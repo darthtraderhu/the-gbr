@@ -1,5 +1,5 @@
 ---
-title: "Next.js vs. WordPress: Miért öli meg a konverziódat az elavult technológia?"
+title: "Next.js vs. WordPress 2: Miért öli meg a konverziódat az elavult technológia?"
 date: "2026-06-12"
 description: "A WordPress nagyszerű volt 10 éve. Ma már biztonsági kockázat és sebességgyilkos. Megmutatjuk, miért a Next.js a kőkemény B2B cégek egyetlen életképes választása."
 category: "Fejlesztés"
