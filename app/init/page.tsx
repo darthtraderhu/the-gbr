@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 
 export default function InitProtocol() {
   const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -13,7 +15,6 @@ export default function InitProtocol() {
     budget: "",
   });
 
-  // Gépelési effekt szimulálása a betöltésnél
   const [bootText, setBootText] = useState("");
   const fullBootText = "> RENDSZER INICIALIZÁLÁSA... \n> KAPCSOLAT TITKOSÍTVA... \n> VÁROM AZ AZONOSÍTÁST...";
 
@@ -34,8 +35,53 @@ export default function InitProtocol() {
     return () => clearInterval(typingInterval);
   }, []);
 
-  const nextStep = () => setStep((prev) => prev + 1);
-  const prevStep = () => setStep((prev) => prev - 1);
+  const nextStep = () => {
+    setSubmitError("");
+    setStep((prev) => prev + 1);
+  };
+  
+  const prevStep = () => {
+    setSubmitError("");
+    setStep((prev) => prev - 1);
+  };
+
+  const handleSubmit = async (budgetVal: string) => {
+    setIsSubmitting(true);
+    setSubmitError("");
+    const finalData = { ...formData, budget: budgetVal };
+    
+    const form = new FormData();
+    form.append("name", finalData.name);
+    form.append("company", finalData.company);
+    form.append("email", finalData.email);
+    form.append("target", finalData.target);
+    form.append("budget", finalData.budget);
+    form.append("_replyto", finalData.email);
+    form.append("_subject", `THE GBR - Új Protokoll Indítás: ${finalData.company}`);
+
+    try {
+      const response = await fetch('https://formspree.io/f/mykabvro', { 
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: form
+      });
+
+      if (response.ok) {
+        setStep(4);
+      } else {
+        const errorData = await response.json();
+        console.error("Formspree Hiba:", errorData);
+        setSubmitError(`> API_HIBA: ${errorData.error || 'Ismeretlen szerver hiba'}`);
+      }
+    } catch (error) {
+      console.error("Hálózati hiba:", error);
+      setSubmitError("> SYS_ERROR: Reklámblokkoló (AdBlock) vagy hálózati hiba blokkolja a jelet!");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <main className="min-h-screen bg-[#050505] text-[#e7ff00] selection:bg-[#e7ff00] selection:text-black relative font-mono overflow-hidden flex flex-col items-center justify-center">
@@ -50,7 +96,6 @@ export default function InitProtocol() {
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         .animate-blink { animation: blink 1s step-end infinite; }
         
-        /* Egyedi input stílusok */
         input:focus { outline: none; border-bottom-color: #e7ff00; box-shadow: 0 4px 15px -3px rgba(231,255,0,0.3); }
         .glitch-text { text-shadow: 2px 0 #00E5FF, -2px 0 #ff00e5; }
       `}} />
@@ -145,6 +190,7 @@ export default function InitProtocol() {
 
               <div className="mt-12 flex justify-end">
                 <button 
+                  type="button"
                   onClick={nextStep}
                   disabled={!formData.name || !formData.company || !formData.email}
                   className="px-8 py-3 bg-[#e7ff00] text-black font-bold uppercase tracking-widest text-xs hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -168,6 +214,7 @@ export default function InitProtocol() {
                   { id: "full", label: "Full-Stack Autopilot (Minden)", color: "hover:border-[#9d00ff] hover:text-[#9d00ff] border-[#9d00ff]/30 text-[#9d00ff]" }
                 ].map((option) => (
                   <button 
+                    type="button"
                     key={option.id}
                     onClick={() => { setFormData({...formData, target: option.id}); nextStep(); }}
                     className={`w-full text-left p-4 border ${formData.target === option.id ? 'border-white bg-white/10' : 'border-white/10'} bg-[#0a0a0a] transition-all text-sm uppercase tracking-widest text-gray-300 ${option.color} group flex justify-between items-center`}
@@ -179,12 +226,12 @@ export default function InitProtocol() {
               </div>
 
               <div className="mt-12 flex justify-start">
-                <button onClick={prevStep} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest">&larr; Vissza</button>
+                <button type="button" onClick={prevStep} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest">&larr; Vissza</button>
               </div>
             </div>
           )}
 
-          {/* LÉPÉS 3: ERŐFORRÁS ALLOKÁCIÓ */}
+          {/* LÉPÉS 3: ERŐFORRÁS ALLOKÁCIÓ ÉS KÜLDÉS */}
           {step === 3 && (
             <div className="animate-fade-in">
               <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#9d00ff] pl-4">03 // Erőforrás Allokáció</h2>
@@ -198,17 +245,33 @@ export default function InitProtocol() {
                   { val: "3m+", label: "3M+ Ft" }
                 ].map((budget) => (
                   <button 
+                    type="button"
                     key={budget.val}
-                    onClick={() => { setFormData({...formData, budget: budget.val}); nextStep(); }}
-                    className={`p-4 border ${formData.budget === budget.val ? 'border-[#e7ff00] text-[#e7ff00]' : 'border-white/10 text-gray-400'} bg-[#0a0a0a] hover:border-[#e7ff00] hover:text-[#e7ff00] transition-all text-sm font-bold tracking-widest`}
+                    disabled={isSubmitting}
+                    onClick={() => handleSubmit(budget.val)}
+                    className={`p-4 border ${formData.budget === budget.val ? 'border-[#e7ff00] text-[#e7ff00]' : 'border-white/10 text-gray-400'} bg-[#0a0a0a] hover:border-[#e7ff00] hover:text-[#e7ff00] transition-all text-sm font-bold tracking-widest disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
                     {budget.label}
                   </button>
                 ))}
               </div>
+              
+              {/* Töltés és Hibaüzenetek */}
+              <div className="mt-6 min-h-[40px]">
+                {isSubmitting && (
+                  <div className="text-center text-[#e7ff00] animate-pulse text-xs tracking-widest uppercase">
+                    &gt; Adatok kódolása és továbbítása...
+                  </div>
+                )}
+                {submitError && (
+                  <div className="text-center text-red-500 font-bold text-xs tracking-widest uppercase">
+                    {submitError}
+                  </div>
+                )}
+              </div>
 
-              <div className="mt-12 flex justify-start">
-                <button onClick={prevStep} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest">&larr; Vissza</button>
+              <div className="mt-6 flex justify-start">
+                <button type="button" onClick={prevStep} disabled={isSubmitting} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest disabled:opacity-50">&larr; Vissza</button>
               </div>
             </div>
           )}
@@ -221,7 +284,7 @@ export default function InitProtocol() {
               <h2 className="text-3xl font-black uppercase tracking-widest text-[#00E5FF] glitch-text mb-4">Protokoll Elindítva</h2>
               <p className="text-gray-400 text-sm tracking-widest mb-8 uppercase leading-relaxed">
                 A célpont rögzítve. Adatok titkosítva. <br/>
-                A THE GBR operatív törzse 24 órán belül felveszi veled a kapcsolatot.
+                A THE GBR operatív törzse hamarosan felveszi veled a kapcsolatot.
               </p>
               
               <div className="font-mono text-[10px] text-gray-600">
