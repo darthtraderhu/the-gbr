@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google"; // ÚJ IMPORT: A hivatalos GA4 modul
 import "./globals.css";
+import { SITE_URL } from "@/lib/site";
 
 // Importáljuk a komponenseket
 import Navbar from "./components/Navbar";
@@ -18,14 +19,14 @@ const montserrat = Montserrat({
 
 // BUMM! Kőkemény globális B2B SEO, OpenGraph és Analytics alapok
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.thegbr.eu"),
+  metadataBase: new URL(SITE_URL),
   title: "THE GBR | Full-Stack B2B Agency",
   description:
     "A marketing és az IT összeolvadt. A Jövő Egy Kézből. Next.js alapú architektúrák, AI integráció és adatvezérelt marketing.",
   openGraph: {
     title: "THE GBR | Full-Stack B2B Agency",
     description: "A marketing és az IT összeolvadt. A Jövő Egy Kézből.",
-    url: "https://www.thegbr.eu",
+    url: SITE_URL,
     siteName: "THE GBR",
     locale: "hu_HU",
     type: "website",
