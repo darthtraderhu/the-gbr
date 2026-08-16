@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { GoogleAnalytics } from '@next/third-parties/google'; // ÚJ IMPORT: A hivatalos GA4 modul
 import "./globals.css";
 
 // Importáljuk a komponenseket
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import AiChat from "./components/AiChat";
 import CallButton from "./components/CallButton";
+import SeoFloatingLabel from "./components/SeoFloatingLabel";
+import AntiCopy from "./components/AntiCopy"; // A Védelmi Pajzs
 
 // Beállítjuk a betűtípust
 const montserrat = Montserrat({ 
@@ -14,9 +18,9 @@ const montserrat = Montserrat({
   style: ["normal", "italic"]
 });
 
-// BUMM! Kőkemény globális B2B SEO és OpenGraph adatok integrálva
+// BUMM! Kőkemény globális B2B SEO, OpenGraph és Analytics alapok
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.thegbr.eu"), // EZ A KULCS A FACEBOOK KÉPHEZ!
+  metadataBase: new URL("https://www.thegbr.eu"),
   title: "THE GBR | Full-Stack B2B Agency",
   description: "A marketing és az IT összeolvadt. A Jövő Egy Kézből. Next.js alapú architektúrák, AI integráció és adatvezérelt marketing.",
   openGraph: {
@@ -32,6 +36,11 @@ export const metadata: Metadata = {
     title: "THE GBR | Full-Stack B2B Agency",
     description: "A marketing és az IT összeolvadt. A Jövő Egy Kézből.",
   },
+  verification: {
+    // Ha a Search Console HTML címkés hitelesítést ad, a kódot (content="") ide másold! 
+    // Ha DNS rekorddal hitelesíted (ez a profibb), ezt a sort nyugodtan hagyhatod így, vagy kitörölheted.
+    google: "IDE_JÖHET_A_SEARCH_CONSOLE_KÓD_HA_KELL", 
+  },
 };
 
 export default function RootLayout({
@@ -41,13 +50,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="hu" className="scroll-smooth">
-      <body className={`${montserrat.className} bg-[#0a0a0a] text-white selection:bg-[#e7ff00] selection:text-black antialiased`}>
+      {/* 
+        A "select-none" osztály letiltja, hogy bárki egérrel kijelölje a szöveget! 
+        A selection:bg-... dolgok bent maradhatnak, ha valahol mégis engednénk egy inputot.
+      */}
+      <body className={`${montserrat.className} bg-[#0a0a0a] text-white select-none selection:bg-[#e7ff00] selection:text-black antialiased`}>
         
+        {/* A Láthatatlan Pajzs */}
+        <AntiCopy />
+
         {/* A Globális Menü */}
         <Navbar />
 
         {/* Az adott aloldal tartalma */}
         {children}
+
+        {/* A Globális Lábléc */}
+        <Footer />
+
+        {/* Lebegő SEO Címke (BAL KÖZÉP) */}
+        <SeoFloatingLabel />
 
         {/* Lebegő Forródrót Gomb (BAL OLDAL) */}
         <CallButton />
@@ -56,6 +78,9 @@ export default function RootLayout({
         <AiChat />
 
       </body>
+
+      {/* A hivatalos, szupergyors Google Analytics 4 integráció! */}
+      <GoogleAnalytics gaId="G-HLK1LCQB5C" />
     </html>
   );
 }

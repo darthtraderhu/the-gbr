@@ -10,10 +10,13 @@ export default function InitProtocol() {
   const [formData, setFormData] = useState({
     name: "",
     company: "",
+    phone: "",
     email: "",
     target: "",
     budget: "",
   });
+  
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
   const [bootText, setBootText] = useState("");
   const fullBootText = "> RENDSZER INICIALIZÁLÁSA... \n> KAPCSOLAT TITKOSÍTVA... \n> VÁROM AZ AZONOSÍTÁST...";
@@ -48,19 +51,22 @@ export default function InitProtocol() {
   const handleSubmit = async (budgetVal: string) => {
     setIsSubmitting(true);
     setSubmitError("");
+    
     const finalData = { ...formData, budget: budgetVal };
     
     const form = new FormData();
-    form.append("name", finalData.name);
-    form.append("company", finalData.company);
-    form.append("email", finalData.email);
-    form.append("target", finalData.target);
-    form.append("budget", finalData.budget);
+    form.append("Név", finalData.name);
+    form.append("Cég", finalData.company);
+    form.append("Telefon", finalData.phone);
+    form.append("Email", finalData.email);
+    form.append("Célpont (Rendszer)", finalData.target);
+    form.append("Kiválasztott Büdzsé", finalData.budget);
+    form.append("Adatkezelés elfogadva", "IGEN");
     form.append("_replyto", finalData.email);
-    form.append("_subject", `THE GBR - Új Protokoll Indítás: ${finalData.company}`);
+    form.append("_subject", `THE GBR LEAD: ${finalData.company} - ${finalData.budget}`);
 
     try {
-      const response = await fetch('https://formspree.io/f/mykabvro', { 
+      const response = await fetch('https://formspree.io/f/mykabnno', { 
         method: 'POST',
         headers: {
           'Accept': 'application/json'
@@ -73,11 +79,11 @@ export default function InitProtocol() {
       } else {
         const errorData = await response.json();
         console.error("Formspree Hiba:", errorData);
-        setSubmitError(`> API_HIBA: ${errorData.error || 'Ismeretlen szerver hiba'}`);
+        setSubmitError(`> API_HIBA: Sikertelen adatküldés!`);
       }
     } catch (error) {
       console.error("Hálózati hiba:", error);
-      setSubmitError("> SYS_ERROR: Reklámblokkoló (AdBlock) vagy hálózati hiba blokkolja a jelet!");
+      setSubmitError("> SYS_ERROR: Hálózati hiba blokkolja a jelet!");
     } finally {
       setIsSubmitting(false);
     }
@@ -96,8 +102,16 @@ export default function InitProtocol() {
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         .animate-blink { animation: blink 1s step-end infinite; }
         
-        input:focus { outline: none; border-bottom-color: #e7ff00; box-shadow: 0 4px 15px -3px rgba(231,255,0,0.3); }
-        .glitch-text { text-shadow: 2px 0 #00E5FF, -2px 0 #ff00e5; }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus { 
+          outline: none; 
+          border-bottom-color: #e7ff00; 
+          box-shadow: 0 4px 15px -3px rgba(231,255,0,0.3); 
+        }
+        
+        input[type="checkbox"] {
+          accent-color: #e7ff00;
+          cursor: pointer;
+        }
       `}} />
 
       {/* =========================================
@@ -177,6 +191,16 @@ export default function InitProtocol() {
                   />
                 </div>
                 <div>
+                  <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">Telefonos Elérhetőség</label>
+                  <input 
+                    type="tel" 
+                    placeholder="+36 30 123 4567"
+                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all focus:border-[#e7ff00]"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  />
+                </div>
+                <div>
                   <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">Kommunikációs Csatorna (Email)</label>
                   <input 
                     type="email" 
@@ -186,13 +210,26 @@ export default function InitProtocol() {
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                   />
                 </div>
+
+                <div className="flex items-start gap-3 pt-4">
+                  <input 
+                    type="checkbox" 
+                    id="privacy"
+                    checked={privacyAccepted}
+                    onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                    className="mt-1 w-4 h-4"
+                  />
+                  <label htmlFor="privacy" className="text-[10px] text-gray-500 leading-relaxed cursor-pointer select-none">
+                    Elfogadom az <Link href="/adatkezeles" target="_blank" className="text-[#e7ff00] hover:text-white transition-colors underline">Adatkezelési Tájékoztatót</Link>, és hozzájárulok, hogy a THE GBR a megadott adataimat kapcsolatfelvétel céljából kezelje.
+                  </label>
+                </div>
               </div>
 
               <div className="mt-12 flex justify-end">
                 <button 
                   type="button"
                   onClick={nextStep}
-                  disabled={!formData.name || !formData.company || !formData.email}
+                  disabled={!formData.name || !formData.company || !formData.phone || !formData.email || !privacyAccepted}
                   className="px-8 py-3 bg-[#e7ff00] text-black font-bold uppercase tracking-widest text-xs hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Hitelesítés &rarr;
@@ -256,7 +293,7 @@ export default function InitProtocol() {
                 ))}
               </div>
               
-              {/* Töltés és Hibaüzenetek */}
+              {/* Töltés és Hibaüzenetek kezelése */}
               <div className="mt-6 min-h-[40px]">
                 {isSubmitting && (
                   <div className="text-center text-[#e7ff00] animate-pulse text-xs tracking-widest uppercase">
@@ -264,7 +301,7 @@ export default function InitProtocol() {
                   </div>
                 )}
                 {submitError && (
-                  <div className="text-center text-red-500 font-bold text-xs tracking-widest uppercase">
+                  <div className="text-center text-red-500 font-bold text-xs tracking-widest uppercase mt-2">
                     {submitError}
                   </div>
                 )}
@@ -276,25 +313,39 @@ export default function InitProtocol() {
             </div>
           )}
 
-          {/* LÉPÉS 4: SIKER / VÉGREHAJTÁS */}
+          {/* LÉPÉS 4: SIKER / VÉGREHAJTÁS (ÚJ, FUTURISZTIKUS DIZÁJN) */}
           {step === 4 && (
             <div className="text-center animate-fade-in py-12">
-              <div className="w-20 h-20 mx-auto rounded-full border-2 border-[#00E5FF] border-t-transparent animate-spin mb-8"></div>
               
-              <h2 className="text-3xl font-black uppercase tracking-widest text-[#00E5FF] glitch-text mb-4">Protokoll Elindítva</h2>
-              <p className="text-gray-400 text-sm tracking-widest mb-8 uppercase leading-relaxed">
+              {/* Futurisztikus töltőgyűrű */}
+              <div className="relative w-24 h-24 mx-auto mb-10 flex items-center justify-center">
+                <div className="absolute inset-0 border-t-2 border-[#e7ff00] rounded-full animate-spin"></div>
+                <div className="absolute inset-2 border-r-2 border-white/10 rounded-full animate-[spin_3s_linear_infinite_reverse]"></div>
+                <div className="w-2 h-2 bg-[#e7ff00] rounded-full animate-pulse shadow-[0_0_15px_#e7ff00]"></div>
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-[0.2em] text-white mb-6">
+                Protokoll <span className="text-[#e7ff00] drop-shadow-[0_0_15px_rgba(231,255,0,0.2)]">Elindítva</span>
+              </h2>
+              
+              <p className="text-gray-400 text-sm tracking-widest mb-8 uppercase leading-relaxed max-w-md mx-auto">
                 A célpont rögzítve. Adatok titkosítva. <br/>
                 A THE GBR operatív törzse hamarosan felveszi veled a kapcsolatot.
               </p>
               
-              <div className="font-mono text-[10px] text-gray-600">
-                &gt; CONNECTION_CLOSED <br/>
-                &gt; WAITING_FOR_AGENT
+              {/* Terminál státusz blokk */}
+              <div className="font-mono text-[10px] text-gray-500 bg-[#0a0a0a] border border-white/5 p-4 rounded inline-block text-left">
+                <span className="text-[#e7ff00]">sys.status:</span> 200_OK <br/>
+                <span className="text-gray-600">connection:</span> CLOSED <br/>
+                <span className="text-gray-600">agent_routing:</span> ACTIVE
               </div>
 
-              <Link href="/" className="inline-block mt-12 px-8 py-3 border border-white/20 text-white font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all">
-                Vissza a Bázisra
-              </Link>
+              <div className="mt-12">
+                <Link href="/" className="inline-block px-8 py-3 border border-white/10 text-white font-bold uppercase tracking-widest text-xs hover:bg-[#e7ff00] hover:text-black hover:border-[#e7ff00] transition-all shadow-[0_0_0_rgba(231,255,0,0)] hover:shadow-[0_0_20px_rgba(231,255,0,0.3)]">
+                  Vissza a Bázisra
+                </Link>
+              </div>
+
             </div>
           )}
 

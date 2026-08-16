@@ -286,28 +286,6 @@ export default function Szindikatus() {
         </div>
       </section>
 
-      {/* =========================================
-          LÁBLÉC
-      ========================================= */}
-      <footer className="relative z-10 border-t border-white/5 bg-[#0a0a0a] py-12">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col items-center md:items-start">
-            <div className="text-3xl font-black italic tracking-tighter flex items-center mb-2">
-              <span className="text-white">THE</span>
-              <span className="text-[#e7ff00]">GBR</span>
-            </div>
-            <p className="text-gray-500 font-mono text-[10px] tracking-widest uppercase">Mérnöki Precizitás 2002 Óta.</p>
-          </div>
-          <div className="flex gap-8 text-xs font-bold text-gray-500 uppercase tracking-widest">
-            <Link href="/" className="hover:text-white transition-colors">Főoldal</Link>
-            <Link href="/init" className="hover:text-[#e7ff00] transition-colors">Kapcsolat</Link>
-          </div>
-          <div className="text-[10px] font-mono text-gray-600 uppercase tracking-widest text-center md:text-right">
-            © {new Date().getFullYear()} THE GBR. Minden jog fenntartva.
-          </div>
-        </div>
-      </footer>
-
     </main>
   );
 }
