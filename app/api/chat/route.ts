@@ -65,7 +65,20 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ reply: response.choices[0].message.content });
   } catch (error) {
-    console.error("OpenAI API Hiba:", error);
+    // Strukturált naplózás: OpenAI API-hiba esetén a státuszkód, hibakód és
+    // típus is látszik a szerver logban, nem csak egy generikus Error-dump.
+    if (error instanceof OpenAI.APIError) {
+      console.error("OpenAI API hiba:", {
+        status: error.status,
+        code: error.code,
+        type: error.type,
+        message: error.message,
+        requestID: error.requestID,
+      });
+    } else {
+      console.error("Váratlan hiba a /api/chat végponton:", error);
+    }
+
     return NextResponse.json(
       {
         reply:
