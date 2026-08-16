@@ -3,11 +3,12 @@ import Link from "next/link";
 export default function Arzenal() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white selection:bg-[#e7ff00] selection:text-black relative font-sans">
-      
       {/* =========================================
           STÍLUSOK ÉS ANIMÁCIÓK (SPIRÁZVA)
       ========================================= */}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         body { scroll-behavior: smooth; }
         
         @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); } }
@@ -34,7 +35,9 @@ export default function Arzenal() {
           text-shadow: 2px 0 #e7ff00, -2px 0 #00E5FF;
           transition: all 0.1s ease;
         }
-      `}} />
+      `,
+        }}
+      />
 
       {/* =========================================
           LEBEGŐ RENDSZER MONITOR (ÚJ)
@@ -44,7 +47,9 @@ export default function Arzenal() {
           <span className="animate-radar absolute inline-flex h-full w-full rounded-full bg-[#e7ff00] opacity-75"></span>
           <span className="relative inline-flex rounded-full h-3 w-3 bg-[#e7ff00]"></span>
         </div>
-        <span className="font-mono text-[9px] font-bold tracking-[0.2em] uppercase text-gray-400">Sys: <span className="text-white">Online</span></span>
+        <span className="font-mono text-[9px] font-bold tracking-[0.2em] uppercase text-gray-400">
+          Sys: <span className="text-white">Online</span>
+        </span>
       </div>
 
       {/* =========================================
@@ -61,7 +66,6 @@ export default function Arzenal() {
           FŐ TARTALOM (OSZTOTT KÉPERNYŐ)
       ========================================= */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-20 md:pt-32 md:pb-32 lg:pt-48 flex flex-col lg:flex-row gap-12 lg:gap-24">
-        
         {/* BAL OLDAL: STICKY VEZÉRLŐPANEL */}
         <aside className="lg:w-1/3 relative">
           <div className="sticky top-32">
@@ -69,7 +73,8 @@ export default function Arzenal() {
               A <span className="text-[#e7ff00]">Fegyver</span>tár.
             </h1>
             <p className="text-gray-400 font-medium text-xs md:text-sm leading-relaxed mb-8 md:mb-10 border-l-2 border-[#e7ff00] pl-4 bg-gradient-to-r from-[#e7ff00]/5 to-transparent py-2">
-              Válaszd ki a célt. Integrált digitális ügynökségként a webfejlesztéstől a hirdetéskezelésig minden rendszert in-house építünk a B2B szektor számára.
+              Válaszd ki a célt. Integrált digitális ügynökségként a webfejlesztéstől a
+              hirdetéskezelésig minden rendszert in-house építünk a B2B szektor számára.
             </p>
 
             <nav className="flex flex-col gap-2 font-mono text-[10px] md:text-xs uppercase tracking-widest font-bold">
@@ -79,14 +84,20 @@ export default function Arzenal() {
                 { id: "ai", name: "AI & Chatbot Integráció" },
                 { id: "video", name: "Prémium Videógyártás" },
                 { id: "auto", name: "Autopilot Rendszerek" },
-                { id: "pm", name: "IT Projektmenedzsment" }
+                { id: "pm", name: "IT Projektmenedzsment" },
               ].map((item, index) => (
-                <Link key={index} href={`#${item.id}`} className="p-3 md:p-4 border border-white/5 bg-white/5 hover:bg-white/10 hover:border-l-4 hover:border-l-[#e7ff00] transition-all rounded flex items-center justify-between group">
+                <Link
+                  key={index}
+                  href={`#${item.id}`}
+                  className="p-3 md:p-4 border border-white/5 bg-white/5 hover:bg-white/10 hover:border-l-4 hover:border-l-[#e7ff00] transition-all rounded flex items-center justify-between group"
+                >
                   <span className="group-hover:text-white transition-colors text-gray-500 flex items-center gap-2 md:gap-3">
-                    <span className="text-[#e7ff00]">[{String(index + 1).padStart(2, '0')}]</span>
+                    <span className="text-[#e7ff00]">[{String(index + 1).padStart(2, "0")}]</span>
                     {item.name}
                   </span>
-                  <span className="text-gray-700 group-hover:text-[#e7ff00] transition-colors font-black">&rarr;</span>
+                  <span className="text-gray-700 group-hover:text-[#e7ff00] transition-colors font-black">
+                    &rarr;
+                  </span>
                 </Link>
               ))}
             </nav>
@@ -95,27 +106,47 @@ export default function Arzenal() {
 
         {/* JOBB OLDAL: MODULOK (GÖRGETHETŐ) */}
         <div className="lg:w-2/3 flex flex-col gap-16 md:gap-32">
-
           {/* [01] WEB */}
           <section id="web" className="scroll-mt-32">
             <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6 border-b border-white/10 pb-4">
-              <span className="text-3xl md:text-4xl font-black italic text-[#e7ff00] drop-shadow-[0_0_10px_rgba(231,255,0,0.3)]">01</span>
-              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">High-End Webfejlesztés</h2>
+              <span className="text-3xl md:text-4xl font-black italic text-[#e7ff00] drop-shadow-[0_0_10px_rgba(231,255,0,0.3)]">
+                01
+              </span>
+              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">
+                High-End Webfejlesztés
+              </h2>
             </div>
             {/* ÚJ: bg-blueprint a kártyákon */}
             <div className="bg-[#121212] bg-blueprint border border-white/5 rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-[#e7ff00]/50 hover:shadow-[0_0_40px_rgba(231,255,0,0.1)] transition-all duration-500">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#e7ff00]/10 blur-[50px] group-hover:bg-[#e7ff00]/20 transition-colors"></div>
-              
-              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">Kőkemény technológiai fölény a versenytársakkal szemben.</h3>
+
+              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">
+                Kőkemény technológiai fölény a versenytársakkal szemben.
+              </h3>
               <p className="text-gray-300 text-sm md:text-base font-medium leading-relaxed mb-8 relative z-10">
-                A B2B webfejlesztés 2026-ban túlmutat a sablonokon. Egyedi, <strong className="text-white border-b border-[#e7ff00]">Next.js alapú architektúrákat</strong> építünk, amelyek villámgyorsak, biztonságosak és 100%-ban keresőoptimalizáltak (SEO).
+                A B2B webfejlesztés 2026-ban túlmutat a sablonokon. Egyedi,{" "}
+                <strong className="text-white border-b border-[#e7ff00]">
+                  Next.js alapú architektúrákat
+                </strong>{" "}
+                építünk, amelyek villámgyorsak, biztonságosak és 100%-ban keresőoptimalizáltak
+                (SEO).
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-                {['Egyedi UI/UX Dizájn', 'Technikai SEO alapok', 'Supabase Adatbázisok', 'B2B Webáruházak'].map((feat, i) => (
-                  <div key={i} className="bg-[#050505] p-3 md:p-4 rounded border border-white/5 flex items-start gap-3 group-hover:border-white/10 transition-colors">
+                {[
+                  "Egyedi UI/UX Dizájn",
+                  "Technikai SEO alapok",
+                  "Supabase Adatbázisok",
+                  "B2B Webáruházak",
+                ].map((feat, i) => (
+                  <div
+                    key={i}
+                    className="bg-[#050505] p-3 md:p-4 rounded border border-white/5 flex items-start gap-3 group-hover:border-white/10 transition-colors"
+                  >
                     <span className="text-[#e7ff00] font-black">✔</span>
-                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">{feat}</p>
+                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">
+                      {feat}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -123,10 +154,17 @@ export default function Arzenal() {
               {/* Kód szimuláció - mobilon gördíthető */}
               <div className="mt-8 bg-[#050505] border border-white/10 rounded-lg p-4 font-mono text-[9px] md:text-[10px] text-gray-500 overflow-x-auto relative">
                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#e7ff00]"></div>
-                <div className="text-gray-600 mb-2 pl-3 whitespace-nowrap">// INIT_NEXTJS_APP</div>
-                <div className="text-[#e7ff00] pl-3 whitespace-nowrap">export default function <span className="text-white">EnterpriseMatrix</span>() {'{'}</div>
-                <div className="pl-7 whitespace-nowrap">return {'<'}Performance optimized={`{true}`} seo={`{maximum}`} /{'>'}</div>
-                <div className="text-[#e7ff00] pl-3 whitespace-nowrap">{'}'}</div>
+                <div className="text-gray-600 mb-2 pl-3 whitespace-nowrap">
+                  {"// INIT_NEXTJS_APP"}
+                </div>
+                <div className="text-[#e7ff00] pl-3 whitespace-nowrap">
+                  export default function <span className="text-white">EnterpriseMatrix</span>(){" "}
+                  {"{"}
+                </div>
+                <div className="pl-7 whitespace-nowrap">
+                  return {"<"}Performance optimized={`{true}`} seo={`{maximum}`} /{">"}
+                </div>
+                <div className="text-[#e7ff00] pl-3 whitespace-nowrap">{"}"}</div>
               </div>
             </div>
           </section>
@@ -134,34 +172,56 @@ export default function Arzenal() {
           {/* [02] ADS */}
           <section id="ads" className="scroll-mt-32">
             <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6 border-b border-white/10 pb-4">
-              <span className="text-3xl md:text-4xl font-black italic text-[#00E5FF] drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">02</span>
-              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">Performance Marketing</h2>
+              <span className="text-3xl md:text-4xl font-black italic text-[#00E5FF] drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">
+                02
+              </span>
+              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">
+                Performance Marketing
+              </h2>
             </div>
             <div className="bg-[#121212] bg-blueprint border border-white/5 rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-[#00E5FF]/50 hover:shadow-[0_0_40px_rgba(0,229,255,0.1)] transition-all duration-500">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[50px] group-hover:bg-[#00E5FF]/20 transition-colors"></div>
-              
-              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">Befektetünk, nem pedig hirdetési büdzsét égetünk.</h3>
+
+              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">
+                Befektetünk, nem pedig hirdetési büdzsét égetünk.
+              </h3>
               <p className="text-gray-300 text-sm md:text-base font-medium leading-relaxed mb-8 relative z-10">
-                A klasszikus ügynökségi modell halott. Mi <strong className="text-white border-b border-[#00E5FF]">B2B lead generálásra</strong> specializálódtunk. Full-funnel Meta és Google Ads kampányokat építünk fel. Célunk a mérhető ROI.
+                A klasszikus ügynökségi modell halott. Mi{" "}
+                <strong className="text-white border-b border-[#00E5FF]">
+                  B2B lead generálásra
+                </strong>{" "}
+                specializálódtunk. Full-funnel Meta és Google Ads kampányokat építünk fel. Célunk a
+                mérhető ROI.
               </p>
 
               {/* Grafikon szimuláció hover effekttel */}
               <div className="mt-8 bg-[#050505] border border-white/10 rounded-lg p-4 md:p-6 relative group-hover:border-[#00E5FF]/30 transition-colors">
-                 <div className="flex justify-between items-end h-20 md:h-24 border-b border-l border-white/10 px-2 pb-2 gap-1 md:gap-2 relative">
-                    {/* Zöld növekedési vonal (SVG) */}
-                    <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
-                       <polyline points="0,80 20,60 40,70 60,40 80,15 100,0" fill="none" stroke="#00E5FF" strokeWidth="2" className="opacity-50" />
-                    </svg>
-                    <div className="w-1/6 bg-white/5 h-[20%] rounded-t relative z-10 hover:bg-white/20 transition-colors"></div>
-                    <div className="w-1/6 bg-white/10 h-[40%] rounded-t relative z-10 hover:bg-white/30 transition-colors"></div>
-                    <div className="w-1/6 bg-white/20 h-[30%] rounded-t relative z-10 hover:bg-white/40 transition-colors"></div>
-                    <div className="w-1/6 bg-[#00E5FF]/40 h-[60%] rounded-t relative z-10 hover:bg-[#00E5FF]/60 transition-colors"></div>
-                    <div className="w-1/6 bg-[#00E5FF]/70 h-[85%] rounded-t relative z-10 hover:bg-[#00E5FF]/90 transition-colors"></div>
-                    <div className="w-1/6 bg-[#00E5FF] h-[100%] rounded-t shadow-[0_0_15px_rgba(0,229,255,0.5)] relative z-10"></div>
-                 </div>
-                 <div className="flex justify-between mt-2 font-mono text-[8px] md:text-[9px] text-gray-500 uppercase font-bold">
-                    <span>Q1</span> <span>Q2</span> <span>Q3</span> <span className="text-[#00E5FF]">Q4 (ROAS: +312%)</span>
-                 </div>
+                <div className="flex justify-between items-end h-20 md:h-24 border-b border-l border-white/10 px-2 pb-2 gap-1 md:gap-2 relative">
+                  {/* Zöld növekedési vonal (SVG) */}
+                  <svg
+                    className="absolute inset-0 w-full h-full"
+                    preserveAspectRatio="none"
+                    viewBox="0 0 100 100"
+                  >
+                    <polyline
+                      points="0,80 20,60 40,70 60,40 80,15 100,0"
+                      fill="none"
+                      stroke="#00E5FF"
+                      strokeWidth="2"
+                      className="opacity-50"
+                    />
+                  </svg>
+                  <div className="w-1/6 bg-white/5 h-[20%] rounded-t relative z-10 hover:bg-white/20 transition-colors"></div>
+                  <div className="w-1/6 bg-white/10 h-[40%] rounded-t relative z-10 hover:bg-white/30 transition-colors"></div>
+                  <div className="w-1/6 bg-white/20 h-[30%] rounded-t relative z-10 hover:bg-white/40 transition-colors"></div>
+                  <div className="w-1/6 bg-[#00E5FF]/40 h-[60%] rounded-t relative z-10 hover:bg-[#00E5FF]/60 transition-colors"></div>
+                  <div className="w-1/6 bg-[#00E5FF]/70 h-[85%] rounded-t relative z-10 hover:bg-[#00E5FF]/90 transition-colors"></div>
+                  <div className="w-1/6 bg-[#00E5FF] h-[100%] rounded-t shadow-[0_0_15px_rgba(0,229,255,0.5)] relative z-10"></div>
+                </div>
+                <div className="flex justify-between mt-2 font-mono text-[8px] md:text-[9px] text-gray-500 uppercase font-bold">
+                  <span>Q1</span> <span>Q2</span> <span>Q3</span>{" "}
+                  <span className="text-[#00E5FF]">Q4 (ROAS: +312%)</span>
+                </div>
               </div>
             </div>
           </section>
@@ -169,15 +229,26 @@ export default function Arzenal() {
           {/* [03] AI */}
           <section id="ai" className="scroll-mt-32">
             <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6 border-b border-white/10 pb-4">
-              <span className="text-3xl md:text-4xl font-black italic text-[#e7ff00] drop-shadow-[0_0_10px_rgba(231,255,0,0.3)]">03</span>
-              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">AI & Chatbot Integráció</h2>
+              <span className="text-3xl md:text-4xl font-black italic text-[#e7ff00] drop-shadow-[0_0_10px_rgba(231,255,0,0.3)]">
+                03
+              </span>
+              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">
+                AI & Chatbot Integráció
+              </h2>
             </div>
             <div className="bg-[#121212] bg-blueprint border border-white/5 rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-[#e7ff00]/50 hover:shadow-[0_0_40px_rgba(231,255,0,0.1)] transition-all duration-500">
-              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">Az intelligens munkatársad, aki sosem alszik.</h3>
+              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">
+                Az intelligens munkatársad, aki sosem alszik.
+              </h3>
               <p className="text-gray-300 text-sm md:text-base font-medium leading-relaxed mb-8 relative z-10">
-                Implementáljuk a legfejlettebb <strong className="text-white border-b border-[#e7ff00]">OpenAI alapú chatbotokat</strong> a weboldaladba. Képesek árajánlatot adni, időpontot foglalni és 24/7 ügyfélszolgálatot biztosítani a látogatóknak.
+                Implementáljuk a legfejlettebb{" "}
+                <strong className="text-white border-b border-[#e7ff00]">
+                  OpenAI alapú chatbotokat
+                </strong>{" "}
+                a weboldaladba. Képesek árajánlatot adni, időpontot foglalni és 24/7
+                ügyfélszolgálatot biztosítani a látogatóknak.
               </p>
-              
+
               {/* Terminál Chat - Fade in animáció a bot válaszára */}
               <div className="mt-8 bg-[#050505] border border-white/10 rounded-lg p-3 md:p-4 font-mono text-[10px] md:text-xs shadow-inner overflow-x-auto">
                 <div className="flex items-start gap-2 mb-4 whitespace-nowrap">
@@ -186,7 +257,10 @@ export default function Arzenal() {
                 </div>
                 <div className="flex items-start gap-2 border-l-2 border-[#e7ff00] pl-2 md:pl-3 group-hover:opacity-100 opacity-50 transition-opacity duration-1000">
                   <span className="text-[#e7ff00] font-bold">GBR_AI:</span>
-                  <span className="text-white min-w-0">A komplexitástól függ, de az átlagos ROI 3 hónap. Kérhetek egy e-mail címet? <span className="animate-blink text-[#e7ff00]">█</span></span>
+                  <span className="text-white min-w-0">
+                    A komplexitástól függ, de az átlagos ROI 3 hónap. Kérhetek egy e-mail címet?{" "}
+                    <span className="animate-blink text-[#e7ff00]">█</span>
+                  </span>
                 </div>
               </div>
             </div>
@@ -195,22 +269,42 @@ export default function Arzenal() {
           {/* [04] VIDEO */}
           <section id="video" className="scroll-mt-32">
             <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6 border-b border-white/10 pb-4">
-              <span className="text-3xl md:text-4xl font-black italic text-[#00E5FF] drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">04</span>
-              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">Prémium Videógyártás</h2>
+              <span className="text-3xl md:text-4xl font-black italic text-[#00E5FF] drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">
+                04
+              </span>
+              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">
+                Prémium Videógyártás
+              </h2>
             </div>
             <div className="bg-[#121212] bg-blueprint border border-white/5 rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-[#00E5FF]/50 hover:shadow-[0_0_40px_rgba(0,229,255,0.1)] transition-all duration-500">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[50px] group-hover:bg-[#00E5FF]/20 transition-colors"></div>
 
-              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">Vizuális történetmesélés, ami elad.</h3>
+              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">
+                Vizuális történetmesélés, ami elad.
+              </h3>
               <p className="text-gray-300 text-sm md:text-base font-medium leading-relaxed mb-8 relative z-10">
-                Lélegzetelállító reklámfilmek, TikTok/Reels kampányok és vállalati imázsvideók. <strong className="text-white border-b border-[#00E5FF]">A forgatókönyvtől a színbontásig</strong> minden a legmagasabb minőségben.
+                Lélegzetelállító reklámfilmek, TikTok/Reels kampányok és vállalati imázsvideók.{" "}
+                <strong className="text-white border-b border-[#00E5FF]">
+                  A forgatókönyvtől a színbontásig
+                </strong>{" "}
+                minden a legmagasabb minőségben.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-                {['4K & Color Grading', 'TikTok / Reels Vágás', 'Drónfelvételek', 'Vállalati Imázsfilm'].map((feat, i) => (
-                  <div key={i} className="bg-[#050505] p-3 md:p-4 rounded border border-white/5 flex items-start gap-3 group-hover:border-white/10 transition-colors">
+                {[
+                  "4K & Color Grading",
+                  "TikTok / Reels Vágás",
+                  "Drónfelvételek",
+                  "Vállalati Imázsfilm",
+                ].map((feat, i) => (
+                  <div
+                    key={i}
+                    className="bg-[#050505] p-3 md:p-4 rounded border border-white/5 flex items-start gap-3 group-hover:border-white/10 transition-colors"
+                  >
                     <span className="text-[#00E5FF] font-black">✔</span>
-                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">{feat}</p>
+                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">
+                      {feat}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -220,23 +314,41 @@ export default function Arzenal() {
           {/* [05] AUTOPILOT */}
           <section id="auto" className="scroll-mt-32">
             <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6 border-b border-white/10 pb-4">
-              <span className="text-3xl md:text-4xl font-black italic text-[#e7ff00] drop-shadow-[0_0_10px_rgba(231,255,0,0.3)]">05</span>
-              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">Autopilot Rendszerek</h2>
+              <span className="text-3xl md:text-4xl font-black italic text-[#e7ff00] drop-shadow-[0_0_10px_rgba(231,255,0,0.3)]">
+                05
+              </span>
+              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">
+                Autopilot Rendszerek
+              </h2>
             </div>
             <div className="bg-[#121212] bg-blueprint border border-white/5 rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-[#e7ff00]/50 hover:shadow-[0_0_40px_rgba(231,255,0,0.1)] transition-all duration-500">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#e7ff00]/10 blur-[50px] group-hover:bg-[#e7ff00]/20 transition-colors"></div>
 
-              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">A szoftver dolgozik helyetted.</h3>
+              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">
+                A szoftver dolgozik helyetted.
+              </h3>
               <p className="text-gray-300 text-sm md:text-base font-medium leading-relaxed mb-8 relative z-10">
-                Marketing automatizációk, okos hírlevelek és önjáró blogmotorok. Miközben alszol, a rendszer <strong className="text-white border-b border-[#e7ff00]">tartalmat gyárt, posztol és követ</strong> — emberi beavatkozás nélkül.
+                Marketing automatizációk, okos hírlevelek és önjáró blogmotorok. Miközben alszol, a
+                rendszer{" "}
+                <strong className="text-white border-b border-[#e7ff00]">
+                  tartalmat gyárt, posztol és követ
+                </strong>{" "}
+                — emberi beavatkozás nélkül.
               </p>
 
               {/* Ütemezési napló szimuláció */}
               <div className="mt-8 bg-[#050505] border border-white/10 rounded-lg p-4 font-mono text-[9px] md:text-[10px] text-gray-500 overflow-x-auto relative">
                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#e7ff00]"></div>
-                <div className="pl-3 whitespace-nowrap"><span className="text-[#e7ff00]">06:00</span> → AI cikk generálás elindítva</div>
-                <div className="pl-3 whitespace-nowrap"><span className="text-[#e7ff00]">06:04</span> → Poszt ütemezve a Hírmotorba</div>
-                <div className="pl-3 whitespace-nowrap"><span className="text-[#e7ff00]">12:00</span> → Social poszt automatikusan kiküldve</div>
+                <div className="pl-3 whitespace-nowrap">
+                  <span className="text-[#e7ff00]">06:00</span> → AI cikk generálás elindítva
+                </div>
+                <div className="pl-3 whitespace-nowrap">
+                  <span className="text-[#e7ff00]">06:04</span> → Poszt ütemezve a Hírmotorba
+                </div>
+                <div className="pl-3 whitespace-nowrap">
+                  <span className="text-[#e7ff00]">12:00</span> → Social poszt automatikusan
+                  kiküldve
+                </div>
               </div>
             </div>
           </section>
@@ -244,28 +356,48 @@ export default function Arzenal() {
           {/* [06] IT PROJEKTMENEDZSMENT */}
           <section id="pm" className="scroll-mt-32">
             <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6 border-b border-white/10 pb-4">
-              <span className="text-3xl md:text-4xl font-black italic text-[#00E5FF] drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">06</span>
-              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">IT Projektmenedzsment</h2>
+              <span className="text-3xl md:text-4xl font-black italic text-[#00E5FF] drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">
+                06
+              </span>
+              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">
+                IT Projektmenedzsment
+              </h2>
             </div>
             <div className="bg-[#121212] bg-blueprint border border-white/5 rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-[#00E5FF]/50 hover:shadow-[0_0_40px_rgba(0,229,255,0.1)] transition-all duration-500">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[50px] group-hover:bg-[#00E5FF]/20 transition-colors"></div>
 
-              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">Levesszük a terhet a válladról.</h3>
+              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">
+                Levesszük a terhet a válladról.
+              </h3>
               <p className="text-gray-300 text-sm md:text-base font-medium leading-relaxed mb-8 relative z-10">
-                Teljeskörű IT és marketing projektvezetés a legmagasabb nagyvállalati sztenderdek szerint, <strong className="text-white border-b border-[#00E5FF]">határidőre és költségkereten belül</strong>.
+                Teljeskörű IT és marketing projektvezetés a legmagasabb nagyvállalati sztenderdek
+                szerint,{" "}
+                <strong className="text-white border-b border-[#00E5FF]">
+                  határidőre és költségkereten belül
+                </strong>
+                .
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-                {['Dedikált Projektmenedzser', 'Heti Előrehaladási Riport', 'Sprint Alapú Fejlesztés', 'Kockázatkezelés'].map((feat, i) => (
-                  <div key={i} className="bg-[#050505] p-3 md:p-4 rounded border border-white/5 flex items-start gap-3 group-hover:border-white/10 transition-colors">
+                {[
+                  "Dedikált Projektmenedzser",
+                  "Heti Előrehaladási Riport",
+                  "Sprint Alapú Fejlesztés",
+                  "Kockázatkezelés",
+                ].map((feat, i) => (
+                  <div
+                    key={i}
+                    className="bg-[#050505] p-3 md:p-4 rounded border border-white/5 flex items-start gap-3 group-hover:border-white/10 transition-colors"
+                  >
                     <span className="text-[#00E5FF] font-black">✔</span>
-                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">{feat}</p>
+                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">
+                      {feat}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
           </section>
-
         </div>
       </div>
 
@@ -274,11 +406,10 @@ export default function Arzenal() {
       ========================================= */}
       <section className="relative z-10 w-full px-4 md:px-6 py-16 md:py-24">
         <div className="max-w-5xl mx-auto rounded-3xl bg-[#e7ff00] p-8 md:p-12 lg:p-20 text-center shadow-[0_0_40px_rgba(231,255,0,0.15)] transform transition-transform duration-500 hover:scale-[1.02]">
-          
           <p className="text-black text-[10px] md:text-xs lg:text-sm font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase mb-6 md:mb-8">
             Rendszer követelmény: Ambíció
           </p>
-          
+
           <div className="flex flex-col items-center justify-center mb-10 md:mb-12">
             <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[7rem] font-black text-black uppercase italic leading-none tracking-tighter">
               Indítsd el a
@@ -295,9 +426,11 @@ export default function Arzenal() {
             href="/init"
             className="inline-flex items-center gap-2 md:gap-3 bg-black text-white font-black uppercase text-xs md:text-sm lg:text-base tracking-widest px-6 md:px-10 py-4 md:py-5 transition-all duration-300 hover:bg-white hover:text-black shadow-2xl hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] group"
           >
-            Kapcsolatfelvétel <span className="text-[#e7ff00] group-hover:text-black transition-colors duration-300">•</span>
+            Kapcsolatfelvétel{" "}
+            <span className="text-[#e7ff00] group-hover:text-black transition-colors duration-300">
+              •
+            </span>
           </Link>
-          
         </div>
       </section>
 
@@ -308,23 +441,36 @@ export default function Arzenal() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex items-center gap-3 md:gap-4 justify-center mb-8 md:mb-12">
             <span className="w-8 md:w-12 h-px bg-white/20"></span>
-            <h2 className="text-xl md:text-2xl font-black italic uppercase tracking-widest text-center text-gray-500">Intelligencia <span className="text-white">Bázis</span></h2>
+            <h2 className="text-xl md:text-2xl font-black italic uppercase tracking-widest text-center text-gray-500">
+              Intelligencia <span className="text-white">Bázis</span>
+            </h2>
             <span className="w-8 md:w-12 h-px bg-white/20"></span>
           </div>
-          
+
           <div className="space-y-4">
             <div className="border border-white/10 bg-[#0a0a0a] rounded p-5 md:p-6 hover:border-[#e7ff00]/30 transition-colors">
-              <h4 className="font-bold text-white mb-2 uppercase tracking-wide text-sm md:text-base">Miért Next.js-ben építitek a weboldalakat?</h4>
-              <p className="text-gray-400 text-xs md:text-sm leading-relaxed">A Next.js a React legmodernebb keretrendszere. Lehetővé teszi az SSR (Server-Side Rendering) használatát, ami elengedhetetlen a kiemelkedő betöltési sebességhez és a Google technikai SEO követelményeinek maximalizálásához.</p>
+              <h4 className="font-bold text-white mb-2 uppercase tracking-wide text-sm md:text-base">
+                Miért Next.js-ben építitek a weboldalakat?
+              </h4>
+              <p className="text-gray-400 text-xs md:text-sm leading-relaxed">
+                A Next.js a React legmodernebb keretrendszere. Lehetővé teszi az SSR (Server-Side
+                Rendering) használatát, ami elengedhetetlen a kiemelkedő betöltési sebességhez és a
+                Google technikai SEO követelményeinek maximalizálásához.
+              </p>
             </div>
             <div className="border border-white/10 bg-[#0a0a0a] rounded p-5 md:p-6 hover:border-[#00E5FF]/30 transition-colors">
-              <h4 className="font-bold text-white mb-2 uppercase tracking-wide text-sm md:text-base">Csak nagyvállalatokkal dolgoztok?</h4>
-              <p className="text-gray-400 text-xs md:text-sm leading-relaxed">Kifejezetten B2B és E-commerce fókuszunk van. Bár architektúráink a nagyvállalati sztenderdeket követik, skálázni vágyó, agresszíven növekvő KKV-k számára is biztosítunk rendszereket a gyors piaci előnyszerzés érdekében.</p>
+              <h4 className="font-bold text-white mb-2 uppercase tracking-wide text-sm md:text-base">
+                Csak nagyvállalatokkal dolgoztok?
+              </h4>
+              <p className="text-gray-400 text-xs md:text-sm leading-relaxed">
+                Kifejezetten B2B és E-commerce fókuszunk van. Bár architektúráink a nagyvállalati
+                sztenderdeket követik, skálázni vágyó, agresszíven növekvő KKV-k számára is
+                biztosítunk rendszereket a gyors piaci előnyszerzés érdekében.
+              </p>
             </div>
           </div>
         </div>
       </div>
-
     </main>
   );
 }

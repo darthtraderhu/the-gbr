@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+build
+public
+
+# Jogi és marketing tartalom: ezeket szándékosan nem formázza a Prettier,
+# hogy a szöveges tartalom ne módosuljon formázás ürügyén.
+content/legal
+posts
+README.md
+AGENTS.md
+CLAUDE.md

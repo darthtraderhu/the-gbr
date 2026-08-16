@@ -1,11 +1,11 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
-import { z } from 'zod';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { remark } from "remark";
+import html from "remark-html";
+import { z } from "zod";
 
-const postsDirectory = path.join(process.cwd(), 'posts');
+const postsDirectory = path.join(process.cwd(), "posts");
 
 // A frontmatter-mezők futásidejű ellenőrzése: hiányos/hibás .md fájl esetén
 // a build egyértelmű hibaüzenettel áll le, nem csendben renderel undefined-et.
@@ -31,15 +31,15 @@ function calculateReadTime(content: string): string {
 
 export function getSortedPostsData() {
   const fileNames = fs.readdirSync(postsDirectory);
-  
+
   const allPostsData = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.md$/, '');
+    const id = fileName.replace(/\.md$/, "");
     const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const fileContents = fs.readFileSync(fullPath, "utf8");
 
     // Fejléc és Tartalom szétválasztása
     const matterResult = matter(fileContents);
-    
+
     // Itt hívjuk meg az okos számolót a nyers szövegre (content)
     const computedReadTime = calculateReadTime(matterResult.content);
     const frontmatter = postFrontmatterSchema.parse(matterResult.data);
@@ -62,15 +62,13 @@ export function getSortedPostsData() {
 
 export async function getPostData(id: string) {
   const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const matterResult = matter(fileContents);
 
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
+  const processedContent = await remark().use(html).process(matterResult.content);
   const contentHtml = processedContent.toString();
-  
+
   // A konkrét cikkhez is kiszámoljuk, ha ott is ki akarnád írni
   const computedReadTime = calculateReadTime(matterResult.content);
   const frontmatter = postFrontmatterSchema.parse(matterResult.data);

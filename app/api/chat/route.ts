@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
-import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
-import { z } from 'zod';
+import { NextResponse } from "next/server";
+import OpenAI from "openai";
+import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import { z } from "zod";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -10,7 +10,7 @@ const openai = new OpenAI({
 // Bejövő kérés-séma: role-whitelist (csak "user"/"ai"), üzenethossz- és
 // history-méret-korlát, hogy a végpont ne legyen nyitott költség-DoS vektor.
 const chatMessageSchema = z.object({
-  sender: z.enum(['user', 'ai']),
+  sender: z.enum(["user", "ai"]),
   text: z.string().trim().min(1).max(1000),
 });
 
@@ -47,8 +47,8 @@ export async function POST(req: Request) {
 
     // Előző üzenetek formázása az OpenAI-nak (hogy emlékezzen a beszélgetésre)
     const formattedHistory: ChatCompletionMessageParam[] = history.map((msg) => ({
-      role: msg.sender === 'ai' ? 'assistant' : 'user',
-      content: msg.text
+      role: msg.sender === "ai" ? "assistant" : "user",
+      content: msg.text,
     }));
 
     // OpenAI API hívás (gpt-3.5-turbo a leggyorsabb és költséghatékonyabb a chathez)
@@ -57,18 +57,20 @@ export async function POST(req: Request) {
       messages: [
         { role: "system", content: systemPrompt },
         ...formattedHistory,
-        { role: "user", content: message }
+        { role: "user", content: message },
       ],
       temperature: 0.7, // Kreativitás (0.7 pont jó egy asszisztensnek)
-      max_tokens: 200,  // Ne írjon regényeket
+      max_tokens: 200, // Ne írjon regényeket
     });
 
     return NextResponse.json({ reply: response.choices[0].message.content });
-
   } catch (error) {
     console.error("OpenAI API Hiba:", error);
     return NextResponse.json(
-      { reply: "SYS.ERROR: A neurális kapcsolat megszakadt az OpenAI szervereivel. Kérem, hívja a +36705139838-as forródrótot." },
+      {
+        reply:
+          "SYS.ERROR: A neurális kapcsolat megszakadt az OpenAI szervereivel. Kérem, hívja a +36705139838-as forródrótot.",
+      },
       { status: 500 }
     );
   }
