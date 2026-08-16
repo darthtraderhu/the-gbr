@@ -8,8 +8,7 @@ export default function Arzenal() {
           STÍLUSOK ÉS ANIMÁCIÓK (SPIRÁZVA)
       ========================================= */}
       <style dangerouslySetInnerHTML={{__html: `
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap');
-        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        body { scroll-behavior: smooth; }
         
         @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); } }
         .scanline-effect { animation: scanline 8s linear infinite; }
@@ -54,28 +53,9 @@ export default function Arzenal() {
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-[#e7ff00]/5 blur-[150px] rounded-full"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-[#00E5FF]/5 blur-[150px] rounded-full"></div>
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.10]"></div>
+        <div className="absolute inset-0 bg-cubes-pattern opacity-[0.10]"></div>
         <div className="absolute inset-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#e7ff00]/10 to-transparent scanline-effect opacity-50"></div>
       </div>
-
-      {/* =========================================
-          FEJLÉC
-      ========================================= */}
-      <header className="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-[#0a0a0a]/90 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
-          <Link href="/" className="text-3xl md:text-5xl font-black italic tracking-[-0.05em] flex items-center hover:opacity-80 transition-opacity">
-            <span className="text-white">THE</span>
-            <span className="text-[#e7ff00] drop-shadow-[0_0_15px_rgba(231,255,0,0.4)]">GBR</span>
-          </Link>
-          <div className="hidden md:flex items-center gap-4 border border-[#e7ff00]/30 bg-[#e7ff00]/10 px-4 py-2 rounded">
-            <span className="w-2 h-2 rounded-full bg-[#e7ff00] animate-pulse"></span>
-            <span className="font-mono text-[10px] text-[#e7ff00] uppercase tracking-widest">Sys.Node: Arsenal_Active</span>
-          </div>
-          <Link href="/init" className="px-4 py-2 sm:px-6 sm:py-3 rounded bg-[#e7ff00] text-[#0a0a0a] text-[10px] md:text-xs font-black italic uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_0_20px_rgba(231,255,0,0.2)]">
-            Projekt Indítása
-          </Link>
-        </div>
-      </header>
 
       {/* =========================================
           FŐ TARTALOM (OSZTOTT KÉPERNYŐ)
@@ -212,6 +192,80 @@ export default function Arzenal() {
             </div>
           </section>
 
+          {/* [04] VIDEO */}
+          <section id="video" className="scroll-mt-32">
+            <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6 border-b border-white/10 pb-4">
+              <span className="text-3xl md:text-4xl font-black italic text-[#00E5FF] drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">04</span>
+              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">Prémium Videógyártás</h2>
+            </div>
+            <div className="bg-[#121212] bg-blueprint border border-white/5 rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-[#00E5FF]/50 hover:shadow-[0_0_40px_rgba(0,229,255,0.1)] transition-all duration-500">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[50px] group-hover:bg-[#00E5FF]/20 transition-colors"></div>
+
+              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">Vizuális történetmesélés, ami elad.</h3>
+              <p className="text-gray-300 text-sm md:text-base font-medium leading-relaxed mb-8 relative z-10">
+                Lélegzetelállító reklámfilmek, TikTok/Reels kampányok és vállalati imázsvideók. <strong className="text-white border-b border-[#00E5FF]">A forgatókönyvtől a színbontásig</strong> minden a legmagasabb minőségben.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+                {['4K & Color Grading', 'TikTok / Reels Vágás', 'Drónfelvételek', 'Vállalati Imázsfilm'].map((feat, i) => (
+                  <div key={i} className="bg-[#050505] p-3 md:p-4 rounded border border-white/5 flex items-start gap-3 group-hover:border-white/10 transition-colors">
+                    <span className="text-[#00E5FF] font-black">✔</span>
+                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">{feat}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* [05] AUTOPILOT */}
+          <section id="auto" className="scroll-mt-32">
+            <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6 border-b border-white/10 pb-4">
+              <span className="text-3xl md:text-4xl font-black italic text-[#e7ff00] drop-shadow-[0_0_10px_rgba(231,255,0,0.3)]">05</span>
+              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">Autopilot Rendszerek</h2>
+            </div>
+            <div className="bg-[#121212] bg-blueprint border border-white/5 rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-[#e7ff00]/50 hover:shadow-[0_0_40px_rgba(231,255,0,0.1)] transition-all duration-500">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#e7ff00]/10 blur-[50px] group-hover:bg-[#e7ff00]/20 transition-colors"></div>
+
+              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">A szoftver dolgozik helyetted.</h3>
+              <p className="text-gray-300 text-sm md:text-base font-medium leading-relaxed mb-8 relative z-10">
+                Marketing automatizációk, okos hírlevelek és önjáró blogmotorok. Miközben alszol, a rendszer <strong className="text-white border-b border-[#e7ff00]">tartalmat gyárt, posztol és követ</strong> — emberi beavatkozás nélkül.
+              </p>
+
+              {/* Ütemezési napló szimuláció */}
+              <div className="mt-8 bg-[#050505] border border-white/10 rounded-lg p-4 font-mono text-[9px] md:text-[10px] text-gray-500 overflow-x-auto relative">
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#e7ff00]"></div>
+                <div className="pl-3 whitespace-nowrap"><span className="text-[#e7ff00]">06:00</span> → AI cikk generálás elindítva</div>
+                <div className="pl-3 whitespace-nowrap"><span className="text-[#e7ff00]">06:04</span> → Poszt ütemezve a Hírmotorba</div>
+                <div className="pl-3 whitespace-nowrap"><span className="text-[#e7ff00]">12:00</span> → Social poszt automatikusan kiküldve</div>
+              </div>
+            </div>
+          </section>
+
+          {/* [06] IT PROJEKTMENEDZSMENT */}
+          <section id="pm" className="scroll-mt-32">
+            <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6 border-b border-white/10 pb-4">
+              <span className="text-3xl md:text-4xl font-black italic text-[#00E5FF] drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">06</span>
+              <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white hover-glitch cursor-default">IT Projektmenedzsment</h2>
+            </div>
+            <div className="bg-[#121212] bg-blueprint border border-white/5 rounded-xl p-6 md:p-8 relative overflow-hidden group hover:border-[#00E5FF]/50 hover:shadow-[0_0_40px_rgba(0,229,255,0.1)] transition-all duration-500">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[50px] group-hover:bg-[#00E5FF]/20 transition-colors"></div>
+
+              <h3 className="text-lg md:text-xl font-bold text-white mb-4 relative z-10">Levesszük a terhet a válladról.</h3>
+              <p className="text-gray-300 text-sm md:text-base font-medium leading-relaxed mb-8 relative z-10">
+                Teljeskörű IT és marketing projektvezetés a legmagasabb nagyvállalati sztenderdek szerint, <strong className="text-white border-b border-[#00E5FF]">határidőre és költségkereten belül</strong>.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+                {['Dedikált Projektmenedzser', 'Heti Előrehaladási Riport', 'Sprint Alapú Fejlesztés', 'Kockázatkezelés'].map((feat, i) => (
+                  <div key={i} className="bg-[#050505] p-3 md:p-4 rounded border border-white/5 flex items-start gap-3 group-hover:border-white/10 transition-colors">
+                    <span className="text-[#00E5FF] font-black">✔</span>
+                    <p className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">{feat}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
         </div>
       </div>
 
@@ -237,8 +291,8 @@ export default function Arzenal() {
             </div>
           </div>
 
-          <Link 
-            href="https://www.thegbr.eu/init" 
+          <Link
+            href="/init"
             className="inline-flex items-center gap-2 md:gap-3 bg-black text-white font-black uppercase text-xs md:text-sm lg:text-base tracking-widest px-6 md:px-10 py-4 md:py-5 transition-all duration-300 hover:bg-white hover:text-black shadow-2xl hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] group"
           >
             Kapcsolatfelvétel <span className="text-[#e7ff00] group-hover:text-black transition-colors duration-300">•</span>

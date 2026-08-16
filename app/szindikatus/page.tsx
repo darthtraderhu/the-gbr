@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Szindikatus() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white selection:bg-[#e7ff00] selection:text-black relative font-sans overflow-hidden">
@@ -8,8 +6,7 @@ export default function Szindikatus() {
           STÍLUSOK ÉS ANIMÁCIÓK
       ========================================= */}
       <style dangerouslySetInnerHTML={{__html: `
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap');
-        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        body { scroll-behavior: smooth; }
         
         @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); } }
         .scanline-effect { animation: scanline 8s linear infinite; }
@@ -40,31 +37,6 @@ export default function Szindikatus() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-[#9d00ff]/5 blur-[150px] rounded-full"></div>
         <div className="absolute inset-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#e7ff00]/10 to-transparent scanline-effect opacity-50"></div>
       </div>
-
-      {/* =========================================
-          FEJLÉC
-      ========================================= */}
-      <header className="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-[#0a0a0a]/90 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
-          <Link href="/" className="text-3xl md:text-5xl font-black italic tracking-[-0.05em] flex items-center hover:opacity-80 transition-opacity">
-            <span className="text-white">THE</span>
-            <span className="text-[#e7ff00] drop-shadow-[0_0_15px_rgba(231,255,0,0.4)]">GBR</span>
-          </Link>
-
-          <nav className="hidden lg:flex gap-10 text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">
-            <Link href="/arzenal" className="hover:text-[#e7ff00] transition-colors">Arzenál</Link>
-            <Link href="/architektura" className="hover:text-white transition-colors">Csomagok</Link>
-            <div className="flex items-center gap-2 border-b-2 border-[#00E5FF] pb-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse"></span>
-              <span className="text-[#00E5FF]">Szindikátus</span>
-            </div>
-          </nav>
-
-          <Link href="/init" className="px-6 py-3 rounded bg-[#e7ff00] text-[#0a0a0a] text-[10px] md:text-xs font-black italic uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_0_20px_rgba(231,255,0,0.2)]">
-            Projekt Indítása
-          </Link>
-        </div>
-      </header>
 
       {/* =========================================
           HERO: A SZINDIKÁTUS

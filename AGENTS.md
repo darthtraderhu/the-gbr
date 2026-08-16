@@ -98,3 +98,22 @@ Részletes lista: `the-gbr-feladatlista.md`. A legfontosabbak:
 - Ne állíts noindex-et a jogi oldalakra — azok indexelhetők.
 - Ne találj ki jogi szöveget. A jogi tartalom a `content/legal/` fájlokból jön.
 - Ne írj olyat a szolgáltatásoldalakra, amit az oldal maga nem valósít meg.
+
+## Döntési jogkör
+
+Kérdezés nélkül elvégezhető:
+- Formázás, elnevezés, mappastruktúra a fenti konvenciók szerint
+- Kód törlése, ha a feladat azt kéri (nem kell megerősítés)
+- Csomag telepítése, ha a feladathoz szükséges
+- Olvasó jellegű shell parancsok (curl, grep, ls, git status, build)
+- Több fájl egyidejű módosítása, ha ugyanaz a hiba több helyen van
+
+Kérdezz, mielőtt megcsinálod:
+- Adatbázis-séma vagy adatvesztéssel járó művelet
+- Új külső szolgáltatás bevezetése (fizetős vagy adatot kap)
+- Jogi vagy marketingszöveg tartalmi módosítása
+- Bármi, ami az élő deployt érinti
+
+Ha egy feladat több módon is megoldható, VÁLASSZ egyet a fenti konvenciók alapján, csináld meg, és a végén jelezd, mit választottál és miért. Ne kérdezz rá előre.
+
+Ha egy javítás során további, kapcsolódó hibát találsz, azt is javítsd ki, és a végén sorold fel. Ne kérj rá külön engedélyt.

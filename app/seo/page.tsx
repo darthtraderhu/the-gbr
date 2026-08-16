@@ -183,8 +183,8 @@ export default function SeoAeoPage() {
             </div>
           </div>
 
-          <Link 
-            href="https://www.thegbr.eu/init" 
+          <Link
+            href="/init"
             className="inline-flex items-center gap-3 bg-black text-white font-black uppercase text-sm md:text-base tracking-widest px-10 py-5 transition-all duration-300 hover:bg-white hover:text-black shadow-2xl hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] group"
           >
             Kapcsolatfelvétel <span className="text-[#e7ff00] group-hover:text-black transition-colors duration-300">•</span>

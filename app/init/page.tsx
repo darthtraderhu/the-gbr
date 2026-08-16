@@ -118,7 +118,7 @@ export default function InitProtocol() {
           HÁTTÉR EFFEKTEK
       ========================================= */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        <div className="absolute inset-0 bg-cubes-pattern opacity-5"></div>
         <div className="absolute inset-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#e7ff00]/20 to-transparent scanline-effect opacity-30"></div>
       </div>
 

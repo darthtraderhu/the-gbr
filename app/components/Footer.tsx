@@ -26,6 +26,8 @@ export default function Footer() {
             <Link href="/" className="text-xs font-bold text-gray-500 hover:text-white transition-colors">Főoldal</Link>
             <Link href="/arzenal" className="text-xs font-bold text-gray-500 hover:text-white transition-colors">Arzenál</Link>
             <Link href="/architektura" className="text-xs font-bold text-gray-500 hover:text-white transition-colors">Csomagok</Link>
+            <Link href="/seo" className="text-xs font-bold text-gray-500 hover:text-white transition-colors">SEO</Link>
+            <Link href="/szindikatus" className="text-xs font-bold text-gray-500 hover:text-white transition-colors">Hálózat</Link>
             <Link href="/hirek" className="text-xs font-bold text-gray-500 hover:text-white transition-colors">Hírmotor</Link>
           </div>
 

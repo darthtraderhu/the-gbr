@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getSortedPostsData } from "../lib/posts"; // <-- BEHÚZZUK A MOTORT!
+
+export const metadata: Metadata = {
+  title: "THE GBR | Full-Stack B2B Ügynökség — Web, AI, Teljesítménymarketing",
+  description: "Next.js alapú weboldalak, AI-vezérelt ügyfélszolgálat és adatvezérelt hirdetési kampányok egyetlen csapattól. 2002 óta az értékesítésben, kizárólag B2B fókusszal.",
+};
 
 export default function Home() {
   // Lekérjük a cikkeket, és csak a legújabb 3 darabot vesszük ki a főoldalra
@@ -13,9 +19,7 @@ export default function Home() {
           ANIMÁCIÓK ÉS STÍLUSOK
       ========================================= */}
       <style dangerouslySetInnerHTML={{__html: `
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap');
-        
-        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        body { scroll-behavior: smooth; }
 
         @keyframes floatUp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         .animate-float { animation: floatUp 4s ease-in-out infinite; }
@@ -38,31 +42,9 @@ export default function Home() {
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-[#e7ff00]/10 blur-[150px] rounded-full"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-[#00E5FF]/5 blur-[150px] rounded-full"></div>
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.15]"></div>
+        <div className="absolute inset-0 bg-cubes-pattern opacity-[0.15]"></div>
         <div className="absolute inset-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#e7ff00]/20 to-transparent scanline-effect opacity-50"></div>
       </div>
-
-      {/* =========================================
-          FEJLÉC
-      ========================================= */}
-      <header className="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-[#0a0a0a]/90 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
-          <Link href="/" className="text-3xl md:text-5xl font-black italic tracking-[-0.05em] flex items-center">
-            <span className="text-white">THE</span>
-            <span className="text-[#e7ff00] drop-shadow-[0_0_15px_rgba(231,255,0,0.4)]">GBR</span>
-          </Link>
-
-          <nav className="hidden lg:flex gap-10 text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">
-            <Link href="#services" className="hover:text-[#e7ff00] transition-colors">Arzenál</Link>
-            <Link href="#packages" className="hover:text-white transition-colors">Csomagok</Link>
-            <Link href="/hirek" className="hover:text-[#00E5FF] transition-colors">Hírmotor</Link>
-          </nav>
-
-          <Link href="#contact" className="px-6 py-3 rounded bg-[#e7ff00] text-[#0a0a0a] text-[10px] md:text-xs font-black italic uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_0_20px_rgba(231,255,0,0.2)]">
-            Projekt Indítása
-          </Link>
-        </div>
-      </header>
 
       {/* =========================================
           HERO SZEKCIÓ
@@ -248,7 +230,7 @@ export default function Home() {
               <li className="flex items-center gap-3 text-gray-300 font-medium text-sm"><span className="text-[#e7ff00]">✔</span> Villámgyors Next.js alapok</li>
               <li className="flex items-center gap-3 text-gray-300 font-medium text-sm"><span className="text-[#e7ff00]">✔</span> SEO felépítés és Copywriting</li>
             </ul>
-            <button className="w-full py-4 rounded border border-white/20 text-white font-bold uppercase tracking-widest text-xs hover:bg-white/5 transition-all mt-auto">Érdekel</button>
+            <Link href="/init?csomag=web-arculat" className="w-full py-4 rounded border border-white/20 text-white font-bold uppercase tracking-widest text-xs hover:bg-white/5 transition-all mt-auto block text-center">Érdekel</Link>
           </div>
 
           <div className="bg-gradient-to-b from-[#1a1c00] to-[#121212] border border-[#e7ff00]/50 rounded-2xl p-10 hover:border-[#e7ff00] transition-all transform md:-translate-y-4 shadow-[0_0_30px_rgba(231,255,0,0.15)] flex flex-col relative overflow-hidden">
@@ -263,7 +245,7 @@ export default function Home() {
               <li className="flex items-center gap-3 text-gray-300 font-medium text-sm"><span className="text-[#e7ff00]">✔</span> Egyedi admin és Dashboard</li>
               <li className="flex items-center gap-3 text-gray-300 font-medium text-sm"><span className="text-[#e7ff00]">✔</span> Meta & Google Ads menedzsment</li>
             </ul>
-            <button className="w-full py-4 rounded bg-[#e7ff00] text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all shadow-[0_0_20px_rgba(231,255,0,0.2)] mt-auto">Kiválasztom</button>
+            <Link href="/init?csomag=ecommerce" className="w-full py-4 rounded bg-[#e7ff00] text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all shadow-[0_0_20px_rgba(231,255,0,0.2)] mt-auto block text-center">Kiválasztom</Link>
           </div>
 
           <div className="bg-[#121212] border border-white/10 rounded-2xl p-10 hover:border-[#00E5FF]/40 transition-all flex flex-col relative overflow-hidden group">
@@ -277,7 +259,7 @@ export default function Home() {
               <li className="flex items-center gap-3 text-gray-300 font-medium text-sm"><span className="text-[#00E5FF]">✔</span> Prémium videó- és tartalomgyártás</li>
               <li className="flex items-center gap-3 text-gray-300 font-medium text-sm"><span className="text-[#00E5FF]">✔</span> Dedikált IT Projektmenedzser</li>
             </ul>
-            <button className="w-full py-4 rounded border border-[#00E5FF]/40 text-white font-bold uppercase tracking-widest text-xs hover:bg-[#00E5FF]/10 transition-all mt-auto relative z-10">Konzultáció Kérése</button>
+            <Link href="/init?csomag=fullstack" className="w-full py-4 rounded border border-[#00E5FF]/40 text-white font-bold uppercase tracking-widest text-xs hover:bg-[#00E5FF]/10 transition-all mt-auto relative z-10 block text-center">Konzultáció Kérése</Link>
           </div>
         </div>
       </section>
@@ -361,9 +343,9 @@ export default function Home() {
             Ne a versenytársaidat másold. Építs olyan digitális infrastruktúrát, amit ők fognak próbálni lemásolni. Bízd ránk a kódolást, a videókat és a hirdetéseket.
           </p>
           
-          <a href="mailto:hello@thegbr.com" className="inline-block px-14 py-6 rounded bg-[#e7ff00] text-[#0a0a0a] font-black italic uppercase tracking-[0.3em] text-sm hover:bg-white transition-all shadow-[0_0_40px_rgba(231,255,0,0.3)] relative z-10">
+          <Link href="/init" className="inline-block px-14 py-6 rounded bg-[#e7ff00] text-[#0a0a0a] font-black italic uppercase tracking-[0.3em] text-sm hover:bg-white transition-all shadow-[0_0_40px_rgba(231,255,0,0.3)] relative z-10">
             Kapcsolatfelvétel &rarr;
-          </a>
+          </Link>
         </div>
       </section>
 

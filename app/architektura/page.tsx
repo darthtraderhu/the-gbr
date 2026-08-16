@@ -25,8 +25,7 @@ export default function Architektura() {
           STÍLUSOK ÉS ANIMÁCIÓK
       ========================================= */}
       <style dangerouslySetInnerHTML={{__html: `
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap');
-        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        body { scroll-behavior: smooth; }
         .bg-blueprint {
           background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
           background-size: 30px 30px;
@@ -46,25 +45,6 @@ export default function Architektura() {
         <div className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[60vw] h-[60vw] bg-[#e7ff00]/5 blur-[200px] rounded-full"></div>
         <div className="absolute bottom-0 right-0 w-[40vw] h-[40vw] bg-[#00E5FF]/5 blur-[150px] rounded-full"></div>
       </div>
-
-      {/* =========================================
-          FEJLÉC
-      ========================================= */}
-      <header className="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-[#0a0a0a]/90 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
-          <Link href="/" className="text-3xl md:text-5xl font-black italic tracking-[-0.05em] flex items-center hover:opacity-80 transition-opacity">
-            <span className="text-white">THE</span>
-            <span className="text-[#e7ff00] drop-shadow-[0_0_15px_rgba(231,255,0,0.4)]">GBR</span>
-          </Link>
-          <div className="hidden md:flex items-center gap-4 border border-[#e7ff00]/30 bg-[#e7ff00]/10 px-4 py-2 rounded">
-            <span className="w-2 h-2 rounded-full bg-[#e7ff00] animate-pulse"></span>
-            <span className="font-mono text-[10px] text-[#e7ff00] uppercase tracking-widest">Sys: Architecture_Mode</span>
-          </div>
-          <Link href="/init" className="px-6 py-3 rounded bg-[#e7ff00] text-[#0a0a0a] text-[10px] md:text-xs font-black italic uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_0_20px_rgba(231,255,0,0.2)]">
-            Projekt Indítása
-          </Link>
-        </div>
-      </header>
 
       {/* =========================================
           HERO & KALKULÁTOR

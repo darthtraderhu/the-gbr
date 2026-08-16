@@ -8,7 +8,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AiChat from "./components/AiChat";
 import CallButton from "./components/CallButton";
-import SeoFloatingLabel from "./components/SeoFloatingLabel";
 import AntiCopy from "./components/AntiCopy"; // A Védelmi Pajzs
 
 // Beállítjuk a betűtípust
@@ -67,9 +66,6 @@ export default function RootLayout({
 
         {/* A Globális Lábléc */}
         <Footer />
-
-        {/* Lebegő SEO Címke (BAL KÖZÉP) */}
-        <SeoFloatingLabel />
 
         {/* Lebegő Forródrót Gomb (BAL OLDAL) */}
         <CallButton />

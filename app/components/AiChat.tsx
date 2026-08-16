@@ -61,7 +61,7 @@ export default function AiChat() {
             </button>
           </div>
 
-          <div className="h-[350px] p-4 overflow-y-auto flex flex-col gap-4 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-opacity-5 relative">
+          <div className="h-[350px] p-4 overflow-y-auto flex flex-col gap-4 bg-cubes-pattern bg-opacity-5 relative">
             <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505] pointer-events-none"></div>
             
             {messages.map((msg, idx) => (

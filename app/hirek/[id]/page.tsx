@@ -40,7 +40,7 @@ export default async function PosztOldal({ params }: { params: Promise<{ id: str
   const postData = await getPostData(resolvedParams.id);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white pt-24 px-6 md:px-12 font-sans bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-opacity-5">
+    <div className="min-h-screen bg-[#050505] text-white pt-24 px-6 md:px-12 font-sans bg-cubes-pattern bg-opacity-5">
       <div className="max-w-3xl mx-auto bg-[#0a0a0a] border border-white/10 rounded-xl p-8 md:p-12 shadow-[0_0_40px_rgba(231,255,0,0.05)] relative overflow-hidden">
         
         {/* Dekorcsík */}

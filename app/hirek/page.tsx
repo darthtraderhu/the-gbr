@@ -16,8 +16,7 @@ export default function Intel() {
           STÍLUSOK ÉS ANIMÁCIÓK
       ========================================= */}
       <style dangerouslySetInnerHTML={{__html: `
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap');
-        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        body { scroll-behavior: smooth; }
         
         @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); } }
         .scanline-effect { animation: scanline 8s linear infinite; }
@@ -48,32 +47,6 @@ export default function Intel() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-[#e7ff00]/5 blur-[150px] rounded-full"></div>
         <div className="absolute inset-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#00E5FF]/10 to-transparent scanline-effect opacity-50"></div>
       </div>
-
-      {/* =========================================
-          FEJLÉC
-      ========================================= */}
-      <header className="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-[#0a0a0a]/90 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
-          <Link href="/" className="text-3xl md:text-5xl font-black italic tracking-[-0.05em] flex items-center hover:opacity-80 transition-opacity">
-            <span className="text-white">THE</span>
-            <span className="text-[#e7ff00] drop-shadow-[0_0_15px_rgba(231,255,0,0.4)]">GBR</span>
-          </Link>
-
-          <nav className="hidden lg:flex gap-10 text-xs font-bold text-gray-400 uppercase tracking-[0.2em]">
-            <Link href="/arzenal" className="hover:text-[#e7ff00] transition-colors">Arzenál</Link>
-            <Link href="/architektura" className="hover:text-white transition-colors">Csomagok</Link>
-            <Link href="/szindikatus" className="hover:text-[#00E5FF] transition-colors">Szindikátus</Link>
-            <div className="flex items-center gap-2 border-b-2 border-white pb-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-              <span className="text-white">Hírmotor</span>
-            </div>
-          </nav>
-
-          <Link href="/init" className="px-6 py-3 rounded bg-[#e7ff00] text-[#0a0a0a] text-[10px] md:text-xs font-black italic uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_0_20px_rgba(231,255,0,0.2)]">
-            Projekt Indítása
-          </Link>
-        </div>
-      </header>
 
       {/* =========================================
           BLOOMBERG ADATSÁV (TICKER)
@@ -134,7 +107,7 @@ export default function Intel() {
               <div className="w-full md:w-1/2 aspect-video md:aspect-auto bg-[#1a1a1a] relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 hidden md:block"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent z-10 md:hidden"></div>
-                <div className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                <div className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700 bg-cubes-pattern"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-20">
                   <svg className="w-24 h-24 text-[#e7ff00]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.956 11.956 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                 </div>
