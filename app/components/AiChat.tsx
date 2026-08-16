@@ -2,9 +2,11 @@
 
 import { useState, useRef, useEffect } from "react";
 
+type ChatMessage = { sender: "user" | "ai"; text: string };
+
 export default function AiChat() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<ChatMessage[]>([
     { sender: "ai", text: "Üdvözlöm. Én a THE GBR neurális asszisztense vagyok. Milyen rendszer architektúrára van szüksége?" }
   ]);
   const [inputValue, setInputValue] = useState("");
@@ -40,6 +42,7 @@ export default function AiChat() {
       const data = await response.json();
       setMessages((prev) => [...prev, { sender: "ai", text: data.reply }]);
     } catch (error) {
+      console.error("Chat hívási hiba:", error);
       setMessages((prev) => [...prev, { sender: "ai", text: "SYS.ERROR: Hálózati hiba lépett fel." }]);
     } finally {
       setIsTyping(false);

@@ -3,8 +3,20 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
+import { z } from 'zod';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
+
+// A frontmatter-mezők futásidejű ellenőrzése: hiányos/hibás .md fájl esetén
+// a build egyértelmű hibaüzenettel áll le, nem csendben renderel undefined-et.
+const postFrontmatterSchema = z.object({
+  date: z.string(),
+  title: z.string(),
+  // Néhány meglévő posztból hiányzik — nem szabad emiatt elbukni a buildet.
+  excerpt: z.string().optional().default(""),
+  // Opcionális: a UI a hiányzó kategóriát "Hírek"-re esik vissza (ld. app/page.tsx, hirek/page.tsx).
+  category: z.string().optional(),
+});
 
 // -------------------------------------------------------------
 // SEGÉDFUNKCIÓ: Olvasási idő kiszámítása (kb. 200 szó / perc)
@@ -30,11 +42,12 @@ export function getSortedPostsData() {
     
     // Itt hívjuk meg az okos számolót a nyers szövegre (content)
     const computedReadTime = calculateReadTime(matterResult.content);
+    const frontmatter = postFrontmatterSchema.parse(matterResult.data);
 
     return {
       id,
       readTime: computedReadTime, // <--- BUMM! Itt adjuk át az automatikus adatot
-      ...(matterResult.data as { date: string; title: string; excerpt: string; category: string }),
+      ...frontmatter,
     };
   });
 
@@ -60,11 +73,12 @@ export async function getPostData(id: string) {
   
   // A konkrét cikkhez is kiszámoljuk, ha ott is ki akarnád írni
   const computedReadTime = calculateReadTime(matterResult.content);
+  const frontmatter = postFrontmatterSchema.parse(matterResult.data);
 
   return {
     id,
     contentHtml,
     readTime: computedReadTime, // <--- És itt is átadjuk
-    ...(matterResult.data as { date: string; title: string; excerpt: string; category: string }),
+    ...frontmatter,
   };
 }

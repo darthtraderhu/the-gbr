@@ -90,9 +90,10 @@ export async function GET(request: Request) {
       generatedText: postContent 
     });
 
-  } catch (error: any) {
+  } catch (error) {
     // ITT A MÁSIK LÉNYEG: Kőkeményen az arcunkba üvölti a végzetes hibát a terminálban!
     console.error("🚨 KŐKEMÉNY RENDSZERHIBA:", error);
-    return NextResponse.json({ success: false, error: error.message || error }, { status: 500 });
+    const message = error instanceof Error ? error.message : String(error);
+    return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }
