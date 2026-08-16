@@ -1,18 +1,18 @@
 ---
 title: "Szolgáltatási feltételek | THE GBR"
-description: "A thegbr.eu weboldal használatának feltételei: kapcsolatfelvétel jogi jellege, szellemi tulajdon, felelősségkorlátozás, tiltott magatartások és az irányadó jog."
+description: "A www.thegbr.eu weboldal használatának feltételei: kapcsolatfelvétel jogi jellege, szellemi tulajdon, felelősségkorlátozás, tiltott magatartások és az irányadó jog."
 ---
 
 # Szolgáltatási feltételek
 
 **Hatályos:** 2026. augusztus 16.
-**Weboldal:** thegbr.eu
+**Weboldal:** www.thegbr.eu
 
 ---
 
 ## 1. Bevezetés
 
-Ezek a feltételek a **thegbr.eu** weboldal használatára vonatkoznak. Az üzemeltető a **GBR Marketing Solutions Kft.** (a továbbiakban: Szolgáltató), amelynek adatait az [Impresszum](/impresszum) tartalmazza.
+Ezek a feltételek a **www.thegbr.eu** weboldal használatára vonatkoznak. Az üzemeltető a **GBR Marketing Solutions Kft.** (a továbbiakban: Szolgáltató), amelynek adatait az [Impresszum](/impresszum) tartalmazza.
 
 A weboldal használatával Ön elfogadja az alábbi feltételeket. Ha nem ért egyet velük, kérjük, ne használja a weboldalt.
 

@@ -1,11 +1,11 @@
 ---
 title: "Impresszum | THE GBR"
-description: "A thegbr.eu üzemeltetőjének, a GBR Marketing Solutions Kft.-nek a cégadatai, elérhetőségei és a tárhelyszolgáltató adatai az elektronikus kereskedelmi törvény szerint."
+description: "A www.thegbr.eu üzemeltetőjének, a GBR Marketing Solutions Kft.-nek a cégadatai, elérhetőségei és a tárhelyszolgáltató adatai az elektronikus kereskedelmi törvény szerint."
 ---
 
 # Impresszum
 
-A thegbr.eu weboldal üzemeltetőjének adatai az elektronikus kereskedelmi szolgáltatásokról szóló **2001. évi CVIII. törvény 4. §-a** alapján.
+A www.thegbr.eu weboldal üzemeltetőjének adatai az elektronikus kereskedelmi szolgáltatásokról szóló **2001. évi CVIII. törvény 4. §-a** alapján.
 
 ---
 
@@ -24,7 +24,7 @@ A thegbr.eu weboldal üzemeltetőjének adatai az elektronikus kereskedelmi szol
 | **Képviselő** | Tóthné Macsinka Katalin |
 | **E-mail** | gabor@thegbr.eu |
 | **Telefon** | +36 70 513 9838 |
-| **Weboldal** | https://thegbr.eu |
+| **Weboldal** | https://www.thegbr.eu |
 
 **Bankszámlaszám:** 12600016-12754276-15083634
 **Számlavezető pénzintézet:** Wise

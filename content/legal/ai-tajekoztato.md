@@ -1,18 +1,18 @@
 ---
 title: "AI-használati tájékoztató | THE GBR"
-description: "Hogyan működik a thegbr.eu mesterségesintelligencia-alapú chat funkciója, mi történik a beírt adatokkal, és mire nem használható a chat válasza."
+description: "Hogyan működik a www.thegbr.eu mesterségesintelligencia-alapú chat funkciója, mi történik a beírt adatokkal, és mire nem használható a chat válasza."
 ---
 
 # AI-használati tájékoztató
 
 **Hatályos:** 2026. augusztus 16.
-**Weboldal:** thegbr.eu
+**Weboldal:** www.thegbr.eu
 
 ---
 
 ## 1. Miért adjuk ki ezt a tájékoztatót?
 
-A thegbr.eu weboldalon mesterséges intelligenciára épülő funkció működik. Fontosnak tartjuk, hogy Ön pontosan tudja, mi történik az adataival, és mit várhat el ettől a funkciótól.
+A www.thegbr.eu weboldalon mesterséges intelligenciára épülő funkció működik. Fontosnak tartjuk, hogy Ön pontosan tudja, mi történik az adataival, és mit várhat el ettől a funkciótól.
 
 Az uniós mesterségesintelligencia-rendelet **(EU) 2024/1689** átláthatósági követelménye szerint a felhasználót tájékoztatni kell arról, ha mesterséges intelligenciával kommunikál. Ez a tájékoztató ezt a kötelezettséget is teljesíti.
 

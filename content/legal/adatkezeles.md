@@ -1,13 +1,13 @@
 ---
 title: "Adatkezelési tájékoztató | THE GBR"
-description: "Milyen személyes adatokat kezel a GBR Marketing Solutions Kft. a thegbr.eu használata és a szolgáltatások igénybevétele során, milyen jogalapon, meddig, és kinek továbbítjuk — GDPR szerinti tájékoztató."
+description: "Milyen személyes adatokat kezel a GBR Marketing Solutions Kft. a www.thegbr.eu használata és a szolgáltatások igénybevétele során, milyen jogalapon, meddig, és kinek továbbítjuk — GDPR szerinti tájékoztató."
 ---
 
 # Adatkezelési tájékoztató
 
 **Hatályos:** 2026. augusztus 16.
 **Verzió:** 1.0
-**Weboldal:** thegbr.eu
+**Weboldal:** www.thegbr.eu
 
 ---
 
@@ -23,7 +23,7 @@ description: "Milyen személyes adatokat kezel a GBR Marketing Solutions Kft. a 
 | **Képviselő** | Tóthné Macsinka Katalin |
 | **E-mail** | gabor@thegbr.eu |
 | **Telefon** | +36 70 513 9838 |
-| **Weboldal** | https://thegbr.eu |
+| **Weboldal** | https://www.thegbr.eu |
 
 **Adatvédelmi tisztviselő:** Az adatkezelő a GDPR 37. cikke alapján nem köteles adatvédelmi tisztviselőt kijelölni, és nem is jelölt ki. Adatvédelmi kérdésekben a fenti e-mail címen lehet kapcsolatba lépni.
 
@@ -31,7 +31,7 @@ description: "Milyen személyes adatokat kezel a GBR Marketing Solutions Kft. a 
 
 ## 2. A tájékoztató célja és jogszabályi háttér
 
-Ez a tájékoztató azt írja le, hogy a thegbr.eu weboldal használata és a szolgáltatásaink igénybevétele során milyen személyes adatokat kezelünk, milyen célból, milyen jogalapon, meddig, és kinek továbbítjuk azokat.
+Ez a tájékoztató azt írja le, hogy a www.thegbr.eu weboldal használata és a szolgáltatásaink igénybevétele során milyen személyes adatokat kezelünk, milyen célból, milyen jogalapon, meddig, és kinek továbbítjuk azokat.
 
 Az adatkezelés az alábbi jogszabályok alapján történik:
 
