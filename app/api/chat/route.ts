@@ -1,13 +1,37 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
+import { z } from 'zod';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// Bejövő kérés-séma: role-whitelist (csak "user"/"ai"), üzenethossz- és
+// history-méret-korlát, hogy a végpont ne legyen nyitott költség-DoS vektor.
+const chatMessageSchema = z.object({
+  sender: z.enum(['user', 'ai']),
+  text: z.string().trim().min(1).max(1000),
+});
+
+const chatRequestSchema = z.object({
+  message: z.string().trim().min(1).max(1000),
+  history: z.array(chatMessageSchema).max(20),
+});
+
 export async function POST(req: Request) {
   try {
-    const { message, history } = await req.json();
+    const body = await req.json();
+    const parsed = chatRequestSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { reply: "SYS.ERROR: Érvénytelen kérés formátum." },
+        { status: 400 }
+      );
+    }
+
+    const { message, history } = parsed.data;
 
     // A THE GBR RENDSZERUTASÍTÁS (Prompt)
     const systemPrompt = `
@@ -22,7 +46,7 @@ export async function POST(req: Request) {
     `;
 
     // Előző üzenetek formázása az OpenAI-nak (hogy emlékezzen a beszélgetésre)
-    const formattedHistory = history.map((msg: any) => ({
+    const formattedHistory: ChatCompletionMessageParam[] = history.map((msg) => ({
       role: msg.sender === 'ai' ? 'assistant' : 'user',
       content: msg.text
     }));

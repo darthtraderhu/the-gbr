@@ -8,7 +8,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AiChat from "./components/AiChat";
 import CallButton from "./components/CallButton";
-import AntiCopy from "./components/AntiCopy"; // A Védelmi Pajzs
 
 // Beállítjuk a betűtípust
 const montserrat = Montserrat({ 
@@ -55,9 +54,6 @@ export default function RootLayout({
       */}
       <body className={`${montserrat.className} bg-[#0a0a0a] text-white select-none selection:bg-[#e7ff00] selection:text-black antialiased`}>
         
-        {/* A Láthatatlan Pajzs */}
-        <AntiCopy />
-
         {/* A Globális Menü */}
         <Navbar />
 

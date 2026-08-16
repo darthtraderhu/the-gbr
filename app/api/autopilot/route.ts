@@ -1,14 +1,34 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { timingSafeEqual } from 'crypto';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// Konstans idejű összehasonlítás: nem áll meg az első eltérő karakternél,
+// így az időzítésből nem következtethető ki a helyes CRON_SECRET.
+function isAuthorized(authHeader: string | null, cronSecret: string): boolean {
+  if (!authHeader) return false;
+
+  const expected = Buffer.from(`Bearer ${cronSecret}`);
+  const provided = Buffer.from(authHeader);
+
+  if (expected.length !== provided.length) return false;
+
+  return timingSafeEqual(expected, provided);
+}
+
 export async function GET(request: Request) {
   // 1. Biztonsági pajzs
+  const cronSecret = process.env.CRON_SECRET;
+  if (!cronSecret) {
+    console.error("🔥 HIBA: A CRON_SECRET környezeti változó nincs beállítva!");
+    return new NextResponse('Szerver-konfigurációs hiba', { status: 500 });
+  }
+
   const authHeader = request.headers.get('authorization');
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (!isAuthorized(authHeader, cronSecret)) {
     console.error("🔥 HIBA: Rossz vagy hiányzó CRON_SECRET!");
     return new NextResponse('Hozzáférés megtagadva', { status: 401 });
   }
