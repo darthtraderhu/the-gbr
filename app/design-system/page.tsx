@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ThemeToggle from "./ThemeToggle";
+import ComponentsShowcase from "./ComponentsShowcase";
 
 export const metadata: Metadata = {
   title: "Design System (dev) — THE GBR",
@@ -437,6 +438,93 @@ export default function DesignSystemPage() {
                 />
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* ============ KOMPONENSEK ============ */}
+        <section style={{ marginTop: "5rem" }}>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 600,
+              fontSize: "var(--text-2xl)",
+              borderBottom: "1px solid var(--rule)",
+              paddingBottom: "0.75rem",
+              marginBottom: "0.75rem",
+            }}
+          >
+            Komponensek
+          </h2>
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "var(--text-sm)",
+              color: "var(--ink-2)",
+              marginBottom: "2rem",
+              maxWidth: "42rem",
+            }}
+          >
+            A design token réteg fölé épített komponens-készlet — kizárólag tokeneket használ, sehol
+            nincs hardcode-olt szín, betűméret vagy térköz. Alább mindkét téma egyszerre látható, a
+            fenti kapcsolótól függetlenül (a data-theme attribútum itt lokálisan van kikényszerítve
+            mindkét oszlopon).
+          </p>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))",
+              gap: "1.5rem",
+            }}
+          >
+            <div
+              data-theme="light"
+              style={{
+                backgroundColor: "var(--ground)",
+                color: "var(--ink)",
+                border: "1px solid var(--rule)",
+                borderRadius: "4px",
+                padding: "2rem",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "var(--text-xs)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  color: "var(--mid)",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                Világos téma
+              </p>
+              <ComponentsShowcase />
+            </div>
+            <div
+              data-theme="dark"
+              style={{
+                backgroundColor: "var(--ground)",
+                color: "var(--ink)",
+                border: "1px solid var(--rule)",
+                borderRadius: "4px",
+                padding: "2rem",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "var(--text-xs)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  color: "var(--mid)",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                Sötét téma
+              </p>
+              <ComponentsShowcase />
+            </div>
           </div>
         </section>
       </div>

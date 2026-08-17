@@ -107,8 +107,13 @@
    A --signal-deep és --attention tokenekhez a felhasználó nem adott
    sötét változatot — ezek dark módban is a világos értéküket tartják meg,
    amíg a következő kör nem definiál nekik sajátot.
+
+   FONTOS: a szelektor SZÁNDÉKOSAN nem :root-hoz kötött, hanem bármely
+   elemre illeszkedik — ez teszi lehetővé, hogy a Card "dark" variánsa
+   egy data-theme="dark" attribútummal lokálisan is felülírhassa a
+   tokeneket egy világos oldalon belül, a CSS-változó öröklődés miatt.
    ========================================================= */
-:root[data-theme="dark"] {
+[data-theme="dark"] {
   --ground: #0e1113;
   --panel: #16191c;
   --ink: #e4e7e2;
@@ -121,7 +126,7 @@
 
 /* Explicit világos felülírás — robosztusság kedvéért, ha a kaszkádba
    később bekerülne bármilyen más sötét-mód szabály. */
-:root[data-theme="light"] {
+[data-theme="light"] {
   --ground: #eef0ec;
   --panel: #ffffff;
   --ink: #14171a;
