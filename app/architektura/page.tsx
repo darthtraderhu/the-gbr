@@ -4,21 +4,23 @@ import { breadcrumbSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import ArchitekturaClient from "./ArchitekturaClient";
 
+const DESCRIPTION =
+  "Három tipikus felállás weboldal-fejlesztéstől a folyamatos üzemeltetésig. Tervezd meg a keretet, és nézd meg, mit kapsz érte.";
+
 export const metadata: Metadata = {
-  title: "Digitális Architektúra & ROI Kalkulátor | THE GBR",
-  description:
-    "Tervezd meg a digitális architektúrád és számold ki a várható megtérülést a THE GBR ROI motorjával. Web Presence, Scale & E-Comm és Full-Stack Autopilot csomagok.",
+  title: "Csomagok és árazás | THE GBR",
+  description: DESCRIPTION,
   alternates: {
     canonical: "/architektura",
   },
   openGraph: {
-    title: "Digitális Architektúra & ROI Kalkulátor | THE GBR",
-    description: "Tervezd meg a digitális architektúrád, és számold ki a várható megtérülést.",
+    title: "Csomagok és árazás | THE GBR",
+    description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Digitális Architektúra & ROI Kalkulátor | THE GBR",
-    description: "Tervezd meg a digitális architektúrád, és számold ki a várható megtérülést.",
+    title: "Csomagok és árazás | THE GBR",
+    description: DESCRIPTION,
   },
 };
 
