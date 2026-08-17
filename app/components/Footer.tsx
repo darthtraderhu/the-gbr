@@ -55,7 +55,7 @@ export default function Footer() {
               href="/szindikatus"
               className="text-xs font-bold text-gray-500 hover:text-white transition-colors"
             >
-              Hálózat
+              Rólunk
             </Link>
             <Link
               href="/hirek"

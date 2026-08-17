@@ -64,7 +64,7 @@ export default function Navbar() {
       ),
     },
     {
-      name: "Hálózat",
+      name: "Rólunk",
       href: "/szindikatus",
       activeColor: "text-[#9d00ff]",
       icon: (
