@@ -71,7 +71,7 @@ A böngészők beállításaiban letilthatja vagy törölheti a sütiket:
 - **Safari:** Beállítások → Adatvédelem
 - **Edge:** Beállítások → Cookie-k és webhelyengedélyek
 
-**Figyelem:** a működéshez szükséges sütik letiltása esetén a weboldal egyes funkciói nem lesznek elérhetők.
+> **Figyelem:** a működéshez szükséges sütik letiltása esetén a weboldal egyes funkciói nem lesznek elérhetők.
 
 ---
 

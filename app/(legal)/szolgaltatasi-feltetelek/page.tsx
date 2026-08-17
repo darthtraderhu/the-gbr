@@ -3,6 +3,7 @@ import { getLegalDoc } from "@/lib/legal";
 import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
+import LegalDoc from "../LegalDoc";
 
 export async function generateMetadata(): Promise<Metadata> {
   const doc = await getLegalDoc("szolgaltatasi-feltetelek");
@@ -25,7 +26,7 @@ export default async function SzolgaltatasiFeltetelekPage() {
           { name: "Szolgáltatási feltételek", url: `${SITE_URL}/szolgaltatasi-feltetelek` },
         ])}
       />
-      <div dangerouslySetInnerHTML={{ __html: doc.contentHtml }} />
+      <LegalDoc doc={doc} />
     </>
   );
 }

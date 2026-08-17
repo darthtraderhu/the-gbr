@@ -68,7 +68,7 @@ A weboldalon mesterséges intelligenciára épülő chat funkció működik. A f
 | **Megőrzés** | 30 nap |
 | **Adattovábbítás** | A beírt üzenetek feldolgozás céljából továbbításra kerülnek az **OpenAI, L.L.C.** (Egyesült Államok) részére. Részletek az 5. és 6. pontban. |
 
-**Fontos figyelmeztetés:** Kérjük, hogy a chatbe **ne írjon be személyes adatot**, sem a sajátját, sem harmadik személyét, és ne osszon meg bizalmas vagy üzleti titoknak minősülő információt. Amennyiben ilyet ír be, az továbbításra kerül az OpenAI részére. A chat nem alkalmas ajánlatkérésre — erre a kapcsolatfelvételi űrlap szolgál.
+> **Fontos figyelmeztetés:** Kérjük, hogy a chatbe **ne írjon be személyes adatot**, sem a sajátját, sem harmadik személyét, és ne osszon meg bizalmas vagy üzleti titoknak minősülő információt. Amennyiben ilyet ír be, az továbbításra kerül az OpenAI részére. A chat nem alkalmas ajánlatkérésre — erre a kapcsolatfelvételi űrlap szolgál.
 
 **Automatizált döntéshozatal:** A chat funkció nem hoz az érintettre nézve joghatással járó vagy őt hasonlóképpen jelentős mértékben érintő automatizált döntést. Profilalkotás nem történik.
 

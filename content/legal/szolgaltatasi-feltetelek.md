@@ -16,7 +16,7 @@ Ezek a feltételek a **www.thegbr.eu** weboldal használatára vonatkoznak. Az �
 
 A weboldal használatával Ön elfogadja az alábbi feltételeket. Ha nem ért egyet velük, kérjük, ne használja a weboldalt.
 
-**Fontos:** Ez a dokumentum a weboldal használatára vonatkozik. **A Szolgáltató által nyújtott fejlesztési, üzemeltetési és marketingszolgáltatások feltételeit minden esetben külön, egyedi szerződés rendezi** — ezt a dokumentumot nem lehet a szolgáltatásra vonatkozó ajánlatnak vagy szerződéses feltételnek tekinteni.
+> **Fontos:** Ez a dokumentum a weboldal használatára vonatkozik. **A Szolgáltató által nyújtott fejlesztési, üzemeltetési és marketingszolgáltatások feltételeit minden esetben külön, egyedi szerződés rendezi** — ezt a dokumentumot nem lehet a szolgáltatásra vonatkozó ajánlatnak vagy szerződéses feltételnek tekinteni.
 
 ---
 

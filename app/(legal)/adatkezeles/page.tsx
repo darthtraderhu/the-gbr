@@ -3,6 +3,7 @@ import { getLegalDoc } from "@/lib/legal";
 import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
+import LegalDoc from "../LegalDoc";
 
 export async function generateMetadata(): Promise<Metadata> {
   const doc = await getLegalDoc("adatkezeles");
@@ -25,7 +26,7 @@ export default async function AdatkezelesPage() {
           { name: "Adatkezelés", url: `${SITE_URL}/adatkezeles` },
         ])}
       />
-      <div dangerouslySetInnerHTML={{ __html: doc.contentHtml }} />
+      <LegalDoc doc={doc} />
     </>
   );
 }
