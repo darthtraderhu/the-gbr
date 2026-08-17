@@ -15,7 +15,7 @@ export default function SectionHeader({ eyebrow, title, lead, className }: Secti
           {eyebrow}
         </p>
       )}
-      <h2 className="font-display font-bold text-[var(--ink)] [font-size:var(--text-3xl)]">
+      <h2 className="font-display font-bold text-[var(--ink)] [font-size:var(--text-section)] leading-[1.02] tracking-tight max-w-[17ch]">
         {title}
       </h2>
       {lead && (

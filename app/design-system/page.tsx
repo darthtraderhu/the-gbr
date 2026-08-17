@@ -12,37 +12,52 @@ export const metadata: Metadata = {
 };
 
 const COLORS: { name: string; token: string; hex: string; hexDark?: string; note?: string }[] = [
-  { name: "ground", token: "--ground", hex: "#EEF0EC", hexDark: "#0E1113", note: "alap" },
+  { name: "ground", token: "--ground", hex: "#EEF0EC", hexDark: "#0B0E10", note: "alap" },
   { name: "panel", token: "--panel", hex: "#FFFFFF", hexDark: "#16191C", note: "felület" },
-  { name: "ink", token: "--ink", hex: "#14171A", hexDark: "#E4E7E2", note: "tinta" },
+  { name: "ink", token: "--ink", hex: "#14171A", hexDark: "#EAEEE8", note: "tinta" },
   {
     name: "ink-2",
     token: "--ink-2",
-    hex: "#3A4046",
-    hexDark: "#B4BAB6",
+    hex: "#3C4348",
+    hexDark: "#9FA9A2",
     note: "másodlagos szöveg",
   },
   {
     name: "mid",
     token: "--mid",
     hex: "#697079",
-    hexDark: "#7E8783",
+    hexDark: "#79837D",
     note: "halvány szöveg, címkék",
   },
-  { name: "rule", token: "--rule", hex: "#D4D8D1", hexDark: "#262B2E", note: "vonal" },
+  {
+    name: "dim",
+    token: "--dim",
+    hex: "#697079",
+    hexDark: "#4A524E",
+    note: "sötétben a --mid alatti szint (eyebrow, rail-szám); világosban egyezik a --mid-del",
+  },
+  { name: "rule", token: "--rule", hex: "#D4D8D1", hexDark: "#20272B", note: "vonal" },
   {
     name: "rule-soft",
     token: "--rule-soft",
-    hex: "#E6E9E3",
+    hex: "#E4E8E1",
     hexDark: "#1D2124",
     note: "halvány vonal",
   },
-  { name: "signal", token: "--signal", hex: "#93B300", hexDark: "#A6C400", note: "jelzés, lime" },
+  {
+    name: "rule-strong",
+    token: "--rule-strong",
+    hex: "#BFC5BC",
+    hexDark: "#39413C",
+    note: "kiemelt szegély (pl. körvonalas gomb)",
+  },
+  { name: "signal", token: "--signal", hex: "#93B300", hexDark: "#A8D400", note: "jelzés, lime" },
   {
     name: "signal-deep",
     token: "--signal-deep",
-    hex: "#5E7200",
-    note: "nincs sötét változata még",
+    hex: "#88A800",
+    hexDark: "#7A9400",
+    note: "gomb-hover árnyalat",
   },
   {
     name: "attention",
@@ -68,7 +83,21 @@ const TYPE_SCALE: { token: string; label: string; sample: string }[] = [
   { token: "--text-4xl", label: "4xl · 36–48px (clamp)", sample: "Nagy címsor" },
   { token: "--text-5xl", label: "5xl · 44–60px (clamp)", sample: "Hero alcím" },
   { token: "--text-6xl", label: "6xl · 52–72px (clamp)", sample: "Hero cím" },
-  { token: "--text-display", label: "display · 56–96px (clamp)", sample: "Display" },
+  { token: "--text-display", label: "display · 50–158px (clamp)", sample: "Display" },
+];
+
+// A főoldal látványterve (design/fooldal-latvanyterv.html) bevezetett néhány
+// szekció-specifikus, nagyméretű "kijelző-számjegy" tokent — ezek nem az
+// általános szövegskála részei, csak dokumentáljuk őket itt.
+const NUMERAL_SCALE: { token: string; label: string; sample: string }[] = [
+  { token: "--text-section", label: "section · 30–62px", sample: "Szekció-címsor" },
+  { token: "--text-quote", label: "quote · 28–58px", sample: "Idézet" },
+  { token: "--text-gauge", label: "gauge · 36–70px", sample: "1284" },
+  { token: "--text-wall", label: "wall · 30–86px", sample: "Stack" },
+  { token: "--text-numeral-lg", label: "numeral-lg · 40–92px", sample: "01" },
+  { token: "--text-claim", label: "claim · 34–104px", sample: "Állítás" },
+  { token: "--text-numeral-xl", label: "numeral-xl · 52–130px", sample: "02" },
+  { token: "--text-final", label: "final · 38–124px", sample: "CTA" },
 ];
 
 const SPACE_SCALE = [
@@ -381,6 +410,58 @@ export default function DesignSystemPage() {
                     fontSize: `var(${t.token})`,
                     color: "var(--ink)",
                     lineHeight: 1.15,
+                  }}
+                >
+                  {t.sample}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "var(--text-xs)",
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              color: "var(--mid)",
+              margin: "3rem 0 1.5rem",
+            }}
+          >
+            Kijelző-számjegyek — a főoldal látványterve (nem az általános szövegskála)
+          </p>
+          <div>
+            {NUMERAL_SCALE.map((t) => (
+              <div
+                key={t.token}
+                style={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  gap: "1.5rem",
+                  borderBottom: "1px solid var(--rule-soft)",
+                  padding: "1rem 0",
+                }}
+              >
+                <div
+                  style={{
+                    width: "220px",
+                    flexShrink: 0,
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "var(--text-xs)",
+                    color: "var(--mid)",
+                  }}
+                >
+                  {t.token}
+                  <br />
+                  {t.label}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 800,
+                    fontSize: `var(${t.token})`,
+                    color: "var(--ink)",
+                    lineHeight: 0.9,
                   }}
                 >
                   {t.sample}

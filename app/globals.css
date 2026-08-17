@@ -16,12 +16,15 @@
   --ground: #eef0ec;
   --panel: #ffffff;
   --ink: #14171a;
-  --ink-2: #3a4046;
+  --ink-2: #3c4348;
   --mid: #697079;
+  --dim: #697079; /* világosban egyezik a --mid-del — a főoldal látványterve
+                      csak sötétben különbözteti meg a két szintet. */
   --rule: #d4d8d1;
-  --rule-soft: #e6e9e3;
+  --rule-soft: #e4e8e1;
+  --rule-strong: #bfc5bc; /* kiemelt szegély (pl. körvonalas gomb) — erősebb, mint --rule */
   --signal: #93b300;
-  --signal-deep: #5e7200;
+  --signal-deep: #88a800;
   --attention: #b8501c;
 
   /* Térköz-skála — 4px alap (1 egység = 0.25rem = 4px) */
@@ -40,6 +43,7 @@
   --space-32: 8rem; /* 128px */
 
   /* Tipográfiai skála — a 2xl fölött clamp()-pel reszponzív */
+  --text-2xs: 0.625rem; /* 10px — mikro-címke (eyebrow, rail-szám, táblázatfejléc) */
   --text-xs: 0.75rem; /* 12px — adat/címke */
   --text-sm: 0.875rem; /* 14px */
   --text-base: 1rem; /* 16px */
@@ -50,7 +54,19 @@
   --text-4xl: clamp(2.25rem, 1.85rem + 2vw, 3rem); /* 36–48px */
   --text-5xl: clamp(2.75rem, 2.1rem + 3.25vw, 3.75rem); /* 44–60px */
   --text-6xl: clamp(3.25rem, 2.3rem + 4.75vw, 4.5rem); /* 52–72px */
-  --text-display: clamp(3.5rem, 2.2rem + 6.5vw, 6rem); /* 56–96px */
+  --text-display: clamp(50px, 11.8vw, 158px); /* hero H1 — a főoldal látványterve szerint */
+
+  /* Kijelző-számjegyek — a főoldal látványtervének (design/fooldal-latvanyterv.html)
+     saját, nagyméretű, fluid tipográfiai eszközei. Nem az általános szövegskála
+     része, hanem szekció-specifikus "signature" méretek. */
+  --text-section: clamp(30px, 4.6vw, 62px); /* általános szekció-címsor (h2) */
+  --text-quote: clamp(28px, 4.4vw, 58px); /* "A cég mögött" idézet */
+  --text-numeral-xl: clamp(52px, 8.5vw, 130px); /* szolgáltatás-számjegyek (01/02) */
+  --text-numeral-lg: clamp(40px, 6vw, 92px); /* folyamat-számjegyek (01–04) */
+  --text-wall: clamp(30px, 6.2vw, 86px); /* stack tipográfiai fal */
+  --text-claim: clamp(34px, 7vw, 104px); /* sötét állítás címsora */
+  --text-final: clamp(38px, 8.4vw, 124px); /* záró CTA címsora */
+  --text-gauge: clamp(36px, 5.2vw, 70px); /* műszer nagy száma */
 }
 
 @theme inline {
@@ -72,8 +88,10 @@
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-mid: var(--mid);
+  --color-dim: var(--dim);
   --color-rule: var(--rule);
   --color-rule-soft: var(--rule-soft);
+  --color-rule-strong: var(--rule-strong);
   --color-signal: var(--signal);
   --color-signal-deep: var(--signal-deep);
   --color-attention: var(--attention);
@@ -114,14 +132,17 @@
    tokeneket egy világos oldalon belül, a CSS-változó öröklődés miatt.
    ========================================================= */
 [data-theme="dark"] {
-  --ground: #0e1113;
+  --ground: #0b0e10;
   --panel: #16191c;
-  --ink: #e4e7e2;
-  --ink-2: #b4bab6;
-  --mid: #7e8783;
-  --rule: #262b2e;
+  --ink: #eaeee8;
+  --ink-2: #9fa9a2;
+  --mid: #79837d;
+  --dim: #4a524e; /* sötétben külön szint a --mid alatt — eyebrow-k, rail-számok, apró feliratok */
+  --rule: #20272b;
   --rule-soft: #1d2124;
-  --signal: #a6c400;
+  --rule-strong: #39413c; /* kiemelt szegély sötétben (pl. körvonalas gomb, átlag-jelölő) */
+  --signal: #a8d400;
+  --signal-deep: #7a9400; /* a --signal sötétített változata gomb-hoverhez */
 }
 
 /* Explicit világos felülírás — robosztusság kedvéért, ha a kaszkádba
@@ -130,11 +151,14 @@
   --ground: #eef0ec;
   --panel: #ffffff;
   --ink: #14171a;
-  --ink-2: #3a4046;
+  --ink-2: #3c4348;
   --mid: #697079;
+  --dim: #697079;
   --rule: #d4d8d1;
-  --rule-soft: #e6e9e3;
+  --rule-soft: #e4e8e1;
+  --rule-strong: #bfc5bc;
   --signal: #93b300;
+  --signal-deep: #88a800;
 }
 
 body {

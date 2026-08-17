@@ -10,7 +10,8 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
     "bg-[var(--signal)] text-[var(--ink)] border border-transparent hover:bg-[var(--signal-deep)] hover:text-[var(--ground)]",
   secondary:
     "bg-[var(--ink)] text-[var(--panel)] border border-transparent hover:bg-[var(--ink-2)]",
-  ghost: "bg-transparent text-[var(--ink)] border border-[var(--rule)] hover:bg-[var(--rule-soft)]",
+  ghost:
+    "bg-transparent text-[var(--ink)] border border-[var(--rule-strong)] hover:bg-[var(--ink)] hover:text-[var(--panel)] hover:border-[var(--ink)]",
 };
 
 const SIZE_CLASSES: Record<ButtonSize, string> = {

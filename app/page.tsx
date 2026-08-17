@@ -3,7 +3,8 @@ import Link from "next/link";
 import { getSortedPostsData } from "../lib/posts"; // <-- BEHÚZZUK A MOTORT!
 import { websiteSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
-import { Button, Card, DataCell, SectionHeader } from "@/app/components/ui";
+import { Button, SectionHeader } from "@/app/components/ui";
+import HeroInstrument from "./HeroInstrument";
 
 const HOME_DESCRIPTION =
   "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek. Válasz két munkanapon belül.";
@@ -25,34 +26,20 @@ export const metadata: Metadata = {
   },
 };
 
-const HERO_STATS = [
-  { label: "Tapasztalat", value: "20+", unit: "év" },
-  { label: "A cég", value: "6", unit: "év" },
-  { label: "Válaszidő", value: "2", unit: "munkanap" },
-];
-
 const DEVELOP_ITEMS = [
   "Weboldal és webshop nulláról, vagy meglévő rendszer fölé",
-  "Telefonra telepíthető webalkalmazás (PWA) — ikonként a kezdőlapon, alkalmazásbolt nélkül",
-  "Technikai SEO: sitemap, strukturált adat, mérhető eredmény",
-  "Biztonság és teljesítmény alapból, nem utólag",
-  "Arculat, design rendszer és szövegezés, ha még nincs",
-  "Videó és vizuális tartalom a bevezetéshez",
+  "Telefonra telepíthető webalkalmazás (PWA)",
+  "Technikai SEO: sitemap, strukturált adat",
+  "Biztonság és teljesítmény alapból",
+  "Arculat, design rendszer, szövegezés",
 ];
 
 const MANAGE_ITEMS = [
   "Üzemeltetés, monitoring, hibariasztás",
   "Folyamatos fejlesztés havi keretben",
   "Tartalom, kampány, mérés",
-  "Automatizált tartalommotor: a blog magától frissül",
-  "Jogi megfelelés karbantartása a változásokkal együtt",
-  "Egy felelős kapcsolattartó — nem ügyfélszolgálati sorszám",
-];
-
-const VIDEO_ITEMS = [
-  "Cégbemutató és imázsvideó",
-  "Termékvideó webshophoz",
-  "Rövid formátumok közösségi médiára",
+  "Automatizált tartalommotor",
+  "Egy felelős kapcsolattartó",
 ];
 
 const TECH_STACK = [
@@ -62,27 +49,30 @@ const TECH_STACK = [
   "Supabase",
   "WooCommerce",
   "Vercel",
-  "OpenAI API",
+  "OpenAI",
 ];
 
 const PROJECTS = [
   {
-    badge: "Ügyfél · Folyamatban",
+    tag: "Ügyfél · folyamatban",
+    client: true,
     title: "Kisgép-forgalmazó webshop",
-    desc: "Több évtizede piacon lévő kizárólagos importőr. Élő, forgalmazó webáruház fokozatos újraépítése — a bolt egy percre sem áll le.",
-    meta: "~400 termék · Next.js",
+    desc: "Több évtizede piacon lévő kizárólagos importőr. Élő webáruház fokozatos újraépítése — a bolt egy percre sem áll le.",
+    meta: ["~400 termék", "Next.js"],
   },
   {
-    badge: "Saját termék · Élő",
+    tag: "Saját termék · élő",
+    client: false,
     title: "Pénzügyi alkalmazás",
     desc: "Saját fejlesztés, saját infrastruktúrán. Nincs kire mutogatni, ha elromlik — ezért tudjuk, mit jelent üzemeltetni.",
-    meta: "Élő · Supabase",
+    meta: ["Élő", "Supabase"],
   },
   {
-    badge: "Saját termék · Élő",
+    tag: "Saját termék · élő",
+    client: false,
     title: "Tőzsdei oktatóplatform",
     desc: "Tartalom, közösség és eszközök egy helyen. Kétnyelvű felépítés, folyamatos üzemeltetés.",
-    meta: "Next.js · Kétnyelvű",
+    meta: ["Kétnyelvű", "Next.js"],
   },
 ];
 
@@ -99,6 +89,41 @@ const TRUST_CLAIMS = [
     head: "Egy felelős ember",
     text: "Nem ügyfélszolgálati sorszámot kapsz, hanem valakit, aki ismeri a projekted.",
   },
+];
+
+const PACKAGE_COLUMNS = [
+  {
+    tag: "Belépő",
+    name: "Weboldal és arculat",
+    price: "Egyedi ajánlat",
+    hot: false,
+    href: "/init?csomag=web-arculat",
+  },
+  {
+    tag: "A leggyakoribb",
+    name: "Webshop és skálázás",
+    price: "Teljes infrastruktúra",
+    hot: true,
+    href: "/init?csomag=webshop-skalazas",
+  },
+  {
+    tag: "Teljes lefedettség",
+    name: "Fejlesztés és üzemeltetés",
+    price: "Havi keret",
+    hot: false,
+    href: "/init?csomag=fejlesztes-uzemeltetes",
+  },
+];
+
+const PACKAGE_ROWS: { label: string; values: [boolean, boolean, boolean] }[] = [
+  { label: "Weboldal, dizájn", values: [true, true, true] },
+  { label: "Technikai SEO", values: [true, true, true] },
+  { label: "Webshop, PWA", values: [false, true, true] },
+  { label: "Fizetés, szállítás, számlázás", values: [false, true, true] },
+  { label: "Kampány és mérés", values: [false, true, true] },
+  { label: "Üzemeltetés, monitoring", values: [false, false, true] },
+  { label: "Videó és tartalom", values: [false, false, true] },
+  { label: "Egy felelős kapcsolattartó", values: [false, false, true] },
 ];
 
 const PROCESS_STEPS = [
@@ -124,489 +149,498 @@ const PROCESS_STEPS = [
   },
 ];
 
-const PACKAGES = [
-  {
-    tag: "Belépő",
-    name: "Weboldal és arculat",
-    price: "Egyedi",
-    priceUnit: "ajánlat",
-    items: [
-      "Vállalati weboldal, egyedi dizájn",
-      "Design rendszer, ami később is használható",
-      "Technikai SEO alapok, mérhető eredménnyel",
-      "Szövegezés, ha kell",
-    ],
-    href: "/init?csomag=web-arculat",
-    featured: false,
-  },
-  {
-    tag: "A leggyakoribb",
-    name: "Webshop és skálázás",
-    price: "Teljes",
-    priceUnit: "infrastruktúra",
-    items: [
-      "Minden az előző csomagból",
-      "Webshop nulláról vagy meglévő rendszer fölé",
-      "Telefonra telepíthető változat (PWA) — a vásárló kezdőlapján",
-      "Fizetés, szállítás, számlázás integrálva",
-      "Admin felület, amit a kollégák is használni tudnak",
-      "Kampánykezelés és mérés",
-    ],
-    href: "/init?csomag=webshop-skalazas",
-    featured: true,
-  },
-  {
-    tag: "Teljes lefedettség",
-    name: "Fejlesztés és üzemeltetés",
-    price: "Havi",
-    priceUnit: "keret",
-    items: [
-      "Minden az előző csomagból",
-      "Folyamatos fejlesztés havi óraszámban",
-      "Monitoring, hibariasztás, ügyelet",
-      "Tartalom, videó és kampány",
-      "Jogi megfelelés karbantartása",
-      "Egy felelős kapcsolattartó",
-    ],
-    href: "/init?csomag=fejlesztes-uzemeltetes",
-    featured: false,
-  },
-];
-
-function Eyebrow({ children }: { children: React.ReactNode }) {
+function Rail({
+  label,
+  children,
+  dark,
+}: {
+  label: string;
+  children: React.ReactNode;
+  dark?: boolean;
+}) {
   return (
-    <span className="block [font-family:var(--font-mono)] text-[length:var(--text-xs)] uppercase tracking-[0.15em] text-[var(--mid)] mb-[var(--space-4)]">
-      {children}
-    </span>
+    <div
+      data-theme={dark ? "dark" : undefined}
+      style={dark ? { backgroundColor: "var(--ground)", color: "var(--ink)" } : undefined}
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-[72px_1fr]">
+        <div
+          className={`hidden sm:block relative border-r ${dark ? "border-[var(--rule)]" : "border-[var(--rule)]"}`}
+        >
+          <span className="absolute top-[var(--space-12)] left-1/2 -translate-x-1/2 rotate-180 [writing-mode:vertical-rl] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.34em] uppercase text-[var(--dim)] whitespace-nowrap">
+            {label}
+          </span>
+        </div>
+        <div className="min-w-0">{children}</div>
+      </div>
+    </div>
   );
 }
 
-function Divider() {
-  return <div className="h-px bg-[var(--rule)]" />;
+function Seam() {
+  return <div className="h-px bg-[var(--signal)]" />;
+}
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.22em] uppercase text-[var(--dim)] mb-[var(--space-5)]">
+      {children}
+    </p>
+  );
 }
 
 export default function Home() {
-  // Lekérjük a cikkeket, és csak a legújabb 3 darabot vesszük ki a főoldalra
   const allPostsData = getSortedPostsData();
-  const recentPosts = allPostsData.slice(0, 3);
+  const [leadPost, ...restPosts] = allPostsData;
+  const minorPosts = restPosts.slice(0, 2);
 
   return (
-    <main className="min-h-screen bg-[var(--ground)] text-[var(--ink)] font-body selection:bg-[var(--signal)] selection:text-[var(--ground)]">
+    <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd data={websiteSchema()} />
 
-      {/* =========================================
-          HERO — a hero maga a bizonyíték
-          (a mért műszer külön feladat, ez a kör csak a
-          címsort, alcímet és a CTA-kat adja)
-      ========================================= */}
-      <section className="w-full pt-[var(--space-32)] pb-[var(--space-16)] px-6 flex flex-col items-center text-center">
-        <div className="max-w-4xl mx-auto flex flex-col items-center">
-          <h1 className="font-display font-bold leading-[1.05] mb-[var(--space-6)] text-[var(--ink)] [font-size:var(--text-display)]">
-            Nem mondjuk{" "}
-            <span className="text-[var(--mid)]">
-              hogy gyors<span className="text-[var(--signal)]">.</span>
-            </span>
+      {/* ===== 01 / MŰSZER — a hero maga a bizonyíték ===== */}
+      <Rail label="01 / Műszer" dark>
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-10)]">
+          <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.24em] uppercase text-[var(--mid)] flex items-center gap-3 mb-[var(--space-8)]">
+            <span className="w-1.5 h-1.5 bg-[var(--signal)] block animate-pulse" />
+            Ez az oldal most megméri magát
+          </p>
+          <h1 className="font-display font-black leading-[0.86] tracking-[-0.055em] [font-size:var(--text-display)]">
+            Nem mondjuk
+            <br />
+            <span className="text-[var(--dim)]">hogy gyors</span>
+            <span className="text-[var(--signal)]">.</span>
           </h1>
-
-          <p className="max-w-2xl [font-size:var(--text-xl)] text-[var(--ink-2)] mb-[var(--space-10)] leading-relaxed">
+          <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-8)]">
             Megmutatjuk. Az alábbi számokat nem mi írtuk ide — a te böngésződ mérte, most, ahogy
             betöltötte ezt az oldalt.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-[var(--space-4)] w-full sm:w-auto items-center mb-[var(--space-12)]">
-            <Button asChild size="lg">
-              <Link href="/init">Pitcheld el a projekted &rarr;</Link>
+          <div className="flex flex-wrap items-center gap-3 mt-[var(--space-8)]">
+            <Button asChild>
+              <Link href="/init">Pitcheld el a projekted</Link>
             </Button>
-            <Button asChild variant="ghost" size="lg">
+            <Button asChild variant="ghost">
               <Link href="#folyamat">Hogyan dolgozunk</Link>
             </Button>
+            <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)]">
+              Válasz 2 munkanapon belül
+            </span>
           </div>
+        </section>
 
-          <div className="flex flex-wrap justify-center gap-[var(--space-10)]">
-            {HERO_STATS.map((stat) => (
-              <DataCell key={stat.label} {...stat} />
-            ))}
+        <HeroInstrument />
+      </Rail>
+
+      <Seam />
+
+      {/* ===== 02 / VIDEÓ — élig futó ===== */}
+      <Rail label="02 / Videó">
+        <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-3.5 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
+          <span>Két perc arról, hogyan dolgozunk</span>
+          <span>Cégbemutató · Hamarosan</span>
+        </div>
+        <div
+          className="aspect-[21/9] flex items-center justify-center border-b border-[var(--rule)]"
+          style={{
+            background:
+              "linear-gradient(150deg, var(--rule-soft) 0%, var(--rule) 50%, var(--ground) 100%)",
+          }}
+        >
+          <div
+            className="w-[var(--space-20)] h-[var(--space-20)] rounded-full border border-[var(--ink)] flex items-center justify-center"
+            style={{ backgroundColor: "color-mix(in srgb, var(--panel) 55%, transparent)" }}
+          >
+            <span
+              className="ml-1 block w-0 h-0"
+              style={{
+                borderTop: "11px solid transparent",
+                borderBottom: "11px solid transparent",
+                borderLeft: "18px solid var(--ink)",
+              }}
+            />
           </div>
         </div>
-      </section>
+      </Rail>
 
-      {/* =========================================
-          CÉGBEMUTATÓ VIDEÓ — placeholder, amíg nincs
-          kész anyag; nincs valódi lejátszás, ezért nincs
-          rákattintható affordancia sem
-      ========================================= */}
-      <section className="max-w-4xl mx-auto px-6 py-[var(--space-20)]">
-        <p className="text-center [font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.2em] text-[var(--mid)] uppercase mb-[var(--space-8)]">
-          Két perc arról, hogyan dolgozunk
-        </p>
-        <Card className="p-0 overflow-hidden">
-          <div className="relative aspect-video flex items-center justify-center bg-[var(--rule-soft)]">
-            <div className="flex flex-col items-center gap-[var(--space-4)]">
-              <div className="w-16 h-16 rounded-full border-2 border-[var(--rule)] flex items-center justify-center">
-                <svg
-                  className="w-6 h-6 text-[var(--mid)] ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-              <span className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-widest text-[var(--mid)] uppercase">
-                Videó hamarosan
-              </span>
+      {/* ===== 03 / A CÉG MÖGÖTT — óriás idézet ===== */}
+      <Rail label="03 / A cég mögött">
+        <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-24)] grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-[var(--space-10)] lg:gap-[var(--space-20)] items-start">
+          <blockquote className="m-0 font-display font-bold [font-size:var(--text-quote)] leading-[1.06] tracking-[-0.038em]">
+            A legjobb kampány sem segít,{" "}
+            <em className="not-italic text-[var(--rule-strong)]">
+              ha a rendszer mögötte nem működik.
+            </em>
+          </blockquote>
+          <div>
+            <Eyebrow>A cég mögött</Eyebrow>
+            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[42ch] mb-[var(--space-4)]">
+              Több mint két évtizedet töltöttem értékesítéssel és marketinggel. A THE GBR-t azért
+              indítottam, mert újra és újra ugyanazt láttam: lassú az oldal, elveszik a megkeresés,
+              senki nem méri, mi történik.
+            </p>
+            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[42ch]">
+              Ma egy hatéves cég vagyunk, és pontosan ezt a két oldalt kötjük össze — az
+              értékesítési logikát és a technológiát.
+            </p>
+            <div className="mt-[var(--space-6)] pt-[var(--space-4)] border-t border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
+              Tóth Gábor · Sales &amp; Management
             </div>
           </div>
-        </Card>
-        <p className="text-[var(--ink-2)] [font-size:var(--text-base)] leading-relaxed max-w-2xl mx-auto mt-[var(--space-8)] text-center">
-          Bemutatjuk, hogyan dolgozunk egy projekt indulásától az üzemeltetésig — felméréstől az
-          élesítésig, saját szavainkkal.
-        </p>
-      </section>
+        </section>
+      </Rail>
 
-      {/* =========================================
-          MIÉRT LÉTEZIK A THE GBR
-      ========================================= */}
-      <section className="max-w-2xl mx-auto px-6 py-[var(--space-16)] text-center">
-        <Eyebrow>A cég mögött</Eyebrow>
-        <h2 className="font-display font-bold text-[var(--ink)] [font-size:var(--text-4xl)] mb-[var(--space-8)]">
-          Húsz év értékesítés, aztán a felismerés
-        </h2>
-        <p className="text-[var(--ink-2)] [font-size:var(--text-lg)] leading-relaxed mb-[var(--space-4)]">
-          Több mint két évtizedet töltöttem értékesítéssel és marketinggel. A THE GBR-t azért
-          indítottam, mert a legjobb kampány sem segít, ha a rendszer mögötte nem működik: lassú az
-          oldal, elveszik a megkeresés, senki nem méri, mi történik.
-        </p>
-        <p className="text-[var(--ink-2)] [font-size:var(--text-lg)] leading-relaxed mb-[var(--space-8)]">
-          Ma egy hatéves cég vagyunk, és pontosan ezt a két oldalt kötjük össze — az értékesítési
-          logikát és a technológiát.
-        </p>
-        <p className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] uppercase tracking-widest text-[var(--mid)]">
-          Tóth Gábor · Sales &amp; Management
-        </p>
-      </section>
-
-      {/* =========================================
-          AMIT CSINÁLUNK — DEVELOP / MANAGE
-      ========================================= */}
-      <section id="amit-csinalunk" className="max-w-6xl mx-auto px-6 py-[var(--space-24)]">
-        <div className="text-center mb-[var(--space-12)] flex flex-col items-center">
+      {/* ===== 04 / SZOLGÁLTATÁS — óriás számjegyek ===== */}
+      <Rail label="04 / Szolgáltatás">
+        <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Amit csinálunk"
             title="Két dolog, nem tizenkettő"
             lead="A „mindent tudunk” lista senkit nem győz meg. Két dologban vagyunk jók, és a kettő összetartozik."
-            className="items-center [&>h2]:text-center [&>p]:text-center"
           />
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--space-6)]">
-          <Card eyebrow="01 — Develop">
-            <h3 className="font-display font-semibold text-[var(--ink)] [font-size:var(--text-2xl)] mb-[var(--space-4)]">
-              Megépítjük
-            </h3>
-            <p className="text-[var(--ink-2)] [font-size:var(--text-base)] leading-relaxed mb-[var(--space-5)]">
-              Weboldalak és webshopok Next.js alapon, a mérnöki részletekkel együtt — nem csak úgy,
-              hogy szép legyen a nyitóképernyő.
-            </p>
-            <ul className="space-y-[var(--space-3)]">
-              {DEVELOP_ITEMS.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-[var(--space-3)] text-[var(--ink-2)] [font-size:var(--text-sm)]"
-                >
-                  <span className="text-[var(--signal)] mt-0.5">✔</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Card>
-
-          <Card eyebrow="02 — Manage">
-            <h3 className="font-display font-semibold text-[var(--ink)] [font-size:var(--text-2xl)] mb-[var(--space-4)]">
-              És visszük tovább
-            </h3>
-            <p className="text-[var(--ink-2)] [font-size:var(--text-base)] leading-relaxed mb-[var(--space-5)]">
-              Itt dől el, hogy egy projekt siker lesz-e. Az átadás nem a vége — onnantól kezd el
-              pénzt termelni.
-            </p>
-            <ul className="space-y-[var(--space-3)]">
-              {MANAGE_ITEMS.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-[var(--space-3)] text-[var(--ink-2)] [font-size:var(--text-sm)]"
-                >
-                  <span className="text-[var(--signal)] mt-0.5">✔</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Card>
-        </div>
-      </section>
-
-      {/* =========================================
-          VIDEÓ ÉS VIZUÁLIS TARTALOM
-      ========================================= */}
-      <section className="max-w-2xl mx-auto px-6 py-[var(--space-16)] text-center">
-        <Eyebrow>Videó</Eyebrow>
-        <h2 className="font-display font-bold text-[var(--ink)] [font-size:var(--text-3xl)] mb-[var(--space-5)]">
-          A weboldal önmagában nem elég
-        </h2>
-        <p className="text-[var(--ink-2)] [font-size:var(--text-base)] leading-relaxed mb-[var(--space-6)]">
-          Egy jó oldalra tartalom is kell. Reklámfilm, termékvideó, közösségi formátumok — a mi
-          irányításunk alatt, ugyanabban az arculatban, mint a weboldal. Így nem lesz külön a „szép
-          oldal” és a „valahonnan összeszedett videó”.
-        </p>
-        <ul className="flex flex-col sm:flex-row justify-center gap-[var(--space-3)] sm:gap-[var(--space-6)] [font-family:var(--font-mono)] text-[length:var(--text-xs)] text-[var(--ink-2)] uppercase tracking-widest">
-          {VIDEO_ITEMS.map((item) => (
-            <li key={item} className="flex items-center justify-center gap-[var(--space-2)]">
-              <span className="text-[var(--signal)]">✔</span> {item}
-            </li>
+        <div className="border-t border-[var(--rule)]">
+          {[
+            {
+              n: "01",
+              lab: "Develop",
+              title: "Megépítjük",
+              desc: "Weboldalak és webshopok Next.js alapon, a mérnöki részletekkel együtt — nem csak úgy, hogy szép legyen a nyitóképernyő.",
+              items: DEVELOP_ITEMS,
+            },
+            {
+              n: "02",
+              lab: "Manage",
+              title: "És visszük tovább",
+              desc: "Itt dől el, hogy egy projekt siker lesz-e. Az átadás nem a vége — onnantól kezd el pénzt termelni.",
+              items: MANAGE_ITEMS,
+            },
+          ].map((row) => (
+            <div
+              key={row.n}
+              className="group grid grid-cols-1 lg:grid-cols-[minmax(140px,20%)_1fr_minmax(0,34%)] gap-[var(--space-6)] sm:gap-[var(--space-10)] px-6 py-[var(--space-8)] sm:py-[var(--space-12)] border-b border-[var(--rule)] items-start"
+            >
+              <div>
+                <div className="font-display font-black [font-size:var(--text-numeral-xl)] leading-[0.78] tracking-[-0.06em] text-[var(--rule)] transition-colors group-hover:text-[var(--signal)]">
+                  {row.n}
+                </div>
+                <div className="mt-[var(--space-3)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.22em] uppercase text-[var(--mid)]">
+                  {row.lab}
+                </div>
+              </div>
+              <div>
+                <h3 className="font-display font-bold [font-size:var(--text-3xl)] leading-[1.05] tracking-[-0.03em] mb-[var(--space-4)]">
+                  {row.title}
+                </h3>
+                <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[44ch]">
+                  {row.desc}
+                </p>
+              </div>
+              <ul className="m-0 p-0 list-none">
+                {row.items.map((item, i) => (
+                  <li
+                    key={item}
+                    className={`[font-size:var(--text-base)] text-[var(--ink-2)] py-[var(--space-3)] ${i === 0 ? "" : "border-t border-[var(--rule-soft)]"}`}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
-      </section>
+        </div>
+      </Rail>
 
-      {/* =========================================
-          MŰSZAKI ALAP — statikus, fegyelmezett rács
-      ========================================= */}
-      <section className="w-full border-y border-[var(--rule)] bg-[var(--panel)] py-[var(--space-12)]">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <Eyebrow>Műszaki alap</Eyebrow>
-          <h2 className="font-display font-semibold text-[var(--ink)] [font-size:var(--text-2xl)] mb-[var(--space-3)]">
-            Amivel dolgozunk
-          </h2>
-          <p className="text-[var(--mid)] [font-size:var(--text-sm)] mb-[var(--space-8)] max-w-xl mx-auto">
+      {/* ===== 05 / STACK — tipográfiai fal ===== */}
+      <Rail label="05 / Stack">
+        <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)]">
+          <Eyebrow>Műszaki alap · amivel dolgozunk</Eyebrow>
+          <p className="font-display font-extrabold [font-size:var(--text-wall)] leading-[1.02] tracking-[-0.045em] text-[var(--ink)]">
+            {TECH_STACK.map((tech, i) => (
+              <span key={tech}>
+                {i > 0 && <span className="text-[var(--signal)] px-[0.18em]">·</span>}
+                {tech}
+              </span>
+            ))}
+          </p>
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch] mt-[var(--space-8)]">
             Nem minden projektre ugyanaz kell. Ezekkel dolgozunk napi szinten, és ezekért felelünk
             is.
           </p>
-          <div className="flex flex-wrap justify-center gap-x-[var(--space-8)] gap-y-[var(--space-3)] [font-family:var(--font-mono)] [font-size:var(--text-sm)] font-medium tracking-widest uppercase text-[var(--ink)]">
-            {TECH_STACK.map((tech) => (
-              <span key={tech}>{tech}</span>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      </Rail>
 
-      {/* =========================================
-          MUNKÁK
-      ========================================= */}
-      <section id="munkak" className="max-w-6xl mx-auto px-6 py-[var(--space-24)]">
-        <div className="text-center mb-[var(--space-12)] flex flex-col items-center">
+      {/* ===== 06 / MUNKÁK — jegyzék ===== */}
+      <Rail label="06 / Munkák">
+        <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Munkák"
             title="Amin dolgozunk"
-            lead="Ügyfélmunka és saját termék. Az utóbbi nem portfólió-töltelék: azért van itt, mert ezeket magunk üzemeltetjük, és ez a különbség."
-            className="items-center [&>h2]:text-center [&>p]:text-center"
+            lead="Ügyfélmunka és saját termék. Az utóbbi nem portfólió-töltelék: azért van itt, mert ezeket magunk üzemeltetjük."
           />
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--space-6)]">
-          {PROJECTS.map((project) => (
-            <Card
+        <div className="border-t border-[var(--rule)]">
+          {PROJECTS.map((project, i) => (
+            <div
               key={project.title}
-              eyebrow={project.badge}
-              footer={
-                <span className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] text-[var(--mid)] uppercase tracking-widest">
-                  {project.meta}
-                </span>
-              }
+              className="grid grid-cols-[40px_1fr] sm:grid-cols-[56px_1.1fr_1.5fr_minmax(0,180px)] gap-x-[var(--space-4)] sm:gap-x-[var(--space-8)] gap-y-[var(--space-3)] px-6 py-[var(--space-8)] sm:py-[var(--space-10)] border-b border-[var(--rule)] items-baseline hover:bg-[var(--panel)] transition-colors"
             >
-              <h3 className="font-display font-semibold text-[var(--ink)] [font-size:var(--text-xl)] mb-[var(--space-3)]">
-                {project.title}
-              </h3>
-              <p className="text-[var(--ink-2)] [font-size:var(--text-sm)] leading-relaxed">
+              <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--mid)]">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <div
+                  className={`[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.18em] uppercase mb-2 ${project.client ? "text-[var(--signal-deep)]" : "text-[var(--mid)]"}`}
+                >
+                  {project.tag}
+                </div>
+                <h3 className="font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.025em]">
+                  {project.title}
+                </h3>
+              </div>
+              <p className="col-span-2 sm:col-span-1 [font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed">
                 {project.desc}
               </p>
-            </Card>
+              <div className="col-span-2 sm:col-span-1 [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)] sm:text-right">
+                {project.meta.map((line) => (
+                  <div key={line}>{line}</div>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
-      </section>
+      </Rail>
 
-      <div className="max-w-6xl mx-auto px-6">
-        <Divider />
-      </div>
+      <Seam />
 
-      {/* =========================================
-          A SÖTÉT SZEKCIÓ — a legkeményebb állítás
-          (data-theme="dark" lokálisan, kontrasztként)
-      ========================================= */}
-      <section
-        data-theme="dark"
-        className="w-full py-[var(--space-24)]"
-        style={{ backgroundColor: "var(--ground)", color: "var(--ink)" }}
-      >
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      {/* ===== 07 / MIÉRT SZÁMÍT — sötét állítás ===== */}
+      <Rail label="07 / Miért számít" dark>
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
           <Eyebrow>Miért számít</Eyebrow>
-          <h2 className="font-display font-bold [font-size:var(--text-4xl)] mb-[var(--space-6)] text-[var(--ink)]">
+          <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[14ch] text-[var(--ink)]">
             Aki csak épít, annak nincsenek számai
           </h2>
-          <p className="text-[var(--ink-2)] [font-size:var(--text-lg)] leading-relaxed max-w-2xl mx-auto mb-[var(--space-12)]">
+          <p className="[font-size:var(--text-xl)] leading-relaxed text-[var(--ink-2)] max-w-[58ch] mt-[var(--space-6)]">
             A portfólió megmutatja, mi készült el. Nem mutatja meg, hogy mi lett vele fél évvel
             később. Az átadás után kezdődik az igazi munka — és a legtöbb ügynökség pont ott hagyja
             abba.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--space-8)] text-left">
-            {TRUST_CLAIMS.map((claim) => (
-              <div key={claim.head}>
-                <h3 className="font-display font-semibold text-[var(--ink)] [font-size:var(--text-lg)] mb-[var(--space-2)]">
-                  {claim.head}
-                </h3>
-                <p className="text-[var(--ink-2)] [font-size:var(--text-sm)] leading-relaxed">
-                  {claim.text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="max-w-6xl mx-auto px-6">
-        <Divider />
-      </div>
-
-      {/* =========================================
-          CSOMAGOK
-      ========================================= */}
-      <section id="packages" className="max-w-6xl mx-auto px-6 py-[var(--space-24)]">
-        <div className="text-center mb-[var(--space-12)] flex flex-col items-center">
-          <SectionHeader
-            eyebrow="Együttműködés"
-            title="Hogyan dolgozunk együtt"
-            lead="Minden projekt más, ezért fix árlista nincs. Három tipikus felállás — a tiéd valószínűleg valamelyikhez közel esik."
-            className="items-center [&>h2]:text-center [&>p]:text-center"
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--space-6)]">
-          {PACKAGES.map((pkg) => (
-            <Card
-              key={pkg.name}
-              variant={pkg.featured ? "elevated" : "default"}
-              eyebrow={pkg.tag}
-              className={pkg.featured ? "md:-translate-y-4" : ""}
-              style={pkg.featured ? { borderColor: "var(--signal)" } : undefined}
-              footer={
-                <Button asChild variant={pkg.featured ? "primary" : "ghost"} className="w-full">
-                  <Link href={pkg.href}>Beszéljünk róla</Link>
-                </Button>
-              }
+        </section>
+        <div className="grid grid-cols-1 sm:grid-cols-3 border-t border-[var(--rule)]">
+          {TRUST_CLAIMS.map((claim, i) => (
+            <div
+              key={claim.head}
+              className={`px-6 py-[var(--space-8)] sm:py-[var(--space-10)] ${i < TRUST_CLAIMS.length - 1 ? "border-b sm:border-b-0 sm:border-r border-[var(--rule)]" : ""}`}
             >
-              <h3 className="font-display font-semibold text-[var(--ink)] [font-size:var(--text-2xl)] mb-[var(--space-5)]">
-                {pkg.name}
+              <h3 className="font-display font-bold [font-size:var(--text-lg)] mb-[var(--space-2)] text-[var(--ink)]">
+                {claim.head}
               </h3>
-              <div className="[font-size:var(--text-3xl)] font-display font-bold text-[var(--ink)] mb-[var(--space-6)] pb-[var(--space-6)] border-b border-[var(--rule-soft)]">
-                {pkg.price}{" "}
-                <span className="[font-size:var(--text-base)] text-[var(--mid)] font-body font-normal">
-                  {pkg.priceUnit}
-                </span>
-              </div>
-              <ul className="space-y-[var(--space-3)]">
-                {pkg.items.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-[var(--space-3)] text-[var(--ink-2)] [font-size:var(--text-sm)]"
-                  >
-                    <span className="text-[var(--signal)] mt-0.5">✔</span> {item}
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* =========================================
-          FOLYAMAT
-      ========================================= */}
-      <section id="folyamat" className="max-w-6xl mx-auto px-6 py-[var(--space-24)]">
-        <div className="text-center mb-[var(--space-12)] flex flex-col items-center">
-          <SectionHeader
-            eyebrow="Folyamat"
-            title="Nincs meglepetés a végén"
-            lead="Minden szakasz végén van valami, amit meg tudsz nézni."
-            className="items-center [&>h2]:text-center [&>p]:text-center"
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[var(--space-8)]">
-          {PROCESS_STEPS.map((step) => (
-            <div key={step.num}>
-              <span className="block font-display font-bold text-[var(--rule)] [font-size:var(--text-5xl)] mb-[var(--space-3)]">
-                {step.num}
-              </span>
-              <h3 className="font-display font-semibold text-[var(--ink)] [font-size:var(--text-lg)] mb-[var(--space-2)]">
-                {step.title}
-              </h3>
-              <p className="text-[var(--ink-2)] [font-size:var(--text-sm)] leading-relaxed">
-                {step.text}
+              <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed">
+                {claim.text}
               </p>
             </div>
           ))}
         </div>
-      </section>
+      </Rail>
 
-      {/* =========================================
-          BLOG — DINAMIKUS VÁLTOZAT
-      ========================================= */}
-      <section
-        id="blog"
-        className="w-full bg-[var(--panel)] border-y border-[var(--rule)] py-[var(--space-24)]"
-      >
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-[var(--space-12)] gap-[var(--space-6)]">
-            <SectionHeader
-              eyebrow="Írások"
-              title="Amit közben megtanulunk"
-              lead="Nem tartalomgyár. Amit leírunk, azt előbb megcsináltuk."
-            />
-            <Button asChild variant="ghost" size="sm">
-              <Link href="/hirek">Összes írás &rarr;</Link>
-            </Button>
+      <Seam />
+
+      {/* ===== 08 / CSOMAGOK — összehasonlító táblázat ===== */}
+      <Rail label="08 / Csomagok" dark={false}>
+        <section id="packages" className="px-6 py-[var(--space-16)] sm:py-[var(--space-24)]">
+          <SectionHeader
+            eyebrow="Együttműködés"
+            title="Hogyan dolgozunk együtt"
+            lead="Minden projekt más, ezért fix árlista nincs. Három tipikus felállás — a tiéd valószínűleg valamelyikhez közel esik."
+          />
+
+          <div className="overflow-x-auto mt-[var(--space-8)]">
+            <table className="w-full border-collapse min-w-[640px]">
+              <colgroup>
+                <col />
+                <col />
+                <col style={{ backgroundColor: "var(--panel)" }} />
+                <col />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th className="text-left align-bottom p-[var(--space-4)] pt-0"></th>
+                  {PACKAGE_COLUMNS.map((pkg) => (
+                    <th key={pkg.name} className="text-left align-bottom p-[var(--space-4)] pt-0">
+                      <span
+                        className={`block [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.18em] uppercase mb-[var(--space-2)] ${pkg.hot ? "text-[var(--signal-deep)]" : "text-[var(--mid)]"}`}
+                      >
+                        {pkg.tag}
+                      </span>
+                      <span className="block font-display font-bold [font-size:var(--text-xl)] tracking-[-0.025em] mb-[var(--space-2)]">
+                        {pkg.name}
+                      </span>
+                      <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--mid)]">
+                        {pkg.price}
+                      </span>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {PACKAGE_ROWS.map((row) => (
+                  <tr key={row.label}>
+                    <th className="text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)] border-t border-[var(--rule)] p-[var(--space-4)] w-[26%]">
+                      {row.label}
+                    </th>
+                    {row.values.map((yes, i) => (
+                      <td
+                        key={i}
+                        className="border-t border-[var(--rule)] p-[var(--space-4)] [font-size:var(--text-base)]"
+                      >
+                        {yes ? (
+                          <span className="font-display font-bold text-[var(--signal-deep)]">
+                            ✓
+                          </span>
+                        ) : (
+                          <span className="text-[var(--rule-strong)]">—</span>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td className="p-[var(--space-4)] pt-[var(--space-6)] border-t border-[var(--rule)]"></td>
+                  {PACKAGE_COLUMNS.map((pkg) => (
+                    <td
+                      key={pkg.name}
+                      className="p-[var(--space-4)] pt-[var(--space-6)] border-t border-[var(--rule)]"
+                    >
+                      <Button asChild variant={pkg.hot ? "primary" : "ghost"} size="sm">
+                        <Link href={pkg.href}>Beszéljünk róla</Link>
+                      </Button>
+                    </td>
+                  ))}
+                </tr>
+              </tfoot>
+            </table>
           </div>
+        </section>
+      </Rail>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--space-6)]">
-            {recentPosts.map((post) => (
-              <Link key={post.id} href={`/hirek/${post.id}`}>
-                <Card
-                  eyebrow={post.category || "Írások"}
-                  className="h-full transition-colors hover:border-[var(--signal)]"
+      {/* ===== 09 / FOLYAMAT ===== */}
+      <Rail label="09 / Folyamat">
+        <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
+          <SectionHeader
+            eyebrow="Folyamat"
+            title="Nincs meglepetés a végén"
+            lead="Minden szakasz végén van valami, amit meg tudsz nézni."
+          />
+        </div>
+        <div className="border-t border-[var(--rule)]">
+          {PROCESS_STEPS.map((step) => (
+            <div
+              key={step.num}
+              id={step.num === "01" ? "folyamat" : undefined}
+              className="grid grid-cols-1 sm:grid-cols-[minmax(110px,16%)_1fr] gap-[var(--space-4)] sm:gap-[var(--space-10)] px-6 py-[var(--space-8)] sm:py-[var(--space-10)] border-b border-[var(--rule)] items-start"
+            >
+              <div className="font-display font-black [font-size:var(--text-numeral-lg)] leading-[0.8] tracking-[-0.06em] text-[var(--rule)]">
+                {step.num}
+              </div>
+              <div>
+                <h3 className="font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.025em] mb-[var(--space-3)]">
+                  {step.title}
+                </h3>
+                <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[62ch]">
+                  {step.text}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Rail>
+
+      {/* ===== 10 / ÍRÁSOK — kiemelt + lista ===== */}
+      <Rail label="10 / Írások">
+        <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
+          <SectionHeader
+            eyebrow="Írások"
+            title="Amit közben megtanulunk"
+            lead="Nem tartalomgyár. Amit leírunk, azt előbb megcsináltuk."
+          />
+        </div>
+        {leadPost && (
+          <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] border-t border-[var(--rule)]">
+            <Link
+              href={`/hirek/${leadPost.id}`}
+              className="block px-6 py-[var(--space-10)] sm:py-[var(--space-12)] border-b lg:border-b-0 lg:border-r border-[var(--rule)] hover:bg-[var(--panel)] transition-colors group"
+            >
+              <div className="flex flex-wrap gap-4 [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.18em] uppercase text-[var(--mid)] mb-[var(--space-5)]">
+                <span className="text-[var(--signal-deep)]">{leadPost.category || "Írások"}</span>
+                <span>
+                  {new Intl.DateTimeFormat("hu-HU", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  }).format(new Date(leadPost.date))}
+                </span>
+                <span>{leadPost.readTime}</span>
+              </div>
+              <h3 className="font-body font-semibold [font-size:var(--text-4xl)] leading-[1.14] tracking-[-0.015em] max-w-[22ch] mb-[var(--space-4)]">
+                {leadPost.title}
+              </h3>
+              <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed max-w-[44ch]">
+                {leadPost.excerpt}
+              </p>
+              <span className="inline-block mt-[var(--space-6)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] group-hover:text-[var(--signal-deep)] transition-colors">
+                Elolvasom &rarr;
+              </span>
+            </Link>
+            <div className="flex flex-col">
+              {minorPosts.map((post) => (
+                <Link
+                  key={post.id}
+                  href={`/hirek/${post.id}`}
+                  className="block px-6 py-[var(--space-6)] sm:py-[var(--space-8)] border-b border-[var(--rule)] hover:bg-[var(--panel)] transition-colors flex-1 group"
                 >
-                  <h3 className="font-display font-semibold text-[var(--ink)] [font-size:var(--text-lg)] leading-snug">
+                  <div className="flex flex-wrap gap-3 [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.18em] uppercase text-[var(--mid)]">
+                    <span className="text-[var(--signal-deep)]">{post.category || "Írások"}</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <h3 className="font-body font-semibold [font-size:var(--text-xl)] leading-[1.24] tracking-[-0.008em] mt-[var(--space-3)] group-hover:text-[var(--signal-deep)] transition-colors">
                     {post.title}
                   </h3>
-                </Card>
+                </Link>
+              ))}
+              <Link
+                href="/hirek"
+                className="flex justify-between px-6 py-[var(--space-5)] border-t border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] hover:text-[var(--ink)] hover:bg-[var(--panel)] transition-colors"
+              >
+                <span>Összes írás</span>
+                <span>&rarr;</span>
               </Link>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
+        )}
+      </Rail>
 
-      {/* =========================================
-          ZÁRÓ CTA
-      ========================================= */}
-      <section id="contact" className="w-full px-6 py-[var(--space-24)]">
-        <Card variant="elevated" className="max-w-3xl mx-auto text-center items-center">
-          <h2 className="font-display font-bold text-[var(--ink)] [font-size:var(--text-4xl)] mb-[var(--space-5)]">
-            Pitcheld el a <span className="text-[var(--signal-deep)]">projekted</span>
+      <Seam />
+
+      {/* ===== 11 / KAPCSOLAT — záró CTA ===== */}
+      <Rail label="11 / Kapcsolat" dark>
+        <section id="contact" className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
+          <Eyebrow>Kapcsolat</Eyebrow>
+          <h2 className="font-display font-black [font-size:var(--text-final)] leading-[0.9] tracking-[-0.055em] max-w-[12ch] mb-[var(--space-6)] text-[var(--ink)]">
+            Pitcheld el a projekted
           </h2>
-          <p className="[font-size:var(--text-lg)] text-[var(--ink-2)] mb-[var(--space-8)] max-w-xl mx-auto">
+          <p className="[font-size:var(--text-lg)] text-[var(--ink-2)] max-w-[52ch] leading-relaxed mb-[var(--space-8)]">
             Nem minden projektet vállalunk el — ezért kérdezünk előbb. Írd le, mit szeretnél elérni,
             és két munkanapon belül válaszolunk. Ha nem illünk össze, azt is megmondjuk.
           </p>
-
-          <Button asChild size="lg">
+          <Button asChild>
             <Link href="/init">Kezdjük &rarr;</Link>
           </Button>
-          <p className="mt-[var(--space-6)] [font-family:var(--font-mono)] text-[length:var(--text-xs)] text-[var(--mid)] uppercase tracking-widest">
-            Vagy írj közvetlenül:{" "}
-            <a
-              href="mailto:gabor@thegbr.eu"
-              className="text-[var(--ink-2)] hover:text-[var(--signal-deep)]"
-            >
-              gabor@thegbr.eu
-            </a>
+          <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)] mt-[var(--space-6)]">
+            Vagy írj közvetlenül: gabor@thegbr.eu
           </p>
-        </Card>
-      </section>
+        </section>
+      </Rail>
     </main>
   );
 }
