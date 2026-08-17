@@ -1,9 +1,12 @@
 import { getPostData, getSortedPostsData } from "../../../lib/posts";
+import { formatHungarianDate } from "../../../lib/date";
 import Link from "next/link";
 import { Metadata } from "next";
 import { SITE_URL } from "@/lib/site";
 import { blogPostingSchema, breadcrumbSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
+import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
+import ShareBar from "./ShareBar";
 
 // =========================================================================
 // DINAMIKUS SEO MOTOR: Ez olvassa be a Facebook/Google részére a cikk adatait
@@ -37,12 +40,6 @@ export async function generateMetadata({
   };
 }
 
-function formatHungarianDate(iso: string): string {
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return iso;
-  return new Intl.DateTimeFormat("hu-HU", { dateStyle: "long" }).format(date);
-}
-
 function getRelatedPosts(
   allPosts: ReturnType<typeof getSortedPostsData>,
   currentId: string,
@@ -65,9 +62,10 @@ export default async function PosztOldal({ params }: { params: Promise<{ id: str
 
   const articleUrl = `${SITE_URL}/hirek/${id}`;
   const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`;
+  const showUpdated = postData.updated && postData.updated !== postData.date;
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white pt-10 px-6 md:px-12 font-sans bg-cubes-pattern bg-opacity-5">
+    <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd
         data={[
           blogPostingSchema({
@@ -85,98 +83,101 @@ export default async function PosztOldal({ params }: { params: Promise<{ id: str
           ]),
         ]}
       />
-      <div className="max-w-3xl mx-auto bg-[#0a0a0a] border border-white/10 rounded-xl p-8 md:p-12 shadow-[0_0_40px_rgba(231,255,0,0.05)] relative overflow-hidden">
-        {/* Dekorcsík */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#e7ff00]/20 via-[#e7ff00] to-[#e7ff00]/20"></div>
 
-        {/* Vissza gomb */}
-        <Link
-          href="/hirek"
-          className="inline-flex items-center gap-2 text-[#e7ff00] hover:text-white transition-colors mb-8 text-sm font-mono tracking-widest uppercase"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            ></path>
-          </svg>
-          Vissza az írásokhoz
-        </Link>
-
-        {/* Fejléc */}
-        <div className="mb-10">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-            <div className="font-mono text-xs text-gray-500 tracking-widest uppercase">
-              <span className="text-[#e7ff00]">{postData.category || "Írások"}</span>
-              {" · "}
-              {formatHungarianDate(postData.date)}
-              {" · "}
-              {postData.readTime} olvasás
-            </div>
-            <a
-              href={linkedInShareUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-gray-500 hover:text-[#e7ff00] transition-colors border border-white/10 hover:border-[#e7ff00]/40 rounded px-3 py-1.5"
-            >
-              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-              Megosztás
-            </a>
+      {/* ===== SÖTÉT CIKKFEJLÉC ===== */}
+      <Rail label="Írás" dark>
+        <section className="px-6 pt-[var(--space-8)] sm:pt-[var(--space-12)] pb-[var(--space-6)] sm:pb-[var(--space-8)]">
+          <div className="flex flex-wrap items-center gap-[var(--space-4)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)] mb-[var(--space-6)]">
+            <span className="text-[var(--signal)]">{postData.category || "Írások"}</span>
+            <span>{formatHungarianDate(postData.date)}</span>
+            <span>{postData.readTime} olvasás</span>
           </div>
-          <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-6">
+          <h1 className="font-display font-extrabold leading-[1.0] tracking-[-0.045em] [font-size:var(--text-4xl)] sm:[font-size:var(--text-6xl)] max-w-[20ch]">
             {postData.title}
           </h1>
-        </div>
-
-        {/* A tartalom maga */}
-        <div
-          className="prose prose-invert prose-p:text-gray-400 prose-headings:text-white prose-a:text-[#e7ff00] max-w-none leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-        />
-
-        {/* CTA */}
-        <div className="mt-16 pt-10 border-t border-white/10 text-center">
-          <h2 className="text-2xl md:text-3xl font-black italic uppercase tracking-tighter text-white mb-3">
-            Hasonló problémád van?
-          </h2>
-          <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6 max-w-lg mx-auto">
-            Írd le, mit szeretnél elérni, és két munkanapon belül válaszolunk.
-          </p>
-          <Link
-            href="/init"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded bg-[#e7ff00] text-[#0a0a0a] font-black italic uppercase tracking-[0.2em] text-sm hover:bg-white transition-all duration-300 shadow-[0_0_30px_rgba(231,255,0,0.25)]"
-          >
-            Pitcheld el a projekted <span aria-hidden="true">&rarr;</span>
+          {postData.excerpt && (
+            <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[52ch] mt-[var(--space-6)]">
+              {postData.excerpt}
+            </p>
+          )}
+        </section>
+        <div className="flex flex-wrap justify-between gap-[var(--space-4)] px-6 py-[13px] border-t border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.18em] uppercase text-[var(--dim)]">
+          <Link href="/hirek" className="hover:text-[var(--signal)] transition-colors">
+            &larr; Vissza az írásokhoz
           </Link>
+          <span>THE GBR</span>
         </div>
+      </Rail>
 
-        {/* Kapcsolódó írások */}
-        {relatedPosts.length > 0 && (
-          <div className="mt-16 pt-10 border-t border-white/10">
-            <h2 className="font-mono text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">
-              Kapcsolódó írások
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {relatedPosts.map((post) => (
-                <Link key={post.id} href={`/hirek/${post.id}`} className="group">
-                  <div className="border border-white/10 rounded-lg p-5 h-full flex flex-col hover:border-[#e7ff00]/40 transition-colors">
-                    <span className="text-[9px] font-black uppercase tracking-widest text-[#00E5FF] border border-[#00E5FF]/30 bg-[#00E5FF]/10 px-2 py-1 rounded w-fit mb-3">
-                      {post.category || "Általános"}
-                    </span>
-                    <h3 className="text-sm font-bold text-white uppercase tracking-tight leading-snug group-hover:text-[#e7ff00] transition-colors line-clamp-3">
-                      {post.title}
-                    </h3>
-                  </div>
-                </Link>
-              ))}
-            </div>
+      <Seam />
+
+      {/* ===== CIKK TÖRZS ===== */}
+      <Rail label="Tartalom">
+        <section className="px-6 py-[clamp(44px,5.4vw,86px)]">
+          <article
+            className="prose-gbr"
+            dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+          />
+        </section>
+
+        <div className="flex flex-wrap justify-between items-center gap-[var(--space-4)] px-6 py-[clamp(28px,3.2vw,44px)] border-t border-[var(--rule)]">
+          <ShareBar linkedInShareUrl={linkedInShareUrl} articleUrl={articleUrl} />
+          {showUpdated && (
+            <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.18em] uppercase text-[var(--mid)]">
+              Frissítve: {formatHungarianDate(postData.updated!)}
+            </span>
+          )}
+        </div>
+      </Rail>
+
+      <Seam />
+
+      {/* ===== CTA ===== */}
+      <Rail label="Kapcsolat" dark>
+        <section className="px-6 py-[clamp(40px,4.6vw,72px)]">
+          <Eyebrow>Hasonló problémád van?</Eyebrow>
+          <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.02] tracking-[-0.04em] max-w-[18ch] mb-[var(--space-5)] text-[var(--ink)]">
+            Nézzük meg, hol tartasz
+          </h2>
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[52ch] mb-[var(--space-7)]">
+            A felmérés végén kapsz egy listát arról, mi hiányzik — akkor is, ha nem velünk dolgozol
+            tovább. Két munkanapon belül válaszolunk.
+          </p>
+          <Button asChild>
+            <Link href="/init">Pitcheld el a projekted &rarr;</Link>
+          </Button>
+        </section>
+      </Rail>
+
+      <Seam />
+
+      {/* ===== KAPCSOLÓDÓ ÍRÁSOK ===== */}
+      {relatedPosts.length > 0 && (
+        <Rail label="Kapcsolódó">
+          <section className="px-6 pt-[clamp(44px,5vw,80px)] pb-[var(--space-6)] sm:pb-[var(--space-8)]">
+            <Eyebrow>Kapcsolódó írások</Eyebrow>
+          </section>
+          <div className="border-t border-[var(--rule)]">
+            {relatedPosts.map((post) => (
+              <Link
+                key={post.id}
+                href={`/hirek/${post.id}`}
+                className="grid grid-cols-1 sm:grid-cols-[minmax(120px,16%)_1fr_auto] gap-[var(--space-3)] sm:gap-[clamp(16px,2.6vw,44px)] px-6 py-[clamp(22px,2.6vw,34px)] border-b border-[var(--rule)] items-baseline hover:bg-[var(--panel)] transition-colors"
+              >
+                <span className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.18em] uppercase text-[var(--mid)]">
+                  {post.category || "Általános"}
+                </span>
+                <h3 className="[font-size:var(--text-xl)] font-semibold leading-tight tracking-[-0.01em] max-w-[32ch] m-0">
+                  {post.title}
+                </h3>
+                <span className="hidden sm:block [font-family:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--rule-strong)]">
+                  &rarr;
+                </span>
+              </Link>
+            ))}
           </div>
-        )}
-      </div>
-    </div>
+        </Rail>
+      )}
+    </main>
   );
 }
