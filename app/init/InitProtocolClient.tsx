@@ -1,32 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Button, Rail } from "@/app/components/ui";
 
 const TARGET_OPTIONS = [
   {
     id: "web",
     label: "Weboldal vagy webshop",
     desc: "Új rendszer, vagy a mostani lecserélése",
-    color: "hover:border-[#e7ff00] hover:text-[#e7ff00]",
   },
   {
     id: "marketing",
     label: "Marketing és tartalom",
     desc: "Hirdetés, videó, tartalomgyártás",
-    color: "hover:border-[#00E5FF] hover:text-[#00E5FF]",
   },
   {
     id: "uzemeltetes",
     label: "Fejlesztés és üzemeltetés",
     desc: "Teljes lefedettség, folyamatosan",
-    color: "hover:border-[#9d00ff] hover:text-[#9d00ff]",
   },
   {
     id: "nem-tudom",
     label: "Még nem tudom",
     desc: "Beszéljük meg",
-    color: "hover:border-white/60 hover:text-white",
   },
 ] as const;
 
@@ -37,11 +34,52 @@ const BUDGET_OPTIONS = [
   { val: "nem-tudom", label: "Még nem tudom" },
 ] as const;
 
+const SCALE_ITEMS = [
+  { n: 1, label: "01 — A projekt" },
+  { n: 2, label: "02 — Keret és határidő" },
+  { n: 3, label: "03 — Kapcsolat" },
+];
+
+const SIDE_LABELS: Record<number, string> = {
+  1: "01 / A projekt",
+  2: "02 / Keret",
+  3: "03 / Kapcsolat",
+  4: "Kész",
+};
+
 const MIN_DESC_LENGTH = 100;
-const TOTAL_STEPS = 3;
 const CONTACT_EMAIL = "gabor@thegbr.eu";
 
 type SubmitError = { kind: "server" | "network"; detail?: string };
+
+function StepFrame({
+  n,
+  label,
+  numeralColor,
+  children,
+}: {
+  n: string;
+  label: string;
+  numeralColor?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-[minmax(120px,16%)_1fr] gap-[clamp(20px,3.4vw,56px)] items-start">
+      <div>
+        <div
+          className="font-display font-black [font-size:var(--text-step-n)] leading-[0.8] tracking-[-0.06em]"
+          style={{ color: numeralColor ?? "var(--rule)" }}
+        >
+          {n}
+        </div>
+        <div className="mt-[var(--space-3)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.24em] uppercase text-[var(--dim)]">
+          {label}
+        </div>
+      </div>
+      <div>{children}</div>
+    </div>
+  );
+}
 
 export default function InitProtocolClient() {
   const [step, setStep] = useState(1);
@@ -67,27 +105,6 @@ export default function InitProtocolClient() {
   const [formStartedAt] = useState(() => Date.now());
 
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
-
-  const [bootText, setBootText] = useState("");
-  const fullBootText =
-    "Három lépés, kb. két perc.\nNem minden projektet vállalunk el — ezért kérdezünk előbb.";
-
-  useEffect(() => {
-    let currentText = "";
-    let currentIndex = 0;
-
-    const typingInterval = setInterval(() => {
-      if (currentIndex < fullBootText.length) {
-        currentText += fullBootText[currentIndex];
-        setBootText(currentText);
-        currentIndex++;
-      } else {
-        clearInterval(typingInterval);
-      }
-    }, 30);
-
-    return () => clearInterval(typingInterval);
-  }, []);
 
   const nextStep = () => {
     setSubmitError(null);
@@ -183,278 +200,263 @@ export default function InitProtocolClient() {
     }
   };
 
-  const progressPercent = step > TOTAL_STEPS ? 100 : (step / TOTAL_STEPS) * 100;
-
   return (
-    <main className="min-h-screen bg-[#050505] text-[#e7ff00] selection:bg-[#e7ff00] selection:text-black relative font-mono overflow-hidden flex flex-col items-center justify-center">
-      {/* =========================================
-          STÍLUSOK ÉS ANIMÁCIÓK
-      ========================================= */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        body { background-color: #050505; }
-        @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); } }
-        .scanline-effect { animation: scanline 8s linear infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        .animate-blink { animation: blink 1s step-end infinite; }
-
-        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus {
-          outline: none;
-          border-bottom-color: #e7ff00;
-          box-shadow: 0 4px 15px -3px rgba(231,255,0,0.3);
-        }
-
-        input[type="checkbox"] {
-          accent-color: #e7ff00;
-          cursor: pointer;
-        }
-      `,
-        }}
-      />
-
-      {/* =========================================
-          HÁTTÉR EFFEKTEK
-      ========================================= */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-cubes-pattern opacity-5"></div>
-        <div className="absolute inset-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#e7ff00]/20 to-transparent scanline-effect opacity-30"></div>
-      </div>
-
-      {/* =========================================
-          KILÉPÉS GOMB
-      ========================================= */}
-      <Link
-        href="/"
-        className="absolute top-8 left-8 z-50 flex items-center gap-2 text-gray-500 hover:text-white transition-colors group"
-      >
-        <span className="text-xs tracking-widest uppercase">&larr; Vissza a főoldalra</span>
-      </Link>
-
-      {/* =========================================
-          STÁTUSZ (JOBB FENT)
-      ========================================= */}
-      <div className="absolute top-8 right-8 z-50 flex items-center gap-3">
-        <span className="text-[10px] tracking-widest uppercase text-gray-500">
-          Válasz 2 munkanapon belül
-        </span>
-        <div className="w-2 h-2 rounded-full bg-[#e7ff00] animate-pulse"></div>
-      </div>
-
-      {/* =========================================
-          VARÁZSLÓ (WIZARD) KONTÉNER
-      ========================================= */}
-      <div className="relative z-10 w-full max-w-2xl px-6">
-        {/* Fejléc */}
-        <div className="border border-white/10 bg-[#0a0a0a] rounded-t-lg p-3 flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-          <span className="ml-4 text-[10px] text-gray-500 uppercase tracking-widest">THE GBR</span>
-          {step <= TOTAL_STEPS && (
-            <span className="ml-auto text-[10px] text-gray-600 uppercase tracking-widest">
-              {step}. lépés / {TOTAL_STEPS}
-            </span>
-          )}
+    <main
+      data-theme="dark"
+      style={{ backgroundColor: "var(--ground)", color: "var(--ink)" }}
+      className="min-h-screen flex flex-col font-body"
+    >
+      {/* ===== FEJLÉC ===== */}
+      <div className="border-b border-[var(--rule)]">
+        <div className="flex items-center gap-4 flex-wrap px-6 py-[18px]">
+          <Link
+            href="/"
+            className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)] hover:text-[var(--ink)] transition-colors"
+          >
+            &larr; Vissza a főoldalra
+          </Link>
+          <span className="mx-auto font-display font-extrabold text-[19px] tracking-[-0.045em]">
+            THE GBR<span className="text-[var(--signal)]">.</span>
+          </span>
+          <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--dim)]">
+            Válasz 2 munkanapon belül
+          </span>
         </div>
+      </div>
 
-        {/* Test */}
-        <div className="border-x border-b border-white/10 bg-[#050505] rounded-b-lg p-8 md:p-12 min-h-[400px] shadow-[0_0_50px_rgba(231,255,0,0.05)] relative">
-          {/* Lépésjelző */}
-          <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
+      {/* ===== HALADÁS-LÉC ===== */}
+      <div className="grid grid-cols-3 border-b border-[var(--rule)]">
+        {SCALE_ITEMS.map((item) => {
+          const isOn = step === item.n;
+          const isDone = step > item.n;
+          return (
             <div
-              className="h-full bg-[#e7ff00] transition-all duration-500 shadow-[0_0_10px_rgba(231,255,0,0.5)]"
-              style={{ width: `${progressPercent}%` }}
-            ></div>
-          </div>
+              key={item.n}
+              className={`relative px-3 sm:px-6 py-[11px] border-r border-[var(--rule)] last:border-r-0 [font-family:var(--font-mono)] text-[9px] sm:text-[length:var(--text-2xs)] tracking-[0.12em] sm:tracking-[0.2em] uppercase ${
+                isOn ? "text-[var(--ink)]" : isDone ? "text-[var(--mid)]" : "text-[var(--dim)]"
+              }`}
+            >
+              {item.label}
+              <span
+                className="absolute left-0 bottom-[-1px] h-px bg-[var(--signal)] transition-[width] duration-500 ease-out"
+                style={{ width: isOn || isDone ? "100%" : "0%" }}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ===== TÖRZS ===== */}
+      <Rail label={SIDE_LABELS[step]} dark className="flex-1">
+        <div className="px-6 py-[clamp(36px,5vw,80px)] sm:pb-[clamp(40px,5vw,90px)]">
+          {step === 1 && (
+            <p className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] leading-[2] tracking-[0.08em] text-[var(--mid)] max-w-[60ch] mb-[clamp(30px,4vw,52px)]">
+              Három lépés, kb. két perc.
+              <br />
+              <strong className="font-normal text-[var(--signal)]">
+                Nem minden projektet vállalunk el — ezért kérdezünk előbb.
+              </strong>
+            </p>
+          )}
 
           {/* LÉPÉS 1: A PROJEKT */}
           {step === 1 && (
-            <div className="animate-fade-in">
-              <div className="whitespace-pre-line text-sm text-gray-400 mb-8 h-16">
-                {bootText}
-                <span className="animate-blink text-[#e7ff00]">█</span>
-              </div>
-
-              <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#e7ff00] pl-4">
-                01 · A projekt
+            <StepFrame n="01" label="A projekt">
+              <h2 className="font-display font-extrabold [font-size:var(--text-svc-title)] tracking-[-0.04em] leading-[1.02] max-w-[20ch] mb-[clamp(24px,3vw,38px)]">
+                Mivel tudunk segíteni?
               </h2>
 
-              <div className="space-y-3 mb-8">
-                <label className="block text-[10px] text-gray-500 uppercase tracking-widest">
-                  Mivel tudunk segíteni?
-                </label>
-                <div className="grid grid-cols-1 gap-3">
-                  {TARGET_OPTIONS.map((option) => (
+              <div className="border-t border-[var(--rule)] mb-[var(--space-8)]">
+                {TARGET_OPTIONS.map((option, i) => {
+                  const selected = formData.target === option.id;
+                  return (
                     <button
                       type="button"
                       key={option.id}
                       onClick={() => setFormData({ ...formData, target: option.id })}
-                      className={`w-full text-left p-4 border ${formData.target === option.id ? "border-white bg-white/10" : "border-white/10"} bg-[#0a0a0a] transition-all text-gray-300 ${option.color} group flex justify-between items-center`}
+                      className="w-full text-left grid grid-cols-[34px_1fr_auto] gap-[var(--space-4)] items-center py-[var(--space-4)] border-b border-[var(--rule)] bg-transparent hover:bg-[var(--panel)] transition-colors"
                     >
+                      <span
+                        className="justify-self-center w-[14px] h-[14px]"
+                        style={{
+                          backgroundColor: selected ? "var(--signal)" : "transparent",
+                          border: `1px solid ${selected ? "var(--signal)" : "#39413C"}`,
+                        }}
+                      />
                       <span>
-                        <span className="block text-sm uppercase tracking-widest">
+                        <span className="block font-display font-semibold [font-size:var(--text-lg)] tracking-[-0.02em] text-[var(--ink)]">
                           {option.label}
                         </span>
-                        <span className="block text-[10px] normal-case tracking-normal text-gray-500 mt-1">
+                        <span className="block [font-size:var(--text-sm)] text-[var(--mid)] mt-[var(--space-1)]">
                           {option.desc}
                         </span>
                       </span>
-                      {formData.target === option.id && <span className="text-[#e7ff00]">✓</span>}
+                      <span
+                        className={`[font-family:var(--font-mono)] text-[length:var(--text-xs)] ${
+                          selected ? "text-[var(--signal)]" : "text-[var(--dim)]"
+                        }`}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
                     </button>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
 
               <div>
-                <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
+                <label className="block [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] mb-[var(--space-3)]">
                   Mi a helyzet most, és mit szeretnél elérni?
                 </label>
                 <textarea
                   rows={4}
                   placeholder="Pl.: Van egy WooCommerce webshopunk, ami nagyon lassú és elavult. Szeretnénk átépíteni Next.js-re úgy, hogy a bolt közben ne álljon le. Kb. 400 termék, tavaszra kellene kész lennie."
-                  className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all resize-none overflow-hidden"
+                  className="w-full bg-transparent border-0 border-b border-[#2C3438] text-[var(--ink)] py-[var(--space-3)] [font-size:var(--text-lg)] resize-none focus:outline-none focus:border-b-[var(--signal)]"
                   style={{ overflow: "hidden" }}
                   value={formData.description}
                   onChange={handleDescriptionChange}
                 />
-                <div className="mt-2 flex items-center justify-between gap-4 text-[10px] uppercase tracking-widest">
-                  {descriptionReady ? (
-                    <span className="text-[#e7ff00]/60">✓ Készen áll</span>
-                  ) : (
-                    <span className="text-gray-500">még {descriptionRemaining} karakter</span>
-                  )}
-                  <span className="text-gray-600 normal-case text-right">
-                    Minél konkrétabb, annál pontosabb választ tudunk adni.
+                <div className="flex items-center gap-[var(--space-3)] mt-[var(--space-3)]">
+                  <div className="flex-1 max-w-[160px] h-[2px] bg-[#20272B] relative">
+                    <div
+                      className="h-full"
+                      style={{
+                        width: `${Math.min(100, (descriptionLength / MIN_DESC_LENGTH) * 100)}%`,
+                        backgroundColor: descriptionReady ? "var(--signal)" : "var(--mid)",
+                      }}
+                    />
+                  </div>
+                  <span
+                    className={`[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase whitespace-nowrap ${
+                      descriptionReady ? "text-[var(--signal)]" : "text-[var(--dim)]"
+                    }`}
+                  >
+                    {descriptionReady ? "✓ Készen áll" : `még ${descriptionRemaining} karakter`}
                   </span>
+                </div>
+                <div className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--dim)] mt-[var(--space-3)]">
+                  Minél konkrétabb, annál pontosabb választ tudunk adni.
                 </div>
               </div>
 
-              <div className="mt-12 flex justify-end">
-                <button
-                  type="button"
-                  onClick={nextStep}
-                  disabled={!step1Valid}
-                  className="px-8 py-3 bg-[#e7ff00] text-black font-bold uppercase tracking-widest text-xs hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+              <div className="flex justify-end pt-[var(--space-6)] mt-[clamp(30px,3.6vw,50px)] border-t border-[var(--rule)]">
+                <Button onClick={nextStep} disabled={!step1Valid}>
                   Tovább &rarr;
-                </button>
+                </Button>
               </div>
-            </div>
+            </StepFrame>
           )}
 
           {/* LÉPÉS 2: KERET ÉS HATÁRIDŐ */}
           {step === 2 && (
-            <div className="animate-fade-in">
-              <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#9d00ff] pl-4">
-                02 · Keret és határidő
+            <StepFrame n="02" label="Keret">
+              <h2 className="font-display font-extrabold [font-size:var(--text-svc-title)] tracking-[-0.04em] leading-[1.02] max-w-[20ch] mb-[clamp(24px,3vw,38px)]">
+                Mekkora keretet terveztek erre?
               </h2>
-              <p className="text-xs text-gray-500 leading-relaxed normal-case mb-6">
+              <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch] mb-[var(--space-6)]">
                 Azért kérdezzük, hogy ne pazaroljuk egymás idejét. Ha a keret nem reális a
                 feladathoz, azt inkább most mondjuk meg, mint három egyeztetés után.
               </p>
-              <p className="text-xs text-gray-500 tracking-widest uppercase mb-6">
-                Mekkora keretet terveztek erre?
-              </p>
 
-              <div className="grid grid-cols-2 gap-4">
-                {BUDGET_OPTIONS.map((budget) => (
-                  <button
-                    type="button"
-                    key={budget.val}
-                    onClick={() => setFormData({ ...formData, budget: budget.val })}
-                    className={`p-4 border ${formData.budget === budget.val ? "border-[#e7ff00] text-[#e7ff00]" : "border-white/10 text-gray-400"} bg-[#0a0a0a] hover:border-[#e7ff00] hover:text-[#e7ff00] transition-all text-sm font-bold tracking-widest`}
-                  >
-                    {budget.label}
-                  </button>
-                ))}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[var(--rule)] border border-[var(--rule)] mb-[var(--space-6)]">
+                {BUDGET_OPTIONS.map((budget) => {
+                  const selected = formData.budget === budget.val;
+                  return (
+                    <button
+                      type="button"
+                      key={budget.val}
+                      onClick={() => setFormData({ ...formData, budget: budget.val })}
+                      className={`px-3 py-5 [font-size:var(--text-base)] font-display font-semibold tracking-[-0.01em] transition-colors ${
+                        selected
+                          ? "bg-[var(--signal)] text-[#101400]"
+                          : "bg-[var(--ground)] text-[var(--mid)] hover:bg-[var(--panel)] hover:text-[var(--ink)]"
+                      }`}
+                    >
+                      {budget.label}
+                    </button>
+                  );
+                })}
               </div>
 
-              <div className="mt-6">
-                <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
+              <div className="mb-[var(--space-6)]">
+                <label className="block [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] mb-[var(--space-3)]">
                   Határidő (opcionális)
                 </label>
                 <input
                   type="text"
                   placeholder="pl. 2026 Q4, vagy egy konkrét dátum"
-                  className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
+                  className="w-full bg-transparent border-0 border-b border-[#2C3438] text-[var(--ink)] py-[var(--space-3)] [font-size:var(--text-lg)] focus:outline-none focus:border-b-[var(--signal)]"
                   value={formData.deadline}
                   onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
                 />
               </div>
 
-              <div className="mt-12 flex justify-between">
+              <div className="flex justify-between items-center pt-[var(--space-6)] mt-[clamp(30px,3.6vw,50px)] border-t border-[var(--rule)]">
                 <button
                   type="button"
                   onClick={prevStep}
-                  className="text-xs text-gray-500 hover:text-white uppercase tracking-widest"
+                  className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)] hover:text-[var(--ink)] transition-colors"
                 >
                   &larr; Vissza
                 </button>
-                <button
-                  type="button"
-                  onClick={nextStep}
-                  disabled={!step2Valid}
-                  className="px-8 py-3 bg-[#e7ff00] text-black font-bold uppercase tracking-widest text-xs hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+                <Button onClick={nextStep} disabled={!step2Valid}>
                   Tovább &rarr;
-                </button>
+                </Button>
               </div>
-            </div>
+            </StepFrame>
           )}
 
           {/* LÉPÉS 3: KAPCSOLAT */}
           {step === 3 && (
-            <div className="animate-fade-in">
-              <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#00E5FF] pl-4">
-                03 · Kapcsolat
+            <StepFrame n="03" label="Kapcsolat">
+              <h2 className="font-display font-extrabold [font-size:var(--text-svc-title)] tracking-[-0.04em] leading-[1.02] max-w-[20ch] mb-[clamp(24px,3vw,38px)]">
+                Kapcsolat
               </h2>
 
-              <div className="space-y-6">
+              <div className="space-y-[var(--space-6)]">
                 <div>
-                  <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
+                  <label className="block [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] mb-[var(--space-3)]">
                     Neved
                   </label>
                   <input
                     type="text"
                     placeholder="Kovács János"
-                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
+                    className="w-full bg-transparent border-0 border-b border-[#2C3438] text-[var(--ink)] py-[var(--space-3)] [font-size:var(--text-lg)] focus:outline-none focus:border-b-[var(--signal)]"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
+                  <label className="block [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] mb-[var(--space-3)]">
                     Cégnév
                   </label>
                   <input
                     type="text"
                     placeholder="Cégnév"
-                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
+                    className="w-full bg-transparent border-0 border-b border-[#2C3438] text-[var(--ink)] py-[var(--space-3)] [font-size:var(--text-lg)] focus:outline-none focus:border-b-[var(--signal)]"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
+                  <label className="block [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] mb-[var(--space-3)]">
                     E-mail cím
                   </label>
                   <input
                     type="email"
                     placeholder="nev@ceged.hu"
-                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
+                    className="w-full bg-transparent border-0 border-b border-[#2C3438] text-[var(--ink)] py-[var(--space-3)] [font-size:var(--text-lg)] focus:outline-none focus:border-b-[var(--signal)]"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
+                  <label className="block [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] mb-[var(--space-3)]">
                     Telefonszám (opcionális)
                   </label>
                   <input
                     type="tel"
                     placeholder="+36 30 123 4567"
-                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
+                    className="w-full bg-transparent border-0 border-b border-[#2C3438] text-[var(--ink)] py-[var(--space-3)] [font-size:var(--text-lg)] focus:outline-none focus:border-b-[var(--signal)]"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
@@ -484,23 +486,24 @@ export default function InitProtocolClient() {
                   />
                 </div>
 
-                <div className="flex items-start gap-3 pt-4">
+                <div className="grid grid-cols-[18px_1fr] gap-[var(--space-3)] items-start pt-[var(--space-5)] mt-[var(--space-2)] border-t border-[var(--rule)]">
                   <input
                     type="checkbox"
                     id="privacy"
                     checked={privacyAccepted}
                     onChange={(e) => setPrivacyAccepted(e.target.checked)}
-                    className="mt-1 w-4 h-4"
+                    className="mt-[3px] w-[16px] h-[16px]"
+                    style={{ accentColor: "var(--signal)" }}
                   />
                   <label
                     htmlFor="privacy"
-                    className="text-[10px] text-gray-500 leading-relaxed cursor-pointer select-none"
+                    className="[font-size:var(--text-sm)] text-[var(--mid)] leading-[1.55] cursor-pointer select-none"
                   >
                     Elfogadom az{" "}
                     <Link
                       href="/adatkezeles"
                       target="_blank"
-                      className="text-[#e7ff00] hover:text-white transition-colors underline"
+                      className="text-[var(--signal)] hover:text-[var(--ink)] transition-colors underline"
                     >
                       Adatkezelési Tájékoztatót
                     </Link>
@@ -510,136 +513,131 @@ export default function InitProtocolClient() {
                 </div>
               </div>
 
-              {/* Töltés és Hibaüzenetek kezelése */}
-              <div className="mt-6 min-h-[40px]">
-                {isSubmitting && (
-                  <div className="text-center text-[#e7ff00] animate-pulse text-xs tracking-widest">
-                    Küldés folyamatban…
-                  </div>
-                )}
-                {submitError && (
-                  <div className="text-center text-red-400 text-xs leading-relaxed mt-2">
-                    {submitError.kind === "server" ? (
-                      submitError.detail ? (
-                        <>
-                          {submitError.detail} Írj közvetlenül:{" "}
-                          <a
-                            href={`mailto:${CONTACT_EMAIL}`}
-                            className="underline hover:text-white"
-                          >
-                            {CONTACT_EMAIL}
-                          </a>
-                        </>
-                      ) : (
-                        <>
-                          A küldés nem sikerült. Próbáld újra pár másodperc múlva — ha akkor sem
-                          megy, írj közvetlenül:{" "}
-                          <a
-                            href={`mailto:${CONTACT_EMAIL}`}
-                            className="underline hover:text-white"
-                          >
-                            {CONTACT_EMAIL}
-                          </a>
-                        </>
-                      )
-                    ) : (
+              {isSubmitting && (
+                <div className="mt-[var(--space-6)] [font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.1em] uppercase text-[var(--signal)] animate-pulse">
+                  Küldés folyamatban…
+                </div>
+              )}
+              {submitError && (
+                <div
+                  className="mt-[var(--space-6)] pl-[var(--space-4)] [font-size:var(--text-sm)] leading-relaxed max-w-[56ch]"
+                  style={{ borderLeft: "2px solid var(--attention)", color: "var(--attention)" }}
+                >
+                  {submitError.kind === "server" ? (
+                    submitError.detail ? (
                       <>
-                        Nem sikerült elérni a szervert. Ellenőrizd az internetkapcsolatot, vagy írj
-                        közvetlenül:{" "}
-                        <a href={`mailto:${CONTACT_EMAIL}`} className="underline hover:text-white">
+                        {submitError.detail} Írj közvetlenül:{" "}
+                        <a
+                          href={`mailto:${CONTACT_EMAIL}`}
+                          className="underline hover:text-[var(--ink)]"
+                        >
                           {CONTACT_EMAIL}
                         </a>
                       </>
-                    )}
-                  </div>
-                )}
-              </div>
+                    ) : (
+                      <>
+                        A küldés nem sikerült. Próbáld újra pár másodperc múlva — ha akkor sem megy,
+                        írj közvetlenül:{" "}
+                        <a
+                          href={`mailto:${CONTACT_EMAIL}`}
+                          className="underline hover:text-[var(--ink)]"
+                        >
+                          {CONTACT_EMAIL}
+                        </a>
+                      </>
+                    )
+                  ) : (
+                    <>
+                      Nem sikerült elérni a szervert. Ellenőrizd az internetkapcsolatot, vagy írj
+                      közvetlenül:{" "}
+                      <a
+                        href={`mailto:${CONTACT_EMAIL}`}
+                        className="underline hover:text-[var(--ink)]"
+                      >
+                        {CONTACT_EMAIL}
+                      </a>
+                    </>
+                  )}
+                </div>
+              )}
 
-              <div className="mt-6 flex justify-between">
+              <div className="flex justify-between items-center pt-[var(--space-6)] mt-[clamp(30px,3.6vw,50px)] border-t border-[var(--rule)]">
                 <button
                   type="button"
                   onClick={prevStep}
                   disabled={isSubmitting}
-                  className="text-xs text-gray-500 hover:text-white uppercase tracking-widest disabled:opacity-50"
+                  className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)] hover:text-[var(--ink)] transition-colors disabled:opacity-50"
                 >
                   &larr; Vissza
                 </button>
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  disabled={!step3Valid || isSubmitting}
-                  className="px-8 py-3 bg-[#e7ff00] text-black font-bold uppercase tracking-widest text-xs hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+                <Button onClick={handleSubmit} disabled={!step3Valid || isSubmitting}>
                   {isSubmitting ? "Küldés..." : "Küldés"}
-                </button>
+                </Button>
               </div>
-            </div>
+            </StepFrame>
           )}
 
           {/* LÉPÉS 4: SIKER — csak valós 2xx válasz esetén */}
           {step === 4 && (
-            <div className="text-center animate-fade-in py-12">
-              {/* Statikus pipa — a művelet befejeződött, nem folyamatban van */}
-              <div className="relative w-20 h-20 mx-auto mb-10 flex items-center justify-center rounded-full border-2 border-[#e7ff00] shadow-[0_0_25px_rgba(231,255,0,0.3)]">
-                <svg
-                  className="w-9 h-9 text-[#e7ff00]"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2.5"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-              </div>
-
-              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-[0.2em] text-white mb-6">
-                Megkaptuk<span className="text-[#e7ff00]">.</span>
+            <StepFrame n="✓" label="Kész" numeralColor="var(--signal)">
+              <h2 className="font-display font-extrabold [font-size:var(--text-svc-title)] tracking-[-0.04em] leading-[1.02] mb-[var(--space-5)]">
+                Megkaptuk<span className="text-[var(--signal)]">.</span>
               </h2>
-
-              <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-md mx-auto normal-case tracking-normal">
+              <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch] mb-[var(--space-4)]">
                 Küldtünk egy visszaigazolást a megadott e-mail címre — ha pár percen belül nem
                 érkezik meg, nézd meg a spam mappát is.
-                <br />
-                <br />
+              </p>
+              <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch]">
                 Két munkanapon belül válaszolunk. Ha közben eszedbe jut valami, írj nyugodtan:{" "}
-                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#e7ff00] hover:text-white">
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[var(--signal)] underline">
                   {CONTACT_EMAIL}
                 </a>
               </p>
 
-              {/* Terminál státusz blokk — valós, a válaszból kapott adatokkal */}
-              <div className="font-mono text-[10px] text-gray-500 bg-[#0a0a0a] border border-white/5 p-4 rounded inline-block text-left">
-                <span className="text-[#e7ff00]">Beérkezett:</span>{" "}
-                {submittedAt
-                  ? new Intl.DateTimeFormat("hu-HU", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    }).format(submittedAt)
-                  : "—"}
-                <br />
-                <span className="text-gray-600">Azonosító:</span>{" "}
-                {submittedId ? submittedId.slice(0, 8) : (submittedStatus ?? "—")}
+              <div className="border border-[var(--rule)] bg-[var(--panel)] max-w-[520px] mt-[clamp(30px,3.6vw,50px)]">
+                <div className="px-[18px] py-[11px] border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)]">
+                  Beérkezés visszaigazolása
+                </div>
+                <div className="px-[18px] py-[16px] [font-family:var(--font-mono)] text-[length:var(--text-xs)] text-[var(--mid)]">
+                  <div className="flex justify-between gap-[var(--space-4)] py-[6px]">
+                    <span>Beérkezett</span>
+                    <b className="text-[var(--ink)] font-medium">
+                      {submittedAt
+                        ? new Intl.DateTimeFormat("hu-HU", {
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "2-digit",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          }).format(submittedAt)
+                        : "—"}
+                    </b>
+                  </div>
+                  <div className="flex justify-between gap-[var(--space-4)] py-[6px]">
+                    <span>Azonosító</span>
+                    <b className="text-[var(--ink)] font-medium">
+                      {submittedId ? submittedId.slice(0, 8) : (submittedStatus ?? "—")}
+                    </b>
+                  </div>
+                  <div className="flex justify-between gap-[var(--space-4)] py-[6px]">
+                    <span>Válaszadás</span>
+                    <b className="text-[var(--ink)] font-medium">2 munkanapon belül</b>
+                  </div>
+                </div>
               </div>
 
-              <div className="mt-12">
+              <div className="pt-[var(--space-6)] mt-[clamp(30px,3.6vw,50px)] border-t border-[var(--rule)]">
                 <Link
                   href="/"
-                  className="inline-block px-8 py-3 border border-white/10 text-white font-bold uppercase tracking-widest text-xs hover:bg-[#e7ff00] hover:text-black hover:border-[#e7ff00] transition-all shadow-[0_0_0_rgba(231,255,0,0)] hover:shadow-[0_0_20px_rgba(231,255,0,0.3)]"
+                  className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)] hover:text-[var(--ink)] transition-colors"
                 >
-                  Vissza a főoldalra
+                  &larr; Vissza a főoldalra
                 </Link>
               </div>
-            </div>
+            </StepFrame>
           )}
         </div>
-      </div>
+      </Rail>
     </main>
   );
 }

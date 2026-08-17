@@ -74,6 +74,9 @@
 
   /* /szindikatus (Rólunk) látványterve (design/rolunk-latvanyterv.html) */
   --text-tl-year: clamp(30px, 4.2vw, 56px); /* idővonal — mérőléc évszámai */
+
+  /* /init látványterve (design/init-latvanyterv.html) */
+  --text-step-n: clamp(46px, 7.4vw, 104px); /* lépés-számjegy */
 }
 
 @theme inline {
