@@ -71,6 +71,9 @@
   /* /arzenal (Szolgáltatások) látványterve (design/szolgaltatasok-latvanyterv.html) */
   --text-svc-num: clamp(56px, 9vw, 140px); /* szolgáltatás-blokk számjegye */
   --text-svc-title: clamp(26px, 3.6vw, 50px); /* szolgáltatás-blokk címe */
+
+  /* /szindikatus (Rólunk) látványterve (design/rolunk-latvanyterv.html) */
+  --text-tl-year: clamp(30px, 4.2vw, 56px); /* idővonal — mérőléc évszámai */
 }
 
 @theme inline {
