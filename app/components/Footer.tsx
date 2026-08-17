@@ -18,7 +18,7 @@ export default function Footer() {
             <span className="text-[#e7ff00]">GBR</span>
           </div>
           <p className="text-gray-500 font-mono text-[10px] tracking-widest uppercase">
-            Mérnöki Precizitás 2002 Óta.
+            Fejlesztés és üzemeltetés B2B-ben.
           </p>
         </div>
 
