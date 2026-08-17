@@ -3,10 +3,36 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+const TARGET_OPTIONS = [
+  {
+    id: "web",
+    label: "High-End Web & Shop",
+    color: "hover:border-[#e7ff00] hover:text-[#e7ff00]",
+  },
+  {
+    id: "marketing",
+    label: "Performance Marketing & Videó",
+    color: "hover:border-[#00E5FF] hover:text-[#00E5FF]",
+  },
+  {
+    id: "full",
+    label: "Full-Stack Autopilot (Minden)",
+    color: "hover:border-[#9d00ff] hover:text-[#9d00ff] border-[#9d00ff]/30 text-[#9d00ff]",
+  },
+] as const;
+
+const BUDGET_OPTIONS = [
+  { val: "1-3M", label: "1 - 3M Ft" },
+  { val: "3-8M", label: "3 - 8M Ft" },
+  { val: "8M+", label: "8M+ Ft" },
+  { val: "nem-tudom", label: "Még nem tudom" },
+] as const;
+
 export default function InitProtocol() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [submittedStatus, setSubmittedStatus] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -14,7 +40,13 @@ export default function InitProtocol() {
     email: "",
     target: "",
     budget: "",
+    deadline: "",
+    // Honeypot — valódi felhasználó ezt sosem tölti ki.
+    website: "",
   });
+
+  // Az űrlap megjelenésének időpontja — időalapú bot-szűréshez az API-n.
+  const [formStartedAt] = useState(() => Date.now());
 
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
@@ -49,42 +81,71 @@ export default function InitProtocol() {
     setStep((prev) => prev - 1);
   };
 
-  const handleSubmit = async (budgetVal: string) => {
+  const handleSubmit = async (budgetVal: (typeof BUDGET_OPTIONS)[number]["val"]) => {
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
     setSubmitError("");
 
     const finalData = { ...formData, budget: budgetVal };
+    const targetOption = TARGET_OPTIONS.find((t) => t.id === finalData.target);
+    const projektLeiras = targetOption?.label ?? finalData.target;
 
-    const form = new FormData();
-    form.append("Név", finalData.name);
-    form.append("Cég", finalData.company);
-    form.append("Telefon", finalData.phone);
-    form.append("Email", finalData.email);
-    form.append("Célpont (Rendszer)", finalData.target);
-    form.append("Kiválasztott Büdzsé", finalData.budget);
-    form.append("Adatkezelés elfogadva", "IGEN");
-    form.append("_replyto", finalData.email);
-    form.append("_subject", `THE GBR LEAD: ${finalData.company} - ${finalData.budget}`);
+    // A Formspree egyelőre párhuzamosan fut tovább (átmeneti, nem blokkoló) —
+    // a UI-t kizárólag a saját /api/contact végpont válasza vezérli.
+    const formspreeForm = new FormData();
+    formspreeForm.append("Név", finalData.name);
+    formspreeForm.append("Cég", finalData.company);
+    formspreeForm.append("Telefon", finalData.phone);
+    formspreeForm.append("Email", finalData.email);
+    formspreeForm.append("Célpont (Rendszer)", projektLeiras);
+    formspreeForm.append("Kiválasztott Büdzsé", finalData.budget);
+    formspreeForm.append("Adatkezelés elfogadva", "IGEN");
+    formspreeForm.append("_replyto", finalData.email);
+    formspreeForm.append("_subject", `THE GBR LEAD: ${finalData.company} - ${finalData.budget}`);
+
+    fetch("https://formspree.io/f/mykabnno", {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: formspreeForm,
+    }).catch((err) => {
+      console.warn("Formspree (párhuzamos, nem blokkoló) hiba:", err);
+    });
 
     try {
-      const response = await fetch("https://formspree.io/f/mykabnno", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: form,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nev: finalData.name,
+          ceg: finalData.company,
+          email: finalData.email,
+          telefon: finalData.phone,
+          projekt: projektLeiras,
+          keret: finalData.budget,
+          hatarido: finalData.deadline,
+          honeypot: finalData.website,
+          startedAt: formStartedAt,
+        }),
       });
 
       if (response.ok) {
+        setSubmittedStatus(response.status);
         setStep(4);
       } else {
-        const errorData = await response.json();
-        console.error("Formspree Hiba:", errorData);
-        setSubmitError(`> API_HIBA: Sikertelen adatküldés!`);
+        const errorData = await response.json().catch(() => null);
+        console.error("Contact API hiba:", errorData);
+        setSubmitError(
+          errorData?.error
+            ? `> API_HIBA: ${errorData.error}`
+            : "> API_HIBA: Sikertelen adatküldés! Próbáld újra, vagy írj közvetlenül: gabor@thegbr.eu"
+        );
       }
     } catch (error) {
       console.error("Hálózati hiba:", error);
-      setSubmitError("> SYS_ERROR: Hálózati hiba blokkolja a jelet!");
+      setSubmitError(
+        "> SYS_ERROR: Hálózati hiba blokkolja a jelet! Próbáld újra, vagy írj közvetlenül: gabor@thegbr.eu"
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -103,13 +164,13 @@ export default function InitProtocol() {
         .scanline-effect { animation: scanline 8s linear infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         .animate-blink { animation: blink 1s step-end infinite; }
-        
-        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus { 
-          outline: none; 
-          border-bottom-color: #e7ff00; 
-          box-shadow: 0 4px 15px -3px rgba(231,255,0,0.3); 
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus {
+          outline: none;
+          border-bottom-color: #e7ff00;
+          box-shadow: 0 4px 15px -3px rgba(231,255,0,0.3);
         }
-        
+
         input[type="checkbox"] {
           accent-color: #e7ff00;
           cursor: pointer;
@@ -235,6 +296,30 @@ export default function InitProtocol() {
                   />
                 </div>
 
+                {/* Honeypot — CSS-sel elrejtve, csak botok töltik ki. */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    width: 1,
+                    height: 1,
+                    overflow: "hidden",
+                    opacity: 0,
+                    pointerEvents: "none",
+                  }}
+                >
+                  <label htmlFor="website">Cégünk weboldala</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website}
+                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                  />
+                </div>
+
                 <div className="flex items-start gap-3 pt-4">
                   <input
                     type="checkbox"
@@ -292,24 +377,7 @@ export default function InitProtocol() {
               </p>
 
               <div className="grid grid-cols-1 gap-4">
-                {[
-                  {
-                    id: "web",
-                    label: "High-End Web & Shop",
-                    color: "hover:border-[#e7ff00] hover:text-[#e7ff00]",
-                  },
-                  {
-                    id: "marketing",
-                    label: "Performance Marketing & Videó",
-                    color: "hover:border-[#00E5FF] hover:text-[#00E5FF]",
-                  },
-                  {
-                    id: "full",
-                    label: "Full-Stack Autopilot (Minden)",
-                    color:
-                      "hover:border-[#9d00ff] hover:text-[#9d00ff] border-[#9d00ff]/30 text-[#9d00ff]",
-                  },
-                ].map((option) => (
+                {TARGET_OPTIONS.map((option) => (
                   <button
                     type="button"
                     key={option.id}
@@ -346,16 +414,11 @@ export default function InitProtocol() {
                 03 // Erőforrás Allokáció
               </h2>
               <p className="text-xs text-gray-500 tracking-widest uppercase mb-6">
-                Mekkora havi keretet különítesz el a fegyverkezésre?
+                Mekkora büdzsét terveztek erre a projektre?
               </p>
 
               <div className="grid grid-cols-2 gap-4">
-                {[
-                  { val: "300k-500k", label: "300 - 500e Ft" },
-                  { val: "500k-1m", label: "500e - 1M Ft" },
-                  { val: "1m-3m", label: "1M - 3M Ft" },
-                  { val: "3m+", label: "3M+ Ft" },
-                ].map((budget) => (
+                {BUDGET_OPTIONS.map((budget) => (
                   <button
                     type="button"
                     key={budget.val}
@@ -366,6 +429,20 @@ export default function InitProtocol() {
                     {budget.label}
                   </button>
                 ))}
+              </div>
+
+              <div className="mt-6">
+                <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
+                  Határidő (opcionális)
+                </label>
+                <input
+                  type="text"
+                  placeholder="pl. 2026 Q4, vagy egy konkrét dátum"
+                  disabled={isSubmitting}
+                  className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all focus:border-[#e7ff00] disabled:opacity-50"
+                  value={formData.deadline}
+                  onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
+                />
               </div>
 
               {/* Töltés és Hibaüzenetek kezelése */}
@@ -395,7 +472,7 @@ export default function InitProtocol() {
             </div>
           )}
 
-          {/* LÉPÉS 4: SIKER / VÉGREHAJTÁS (ÚJ, FUTURISZTIKUS DIZÁJN) */}
+          {/* LÉPÉS 4: SIKER / VÉGREHAJTÁS — csak valós 2xx válasz esetén */}
           {step === 4 && (
             <div className="text-center animate-fade-in py-12">
               {/* Futurisztikus töltőgyűrű */}
@@ -413,13 +490,14 @@ export default function InitProtocol() {
               </h2>
 
               <p className="text-gray-400 text-sm tracking-widest mb-8 uppercase leading-relaxed max-w-md mx-auto">
-                A célpont rögzítve. Adatok titkosítva. <br />A THE GBR operatív törzse hamarosan
-                felveszi veled a kapcsolatot.
+                A célpont rögzítve. Adatok titkosítva. <br />A THE GBR operatív törzse két
+                munkanapon belül felveszi veled a kapcsolatot.
               </p>
 
-              {/* Terminál státusz blokk */}
+              {/* Terminál státusz blokk — a ténylegesen kapott válaszkódot mutatja */}
               <div className="font-mono text-[10px] text-gray-500 bg-[#0a0a0a] border border-white/5 p-4 rounded inline-block text-left">
-                <span className="text-[#e7ff00]">sys.status:</span> 200_OK <br />
+                <span className="text-[#e7ff00]">sys.status:</span> {submittedStatus ?? "—"}_OK{" "}
+                <br />
                 <span className="text-gray-600">connection:</span> CLOSED <br />
                 <span className="text-gray-600">agent_routing:</span> ACTIVE
               </div>
