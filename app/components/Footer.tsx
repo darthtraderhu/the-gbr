@@ -2,23 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MAIN_NAV_ITEMS, LEGAL_LINKS } from "@/lib/site-links";
 
-const AGENCY_LINKS = [
-  { label: "Főoldal", href: "/" },
-  { label: "Szolgáltatások", href: "/arzenal" },
-  { label: "Csomagok", href: "/architektura" },
-  { label: "SEO", href: "/seo" },
-  { label: "Rólunk", href: "/szindikatus" },
-  { label: "Írások", href: "/hirek" },
-];
-
-const LEGAL_LINKS = [
-  { label: "Adatkezelés", href: "/adatkezeles" },
-  { label: "Cookie-tájékoztató", href: "/cookie-tajekoztato" },
-  { label: "AI-tájékoztató", href: "/ai-tajekoztato" },
-  { label: "ÁSZF", href: "/szolgaltatasi-feltetelek" },
-  { label: "Impresszum", href: "/impresszum" },
-];
+const AGENCY_LINKS = [{ label: "Főoldal", href: "/" }, ...MAIN_NAV_ITEMS];
 
 export default function Footer() {
   const pathname = usePathname();

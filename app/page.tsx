@@ -314,10 +314,10 @@ export default function Home() {
       <Rail label="05 / Stack">
         <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)]">
           <Eyebrow>Műszaki alap · amivel dolgozunk</Eyebrow>
-          <p className="font-display font-extrabold [font-size:var(--text-wall)] leading-[1.02] tracking-[-0.045em] text-[var(--ink)]">
+          <p className="font-display font-extrabold [font-size:var(--text-wall)] leading-[1.02] tracking-[-0.045em] text-[var(--ink)] [overflow-wrap:anywhere]">
             {TECH_STACK.map((tech, i) => (
               <span key={tech}>
-                {i > 0 && <span className="text-[var(--signal)] px-[0.18em]">·</span>}
+                {i > 0 && <span className="text-[var(--signal)]"> · </span>}
                 {tech}
               </span>
             ))}

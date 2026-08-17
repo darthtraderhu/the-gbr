@@ -37,10 +37,13 @@ export default function LegalDoc({ doc }: { doc: Doc }) {
         </section>
         {doc.meta.length > 0 && (
           <div
-            className="grid grid-cols-1 sm:grid-cols-3 border-t border-[var(--rule)]"
-            style={{
-              gridTemplateColumns: `repeat(${Math.min(doc.meta.length, 3)}, 1fr)`,
-            }}
+            className={`grid grid-cols-1 ${
+              doc.meta.length === 3
+                ? "sm:grid-cols-3"
+                : doc.meta.length === 2
+                  ? "sm:grid-cols-2"
+                  : "sm:grid-cols-1"
+            } border-t border-[var(--rule)]`}
           >
             {doc.meta.map((m, i) => (
               <div
