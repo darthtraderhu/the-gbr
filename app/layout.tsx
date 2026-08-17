@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google"; // ÚJ IMPORT: A hivatalos GA4 modul
 import "./globals.css";
 import { SITE_URL } from "@/lib/site";
 import { organizationSchema } from "@/lib/jsonld";
+import { montserrat, fontDisplay, fontBody, fontMono } from "@/lib/fonts";
 
 // Importáljuk a komponenseket
 import Navbar from "./components/Navbar";
@@ -11,13 +11,6 @@ import Footer from "./components/Footer";
 import AiChat from "./components/AiChat";
 import CallButton from "./components/CallButton";
 import JsonLd from "./components/JsonLd";
-
-// Beállítjuk a betűtípust
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
-});
 
 // BUMM! Kőkemény globális B2B SEO, OpenGraph és Analytics alapok
 export const metadata: Metadata = {
@@ -49,7 +42,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="hu" className="scroll-smooth">
+    <html
+      lang="hu"
+      className={`scroll-smooth ${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}
+    >
       {/* 
         A "select-none" osztály letiltja, hogy bárki egérrel kijelölje a szöveget! 
         A selection:bg-... dolgok bent maradhatnak, ha valahol mégis engednénk egy inputot.
