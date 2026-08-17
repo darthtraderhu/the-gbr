@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
+import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 
 const DESCRIPTION =
   "Technikai SEO és strukturált adat, amitől a Google és az AI-keresők is megtalálják a céged. Ezt az oldalt is így építettük — ellenőrizheted.";
@@ -85,6 +86,12 @@ const AEO_ITEMS = [
   },
 ];
 
+const CWV_METRICS = [
+  { code: "LCP", label: "Betöltés" },
+  { code: "INP", label: "Reakció" },
+  { code: "CLS", label: "Stabilitás" },
+];
+
 const PROCESS_STEPS = [
   {
     num: "01",
@@ -133,7 +140,7 @@ const FAQ_ITEMS = [
 
 export default function SeoAeoPage() {
   return (
-    <main className="min-h-screen bg-[#020202] relative overflow-hidden text-white font-sans selection:bg-[#e7ff00] selection:text-black">
+    <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd
         data={breadcrumbSchema([
           { name: "Főoldal", url: SITE_URL },
@@ -141,307 +148,382 @@ export default function SeoAeoPage() {
         ])}
       />
       <JsonLd data={faqPageSchema(FAQ_ITEMS)} />
-      {/* 1. KŐKEMÉNY NEURÁLIS/MÁTRIX HÁTTÉR */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Mátrix Dot-Grid (Neuron pontok) */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#e7ff00_1px,transparent_1px)] bg-[size:24px_24px] opacity-[0.04]"></div>
-        {/* Hálózati összekötő vonalak */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:48px_48px]"></div>
-        {/* Fókusz maszk - Széleken elsötétül, hogy a tartalom keretbe kerüljön */}
-        <div className="absolute inset-0 bg-[#020202] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,transparent_0%,black_100%)]"></div>
-      </div>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        .faq-q .faq-pm-plus { display: inline; }
+        .faq-q .faq-pm-minus { display: none; }
+        .faq-q[open] .faq-pm-plus { display: none; }
+        .faq-q[open] .faq-pm-minus { display: inline; }
+      `,
+        }}
+      />
 
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-12 pt-32 pb-32 relative z-10">
-        {/* HERO SZEKCIÓ */}
-        <div className="mb-32 text-center lg:text-left flex flex-col lg:flex-row items-center gap-16 group/hero">
-          <div className="lg:w-3/5 relative">
-            <p className="text-[#e7ff00] text-xs font-mono tracking-[0.4em] uppercase mb-8 flex items-center justify-center lg:justify-start gap-4">
-              <span className="w-8 h-[1px] bg-[#e7ff00] transform origin-left transition-transform duration-700 group-hover/hero:scale-x-150"></span>
-              Keresőoptimalizálás és AI-láthatóság
-            </p>
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.95] font-black uppercase tracking-tighter mb-8 text-white transition-all duration-700">
-              Attól, hogy jó a szöveged, <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-500 via-gray-200 to-white">
-                még nem talál meg senki.
+      {/* ===== SÖTÉT FEJLÉC + ELLENŐRZŐ PANEL ===== */}
+      <Rail label="SEO és AEO" dark>
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
+          <h1 className="font-display font-black leading-[0.9] tracking-[-0.052em] [font-size:var(--text-display)] max-w-[15ch]">
+            Attól, hogy jó a szöveged,{" "}
+            <span className="text-[var(--dim)]">még nem talál meg senki</span>
+            <span className="text-[var(--signal)]">.</span>
+          </h1>
+          <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[52ch] mt-[var(--space-8)]">
+            A keresés két irányba ment el. A Google továbbra is a technikai alapokat méri: mennyi
+            idő alatt töltődik be az oldal, tiszta-e a szerkezet, érti-e a robot, miről szól. Az
+            AI-keresők pedig strukturált adatot olvasnak, nem marketingszöveget.
+          </p>
+          <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[52ch] mt-[var(--space-4)]">
+            Mi mindkettőt megépítjük — és nem csak beszélünk róla.
+          </p>
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[52ch] mt-[var(--space-6)]">
+            A legtöbb SEO-ügynökség oldalán nincs sitemap. Nézd meg — komolyan, nyisd meg. A miénken
+            van, és ellenőrizheted te is.
+          </p>
+          <div className="mt-[var(--space-8)]">
+            <Button asChild variant="ghost">
+              <Link href="#bizonyitek">Nézd meg az eredményt</Link>
+            </Button>
+          </div>
+        </section>
+
+        <div id="bizonyitek" className="border-t border-[var(--rule)] scroll-mt-16">
+          <div className="flex flex-wrap justify-between gap-3 px-6 py-3 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)]">
+            <span>Bizonyíték · ezt az oldalt is így építettük</span>
+            <span>Kattintható</span>
+          </div>
+
+          {PROOF_ITEMS.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group grid grid-cols-[28px_1fr_auto] sm:grid-cols-[34px_1fr_1.15fr_auto] gap-[var(--space-4)] sm:gap-[var(--space-8)] px-6 py-[var(--space-5)] sm:py-[var(--space-6)] border-b border-[var(--rule)] items-center hover:bg-[var(--panel)] transition-colors"
+            >
+              <span className="[font-family:var(--font-mono)] [font-size:var(--text-lg)] text-[var(--signal)]">
+                ✓
               </span>
-            </h1>
-            <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
-              A keresés két irányba ment el. A Google továbbra is a technikai alapokat méri: mennyi
-              idő alatt töltődik be az oldal, tiszta-e a szerkezet, érti-e a robot, miről szól. Az
-              AI-keresők pedig strukturált adatot olvasnak, nem marketingszöveget.
-            </p>
-            <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mt-4">
-              Mi mindkettőt megépítjük — és nem csak beszélünk róla.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
-              <Link
-                href="#bizonyitek"
-                className="border border-white/20 hover:border-[#e7ff00] bg-white/[0.03] backdrop-blur-md px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#e7ff00]/10 hover:text-[#e7ff00] hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(231,255,0,0.2)]"
-              >
-                Nézd meg az eredményt
-              </Link>
-            </div>
-          </div>
+              <span className="font-display font-semibold [font-size:var(--text-lg)] tracking-[-0.02em] text-[var(--ink)]">
+                {item.label}
+              </span>
+              <span className="hidden sm:block [font-family:var(--font-mono)] text-[length:var(--text-xs)] text-[var(--mid)] truncate group-hover:text-[var(--signal)] transition-colors">
+                {item.where}
+              </span>
+              <span className="[font-family:var(--font-mono)] [font-size:var(--text-sm)] text-[var(--rule-strong)] group-hover:text-[var(--signal)] transition-colors">
+                &rarr;
+              </span>
+            </a>
+          ))}
 
-          <div className="lg:w-2/5 w-full">
-            <div className="relative aspect-square rounded-full border border-white/5 bg-[#050505]/50 backdrop-blur-md flex items-center justify-center overflow-hidden transition-transform duration-1000 hover:scale-105 hover:border-[#e7ff00]/20">
-              {/* Forgó technikai gyűrűk animációja */}
-              <div className="absolute inset-5 border border-[#e7ff00]/20 rounded-full border-dashed animate-[spin_40s_linear_infinite]"></div>
-              <div className="absolute inset-10 border border-white/10 rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
-              <div className="text-center transform transition-transform duration-500 hover:scale-110">
-                <span className="block text-3xl md:text-4xl font-black text-[#e7ff00] mb-2 drop-shadow-[0_0_15px_rgba(231,255,0,0.2)] tracking-tight">
-                  LCP · INP · CLS
-                </span>
-                <span className="text-xs text-gray-500 uppercase tracking-widest font-mono">
-                  Amit ténylegesen mérünk
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* BIZONYÍTÉK SZEKCIÓ */}
-        <div
-          id="bizonyitek"
-          className="mb-32 scroll-mt-32 relative rounded-[2rem] bg-[#070707]/90 backdrop-blur-xl border border-[#e7ff00]/20 p-10 md:p-16 lg:p-20 overflow-hidden transition-all duration-700 hover:border-[#e7ff00]/30"
-        >
-          <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#e7ff00] to-transparent opacity-70"></div>
-          <div className="max-w-3xl relative z-10">
-            <p className="text-[#e7ff00] text-xs font-mono tracking-[0.4em] uppercase mb-4">
-              Bizonyíték
-            </p>
-            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-6">
-              Ezt az oldalt is így építettük
-            </h2>
-            <p className="text-gray-400 leading-relaxed mb-10">
-              A legtöbb SEO-ügynökség oldalán nincs sitemap. Nézd meg — komolyan, nyisd meg. A
-              miénken van, és ellenőrizheted te is.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
-            {PROOF_ITEMS.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group/proof flex items-center justify-between gap-4 border border-white/10 bg-[#0a0a0a] rounded-xl p-5 hover:border-[#e7ff00]/50 transition-colors"
-              >
-                <span>
-                  <span className="block text-sm font-bold text-white uppercase tracking-wide">
-                    {item.label}
-                  </span>
-                  <span className="block text-xs text-gray-500 font-mono mt-1">{item.where}</span>
-                </span>
-                <span className="text-gray-600 group-hover/proof:text-[#e7ff00] transition-colors font-black text-lg">
-                  &rarr;
-                </span>
-              </a>
-            ))}
-          </div>
-
-          <p className="mt-8 text-gray-600 text-xs font-mono relative z-10">
+          <p className="px-6 py-[var(--space-4)] pb-[var(--space-9)] sm:pb-[var(--space-12)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)] max-w-[60ch]">
             Ez nem screenshot, hanem kattintható link. Ha bármelyik nem működne, szólj — és
             javítjuk.
           </p>
         </div>
+      </Rail>
 
-        {/* PARADIGMAVÁLTÁS SZEKCIÓ */}
-        <div className="mb-24 relative rounded-[2rem] bg-[#070707]/90 backdrop-blur-xl border border-white/[0.05] p-10 md:p-16 lg:p-20 overflow-hidden transition-all duration-700 hover:border-white/10 hover:shadow-[0_0_40px_-20px_rgba(255,255,255,0.05)]">
-          <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#e7ff00] to-transparent opacity-50"></div>
-          <div className="max-w-3xl relative z-10">
-            <p className="text-[#e7ff00] text-xs font-mono tracking-[0.4em] uppercase mb-4">
-              Mi változott
-            </p>
-            <h2 className="text-3xl font-black uppercase tracking-tight mb-6">
-              Két külön keresés lett belőle
-            </h2>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              A Google technikai része szigorodott. A betöltési sebesség, a szerkezet stabilitása és
-              a válaszidő ma rangsorolási tényező — nem kényelmi kérdés. Egy lassú oldal nem azért
-              veszít, mert csúnya, hanem mert a Google hátrébb sorolja.
-            </p>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              És megjelent egy második út. Egyre többen kérdezik meg egyszerűen az AI-t, hogy „ki
-              csinál Magyarországon B2B webshopot”. Ezek a rendszerek nem kulcsszavakat olvasnak,
-              hanem struktúrát: mi a cég neve, mivel foglalkozik, hol található, mit ír a saját
-              oldalán. Ha ez nincs gépi olvasásra alkalmas formában, akkor a válaszban más szerepel.
-            </p>
-            <p className="text-gray-400 leading-relaxed">
-              Ez a második rész új, és még kevesen csinálják. Ezért is éri meg most.
-            </p>
-          </div>
-        </div>
+      <Seam />
 
-        {/* BENTO GRID: A KÉT PILLÉR */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-32">
-          {/* TECHNIKAI SEO PANEL */}
-          <div className="group relative rounded-[2rem] bg-[#070707]/90 backdrop-blur-xl border border-white/[0.05] shadow-2xl p-10 md:p-14 overflow-hidden transition-all duration-500 hover:border-[#e7ff00]/30 hover:-translate-y-2 hover:shadow-[0_20px_40px_-20px_rgba(231,255,0,0.1)]">
-            <div className="w-14 h-14 rounded-xl bg-[#0a0a0a] border border-white/10 flex items-center justify-center mb-10 text-white transition-all duration-500 group-hover:text-[#e7ff00] group-hover:border-[#e7ff00]/50 group-hover:scale-110">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
-              </svg>
+      {/* ===== MI VÁLTOZOTT — két keresés ===== */}
+      <Rail label="Mi változott">
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-9)]">
+          <Eyebrow>Mi változott</Eyebrow>
+          <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[18ch] text-[var(--ink)]">
+            Két külön keresés lett belőle
+          </h2>
+        </section>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 border-t border-[var(--rule)]">
+          <div className="border-b lg:border-b-0 lg:border-r border-[var(--rule)]">
+            <div className="px-6 py-3 border-b border-[var(--rule)] bg-[var(--panel)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
+              01 — A klasszikus találati lista
             </div>
+            <div className="px-6 py-[var(--space-8)] sm:py-[var(--space-10)]">
+              <h3 className="font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.028em] mb-[var(--space-4)]">
+                A Google technikai része szigorodott
+              </h3>
+              <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch]">
+                A betöltési sebesség, a szerkezet stabilitása és a válaszidő ma rangsorolási tényező
+                — nem kényelmi kérdés. Egy lassú oldal nem azért veszít, mert csúnya, hanem mert a
+                Google hátrébb sorolja.
+              </p>
 
-            <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-4">
-              Technikai alap (SEO)
-            </h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-10">
-              Amit a Google mér. A Next.js szerveroldali renderelése miatt a keresőrobot azonnal
-              látja a tartalmat — nem kell megvárnia, míg a böngésző összerakja. Ez a különbség a
-              másodperc törtrészében dől el, de a rangsorban is meglátszik.
-            </p>
-
-            <ul className="space-y-0 relative z-10">
-              {SEO_ITEMS.map((item) => (
-                <li
-                  key={item.title}
-                  className="border-t border-white/[0.05] py-4 transition-colors duration-300 hover:bg-[#0a0a0a] px-3 -mx-3 rounded-lg"
-                >
-                  <div className="text-sm font-bold text-gray-200 uppercase tracking-wider mb-1 flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#e7ff00] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
-                    {item.title}
-                  </div>
-                  <div className="text-xs text-gray-500 pl-3.5">{item.desc}</div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* AEO PANEL */}
-          <div className="group relative rounded-[2rem] bg-[#070707]/90 backdrop-blur-xl border border-white/[0.05] shadow-2xl p-10 md:p-14 overflow-hidden transition-all duration-500 hover:border-[#e7ff00]/30 hover:-translate-y-2 hover:shadow-[0_20px_40px_-20px_rgba(231,255,0,0.1)]">
-            <div className="w-14 h-14 rounded-xl bg-[#0a0a0a] border border-white/10 flex items-center justify-center mb-10 text-white transition-all duration-500 group-hover:text-[#e7ff00] group-hover:border-[#e7ff00]/50 group-hover:scale-110">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-              </svg>
-            </div>
-
-            <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-4">
-              AI-láthatóság (AEO)
-            </h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-10">
-              Amit a nyelvi modellek olvasnak. Nem tudjuk garantálni, hogy egy AI éppen téged idéz —
-              ezt senki nem tudja. Azt viszont meg tudjuk csinálni, hogy legyen mit idéznie: tiszta
-              struktúra, egyértelmű adatok, gépi olvasásra alkalmas formában.
-            </p>
-
-            <ul className="space-y-0 relative z-10">
-              {AEO_ITEMS.map((item) => (
-                <li
-                  key={item.title}
-                  className="border-t border-white/[0.05] py-4 transition-colors duration-300 hover:bg-[#0a0a0a] px-3 -mx-3 rounded-lg"
-                >
-                  <div className="text-sm font-bold text-gray-200 uppercase tracking-wider mb-1 flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#e7ff00] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
-                    {item.title}
-                  </div>
-                  <div className="text-xs text-gray-500 pl-3.5">{item.desc}</div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* FOLYAMAT */}
-        <div className="mb-32">
-          <div className="text-center mb-16">
-            <p className="text-[#e7ff00] text-xs font-mono tracking-[0.4em] uppercase mb-4">
-              Folyamat
-            </p>
-            <h2 className="text-4xl font-black uppercase tracking-tight">Három lépés</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative group/steps">
-            {/* Összekötő vonal (csak asztalin látszik) */}
-            <div className="hidden md:block absolute top-[28px] left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent z-0 transition-all duration-700 group-hover/steps:via-[#e7ff00]/30"></div>
-
-            {PROCESS_STEPS.map((step) => (
-              <div
-                key={step.num}
-                className="relative z-10 bg-[#070707] border border-white/5 p-8 rounded-2xl flex flex-col items-center text-center transition-all duration-500 hover:border-[#e7ff00]/40 hover:-translate-y-3 hover:shadow-[0_15px_30px_-15px_rgba(231,255,0,0.15)] group/card"
-              >
-                <div className="w-14 h-14 bg-[#020202] border border-white/10 rounded-full flex items-center justify-center text-[#e7ff00] font-black text-xl mb-6 shadow-[0_0_15px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover/card:scale-125 group-hover/card:border-[#e7ff00]/50">
-                  {step.num}
+              <div className="bg-[var(--panel)] border border-[var(--rule)] p-4 sm:p-5 mt-[var(--space-6)]">
+                <div className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] text-[var(--mid)]">
+                  thegbr.eu › szolgaltatasok
                 </div>
-                <h3 className="text-lg font-bold text-white uppercase tracking-wider mb-3">
+                <div className="font-display font-semibold [font-size:var(--text-lg)] tracking-[-0.015em] text-[#1a4fa0] mt-[var(--space-2)] mb-[var(--space-2)]">
+                  Szolgáltatások | THE GBR
+                </div>
+                <p className="[font-size:var(--text-sm)] text-[var(--ink-2)] m-0">
+                  Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó és
+                  üzemeltetés. Öt terület, házon belül…
+                </p>
+                <div className="mt-[var(--space-3)] pt-[var(--space-3)] border-t border-[var(--rule-soft)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.12em] uppercase text-[var(--signal-deep)]">
+                  Gyakori kérdések · 6 elem megjelenítve
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="px-6 py-3 border-b border-[var(--rule)] bg-[var(--panel)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
+              02 — Az AI-válasz
+            </div>
+            <div className="px-6 py-[var(--space-8)] sm:py-[var(--space-10)]">
+              <h3 className="font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.028em] mb-[var(--space-4)]">
+                És megjelent egy második út
+              </h3>
+              <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch]">
+                Egyre többen kérdezik meg egyszerűen az AI-t. Ezek a rendszerek nem kulcsszavakat
+                olvasnak, hanem struktúrát. Ha ez nincs gépi olvasásra alkalmas formában, a
+                válaszban más szerepel.
+              </p>
+
+              <div className="bg-[var(--panel)] border border-[var(--rule)] p-4 sm:p-5 mt-[var(--space-6)]">
+                <div className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.1em] uppercase text-[var(--mid)] mb-[var(--space-3)]">
+                  „Ki csinál Magyarországon B2B webshopot?&rdquo;
+                </div>
+                <p className="[font-size:var(--text-sm)] leading-relaxed text-[var(--ink-2)] m-0">
+                  Több ügynökség foglalkozik ezzel. Például a{" "}
+                  <strong className="font-display font-bold text-[var(--ink)]">THE GBR</strong> (GBR
+                  Marketing Solutions Kft.) Next.js alapú B2B webshopokat épít, meglévő rendszerek
+                  fölé is…
+                </p>
+                <div className="mt-[var(--space-3)] pt-[var(--space-3)] border-t border-[var(--rule-soft)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] text-[var(--mid)]">
+                  Forrás: thegbr.eu — Organization, Service séma
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Rail>
+
+      {/* ===== KÉT PILLÉR ===== */}
+      <Rail label="A két pillér">
+        {/* SEO */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(140px,19%)_1fr_minmax(0,38%)] gap-[var(--space-8)] sm:gap-[var(--space-10)] px-6 pt-[var(--space-16)] sm:pt-[var(--space-20)] pb-[var(--space-10)] sm:pb-[var(--space-14)] border-t border-[var(--rule)] items-start">
+          <div>
+            <div className="font-display font-black [font-size:var(--text-numeral-xl)] leading-[0.78] tracking-[-0.06em] text-[var(--rule)]">
+              01
+            </div>
+            <div className="mt-[var(--space-3)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.22em] uppercase text-[var(--mid)]">
+              SEO
+            </div>
+          </div>
+          <div>
+            <h3 className="font-display font-bold [font-size:var(--text-3xl)] tracking-[-0.032em] leading-[1.05] mb-[var(--space-4)]">
+              Technikai alap
+            </h3>
+            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[44ch]">
+              Amit a Google mér. A Next.js szerveroldali renderelése miatt a keresőrobot azonnal
+              látja a tartalmat — nem kell megvárnia, míg a böngésző összerakja.
+            </p>
+            <div className="flex gap-px bg-[var(--rule)] border border-[var(--rule)] mt-[var(--space-6)]">
+              {CWV_METRICS.map((m) => (
+                <span
+                  key={m.code}
+                  className="flex-1 bg-[var(--panel)] text-center py-[var(--space-3)] px-[var(--space-2)]"
+                >
+                  <span className="block [font-family:var(--font-mono)] [font-size:var(--text-sm)] tracking-[0.1em] text-[var(--ink)]">
+                    {m.code}
+                  </span>
+                  <span className="block mt-[var(--space-1)] [font-family:var(--font-mono)] text-[length:8.5px] tracking-[0.18em] uppercase text-[var(--mid)]">
+                    {m.label}
+                  </span>
+                </span>
+              ))}
+              <span className="flex-1 bg-[var(--panel)] text-center py-[var(--space-3)] px-[var(--space-2)]">
+                <span className="block [font-family:var(--font-mono)] [font-size:var(--text-sm)] tracking-[0.1em] text-[var(--rule-strong)] line-through">
+                  FID
+                </span>
+                <span className="block mt-[var(--space-1)] [font-family:var(--font-mono)] text-[length:8.5px] tracking-[0.18em] uppercase text-[var(--mid)]">
+                  2024-ben kivezetve
+                </span>
+              </span>
+            </div>
+          </div>
+          <dl className="m-0">
+            {SEO_ITEMS.map((item, i) => (
+              <div key={item.title} className={i > 0 ? "mt-[var(--space-1)]" : ""}>
+                <dt
+                  className={`font-display font-bold [font-size:var(--text-base)] tracking-[-0.01em] pt-[var(--space-4)] pb-[var(--space-1)] ${
+                    i > 0 ? "border-t border-[var(--rule-soft)]" : ""
+                  }`}
+                >
+                  {item.title}
+                </dt>
+                <dd className="m-0 mb-[var(--space-2)] [font-size:var(--text-sm)] text-[var(--mid)]">
+                  {item.desc}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        {/* AEO */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(140px,19%)_1fr_minmax(0,38%)] gap-[var(--space-8)] sm:gap-[var(--space-10)] px-6 pt-[var(--space-10)] sm:pt-[var(--space-14)] pb-[var(--space-16)] sm:pb-[var(--space-20)] border-t border-[var(--rule)] items-start">
+          <div>
+            <div className="font-display font-black [font-size:var(--text-numeral-xl)] leading-[0.78] tracking-[-0.06em] text-[var(--rule)]">
+              02
+            </div>
+            <div className="mt-[var(--space-3)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.22em] uppercase text-[var(--mid)]">
+              AEO
+            </div>
+          </div>
+          <div>
+            <h3 className="font-display font-bold [font-size:var(--text-3xl)] tracking-[-0.032em] leading-[1.05] mb-[var(--space-4)]">
+              AI-láthatóság
+            </h3>
+            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[44ch]">
+              Amit a nyelvi modellek olvasnak. Nem tudjuk garantálni, hogy egy AI éppen téged idéz —
+              ezt senki nem tudja. Azt viszont meg tudjuk csinálni, hogy{" "}
+              <strong className="text-[var(--ink)]">legyen mit idéznie</strong>: tiszta struktúra,
+              egyértelmű adatok, gépi olvasásra alkalmas formában.
+            </p>
+            <div
+              data-theme="dark"
+              style={{ backgroundColor: "var(--ground)" }}
+              className="border border-[var(--rule)] mt-[var(--space-6)]"
+            >
+              <div className="px-4 py-[var(--space-2)] border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)]">
+                Amit egy AI a te oldaladról lát
+              </div>
+              <pre className="m-0 p-4 [font-family:var(--font-mono)] text-[length:var(--text-xs)] leading-[1.75] text-[var(--ink-2)] overflow-x-auto">
+                {"{\n  "}
+                <span className="text-[var(--signal)]">&quot;@type&quot;</span>
+                {": "}
+                <span>&quot;Organization&quot;</span>
+                {",\n  "}
+                <span className="text-[var(--signal)]">&quot;name&quot;</span>
+                {": "}
+                <span>&quot;GBR Marketing Solutions Kft.&quot;</span>
+                {",\n  "}
+                <span className="text-[var(--signal)]">&quot;alternateName&quot;</span>
+                {": "}
+                <span>&quot;THE GBR&quot;</span>
+                {",\n  "}
+                <span className="text-[var(--signal)]">&quot;email&quot;</span>
+                {": "}
+                <span>&quot;gabor@thegbr.eu&quot;</span>
+                {",\n  "}
+                <span className="text-[var(--signal)]">&quot;address&quot;</span>
+                {": {\n    "}
+                <span className="text-[var(--signal)]">&quot;addressLocality&quot;</span>
+                {": "}
+                <span>&quot;Tar&quot;</span>
+                {",\n    "}
+                <span className="text-[var(--signal)]">&quot;addressCountry&quot;</span>
+                {": "}
+                <span>&quot;HU&quot;</span>
+                {"\n  }\n}"}
+              </pre>
+            </div>
+          </div>
+          <dl className="m-0">
+            {AEO_ITEMS.map((item, i) => (
+              <div key={item.title} className={i > 0 ? "mt-[var(--space-1)]" : ""}>
+                <dt
+                  className={`font-display font-bold [font-size:var(--text-base)] tracking-[-0.01em] pt-[var(--space-4)] pb-[var(--space-1)] ${
+                    i > 0 ? "border-t border-[var(--rule-soft)]" : ""
+                  }`}
+                >
+                  {item.title}
+                </dt>
+                <dd className="m-0 mb-[var(--space-2)] [font-size:var(--text-sm)] text-[var(--mid)]">
+                  {item.desc}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </Rail>
+
+      {/* ===== FOLYAMAT ===== */}
+      <Rail label="Folyamat">
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-9)] border-t border-[var(--rule)]">
+          <Eyebrow>Folyamat</Eyebrow>
+          <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[16ch] text-[var(--ink)]">
+            Három lépés
+          </h2>
+        </section>
+        <div className="border-t border-[var(--rule)]">
+          {PROCESS_STEPS.map((step, i) => (
+            <div
+              key={step.num}
+              className={`grid grid-cols-1 sm:grid-cols-[minmax(90px,15%)_1fr] gap-[var(--space-6)] sm:gap-[var(--space-10)] px-6 py-[var(--space-8)] sm:py-[var(--space-10)] items-start ${
+                i < PROCESS_STEPS.length - 1 ? "border-b border-[var(--rule)]" : ""
+              }`}
+            >
+              <div className="font-display font-black [font-size:var(--text-numeral-lg)] leading-[0.8] tracking-[-0.06em] text-[var(--rule)]">
+                {step.num}
+              </div>
+              <div>
+                <h3 className="font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.025em] mb-[var(--space-3)]">
                   {step.title}
                 </h3>
-                <p className="text-sm text-gray-400">{step.desc}</p>
+                <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed max-w-[62ch] m-0">
+                  {step.desc}
+                </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+      </Rail>
 
-        {/* GYAKORI KÉRDÉSEK */}
-        <div className="mb-32 max-w-4xl mx-auto">
-          <div className="flex items-center gap-4 justify-center mb-12">
-            <span className="w-12 h-px bg-white/20"></span>
-            <h2 className="text-2xl font-black italic uppercase tracking-widest text-center text-gray-500">
-              Gyakori <span className="text-white">kérdések</span>
-            </h2>
-            <span className="w-12 h-px bg-white/20"></span>
-          </div>
-
-          <div className="space-y-4">
-            {FAQ_ITEMS.map((item, index) => (
-              <div
-                key={item.question}
-                className={`border border-white/10 bg-[#070707] rounded-xl p-6 transition-colors ${
-                  index % 2 === 0 ? "hover:border-[#e7ff00]/30" : "hover:border-white/20"
-                }`}
-              >
-                <h3 className="font-bold text-white mb-2 uppercase tracking-wide text-sm md:text-base">
-                  {item.question}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{item.answer}</p>
+      {/* ===== GYIK ===== */}
+      <Rail label="GYIK">
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-9)] border-t border-[var(--rule)]">
+          <Eyebrow>Gyakori kérdések</Eyebrow>
+          <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[16ch] text-[var(--ink)]">
+            Amit tényleg meg szoktak kérdezni
+          </h2>
+        </section>
+        <div className="border-t border-[var(--rule)]">
+          {FAQ_ITEMS.map((item, i) => (
+            <details
+              key={item.question}
+              className="faq-q border-b border-[var(--rule)]"
+              open={i === 0}
+            >
+              <summary className="list-none cursor-pointer grid grid-cols-[1fr_28px] gap-[var(--space-5)] items-baseline px-6 py-[var(--space-6)] font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.022em] hover:bg-[var(--panel)] transition-colors [&::-webkit-details-marker]:hidden">
+                <span>{item.question}</span>
+                <span className="[font-family:var(--font-mono)] [font-size:var(--text-lg)] text-[var(--signal-deep)] text-right">
+                  <span className="faq-pm-plus">+</span>
+                  <span className="faq-pm-minus">&minus;</span>
+                </span>
+              </summary>
+              <div className="px-6 pb-[var(--space-8)]">
+                <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed max-w-[64ch]">
+                  {item.answer}
+                </p>
               </div>
-            ))}
-          </div>
+            </details>
+          ))}
         </div>
+      </Rail>
 
-        {/* CTA */}
-        <div className="relative w-full max-w-5xl mx-auto rounded-3xl bg-[#e7ff00] p-12 md:p-20 text-center shadow-[0_0_40px_rgba(231,255,0,0.15)] transform transition-transform duration-500 hover:scale-[1.02]">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-black uppercase italic leading-none tracking-tighter mb-8">
+      <Seam />
+
+      {/* ===== CTA ===== */}
+      <Rail label="Kapcsolat" dark>
+        <section className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
+          <Eyebrow>Felmérés</Eyebrow>
+          <h2 className="font-display font-extrabold [font-size:var(--text-final)] leading-[0.92] tracking-[-0.055em] max-w-[13ch] mb-[var(--space-6)] text-[var(--ink)]">
             Nézzük meg, hol tartasz
           </h2>
-          <p className="text-black/70 text-sm md:text-base font-semibold max-w-xl mx-auto mb-10">
+          <p className="[font-size:var(--text-base)] text-[var(--ink-2)] max-w-[54ch] leading-relaxed mb-[var(--space-8)]">
             A felmérés végén kapsz egy listát arról, mi hiányzik a technikai alapokból — akkor is,
             ha nem velünk dolgozol tovább. Két munkanapon belül válaszolunk.
           </p>
-
-          <Link
-            href="/init"
-            className="inline-flex items-center gap-3 bg-black text-white font-black uppercase text-sm md:text-base tracking-widest px-10 py-5 transition-all duration-300 hover:bg-white hover:text-black shadow-2xl hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] group"
-          >
-            Kérj felmérést{" "}
-            <span className="text-[#e7ff00] group-hover:text-black transition-colors duration-300">
-              &rarr;
-            </span>
-          </Link>
-        </div>
-      </div>
+          <Button asChild>
+            <Link href="/init">Kérj felmérést &rarr;</Link>
+          </Button>
+          <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)] mt-[var(--space-6)]">
+            Vagy írj közvetlenül: gabor@thegbr.eu
+          </p>
+        </section>
+      </Rail>
     </main>
   );
 }
