@@ -1,28 +1,135 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_URL } from "@/lib/site";
-import { breadcrumbSchema } from "@/lib/jsonld";
+import { breadcrumbSchema, faqPageSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 
+const DESCRIPTION =
+  "Technikai SEO és strukturált adat, amitől a Google és az AI-keresők is megtalálják a céged. Ezt az oldalt is így építettük — ellenőrizheted.";
+
 export const metadata: Metadata = {
-  title: "Search & Answer Engine Optimization | THE GBR",
-  description:
-    "Technológiai alapú keresőoptimalizálás és AI-adatstrukturálás (AEO). Készítsük fel az entitásodat a következő generációs keresőmotorokra.",
+  title: "Keresőoptimalizálás és AI-láthatóság (SEO és AEO) | THE GBR",
+  description: DESCRIPTION,
   alternates: {
     canonical: "/seo",
   },
   openGraph: {
-    title: "Search & Answer Engine Optimization | THE GBR",
-    description:
-      "Technológiai alapú keresőoptimalizálás és AI-adatstrukturálás (AEO) a THE GBR-től.",
+    title: "Keresőoptimalizálás és AI-láthatóság (SEO és AEO) | THE GBR",
+    description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Search & Answer Engine Optimization | THE GBR",
-    description:
-      "Technológiai alapú keresőoptimalizálás és AI-adatstrukturálás (AEO) a THE GBR-től.",
+    title: "Keresőoptimalizálás és AI-láthatóság (SEO és AEO) | THE GBR",
+    description: DESCRIPTION,
   },
 };
+
+const PROOF_ITEMS = [
+  {
+    label: "Dinamikus sitemap",
+    where: "thegbr.eu/sitemap.xml",
+    href: "/sitemap.xml",
+  },
+  {
+    label: "Robots.txt sitemap-hivatkozással",
+    where: "thegbr.eu/robots.txt",
+    href: "/robots.txt",
+  },
+  {
+    label: "Strukturált adat (JSON-LD)",
+    where: "Google Rich Results Test",
+    href: `https://search.google.com/test/rich-results?url=${encodeURIComponent(SITE_URL)}`,
+  },
+  {
+    label: "Mért teljesítmény",
+    where: "PageSpeed Insights",
+    href: `https://pagespeed.web.dev/analysis?url=${encodeURIComponent(SITE_URL)}`,
+  },
+];
+
+const SEO_ITEMS = [
+  {
+    title: "Szerveroldali renderelés",
+    desc: "A robot azonnal olvassa a tartalmat, nem kell rá várnia.",
+  },
+  {
+    title: "Automatikus sitemap és robots.txt",
+    desc: "Minden új oldal magától bekerül. Nem kell rá emlékezni.",
+  },
+  {
+    title: "Core Web Vitals: LCP, INP, CLS",
+    desc: "A három metrika, amit a Google ténylegesen mér.",
+  },
+  {
+    title: "Canonical URL-ek és átirányítások",
+    desc: "Platformváltásnál ez a legdrágább hiba, ha kimarad.",
+  },
+];
+
+const AEO_ITEMS = [
+  {
+    title: "Schema.org és JSON-LD",
+    desc: "Cégadatok, cikkek, szolgáltatások, gyakori kérdések — géppel olvasható formában.",
+  },
+  {
+    title: "Gyakori kérdések strukturálva",
+    desc: "Megjelenhetnek közvetlenül a Google találati listájában, kattintás előtt.",
+  },
+  {
+    title: "Egyértelmű cégadatok",
+    desc: "Név, cím, elérhetőség, tevékenység — mindenhol ugyanaz, ellentmondás nélkül. Ez alapján azonosít egy AI.",
+  },
+  {
+    title: "Kérdésre válaszoló tartalom",
+    desc: "Nem kulcsszóhalmozás, hanem az, hogy tényleg megválaszolod, amit kérdeznek.",
+  },
+];
+
+const PROCESS_STEPS = [
+  {
+    num: "01",
+    title: "Felmérés",
+    desc: "Megnézzük, hol tartasz: sebesség, indexeltség, szerkezet, strukturált adat. A végén kapsz egy listát arról, mi hiányzik — akkor is, ha nem velünk dolgozol tovább.",
+  },
+  {
+    num: "02",
+    title: "Építés",
+    desc: "A technikai alapok rendbetétele. Ha a mostani rendszer nem bírja, akkor újraépítés — de fokozatosan, hogy közben ne veszíts forgalmat.",
+  },
+  {
+    num: "03",
+    title: "Karbantartás",
+    desc: "A keresők változnak, és a te oldalad is. Ha üzemeltetést is kérsz, ezt folyamatosan követjük.",
+  },
+];
+
+const FAQ_ITEMS = [
+  {
+    question: "Mennyi idő alatt látszik eredmény?",
+    answer:
+      "A technikai javítások hatása hetek alatt megjelenik az indexelésben. A rangsor-változás lassabb — három-hat hónap, ha versenyzett kifejezésekről van szó. Aki gyorsabbat ígér, az vagy nem érti, vagy nem mond igazat.",
+  },
+  {
+    question: "Garantáltok első helyet a Google-ben?",
+    answer:
+      "Nem, és aki ilyet ígér, azt kerüld el. A rangsort a Google határozza meg, nem a szolgáltatód. Amit garantálni tudunk: a technikai alapok rendben lesznek, mérhetők, és ellenőrizheted.",
+  },
+  {
+    question: "Mi az az AEO, és tényleg kell?",
+    answer:
+      "Az AI-keresőkre való felkészítés. Ma még kevés forgalmat hoz, de gyorsan nő — és a strukturált adat, amit hozzá kell építeni, a hagyományos Google-találatokban is segít. Vagyis nem elszórt pénz akkor sem, ha az AI-keresés lassabban terjed, mint várjuk.",
+  },
+  {
+    question: "Meglévő oldalt is tudtok javítani, vagy csak újat építeni?",
+    answer:
+      "Mindkettő megy. A felmérés végén megmondjuk, melyik éri meg jobban — van, amikor a meglévő rendszer javítása olcsóbb és gyorsabb.",
+  },
+  {
+    question: "Honnan tudom, hogy tényleg megcsináltátok?",
+    answer:
+      "Ugyanúgy, ahogy nálunk is ellenőrizheted: sitemap, robots.txt, Rich Results Test, PageSpeed. Ezek nyilvános, ingyenes eszközök — nem kell hinned nekünk.",
+  },
+];
 
 export default function SeoAeoPage() {
   return (
@@ -33,6 +140,7 @@ export default function SeoAeoPage() {
           { name: "SEO", url: `${SITE_URL}/seo` },
         ])}
       />
+      <JsonLd data={faqPageSchema(FAQ_ITEMS)} />
       {/* 1. KŐKEMÉNY NEURÁLIS/MÁTRIX HÁTTÉR */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Mátrix Dot-Grid (Neuron pontok) */}
@@ -49,25 +157,28 @@ export default function SeoAeoPage() {
           <div className="lg:w-3/5 relative">
             <p className="text-[#e7ff00] text-xs font-mono tracking-[0.4em] uppercase mb-8 flex items-center justify-center lg:justify-start gap-4">
               <span className="w-8 h-[1px] bg-[#e7ff00] transform origin-left transition-transform duration-700 group-hover/hero:scale-x-150"></span>
-              sys.protocol: indexation_v2
+              Keresőoptimalizálás és AI-láthatóság
             </p>
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.95] font-black uppercase tracking-tighter mb-8 text-white transition-all duration-700">
-              Kereshetőség. <br />
+              Attól, hogy jó a szöveged, <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-500 via-gray-200 to-white">
-                Újrakódolva.
+                még nem talál meg senki.
               </span>
             </h1>
             <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
-              A B2B felfedezés már nem a kulcsszavakon múlik. Az AI modellek és az algoritmikus
-              keresők korában a technológiai alapozás és az adatszerkezet dönti el, ki uralja a
-              piacot. Az algoritmusok nem olvasnak marketing szöveget. Adatstruktúrákat elemeznek.
+              A keresés két irányba ment el. A Google továbbra is a technikai alapokat méri: mennyi
+              idő alatt töltődik be az oldal, tiszta-e a szerkezet, érti-e a robot, miről szól. Az
+              AI-keresők pedig strukturált adatot olvasnak, nem marketingszöveget.
+            </p>
+            <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mt-4">
+              Mi mindkettőt megépítjük — és nem csak beszélünk róla.
             </p>
             <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
               <Link
-                href="#architektura"
+                href="#bizonyitek"
                 className="border border-white/20 hover:border-[#e7ff00] bg-white/[0.03] backdrop-blur-md px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#e7ff00]/10 hover:text-[#e7ff00] hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(231,255,0,0.2)]"
               >
-                Rendszer megismerése
+                Nézd meg az eredményt
               </Link>
             </div>
           </div>
@@ -78,38 +189,87 @@ export default function SeoAeoPage() {
               <div className="absolute inset-5 border border-[#e7ff00]/20 rounded-full border-dashed animate-[spin_40s_linear_infinite]"></div>
               <div className="absolute inset-10 border border-white/10 rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
               <div className="text-center transform transition-transform duration-500 hover:scale-110">
-                <span className="block text-5xl font-black text-[#e7ff00] mb-2 drop-shadow-[0_0_15px_rgba(231,255,0,0.2)]">
-                  99/100
+                <span className="block text-3xl md:text-4xl font-black text-[#e7ff00] mb-2 drop-shadow-[0_0_15px_rgba(231,255,0,0.2)] tracking-tight">
+                  LCP · INP · CLS
                 </span>
                 <span className="text-xs text-gray-500 uppercase tracking-widest font-mono">
-                  Core Web Vitals
+                  Amit ténylegesen mérünk
                 </span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* PARADIGMAVÁLTÁS SZEKCIÓ */}
+        {/* BIZONYÍTÉK SZEKCIÓ */}
         <div
-          id="architektura"
-          className="mb-24 relative rounded-[2rem] bg-[#070707]/90 backdrop-blur-xl border border-white/[0.05] p-10 md:p-16 lg:p-20 overflow-hidden transition-all duration-700 hover:border-white/10 hover:shadow-[0_0_40px_-20px_rgba(255,255,255,0.05)]"
+          id="bizonyitek"
+          className="mb-32 scroll-mt-32 relative rounded-[2rem] bg-[#070707]/90 backdrop-blur-xl border border-[#e7ff00]/20 p-10 md:p-16 lg:p-20 overflow-hidden transition-all duration-700 hover:border-[#e7ff00]/30"
         >
+          <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#e7ff00] to-transparent opacity-70"></div>
+          <div className="max-w-3xl relative z-10">
+            <p className="text-[#e7ff00] text-xs font-mono tracking-[0.4em] uppercase mb-4">
+              Bizonyíték
+            </p>
+            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-6">
+              Ezt az oldalt is így építettük
+            </h2>
+            <p className="text-gray-400 leading-relaxed mb-10">
+              A legtöbb SEO-ügynökség oldalán nincs sitemap. Nézd meg — komolyan, nyisd meg. A
+              miénken van, és ellenőrizheted te is.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+            {PROOF_ITEMS.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/proof flex items-center justify-between gap-4 border border-white/10 bg-[#0a0a0a] rounded-xl p-5 hover:border-[#e7ff00]/50 transition-colors"
+              >
+                <span>
+                  <span className="block text-sm font-bold text-white uppercase tracking-wide">
+                    {item.label}
+                  </span>
+                  <span className="block text-xs text-gray-500 font-mono mt-1">{item.where}</span>
+                </span>
+                <span className="text-gray-600 group-hover/proof:text-[#e7ff00] transition-colors font-black text-lg">
+                  &rarr;
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <p className="mt-8 text-gray-600 text-xs font-mono relative z-10">
+            Ez nem screenshot, hanem kattintható link. Ha bármelyik nem működne, szólj — és
+            javítjuk.
+          </p>
+        </div>
+
+        {/* PARADIGMAVÁLTÁS SZEKCIÓ */}
+        <div className="mb-24 relative rounded-[2rem] bg-[#070707]/90 backdrop-blur-xl border border-white/[0.05] p-10 md:p-16 lg:p-20 overflow-hidden transition-all duration-700 hover:border-white/10 hover:shadow-[0_0_40px_-20px_rgba(255,255,255,0.05)]">
           <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#e7ff00] to-transparent opacity-50"></div>
           <div className="max-w-3xl relative z-10">
+            <p className="text-[#e7ff00] text-xs font-mono tracking-[0.4em] uppercase mb-4">
+              Mi változott
+            </p>
             <h2 className="text-3xl font-black uppercase tracking-tight mb-6">
-              A Paradigma Eltolódott
+              Két külön keresés lett belőle
             </h2>
             <p className="text-gray-400 leading-relaxed mb-6">
-              A monolitikus rendszerek elérték a határaikat. A modern keresőmotorok tizedmásodpercek
-              alatt értékelik a weboldalad front-end kódját. A lassú szerverválasz, a felvillanó
-              layout (CLS) és az optimalizálatlan médiafájlok ma már nem UX problémák, hanem
-              kőkemény rangsorolási faktorok.
+              A Google technikai része szigorodott. A betöltési sebesség, a szerkezet stabilitása és
+              a válaszidő ma rangsorolási tényező — nem kényelmi kérdés. Egy lassú oldal nem azért
+              veszít, mert csúnya, hanem mert a Google hátrébb sorolja.
+            </p>
+            <p className="text-gray-400 leading-relaxed mb-6">
+              És megjelent egy második út. Egyre többen kérdezik meg egyszerűen az AI-t, hogy „ki
+              csinál Magyarországon B2B webshopot”. Ezek a rendszerek nem kulcsszavakat olvasnak,
+              hanem struktúrát: mi a cég neve, mivel foglalkozik, hol található, mit ír a saját
+              oldalán. Ha ez nincs gépi olvasásra alkalmas formában, akkor a válaszban más szerepel.
             </p>
             <p className="text-gray-400 leading-relaxed">
-              Ezzel párhuzamosan a felhasználói szokások átalakultak. A jövő döntéshozói egyre
-              ritkábban keresnek kulcsszavakra – inkább komplex kérdéseket tesznek fel az LLM (Large
-              Language Model) alapú rendszereknek. Ha a céged adatai nincsenek szemantikusan
-              strukturálva, a mesterséges intelligencia számára láthatatlan maradsz.
+              Ez a második rész új, és még kevesen csinálják. Ezért is éri meg most.
             </p>
           </div>
         </div>
@@ -135,31 +295,18 @@ export default function SeoAeoPage() {
             </div>
 
             <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-4">
-              Core Architecture (SEO)
+              Technikai alap (SEO)
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-10">
-              Golyóálló technológiai alapozás. A Next.js szerveroldali renderelése (SSR) és statikus
-              generálása (SSG) biztosítja, hogy a keresőrobotok azonnal, várakozás nélkül olvassák
-              be az indexelendő tartalmat.
+              Amit a Google mér. A Next.js szerveroldali renderelése miatt a keresőrobot azonnal
+              látja a tartalmat — nem kell megvárnia, míg a böngésző összerakja. Ez a különbség a
+              másodperc törtrészében dől el, de a rangsorban is meglátszik.
             </p>
 
             <ul className="space-y-0 relative z-10">
-              {[
-                {
-                  title: "Server-Side Rendering",
-                  desc: "Azonnali forráskód-elérhetőség a feltérképező robotok számára.",
-                },
-                {
-                  title: "Dinamikus Sitemaps",
-                  desc: "Szerver szinten generált feltérképezési útvonalak.",
-                },
-                {
-                  title: "Mobile-First Vitals",
-                  desc: "Tökéletes LCP és FID pontszámok a Google algoritmusának.",
-                },
-              ].map((item, i) => (
+              {SEO_ITEMS.map((item) => (
                 <li
-                  key={i}
+                  key={item.title}
                   className="border-t border-white/[0.05] py-4 transition-colors duration-300 hover:bg-[#0a0a0a] px-3 -mx-3 rounded-lg"
                 >
                   <div className="text-sm font-bold text-gray-200 uppercase tracking-wider mb-1 flex items-center gap-2">
@@ -192,31 +339,18 @@ export default function SeoAeoPage() {
             </div>
 
             <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-4">
-              Answer Engine (AEO)
+              AI-láthatóság (AEO)
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-10">
-              Optimalizálás a gépi intelligenciára. Adatstrukturálási protokolljaink felkészítik az
-              entitásodat arra, hogy a ChatGPT és a Gemini megértse, validálja és referenciaként
-              használja a válaszaiban.
+              Amit a nyelvi modellek olvasnak. Nem tudjuk garantálni, hogy egy AI éppen téged idéz —
+              ezt senki nem tudja. Azt viszont meg tudjuk csinálni, hogy legyen mit idéznie: tiszta
+              struktúra, egyértelmű adatok, gépi olvasásra alkalmas formában.
             </p>
 
             <ul className="space-y-0 relative z-10">
-              {[
-                {
-                  title: "Schema.org & JSON-LD",
-                  desc: "Mélyreható mikroadat-struktúrák a kontextus tökéletes átadására.",
-                },
-                {
-                  title: "Entitás Térképezés",
-                  desc: "A márka összekötése megbízható globális tudásbázisokkal.",
-                },
-                {
-                  title: "Konverzációs Tartalom",
-                  desc: "Szemantikus optimalizálás a természetes nyelvű (NLP) lekérdezésekre.",
-                },
-              ].map((item, i) => (
+              {AEO_ITEMS.map((item) => (
                 <li
-                  key={i}
+                  key={item.title}
                   className="border-t border-white/[0.05] py-4 transition-colors duration-300 hover:bg-[#0a0a0a] px-3 -mx-3 rounded-lg"
                 >
                   <div className="text-sm font-bold text-gray-200 uppercase tracking-wider mb-1 flex items-center gap-2">
@@ -230,77 +364,80 @@ export default function SeoAeoPage() {
           </div>
         </div>
 
-        {/* A PROTOKOLL (Lépéses folyamat) */}
+        {/* FOLYAMAT */}
         <div className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black uppercase tracking-tight">Integrációs Protokoll</h2>
-            <p className="text-gray-500 mt-4 text-sm uppercase tracking-widest font-mono">
-              01_Audit - 02_Build - 03_Scale
+            <p className="text-[#e7ff00] text-xs font-mono tracking-[0.4em] uppercase mb-4">
+              Folyamat
             </p>
+            <h2 className="text-4xl font-black uppercase tracking-tight">Három lépés</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative group/steps">
             {/* Összekötő vonal (csak asztalin látszik) */}
             <div className="hidden md:block absolute top-[28px] left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent z-0 transition-all duration-700 group-hover/steps:via-[#e7ff00]/30"></div>
 
-            {[
-              {
-                num: "01",
-                title: "Adatvezérelt Audit",
-                desc: "Sebességtesztek, forráskód-analízis és indexelési státusz felmérése.",
-              },
-              {
-                num: "02",
-                title: "Architektúra Építés",
-                desc: "A rendszerek leváltása Next.js alapú, API-vezérelt ökoszisztémára.",
-              },
-              {
-                num: "03",
-                title: "Entitás Skálázás",
-                desc: "Gépi tanulási modellekre optimalizált folyamatos tartalomfejlesztés.",
-              },
-            ].map((step, i) => (
+            {PROCESS_STEPS.map((step) => (
               <div
-                key={i}
+                key={step.num}
                 className="relative z-10 bg-[#070707] border border-white/5 p-8 rounded-2xl flex flex-col items-center text-center transition-all duration-500 hover:border-[#e7ff00]/40 hover:-translate-y-3 hover:shadow-[0_15px_30px_-15px_rgba(231,255,0,0.15)] group/card"
               >
                 <div className="w-14 h-14 bg-[#020202] border border-white/10 rounded-full flex items-center justify-center text-[#e7ff00] font-black text-xl mb-6 shadow-[0_0_15px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover/card:scale-125 group-hover/card:border-[#e7ff00]/50">
                   {step.num}
                 </div>
-                <h4 className="text-lg font-bold text-white uppercase tracking-wider mb-3">
+                <h3 className="text-lg font-bold text-white uppercase tracking-wider mb-3">
                   {step.title}
-                </h4>
+                </h3>
                 <p className="text-sm text-gray-400">{step.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* ÚJ BRUTÁLIS CTA BLOKK (A feltöltött kép alapján) */}
-        <div className="relative w-full max-w-5xl mx-auto rounded-3xl bg-[#e7ff00] p-12 md:p-20 text-center shadow-[0_0_40px_rgba(231,255,0,0.15)] transform transition-transform duration-500 hover:scale-[1.02] mt-24">
-          <p className="text-black text-xs md:text-sm font-bold tracking-[0.3em] uppercase mb-8">
-            Rendszer követelmény: Ambíció
-          </p>
-
-          <div className="flex flex-col items-center justify-center mb-12">
-            <h2 className="text-6xl md:text-8xl lg:text-[7rem] font-black text-black uppercase italic leading-none tracking-tighter">
-              Indítsd el a
+        {/* GYAKORI KÉRDÉSEK */}
+        <div className="mb-32 max-w-4xl mx-auto">
+          <div className="flex items-center gap-4 justify-center mb-12">
+            <span className="w-12 h-px bg-white/20"></span>
+            <h2 className="text-2xl font-black italic uppercase tracking-widest text-center text-gray-500">
+              Gyakori <span className="text-white">kérdések</span>
             </h2>
-            {/* A kőkemény döntött fekete doboz a képről */}
-            <div className="bg-black px-6 py-2 md:py-4 mt-2 transform -rotate-2 shadow-2xl">
-              <h2 className="text-6xl md:text-8xl lg:text-[7rem] font-black text-[#e7ff00] uppercase italic leading-none tracking-tighter">
-                Protokollt
-              </h2>
-            </div>
+            <span className="w-12 h-px bg-white/20"></span>
           </div>
+
+          <div className="space-y-4">
+            {FAQ_ITEMS.map((item, index) => (
+              <div
+                key={item.question}
+                className={`border border-white/10 bg-[#070707] rounded-xl p-6 transition-colors ${
+                  index % 2 === 0 ? "hover:border-[#e7ff00]/30" : "hover:border-white/20"
+                }`}
+              >
+                <h3 className="font-bold text-white mb-2 uppercase tracking-wide text-sm md:text-base">
+                  {item.question}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{item.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="relative w-full max-w-5xl mx-auto rounded-3xl bg-[#e7ff00] p-12 md:p-20 text-center shadow-[0_0_40px_rgba(231,255,0,0.15)] transform transition-transform duration-500 hover:scale-[1.02]">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-black uppercase italic leading-none tracking-tighter mb-8">
+            Nézzük meg, hol tartasz
+          </h2>
+          <p className="text-black/70 text-sm md:text-base font-semibold max-w-xl mx-auto mb-10">
+            A felmérés végén kapsz egy listát arról, mi hiányzik a technikai alapokból — akkor is,
+            ha nem velünk dolgozol tovább. Két munkanapon belül válaszolunk.
+          </p>
 
           <Link
             href="/init"
             className="inline-flex items-center gap-3 bg-black text-white font-black uppercase text-sm md:text-base tracking-widest px-10 py-5 transition-all duration-300 hover:bg-white hover:text-black shadow-2xl hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] group"
           >
-            Kapcsolatfelvétel{" "}
+            Kérj felmérést{" "}
             <span className="text-[#e7ff00] group-hover:text-black transition-colors duration-300">
-              •
+              &rarr;
             </span>
           </Link>
         </div>
