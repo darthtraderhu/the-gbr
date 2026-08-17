@@ -16,6 +16,9 @@ const postFrontmatterSchema = z.object({
   excerpt: z.string().optional().default(""),
   // Opcionális: a UI a hiányzó kategóriát "Hírek"-re esik vissza (ld. app/page.tsx, hirek/page.tsx).
   category: z.string().optional(),
+  // Opcionális: ha egy cikket frissítünk, ide kerül a frissítés dátuma — ez adja
+  // a BlogPosting JSON-LD dateModified mezőjét. Hiányában a dátum a publikálással egyezik.
+  updated: z.string().optional(),
 });
 
 // -------------------------------------------------------------

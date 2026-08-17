@@ -6,30 +6,26 @@ import { breadcrumbSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Hírmotor | THE GBR",
+  title: "Írások | THE GBR",
   description:
-    "B2B marketing, Next.js fejlesztés és AI-integráció — a THE GBR Autopilot rendszere által automatizáltan publikált kutatások és esettanulmányok.",
+    "B2B marketing, Next.js fejlesztés és AI-integráció — amit megcsinálunk, arról írunk is.",
   alternates: {
     canonical: "/hirek",
   },
   openGraph: {
-    title: "Hírmotor | THE GBR",
-    description:
-      "B2B marketing, Next.js fejlesztés és AI-integráció — automatizáltan publikált kutatások és esettanulmányok.",
+    title: "Írások | THE GBR",
+    description: "B2B marketing, Next.js fejlesztés és AI-integráció.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hírmotor | THE GBR",
-    description:
-      "B2B marketing, Next.js fejlesztés és AI-integráció — automatizáltan publikált kutatások és esettanulmányok.",
+    title: "Írások | THE GBR",
+    description: "B2B marketing, Next.js fejlesztés és AI-integráció.",
   },
 };
 
-export default function Intel() {
-  // Lekérjük a Mátrixból az összes bejegyzést
+export default function Hirek() {
   const allPostsData = getSortedPostsData();
 
-  // A legelső cikket kinevezzük "Kiemelt Aktának", a többit beletesszük a gridbe
   const featuredPost = allPostsData[0];
   const gridPosts = allPostsData.slice(1);
 
@@ -38,7 +34,7 @@ export default function Intel() {
       <JsonLd
         data={breadcrumbSchema([
           { name: "Főoldal", url: SITE_URL },
-          { name: "Hírmotor", url: `${SITE_URL}/hirek` },
+          { name: "Írások", url: `${SITE_URL}/hirek` },
         ])}
       />
       {/* =========================================
@@ -48,21 +44,9 @@ export default function Intel() {
         dangerouslySetInnerHTML={{
           __html: `
         body { scroll-behavior: smooth; }
-        
+
         @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); } }
         .scanline-effect { animation: scanline 8s linear infinite; }
-        
-        /* Tőzsdei Ticker Animáció */
-        @keyframes ticker {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-ticker {
-          display: flex;
-          width: 200%;
-          animation: ticker 30s linear infinite;
-        }
-        .animate-ticker:hover { animation-play-state: paused; }
 
         .bg-grid {
           background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
@@ -82,90 +66,37 @@ export default function Intel() {
       </div>
 
       {/* =========================================
-          BLOOMBERG ADATSÁV (TICKER)
+          HERO
       ========================================= */}
-      <div className="absolute top-20 md:top-24 left-0 w-full z-40 bg-[#050505] border-b border-white/10 py-2 overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.5)]">
-        <div className="animate-ticker font-mono text-[10px] uppercase tracking-widest font-bold flex gap-12 whitespace-nowrap">
-          {/* Adatok 1. fele */}
-          <div className="flex gap-12 text-gray-400">
-            <span>
-              [ SYS.STATUS: <span className="text-[#e7ff00]">ONLINE</span> ]
-            </span>
-            <span>
-              META B2B CPC: <span className="text-[#00E5FF]">142 Ft ▼ -12%</span>
-            </span>
-            <span>
-              LINKEDIN CPL: <span className="text-red-500">4,200 Ft ▲ +4%</span>
-            </span>
-            <span>
-              NEXT.JS BUILD TIME: <span className="text-[#e7ff00]">42ms</span>
-            </span>
-            <span>
-              AI BOT CONVERSION: <span className="text-[#00E5FF]">14.2% ▲</span>
-            </span>
-            <span>
-              SEO INDEX HEALTH: <span className="text-[#e7ff00]">100%</span>
-            </span>
-          </div>
-          {/* Adatok 2. fele (A végtelenített loophoz) */}
-          <div className="flex gap-12 text-gray-400">
-            <span>
-              [ SYS.STATUS: <span className="text-[#e7ff00]">ONLINE</span> ]
-            </span>
-            <span>
-              META B2B CPC: <span className="text-[#00E5FF]">142 Ft ▼ -12%</span>
-            </span>
-            <span>
-              LINKEDIN CPL: <span className="text-red-500">4,200 Ft ▲ +4%</span>
-            </span>
-            <span>
-              NEXT.JS BUILD TIME: <span className="text-[#e7ff00]">42ms</span>
-            </span>
-            <span>
-              AI BOT CONVERSION: <span className="text-[#00E5FF]">14.2% ▲</span>
-            </span>
-            <span>
-              SEO INDEX HEALTH: <span className="text-[#e7ff00]">100%</span>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* =========================================
-          HERO: THE GBR INTELLIGENCE
-      ========================================= */}
-      <section className="relative z-10 w-full pt-48 pb-16 px-6">
+      <section className="relative z-10 w-full pt-40 pb-16 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8 border-b border-white/10 pb-8">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-white/5 border border-white/10 text-[10px] font-bold tracking-[0.2em] text-gray-400 uppercase mb-6">
-              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-              Autopilot Aggregátor Aktiválva
-            </div>
+            <p className="font-mono text-xs tracking-[0.3em] text-gray-500 uppercase mb-4">
+              Írások
+            </p>
             <h1 className="text-5xl md:text-7xl font-black italic tracking-tighter uppercase text-white drop-shadow-2xl">
-              Adat
+              Amit közben
+              <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-600">
-                központ.
+                megtanulunk.
               </span>
             </h1>
           </div>
           <div className="max-w-md text-right">
-            <p className="text-gray-400 text-sm font-medium leading-relaxed font-mono">
-              {
-                "// Ezt a szekciót a THE GBR Autopilot rendszere kezeli. Az iparági adatok, esettanulmányok és trendek elemzése, valamint a publikáció 100%-ban automatizált."
-              }
+            <p className="text-gray-400 text-sm font-medium leading-relaxed">
+              Nem tartalomgyár. Amit leírunk, azt előbb megcsináltuk.
             </p>
           </div>
         </div>
       </section>
 
       {/* =========================================
-          KIEMELT AKTA (FEATURED ARTICLE)
+          KIEMELT ÍRÁS
       ========================================= */}
       {featuredPost && (
         <section className="relative z-10 max-w-7xl mx-auto px-6 pb-20">
           <Link href={`/hirek/${featuredPost.id}`}>
             <div className="group cursor-pointer bg-[#121212] border border-white/10 rounded-xl overflow-hidden hover:border-[#e7ff00]/50 transition-all duration-500 shadow-2xl relative flex flex-col md:flex-row">
-              {/* Cyberpunk Kép Helyettesítő */}
               <div className="w-full md:w-1/2 aspect-video md:aspect-auto bg-[#1a1a1a] relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 hidden md:block"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent z-10 md:hidden"></div>
@@ -186,17 +117,15 @@ export default function Intel() {
                   </svg>
                 </div>
 
-                {/* Kódos Overlay */}
                 <div className="absolute top-4 left-4 z-20 font-mono text-[9px] text-[#e7ff00] uppercase tracking-widest bg-black/50 px-2 py-1 border border-[#e7ff00]/30 rounded backdrop-blur-sm">
                   [SYS.FILE: ALPHA-01]
                 </div>
               </div>
 
-              {/* Tartalom */}
               <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative z-20 bg-gradient-to-l from-[#121212] to-transparent">
                 <div className="flex items-center gap-4 mb-4">
                   <span className="text-[10px] font-black uppercase tracking-widest text-black bg-[#e7ff00] px-3 py-1 rounded shadow-[0_0_10px_rgba(231,255,0,0.5)]">
-                    {featuredPost.category || "Kiemelt Kutatás"}
+                    {featuredPost.category || "Kiemelt írás"}
                   </span>
                   <span className="text-[10px] font-mono text-gray-500 border border-white/10 px-2 py-1 rounded">
                     Olvasás: {featuredPost.readTime || "5 perc"}
@@ -209,7 +138,7 @@ export default function Intel() {
                   {featuredPost.excerpt}
                 </p>
                 <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white group-hover:text-[#e7ff00] transition-colors mt-auto">
-                  Aktába Tekintés{" "}
+                  Tovább az íráshoz{" "}
                   <span className="group-hover:translate-x-2 transition-transform">&rarr;</span>
                 </div>
               </div>
@@ -219,14 +148,14 @@ export default function Intel() {
       )}
 
       {/* =========================================
-          ADATBÁZIS (GRID CIKKEK DINAMIKUSAN)
+          TOVÁBBI ÍRÁSOK (GRID)
       ========================================= */}
       <section className="relative z-10 max-w-7xl mx-auto px-6 pb-32">
         <div className="flex items-center gap-3 mb-10 border-b border-white/5 pb-4">
           <div className="w-3 h-3 bg-gray-500 rounded-sm"></div>
-          <h3 className="font-mono text-xs font-bold text-gray-400 uppercase tracking-widest">
-            / ARCHÍVUM_BÉTA // TOVÁBBI AKTÁK ({gridPosts.length})
-          </h3>
+          <h2 className="font-mono text-xs font-bold text-gray-400 uppercase tracking-widest">
+            / TOVÁBBI ÍRÁSOK ({gridPosts.length})
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

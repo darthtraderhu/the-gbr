@@ -61,7 +61,7 @@ export default function Footer() {
               href="/hirek"
               className="text-xs font-bold text-gray-500 hover:text-white transition-colors"
             >
-              Hírmotor
+              Írások
             </Link>
           </div>
 

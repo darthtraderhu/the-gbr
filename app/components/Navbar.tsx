@@ -77,7 +77,7 @@ export default function Navbar() {
       ),
     },
     {
-      name: "Hírmotor",
+      name: "Írások",
       href: "/hirek",
       activeColor: "text-white",
       icon: (
