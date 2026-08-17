@@ -6,3 +6,6 @@ export { default as SectionHeader, type SectionHeaderProps } from "./SectionHead
 export { default as Field, type FieldProps } from "./Field";
 export { default as ChipGroup, type ChipGroupProps, type ChipOption } from "./ChipGroup";
 export { default as Prose, type ProseProps } from "./Prose";
+export { default as Rail, type RailProps } from "./Rail";
+export { default as Seam } from "./Seam";
+export { default as Eyebrow, type EyebrowProps } from "./Eyebrow";

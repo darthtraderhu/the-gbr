@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getSortedPostsData } from "../lib/posts"; // <-- BEHÚZZUK A MOTORT!
 import { websiteSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
-import { Button, SectionHeader } from "@/app/components/ui";
+import { Button, SectionHeader, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import HeroInstrument from "./HeroInstrument";
 
 const HOME_DESCRIPTION =
@@ -148,46 +148,6 @@ const PROCESS_STEPS = [
     text: "Dokumentáció, monitoring, riasztás. Innentől jön a „manage” rész — ha kéred.",
   },
 ];
-
-function Rail({
-  label,
-  children,
-  dark,
-}: {
-  label: string;
-  children: React.ReactNode;
-  dark?: boolean;
-}) {
-  return (
-    <div
-      data-theme={dark ? "dark" : undefined}
-      style={dark ? { backgroundColor: "var(--ground)", color: "var(--ink)" } : undefined}
-    >
-      <div className="grid grid-cols-1 sm:grid-cols-[72px_1fr]">
-        <div
-          className={`hidden sm:block relative border-r ${dark ? "border-[var(--rule)]" : "border-[var(--rule)]"}`}
-        >
-          <span className="absolute top-[var(--space-12)] left-1/2 -translate-x-1/2 rotate-180 [writing-mode:vertical-rl] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.34em] uppercase text-[var(--dim)] whitespace-nowrap">
-            {label}
-          </span>
-        </div>
-        <div className="min-w-0">{children}</div>
-      </div>
-    </div>
-  );
-}
-
-function Seam() {
-  return <div className="h-px bg-[var(--signal)]" />;
-}
-
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.22em] uppercase text-[var(--dim)] mb-[var(--space-5)]">
-      {children}
-    </p>
-  );
-}
 
 export default function Home() {
   const allPostsData = getSortedPostsData();
