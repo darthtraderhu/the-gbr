@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { faqPageSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
+import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 
 // A tervező kimenete tartomány, nem pontszám — nem ígérünk eredményt
 // (lead-szám, ROAS), csak azt mutatjuk meg, mekkora terjedelmet tudunk
@@ -78,6 +79,84 @@ function getRecommendedPackage(budget: number) {
   return { name: "Fejlesztés és üzemeltetés", anchor: "csomag-fejlesztes-uzemeltetes" };
 }
 
+const CHANNEL_SPLIT = [
+  { label: "Google Ads", pct: 0.3, mix: 100 },
+  { label: "Meta Ads", pct: 0.35, mix: 100 },
+  { label: "Videós hirdetés", pct: 0.2, mix: 65 },
+  { label: "Újracélzás", pct: 0.15, mix: 35 },
+] as const;
+
+const PACKAGES = [
+  {
+    id: "csomag-web-arculat",
+    railLabel: "01 / Belépő",
+    n: "01",
+    tag: "Belépő",
+    hot: false,
+    name: "Weboldal és arculat",
+    desc: "Ha most nincs oldalad, vagy a mostani lassú és nem hoz megkeresést. Ez az alap, amire később építeni lehet.",
+    price: "Egyedi ajánlat",
+    priceNote: "a felmérés után",
+    items: [
+      "Vállalati weboldal Next.js alapon",
+      "Egyedi dizájn és design rendszer",
+      "Kapcsolati űrlap, ami tényleg működik",
+      "Technikai SEO: sitemap, strukturált adat, canonical",
+      "Szövegezés, ha kell",
+    ],
+    notIncluded:
+      "Webshop-funkciót, hirdetéskezelést és folyamatos üzemeltetést. Ha ezek is kellenek, a 02-es vagy 03-as felállás a reális.",
+    href: "/init?csomag=web-arculat",
+  },
+  {
+    id: "csomag-webshop-skalazas",
+    railLabel: "02 / Leggyakoribb",
+    n: "02",
+    tag: "A leggyakoribb",
+    hot: true,
+    name: "Webshop és skálázás",
+    desc: "Ha eladni is akarsz, nem csak jelen lenni. Webshop, hirdetés és mérés egy rendszerben.",
+    price: "Teljes infrastruktúra",
+    priceNote: "projekt + havidíj",
+    items: [
+      "Minden az előzőből",
+      "Webshop nulláról vagy meglévő rendszer fölé",
+      "Telefonra telepíthető változat (PWA)",
+      "Fizetés, szállítás, számlázás integrálva",
+      "Admin felület, amit a kollégák is használni tudnak",
+      "Google és Meta kampányok, videós hirdetésekkel",
+      "Heti jelentés, érthető nyelven",
+    ],
+    notIncluded:
+      "A folyamatos üzemeltetést, monitoringot és a jogi megfelelés karbantartását. Élesítés után a hibákat javítjuk, de nem figyeljük 0-24-ben.",
+    href: "/init?csomag=webshop-skalazas",
+  },
+  {
+    id: "csomag-fejlesztes-uzemeltetes",
+    railLabel: "03 / Teljes",
+    n: "03",
+    tag: "Teljes lefedettség",
+    hot: false,
+    name: "Fejlesztés és üzemeltetés",
+    desc: "Ha nem akarsz szolgáltatókat koordinálni. Egy felelős, minden a helyén.",
+    price: "Havi keret",
+    priceNote: "óraszám alapon",
+    items: [
+      "Minden az előzőből",
+      "Folyamatos fejlesztés havi óraszámban",
+      "Monitoring és hibariasztás",
+      "AI chat a weboldalon",
+      "Automatizált tartalommotor: a blog magától frissül",
+      "Videó és tartalomgyártás",
+      "Jogi megfelelés karbantartása",
+      "Egy felelős kapcsolattartó",
+    ],
+    notIncluded:
+      "Az egyedi belső rendszerek (ERP, CRM) fejlesztését — az külön projekt, külön árazással. A kapcsolódást viszont megoldjuk.",
+    href: "/init?csomag=fejlesztes-uzemeltetes",
+  },
+];
+
 const FAQ_ITEMS = [
   {
     question: "Hogyan alakul ki a végleges ár?",
@@ -105,7 +184,7 @@ const FAQ_ITEMS = [
   },
 ];
 
-const SLA_ITEMS = [
+const WORK_ITEMS = [
   {
     title: "Infrastruktúra",
     text: "A Vercel platformján üzemeltetünk, ami globális CDN-t és automatikus skálázást ad. A rendelkezésre állásra a szolgáltató saját garanciája érvényes — ezt nem mi ígérjük, hanem ők.",
@@ -130,79 +209,56 @@ export default function ArchitekturaClient() {
   const deliverables = getDeliverables(budget);
   const recommended = getRecommendedPackage(budget);
 
-  // Csatorna-felosztás — szakmai kiindulási javaslat, nem "AI becslés".
-  const metaBudget = Math.floor(budget * 0.35); // 35%
-  const googleBudget = Math.floor(budget * 0.3); // 30%
-  const videoBudget = Math.floor(budget * 0.2); // 20%
-  const retargetingBudget = Math.floor(budget * 0.15); // 15%
-
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white selection:bg-[#e7ff00] selection:text-black relative font-sans">
+    <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd data={faqPageSchema(FAQ_ITEMS)} />
-      {/* =========================================
-          STÍLUSOK ÉS ANIMÁCIÓK
-      ========================================= */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        body { scroll-behavior: smooth; }
-        .bg-blueprint {
-          background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-          background-size: 30px 30px;
-        }
-        input[type=range] { -webkit-appearance: none; background: transparent; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: #e7ff00; cursor: pointer; margin-top: -10px; box-shadow: 0 0 15px rgba(231,255,0,0.5); border: 2px solid #000; }
-        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: rgba(255,255,255,0.1); border-radius: 2px; }
+        input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; background: transparent; }
+        input[type="range"]::-webkit-slider-runnable-track { height: 2px; background: var(--rule-strong); }
+        input[type="range"]::-moz-range-track { height: 2px; background: var(--rule-strong); }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; background: var(--signal); margin-top: -7px; cursor: pointer; border: 0; }
+        input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; background: var(--signal); border: 0; cursor: pointer; }
+        input[type="range"]:focus-visible { outline: 2px solid var(--signal); outline-offset: 6px; }
+
+        .faq-q .faq-pm-plus { display: inline; }
+        .faq-q .faq-pm-minus { display: none; }
+        .faq-q[open] .faq-pm-plus { display: none; }
+        .faq-q[open] .faq-pm-minus { display: inline; }
       `,
         }}
       />
 
-      {/* =========================================
-          HÁTTÉR
-      ========================================= */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-blueprint">
-        <div className="absolute top-[20%] left-[50%] -translate-x-1/2 w-[60vw] h-[60vw] bg-[#e7ff00]/5 blur-[200px] rounded-full"></div>
-        <div className="absolute bottom-0 right-0 w-[40vw] h-[40vw] bg-[#00E5FF]/5 blur-[150px] rounded-full"></div>
-      </div>
+      {/* ===== SÖTÉT FEJLÉC + TERVEZŐ ===== */}
+      <Rail label="Tervező" dark>
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
+          <h1 className="font-display font-black leading-[0.88] tracking-[-0.055em] [font-size:var(--text-display)]">
+            Csomagok
+            <br />
+            és árazás<span className="text-[var(--signal)]">.</span>
+          </h1>
+          <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[50ch] mt-[var(--space-8)]">
+            Nincs fix árlista, mert nincs két egyforma projekt. Van viszont három tipikus felállás,
+            és egy tervező, amiből látod, mit kapsz egy adott keretből.
+          </p>
+        </section>
 
-      {/* =========================================
-          HERO & TERVEZŐ
-      ========================================= */}
-      <section className="relative z-10 w-full pt-40 pb-20 px-6 flex flex-col items-center text-center">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black italic tracking-tighter leading-tight mb-6 uppercase text-white drop-shadow-2xl">
-          Csomagok <br />
-          <span className="text-[#e7ff00] drop-shadow-[0_0_30px_rgba(231,255,0,0.4)]">
-            és árazás.
-          </span>
-        </h1>
-        <p className="max-w-2xl text-gray-400 font-medium text-lg leading-relaxed mb-16 border-l-4 border-[#e7ff00] pl-4 text-left md:text-center md:border-none md:pl-0 mx-auto">
-          Nincs fix árlista, mert nincs két egyforma projekt. Van viszont három tipikus felállás, és
-          egy tervező, amiből látod, mit kapsz egy adott keretből.
-        </p>
-
-        {/* TERVEZŐ */}
-        <div className="w-full max-w-5xl bg-gradient-to-b from-[#121212] to-[#0a0a0a] border-2 border-white/10 rounded-2xl p-8 md:p-12 shadow-[0_0_50px_rgba(231,255,0,0.05)] relative overflow-hidden text-left">
-          <div className="flex items-center gap-3 mb-8 border-b border-white/5 pb-4 relative z-10">
-            <span className="w-3 h-3 bg-[#e7ff00] rounded-sm animate-pulse"></span>
-            <h3 className="font-mono text-xs font-bold text-gray-400 uppercase tracking-widest">
-              TERVEZŐ // Mit kapsz egy adott keretből?
-            </h3>
+        <div className="border-t border-[var(--rule)]">
+          <div className="flex flex-wrap justify-between gap-3 px-6 py-3 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)]">
+            <span>Tervező · mit kapsz egy adott keretből</span>
+            <span>Havi marketing keret</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
-            {/* Csúszka rész */}
-            <div>
-              <label className="block text-2xl font-black italic uppercase text-white mb-2">
-                Havi marketing keret
-              </label>
-              <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.15fr]">
+            {/* Bal: csúszka + csatorna-felosztás */}
+            <div className="lg:border-r border-[var(--rule)] px-6 py-[var(--space-10)]">
+              <div className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)] mb-[var(--space-5)]">
                 Húzd el, és lásd, mi fér bele
-              </p>
-
-              <div className="mb-6">
-                <span className="text-5xl font-black text-[#e7ff00] drop-shadow-[0_0_15px_rgba(231,255,0,0.3)]">
-                  {new Intl.NumberFormat("hu-HU").format(budget)} Ft
-                </span>
+              </div>
+              <div className="flex items-baseline gap-[var(--space-2)] font-display font-bold [font-size:var(--text-gauge)] tracking-[-0.05em] leading-[0.9] tabular-nums mb-[var(--space-6)]">
+                <span>{new Intl.NumberFormat("hu-HU").format(budget)}</span>
+                <span className="text-[0.3em] font-semibold text-[var(--mid)]">Ft / hó</span>
               </div>
 
               <input
@@ -212,362 +268,237 @@ export default function ArchitekturaClient() {
                 step="100000"
                 value={budget}
                 onChange={(e) => setBudget(Number(e.target.value))}
-                className="w-full"
                 aria-label="Havi marketing keret"
               />
-              <div className="flex justify-between mt-2 font-mono text-[10px] text-gray-600 font-bold">
-                <span>300.000 Ft</span>
-                <span>5.000.000+ Ft</span>
+              <div className="flex justify-between [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] text-[var(--dim)]">
+                <span>300 000</span>
+                <span>5 000 000+</span>
               </div>
 
-              {/* Csatorna-felosztás */}
-              <div className="mt-10 p-6 bg-[#050505] border border-white/5 rounded-lg">
-                <h4 className="font-mono text-[10px] text-gray-400 uppercase tracking-widest mb-1 border-b border-white/5 pb-2">
+              <div className="mt-[var(--space-10)] pt-[var(--space-6)] border-t border-[var(--rule)]">
+                <div className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)] mb-[var(--space-4)]">
                   Javasolt csatorna-felosztás
-                </h4>
-                <p className="text-[10px] text-gray-600 mb-4 mt-2 leading-relaxed">
-                  Kiindulási javaslat. A tényleges felosztás az iparágtól és a célközönségtől függ —
-                  az első hónapban közösen kalibráljuk.
-                </p>
-                <div className="space-y-3">
-                  <div>
-                    <div className="flex justify-between text-xs font-bold mb-1">
-                      <span className="text-[#00E5FF]">Meta Ads (35%)</span>{" "}
-                      <span className="text-white">
-                        {new Intl.NumberFormat("hu-HU").format(metaBudget)} Ft
-                      </span>
+                </div>
+                <div className="space-y-[var(--space-3)]">
+                  {CHANNEL_SPLIT.map((ch) => (
+                    <div key={ch.label}>
+                      <div className="flex justify-between [font-family:var(--font-mono)] text-[length:var(--text-xs)] mb-[var(--space-1)]">
+                        <span className="text-[var(--mid)]">
+                          {ch.label} · {Math.round(ch.pct * 100)}%
+                        </span>
+                        <span className="text-[var(--ink)] font-medium">
+                          {new Intl.NumberFormat("hu-HU").format(Math.round(budget * ch.pct))} Ft
+                        </span>
+                      </div>
+                      <div className="h-1 bg-[var(--rule)]">
+                        <div
+                          className="h-full"
+                          style={{
+                            width: `${ch.pct * 100}%`,
+                            backgroundColor: `color-mix(in srgb, var(--signal) ${ch.mix}%, var(--ground))`,
+                          }}
+                        />
+                      </div>
                     </div>
-                    <div className="w-full h-1 bg-white/10 rounded">
-                      <div className="h-full bg-[#00E5FF] w-[35%] rounded"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-xs font-bold mb-1">
-                      <span className="text-yellow-400">Google Ads (30%)</span>{" "}
-                      <span className="text-white">
-                        {new Intl.NumberFormat("hu-HU").format(googleBudget)} Ft
-                      </span>
-                    </div>
-                    <div className="w-full h-1 bg-white/10 rounded">
-                      <div className="h-full bg-yellow-400 w-[30%] rounded"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-xs font-bold mb-1">
-                      <span className="text-[#9d00ff] drop-shadow-[0_0_5px_rgba(157,0,255,0.5)]">
-                        Videó hirdetés & Reels (20%)
-                      </span>{" "}
-                      <span className="text-white">
-                        {new Intl.NumberFormat("hu-HU").format(videoBudget)} Ft
-                      </span>
-                    </div>
-                    <div className="w-full h-1 bg-white/10 rounded">
-                      <div className="h-full bg-[#9d00ff] w-[20%] rounded shadow-[0_0_10px_rgba(157,0,255,0.5)]"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-xs font-bold mb-1">
-                      <span className="text-[#e7ff00]">Retargeting (15%)</span>{" "}
-                      <span className="text-white">
-                        {new Intl.NumberFormat("hu-HU").format(retargetingBudget)} Ft
-                      </span>
-                    </div>
-                    <div className="w-full h-1 bg-white/10 rounded">
-                      <div className="h-full bg-[#e7ff00] w-[15%] rounded"></div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* Kimenet: teljesítés, nem eredmény */}
-            <div className="bg-[#050505] rounded-xl border border-white/5 p-8 flex flex-col justify-center shadow-inner">
-              <h4 className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-6 border-b border-white/5 pb-3">
+            {/* Jobb: teljesítés + ajánlás */}
+            <div>
+              <div className="px-6 py-3 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)]">
                 Ebből ennyit tudunk hozni
-              </h4>
-              <div className="space-y-4">
-                {DELIVERABLE_LABELS.map(({ key, label }) => (
-                  <div key={key} className="flex items-center justify-between gap-4">
-                    <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2">
+                {DELIVERABLE_LABELS.map(({ key, label }, i) => (
+                  <div
+                    key={key}
+                    className={`px-6 py-[var(--space-5)] border-b border-[var(--rule)] ${
+                      i % 2 === 0 ? "sm:border-r" : ""
+                    }`}
+                  >
+                    <span className="block [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)] mb-[var(--space-2)]">
                       {label}
                     </span>
-                    <span className="text-sm md:text-base font-black text-white text-right">
+                    <div className="font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.04em] leading-[0.95]">
                       {deliverables[key]}
-                    </span>
+                    </div>
                   </div>
                 ))}
               </div>
-
-              <p className="mt-8 font-mono text-[9px] text-gray-600 uppercase leading-relaxed">
-                A számok a tipikus terjedelmet mutatják, nem eredményt. Hogy egy kampány mennyit
-                hoz, az az iparágtól, a terméktől és a piaci helyzettől függ — ezt az első hónap
-                végén együtt látjuk meg, nem előre.
-              </p>
-
-              <div className="mt-8 pt-6 border-t border-white/5">
-                <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-2">
-                  Ehhez a kerethez illik
-                </p>
-                <Link
-                  href={`#${recommended.anchor}`}
-                  className="inline-flex items-center gap-2 text-[#e7ff00] font-black italic uppercase tracking-wide text-lg hover:text-white transition-colors"
-                >
-                  {recommended.name} <span aria-hidden="true">&rarr;</span>
-                </Link>
+              <div className="flex flex-wrap items-center justify-between gap-[var(--space-4)] px-6 py-[var(--space-6)]">
+                <div>
+                  <span className="block [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)] mb-[var(--space-2)]">
+                    Ehhez a kerethez ez illik
+                  </span>
+                  <span className="font-display font-bold [font-size:var(--text-xl)] tracking-[-0.025em] text-[var(--signal)]">
+                    {recommended.name}
+                  </span>
+                </div>
+                <Button asChild size="sm">
+                  <Link href={`#${recommended.anchor}`}>Beszéljünk róla &rarr;</Link>
+                </Button>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* =========================================
-          PRICING GRID
-      ========================================= */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Csomag 1 */}
-          <div
-            id="csomag-web-arculat"
-            className="scroll-mt-32 bg-[#121212] border border-white/10 rounded-2xl p-8 hover:border-[#e7ff00]/30 transition-all flex flex-col group"
-          >
-            <div className="font-mono text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">
-              Belépő
-            </div>
-            <h3 className="text-3xl font-black italic uppercase text-white mb-4">
-              Weboldal és arculat
-            </h3>
-            <p className="text-gray-400 text-sm mb-6">
-              Ha most nincs oldalad, vagy a mostani lassú és nem hoz megkeresést. Ez az alap, amire
-              később építeni lehet.
-            </p>
-
-            <div className="text-2xl font-black text-white mb-8 border-b border-white/10 pb-8 group-hover:text-[#e7ff00] transition-colors">
-              Egyedi{" "}
-              <span className="text-sm text-gray-500 font-normal uppercase tracking-widest">
-                / Ajánlat
-              </span>
-            </div>
-
-            <ul className="space-y-4 mb-10 flex-1">
-              {[
-                "Vállalati weboldal Next.js alapon",
-                "Egyedi dizájn és design rendszer",
-                "Kapcsolati űrlap, ami tényleg működik",
-                "Technikai SEO: sitemap, strukturált adat, canonical",
-                "Szövegezés, ha kell",
-              ].map((feat) => (
-                <li
-                  key={feat}
-                  className="flex items-center gap-3 text-gray-300 font-medium text-sm"
-                >
-                  <span className="text-gray-500 font-bold">✔</span> {feat}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/init?csomag=web-arculat"
-              className="w-full py-4 text-center rounded border border-white/20 text-white font-bold uppercase tracking-widest text-xs hover:bg-[#e7ff00] hover:text-black hover:border-[#e7ff00] transition-all mt-auto"
-            >
-              Beszéljünk róla
-            </Link>
-          </div>
-
-          {/* Csomag 2 */}
-          <div
-            id="csomag-webshop-skalazas"
-            className="scroll-mt-32 bg-[#050505] border-2 border-[#e7ff00] rounded-2xl p-8 transform lg:-translate-y-4 shadow-[0_0_50px_rgba(231,255,0,0.15)] flex flex-col relative overflow-hidden group"
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-[#e7ff00]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-
-            <div className="absolute top-0 right-8 bg-[#e7ff00] text-[#0a0a0a] px-4 py-1.5 font-black italic text-xs uppercase tracking-widest rounded-b-md shadow-[0_0_15px_rgba(231,255,0,0.5)]">
-              A leggyakoribb
-            </div>
-
-            <div className="font-mono text-[10px] font-bold text-[#e7ff00] uppercase tracking-widest mb-2 relative z-10">
-              A leggyakoribb
-            </div>
-            <h3 className="text-3xl font-black italic uppercase text-white mb-4 relative z-10">
-              Webshop és skálázás
-            </h3>
-            <p className="text-gray-400 text-sm mb-6 relative z-10">
-              Ha eladni is akarsz, nem csak jelen lenni. Webshop, hirdetés és mérés egy rendszerben.
-            </p>
-
-            <div className="text-3xl font-black text-[#e7ff00] mb-8 border-b border-white/10 pb-8 relative z-10 drop-shadow-[0_0_10px_rgba(231,255,0,0.3)]">
-              Teljes{" "}
-              <span className="text-sm text-gray-500 font-normal uppercase tracking-widest text-white">
-                / Infrastruktúra
-              </span>
-            </div>
-
-            <ul className="space-y-4 mb-10 flex-1 relative z-10">
-              <li className="flex items-center gap-3 text-white font-bold text-sm">
-                <span className="text-[#e7ff00]">✔</span> Minden az előző csomagból
-              </li>
-              {[
-                "Webshop nulláról vagy meglévő rendszer fölé",
-                "Telefonra telepíthető változat (PWA)",
-                "Fizetés, szállítás, számlázás integrálva",
-                "Admin felület, amit a kollégák is használni tudnak",
-                "Google és Meta kampányok, videós hirdetésekkel",
-                "Heti jelentés, érthető nyelven",
-              ].map((feat) => (
-                <li
-                  key={feat}
-                  className="flex items-center gap-3 text-gray-300 font-medium text-sm"
-                >
-                  <span className="text-[#e7ff00]">✔</span> {feat}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/init?csomag=webshop-skalazas"
-              className="w-full py-5 text-center rounded bg-[#e7ff00] text-black font-black uppercase tracking-[0.2em] text-xs hover:bg-white transition-all shadow-[0_0_20px_rgba(231,255,0,0.2)] mt-auto relative z-10 hover:-translate-y-1"
-            >
-              Beszéljünk róla
-            </Link>
-          </div>
-
-          {/* Csomag 3 */}
-          <div
-            id="csomag-fejlesztes-uzemeltetes"
-            className="scroll-mt-32 bg-[#121212] border border-white/10 rounded-2xl p-8 hover:border-[#00E5FF]/40 transition-all flex flex-col group"
-          >
-            <div className="font-mono text-[10px] font-bold text-[#00E5FF] uppercase tracking-widest mb-2">
-              Teljes lefedettség
-            </div>
-            <h3 className="text-3xl font-black italic uppercase text-white mb-4">
-              Fejlesztés és üzemeltetés
-            </h3>
-            <p className="text-gray-400 text-sm mb-6">
-              Ha nem akarsz szolgáltatókat koordinálni. Egy felelős, minden a helyén.
-            </p>
-
-            <div className="text-2xl font-black text-white mb-8 border-b border-white/10 pb-8 group-hover:text-[#00E5FF] transition-colors">
-              Havi{" "}
-              <span className="text-sm text-gray-500 font-normal uppercase tracking-widest">
-                / Keret
-              </span>
-            </div>
-
-            <ul className="space-y-4 mb-10 flex-1">
-              <li className="flex items-center gap-3 text-white font-bold text-sm">
-                <span className="text-[#00E5FF] font-black">✔</span> Minden az előző csomagból
-              </li>
-              {[
-                "Folyamatos fejlesztés havi óraszámban",
-                "Monitoring és hibariasztás",
-                "AI chat a weboldalon",
-                "Automatizált tartalommotor: a blog magától frissül",
-                "Videó és tartalomgyártás",
-                "Jogi megfelelés karbantartása",
-                "Egy felelős kapcsolattartó",
-              ].map((feat) => (
-                <li
-                  key={feat}
-                  className="flex items-center gap-3 text-gray-300 font-medium text-sm"
-                >
-                  <span className="text-[#00E5FF] font-black">✔</span> {feat}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/init?csomag=fejlesztes-uzemeltetes"
-              className="w-full py-4 text-center rounded border border-[#00E5FF]/40 text-white font-bold uppercase tracking-widest text-xs hover:bg-[#00E5FF] hover:text-black transition-all mt-auto"
-            >
-              Beszéljünk róla
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================
-          AHOGY DOLGOZUNK (korábban: SLA & Garanciák)
-      ========================================= */}
-      <section className="relative z-10 w-full bg-[#050505] border-t border-white/5 py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="block font-mono text-xs tracking-[0.3em] text-gray-500 uppercase mb-4">
-              Ahogy dolgozunk
-            </span>
-            <h2 className="text-3xl md:text-5xl font-black italic uppercase tracking-tighter mb-4 text-white">
-              Mire számíthatsz
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {SLA_ITEMS.map((item) => (
-              <div
-                key={item.title}
-                className="p-6 border border-white/10 rounded-xl bg-[#0a0a0a] hover:border-[#e7ff00]/30 transition-colors"
-              >
-                <h3 className="font-black text-white uppercase italic text-lg mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{item.text}</p>
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-12 max-w-3xl mx-auto text-center text-gray-600 text-xs font-mono leading-relaxed">
-            Ha lesz valós uptime-monitoring és ügyeleti rend, ez a szekció visszakaphatja a számokat
-            — akkor viszont a szerződésben is szerepelniük kell, kötbérrel együtt. Addig ez a forma
-            erősebb, mert igaz.
+          <p className="px-6 py-[var(--space-4)] pb-[var(--space-10)] border-t border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] text-[var(--mid)] leading-[1.7]">
+            A számok a tipikus terjedelmet mutatják, nem eredményt. Hogy egy kampány mennyit hoz, az
+            az iparágtól, a terméktől és a piaci helyzettől függ — ezt az első hónap végén együtt
+            látjuk meg, nem előre.
           </p>
         </div>
-      </section>
+      </Rail>
 
-      {/* =========================================
-          GYAKORI KÉRDÉSEK (FAQ)
-      ========================================= */}
-      <section className="relative z-10 w-full bg-[#0a0a0a] border-t border-white/5 py-24">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="flex items-center gap-4 justify-center mb-12">
-            <span className="w-12 h-px bg-white/20"></span>
-            <h2 className="text-2xl font-black italic uppercase tracking-widest text-center text-gray-500">
-              Gyakori <span className="text-white">kérdések</span>
-            </h2>
-            <span className="w-12 h-px bg-white/20"></span>
-          </div>
+      <Seam />
 
-          <div className="space-y-4">
-            {FAQ_ITEMS.map((item, index) => (
-              <div
-                key={item.question}
-                className={`border border-white/10 bg-[#121212] rounded p-6 transition-colors ${
-                  index % 2 === 0 ? "hover:border-[#e7ff00]/30" : "hover:border-[#00E5FF]/30"
-                }`}
-              >
-                <h3 className="font-bold text-white mb-2 uppercase tracking-wide">
-                  {item.question}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{item.answer}</p>
+      {/* ===== CSOMAGOK ===== */}
+      {PACKAGES.map((pkg) => (
+        <Rail key={pkg.id} label={pkg.railLabel}>
+          <section id={pkg.id} className="border-b border-[var(--rule)] scroll-mt-16">
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(150px,20%)_1fr_minmax(0,26%)] gap-[var(--space-6)] sm:gap-[var(--space-10)] px-6 pt-[var(--space-12)] sm:pt-[var(--space-20)] pb-[var(--space-6)] sm:pb-[var(--space-9)]">
+              <div>
+                <div className="font-display font-black [font-size:var(--text-numeral-xl)] leading-[0.78] tracking-[-0.06em] text-[var(--rule)]">
+                  {pkg.n}
+                </div>
+                <div
+                  className={`mt-[var(--space-3)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.22em] uppercase ${
+                    pkg.hot ? "text-[var(--signal-deep)]" : "text-[var(--mid)]"
+                  }`}
+                >
+                  {pkg.tag}
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <div>
+                <h2 className="font-display font-extrabold [font-size:var(--text-svc-title)] tracking-[-0.036em] leading-[1.03] mb-[var(--space-3)]">
+                  {pkg.name}
+                </h2>
+                <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[52ch]">
+                  {pkg.desc}
+                </p>
+              </div>
+              <div className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.14em] uppercase text-[var(--mid)] lg:pt-[var(--space-2)]">
+                {pkg.price}
+                <br />
+                {pkg.priceNote}
+              </div>
+            </div>
 
-      {/* =========================================
-          ZÁRÓ CTA
-      ========================================= */}
-      <section className="relative z-10 w-full px-6 py-24 bg-[#050505] border-t border-white/5">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-black italic uppercase tracking-tighter mb-6 text-white">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-[var(--rule)]">
+              {pkg.items.map((item, i) => (
+                <div
+                  key={item}
+                  className={`px-6 py-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--ink-2)] border-b border-[var(--rule)] ${
+                    i % 2 === 0 ? "sm:border-r" : "sm:border-r-0"
+                  } ${i % 3 !== 2 ? "lg:border-r" : "lg:border-r-0"}`}
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap items-baseline gap-x-[var(--space-4)] gap-y-[var(--space-2)] px-6 py-[var(--space-5)] bg-[var(--panel)] border-b border-[var(--rule)]">
+              <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] whitespace-nowrap">
+                Nem tartalmazza
+              </span>
+              <p className="m-0 [font-size:var(--text-sm)] text-[var(--mid)]">{pkg.notIncluded}</p>
+            </div>
+
+            <div className="px-6 py-[var(--space-6)] sm:py-[var(--space-8)]">
+              <Button asChild variant={pkg.hot ? "primary" : "ghost"}>
+                <Link href={pkg.href}>Beszéljünk róla &rarr;</Link>
+              </Button>
+            </div>
+          </section>
+        </Rail>
+      ))}
+
+      <Seam />
+
+      {/* ===== AHOGY DOLGOZUNK ===== */}
+      <Rail label="Ahogy dolgozunk" dark>
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-9)]">
+          <Eyebrow>Ahogy dolgozunk</Eyebrow>
+          <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[18ch] text-[var(--ink)] mb-[var(--space-5)]">
+            Mire számíthatsz
+          </h2>
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch]">
+            Nem írunk ki százalékos garanciákat, mert azokat vagy nem lehet tartani, vagy a
+            szerződésben a helyük. Ehelyett elmondjuk, hogyan működünk.
+          </p>
+        </section>
+        <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-[var(--rule)]">
+          {WORK_ITEMS.map((item, i) => (
+            <div
+              key={item.title}
+              className={`px-6 py-[var(--space-8)] sm:py-[var(--space-10)] border-b border-[var(--rule)] ${
+                i % 2 === 0 ? "sm:border-r" : ""
+              }`}
+            >
+              <h3 className="font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.025em] mb-[var(--space-3)] text-[var(--ink)]">
+                {item.title}
+              </h3>
+              <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed max-w-[44ch]">
+                {item.text}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Rail>
+
+      <Seam />
+
+      {/* ===== GYIK ===== */}
+      <Rail label="GYIK">
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-9)]">
+          <Eyebrow>Gyakori kérdések</Eyebrow>
+          <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[18ch] text-[var(--ink)]">
+            Amit tényleg meg szoktak kérdezni
+          </h2>
+        </section>
+        <div className="border-t border-[var(--rule)]">
+          {FAQ_ITEMS.map((item, i) => (
+            <details
+              key={item.question}
+              className="faq-q border-b border-[var(--rule)]"
+              open={i === 0}
+            >
+              <summary className="list-none cursor-pointer grid grid-cols-[1fr_28px] gap-[var(--space-5)] items-baseline px-6 py-[var(--space-6)] font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.022em] hover:bg-[var(--panel)] transition-colors [&::-webkit-details-marker]:hidden">
+                <span>{item.question}</span>
+                <span className="[font-family:var(--font-mono)] [font-size:var(--text-lg)] text-[var(--signal-deep)] text-right">
+                  <span className="faq-pm-plus">+</span>
+                  <span className="faq-pm-minus">&minus;</span>
+                </span>
+              </summary>
+              <div className="px-6 pb-[var(--space-8)]">
+                <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed max-w-[64ch]">
+                  {item.answer}
+                </p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </Rail>
+
+      <Seam />
+
+      {/* ===== CTA ===== */}
+      <Rail label="Kapcsolat" dark>
+        <section className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
+          <Eyebrow>Kapcsolat</Eyebrow>
+          <h2 className="font-display font-extrabold [font-size:var(--text-final)] leading-[0.92] tracking-[-0.055em] max-w-[13ch] mb-[var(--space-6)] text-[var(--ink)]">
             Nem tudod, melyik illik hozzád?
           </h2>
-          <p className="text-gray-400 font-medium text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="[font-size:var(--text-base)] text-[var(--ink-2)] max-w-[54ch] leading-relaxed mb-[var(--space-8)]">
             Írd le, mit szeretnél elérni, és megmondjuk, mire van valóban szükséged. Két munkanapon
             belül válaszolunk. Ha nem illünk össze, azt is megmondjuk.
           </p>
-          <Link
-            href="/init"
-            className="inline-flex items-center gap-3 px-12 py-5 rounded bg-[#e7ff00] text-[#0a0a0a] font-black italic uppercase tracking-[0.3em] text-sm hover:bg-white hover:-translate-y-1 transition-all duration-300 shadow-[0_0_40px_rgba(231,255,0,0.3)]"
-          >
-            Pitcheld el a projekted <span aria-hidden="true">&rarr;</span>
-          </Link>
-        </div>
-      </section>
+          <Button asChild>
+            <Link href="/init">Pitcheld el a projekted &rarr;</Link>
+          </Button>
+        </section>
+      </Rail>
     </main>
   );
 }
