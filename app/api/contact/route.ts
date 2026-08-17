@@ -3,12 +3,10 @@ import { Resend } from "resend";
 import { z } from "zod";
 import { saveLead } from "@/lib/leads";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
-import { SITE_URL } from "@/lib/site";
+import { LEAD_FROM_EMAIL, SITE_URL } from "@/lib/site";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_NOTIFICATION = "THE GBR Rendszer <lead@send.thegbr.eu>";
-const FROM_CONFIRMATION = "THE GBR <hello@send.thegbr.eu>";
 const NOTIFICATION_TO = "gabor@thegbr.eu";
 
 // Ha ennyi ezredmásodpercen belül érkezik a submit az űrlap betöltéséhez
@@ -149,7 +147,7 @@ export async function POST(req: Request) {
   try {
     const [notificationResult, confirmationResult] = await Promise.all([
       resend.emails.send({
-        from: FROM_NOTIFICATION,
+        from: LEAD_FROM_EMAIL,
         to: NOTIFICATION_TO,
         replyTo: email,
         subject: `Új lead: ${nev}${ceg ? ` — ${ceg}` : ""} (${budgetLabel(keret)})`,
@@ -170,7 +168,7 @@ export async function POST(req: Request) {
         ].join("\n"),
       }),
       resend.emails.send({
-        from: FROM_CONFIRMATION,
+        from: LEAD_FROM_EMAIL,
         to: email,
         subject: "Megkaptuk a megkeresésed — THE GBR",
         text: [
