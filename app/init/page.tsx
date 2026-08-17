@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const TARGET_OPTIONS = [
   {
@@ -28,6 +28,9 @@ const BUDGET_OPTIONS = [
   { val: "nem-tudom", label: "Még nem tudom" },
 ] as const;
 
+const MIN_DESC_LENGTH = 100;
+const TOTAL_STEPS = 3;
+
 export default function InitProtocol() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -39,6 +42,7 @@ export default function InitProtocol() {
     phone: "",
     email: "",
     target: "",
+    description: "",
     budget: "",
     deadline: "",
     // Honeypot — valódi felhasználó ezt sosem tölti ki.
@@ -49,6 +53,7 @@ export default function InitProtocol() {
   const [formStartedAt] = useState(() => Date.now());
 
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
   const [bootText, setBootText] = useState("");
   const fullBootText =
@@ -81,28 +86,44 @@ export default function InitProtocol() {
     setStep((prev) => prev - 1);
   };
 
-  const handleSubmit = async (budgetVal: (typeof BUDGET_OPTIONS)[number]["val"]) => {
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setFormData({ ...formData, description: e.target.value });
+    // Automatikus magasság-növelés — a textarea a tartalommal együtt nő.
+    const el = e.target;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  };
+
+  const descriptionLength = formData.description.trim().length;
+  const descriptionRemaining = Math.max(0, MIN_DESC_LENGTH - descriptionLength);
+  const descriptionReady = descriptionLength >= MIN_DESC_LENGTH;
+  const step1Valid = formData.target !== "" && descriptionReady;
+  const step2Valid = formData.budget !== "";
+  const step3Valid = !!formData.name && !!formData.company && !!formData.email && privacyAccepted;
+
+  const handleSubmit = async () => {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
     setSubmitError("");
 
-    const finalData = { ...formData, budget: budgetVal };
-    const targetOption = TARGET_OPTIONS.find((t) => t.id === finalData.target);
-    const projektLeiras = targetOption?.label ?? finalData.target;
+    const targetOption = TARGET_OPTIONS.find((t) => t.id === formData.target);
+    const kategoria = targetOption?.label ?? formData.target;
 
     // A Formspree egyelőre párhuzamosan fut tovább (átmeneti, nem blokkoló) —
     // a UI-t kizárólag a saját /api/contact végpont válasza vezérli.
     const formspreeForm = new FormData();
-    formspreeForm.append("Név", finalData.name);
-    formspreeForm.append("Cég", finalData.company);
-    formspreeForm.append("Telefon", finalData.phone);
-    formspreeForm.append("Email", finalData.email);
-    formspreeForm.append("Célpont (Rendszer)", projektLeiras);
-    formspreeForm.append("Kiválasztott Büdzsé", finalData.budget);
+    formspreeForm.append("Név", formData.name);
+    formspreeForm.append("Cég", formData.company);
+    formspreeForm.append("Telefon", formData.phone);
+    formspreeForm.append("Email", formData.email);
+    formspreeForm.append("Célpont (Rendszer)", kategoria);
+    formspreeForm.append("Projekt leírása", formData.description);
+    formspreeForm.append("Kiválasztott Büdzsé", formData.budget);
+    formspreeForm.append("Határidő", formData.deadline);
     formspreeForm.append("Adatkezelés elfogadva", "IGEN");
-    formspreeForm.append("_replyto", finalData.email);
-    formspreeForm.append("_subject", `THE GBR LEAD: ${finalData.company} - ${finalData.budget}`);
+    formspreeForm.append("_replyto", formData.email);
+    formspreeForm.append("_subject", `THE GBR LEAD: ${formData.company} - ${formData.budget}`);
 
     fetch("https://formspree.io/f/mykabnno", {
       method: "POST",
@@ -117,14 +138,15 @@ export default function InitProtocol() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          nev: finalData.name,
-          ceg: finalData.company,
-          email: finalData.email,
-          telefon: finalData.phone,
-          projekt: projektLeiras,
-          keret: finalData.budget,
-          hatarido: finalData.deadline,
-          honeypot: finalData.website,
+          nev: formData.name,
+          ceg: formData.company,
+          email: formData.email,
+          telefon: formData.phone,
+          kategoria,
+          leiras: formData.description,
+          keret: formData.budget,
+          hatarido: formData.deadline,
+          honeypot: formData.website,
           startedAt: formStartedAt,
         }),
       });
@@ -151,6 +173,8 @@ export default function InitProtocol() {
     }
   };
 
+  const progressPercent = step > TOTAL_STEPS ? 100 : (step / TOTAL_STEPS) * 100;
+
   return (
     <main className="min-h-screen bg-[#050505] text-[#e7ff00] selection:bg-[#e7ff00] selection:text-black relative font-mono overflow-hidden flex flex-col items-center justify-center">
       {/* =========================================
@@ -165,7 +189,7 @@ export default function InitProtocol() {
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         .animate-blink { animation: blink 1s step-end infinite; }
 
-        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus {
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus {
           outline: none;
           border-bottom-color: #e7ff00;
           box-shadow: 0 4px 15px -3px rgba(231,255,0,0.3);
@@ -222,6 +246,11 @@ export default function InitProtocol() {
           <span className="ml-4 text-[10px] text-gray-500 uppercase tracking-widest">
             root@thegbr:~ /init_protocol
           </span>
+          {step <= TOTAL_STEPS && (
+            <span className="ml-auto text-[10px] text-gray-600 uppercase tracking-widest">
+              {step}. lépés / {TOTAL_STEPS}
+            </span>
+          )}
         </div>
 
         {/* Terminál Test */}
@@ -230,11 +259,11 @@ export default function InitProtocol() {
           <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
             <div
               className="h-full bg-[#e7ff00] transition-all duration-500 shadow-[0_0_10px_rgba(231,255,0,0.5)]"
-              style={{ width: `${(step / 4) * 100}%` }}
+              style={{ width: `${progressPercent}%` }}
             ></div>
           </div>
 
-          {/* LÉPÉS 1: AZONOSÍTÁS */}
+          {/* LÉPÉS 1: A PROJEKT */}
           {step === 1 && (
             <div className="animate-fade-in">
               <div className="whitespace-pre-line text-sm text-gray-400 mb-8 h-16">
@@ -243,7 +272,124 @@ export default function InitProtocol() {
               </div>
 
               <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#e7ff00] pl-4">
-                01 // Azonosítási Protokoll
+                01 // A Projekt
+              </h2>
+
+              <div className="space-y-3 mb-8">
+                <label className="block text-[10px] text-gray-500 uppercase tracking-widest">
+                  Melyik rendszert aktiváljuk?
+                </label>
+                <div className="grid grid-cols-1 gap-3">
+                  {TARGET_OPTIONS.map((option) => (
+                    <button
+                      type="button"
+                      key={option.id}
+                      onClick={() => setFormData({ ...formData, target: option.id })}
+                      className={`w-full text-left p-4 border ${formData.target === option.id ? "border-white bg-white/10" : "border-white/10"} bg-[#0a0a0a] transition-all text-sm uppercase tracking-widest text-gray-300 ${option.color} group flex justify-between items-center`}
+                    >
+                      <span>{option.label}</span>
+                      {formData.target === option.id && <span className="text-[#e7ff00]">✓</span>}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
+                  Mi a helyzet most, és mit szeretnél elérni?
+                </label>
+                <textarea
+                  ref={descriptionRef}
+                  rows={4}
+                  placeholder="Pl.: Van egy WooCommerce webshopunk, ami nagyon lassú és elavult. Szeretnénk átépíteni Next.js-re úgy, hogy a bolt közben ne álljon le. Kb. 400 termék, tavaszra kellene kész lennie."
+                  className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all resize-none overflow-hidden"
+                  style={{ overflow: "hidden" }}
+                  value={formData.description}
+                  onChange={handleDescriptionChange}
+                />
+                <div className="mt-2 text-[10px] uppercase tracking-widest">
+                  {descriptionReady ? (
+                    <span className="text-[#e7ff00]/60">✓ Készen áll</span>
+                  ) : (
+                    <span className="text-gray-500">még {descriptionRemaining} karakter</span>
+                  )}
+                </div>
+              </div>
+
+              <div className="mt-12 flex justify-end">
+                <button
+                  type="button"
+                  onClick={nextStep}
+                  disabled={!step1Valid}
+                  className="px-8 py-3 bg-[#e7ff00] text-black font-bold uppercase tracking-widest text-xs hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Tovább &rarr;
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* LÉPÉS 2: KERET ÉS HATÁRIDŐ */}
+          {step === 2 && (
+            <div className="animate-fade-in">
+              <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#9d00ff] pl-4">
+                02 // Keret és Határidő
+              </h2>
+              <p className="text-xs text-gray-500 tracking-widest uppercase mb-6">
+                Mekkora büdzsét terveztek erre a projektre?
+              </p>
+
+              <div className="grid grid-cols-2 gap-4">
+                {BUDGET_OPTIONS.map((budget) => (
+                  <button
+                    type="button"
+                    key={budget.val}
+                    onClick={() => setFormData({ ...formData, budget: budget.val })}
+                    className={`p-4 border ${formData.budget === budget.val ? "border-[#e7ff00] text-[#e7ff00]" : "border-white/10 text-gray-400"} bg-[#0a0a0a] hover:border-[#e7ff00] hover:text-[#e7ff00] transition-all text-sm font-bold tracking-widest`}
+                  >
+                    {budget.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-6">
+                <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
+                  Határidő (opcionális)
+                </label>
+                <input
+                  type="text"
+                  placeholder="pl. 2026 Q4, vagy egy konkrét dátum"
+                  className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
+                  value={formData.deadline}
+                  onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
+                />
+              </div>
+
+              <div className="mt-12 flex justify-between">
+                <button
+                  type="button"
+                  onClick={prevStep}
+                  className="text-xs text-gray-500 hover:text-white uppercase tracking-widest"
+                >
+                  &larr; Vissza
+                </button>
+                <button
+                  type="button"
+                  onClick={nextStep}
+                  disabled={!step2Valid}
+                  className="px-8 py-3 bg-[#e7ff00] text-black font-bold uppercase tracking-widest text-xs hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Tovább &rarr;
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* LÉPÉS 3: KAPCSOLAT */}
+          {step === 3 && (
+            <div className="animate-fade-in">
+              <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#00E5FF] pl-4">
+                03 // Kapcsolat
               </h2>
 
               <div className="space-y-6">
@@ -254,7 +400,7 @@ export default function InitProtocol() {
                   <input
                     type="text"
                     placeholder="Vezeték és Keresztnév"
-                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all focus:border-[#e7ff00]"
+                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
@@ -266,21 +412,9 @@ export default function InitProtocol() {
                   <input
                     type="text"
                     placeholder="Cégnév"
-                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all focus:border-[#e7ff00]"
+                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
-                    Telefonos Elérhetőség
-                  </label>
-                  <input
-                    type="tel"
-                    placeholder="+36 30 123 4567"
-                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all focus:border-[#e7ff00]"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
                 </div>
                 <div>
@@ -290,9 +424,21 @@ export default function InitProtocol() {
                   <input
                     type="email"
                     placeholder="titkosított@email.com"
-                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all focus:border-[#e7ff00]"
+                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
+                    Telefonos Elérhetőség (opcionális)
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="+36 30 123 4567"
+                    className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
                 </div>
 
@@ -346,105 +492,6 @@ export default function InitProtocol() {
                 </div>
               </div>
 
-              <div className="mt-12 flex justify-end">
-                <button
-                  type="button"
-                  onClick={nextStep}
-                  disabled={
-                    !formData.name ||
-                    !formData.company ||
-                    !formData.phone ||
-                    !formData.email ||
-                    !privacyAccepted
-                  }
-                  className="px-8 py-3 bg-[#e7ff00] text-black font-bold uppercase tracking-widest text-xs hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Hitelesítés &rarr;
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* LÉPÉS 2: CÉLPONT KIJELÖLÉSE */}
-          {step === 2 && (
-            <div className="animate-fade-in">
-              <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#00E5FF] pl-4">
-                02 // Célpont Kijelölése
-              </h2>
-              <p className="text-xs text-gray-500 tracking-widest uppercase mb-6">
-                Melyik rendszert aktiváljuk a(z){" "}
-                <span className="text-white">{formData.company}</span> számára?
-              </p>
-
-              <div className="grid grid-cols-1 gap-4">
-                {TARGET_OPTIONS.map((option) => (
-                  <button
-                    type="button"
-                    key={option.id}
-                    onClick={() => {
-                      setFormData({ ...formData, target: option.id });
-                      nextStep();
-                    }}
-                    className={`w-full text-left p-4 border ${formData.target === option.id ? "border-white bg-white/10" : "border-white/10"} bg-[#0a0a0a] transition-all text-sm uppercase tracking-widest text-gray-300 ${option.color} group flex justify-between items-center`}
-                  >
-                    <span>{option.label}</span>
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity">
-                      Aktiválás &rarr;
-                    </span>
-                  </button>
-                ))}
-              </div>
-
-              <div className="mt-12 flex justify-start">
-                <button
-                  type="button"
-                  onClick={prevStep}
-                  className="text-xs text-gray-500 hover:text-white uppercase tracking-widest"
-                >
-                  &larr; Vissza
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* LÉPÉS 3: ERŐFORRÁS ALLOKÁCIÓ ÉS KÜLDÉS */}
-          {step === 3 && (
-            <div className="animate-fade-in">
-              <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#9d00ff] pl-4">
-                03 // Erőforrás Allokáció
-              </h2>
-              <p className="text-xs text-gray-500 tracking-widest uppercase mb-6">
-                Mekkora büdzsét terveztek erre a projektre?
-              </p>
-
-              <div className="grid grid-cols-2 gap-4">
-                {BUDGET_OPTIONS.map((budget) => (
-                  <button
-                    type="button"
-                    key={budget.val}
-                    disabled={isSubmitting}
-                    onClick={() => handleSubmit(budget.val)}
-                    className={`p-4 border ${formData.budget === budget.val ? "border-[#e7ff00] text-[#e7ff00]" : "border-white/10 text-gray-400"} bg-[#0a0a0a] hover:border-[#e7ff00] hover:text-[#e7ff00] transition-all text-sm font-bold tracking-widest disabled:opacity-50 disabled:cursor-not-allowed`}
-                  >
-                    {budget.label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="mt-6">
-                <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
-                  Határidő (opcionális)
-                </label>
-                <input
-                  type="text"
-                  placeholder="pl. 2026 Q4, vagy egy konkrét dátum"
-                  disabled={isSubmitting}
-                  className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all focus:border-[#e7ff00] disabled:opacity-50"
-                  value={formData.deadline}
-                  onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-                />
-              </div>
-
               {/* Töltés és Hibaüzenetek kezelése */}
               <div className="mt-6 min-h-[40px]">
                 {isSubmitting && (
@@ -459,7 +506,7 @@ export default function InitProtocol() {
                 )}
               </div>
 
-              <div className="mt-6 flex justify-start">
+              <div className="mt-6 flex justify-between">
                 <button
                   type="button"
                   onClick={prevStep}
@@ -467,6 +514,14 @@ export default function InitProtocol() {
                   className="text-xs text-gray-500 hover:text-white uppercase tracking-widest disabled:opacity-50"
                 >
                   &larr; Vissza
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={!step3Valid || isSubmitting}
+                  className="px-8 py-3 bg-[#e7ff00] text-black font-bold uppercase tracking-widest text-xs hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "Küldés..." : "Küldés"}
                 </button>
               </div>
             </div>

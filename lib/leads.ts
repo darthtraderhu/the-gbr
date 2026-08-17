@@ -3,7 +3,10 @@ export type Lead = {
   ceg?: string;
   email: string;
   telefon?: string;
-  projekt: string;
+  // A célpont-választás címkéje (Web / Marketing / Full-Stack) — kategória,
+  // nem szabadszöveg. A tartalmi leírást a `leiras` mező hordozza.
+  kategoria: string;
+  leiras: string;
   keret: "1-3M" | "3-8M" | "8M+" | "nem-tudom";
   hatarido?: string;
   ip: string;

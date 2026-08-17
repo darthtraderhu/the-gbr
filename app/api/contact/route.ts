@@ -31,7 +31,11 @@ const contactSchema = z.object({
     .optional()
     .or(z.literal(""))
     .transform((v) => (v ? v : undefined)),
-  projekt: z.string().trim().min(1, "A projekt leírása kötelező.").max(2000),
+  // A célpont-választás címkéje (Web / Marketing / Full-Stack) — kategória.
+  kategoria: z.string().trim().min(1, "A kategória megadása kötelező.").max(200),
+  // A szabadszöveges projektleírás — a UI-n 100 karakteres minimum van rajta,
+  // itt is érvényesítve, hogy közvetlen API-hívás se kerülje meg.
+  leiras: z.string().trim().min(100, "A leírás legalább 100 karakter legyen.").max(5000),
   keret: z.enum(["1-3M", "3-8M", "8M+", "nem-tudom"]),
   hatarido: z
     .string()
@@ -103,7 +107,8 @@ export async function POST(req: Request) {
     );
   }
 
-  const { nev, ceg, email, telefon, projekt, keret, hatarido, honeypot, startedAt } = parsed.data;
+  const { nev, ceg, email, telefon, kategoria, leiras, keret, hatarido, honeypot, startedAt } =
+    parsed.data;
 
   // 4. Bot-szűrés: kitöltött honeypot VAGY túl gyors submit.
   const elapsed = Date.now() - startedAt;
@@ -126,7 +131,8 @@ export async function POST(req: Request) {
       ceg,
       email,
       telefon,
-      projekt,
+      kategoria,
+      leiras,
       keret,
       hatarido,
       ip,
@@ -158,9 +164,15 @@ export async function POST(req: Request) {
           `Cég: ${ceg ?? "—"}`,
           `E-mail: ${email}`,
           `Telefon: ${telefon ?? "—"}`,
-          `Projekt: ${projekt}`,
+          `Kategória: ${kategoria}`,
           `Keret: ${budgetLabel(keret)}`,
           `Határidő: ${hatarido ?? "—"}`,
+          "",
+          "--- PROJEKT LEÍRÁSA ---",
+          "",
+          leiras,
+          "",
+          "-----------------------",
           "",
           `Beküldve: ${savedLead.createdAt}`,
           `IP: ${savedLead.ip}`,
@@ -176,9 +188,12 @@ export async function POST(req: Request) {
           "",
           "Köszönjük a megkeresésed. Az alábbi adatokat rögzítettük:",
           "",
-          `Projekt: ${projekt}`,
+          `Kategória: ${kategoria}`,
           `Tervezett keret: ${budgetLabel(keret)}`,
           ...(hatarido ? [`Határidő: ${hatarido}`] : []),
+          "",
+          "Amit írtál:",
+          leiras,
           "",
           "Munkatársaink két munkanapon belül felveszik veled a kapcsolatot a megadott elérhetőségeken.",
           "",
