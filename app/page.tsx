@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getSortedPostsData } from "../lib/posts"; // <-- BEHÚZZUK A MOTORT!
+import { websiteSchema } from "@/lib/jsonld";
+import JsonLd from "@/app/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "THE GBR | Full-Stack B2B Ügynökség — Web, AI, Teljesítménymarketing",
   description:
     "Next.js alapú weboldalak, AI-vezérelt ügyfélszolgálat és adatvezérelt hirdetési kampányok egyetlen csapattól. 2002 óta az értékesítésben, kizárólag B2B fókusszal.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function Home() {
@@ -15,6 +20,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white selection:bg-[#e7ff00] selection:text-black overflow-hidden relative cursor-default font-sans">
+      <JsonLd data={websiteSchema()} />
       {/* =========================================
           ANIMÁCIÓK ÉS STÍLUSOK
       ========================================= */}

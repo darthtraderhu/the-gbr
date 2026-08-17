@@ -1,5 +1,29 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getSortedPostsData } from "../../lib/posts";
+import { SITE_URL } from "@/lib/site";
+import { breadcrumbSchema } from "@/lib/jsonld";
+import JsonLd from "@/app/components/JsonLd";
+
+export const metadata: Metadata = {
+  title: "Hírmotor | THE GBR",
+  description:
+    "B2B marketing, Next.js fejlesztés és AI-integráció — a THE GBR Autopilot rendszere által automatizáltan publikált kutatások és esettanulmányok.",
+  alternates: {
+    canonical: "/hirek",
+  },
+  openGraph: {
+    title: "Hírmotor | THE GBR",
+    description:
+      "B2B marketing, Next.js fejlesztés és AI-integráció — automatizáltan publikált kutatások és esettanulmányok.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hírmotor | THE GBR",
+    description:
+      "B2B marketing, Next.js fejlesztés és AI-integráció — automatizáltan publikált kutatások és esettanulmányok.",
+  },
+};
 
 export default function Intel() {
   // Lekérjük a Mátrixból az összes bejegyzést
@@ -11,6 +35,12 @@ export default function Intel() {
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white selection:bg-[#e7ff00] selection:text-black relative font-sans overflow-hidden">
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Főoldal", url: SITE_URL },
+          { name: "Hírmotor", url: `${SITE_URL}/hirek` },
+        ])}
+      />
       {/* =========================================
           STÍLUSOK ÉS ANIMÁCIÓK
       ========================================= */}

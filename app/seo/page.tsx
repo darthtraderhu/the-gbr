@@ -1,15 +1,38 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SITE_URL } from "@/lib/site";
+import { breadcrumbSchema } from "@/lib/jsonld";
+import JsonLd from "@/app/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Search & Answer Engine Optimization | THE GBR",
   description:
     "Technológiai alapú keresőoptimalizálás és AI-adatstrukturálás (AEO). Készítsük fel az entitásodat a következő generációs keresőmotorokra.",
+  alternates: {
+    canonical: "/seo",
+  },
+  openGraph: {
+    title: "Search & Answer Engine Optimization | THE GBR",
+    description:
+      "Technológiai alapú keresőoptimalizálás és AI-adatstrukturálás (AEO) a THE GBR-től.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Search & Answer Engine Optimization | THE GBR",
+    description:
+      "Technológiai alapú keresőoptimalizálás és AI-adatstrukturálás (AEO) a THE GBR-től.",
+  },
 };
 
 export default function SeoAeoPage() {
   return (
     <main className="min-h-screen bg-[#020202] relative overflow-hidden text-white font-sans selection:bg-[#e7ff00] selection:text-black">
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Főoldal", url: SITE_URL },
+          { name: "SEO", url: `${SITE_URL}/seo` },
+        ])}
+      />
       {/* 1. KŐKEMÉNY NEURÁLIS/MÁTRIX HÁTTÉR */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Mátrix Dot-Grid (Neuron pontok) */}

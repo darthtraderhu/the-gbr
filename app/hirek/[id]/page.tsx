@@ -1,6 +1,9 @@
 import { getPostData } from "../../../lib/posts";
 import Link from "next/link";
-import { Metadata } from "next"; // <-- BEHÚZZUK A METADATA TÍPUST A SEO-HOZ
+import { Metadata } from "next";
+import { SITE_URL } from "@/lib/site";
+import { blogPostingSchema, breadcrumbSchema } from "@/lib/jsonld";
+import JsonLd from "@/app/components/JsonLd";
 
 // =========================================================================
 // DINAMIKUS SEO MOTOR: Ez olvassa be a Facebook/Google részére a cikk adatait
@@ -8,15 +11,17 @@ import { Metadata } from "next"; // <-- BEHÚZZUK A METADATA TÍPUST A SEO-HOZ
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string } | Promise<{ id: string }>;
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  // Kezeljük le, hogy a params Promise-ként vagy sima objektumként érkezik-e (Next 15 kompatibilitás)
-  const resolvedParams = params instanceof Promise ? await params : params;
-  const postData = await getPostData(resolvedParams.id);
+  const { id } = await params;
+  const postData = await getPostData(id);
 
   return {
     title: `${postData.title} | THE GBR Akták`,
     description: postData.excerpt,
+    alternates: {
+      canonical: `/hirek/${id}`,
+    },
     openGraph: {
       title: postData.title,
       description: postData.excerpt,
@@ -36,14 +41,29 @@ export async function generateMetadata({
 // MEGJELENÍTŐ (PAGE): Ez rendereli le a dizájnt a felhasználónak
 // =========================================================================
 export default async function PosztOldal({ params }: { params: Promise<{ id: string }> }) {
-  // Kőkeményen megvárjuk, amíg a Mátrix kibontja az URL paramétert
-  const resolvedParams = await params;
+  const { id } = await params;
+  const postData = await getPostData(id);
 
-  // A valós ID-t adjuk át a motornak az undefined helyett
-  const postData = await getPostData(resolvedParams.id);
+  const articleUrl = `${SITE_URL}/hirek/${id}`;
 
   return (
     <div className="min-h-screen bg-[#050505] text-white pt-24 px-6 md:px-12 font-sans bg-cubes-pattern bg-opacity-5">
+      <JsonLd
+        data={[
+          blogPostingSchema({
+            headline: postData.title,
+            description: postData.excerpt,
+            datePublished: postData.date,
+            url: articleUrl,
+            image: `${articleUrl}/opengraph-image`,
+          }),
+          breadcrumbSchema([
+            { name: "Főoldal", url: SITE_URL },
+            { name: "Hírmotor", url: `${SITE_URL}/hirek` },
+            { name: postData.title, url: articleUrl },
+          ]),
+        ]}
+      />
       <div className="max-w-3xl mx-auto bg-[#0a0a0a] border border-white/10 rounded-xl p-8 md:p-12 shadow-[0_0_40px_rgba(231,255,0,0.05)] relative overflow-hidden">
         {/* Dekorcsík */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#e7ff00]/20 via-[#e7ff00] to-[#e7ff00]/20"></div>

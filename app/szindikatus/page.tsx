@@ -1,6 +1,35 @@
+import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/site";
+import { breadcrumbSchema } from "@/lib/jsonld";
+import JsonLd from "@/app/components/JsonLd";
+
+export const metadata: Metadata = {
+  title: "A Szindikátus | THE GBR",
+  description:
+    "2002 óta az értékesítésben — a THE GBR története és a 400+ hitelesített szakértőből álló decentralizált hálózat, ami a full-stack ügynökség mögött áll.",
+  alternates: {
+    canonical: "/szindikatus",
+  },
+  openGraph: {
+    title: "A Szindikátus | THE GBR",
+    description: "2002 óta az értékesítésben — a THE GBR története és szakértői hálózata.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "A Szindikátus | THE GBR",
+    description: "2002 óta az értékesítésben — a THE GBR története és szakértői hálózata.",
+  },
+};
+
 export default function Szindikatus() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white selection:bg-[#e7ff00] selection:text-black relative font-sans overflow-hidden">
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Főoldal", url: SITE_URL },
+          { name: "Hálózat", url: `${SITE_URL}/szindikatus` },
+        ])}
+      />
       {/* =========================================
           STÍLUSOK ÉS ANIMÁCIÓK
       ========================================= */}

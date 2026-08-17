@@ -1,8 +1,36 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { SITE_URL } from "@/lib/site";
+import { breadcrumbSchema } from "@/lib/jsonld";
+import JsonLd from "@/app/components/JsonLd";
+
+export const metadata: Metadata = {
+  title: "A Fegyvertár | THE GBR",
+  description:
+    "High-End Web & Shop, Performance Marketing, AI & Chatbot Integráció, Prémium Videógyártás, Autopilot Rendszerek, IT Projektmenedzsment — a THE GBR teljes szolgáltatási arzenálja.",
+  alternates: {
+    canonical: "/arzenal",
+  },
+  openGraph: {
+    title: "A Fegyvertár | THE GBR",
+    description: "A THE GBR teljes szolgáltatási arzenálja — webfejlesztéstől az AI-ig.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "A Fegyvertár | THE GBR",
+    description: "A THE GBR teljes szolgáltatási arzenálja — webfejlesztéstől az AI-ig.",
+  },
+};
 
 export default function Arzenal() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white selection:bg-[#e7ff00] selection:text-black relative font-sans">
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Főoldal", url: SITE_URL },
+          { name: "Arzenál", url: `${SITE_URL}/arzenal` },
+        ])}
+      />
       {/* =========================================
           STÍLUSOK ÉS ANIMÁCIÓK (SPIRÁZVA)
       ========================================= */}

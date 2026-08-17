@@ -3,12 +3,14 @@ import { Montserrat } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google"; // ÚJ IMPORT: A hivatalos GA4 modul
 import "./globals.css";
 import { SITE_URL } from "@/lib/site";
+import { organizationSchema } from "@/lib/jsonld";
 
 // Importáljuk a komponenseket
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AiChat from "./components/AiChat";
 import CallButton from "./components/CallButton";
+import JsonLd from "./components/JsonLd";
 
 // Beállítjuk a betűtípust
 const montserrat = Montserrat({
@@ -36,11 +38,9 @@ export const metadata: Metadata = {
     title: "THE GBR | Full-Stack B2B Agency",
     description: "A marketing és az IT összeolvadt. A Jövő Egy Kézből.",
   },
-  verification: {
-    // Ha a Search Console HTML címkés hitelesítést ad, a kódot (content="") ide másold!
-    // Ha DNS rekorddal hitelesíted (ez a profibb), ezt a sort nyugodtan hagyhatod így, vagy kitörölheted.
-    google: "IDE_JÖHET_A_SEARCH_CONSOLE_KÓD_HA_KELL",
-  },
+  // A Search Console-hitelesítés még nincs beállítva. Ha a HTML meta-tages
+  // módot használjuk, ide kerül a valós kód: verification: { google: "..." }.
+  // Amíg nincs valós token, üresen hagyva jobb, mint egy placeholdert kiadni.
 };
 
 export default function RootLayout({
@@ -57,6 +57,9 @@ export default function RootLayout({
       <body
         className={`${montserrat.className} bg-[#0a0a0a] text-white select-none selection:bg-[#e7ff00] selection:text-black antialiased`}
       >
+        {/* Szervezeti JSON-LD — minden oldalon jelen van, ez a kiadó/publisher. */}
+        <JsonLd data={organizationSchema()} />
+
         {/* A Globális Menü */}
         <Navbar />
 
