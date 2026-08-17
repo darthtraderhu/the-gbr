@@ -8,18 +8,28 @@ export const ORGANIZATION = {
   name: "GBR Marketing Solutions Kft.",
   alternateName: "THE GBR",
   url: SITE_URL,
-  // Nincs külön logó-fájl a projektben — az egyetlen létező márkás,
-  // megfelelő méretű képi elem az OG-kép, ez a legjobb elérhető helyettes,
-  // amíg nincs dedikált logo.svg/png.
-  logo: `${SITE_URL}/opengraph-image.jpg`,
+  // A logo a márkajel (public/logo-jel.png), az image a reprezentatív
+  // vizuál (OG-kép) — a Google Rich Results ezt a két mezőt külön kéri,
+  // ezért nem ugyanazt a fájlt adjuk mindkettőre.
+  logo: `${SITE_URL}/logo-jel.png`,
+  image: `${SITE_URL}/opengraph-image.jpg`,
   email: "gabor@thegbr.eu",
   telephone: "+36705139838",
   address: {
     "@type": "PostalAddress" as const,
     streetAddress: "Kossuth út 37.",
     addressLocality: "Tar",
+    addressRegion: "Nógrád",
     postalCode: "3073",
     addressCountry: "HU",
+  },
+  // Település-szintű koordináták (OpenStreetMap Nominatim, Tar község
+  // középpontja) — a pontos utcaszintű cím nincs benne az OSM adatbázisban,
+  // ezért ez közelítés, nem az épület pontos helye.
+  geo: {
+    "@type": "GeoCoordinates" as const,
+    latitude: 47.9505386,
+    longitude: 19.7441779,
   },
   taxID: "28814706-2-12",
   vatID: "HU28814706",
