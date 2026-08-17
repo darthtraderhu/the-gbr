@@ -25,7 +25,7 @@ export default function Navbar() {
       ),
     },
     {
-      name: "Arzenál",
+      name: "Szolgáltatások",
       href: "/arzenal",
       activeColor: "text-[#e7ff00]",
       icon: (

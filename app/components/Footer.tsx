@@ -37,7 +37,7 @@ export default function Footer() {
               href="/arzenal"
               className="text-xs font-bold text-gray-500 hover:text-white transition-colors"
             >
-              Arzenál
+              Szolgáltatások
             </Link>
             <Link
               href="/architektura"
