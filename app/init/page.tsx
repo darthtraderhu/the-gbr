@@ -4,21 +4,23 @@ import { breadcrumbSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import InitProtocolClient from "./InitProtocolClient";
 
+const DESCRIPTION =
+  "Mondd el, mit szeretnél elérni, és két munkanapon belül válaszolunk. Ha nem illünk össze, azt is megmondjuk.";
+
 export const metadata: Metadata = {
-  title: "Projekt Indítása | THE GBR",
-  description:
-    "Indítsd el a kapcsolatfelvételt a THE GBR-rel: mondd el, mi a helyzet most, mekkora a kereted, és két munkanapon belül jelentkezünk.",
+  title: "Beszéljünk a projektedről | THE GBR",
+  description: DESCRIPTION,
   alternates: {
     canonical: "/init",
   },
   openGraph: {
-    title: "Projekt Indítása | THE GBR",
-    description: "Indítsd el a kapcsolatfelvételt a THE GBR-rel.",
+    title: "Beszéljünk a projektedről | THE GBR",
+    description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projekt Indítása | THE GBR",
-    description: "Indítsd el a kapcsolatfelvételt a THE GBR-rel.",
+    title: "Beszéljünk a projektedről | THE GBR",
+    description: DESCRIPTION,
   },
 };
 
@@ -28,7 +30,7 @@ export default function InitPage() {
       <JsonLd
         data={breadcrumbSchema([
           { name: "Főoldal", url: SITE_URL },
-          { name: "Projekt Indítása", url: `${SITE_URL}/init` },
+          { name: "Kapcsolat", url: `${SITE_URL}/init` },
         ])}
       />
       <InitProtocolClient />

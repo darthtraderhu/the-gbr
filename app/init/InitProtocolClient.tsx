@@ -1,23 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const TARGET_OPTIONS = [
   {
     id: "web",
-    label: "High-End Web & Shop",
+    label: "Weboldal vagy webshop",
+    desc: "Új rendszer, vagy a mostani lecserélése",
     color: "hover:border-[#e7ff00] hover:text-[#e7ff00]",
   },
   {
     id: "marketing",
-    label: "Performance Marketing & Videó",
+    label: "Marketing és tartalom",
+    desc: "Hirdetés, videó, tartalomgyártás",
     color: "hover:border-[#00E5FF] hover:text-[#00E5FF]",
   },
   {
-    id: "full",
-    label: "Full-Stack Autopilot (Minden)",
-    color: "hover:border-[#9d00ff] hover:text-[#9d00ff] border-[#9d00ff]/30 text-[#9d00ff]",
+    id: "uzemeltetes",
+    label: "Fejlesztés és üzemeltetés",
+    desc: "Teljes lefedettség, folyamatosan",
+    color: "hover:border-[#9d00ff] hover:text-[#9d00ff]",
+  },
+  {
+    id: "nem-tudom",
+    label: "Még nem tudom",
+    desc: "Beszéljük meg",
+    color: "hover:border-white/60 hover:text-white",
   },
 ] as const;
 
@@ -30,12 +39,17 @@ const BUDGET_OPTIONS = [
 
 const MIN_DESC_LENGTH = 100;
 const TOTAL_STEPS = 3;
+const CONTACT_EMAIL = "gabor@thegbr.eu";
+
+type SubmitError = { kind: "server" | "network"; detail?: string };
 
 export default function InitProtocolClient() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState("");
+  const [submitError, setSubmitError] = useState<SubmitError | null>(null);
   const [submittedStatus, setSubmittedStatus] = useState<number | null>(null);
+  const [submittedId, setSubmittedId] = useState<string | null>(null);
+  const [submittedAt, setSubmittedAt] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -53,11 +67,10 @@ export default function InitProtocolClient() {
   const [formStartedAt] = useState(() => Date.now());
 
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
-  const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
   const [bootText, setBootText] = useState("");
   const fullBootText =
-    "> RENDSZER INICIALIZÁLÁSA... \n> KAPCSOLAT TITKOSÍTVA... \n> VÁROM AZ AZONOSÍTÁST...";
+    "Három lépés, kb. két perc.\nNem minden projektet vállalunk el — ezért kérdezünk előbb.";
 
   useEffect(() => {
     let currentText = "";
@@ -77,12 +90,12 @@ export default function InitProtocolClient() {
   }, []);
 
   const nextStep = () => {
-    setSubmitError("");
+    setSubmitError(null);
     setStep((prev) => prev + 1);
   };
 
   const prevStep = () => {
-    setSubmitError("");
+    setSubmitError(null);
     setStep((prev) => prev - 1);
   };
 
@@ -105,7 +118,7 @@ export default function InitProtocolClient() {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
-    setSubmitError("");
+    setSubmitError(null);
 
     const targetOption = TARGET_OPTIONS.find((t) => t.id === formData.target);
     const kategoria = targetOption?.label ?? formData.target;
@@ -152,22 +165,19 @@ export default function InitProtocolClient() {
       });
 
       if (response.ok) {
+        const data = await response.json().catch(() => null);
         setSubmittedStatus(response.status);
+        setSubmittedId(typeof data?.id === "string" ? data.id : null);
+        setSubmittedAt(Date.now());
         setStep(4);
       } else {
         const errorData = await response.json().catch(() => null);
         console.error("Contact API hiba:", errorData);
-        setSubmitError(
-          errorData?.error
-            ? `> API_HIBA: ${errorData.error}`
-            : "> API_HIBA: Sikertelen adatküldés! Próbáld újra, vagy írj közvetlenül: gabor@thegbr.eu"
-        );
+        setSubmitError({ kind: "server", detail: errorData?.error });
       }
     } catch (error) {
       console.error("Hálózati hiba:", error);
-      setSubmitError(
-        "> SYS_ERROR: Hálózati hiba blokkolja a jelet! Próbáld újra, vagy írj közvetlenül: gabor@thegbr.eu"
-      );
+      setSubmitError({ kind: "network" });
     } finally {
       setIsSubmitting(false);
     }
@@ -212,40 +222,35 @@ export default function InitProtocolClient() {
       </div>
 
       {/* =========================================
-          KILÉPÉS GOMB (ESC)
+          KILÉPÉS GOMB
       ========================================= */}
       <Link
         href="/"
         className="absolute top-8 left-8 z-50 flex items-center gap-2 text-gray-500 hover:text-white transition-colors group"
       >
-        <div className="border border-gray-600 group-hover:border-white px-2 py-1 rounded text-xs">
-          ESC
-        </div>
-        <span className="text-xs tracking-widest uppercase">Megszakítás</span>
+        <span className="text-xs tracking-widest uppercase">&larr; Vissza a főoldalra</span>
       </Link>
 
       {/* =========================================
-          RADAR / STÁTUSZ (JOBB FENT)
+          STÁTUSZ (JOBB FENT)
       ========================================= */}
       <div className="absolute top-8 right-8 z-50 flex items-center gap-3">
         <span className="text-[10px] tracking-widest uppercase text-gray-500">
-          Kapcsolat: <span className="text-[#00E5FF]">Biztonságos</span>
+          Válasz 2 munkanapon belül
         </span>
-        <div className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse"></div>
+        <div className="w-2 h-2 rounded-full bg-[#e7ff00] animate-pulse"></div>
       </div>
 
       {/* =========================================
           VARÁZSLÓ (WIZARD) KONTÉNER
       ========================================= */}
       <div className="relative z-10 w-full max-w-2xl px-6">
-        {/* Terminál Fejléc */}
+        {/* Fejléc */}
         <div className="border border-white/10 bg-[#0a0a0a] rounded-t-lg p-3 flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
           <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-          <span className="ml-4 text-[10px] text-gray-500 uppercase tracking-widest">
-            root@thegbr:~ /init_protocol
-          </span>
+          <span className="ml-4 text-[10px] text-gray-500 uppercase tracking-widest">THE GBR</span>
           {step <= TOTAL_STEPS && (
             <span className="ml-auto text-[10px] text-gray-600 uppercase tracking-widest">
               {step}. lépés / {TOTAL_STEPS}
@@ -253,7 +258,7 @@ export default function InitProtocolClient() {
           )}
         </div>
 
-        {/* Terminál Test */}
+        {/* Test */}
         <div className="border-x border-b border-white/10 bg-[#050505] rounded-b-lg p-8 md:p-12 min-h-[400px] shadow-[0_0_50px_rgba(231,255,0,0.05)] relative">
           {/* Lépésjelző */}
           <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
@@ -272,12 +277,12 @@ export default function InitProtocolClient() {
               </div>
 
               <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#e7ff00] pl-4">
-                01 // A Projekt
+                01 · A projekt
               </h2>
 
               <div className="space-y-3 mb-8">
                 <label className="block text-[10px] text-gray-500 uppercase tracking-widest">
-                  Melyik rendszert aktiváljuk?
+                  Mivel tudunk segíteni?
                 </label>
                 <div className="grid grid-cols-1 gap-3">
                   {TARGET_OPTIONS.map((option) => (
@@ -285,9 +290,16 @@ export default function InitProtocolClient() {
                       type="button"
                       key={option.id}
                       onClick={() => setFormData({ ...formData, target: option.id })}
-                      className={`w-full text-left p-4 border ${formData.target === option.id ? "border-white bg-white/10" : "border-white/10"} bg-[#0a0a0a] transition-all text-sm uppercase tracking-widest text-gray-300 ${option.color} group flex justify-between items-center`}
+                      className={`w-full text-left p-4 border ${formData.target === option.id ? "border-white bg-white/10" : "border-white/10"} bg-[#0a0a0a] transition-all text-gray-300 ${option.color} group flex justify-between items-center`}
                     >
-                      <span>{option.label}</span>
+                      <span>
+                        <span className="block text-sm uppercase tracking-widest">
+                          {option.label}
+                        </span>
+                        <span className="block text-[10px] normal-case tracking-normal text-gray-500 mt-1">
+                          {option.desc}
+                        </span>
+                      </span>
                       {formData.target === option.id && <span className="text-[#e7ff00]">✓</span>}
                     </button>
                   ))}
@@ -299,7 +311,6 @@ export default function InitProtocolClient() {
                   Mi a helyzet most, és mit szeretnél elérni?
                 </label>
                 <textarea
-                  ref={descriptionRef}
                   rows={4}
                   placeholder="Pl.: Van egy WooCommerce webshopunk, ami nagyon lassú és elavult. Szeretnénk átépíteni Next.js-re úgy, hogy a bolt közben ne álljon le. Kb. 400 termék, tavaszra kellene kész lennie."
                   className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all resize-none overflow-hidden"
@@ -307,12 +318,15 @@ export default function InitProtocolClient() {
                   value={formData.description}
                   onChange={handleDescriptionChange}
                 />
-                <div className="mt-2 text-[10px] uppercase tracking-widest">
+                <div className="mt-2 flex items-center justify-between gap-4 text-[10px] uppercase tracking-widest">
                   {descriptionReady ? (
                     <span className="text-[#e7ff00]/60">✓ Készen áll</span>
                   ) : (
                     <span className="text-gray-500">még {descriptionRemaining} karakter</span>
                   )}
+                  <span className="text-gray-600 normal-case text-right">
+                    Minél konkrétabb, annál pontosabb választ tudunk adni.
+                  </span>
                 </div>
               </div>
 
@@ -333,10 +347,14 @@ export default function InitProtocolClient() {
           {step === 2 && (
             <div className="animate-fade-in">
               <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#9d00ff] pl-4">
-                02 // Keret és Határidő
+                02 · Keret és határidő
               </h2>
+              <p className="text-xs text-gray-500 leading-relaxed normal-case mb-6">
+                Azért kérdezzük, hogy ne pazaroljuk egymás idejét. Ha a keret nem reális a
+                feladathoz, azt inkább most mondjuk meg, mint három egyeztetés után.
+              </p>
               <p className="text-xs text-gray-500 tracking-widest uppercase mb-6">
-                Mekkora büdzsét terveztek erre a projektre?
+                Mekkora keretet terveztek erre?
               </p>
 
               <div className="grid grid-cols-2 gap-4">
@@ -389,17 +407,17 @@ export default function InitProtocolClient() {
           {step === 3 && (
             <div className="animate-fade-in">
               <h2 className="text-2xl font-bold uppercase tracking-widest text-white mb-8 border-l-2 border-[#00E5FF] pl-4">
-                03 // Kapcsolat
+                03 · Kapcsolat
               </h2>
 
               <div className="space-y-6">
                 <div>
                   <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
-                    Engedélyezett Név
+                    Neved
                   </label>
                   <input
                     type="text"
-                    placeholder="Vezeték és Keresztnév"
+                    placeholder="Kovács János"
                     className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -407,7 +425,7 @@ export default function InitProtocolClient() {
                 </div>
                 <div>
                   <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
-                    Vállalat / Entitás
+                    Cégnév
                   </label>
                   <input
                     type="text"
@@ -419,11 +437,11 @@ export default function InitProtocolClient() {
                 </div>
                 <div>
                   <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
-                    Kommunikációs Csatorna (Email)
+                    E-mail cím
                   </label>
                   <input
                     type="email"
-                    placeholder="titkosított@email.com"
+                    placeholder="nev@ceged.hu"
                     className="w-full bg-transparent border-b border-white/20 text-white p-2 text-sm transition-all"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -431,7 +449,7 @@ export default function InitProtocolClient() {
                 </div>
                 <div>
                   <label className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2">
-                    Telefonos Elérhetőség (opcionális)
+                    Telefonszám (opcionális)
                   </label>
                   <input
                     type="tel"
@@ -495,13 +513,44 @@ export default function InitProtocolClient() {
               {/* Töltés és Hibaüzenetek kezelése */}
               <div className="mt-6 min-h-[40px]">
                 {isSubmitting && (
-                  <div className="text-center text-[#e7ff00] animate-pulse text-xs tracking-widest uppercase">
-                    &gt; Adatok kódolása és továbbítása...
+                  <div className="text-center text-[#e7ff00] animate-pulse text-xs tracking-widest">
+                    Küldés folyamatban…
                   </div>
                 )}
                 {submitError && (
-                  <div className="text-center text-red-500 font-bold text-xs tracking-widest uppercase mt-2">
-                    {submitError}
+                  <div className="text-center text-red-400 text-xs leading-relaxed mt-2">
+                    {submitError.kind === "server" ? (
+                      submitError.detail ? (
+                        <>
+                          {submitError.detail} Írj közvetlenül:{" "}
+                          <a
+                            href={`mailto:${CONTACT_EMAIL}`}
+                            className="underline hover:text-white"
+                          >
+                            {CONTACT_EMAIL}
+                          </a>
+                        </>
+                      ) : (
+                        <>
+                          A küldés nem sikerült. Próbáld újra pár másodperc múlva — ha akkor sem
+                          megy, írj közvetlenül:{" "}
+                          <a
+                            href={`mailto:${CONTACT_EMAIL}`}
+                            className="underline hover:text-white"
+                          >
+                            {CONTACT_EMAIL}
+                          </a>
+                        </>
+                      )
+                    ) : (
+                      <>
+                        Nem sikerült elérni a szervert. Ellenőrizd az internetkapcsolatot, vagy írj
+                        közvetlenül:{" "}
+                        <a href={`mailto:${CONTACT_EMAIL}`} className="underline hover:text-white">
+                          {CONTACT_EMAIL}
+                        </a>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
@@ -527,34 +576,56 @@ export default function InitProtocolClient() {
             </div>
           )}
 
-          {/* LÉPÉS 4: SIKER / VÉGREHAJTÁS — csak valós 2xx válasz esetén */}
+          {/* LÉPÉS 4: SIKER — csak valós 2xx válasz esetén */}
           {step === 4 && (
             <div className="text-center animate-fade-in py-12">
-              {/* Futurisztikus töltőgyűrű */}
-              <div className="relative w-24 h-24 mx-auto mb-10 flex items-center justify-center">
-                <div className="absolute inset-0 border-t-2 border-[#e7ff00] rounded-full animate-spin"></div>
-                <div className="absolute inset-2 border-r-2 border-white/10 rounded-full animate-[spin_3s_linear_infinite_reverse]"></div>
-                <div className="w-2 h-2 bg-[#e7ff00] rounded-full animate-pulse shadow-[0_0_15px_#e7ff00]"></div>
+              {/* Statikus pipa — a művelet befejeződött, nem folyamatban van */}
+              <div className="relative w-20 h-20 mx-auto mb-10 flex items-center justify-center rounded-full border-2 border-[#e7ff00] shadow-[0_0_25px_rgba(231,255,0,0.3)]">
+                <svg
+                  className="w-9 h-9 text-[#e7ff00]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2.5"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
               </div>
 
               <h2 className="text-3xl md:text-4xl font-black uppercase tracking-[0.2em] text-white mb-6">
-                Protokoll{" "}
-                <span className="text-[#e7ff00] drop-shadow-[0_0_15px_rgba(231,255,0,0.2)]">
-                  Elindítva
-                </span>
+                Megkaptuk<span className="text-[#e7ff00]">.</span>
               </h2>
 
-              <p className="text-gray-400 text-sm tracking-widest mb-8 uppercase leading-relaxed max-w-md mx-auto">
-                A célpont rögzítve. Adatok titkosítva. <br />A THE GBR operatív törzse két
-                munkanapon belül felveszi veled a kapcsolatot.
+              <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-md mx-auto normal-case tracking-normal">
+                Küldtünk egy visszaigazolást a megadott e-mail címre — ha pár percen belül nem
+                érkezik meg, nézd meg a spam mappát is.
+                <br />
+                <br />
+                Két munkanapon belül válaszolunk. Ha közben eszedbe jut valami, írj nyugodtan:{" "}
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#e7ff00] hover:text-white">
+                  {CONTACT_EMAIL}
+                </a>
               </p>
 
-              {/* Terminál státusz blokk — a ténylegesen kapott válaszkódot mutatja */}
+              {/* Terminál státusz blokk — valós, a válaszból kapott adatokkal */}
               <div className="font-mono text-[10px] text-gray-500 bg-[#0a0a0a] border border-white/5 p-4 rounded inline-block text-left">
-                <span className="text-[#e7ff00]">sys.status:</span> {submittedStatus ?? "—"}_OK{" "}
+                <span className="text-[#e7ff00]">Beérkezett:</span>{" "}
+                {submittedAt
+                  ? new Intl.DateTimeFormat("hu-HU", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }).format(submittedAt)
+                  : "—"}
                 <br />
-                <span className="text-gray-600">connection:</span> CLOSED <br />
-                <span className="text-gray-600">agent_routing:</span> ACTIVE
+                <span className="text-gray-600">Azonosító:</span>{" "}
+                {submittedId ? submittedId.slice(0, 8) : (submittedStatus ?? "—")}
               </div>
 
               <div className="mt-12">
@@ -562,7 +633,7 @@ export default function InitProtocolClient() {
                   href="/"
                   className="inline-block px-8 py-3 border border-white/10 text-white font-bold uppercase tracking-widest text-xs hover:bg-[#e7ff00] hover:text-black hover:border-[#e7ff00] transition-all shadow-[0_0_0_rgba(231,255,0,0)] hover:shadow-[0_0_20px_rgba(231,255,0,0.3)]"
                 >
-                  Vissza a Bázisra
+                  Vissza a főoldalra
                 </Link>
               </div>
             </div>
