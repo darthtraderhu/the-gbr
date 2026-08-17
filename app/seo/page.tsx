@@ -161,7 +161,7 @@ export default function SeoAeoPage() {
 
       {/* ===== SÖTÉT FEJLÉC + ELLENŐRZŐ PANEL ===== */}
       <Rail label="SEO és AEO" dark>
-        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
+        <section className="px-6 pt-[var(--space-8)] sm:pt-[var(--space-12)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
           <h1 className="font-display font-black leading-[0.9] tracking-[-0.052em] [font-size:var(--text-display)] max-w-[15ch]">
             Attól, hogy jó a szöveged,{" "}
             <span className="text-[var(--dim)]">még nem talál meg senki</span>

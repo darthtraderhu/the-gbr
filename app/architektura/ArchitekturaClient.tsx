@@ -232,7 +232,7 @@ export default function ArchitekturaClient() {
 
       {/* ===== SÖTÉT FEJLÉC + TERVEZŐ ===== */}
       <Rail label="Tervező" dark>
-        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
+        <section className="px-6 pt-[var(--space-8)] sm:pt-[var(--space-12)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
           <h1 className="font-display font-black leading-[0.88] tracking-[-0.055em] [font-size:var(--text-display)]">
             Csomagok
             <br />

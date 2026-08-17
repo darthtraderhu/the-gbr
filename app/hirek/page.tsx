@@ -68,7 +68,7 @@ export default function Hirek() {
       {/* =========================================
           HERO
       ========================================= */}
-      <section className="relative z-10 w-full pt-40 pb-16 px-6">
+      <section className="relative z-10 w-full pt-24 pb-16 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8 border-b border-white/10 pb-8">
           <div>
             <p className="font-mono text-xs tracking-[0.3em] text-gray-500 uppercase mb-4">

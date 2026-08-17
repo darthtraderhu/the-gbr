@@ -160,7 +160,7 @@ export default function Home() {
 
       {/* ===== 01 / MŰSZER — a hero maga a bizonyíték ===== */}
       <Rail label="01 / Műszer" dark>
-        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-10)]">
+        <section className="px-6 pt-[var(--space-8)] sm:pt-[var(--space-12)] pb-[var(--space-10)]">
           <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.24em] uppercase text-[var(--mid)] flex items-center gap-3 mb-[var(--space-8)]">
             <span className="w-1.5 h-1.5 bg-[var(--signal)] block animate-pulse" />
             Ez az oldal most megméri magát

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function LegalLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-[#050505] text-white pt-24 px-6 md:px-12 pb-24 font-sans">
+    <div className="min-h-screen bg-[#050505] text-white pt-10 px-6 md:px-12 pb-24 font-sans">
       <div className="max-w-3xl mx-auto bg-[#0a0a0a] border border-white/10 rounded-xl p-8 md:p-12 shadow-[0_0_40px_rgba(231,255,0,0.05)] relative overflow-hidden">
         {/* Dekorcsík */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#e7ff00]/20 via-[#e7ff00] to-[#e7ff00]/20"></div>

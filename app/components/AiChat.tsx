@@ -1,32 +1,34 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useChatOpenRequests } from "./chat-bus";
 
 type ChatMessage = { sender: "user" | "ai"; text: string };
 
+const INITIAL_MESSAGE: ChatMessage = {
+  sender: "ai",
+  text: "Szia! Segítek eligazodni az oldalon. Kérlek, ne írj ide személyes adatot — ha ajánlatot szeretnél, a kapcsolati űrlap a jó hely.",
+};
+
 export default function AiChat() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      sender: "ai",
-      text: "Üdvözlöm. Én a THE GBR neurális asszisztense vagyok. Milyen rendszer architektúrára van szüksége?",
-    },
-  ]);
+  const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useChatOpenRequests(useCallback(() => setIsOpen(true), []));
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  // VALÓDI API HÍVÁS AZ OPENAI FELÉ
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
     const userMsg = inputValue;
-    const currentHistory = [...messages]; // Elmentjük a memóriát
+    const currentHistory = [...messages];
 
     setMessages((prev) => [...prev, { sender: "user", text: userMsg }]);
     setInputValue("");
@@ -48,7 +50,7 @@ export default function AiChat() {
       console.error("Chat hívási hiba:", error);
       setMessages((prev) => [
         ...prev,
-        { sender: "ai", text: "SYS.ERROR: Hálózati hiba lépett fel." },
+        { sender: "ai", text: "A kérés nem sikerült. Próbáld újra, vagy írj: gabor@thegbr.eu" },
       ]);
     } finally {
       setIsTyping(false);
@@ -56,68 +58,78 @@ export default function AiChat() {
   };
 
   return (
-    <div className="fixed bottom-28 md:bottom-6 right-4 md:right-6 z-[100] font-mono">
+    <>
+      {/* ===== ASZTALI INDÍTÓGOMB ===== */}
+      {!isOpen && (
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          data-theme="dark"
+          className="hidden md:flex fixed right-6 bottom-6 z-[70] items-center gap-[10px] px-5 py-[14px] border border-[var(--rule)] hover:border-[var(--signal)] transition-colors [font-family:var(--font-mono)] text-[10.5px] tracking-[0.18em] uppercase"
+          style={{ backgroundColor: "var(--ground)", color: "var(--ink)" }}
+        >
+          <span className="w-[6px] h-[6px] bg-[var(--signal)] block animate-pulse" />
+          Kérdésed van?
+        </button>
+      )}
+
+      {/* ===== PANEL ===== */}
       {isOpen && (
-        <div className="absolute bottom-16 right-0 w-[320px] sm:w-[380px] bg-[#050505] border border-white/20 rounded-xl shadow-[0_0_40px_rgba(231,255,0,0.15)] overflow-hidden flex flex-col transform transition-all duration-300 origin-bottom-right">
-          <div className="bg-[#0a0a0a] border-b border-white/10 px-4 py-3 flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#e7ff00] animate-pulse"></span>
-              <span className="text-[10px] text-gray-300 uppercase tracking-widest font-bold">
-                Sys: GBR_AI_NODE
-              </span>
+        <div
+          data-theme="dark"
+          className="fixed z-[80] right-0 left-0 bottom-0 md:left-auto md:right-6 md:bottom-6 w-auto md:w-[400px] md:max-w-[calc(100vw-40px)] border-t md:border border-[var(--rule)] flex flex-col max-h-[88vh] md:max-h-[min(640px,calc(100vh-48px))]"
+          style={{ backgroundColor: "var(--ground)", color: "var(--ink)" }}
+        >
+          <div className="flex items-center gap-3 px-[18px] py-[14px] border-b border-[var(--rule)]">
+            <div>
+              <div className="font-display font-bold text-[14px] tracking-[-0.02em]">GBR AI</div>
+              <div className="[font-family:var(--font-mono)] text-[9px] tracking-[0.18em] uppercase text-[var(--dim)]">
+                Válaszol · nem ajánl
+              </div>
             </div>
             <button
+              type="button"
               onClick={() => setIsOpen(false)}
-              className="text-gray-500 hover:text-white transition-colors"
+              aria-label="Bezárás"
+              className="ml-auto text-[var(--mid)] hover:text-[var(--ink)] transition-colors [font-family:var(--font-mono)] text-[15px]"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
+              ✕
             </button>
           </div>
 
-          <div className="h-[350px] p-4 overflow-y-auto flex flex-col gap-4 bg-cubes-pattern bg-opacity-5 relative">
-            <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505] pointer-events-none"></div>
+          <div className="px-[18px] py-[10px] border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[9px] tracking-[0.14em] uppercase text-[var(--dim)]">
+            AI válaszol · árat és határidőt ember mond
+          </div>
 
+          <div className="px-[18px] py-[18px] overflow-y-auto flex-1">
             {messages.map((msg, idx) => (
               <div
                 key={idx}
-                className={`relative z-10 flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+                className={`grid grid-cols-[64px_1fr] gap-3 py-[11px] border-b border-[color-mix(in_srgb,var(--rule)_60%,transparent)] last:border-b-0`}
               >
-                <div
-                  className={`max-w-[85%] p-3 rounded text-xs leading-relaxed ${msg.sender === "user" ? "bg-white/10 text-white border border-white/5 rounded-br-none" : "bg-[#e7ff00]/10 text-[#e7ff00] border border-[#e7ff00]/20 rounded-bl-none"}`}
+                <span
+                  className={`[font-family:var(--font-mono)] text-[9px] tracking-[0.16em] uppercase pt-[3px] ${
+                    msg.sender === "ai" ? "text-[var(--signal)]" : "text-[var(--dim)]"
+                  }`}
                 >
-                  {msg.sender === "ai" && (
-                    <div className="text-[8px] font-black uppercase tracking-widest mb-1 opacity-50">
-                      GBR_AI
-                    </div>
-                  )}
+                  {msg.sender === "ai" ? "GBR AI" : "Te"}
+                </span>
+                <p
+                  className={`m-0 text-[15px] leading-[1.55] ${
+                    msg.sender === "ai" ? "text-[var(--ink-2)]" : "text-[var(--ink)]"
+                  }`}
+                >
                   {msg.text}
-                </div>
+                </p>
               </div>
             ))}
 
             {isTyping && (
-              <div className="flex justify-start relative z-10">
-                <div className="bg-[#e7ff00]/10 border border-[#e7ff00]/20 p-3 rounded rounded-bl-none flex gap-1 items-center">
-                  <div
-                    className="w-1.5 h-1.5 bg-[#e7ff00] rounded-full animate-bounce"
-                    style={{ animationDelay: "0ms" }}
-                  ></div>
-                  <div
-                    className="w-1.5 h-1.5 bg-[#e7ff00] rounded-full animate-bounce"
-                    style={{ animationDelay: "150ms" }}
-                  ></div>
-                  <div
-                    className="w-1.5 h-1.5 bg-[#e7ff00] rounded-full animate-bounce"
-                    style={{ animationDelay: "300ms" }}
-                  ></div>
-                </div>
+              <div className="grid grid-cols-[64px_1fr] gap-3 py-[11px]">
+                <span className="[font-family:var(--font-mono)] text-[9px] tracking-[0.16em] uppercase text-[var(--signal)] pt-[3px]">
+                  GBR AI
+                </span>
+                <p className="m-0 text-[15px] text-[var(--dim)] animate-pulse">…</p>
               </div>
             )}
             <div ref={messagesEndRef} />
@@ -125,65 +137,25 @@ export default function AiChat() {
 
           <form
             onSubmit={handleSendMessage}
-            className="border-t border-white/10 bg-[#0a0a0a] p-3 flex gap-2"
+            className="border-t border-[var(--rule)] flex items-center gap-[10px] px-[18px] py-[12px]"
           >
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Adjon meg egy parancsot..."
-              className="flex-1 bg-transparent border-none text-xs text-white focus:outline-none focus:ring-0 placeholder-gray-600"
+              placeholder="Írj egy kérdést…"
+              className="flex-1 bg-transparent border-0 text-[15px] py-[6px] text-[var(--ink)] placeholder:text-[var(--dim)] focus:outline-none"
             />
             <button
               type="submit"
               disabled={!inputValue.trim() || isTyping}
-              className="p-2 bg-[#e7ff00] text-black rounded hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="[font-family:var(--font-mono)] text-[11px] tracking-[0.1em] uppercase px-[14px] py-[9px] bg-[var(--signal)] text-[#101400] disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                ></path>
-              </svg>
+              Küld
             </button>
           </form>
         </div>
       )}
-
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`relative flex items-center justify-center w-14 h-14 rounded-full bg-[#0a0a0a] border-2 ${isOpen ? "border-white/20 text-gray-500" : "border-[#e7ff00] text-[#e7ff00] shadow-[0_0_20px_rgba(231,255,0,0.3)] hover:scale-110"} transition-all duration-300 group`}
-      >
-        {!isOpen && (
-          <>
-            <span className="absolute inset-0 rounded-full border border-[#e7ff00] animate-ping opacity-20"></span>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-              ></path>
-            </svg>
-            <div className="absolute right-16 top-1/2 -translate-y-1/2 bg-[#050505] border border-white/10 px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none flex items-center gap-2 whitespace-nowrap hidden md:flex">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e7ff00] animate-pulse"></span>
-              <span className="text-[9px] uppercase tracking-widest text-white">AI Segéd</span>
-            </div>
-          </>
-        )}
-        {isOpen && (
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        )}
-      </button>
-    </div>
+    </>
   );
 }

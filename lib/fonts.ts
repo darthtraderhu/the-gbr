@@ -1,18 +1,10 @@
-import { Montserrat, Archivo, Source_Serif_4, IBM_Plex_Mono } from "next/font/google";
+import { Archivo, Source_Serif_4, IBM_Plex_Mono } from "next/font/google";
 
-// Az aktív betűtípus — ez marad érvényben, amíg a vizuális átépítés meg nem
-// történik. A className-jét kapja a <body>, tehát ez rendereli ténylegesen.
-export const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
-});
-
-// ---------------------------------------------------------------------
-// Design token réteg (2026.08 arculatváltás alapozása). A .variable módot
-// használjuk, NEM a .className-t — ez csak a CSS változót definiálja,
-// font-family-t nem állít be semmin, tehát a jelenlegi megjelenést nem
-// érinti. A tényleges bekötés a következő körben történik.
+// Design token réteg (2026.08 arculatváltás). A .variable módot használjuk —
+// ez a CSS változót definiálja, a tényleges font-family-t a globals.css
+// @theme inline blokkja köti be Tailwind osztályokként (font-display,
+// font-body, var(--font-mono)). A korábbi Montserrat (a <body> alap-betűje
+// az átépítés előtt) kivezetve — ld. AGENTS.md.
 // ---------------------------------------------------------------------
 
 // Display — címsorokhoz.

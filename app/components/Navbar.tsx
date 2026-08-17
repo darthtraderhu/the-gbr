@@ -2,178 +2,129 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "./ThemeToggle";
+import { requestChatOpen } from "./chat-bus";
+
+const NAV_LINKS = [
+  { name: "Szolgáltatások", href: "/arzenal" },
+  { name: "Csomagok", href: "/architektura" },
+  { name: "SEO", href: "/seo" },
+  { name: "Rólunk", href: "/szindikatus" },
+  { name: "Írások", href: "/hirek" },
+];
+
+const BOTTOM_LINKS = [
+  { name: "Szolgált.", icon: "◧", href: "/arzenal" },
+  { name: "Csomagok", icon: "▤", href: "/architektura" },
+  { name: "Írások", icon: "▦", href: "/hirek" },
+];
 
 export default function Navbar() {
   const pathname = usePathname();
 
-  // Az /init oldalon (terminál varázsló) teljesen elrejtjük a menüt a maximális fókuszért!
+  // Az /init oldalon (fókuszált kapcsolatfelvételi folyamat) nincs sem
+  // felső, sem alsó navigáció.
   if (pathname === "/init") return null;
-
-  // Navigációs adatok (Link, Név, Szín, és Ikon az applikációs menühöz)
-  const navLinks = [
-    {
-      name: "Központ",
-      href: "/",
-      activeColor: "text-white",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-        />
-      ),
-    },
-    {
-      name: "Szolgáltatások",
-      href: "/arzenal",
-      activeColor: "text-[#e7ff00]",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-        />
-      ),
-    },
-    {
-      name: "Csomagok",
-      href: "/architektura",
-      activeColor: "text-[#00E5FF]",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-        />
-      ),
-    },
-    {
-      name: "SEO",
-      href: "/seo",
-      activeColor: "text-[#e7ff00]",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0015.607 10.607z"
-        />
-      ),
-    },
-    {
-      name: "Rólunk",
-      href: "/szindikatus",
-      activeColor: "text-[#9d00ff]",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-        />
-      ),
-    },
-    {
-      name: "Írások",
-      href: "/hirek",
-      activeColor: "text-white",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M13 10V3L4 14h7v7l9-11h-7z"
-        />
-      ),
-    },
-  ];
 
   return (
     <>
-      {/* =========================================
-          ASZTALI / FELSŐ FEJLÉC (Minden eszközön)
-      ========================================= */}
-      <header className="fixed top-0 left-0 w-full z-[90] border-b border-white/5 bg-[#0a0a0a]/90 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 h-16 md:h-24 flex items-center justify-between">
-          {/* Logó */}
+      {/* ===== ASZTALI / FELSŐ NAVIGÁCIÓ ===== */}
+      <header
+        data-theme="dark"
+        className="sticky top-0 z-[60] border-b border-[var(--rule)] backdrop-blur-md"
+        style={{ backgroundColor: "rgba(11,14,16,.94)", color: "var(--ink)" }}
+      >
+        <div className="flex items-center gap-5 px-6 py-[18px]">
           <Link
             href="/"
-            className="text-3xl md:text-5xl font-black italic tracking-[-0.05em] flex items-center hover:opacity-80 transition-opacity"
+            className="font-display font-extrabold text-[20px] tracking-[-0.045em] hover:opacity-80 transition-opacity"
           >
-            <span className="text-white">THE</span>
-            <span className="text-[#e7ff00] drop-shadow-[0_0_15px_rgba(231,255,0,0.4)]">GBR</span>
+            THE GBR<span className="text-[var(--signal)]">.</span>
           </Link>
 
-          {/* Desktop Menü (Csak gépen látszik) */}
-          <nav className="hidden md:flex gap-10 text-xs font-bold uppercase tracking-[0.2em] items-center">
-            {navLinks.slice(1).map((link) => {
-              // A "Központ" (Főoldal) gombot elrejtjük asztalon, mert a Logó visz oda
+          <nav className="ml-auto hidden md:flex items-center gap-6">
+            {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`transition-colors relative flex items-center gap-2 ${isActive ? link.activeColor : "text-gray-500 hover:text-white"}`}
+                  className={`[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase transition-colors ${
+                    isActive ? "text-[var(--signal)]" : "text-[var(--mid)] hover:text-[var(--ink)]"
+                  }`}
                 >
-                  {isActive && (
-                    <span
-                      className={`w-1.5 h-1.5 rounded-full animate-pulse ${link.activeColor.replace("text-", "bg-")}`}
-                    ></span>
-                  )}
                   {link.name}
                 </Link>
               );
             })}
+            <ThemeToggle />
+            <Link
+              href="/init"
+              className="font-display font-bold text-[12.5px] tracking-[-0.01em] px-[17px] py-[10px] bg-[var(--signal)] text-[#101400] border border-[var(--signal)] hover:bg-[var(--signal-deep)] hover:border-[var(--signal-deep)] transition-colors"
+            >
+              Pitcheld el
+            </Link>
           </nav>
 
-          {/* Akció gomb (A mobilon kisebb, de ott is látszik felül) */}
           <Link
             href="/init"
-            className="px-4 py-2 md:px-6 md:py-3 rounded bg-[#e7ff00] text-[#0a0a0a] text-[9px] md:text-xs font-black italic uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_0_20px_rgba(231,255,0,0.2)]"
+            className="ml-auto md:hidden font-display font-bold text-[12px] px-[14px] py-[9px] bg-[var(--signal)] text-[#101400] border border-[var(--signal)]"
           >
-            Indítás
+            Pitcheld el
           </Link>
         </div>
       </header>
 
-      {/* =========================================
-          MOBIL APPLIKÁCIÓS ALSÓ MENÜ (TAB BAR)
-      ========================================= */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full z-[90] bg-[#050505]/95 backdrop-blur-2xl border-t border-white/10 pb-6 pt-3 px-2 flex justify-around items-center">
-        {navLinks.map((link) => {
+      {/* ===== MOBIL ALSÓ SÁV ===== */}
+      <nav
+        data-theme="dark"
+        className="md:hidden fixed left-0 right-0 bottom-0 z-[75] grid grid-cols-5 border-t border-[var(--rule)]"
+        style={{ backgroundColor: "var(--ground)" }}
+      >
+        {BOTTOM_LINKS.map((link) => {
           const isActive = pathname === link.href;
           return (
             <Link
               key={link.href}
               href={link.href}
-              className={`flex flex-col items-center gap-1.5 w-1/6 ${isActive ? link.activeColor : "text-gray-600"}`}
+              className={`relative flex flex-col items-center justify-center gap-[6px] border-r border-[var(--rule)] pt-[11px] pb-[calc(11px+env(safe-area-inset-bottom))] px-1 ${
+                isActive ? "text-[var(--ink)]" : "text-[var(--mid)]"
+              }`}
             >
-              <div
-                className={`relative p-1.5 rounded-xl transition-all duration-300 ${isActive ? "bg-white/5 scale-110" : "bg-transparent scale-100"}`}
-              >
-                {/* Ha aktív, akkor bevillan egy finom glow a háttérben */}
-                {isActive && (
-                  <div
-                    className={`absolute inset-0 blur-md opacity-30 ${link.activeColor.replace("text-", "bg-")}`}
-                  ></div>
-                )}
-
-                <svg
-                  className="w-5 h-5 relative z-10"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  {link.icon}
-                </svg>
-              </div>
-              <span className="text-[8px] font-bold uppercase tracking-widest">{link.name}</span>
+              {isActive && (
+                <span className="absolute top-[-1px] left-0 right-0 h-[2px] bg-[var(--signal)]" />
+              )}
+              <span className="[font-family:var(--font-mono)] text-[15px] leading-none">
+                {link.icon}
+              </span>
+              <span className="[font-family:var(--font-mono)] text-[8.5px] tracking-[0.12em] uppercase">
+                {link.name}
+              </span>
             </Link>
           );
         })}
+
+        <button
+          type="button"
+          onClick={() => requestChatOpen()}
+          className="relative flex flex-col items-center justify-center gap-[6px] border-r border-[var(--rule)] pt-[11px] pb-[calc(11px+env(safe-area-inset-bottom))] px-1 text-[var(--mid)]"
+        >
+          <span className="[font-family:var(--font-mono)] text-[15px] leading-none">◇</span>
+          <span className="[font-family:var(--font-mono)] text-[8.5px] tracking-[0.12em] uppercase">
+            Chat
+          </span>
+        </button>
+
+        <Link
+          href="/init"
+          className="flex flex-col items-center justify-center gap-[6px] pt-[11px] pb-[calc(11px+env(safe-area-inset-bottom))] px-1"
+          style={{ backgroundColor: "var(--signal)", color: "#101400" }}
+        >
+          <span className="[font-family:var(--font-mono)] text-[15px] leading-none">&rarr;</span>
+          <span className="[font-family:var(--font-mono)] text-[8.5px] tracking-[0.12em] uppercase font-semibold">
+            Pitch
+          </span>
+        </Link>
       </nav>
     </>
   );

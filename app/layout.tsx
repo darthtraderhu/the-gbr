@@ -3,14 +3,23 @@ import { GoogleAnalytics } from "@next/third-parties/google"; // ÚJ IMPORT: A h
 import "./globals.css";
 import { SITE_URL } from "@/lib/site";
 import { organizationSchema } from "@/lib/jsonld";
-import { montserrat, fontDisplay, fontBody, fontMono } from "@/lib/fonts";
+import { fontDisplay, fontBody, fontMono } from "@/lib/fonts";
 
 // Importáljuk a komponenseket
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AiChat from "./components/AiChat";
-import CallButton from "./components/CallButton";
 import JsonLd from "./components/JsonLd";
+
+// Villanásmentes témabeállítás — a tárolt választást már a hidratáció előtt
+// alkalmazza, mielőtt a böngésző a világos alapértelmezéssel kifestene
+// (ld. ThemeToggle és globals.css [data-theme] blokkjai).
+const THEME_INIT_SCRIPT = `
+try {
+  var t = localStorage.getItem("gbr-theme");
+  if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
+} catch (e) {}
+`;
 
 // BUMM! Kőkemény globális B2B SEO, OpenGraph és Analytics alapok
 export const metadata: Metadata = {
@@ -44,19 +53,17 @@ export default function RootLayout({
   return (
     <html
       lang="hu"
+      suppressHydrationWarning
       className={`scroll-smooth ${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}
     >
-      {/* 
-        A "select-none" osztály letiltja, hogy bárki egérrel kijelölje a szöveget! 
-        A selection:bg-... dolgok bent maradhatnak, ha valahol mégis engednénk egy inputot.
-      */}
-      <body
-        className={`${montserrat.className} bg-[#0a0a0a] text-white select-none selection:bg-[#e7ff00] selection:text-black antialiased`}
-      >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
+      <body className="font-body bg-[var(--ground)] text-[var(--ink)] antialiased pb-[66px] md:pb-0">
         {/* Szervezeti JSON-LD — minden oldalon jelen van, ez a kiadó/publisher. */}
         <JsonLd data={organizationSchema()} />
 
-        {/* A Globális Menü */}
+        {/* A Globális Menü — felül asztalon, alul mobilon */}
         <Navbar />
 
         {/* Az adott aloldal tartalma */}
@@ -65,10 +72,7 @@ export default function RootLayout({
         {/* A Globális Lábléc */}
         <Footer />
 
-        {/* Lebegő Forródrót Gomb (BAL OLDAL) */}
-        <CallButton />
-
-        {/* A Globális AI Asszisztens (JOBB OLDAL) */}
+        {/* A Globális AI Asszisztens */}
         <AiChat />
       </body>
 

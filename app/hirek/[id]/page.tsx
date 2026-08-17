@@ -67,7 +67,7 @@ export default async function PosztOldal({ params }: { params: Promise<{ id: str
   const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`;
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white pt-24 px-6 md:px-12 font-sans bg-cubes-pattern bg-opacity-5">
+    <div className="min-h-screen bg-[#050505] text-white pt-10 px-6 md:px-12 font-sans bg-cubes-pattern bg-opacity-5">
       <JsonLd
         data={[
           blogPostingSchema({
