@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google"; // ÚJ IMPORT: A hivatalos GA4 modul
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SITE_URL } from "@/lib/site";
 import { organizationSchema } from "@/lib/jsonld";
@@ -79,6 +80,9 @@ export default function RootLayout({
 
         {/* A Globális AI Asszisztens */}
         <AiChat />
+
+        {/* Vercel Analytics — a hoszting platform saját, cookie nélküli látogatómérése */}
+        <Analytics />
       </body>
 
       {/* A hivatalos, szupergyors Google Analytics 4 integráció! */}
