@@ -255,6 +255,10 @@ export default function Szindikatus() {
             belül végezzük — ott, ahol a minőségért közvetlenül felelni tudunk. Amihez külön
             szakértelem kell, ahhoz partnereket hívunk, akikkel korábban is dolgoztunk.
           </p>
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[64ch] mt-[var(--space-4)]">
+            Fejlesztési partnerként is dolgozunk — magyar és nyugat-európai ügynökségeknek
+            egyaránt.
+          </p>
         </section>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-[var(--rule)]">

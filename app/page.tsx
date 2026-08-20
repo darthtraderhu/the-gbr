@@ -245,9 +245,13 @@ export default function Home() {
               indítottam, mert újra és újra ugyanazt láttam: lassú az oldal, elveszik a megkeresés,
               senki nem méri, mi történik.
             </p>
-            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[42ch]">
+            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[42ch] mb-[var(--space-4)]">
               Ma egy hatéves cég vagyunk, és pontosan ezt a két oldalt kötjük össze — az
               értékesítési logikát és a technológiát.
+            </p>
+            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[42ch]">
+              Fejlesztési partnerként is dolgozunk — magyar és nyugat-európai ügynökségeknek
+              egyaránt.
             </p>
             <div className="mt-[var(--space-6)] pt-[var(--space-4)] border-t border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
               Tóth Gábor · Sales &amp; Management

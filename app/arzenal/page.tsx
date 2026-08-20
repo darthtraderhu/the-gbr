@@ -317,6 +317,10 @@ export default function Arzenal() {
             Hét terület, amit házon belül végzünk. Ha egy projekthez nem mind a hét kell, nem is
             adjuk el mind a hetet.
           </p>
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-5)]">
+            Fejlesztési partnerként is dolgozunk — magyar és nyugat-európai ügynökségeknek
+            egyaránt.
+          </p>
         </section>
 
         <div className="border-t border-[var(--rule)]">
