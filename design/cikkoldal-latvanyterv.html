@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cikkoldal | THE GBR — látványterv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --d-ground:#0B0E10; --d-panel:#11161A; --d-ink:#EAEEE8; --d-mid:#79837D;
+  --d-dim:#4A524E; --d-rule:#20272B; --signal:#A8D400;
+  --l-ground:#EEF0EC; --l-panel:#FFF; --l-ink:#14171A; --l-ink2:#3C4348;
+  --l-mid:#697079; --l-rule:#D4D8D1; --l-soft:#E4E8E1; --l-signal:#93B300;
+  --pad:32px; --botnav:0px;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--l-ground);color:var(--l-ink);
+  font-family:"Source Serif 4",Georgia,serif;-webkit-font-smoothing:antialiased;
+  padding-bottom:var(--botnav);}
+a{color:inherit;}
+.rail{display:grid;grid-template-columns:72px 1fr;}
+.rail-side{border-right:1px solid var(--l-rule);position:relative;}
+.rail-side span{position:absolute;top:56px;left:50%;transform:translateX(-50%) rotate(180deg);
+  writing-mode:vertical-rl;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.34em;text-transform:uppercase;color:#A3ABA4;white-space:nowrap;}
+.dark .rail-side{border-right-color:var(--d-rule);} .dark .rail-side span{color:var(--d-dim);}
+.rail-main{min-width:0;}
+.dark{background:var(--d-ground);color:var(--d-ink);}
+.seam{height:1px;background:var(--signal);}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--l-mid);margin:0 0 18px;}
+.dark .eyebrow{color:var(--d-dim);}
+.btn{font-family:"Archivo",sans-serif;font-size:14px;font-weight:700;padding:14px 24px;
+  text-decoration:none;display:inline-block;background:var(--l-signal);color:#131A00;border:1px solid var(--l-signal);}
+.dark .btn{background:var(--signal);border-color:var(--signal);color:#101400;}
+
+/* ---- nav (asztali) ---- */
+.nav{border-bottom:1px solid var(--d-rule);position:sticky;top:0;z-index:60;
+  background:rgba(11,14,16,.94);backdrop-filter:blur(8px);}
+.nav-in{display:flex;align-items:center;gap:20px;padding:18px var(--pad);}
+.wm{font-family:"Archivo",sans-serif;font-size:20px;font-weight:800;letter-spacing:-.045em;}
+.wm i{color:var(--signal);font-style:normal;}
+.nav-links{margin-left:auto;display:flex;gap:24px;align-items:center;}
+.nav-links a{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--d-mid);text-decoration:none;}
+.nav-links a.on{color:var(--signal);} .nav-links a:hover{color:var(--d-ink);}
+.nav-cta{font-size:12.5px;padding:10px 17px;}
+
+/* ================= CIKK FEJLÉC ================= */
+.ahead{padding:clamp(40px,5.4vw,86px) var(--pad) clamp(28px,3.4vw,48px);}
+.ameta{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--d-dim);display:flex;gap:16px;flex-wrap:wrap;margin-bottom:26px;}
+.ameta .cat{color:var(--signal);}
+h1{font-family:"Archivo",sans-serif;margin:0;font-size:clamp(32px,5.6vw,74px);
+  font-weight:800;line-height:1.0;letter-spacing:-.045em;max-width:20ch;}
+.lede{font-size:clamp(17px,1.6vw,22px);line-height:1.5;color:#A7B0AA;max-width:52ch;margin:26px 0 0;}
+.abar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:13px var(--pad);
+  border-top:1px solid var(--d-rule);font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--d-dim);}
+.abar a{text-decoration:none;} .abar a:hover{color:var(--signal);}
+
+/* ================= PROSE ================= */
+.body{padding:clamp(44px,5.4vw,86px) var(--pad) clamp(40px,5vw,76px);}
+.prose{max-width:66ch;}
+.prose p{font-size:clamp(17px,1.42vw,20px);line-height:1.72;color:var(--l-ink2);margin:0 0 26px;}
+.prose p:first-of-type::first-letter{font-family:"Archivo",sans-serif;font-weight:800;
+  font-size:3.1em;line-height:.82;float:left;margin:6px 12px 0 0;color:var(--l-ink);}
+.prose h2{font-family:"Archivo",sans-serif;font-size:clamp(23px,2.5vw,33px);font-weight:700;
+  letter-spacing:-.03em;line-height:1.12;margin:52px 0 18px;max-width:24ch;}
+.prose h3{font-family:"Archivo",sans-serif;font-size:clamp(19px,1.9vw,24px);font-weight:700;
+  letter-spacing:-.022em;margin:38px 0 14px;}
+.prose strong{color:var(--l-ink);font-weight:600;}
+.prose a{color:var(--l-signal);text-decoration:none;border-bottom:1px solid #C2D68A;}
+.prose a:hover{border-bottom-color:var(--l-signal);}
+.prose ul,.prose ol{margin:0 0 26px;padding:0;list-style:none;counter-reset:li;}
+.prose li{font-size:clamp(16.5px,1.35vw,19px);line-height:1.65;color:var(--l-ink2);
+  padding:11px 0 11px 26px;border-top:1px solid var(--l-soft);position:relative;}
+.prose ul li:before{content:"";position:absolute;left:0;top:21px;width:10px;height:1px;background:var(--l-signal);}
+.prose ol li{counter-increment:li;}
+.prose ol li:before{content:counter(li,decimal-leading-zero);position:absolute;left:0;top:12px;
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--l-signal);}
+.prose blockquote{margin:36px 0;padding:0 0 0 26px;border-left:2px solid var(--l-signal);}
+.prose blockquote p{font-family:"Archivo",sans-serif;font-size:clamp(20px,2.2vw,28px);
+  font-weight:600;letter-spacing:-.025em;line-height:1.3;color:var(--l-ink);margin:0;}
+.prose table{width:100%;border-collapse:collapse;margin:0 0 30px;font-size:15.5px;}
+.prose th,.prose td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--l-soft);}
+.prose th{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--l-mid);font-weight:400;border-bottom:1px solid var(--l-rule);}
+.prose td{color:var(--l-ink2);}
+.prose code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:var(--l-panel);
+  border:1px solid var(--l-rule);padding:2px 6px;}
+.prose figure{margin:34px 0;}
+.prose figure div{aspect-ratio:16/9;background:linear-gradient(150deg,#E6EAE3,#D9DED5);
+  border:1px solid var(--l-rule);}
+.prose figcaption{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--l-mid);margin-top:10px;}
+
+/* ---- cikk vége ---- */
+.aend{border-top:1px solid var(--l-rule);padding:clamp(28px,3.2vw,44px) var(--pad);
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;}
+.share{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--l-mid);display:flex;gap:16px;align-items:center;}
+.share a{text-decoration:none;border-bottom:1px solid var(--l-rule);}
+.share a:hover{color:var(--l-ink);border-bottom-color:var(--l-signal);}
+
+/* ---- cikk CTA ---- */
+.acta{padding:clamp(40px,4.6vw,72px) var(--pad);}
+.acta h2{font-family:"Archivo",sans-serif;font-size:clamp(26px,3.6vw,48px);font-weight:800;
+  letter-spacing:-.04em;line-height:1.02;margin:0 0 16px;max-width:18ch;color:var(--d-ink);}
+.acta p{font-size:17px;line-height:1.6;color:#9FA9A2;max-width:52ch;margin:0 0 26px;}
+
+/* ---- további írások ---- */
+.more{border-top:1px solid var(--l-rule);}
+.mrow{display:grid;grid-template-columns:minmax(120px,16%) 1fr auto;gap:clamp(16px,2.6vw,44px);
+  padding:clamp(22px,2.6vw,34px) var(--pad);border-bottom:1px solid var(--l-rule);
+  align-items:baseline;text-decoration:none;color:inherit;}
+.mrow:hover{background:var(--l-panel);}
+.mrow .cat{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--l-mid);}
+.mrow h3{font-family:"Source Serif 4",serif;font-size:clamp(19px,2.1vw,27px);font-weight:600;
+  line-height:1.2;margin:0;max-width:32ch;letter-spacing:-.01em;}
+.mrow:hover h3{color:var(--l-signal);}
+.mrow .arw{font-family:"IBM Plex Mono",monospace;font-size:14px;color:#B9BFB6;}
+
+/* ================= AI CHAT ================= */
+.chat-btn{position:fixed;right:24px;bottom:24px;z-index:70;background:var(--d-ground);
+  border:1px solid var(--d-rule);color:var(--d-ink);padding:14px 20px;cursor:pointer;
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;display:flex;align-items:center;gap:10px;}
+.chat-btn:hover{border-color:var(--signal);}
+.chat-btn b{width:6px;height:6px;background:var(--signal);display:block;}
+@media(prefers-reduced-motion:no-preference){.chat-btn b{animation:blip 2.6s ease-in-out infinite;}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.2}}}
+
+.chat{position:fixed;right:24px;bottom:24px;width:400px;max-width:calc(100vw - 40px);
+  z-index:80;background:var(--d-ground);border:1px solid var(--d-rule);display:none;
+  flex-direction:column;max-height:min(640px,calc(100vh - 48px));}
+.chat.open{display:flex;}
+.chat-h{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--d-rule);}
+.chat-h .t{font-family:"Archivo",sans-serif;font-size:14px;font-weight:700;letter-spacing:-.02em;color:var(--d-ink);}
+.chat-h .s{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--d-dim);}
+.chat-h button{margin-left:auto;background:0;border:0;color:var(--d-mid);cursor:pointer;
+  font-family:"IBM Plex Mono",monospace;font-size:15px;}
+.chat-h button:hover{color:var(--d-ink);}
+.chat-note{padding:10px 18px;border-bottom:1px solid var(--d-rule);
+  font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--d-dim);}
+.chat-b{padding:18px;overflow-y:auto;flex:1;}
+.msg{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:11px 0;
+  border-bottom:1px solid #171D20;}
+.msg:last-child{border-bottom:0;}
+.msg .who{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--d-dim);padding-top:3px;}
+.msg.ai .who{color:var(--signal);}
+.msg p{margin:0;font-size:15px;line-height:1.55;color:#B4BCB6;}
+.msg.me p{color:var(--d-ink);}
+.chat-f{border-top:1px solid var(--d-rule);display:flex;align-items:center;gap:10px;padding:12px 18px;}
+.chat-f input{flex:1;background:transparent;border:0;color:var(--d-ink);font-family:inherit;
+  font-size:15px;padding:6px 0;}
+.chat-f input::placeholder{color:#3F4744;}
+.chat-f input:focus{outline:0;}
+.chat-f button{background:var(--signal);border:0;color:#101400;padding:9px 14px;cursor:pointer;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;}
+
+/* ================= MOBIL ALSÓ MENÜ ================= */
+.bot{display:none;position:fixed;left:0;right:0;bottom:0;z-index:75;background:var(--d-ground);
+  border-top:1px solid var(--d-rule);}
+.bot-in{display:grid;grid-template-columns:repeat(5,1fr);}
+.bot a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  padding:11px 4px calc(11px + env(safe-area-inset-bottom));border-right:1px solid var(--d-rule);
+  text-decoration:none;color:var(--d-mid);position:relative;}
+.bot a:last-child{border-right:0;}
+.bot a .ic{font-family:"IBM Plex Mono",monospace;font-size:15px;line-height:1;}
+.bot a .lb{font-family:"IBM Plex Mono",monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;}
+.bot a.on{color:var(--d-ink);}
+.bot a.on:before{content:"";position:absolute;top:-1px;left:0;right:0;height:2px;background:var(--signal);}
+.bot a.cta{color:#101400;background:var(--signal);}
+.bot a.cta .lb{font-weight:600;}
+
+@media(max-width:820px){
+  .mrow{grid-template-columns:1fr;gap:8px;} .mrow .arw{display:none;}
+}
+@media(max-width:720px){
+  :root{--pad:20px;--botnav:66px;}
+  .rail{grid-template-columns:1fr;} .rail-side{display:none;}
+  .nav-links a:not(.nav-cta){display:none;}
+  .bot{display:block;}
+  .chat-btn{display:none;}
+  .chat{right:0;left:0;bottom:0;width:auto;max-width:none;max-height:88vh;border-left:0;border-right:0;border-bottom:0;}
+  .prose p:first-of-type::first-letter{font-size:2.6em;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SÖTÉT CIKKFEJLÉC ===== -->
+<div class="dark">
+  <div class="nav"><div class="nav-in">
+    <span class="wm">THE GBR<i>.</i></span>
+    <nav class="nav-links">
+      <a href="#">Szolgáltatások</a><a href="#">Csomagok</a><a href="#">SEO</a>
+      <a href="#">Rólunk</a><a class="on" href="#">Írások</a>
+      <a class="btn nav-cta" href="#">Pitcheld el</a>
+    </nav>
+  </div></div>
+
+  <div class="rail">
+    <div class="rail-side"><span>ÍRÁS</span></div>
+    <div class="rail-main">
+      <section class="ahead">
+        <div class="ameta"><span class="cat">Technikai SEO</span><span>2026. 08. 14.</span><span>7 perc olvasás</span></div>
+        <h1>Auditáltuk a saját oldalunkat, és négy dolgot ki kellett vennünk róla</h1>
+        <p class="lede">Sitemapet ígértünk, és nem volt. Strukturált adatot hirdettünk, és nem volt. Végigmentünk a saját oldalunkon úgy, ahogy egy ügyfélén szoktunk.</p>
+      </section>
+      <div class="abar">
+        <a href="#">← Vissza az írásokhoz</a>
+        <span>Tóth Gábor</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="seam"></div>
+
+<!-- ===== CIKK TÖRZS ===== -->
+<div class="rail">
+  <div class="rail-side"><span>TARTALOM</span></div>
+  <div class="rail-main">
+    <section class="body">
+      <article class="prose">
+        <p>Egy weboldal auditálásakor az első kérdés mindig ugyanaz: az, amit az oldal állít magáról, megegyezik-e azzal, amit ténylegesen csinál. A saját oldalunknál ez a kérdés kellemetlen válaszokat adott.</p>
+
+        <p>A szolgáltatásoldalunk „dinamikus sitemapet" hirdetett. Megnyitottuk a <code>thegbr.eu/sitemap.xml</code> címet: 404. Ugyanez a „Schema.org és JSON-LD" ígérettel — a forráskódban nulla strukturált adat.</p>
+
+        <blockquote><p>Ha egy technikai döntéshozó öt perc alatt ellenőrizni tudja az állításodat, akkor öt perc alatt le is buktat.</p></blockquote>
+
+        <h2>Ami kikerült</h2>
+        <p>Négy szolgáltatás-ígéret mögött nem volt fedezet. Nem arról van szó, hogy ne tudnánk megcsinálni — hanem arról, hogy a saját oldalunkon nem volt megcsinálva.</p>
+
+        <ol>
+          <li><strong>Dinamikus sitemap</strong> — hirdetve, de nem létezett. Azóta megépült.</li>
+          <li><strong>Strukturált adat</strong> — ugyanaz. Ma négy érvényes séma fut az oldalon.</li>
+          <li><strong>Marketing automatizáció</strong> — a blogmotor működött, a többi nem. A szöveget szűkítettük arra, ami igaz.</li>
+          <li><strong>Supabase-architektúra</strong> — használjuk, de nem önálló szolgáltatásként. A stack-listába került.</li>
+        </ol>
+
+        <h2>A legdrágább hiba nem is ez volt</h2>
+        <p>A kapcsolati űrlapunk elküldés után kiírta, hogy <code>sys.status: 200_OK</code>, és hogy a megkeresés rögzítve lett. Ez a képernyő <strong>hardcode-olt volt</strong> — nem valós szerverválaszból jött.</p>
+
+        <p>Az űrlap ténylegesen működött egy külső szolgáltatáson keresztül, tehát megkeresés nem veszett el. De ha az a szolgáltatás kiesett vagy elfogyott volna a havi kerete, az oldal akkor is sikert mutatott volna.</p>
+
+        <figure>
+          <div></div>
+          <figcaption>A régi sikerképernyő — a státuszkód nem a szervertől jött</figcaption>
+        </figure>
+
+        <h3>Mit csináltunk helyette</h3>
+        <p>Saját végpontot építettünk validációval, rate limitinggel és bot-szűréssel. A sikerképernyő azóta <strong>csak valós 2xx válaszra</strong> jelenik meg, és a beérkezés időpontját meg a lead azonosítóját mutatja — olyan adatot, ami tényleg létezik.</p>
+
+        <h2>Amit ebből tanultunk</h2>
+        <table>
+          <thead><tr><th>Amit hirdettünk</th><th>Amit valóban csináltunk</th><th>Mi lett belőle</th></tr></thead>
+          <tbody>
+            <tr><td>Dinamikus sitemap</td><td>Nem létezett</td><td>Megépült</td></tr>
+            <tr><td>Strukturált adat</td><td>Nem létezett</td><td>4 séma él</td></tr>
+            <tr><td>Sikeres űrlapküldés</td><td>Hardcode-olt üzenet</td><td>Valós állapotkezelés</td></tr>
+          </tbody>
+        </table>
+
+        <p>Az ügynökségi weboldal nem marketinganyag a munkáról. <strong>Maga a munka.</strong> Ha ott nem stimmel valami, azt egy ügyfél is meg fogja találni — csak akkor már drágább.</p>
+
+        <p>Ha kíváncsi vagy, hogyan áll most az oldalunk, <a href="#">itt ellenőrizheted</a> — sitemap, robots.txt, strukturált adat, mért teljesítmény. Mind kattintható.</p>
+      </article>
+    </section>
+
+    <div class="aend">
+      <div class="share">Megosztás <a href="#">LinkedIn</a><a href="#">Link másolása</a></div>
+      <div class="share">Frissítve: 2026. 08. 17.</div>
+    </div>
+  </div>
+</div>
+
+<div class="seam"></div>
+
+<!-- ===== CIKK CTA ===== -->
+<div class="dark">
+  <div class="rail">
+    <div class="rail-side"><span>KAPCSOLAT</span></div>
+    <div class="rail-main">
+      <section class="acta">
+        <p class="eyebrow">Hasonló problémád van?</p>
+        <h2>Nézzük meg, hol tartasz</h2>
+        <p>A felmérés végén kapsz egy listát arról, mi hiányzik — akkor is, ha nem velünk dolgozol tovább. Két munkanapon belül válaszolunk.</p>
+        <a class="btn" href="#">Pitcheld el a projekted →</a>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div class="seam"></div>
+
+<!-- ===== TOVÁBBI ÍRÁSOK ===== -->
+<div class="rail">
+  <div class="rail-side"><span>TOVÁBBI</span></div>
+  <div class="rail-main">
+    <section style="padding:clamp(44px,5vw,80px) var(--pad) clamp(20px,2.4vw,32px);">
+      <p class="eyebrow">További írások</p>
+    </section>
+    <div class="more">
+      <a class="mrow" href="#"><span class="cat">E-commerce · 6 perc</span>
+        <h3>Élő webshop platformváltása anélkül, hogy a bolt leállna</h3><span class="arw">→</span></a>
+      <a class="mrow" href="#"><span class="cat">Konverzió · 4 perc</span>
+        <h3>Miért kérünk kötelezően két mondatot a projektről</h3><span class="arw">→</span></a>
+      <a class="mrow" href="#"><span class="cat">Üzemeltetés · 5 perc</span>
+        <h3>Az átadás után kezdődik az igazi munka</h3><span class="arw">→</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== AI CHAT ===== -->
+<button class="chat-btn" id="cbtn"><b></b> Kérdésed van?</button>
+
+<div class="chat" id="chat">
+  <div class="chat-h">
+    <div><div class="t">GBR AI</div><div class="s">Válaszol · nem ajánl</div></div>
+    <button id="cx" aria-label="Bezárás">✕</button>
+  </div>
+  <div class="chat-note">AI válaszol · árat és határidőt ember mond</div>
+  <div class="chat-b">
+    <div class="msg ai"><span class="who">GBR AI</span>
+      <p>Szia! Segítek eligazodni az oldalon. Kérlek, ne írj ide személyes adatot — ha ajánlatot szeretnél, a kapcsolati űrlap a jó hely.</p></div>
+    <div class="msg me"><span class="who">Te</span>
+      <p>Építesz webshopot meglévő WooCommerce fölé?</p></div>
+    <div class="msg ai"><span class="who">GBR AI</span>
+      <p>Igen, ez a leggyakoribb felállás — a motor marad, a felület újul, így a bolt közben forgalmaz. A részletekhez érdemes leírnod a projektet a kapcsolati űrlapon.</p></div>
+  </div>
+  <div class="chat-f">
+    <input type="text" placeholder="Írj egy kérdést…">
+    <button>Küld</button>
+  </div>
+</div>
+
+<!-- ===== MOBIL ALSÓ MENÜ ===== -->
+<nav class="bot"><div class="bot-in">
+  <a href="#"><span class="ic">◧</span><span class="lb">Szolgált.</span></a>
+  <a href="#"><span class="ic">▤</span><span class="lb">Csomagok</span></a>
+  <a class="on" href="#"><span class="ic">▦</span><span class="lb">Írások</span></a>
+  <a href="#" id="cbtn2"><span class="ic">◇</span><span class="lb">Chat</span></a>
+  <a class="cta" href="#"><span class="ic">→</span><span class="lb">Pitch</span></a>
+</div></nav>
+
+<script>
+var chat=document.getElementById('chat');
+function open(){chat.classList.add('open');}
+document.getElementById('cbtn').onclick=open;
+document.getElementById('cbtn2').onclick=function(e){e.preventDefault();open();};
+document.getElementById('cx').onclick=function(){chat.classList.remove('open');};
+</script>
+</body>
+</html>

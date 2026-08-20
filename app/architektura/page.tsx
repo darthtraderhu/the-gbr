@@ -5,7 +5,7 @@ import JsonLd from "@/app/components/JsonLd";
 import ArchitekturaClient from "./ArchitekturaClient";
 
 const DESCRIPTION =
-  "Három tipikus felállás weboldal-fejlesztéstől a folyamatos üzemeltetésig. Tervezd meg a keretet, és nézd meg, mit kapsz érte.";
+  "Három tipikus felállás weboldal-fejlesztéstől a folyamatos üzemeltetésig, plusz a Pulzus havi figyelő szolgáltatás. Tervezd meg a keretet, és nézd meg, mit kapsz érte.";
 
 export const metadata: Metadata = {
   title: "Csomagok és árazás | THE GBR",

@@ -8,20 +8,20 @@ import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 export const metadata: Metadata = {
   title: "Szolgáltatások | THE GBR",
   description:
-    "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó és üzemeltetés. Öt terület, házon belül — B2B ügyfeleknek.",
+    "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, üzemeltetés, akadálymentesítés és a Pulzus figyelő szolgáltatás. Hét terület, házon belül — B2B ügyfeleknek.",
   alternates: {
     canonical: "/arzenal",
   },
   openGraph: {
     title: "Szolgáltatások | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó és üzemeltetés. Öt terület, házon belül.",
+      "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, üzemeltetés, akadálymentesítés és a Pulzus figyelő szolgáltatás. Hét terület, házon belül.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Szolgáltatások | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó és üzemeltetés. Öt terület, házon belül.",
+      "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, üzemeltetés, akadálymentesítés és a Pulzus figyelő szolgáltatás. Hét terület, házon belül.",
   },
 };
 
@@ -31,6 +31,8 @@ const INDEX_ITEMS = [
   { id: "ai", n: "03", name: "AI és chatbot" },
   { id: "video", n: "04", name: "Videó és tartalom" },
   { id: "ops", n: "05", name: "Üzemeltetés és fejlesztés" },
+  { id: "access", n: "06", name: "Akadálymentesítés" },
+  { id: "pulzus", n: "07", name: "Pulzus" },
 ];
 
 const WEB_FEATURES = [
@@ -69,6 +71,36 @@ const OPS_FEATURES = [
   "Jogi megfelelés karbantartása a változásokkal együtt",
   "Heti vagy kétheti előrehaladási riport",
   "Egy felelős kapcsolattartó",
+];
+
+const ACCESS_FEATURES = [
+  "Felmérés: mi akadályozza a használatot, és mennyire súlyos",
+  "Kontraszt, betűméret, kattintható felületek mérete",
+  "Billentyűzetes bejárhatóság, látható fókusz",
+  "Képernyőolvasóval való használhatóság: szemantikus szerkezet, képleírások",
+  "Űrlapok: érthető címkék, világos hibaüzenetek",
+  "Videók feliratozása",
+  "Írásos jelentés arról, mi változott",
+];
+
+const PULZUS_FEATURES = [
+  "Elérhetőség figyelése — leállásnál értesítés",
+  "Betöltési sebesség: a változást jelezzük, nem a pontszámot",
+  "SSL-tanúsítvány lejárata — időben szólunk",
+  "Kapcsolati űrlap havi tesztelése",
+  "Indexeltség: látszik-e az oldal a keresőben",
+  "Google-profil: új értékelések, változó átlag",
+  "Értékelés-kérés a vásárlás után",
+  "Válaszjavaslat az értékelésekre — a küldés az öné",
+  "Havi levél magyarul, konkrét javaslatokkal",
+];
+
+const ACCESS_SAMPLE_ROWS = [
+  { finding: "Kontraszt 3,1:1 a gombokon", meaning: "Gyengénlátónak nehezen olvasható", severity: "Magas" },
+  { finding: "47 kép leírás nélkül", meaning: "Képernyőolvasó nem tudja felolvasni", severity: "Magas" },
+  { finding: "Fókusz nem látszik", meaning: "Billentyűzettel nem követhető, hol jár", severity: "Magas" },
+  { finding: "Űrlapmezők címke nélkül", meaning: "Nem derül ki, mit kell beírni", severity: "Közepes" },
+  { finding: "Kattintható felület 28 px", meaning: "Remegő kézzel, telefonon nehéz eltalálni", severity: "Közepes" },
 ];
 
 const AD_SAMPLE_ROWS = [
@@ -112,6 +144,16 @@ const FAQ_ITEMS = [
     question: "Csak nagyvállalatokkal dolgoztok?",
     answer:
       "Nem. Van egy alsó határ, ami alatt nem érdemes belefogni — ezt az űrlapon a költségkeret-kérdés szűri. Fölötte a cégméret nem szempont.",
+  },
+  {
+    question: "Az akadálymentesítési felmérés garantálja a jogi megfelelést?",
+    answer:
+      "Nem. A megfelelés jogi minősítés, arról ügyvéd nyilatkozik. Mi a technikai akadályokat mérjük fel, dokumentáljuk és szüntetjük meg — a jogi tanácsadást a saját jogászával intézi.",
+  },
+  {
+    question: "A Pulzus mit csinál, ha talál valami rosszat?",
+    answer:
+      "Nem javít automatikusan. A havi levélben megmondja, mi változott és mit érdemes tenni — a javítás külön megrendelés, vagy a Pulzus havi órakeretének terhére megy, ha azt választja.",
   },
 ];
 
@@ -214,8 +256,8 @@ export default function Arzenal() {
             Szolgáltatások<span className="text-[var(--signal)]">.</span>
           </h1>
           <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-8)]">
-            Öt terület, amit házon belül végzünk. Ha egy projekthez nem mind az öt kell, nem is
-            adjuk el mind az ötöt.
+            Hét terület, amit házon belül végzünk. Ha egy projekthez nem mind a hét kell, nem is
+            adjuk el mind a hetet.
           </p>
         </section>
 
@@ -429,6 +471,159 @@ export default function Arzenal() {
                   </div>
                 ))}
               </div>
+            </DevFrame>
+          }
+        />
+      </Rail>
+
+      {/* ===== 06 AKADÁLYMENTESÍTÉS ===== */}
+      <Rail label="06 / Akadálymentesítés">
+        <ServiceBlock
+          id="access"
+          n="06"
+          label="Akadálymentesítés"
+          title="Van, aki nem tudja használni az oldalát"
+          paragraphs={[
+            "Aki képernyőolvasót használ, aki csak billentyűzettel navigál, akinek gyengébb a látása vagy remeg a keze — ők ugyanúgy vásárolnának, csak sokszor nem tudnak. Nem azért, mert az oldal rossz, hanem mert senki nem gondolt rájuk a tervezésekor.",
+            <>
+              Emellett az uniós akadálymentesítési szabályozás 2025 óta a fogyasztóknak szóló
+              online szolgáltatásokra is kiterjed. Hogy ez pontosan kire és hogyan vonatkozik, azt
+              jogász mondja meg —{" "}
+              <strong className="text-[var(--ink)]">
+                mi a technikai oldalt tudjuk felmérni és rendbe tenni
+              </strong>
+              .
+            </>,
+            <>
+              A megfelelés jogi kérdés, és arról ügyvéd nyilatkozik. Mi azt vállaljuk, hogy{" "}
+              <strong className="text-[var(--ink)]">
+                a technikai akadályokat felmérjük, dokumentáljuk és megszüntetjük
+              </strong>{" "}
+              — és hogy a végén írásban megkapja, mi változott.
+            </>,
+          ]}
+          features={ACCESS_FEATURES}
+          device={
+            <DevFrame header="Amit egy felmérés tipikusan talál" headerRight="Minta">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[480px] border-collapse [font-size:var(--text-sm)]">
+                  <thead>
+                    <tr className="border-b border-[var(--rule-soft)]">
+                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
+                        Amit találunk
+                      </th>
+                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
+                        Mit jelent
+                      </th>
+                      <th className="py-[var(--space-2)] text-right font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
+                        Súly
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ACCESS_SAMPLE_ROWS.map((row) => (
+                      <tr
+                        key={row.finding}
+                        className="border-b border-[var(--rule-soft)] last:border-b-0"
+                      >
+                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--ink-2)]">
+                          {row.finding}
+                        </td>
+                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--mid)]">
+                          {row.meaning}
+                        </td>
+                        <td className="py-[var(--space-3)] text-right [font-family:var(--font-mono)] text-[var(--signal-deep)] whitespace-nowrap">
+                          {row.severity}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
+                Illusztráció. A tényleges lista a felmérés után áll össze, oldalanként eltér.
+              </p>
+            </DevFrame>
+          }
+        />
+      </Rail>
+
+      {/* ===== 07 PULZUS ===== */}
+      <Rail label="07 / Pulzus">
+        <ServiceBlock
+          id="pulzus"
+          n="07"
+          label="Pulzus"
+          title="Havonta egy levél arról, hogyan látja önt az internet"
+          paragraphs={[
+            "A legtöbb weboldal elkészül, aztán senki nem nézi meg többé. Ha lelassul, ha lejár egy tanúsítvány, ha elromlik a kapcsolati űrlap — az derül ki, amikor egy ügyfél szól. Vagy nem derül ki.",
+            <>
+              A Pulzus ezt figyeli helyette —{" "}
+              <strong className="text-[var(--ink)]">havonta megméri, és megmondja, mi változott</strong>
+              . Nem pontszámokat küldünk, hanem egy levelet arról, mi változott, és mit érdemes
+              tenni.
+            </>,
+            <>
+              <strong className="text-[var(--ink)]">Nem kérünk csillagot, csak véleményt.</strong>{" "}
+              A Google tiltja, hogy egy vállalkozás kizárólag pozitív értékelést kérjen. Mi nem is
+              tesszük: a vásárló egy semleges kérést kap. Ha jó a munka, a jó értékelés magától
+              jön.
+            </>,
+            <>
+              <strong className="text-[var(--ink)]">A választ a gép írja, de ön küldi.</strong>{" "}
+              Elkészítjük a válaszjavaslatot, de az ön nevében soha nem posztolunk automatikusan.
+              Egy elhamarkodott válasz többet árt, mint amennyit tíz köszönőlevél használ.
+            </>,
+          ]}
+          features={PULZUS_FEATURES}
+          device={
+            <DevFrame header="Így néz ki egy havi levél" headerRight="Minta">
+              <div className="[font-size:var(--text-sm)] text-[var(--ink-2)] space-y-[var(--space-4)]">
+                <p className="m-0 font-display font-bold [font-size:var(--text-lg)] text-[var(--ink)]">
+                  Augusztusi összefoglaló
+                </p>
+                <div>
+                  <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
+                    Az oldala
+                  </p>
+                  <p className="m-0 leading-relaxed">
+                    Egész hónapban elérhető volt. A betöltési idő 2,1 mp — ez rendben van.
+                  </p>
+                  <p className="m-0 leading-relaxed text-[var(--attention)]">
+                    ⚠️ Az SSL-tanúsítványa 24 nap múlva lejár. Ha nem újul meg, a böngészők „nem
+                    biztonságos” jelzést tesznek az oldalára.
+                  </p>
+                </div>
+                <div>
+                  <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
+                    Ahogy a Google látja
+                  </p>
+                  <p className="m-0 leading-relaxed">
+                    8 új értékelés érkezett. Az átlaga 4,7-ről 4,8-ra emelkedett.
+                  </p>
+                </div>
+                <div>
+                  <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
+                    Amit érdemes megnézni
+                  </p>
+                  <p className="m-0 leading-relaxed">
+                    Két értékelés említi, hogy nehéz telefonon elérni. Ha ez visszatér, érdemes
+                    lehet visszahívás-kérést tenni az oldalra.
+                  </p>
+                </div>
+                <div>
+                  <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
+                    Amit ebben a hónapban tehet
+                  </p>
+                  <ol className="m-0 pl-[1.1em] space-y-[var(--space-1)]">
+                    <li>SSL megújítása — intézzük, ha kéri</li>
+                    <li>Nyitvatartás frissítése a Google-profilban a hosszú hétvégére</li>
+                  </ol>
+                </div>
+              </div>
+              <p className="mt-[var(--space-4)] pt-[var(--space-4)] border-t border-[var(--rule-soft)] [font-size:var(--text-sm)] text-[var(--mid)]">
+                Minta. A tényleges levél az ön adataiból áll össze.
+              </p>
             </DevFrame>
           }
         />

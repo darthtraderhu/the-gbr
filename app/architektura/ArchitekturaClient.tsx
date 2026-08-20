@@ -155,6 +155,27 @@ const PACKAGES = [
       "Az egyedi belső rendszerek (ERP, CRM) fejlesztését — az külön projekt, külön árazással. A kapcsolódást viszont megoldjuk.",
     href: "/init?csomag=fejlesztes-uzemeltetes",
   },
+  {
+    id: "csomag-pulzus",
+    railLabel: "04 / Folyamatos",
+    n: "04",
+    tag: "Folyamatos",
+    hot: false,
+    name: "Pulzus",
+    desc: "Ha van már működő oldala, és csak azt szeretné tudni, hogy rendben van-e. Havi figyelés és egy levél arról, mi változott.",
+    price: "Havidíjas",
+    priceNote: "havonta, felmondható",
+    items: [
+      "Weboldal-figyelés: elérhetőség, sebesség, tanúsítvány, űrlap",
+      "Google-profil: értékelések és helyi megjelenés",
+      "Értékelés-kérés a vásárlás után",
+      "Havi levél konkrét javaslatokkal",
+      "Igény szerint havi fejlesztési óra",
+    ],
+    notIncluded:
+      "A weboldal fejlesztését. A Pulzus figyel és jelez — a javítás külön megrendelés, vagy a havi órakeret terhére megy.",
+    href: "/init?csomag=pulzus",
+  },
 ];
 
 const FAQ_ITEMS = [

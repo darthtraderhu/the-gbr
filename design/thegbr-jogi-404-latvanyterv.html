@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="hu" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jogi oldal + 404 | THE GBR — látványterv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --d-ground:#0B0E10; --d-panel:#11161A; --d-ink:#EAEEE8; --d-mid:#79837D;
+  --d-dim:#4A524E; --d-rule:#20272B; --signal:#A8D400;
+  --ground:#EEF0EC; --panel:#FFF; --ink:#14171A; --ink2:#3C4348;
+  --mid:#697079; --rule:#D4D8D1; --soft:#E4E8E1; --accent:#93B300;
+  --pad:32px; --botnav:0px;
+}
+html[data-theme="dark"]{
+  --ground:#0B0E10; --panel:#11161A; --ink:#EAEEE8; --ink2:#9FA9A2;
+  --mid:#79837D; --rule:#20272B; --soft:#171D20; --accent:#A8D400;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:"Source Serif 4",Georgia,serif;-webkit-font-smoothing:antialiased;padding-bottom:var(--botnav);}
+a{color:inherit;}
+.rail{display:grid;grid-template-columns:72px 1fr;}
+.rail-side{border-right:1px solid var(--rule);position:relative;}
+.rail-side span{position:absolute;top:56px;left:50%;transform:translateX(-50%) rotate(180deg);
+  writing-mode:vertical-rl;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--mid);white-space:nowrap;}
+.dark .rail-side{border-right-color:var(--d-rule);} .dark .rail-side span{color:var(--d-dim);}
+.rail-main{min-width:0;}
+.dark{background:var(--d-ground);color:var(--d-ink);}
+.seam{height:1px;background:var(--signal);}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--mid);margin:0 0 18px;}
+.dark .eyebrow{color:var(--d-dim);}
+.btn{font-family:"Archivo",sans-serif;font-size:14px;font-weight:700;padding:14px 24px;
+  text-decoration:none;display:inline-block;background:var(--signal);color:#101400;border:1px solid var(--signal);}
+.btn.o{background:transparent;color:var(--d-ink);border-color:#39413C;}
+
+/* nav */
+.nav{border-bottom:1px solid var(--d-rule);position:sticky;top:0;z-index:60;
+  background:rgba(11,14,16,.94);backdrop-filter:blur(8px);}
+.nav-in{display:flex;align-items:center;gap:20px;padding:18px var(--pad);}
+.wm{font-family:"Archivo",sans-serif;font-size:20px;font-weight:800;letter-spacing:-.045em;color:var(--d-ink);}
+.wm i{color:var(--signal);font-style:normal;}
+.nav-links{margin-left:auto;display:flex;gap:22px;align-items:center;}
+.nav-links a{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--d-mid);text-decoration:none;}
+.nav-links a:hover{color:var(--d-ink);}
+.nav-cta{font-size:12.5px;padding:10px 17px;}
+
+/* ===== JOGI FEJLÉC ===== */
+.lhead{padding:clamp(40px,5.4vw,84px) var(--pad) clamp(26px,3vw,40px);}
+h1{font-family:"Archivo",sans-serif;margin:0;font-size:clamp(34px,6.4vw,84px);
+  font-weight:800;line-height:.96;letter-spacing:-.05em;max-width:16ch;}
+h1 .dot{color:var(--signal);}
+.lmeta{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--d-rule);}
+.lmeta div{padding:16px var(--pad);border-right:1px solid var(--d-rule);
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--d-dim);}
+.lmeta div:last-child{border-right:0;}
+.lmeta b{display:block;color:var(--d-ink);font-weight:500;margin-top:7px;font-size:11.5px;}
+
+/* ===== TARTALOMJEGYZÉK + SZÖVEG ===== */
+.doc{display:grid;grid-template-columns:minmax(200px,24%) 1fr;}
+.toc{border-right:1px solid var(--rule);padding:clamp(30px,3.4vw,50px) clamp(20px,2vw,28px);}
+.toc-in{position:sticky;top:88px;}
+.toc h4{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mid);font-weight:400;margin:0 0 16px;}
+.toc a{display:grid;grid-template-columns:24px 1fr;gap:8px;padding:8px 0;text-decoration:none;
+  font-size:14.5px;color:var(--ink2);line-height:1.35;border-top:1px solid var(--soft);}
+.toc a:first-of-type{border-top:0;}
+.toc a span{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--mid);}
+.toc a:hover{color:var(--accent);} .toc a:hover span{color:var(--accent);}
+
+.txt{padding:clamp(30px,3.6vw,58px) var(--pad);}
+.prose{max-width:70ch;}
+.prose h2{font-family:"Archivo",sans-serif;font-size:clamp(21px,2.3vw,30px);font-weight:700;
+  letter-spacing:-.028em;line-height:1.14;margin:0 0 18px;scroll-margin-top:90px;}
+.prose h2:not(:first-child){margin-top:56px;padding-top:26px;border-top:1px solid var(--rule);}
+.prose h2 em{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:.5em;
+  color:var(--mid);letter-spacing:.14em;margin-right:12px;vertical-align:middle;}
+.prose h3{font-family:"Archivo",sans-serif;font-size:clamp(17px,1.8vw,21px);font-weight:700;
+  letter-spacing:-.02em;margin:34px 0 12px;}
+.prose p{font-size:16.5px;line-height:1.72;color:var(--ink2);margin:0 0 20px;}
+.prose strong{color:var(--ink);font-weight:600;}
+.prose a{color:var(--accent);text-decoration:none;border-bottom:1px solid #C2D68A;}
+.prose ul{margin:0 0 22px;padding:0;list-style:none;}
+.prose li{font-size:16px;line-height:1.6;color:var(--ink2);padding:10px 0 10px 24px;
+  border-top:1px solid var(--soft);position:relative;}
+.prose li:before{content:"";position:absolute;left:0;top:20px;width:9px;height:1px;background:var(--accent);}
+
+/* adat-táblázat */
+.prose table{width:100%;border-collapse:collapse;margin:0 0 26px;font-size:15px;
+  border:1px solid var(--rule);}
+.prose caption{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mid);text-align:left;padding:0 0 10px;}
+.prose th,.prose td{padding:12px 14px;text-align:left;vertical-align:top;
+  border-bottom:1px solid var(--soft);border-right:1px solid var(--soft);}
+.prose th:last-child,.prose td:last-child{border-right:0;}
+.prose thead th{background:var(--panel);font-family:"IBM Plex Mono",monospace;font-size:9px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--mid);font-weight:400;
+  border-bottom:1px solid var(--rule);}
+.prose tbody th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mid);font-weight:400;width:30%;background:var(--panel);}
+.prose td{color:var(--ink2);}
+.prose tbody tr:last-child th,.prose tbody tr:last-child td{border-bottom:0;}
+
+.callout{border-left:2px solid var(--accent);padding:2px 0 2px 20px;margin:28px 0;}
+.callout p{margin:0;font-size:16px;}
+
+/* jogi lábléc-navigáció */
+.lnav{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);}
+.lnav a{padding:22px var(--pad);border-right:1px solid var(--rule);text-decoration:none;
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mid);}
+.lnav a:last-child{border-right:0;}
+.lnav a:hover{background:var(--panel);color:var(--ink);}
+.lnav a b{display:block;font-family:"Source Serif 4",serif;font-size:15px;letter-spacing:0;
+  text-transform:none;color:var(--ink);margin-top:8px;font-weight:600;}
+
+/* ================= 404 ================= */
+.e404{min-height:78vh;display:flex;align-items:center;}
+.e404-in{padding:clamp(48px,6vw,100px) var(--pad);width:100%;}
+.code{font-family:"Archivo",sans-serif;font-size:clamp(84px,20vw,280px);font-weight:900;
+  letter-spacing:-.07em;line-height:.8;color:var(--d-rule);}
+.code i{color:var(--signal);font-style:normal;}
+.e404 h2{font-family:"Archivo",sans-serif;font-size:clamp(26px,4vw,52px);font-weight:800;
+  letter-spacing:-.042em;line-height:1.02;margin:34px 0 18px;max-width:18ch;color:var(--d-ink);}
+.e404 p{font-size:17.5px;line-height:1.6;color:#9FA9A2;max-width:52ch;margin:0 0 30px;}
+.e404 .acts{display:flex;gap:11px;flex-wrap:wrap;}
+.diag{border-top:1px solid var(--d-rule);margin-top:clamp(40px,5vw,70px);}
+.diag-h{padding:11px var(--pad);border-bottom:1px solid var(--d-rule);
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--d-dim);}
+.diag-b{display:grid;grid-template-columns:repeat(4,1fr);}
+.diag-b a{padding:20px var(--pad);border-right:1px solid var(--d-rule);text-decoration:none;
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--d-dim);}
+.diag-b a:last-child{border-right:0;}
+.diag-b a:hover{background:var(--d-panel);color:var(--d-ink);}
+.diag-b a b{display:block;font-family:"Source Serif 4",serif;font-size:15.5px;letter-spacing:0;
+  text-transform:none;color:var(--d-ink);margin-top:9px;font-weight:600;}
+
+/* szakaszcímke a demóhoz */
+.demo{background:var(--accent);color:#101400;padding:10px var(--pad);
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;}
+
+@media(max-width:980px){
+  .doc{grid-template-columns:1fr;}
+  .toc{border-right:0;border-bottom:1px solid var(--rule);}
+  .toc-in{position:static;}
+  .toc a{display:flex;gap:8px;}
+  .lmeta,.diag-b,.lnav{grid-template-columns:repeat(2,1fr);}
+  .lmeta div:nth-child(2n),.diag-b a:nth-child(2n),.lnav a:nth-child(2n){border-right:0;}
+}
+@media(max-width:720px){
+  :root{--pad:20px;}
+  .rail{grid-template-columns:1fr;} .rail-side{display:none;}
+  .nav-links a:not(.nav-cta){display:none;}
+  .prose table{display:block;overflow-x:auto;}
+}
+</style>
+</head>
+<body>
+
+<div class="demo">1. rész — Jogi oldal (adatkezelési tájékoztató)</div>
+
+<!-- ===== JOGI FEJLÉC ===== -->
+<div class="dark">
+  <div class="nav"><div class="nav-in">
+    <span class="wm">THE GBR<i>.</i></span>
+    <nav class="nav-links">
+      <a href="#">Szolgáltatások</a><a href="#">Csomagok</a><a href="#">SEO</a>
+      <a href="#">Rólunk</a><a href="#">Írások</a>
+      <a class="btn nav-cta" href="#">Pitcheld el</a>
+    </nav>
+  </div></div>
+
+  <div class="rail">
+    <div class="rail-side"><span>JOGI</span></div>
+    <div class="rail-main">
+      <section class="lhead">
+        <p class="eyebrow">Jogi dokumentum</p>
+        <h1>Adatkezelési tájékoztató<span class="dot">.</span></h1>
+      </section>
+      <div class="lmeta">
+        <div>Hatályos<b>2026. augusztus 16.</b></div>
+        <div>Verzió<b>1.0</b></div>
+        <div>Adatkezelő<b>GBR Marketing Solutions Kft.</b></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="seam"></div>
+
+<!-- ===== TARTALOM ===== -->
+<div class="rail">
+  <div class="rail-side"><span>TARTALOM</span></div>
+  <div class="rail-main">
+    <div class="doc">
+      <nav class="toc"><div class="toc-in">
+        <h4>Tartalom</h4>
+        <a href="#p1"><span>01</span>Az adatkezelő</a>
+        <a href="#p2"><span>02</span>Jogszabályi háttér</a>
+        <a href="#p3"><span>03</span>Az egyes adatkezelések</a>
+        <a href="#p4"><span>04</span>Kiskorúak</a>
+        <a href="#p5"><span>05</span>Adatfeldolgozók</a>
+        <a href="#p6"><span>06</span>Harmadik ország</a>
+        <a href="#p7"><span>07</span>Az érintett jogai</a>
+        <a href="#p8"><span>08</span>Jogorvoslat</a>
+        <a href="#p9"><span>09</span>Adatbiztonság</a>
+      </div></nav>
+
+      <div class="txt"><article class="prose">
+        <h2 id="p1"><em>01</em>Az adatkezelő</h2>
+        <table>
+          <tbody>
+            <tr><th>Név</th><td>GBR Marketing Solutions Kft.</td></tr>
+            <tr><th>Székhely</th><td>3073 Tar, Kossuth út 37.</td></tr>
+            <tr><th>Cégjegyzékszám</th><td>12-09-012061</td></tr>
+            <tr><th>Adószám</th><td>28814706-2-12</td></tr>
+            <tr><th>E-mail</th><td>gabor@thegbr.eu</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Adatvédelmi tisztviselő:</strong> Az adatkezelő a GDPR 37. cikke alapján nem köteles adatvédelmi tisztviselőt kijelölni, és nem is jelölt ki. Adatvédelmi kérdésekben a fenti e-mail címen lehet kapcsolatba lépni.</p>
+
+        <h2 id="p2"><em>02</em>A tájékoztató célja és jogszabályi háttér</h2>
+        <p>Ez a tájékoztató azt írja le, hogy a thegbr.eu weboldal használata és a szolgáltatásaink igénybevétele során milyen személyes adatokat kezelünk, milyen célból, milyen jogalapon, meddig, és kinek továbbítjuk azokat.</p>
+        <ul>
+          <li>Az Európai Parlament és a Tanács (EU) 2016/679 rendelete (<strong>GDPR</strong>)</li>
+          <li>A 2011. évi CXII. törvény (Infotv.)</li>
+          <li>A 2001. évi CVIII. törvény (Ekertv.)</li>
+          <li>A 2000. évi C. törvény (Számv. tv.)</li>
+        </ul>
+
+        <h2 id="p3"><em>03</em>Az egyes adatkezelések</h2>
+        <h3>3.1. Kapcsolatfelvétel és ajánlatkérés</h3>
+        <table>
+          <tbody>
+            <tr><th>Cél</th><td>A megkeresés megválaszolása, ajánlatadás, a szerződéskötés előkészítése</td></tr>
+            <tr><th>Kezelt adatok</th><td>Név, cégnév, e-mail cím, telefonszám (opcionális), projektleírás, költségkeret, határidő, a beküldés időpontja és IP-címe</td></tr>
+            <tr><th>Jogalap</th><td>GDPR 6. cikk (1) b) — a szerződés megkötését megelőző lépések</td></tr>
+            <tr><th>Megőrzés</th><td>Szerződés hiányában 2 év; szerződéskötés esetén a 3.4. pont szerint</td></tr>
+          </tbody>
+        </table>
+
+        <h3>3.2. AI-alapú chat funkció</h3>
+        <div class="callout"><p><strong>Fontos:</strong> Kérjük, hogy a chatbe ne írjon be személyes adatot, sem a sajátját, sem harmadik személyét. A beírt üzenetek feldolgozás céljából továbbításra kerülnek az OpenAI, L.L.C. részére.</p></div>
+        <p>A funkció részletes leírását külön <a href="#">AI-használati tájékoztató</a> tartalmazza. A chat nem hoz az érintettre nézve joghatással járó automatizált döntést, és profilalkotás nem történik.</p>
+
+        <h2 id="p5"><em>05</em>Adatfeldolgozók</h2>
+        <table>
+          <caption>Az adatkezelés során igénybe vett szolgáltatók</caption>
+          <thead><tr><th>Adatfeldolgozó</th><th>Tevékenység</th><th>Székhely</th><th>Továbbított adatok</th></tr></thead>
+          <tbody>
+            <tr><td>Vercel Inc.</td><td>Tárhely- és üzemeltetési szolgáltatás</td><td>Egyesült Államok</td><td>Szerverlogok, technikai adatok</td></tr>
+            <tr><td>OpenAI, L.L.C.</td><td>AI chat működtetése</td><td>Egyesült Államok</td><td>A chatbe beírt üzenetek</td></tr>
+            <tr><td>Resend, Inc.</td><td>Tranzakciós e-mailek</td><td>Egyesült Államok</td><td>Név, e-mail cím, üzenet</td></tr>
+            <tr><td>Supabase, Inc.</td><td>Adatbázis-szolgáltatás</td><td>EU-s régió</td><td>Megkeresések</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="p7"><em>07</em>Az érintett jogai</h2>
+        <p>Ön az alábbi jogokkal élhet a személyes adatai kezelésével kapcsolatban. Kérelmét a beérkezéstől számított <strong>1 hónapon belül</strong> teljesítjük.</p>
+        <ul>
+          <li><strong>Hozzáférés (15. cikk)</strong> — tájékoztatást és másolatot kérhet a kezelt adatokról</li>
+          <li><strong>Helyesbítés (16. cikk)</strong> — kérheti a pontatlan adatok javítását</li>
+          <li><strong>Törlés (17. cikk)</strong> — kérheti adatai törlését, ha nincs jogszabályi akadálya</li>
+          <li><strong>Korlátozás (18. cikk)</strong> — kérheti az adatkezelés korlátozását</li>
+          <li><strong>Adathordozhatóság (20. cikk)</strong> — géppel olvasható formában megkaphatja adatait</li>
+          <li><strong>Tiltakozás (21. cikk)</strong> — tiltakozhat a jogos érdeken alapuló adatkezelés ellen</li>
+        </ul>
+
+        <h2 id="p8"><em>08</em>Jogorvoslati lehetőségek</h2>
+        <table>
+          <tbody>
+            <tr><th>Hatóság</th><td>Nemzeti Adatvédelmi és Információszabadság Hatóság</td></tr>
+            <tr><th>Cím</th><td>1055 Budapest, Falk Miksa utca 9-11.</td></tr>
+            <tr><th>Postacím</th><td>1363 Budapest, Pf. 9.</td></tr>
+            <tr><th>Telefon</th><td>+36 (1) 391-1400</td></tr>
+            <tr><th>E-mail</th><td>ugyfelszolgalat@naih.hu</td></tr>
+          </tbody>
+        </table>
+        <p>Jogainak megsértése esetén bírósághoz is fordulhat. A per elbírálása a törvényszék hatáskörébe tartozik, és — az Ön választása szerint — a lakóhelye szerinti törvényszék előtt is megindítható.</p>
+      </article></div>
+    </div>
+
+    <div class="lnav">
+      <a href="#">Következő<b>Impresszum</b></a>
+      <a href="#">Kapcsolódó<b>Cookie-tájékoztató</b></a>
+      <a href="#">Kapcsolódó<b>AI-használat</b></a>
+      <a href="#">Kapcsolódó<b>Szolgáltatási feltételek</b></a>
+    </div>
+  </div>
+</div>
+
+<div class="demo" style="margin-top:60px;">2. rész — 404 oldal</div>
+
+<!-- ================= 404 ================= -->
+<div class="dark">
+  <div class="nav"><div class="nav-in">
+    <span class="wm">THE GBR<i>.</i></span>
+    <nav class="nav-links">
+      <a href="#">Szolgáltatások</a><a href="#">Csomagok</a><a href="#">SEO</a>
+      <a href="#">Rólunk</a><a href="#">Írások</a>
+      <a class="btn nav-cta" href="#">Pitcheld el</a>
+    </nav>
+  </div></div>
+
+  <div class="rail">
+    <div class="rail-side"><span>404 / NINCS TALÁLAT</span></div>
+    <div class="rail-main">
+      <section class="e404"><div class="e404-in">
+        <p class="eyebrow">Hiba · 404</p>
+        <div class="code">4<i>0</i>4</div>
+        <h2>Ez az oldal nincs meg</h2>
+        <p>Vagy elírás történt a címben, vagy régen áthelyeztük ezt a tartalmat. Ha máshonnan érkeztél és ez zavaró, szólj — a törött hivatkozás nálunk hiba, nem a te dolgod.</p>
+        <div class="acts">
+          <a class="btn" href="#">Vissza a főoldalra</a>
+          <a class="btn o" href="#">Szólok róla</a>
+        </div>
+      </div></section>
+
+      <div class="diag">
+        <div class="diag-h">Talán ezt kerested</div>
+        <div class="diag-b">
+          <a href="#">01<b>Szolgáltatások</b></a>
+          <a href="#">02<b>Csomagok és árazás</b></a>
+          <a href="#">03<b>Írások</b></a>
+          <a href="#">04<b>Kapcsolat</b></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="demo" style="margin-top:60px;">3. rész — Hibaoldal (500)</div>
+
+<!-- ================= 500 ================= -->
+<div class="dark">
+  <div class="rail">
+    <div class="rail-side"><span>HIBA</span></div>
+    <div class="rail-main">
+      <section class="e404"><div class="e404-in">
+        <p class="eyebrow">Váratlan hiba</p>
+        <div class="code">5<i>0</i>0</div>
+        <h2>Valami elromlott nálunk</h2>
+        <p>Nem a te hibád. A rendszer értesítést küldött róla, és megnézzük. Próbáld újra pár perc múlva — ha akkor sem megy, írj közvetlenül: <a href="mailto:gabor@thegbr.eu" style="color:var(--signal);">gabor@thegbr.eu</a></p>
+        <div class="acts">
+          <a class="btn" href="#">Újratöltés</a>
+          <a class="btn o" href="#">Vissza a főoldalra</a>
+        </div>
+      </div></section>
+      <div class="diag">
+        <div class="diag-h">Hibaazonosító — ezt add meg, ha írsz</div>
+        <div class="diag-b" style="grid-template-columns:1fr;">
+          <a href="#" style="font-size:13px;letter-spacing:.2em;color:var(--signal);">e7a3-9f21-4c08</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

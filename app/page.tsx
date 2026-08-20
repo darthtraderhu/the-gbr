@@ -39,6 +39,7 @@ const MANAGE_ITEMS = [
   "Folyamatos fejlesztés havi keretben",
   "Tartalom, kampány, mérés",
   "Automatizált tartalommotor",
+  "Havi állapotjelentés a weboldalról és a Google-megjelenésről (Pulzus)",
   "Egy felelős kapcsolattartó",
 ];
 

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="hu" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Írások | THE GBR — látványterv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --d-ground:#0B0E10; --d-panel:#11161A; --d-ink:#EAEEE8; --d-mid:#79837D;
+  --d-dim:#4A524E; --d-rule:#20272B; --signal:#A8D400;
+  --pad:32px; --botnav:0px;
+  /* világos alap */
+  --ground:#EEF0EC; --panel:#FFF; --ink:#14171A; --ink2:#3C4348;
+  --mid:#697079; --rule:#D4D8D1; --soft:#E4E8E1; --accent:#93B300;
+}
+html[data-theme="dark"]{
+  --ground:#0B0E10; --panel:#11161A; --ink:#EAEEE8; --ink2:#9FA9A2;
+  --mid:#79837D; --rule:#20272B; --soft:#171D20; --accent:#A8D400;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:"Source Serif 4",Georgia,serif;-webkit-font-smoothing:antialiased;
+  padding-bottom:var(--botnav);}
+@media(prefers-reduced-motion:no-preference){
+  body{transition:background .35s ease,color .35s ease;}
+}
+a{color:inherit;}
+.rail{display:grid;grid-template-columns:72px 1fr;}
+.rail-side{border-right:1px solid var(--rule);position:relative;}
+.rail-side span{position:absolute;top:56px;left:50%;transform:translateX(-50%) rotate(180deg);
+  writing-mode:vertical-rl;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--mid);white-space:nowrap;}
+.dark .rail-side{border-right-color:var(--d-rule);} .dark .rail-side span{color:var(--d-dim);}
+.rail-main{min-width:0;}
+.dark{background:var(--d-ground);color:var(--d-ink);}
+.seam{height:1px;background:var(--signal);}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--mid);margin:0 0 18px;}
+.dark .eyebrow{color:var(--d-dim);}
+.btn{font-family:"Archivo",sans-serif;font-size:14px;font-weight:700;padding:14px 24px;
+  text-decoration:none;display:inline-block;background:var(--signal);color:#101400;border:1px solid var(--signal);}
+
+/* ---- nav ---- */
+.nav{border-bottom:1px solid var(--d-rule);position:sticky;top:0;z-index:60;
+  background:rgba(11,14,16,.94);backdrop-filter:blur(8px);}
+.nav-in{display:flex;align-items:center;gap:20px;padding:18px var(--pad);}
+.wm{font-family:"Archivo",sans-serif;font-size:20px;font-weight:800;letter-spacing:-.045em;color:var(--d-ink);}
+.wm i{color:var(--signal);font-style:normal;}
+.nav-links{margin-left:auto;display:flex;gap:22px;align-items:center;}
+.nav-links a{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--d-mid);text-decoration:none;}
+.nav-links a.on{color:var(--signal);} .nav-links a:hover{color:var(--d-ink);}
+.nav-cta{font-size:12.5px;padding:10px 17px;}
+
+/* ---- témaváltó ---- */
+.tt{display:flex;border:1px solid var(--d-rule);}
+.tt button{background:transparent;border:0;cursor:pointer;padding:7px 11px;color:var(--d-dim);
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;}
+.tt button.on{background:var(--d-panel);color:var(--d-ink);}
+.tt button:first-child{border-right:1px solid var(--d-rule);}
+
+/* ---- fejléc ---- */
+.head{padding:clamp(44px,6vw,94px) var(--pad) clamp(28px,3.4vw,46px);}
+h1{font-family:"Archivo",sans-serif;margin:0;font-size:clamp(48px,10vw,142px);
+  font-weight:900;line-height:.88;letter-spacing:-.055em;}
+h1 .dot{color:var(--signal);}
+.head p{color:#A7B0AA;max-width:50ch;font-size:clamp(17px,1.5vw,21px);margin:clamp(24px,3vw,38px) 0 0;
+  line-height:1.5;}
+
+/* ---- szűrő ---- */
+.filt{display:flex;flex-wrap:wrap;border-top:1px solid var(--d-rule);}
+.filt button{flex:1;min-width:130px;background:transparent;border:0;border-right:1px solid var(--d-rule);
+  padding:15px 14px;cursor:pointer;color:var(--d-mid);text-align:left;
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  display:flex;justify-content:space-between;gap:10px;}
+.filt button:last-child{border-right:0;}
+.filt button:hover{background:var(--d-panel);color:var(--d-ink);}
+.filt button.on{color:var(--d-ink);box-shadow:inset 0 2px 0 var(--signal);}
+.filt button b{color:var(--d-dim);font-weight:400;}
+.filt button.on b{color:var(--signal);}
+
+/* ---- kiemelt ---- */
+.lead{display:grid;grid-template-columns:1.3fr 1fr;border-top:1px solid var(--rule);}
+.lead-t{padding:clamp(34px,4vw,62px) var(--pad);border-right:1px solid var(--rule);
+  text-decoration:none;color:inherit;}
+.lead-t:hover{background:var(--panel);}
+.lmeta{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mid);display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px;}
+.lmeta .cat{color:var(--accent);}
+.lead-t h2{font-family:"Source Serif 4",serif;font-size:clamp(27px,3.6vw,48px);font-weight:600;
+  line-height:1.12;letter-spacing:-.018em;margin:0 0 18px;max-width:22ch;}
+.lead-t p{font-size:17px;line-height:1.6;color:var(--ink2);margin:0;max-width:46ch;}
+.lead-t .go{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mid);margin-top:26px;display:inline-block;}
+.lead-t:hover .go{color:var(--accent);}
+.lead-i{background:linear-gradient(150deg,var(--panel),var(--soft));position:relative;min-height:280px;}
+.lead-i span{position:absolute;left:22px;bottom:20px;font-family:"IBM Plex Mono",monospace;
+  font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);}
+
+/* ---- lista ---- */
+.list{border-top:1px solid var(--rule);}
+.row{display:grid;grid-template-columns:56px minmax(130px,15%) 1fr auto;gap:clamp(14px,2.2vw,36px);
+  padding:clamp(22px,2.5vw,32px) var(--pad);border-bottom:1px solid var(--rule);
+  align-items:baseline;text-decoration:none;color:inherit;}
+.row:hover{background:var(--panel);}
+.row .idx{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--mid);}
+.row .cat{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mid);}
+.row h3{font-family:"Source Serif 4",serif;font-size:clamp(18px,2vw,26px);font-weight:600;
+  line-height:1.22;margin:0;max-width:36ch;letter-spacing:-.01em;}
+.row:hover h3{color:var(--accent);}
+.row .rt{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mid);white-space:nowrap;}
+
+.more{padding:clamp(30px,3.4vw,48px) var(--pad);display:flex;justify-content:center;}
+.more button{background:transparent;border:1px solid var(--rule);color:var(--ink);cursor:pointer;
+  padding:14px 30px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;}
+.more button:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ---- CTA ---- */
+.final{padding:clamp(52px,6.4vw,102px) var(--pad);}
+.final h2{font-family:"Archivo",sans-serif;font-size:clamp(30px,5.4vw,74px);font-weight:800;
+  letter-spacing:-.048em;line-height:.96;margin:0 0 20px;max-width:15ch;color:var(--d-ink);}
+.final p{font-size:17.5px;line-height:1.6;color:#9FA9A2;max-width:52ch;margin:0 0 26px;}
+.fine{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;color:var(--d-dim);}
+
+/* ---- mobil alsó menü ---- */
+.bot{display:none;position:fixed;left:0;right:0;bottom:0;z-index:75;background:var(--d-ground);
+  border-top:1px solid var(--d-rule);}
+.bot-in{display:grid;grid-template-columns:repeat(5,1fr);}
+.bot a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  padding:11px 4px calc(11px + env(safe-area-inset-bottom));border-right:1px solid var(--d-rule);
+  text-decoration:none;color:var(--d-mid);position:relative;}
+.bot a:last-child{border-right:0;}
+.bot a .ic{font-family:"IBM Plex Mono",monospace;font-size:15px;line-height:1;}
+.bot a .lb{font-family:"IBM Plex Mono",monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;}
+.bot a.on{color:var(--d-ink);}
+.bot a.on:before{content:"";position:absolute;top:-1px;left:0;right:0;height:2px;background:var(--signal);}
+.bot a.cta{color:#101400;background:var(--signal);}
+
+@media(max-width:980px){
+  .lead{grid-template-columns:1fr;}
+  .lead-t{border-right:0;border-bottom:1px solid var(--rule);}
+  .lead-i{min-height:200px;}
+  .row{grid-template-columns:40px 1fr;}
+  .row .cat{grid-column:2;} .row h3{grid-column:2;} .row .rt{grid-column:2;}
+}
+@media(max-width:720px){
+  :root{--pad:20px;--botnav:66px;}
+  .rail{grid-template-columns:1fr;} .rail-side{display:none;}
+  .nav-links a:not(.nav-cta){display:none;}
+  .nav-links .tt{display:none;}
+  .bot{display:block;}
+  .filt button{min-width:50%;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SÖTÉT FEJLÉC ===== -->
+<div class="dark">
+  <div class="nav"><div class="nav-in">
+    <span class="wm">THE GBR<i>.</i></span>
+    <nav class="nav-links">
+      <a href="#">Szolgáltatások</a><a href="#">Csomagok</a><a href="#">SEO</a>
+      <a href="#">Rólunk</a><a class="on" href="#">Írások</a>
+      <span class="tt"><button id="tl" class="on">Világos</button><button id="td">Sötét</button></span>
+      <a class="btn nav-cta" href="#">Pitcheld el</a>
+    </nav>
+  </div></div>
+
+  <div class="rail">
+    <div class="rail-side"><span>ÍRÁSOK</span></div>
+    <div class="rail-main">
+      <section class="head">
+        <h1>Írások<span class="dot">.</span></h1>
+        <p>Nem tartalomgyár. Amit leírunk, azt előbb megcsináltuk — a saját oldalunkon vagy egy ügyfélprojektben.</p>
+      </section>
+      <div class="filt">
+        <button class="on">Mind <b>22</b></button>
+        <button>Technikai SEO <b>7</b></button>
+        <button>E-commerce <b>6</b></button>
+        <button>Konverzió <b>5</b></button>
+        <button>Üzemeltetés <b>4</b></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="seam"></div>
+
+<!-- ===== KIEMELT ===== -->
+<div class="rail">
+  <div class="rail-side"><span>KIEMELT</span></div>
+  <div class="rail-main">
+    <div class="lead">
+      <a class="lead-t" href="#">
+        <div class="lmeta"><span class="cat">Technikai SEO</span><span>2026. 08. 14.</span><span>7 perc</span></div>
+        <h2>Auditáltuk a saját oldalunkat, és négy dolgot ki kellett vennünk róla</h2>
+        <p>Sitemapet ígértünk, és nem volt. Strukturált adatot hirdettünk, és nem volt. Végigmentünk a saját oldalunkon úgy, ahogy egy ügyfélén szoktunk — és nem lett kellemes olvasmány.</p>
+        <span class="go">Elolvasom →</span>
+      </a>
+      <div class="lead-i"><span>Kiemelt írás</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LISTA ===== -->
+<div class="rail">
+  <div class="rail-side"><span>ÖSSZES</span></div>
+  <div class="rail-main">
+    <div class="list">
+      <a class="row" href="#"><span class="idx">02</span><span class="cat">E-commerce</span>
+        <h3>Élő webshop platformváltása anélkül, hogy a bolt leállna</h3><span class="rt">6 perc</span></a>
+      <a class="row" href="#"><span class="idx">03</span><span class="cat">Konverzió</span>
+        <h3>Miért kérünk kötelezően két mondatot a projektről</h3><span class="rt">4 perc</span></a>
+      <a class="row" href="#"><span class="idx">04</span><span class="cat">Üzemeltetés</span>
+        <h3>Az átadás után kezdődik az igazi munka</h3><span class="rt">5 perc</span></a>
+      <a class="row" href="#"><span class="idx">05</span><span class="cat">Technikai SEO</span>
+        <h3>A FID megszűnt — mit mér ma valójában a Google?</h3><span class="rt">8 perc</span></a>
+      <a class="row" href="#"><span class="idx">06</span><span class="cat">Konverzió</span>
+        <h3>A kapcsolati űrlapunk azt mondta, hogy sikerült. Nem sikerült.</h3><span class="rt">6 perc</span></a>
+      <a class="row" href="#"><span class="idx">07</span><span class="cat">E-commerce</span>
+        <h3>400 termék újrakategorizálása: mit tanultunk belőle</h3><span class="rt">9 perc</span></a>
+      <a class="row" href="#"><span class="idx">08</span><span class="cat">Üzemeltetés</span>
+        <h3>Miért nem posztol magától az AI a nevünkben</h3><span class="rt">5 perc</span></a>
+    </div>
+    <div class="more"><button>Régebbi írások betöltése</button></div>
+  </div>
+</div>
+
+<div class="seam"></div>
+
+<!-- ===== CTA ===== -->
+<div class="dark">
+  <div class="rail">
+    <div class="rail-side"><span>KAPCSOLAT</span></div>
+    <div class="rail-main">
+      <section class="final">
+        <p class="eyebrow">Kapcsolat</p>
+        <h2>Hasonló problémád van?</h2>
+        <p>Írd le, mit szeretnél elérni, és két munkanapon belül válaszolunk. Ha nem illünk össze, azt is megmondjuk.</p>
+        <a class="btn" href="#">Pitcheld el a projekted →</a>
+        <p class="fine" style="margin:24px 0 0;">Vagy írj közvetlenül: gabor@thegbr.eu</p>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MOBIL MENÜ ===== -->
+<nav class="bot"><div class="bot-in">
+  <a href="#"><span class="ic">◧</span><span class="lb">Szolgált.</span></a>
+  <a href="#"><span class="ic">▤</span><span class="lb">Csomagok</span></a>
+  <a class="on" href="#"><span class="ic">▦</span><span class="lb">Írások</span></a>
+  <a href="#"><span class="ic">◇</span><span class="lb">Chat</span></a>
+  <a class="cta" href="#"><span class="ic">→</span><span class="lb">Pitch</span></a>
+</div></nav>
+
+<script>
+var h=document.documentElement;
+document.getElementById('tl').onclick=function(){h.dataset.theme='light';
+  this.classList.add('on');document.getElementById('td').classList.remove('on');};
+document.getElementById('td').onclick=function(){h.dataset.theme='dark';
+  this.classList.add('on');document.getElementById('tl').classList.remove('on');};
+</script>
+</body>
+</html>

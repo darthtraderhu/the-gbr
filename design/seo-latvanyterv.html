@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Keresőoptimalizálás | THE GBR — látványterv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --d-ground:#0B0E10; --d-panel:#11161A; --d-ink:#EAEEE8; --d-mid:#79837D;
+  --d-dim:#4A524E; --d-rule:#20272B; --signal:#A8D400;
+  --l-ground:#EEF0EC; --l-panel:#FFF; --l-ink:#14171A; --l-ink2:#3C4348;
+  --l-mid:#697079; --l-rule:#D4D8D1; --l-soft:#E4E8E1; --l-signal:#93B300;
+  --pad:32px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--l-ground);color:var(--l-ink);
+  font-family:"Source Serif 4",Georgia,serif;-webkit-font-smoothing:antialiased;}
+a{color:inherit;}
+.rail{display:grid;grid-template-columns:72px 1fr;}
+.rail-side{border-right:1px solid var(--l-rule);position:relative;}
+.rail-side span{position:absolute;top:56px;left:50%;transform:translateX(-50%) rotate(180deg);
+  writing-mode:vertical-rl;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.34em;text-transform:uppercase;color:#A3ABA4;white-space:nowrap;}
+.dark .rail-side{border-right-color:var(--d-rule);} .dark .rail-side span{color:var(--d-dim);}
+.rail-main{min-width:0;}
+.dark{background:var(--d-ground);color:var(--d-ink);}
+.seam{height:1px;background:var(--signal);}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--l-mid);margin:0 0 20px;}
+.dark .eyebrow{color:var(--d-dim);}
+h2{font-family:"Archivo",sans-serif;margin:0 0 20px;font-size:clamp(30px,4.6vw,60px);
+  font-weight:800;letter-spacing:-.042em;line-height:1.0;max-width:18ch;}
+p{font-size:clamp(16.5px,1.35vw,19px);line-height:1.6;color:var(--l-ink2);margin:0 0 18px;max-width:56ch;}
+.dark p{color:#9FA9A2;}
+.sec{padding:clamp(52px,6vw,96px) var(--pad);}
+.btn{font-family:"Archivo",sans-serif;font-size:14px;font-weight:700;padding:14px 24px;
+  text-decoration:none;display:inline-block;background:var(--l-signal);color:#131A00;border:1px solid var(--l-signal);}
+.btn:hover{background:#88A800;}
+.dark .btn{background:var(--signal);border-color:var(--signal);color:#101400;}
+.fine{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;color:var(--d-dim);}
+
+/* nav */
+.nav{border-bottom:1px solid var(--d-rule);position:sticky;top:0;z-index:60;
+  background:rgba(11,14,16,.94);backdrop-filter:blur(8px);}
+.nav-in{display:flex;align-items:center;gap:20px;padding:18px var(--pad);}
+.wm{font-family:"Archivo",sans-serif;font-size:20px;font-weight:800;letter-spacing:-.045em;}
+.wm i{color:var(--signal);font-style:normal;}
+.nav-links{margin-left:auto;display:flex;gap:24px;align-items:center;}
+.nav-links a{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--d-mid);text-decoration:none;}
+.nav-links a.on{color:var(--signal);} .nav-links a:hover{color:var(--d-ink);}
+.nav-cta{font-size:12.5px;padding:10px 17px;}
+
+/* ===== FEJLÉC ===== */
+.head{padding:clamp(48px,6.5vw,100px) var(--pad) clamp(34px,4vw,56px);}
+h1{font-family:"Archivo",sans-serif;margin:0;font-size:clamp(42px,8.6vw,116px);
+  font-weight:900;line-height:.9;letter-spacing:-.052em;max-width:15ch;}
+h1 .dim{color:var(--d-dim);} h1 .dot{color:var(--signal);}
+.head p{color:#A7B0AA;max-width:52ch;font-size:clamp(17px,1.5vw,21px);margin:clamp(26px,3vw,40px) 0 0;}
+
+/* ===== BIZONYÍTÉK — ellenőrző panel ===== */
+.check{border-top:1px solid var(--d-rule);}
+.check-h{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px var(--pad);
+  border-bottom:1px solid var(--d-rule);font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--d-dim);}
+.chk{display:grid;grid-template-columns:34px 1fr 1.15fr auto;gap:clamp(14px,2.2vw,36px);
+  padding:clamp(16px,1.9vw,24px) var(--pad);border-bottom:1px solid var(--d-rule);
+  align-items:center;text-decoration:none;color:inherit;}
+.chk:last-of-type{border-bottom:0;}
+.chk:hover{background:var(--d-panel);}
+.chk .ok{font-family:"IBM Plex Mono",monospace;font-size:15px;color:var(--signal);}
+.chk .what{font-family:"Archivo",sans-serif;font-size:clamp(15px,1.6vw,20px);font-weight:600;
+  letter-spacing:-.02em;color:var(--d-ink);}
+.chk .where{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--d-mid);
+  overflow:hidden;text-overflow:ellipsis;}
+.chk:hover .where{color:var(--signal);}
+.chk .arw{font-family:"IBM Plex Mono",monospace;font-size:14px;color:#39413C;}
+.chk:hover .arw{color:var(--signal);}
+.check-f{padding:16px var(--pad) clamp(34px,4vw,54px);font-family:"IBM Plex Mono",monospace;
+  font-size:10.5px;letter-spacing:.12em;color:var(--d-mid);border-top:1px solid var(--d-rule);}
+
+/* ===== KÉT KERESÉS ===== */
+.two{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--l-rule);}
+.two>div{border-right:1px solid var(--l-rule);border-bottom:1px solid var(--l-rule);}
+.two>div:last-child{border-right:0;}
+.two-h{padding:12px clamp(20px,2vw,28px);border-bottom:1px solid var(--l-rule);
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--l-mid);background:var(--l-panel);}
+.two-b{padding:clamp(24px,2.8vw,38px) clamp(20px,2vw,28px);}
+.two h3{font-family:"Archivo",sans-serif;font-size:clamp(20px,2.2vw,28px);font-weight:700;
+  letter-spacing:-.028em;margin:0 0 14px;}
+.two p{font-size:16px;max-width:46ch;}
+/* SERP-utánzat */
+.serp{background:var(--l-panel);border:1px solid var(--l-rule);padding:16px 18px;margin-top:20px;}
+.serp .u{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--l-mid);}
+.serp .t{font-family:"Archivo",sans-serif;font-size:17px;font-weight:600;color:#1A4FA0;margin:6px 0 6px;letter-spacing:-.015em;}
+.serp .d{font-size:14px;color:var(--l-ink2);margin:0;}
+.serp .rich{margin-top:12px;padding-top:12px;border-top:1px solid var(--l-soft);
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--l-signal);}
+/* AI-válasz utánzat */
+.ai{background:var(--l-panel);border:1px solid var(--l-rule);padding:16px 18px;margin-top:20px;}
+.ai .q{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--l-mid);margin-bottom:12px;}
+.ai .a{font-size:15px;color:var(--l-ink2);margin:0;line-height:1.55;}
+.ai .a b{color:var(--l-ink);font-family:"Archivo",sans-serif;font-weight:700;}
+.ai .src{margin-top:12px;padding-top:12px;border-top:1px solid var(--l-soft);
+  font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--l-mid);}
+
+/* ===== KÉT PILLÉR ===== */
+.pil{border-top:1px solid var(--l-rule);}
+.pil-row{display:grid;grid-template-columns:minmax(140px,19%) 1fr minmax(0,40%);
+  gap:clamp(20px,3vw,48px);padding:clamp(38px,4.4vw,70px) var(--pad);
+  border-bottom:1px solid var(--l-rule);align-items:start;}
+.pil-n{font-family:"Archivo",sans-serif;font-size:clamp(46px,7vw,112px);font-weight:900;
+  letter-spacing:-.06em;line-height:.78;color:var(--l-rule);}
+.pil-lab{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--l-mid);margin-top:14px;}
+.pil h3{font-family:"Archivo",sans-serif;font-size:clamp(23px,2.8vw,38px);font-weight:700;
+  letter-spacing:-.032em;margin:0 0 14px;line-height:1.05;}
+.pil p{margin:0 0 16px;max-width:44ch;}
+.pil dl{margin:0;}
+.pil dt{font-family:"Archivo",sans-serif;font-size:15.5px;font-weight:700;
+  padding:14px 0 4px;border-top:1px solid var(--l-soft);letter-spacing:-.01em;}
+.pil dt:first-of-type{border-top:0;padding-top:0;}
+.pil dd{margin:0 0 6px;font-size:14.5px;color:var(--l-mid);}
+/* metrika-chipek */
+.cwv{display:flex;gap:1px;background:var(--l-rule);border:1px solid var(--l-rule);margin-top:18px;}
+.cwv span{background:var(--l-panel);flex:1;padding:13px 10px;text-align:center;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;color:var(--l-ink);}
+.cwv span small{display:block;font-size:8.5px;letter-spacing:.18em;color:var(--l-mid);margin-top:6px;}
+.cwv span.out{color:#B9BFB6;text-decoration:line-through;}
+/* JSON-LD kódrészlet */
+.code{background:var(--d-ground);border:1px solid var(--d-rule);margin-top:18px;}
+.code-h{padding:10px 16px;border-bottom:1px solid var(--d-rule);font-family:"IBM Plex Mono",monospace;
+  font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--d-dim);}
+.code pre{margin:0;padding:16px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  line-height:1.75;color:#9FA9A2;overflow-x:auto;}
+.code .k{color:var(--signal);} .code .v{color:#D5DBD3;}
+
+/* ===== FOLYAMAT ===== */
+.steps{border-top:1px solid var(--l-rule);}
+.strow{display:grid;grid-template-columns:minmax(100px,15%) 1fr;gap:clamp(20px,3vw,48px);
+  padding:clamp(26px,3vw,42px) var(--pad);border-bottom:1px solid var(--l-rule);align-items:start;}
+.st-n{font-family:"Archivo",sans-serif;font-size:clamp(36px,5.4vw,80px);font-weight:900;
+  letter-spacing:-.06em;line-height:.8;color:var(--l-rule);}
+.strow h3{font-family:"Archivo",sans-serif;font-size:clamp(19px,2.1vw,28px);font-weight:700;
+  letter-spacing:-.025em;margin:0 0 10px;}
+.strow p{margin:0;max-width:62ch;}
+
+/* ===== GYIK ===== */
+.faq{border-top:1px solid var(--l-rule);}
+.q{border-bottom:1px solid var(--l-rule);}
+.q summary{list-style:none;cursor:pointer;padding:clamp(20px,2.2vw,30px) var(--pad);
+  display:grid;grid-template-columns:1fr 28px;gap:20px;align-items:baseline;
+  font-family:"Archivo",sans-serif;font-size:clamp(17px,1.9vw,25px);font-weight:700;letter-spacing:-.022em;}
+.q summary::-webkit-details-marker{display:none;}
+.q summary:hover{background:var(--l-panel);}
+.q .pm{font-family:"IBM Plex Mono",monospace;font-size:18px;color:var(--l-mid);text-align:right;}
+.q[open] .pm{color:var(--l-signal);}
+.q .a{padding:0 var(--pad) clamp(24px,2.6vw,34px);}
+.q .a p{margin:0;max-width:64ch;}
+
+/* ===== CTA ===== */
+.final{padding:clamp(60px,7.5vw,120px) var(--pad);}
+.final h2{font-size:clamp(36px,7.4vw,110px);max-width:13ch;letter-spacing:-.055em;
+  line-height:.92;color:var(--d-ink);}
+
+@media(max-width:1080px){.pil-row{grid-template-columns:minmax(100px,17%) 1fr;}
+  .pil-row>*:nth-child(3){grid-column:2;}}
+@media(max-width:900px){
+  .two{grid-template-columns:1fr;} .two>div{border-right:0;}
+  .chk{grid-template-columns:28px 1fr auto;} .chk .where{display:none;}
+}
+@media(max-width:720px){
+  :root{--pad:20px;}
+  .rail{grid-template-columns:1fr;} .rail-side{display:none;}
+  .nav-links a:not(.nav-cta){display:none;}
+  .pil-row,.strow{grid-template-columns:1fr;}
+  .cwv{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SÖTÉT FEJLÉC + ELLENŐRZŐ PANEL ===== -->
+<div class="dark">
+  <div class="nav"><div class="nav-in">
+    <span class="wm">THE GBR<i>.</i></span>
+    <nav class="nav-links">
+      <a href="#">Szolgáltatások</a><a href="#">Csomagok</a><a class="on" href="#">SEO</a>
+      <a href="#">Rólunk</a><a href="#">Írások</a>
+      <a class="btn nav-cta" href="#">Pitcheld el</a>
+    </nav>
+  </div></div>
+
+  <div class="rail">
+    <div class="rail-side"><span>SEO ÉS AEO</span></div>
+    <div class="rail-main">
+      <section class="head">
+        <h1>Attól, hogy jó a szöveged,<br><span class="dim">még nem talál meg senki</span><span class="dot">.</span></h1>
+        <p>A keresés két irányba ment el. A Google a technikai alapokat méri, az AI-keresők strukturált adatot olvasnak. Mi mindkettőt megépítjük — és nem csak beszélünk róla.</p>
+      </section>
+
+      <div class="check">
+        <div class="check-h"><span>Bizonyíték · ezt az oldalt is így építettük</span><span>Kattintható</span></div>
+
+        <a class="chk" href="#"><span class="ok">✓</span>
+          <span class="what">Dinamikus sitemap</span>
+          <span class="where">thegbr.eu/sitemap.xml</span><span class="arw">→</span></a>
+
+        <a class="chk" href="#"><span class="ok">✓</span>
+          <span class="what">Robots.txt sitemap-hivatkozással</span>
+          <span class="where">thegbr.eu/robots.txt</span><span class="arw">→</span></a>
+
+        <a class="chk" href="#"><span class="ok">✓</span>
+          <span class="what">Strukturált adat — 4 érvényes elem</span>
+          <span class="where">Google Rich Results Test</span><span class="arw">→</span></a>
+
+        <a class="chk" href="#"><span class="ok">✓</span>
+          <span class="what">Mért teljesítmény</span>
+          <span class="where">PageSpeed Insights</span><span class="arw">→</span></a>
+
+        <div class="check-f">A legtöbb SEO-ügynökség oldalán nincs sitemap. Nézd meg — komolyan, nyisd meg. Ha bármelyik nem működne, szólj, és javítjuk.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="seam"></div>
+
+<!-- ===== MI VÁLTOZOTT — két keresés ===== -->
+<div class="rail">
+  <div class="rail-side"><span>MI VÁLTOZOTT</span></div>
+  <div class="rail-main">
+    <section style="padding:clamp(52px,6vw,96px) var(--pad) clamp(24px,3vw,38px);">
+      <p class="eyebrow">Mi változott</p>
+      <h2>Két külön keresés lett belőle</h2>
+      <p>Ugyanarra a kérdésre ma kétféle úton kapnak választ az emberek. A kettőhöz más kell.</p>
+    </section>
+    <div class="two">
+      <div>
+        <div class="two-h">01 — A klasszikus találati lista</div>
+        <div class="two-b">
+          <h3>A Google technikai része szigorodott</h3>
+          <p>A betöltési sebesség, a szerkezet stabilitása és a válaszidő ma rangsorolási tényező. Egy lassú oldal nem azért veszít, mert csúnya, hanem mert a Google hátrébb sorolja.</p>
+          <div class="serp">
+            <div class="u">thegbr.eu › szolgaltatasok</div>
+            <div class="t">Szolgáltatások | THE GBR</div>
+            <p class="d">Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó és üzemeltetés. Öt terület, házon belül…</p>
+            <div class="rich">Gyakori kérdések · 6 elem megjelenítve</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="two-h">02 — Az AI-válasz</div>
+        <div class="two-b">
+          <h3>És megjelent egy második út</h3>
+          <p>Egyre többen kérdezik meg egyszerűen az AI-t. Ezek a rendszerek nem kulcsszavakat olvasnak, hanem struktúrát. Ha ez nincs gépi olvasásra alkalmas formában, a válaszban más szerepel.</p>
+          <div class="ai">
+            <div class="q">„Ki csinál Magyarországon B2B webshopot?"</div>
+            <p class="a">Több ügynökség foglalkozik ezzel. Például a <b>THE GBR</b> (GBR Marketing Solutions Kft.) Next.js alapú B2B webshopokat épít, meglévő rendszerek fölé is…</p>
+            <div class="src">Forrás: thegbr.eu — Organization, Service séma</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== KÉT PILLÉR ===== -->
+<div class="rail">
+  <div class="rail-side"><span>A KÉT PILLÉR</span></div>
+  <div class="rail-main">
+    <div class="pil">
+      <div class="pil-row">
+        <div><div class="pil-n">01</div><div class="pil-lab">SEO</div></div>
+        <div>
+          <h3>Technikai alap</h3>
+          <p>Amit a Google mér. A Next.js szerveroldali renderelése miatt a keresőrobot azonnal látja a tartalmat — nem kell megvárnia, míg a böngésző összerakja.</p>
+          <div class="cwv">
+            <span>LCP<small>Betöltés</small></span>
+            <span>INP<small>Reakció</small></span>
+            <span>CLS<small>Stabilitás</small></span>
+            <span class="out">FID<small>2024-ben kivezetve</small></span>
+          </div>
+        </div>
+        <dl>
+          <dt>Szerveroldali renderelés</dt><dd>A robot azonnal olvassa a tartalmat, nem kell rá várnia.</dd>
+          <dt>Automatikus sitemap és robots.txt</dt><dd>Minden új oldal magától bekerül. Nem kell rá emlékezni.</dd>
+          <dt>Core Web Vitals</dt><dd>A három metrika, amit a Google ténylegesen mér.</dd>
+          <dt>Canonical URL-ek és átirányítások</dt><dd>Platformváltásnál ez a legdrágább hiba, ha kimarad.</dd>
+        </dl>
+      </div>
+
+      <div class="pil-row">
+        <div><div class="pil-n">02</div><div class="pil-lab">AEO</div></div>
+        <div>
+          <h3>AI-láthatóság</h3>
+          <p>Amit a nyelvi modellek olvasnak. Nem tudjuk garantálni, hogy egy AI éppen téged idéz — ezt senki nem tudja. Azt viszont meg tudjuk csinálni, hogy <strong>legyen mit idéznie</strong>.</p>
+          <div class="code">
+            <div class="code-h">Amit egy AI a te oldaladról lát</div>
+<pre>{
+  <span class="k">"@type"</span>: <span class="v">"Organization"</span>,
+  <span class="k">"name"</span>: <span class="v">"THE GBR"</span>,
+  <span class="k">"legalName"</span>: <span class="v">"GBR Marketing Solutions Kft."</span>,
+  <span class="k">"areaServed"</span>: <span class="v">"HU"</span>,
+  <span class="k">"knowsAbout"</span>: [<span class="v">"Next.js"</span>, <span class="v">"B2B webshop"</span>]
+}</pre>
+          </div>
+        </div>
+        <dl>
+          <dt>Schema.org és JSON-LD</dt><dd>Cégadatok, cikkek, szolgáltatások, gyakori kérdések — géppel olvasható formában.</dd>
+          <dt>Gyakori kérdések strukturálva</dt><dd>Megjelenhetnek közvetlenül a találati listában, kattintás előtt.</dd>
+          <dt>Egyértelmű cégadatok</dt><dd>Név, cím, elérhetőség, tevékenység — mindenhol ugyanaz, ellentmondás nélkül.</dd>
+          <dt>Kérdésre válaszoló tartalom</dt><dd>Nem kulcsszóhalmozás, hanem az, hogy tényleg megválaszolod, amit kérdeznek.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOLYAMAT ===== -->
+<div class="rail">
+  <div class="rail-side"><span>FOLYAMAT</span></div>
+  <div class="rail-main">
+    <section style="padding:clamp(52px,6vw,96px) var(--pad) clamp(24px,3vw,36px);">
+      <p class="eyebrow">Folyamat</p>
+      <h2>Három lépés</h2>
+    </section>
+    <div class="steps">
+      <div class="strow"><div class="st-n">01</div>
+        <div><h3>Felmérés</h3><p>Megnézzük, hol tartasz: sebesség, indexeltség, szerkezet, strukturált adat. A végén kapsz egy listát arról, mi hiányzik — akkor is, ha nem velünk dolgozol tovább.</p></div></div>
+      <div class="strow"><div class="st-n">02</div>
+        <div><h3>Építés</h3><p>A technikai alapok rendbetétele. Ha a mostani rendszer nem bírja, akkor újraépítés — de fokozatosan, hogy közben ne veszíts forgalmat.</p></div></div>
+      <div class="strow"><div class="st-n">03</div>
+        <div><h3>Karbantartás</h3><p>A keresők változnak, és a te oldalad is. Ha üzemeltetést is kérsz, ezt folyamatosan követjük.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GYIK ===== -->
+<div class="rail">
+  <div class="rail-side"><span>GYIK</span></div>
+  <div class="rail-main">
+    <section style="padding:clamp(52px,6vw,96px) var(--pad) clamp(24px,3vw,36px);">
+      <p class="eyebrow">Gyakori kérdések</p>
+      <h2>Amit tényleg meg szoktak kérdezni</h2>
+    </section>
+    <div class="faq">
+      <details class="q" open><summary>Mennyi idő alatt látszik eredmény?<span class="pm">−</span></summary>
+        <div class="a"><p>A technikai javítások hatása hetek alatt megjelenik az indexelésben. A rangsor-változás lassabb — három-hat hónap, ha versenyzett kifejezésekről van szó. Aki gyorsabbat ígér, az vagy nem érti, vagy nem mond igazat.</p></div></details>
+      <details class="q"><summary>Garantáltok első helyet a Google-ben?<span class="pm">+</span></summary>
+        <div class="a"><p>Nem, és aki ilyet ígér, azt kerüld el. A rangsort a Google határozza meg, nem a szolgáltatód. Amit garantálni tudunk: a technikai alapok rendben lesznek, mérhetők, és ellenőrizheted.</p></div></details>
+      <details class="q"><summary>Mi az az AEO, és tényleg kell?<span class="pm">+</span></summary>
+        <div class="a"><p>Az AI-keresőkre való felkészítés. Ma még kevés forgalmat hoz, de gyorsan nő — és a strukturált adat, amit hozzá kell építeni, a hagyományos Google-találatokban is segít. Vagyis nem elszórt pénz akkor sem, ha az AI-keresés lassabban terjed, mint várjuk.</p></div></details>
+      <details class="q"><summary>Meglévő oldalt is tudtok javítani, vagy csak újat építeni?<span class="pm">+</span></summary>
+        <div class="a"><p>Mindkettő megy. A felmérés végén megmondjuk, melyik éri meg jobban — van, amikor a meglévő rendszer javítása olcsóbb és gyorsabb.</p></div></details>
+      <details class="q"><summary>Honnan tudom, hogy tényleg megcsináltátok?<span class="pm">+</span></summary>
+        <div class="a"><p>Ugyanúgy, ahogy nálunk is ellenőrizheted: sitemap, robots.txt, Rich Results Test, PageSpeed. Ezek nyilvános, ingyenes eszközök — nem kell hinned nekünk.</p></div></details>
+    </div>
+  </div>
+</div>
+
+<div class="seam"></div>
+
+<!-- ===== CTA ===== -->
+<div class="dark">
+  <div class="rail">
+    <div class="rail-side"><span>KAPCSOLAT</span></div>
+    <div class="rail-main">
+      <section class="final">
+        <p class="eyebrow">Felmérés</p>
+        <h2>Nézzük meg, hol tartasz</h2>
+        <p style="max-width:54ch;">A felmérés végén kapsz egy listát arról, mi hiányzik a technikai alapokból — akkor is, ha nem velünk dolgozol tovább. Két munkanapon belül válaszolunk.</p>
+        <a class="btn" href="#">Kérj felmérést →</a>
+        <p class="fine" style="margin:24px 0 0;">Vagy írj közvetlenül: gabor@thegbr.eu</p>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.q').forEach(function(d){
+  d.addEventListener('toggle',function(){
+    d.querySelector('.pm').textContent=d.open?'\u2212':'+';
+  });
+});
+</script>
+</body>
+</html>
