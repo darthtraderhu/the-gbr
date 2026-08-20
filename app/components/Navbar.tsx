@@ -84,7 +84,7 @@ export default function Navbar() {
                       className="w-[300px] border border-[var(--rule)] shadow-[0_20px_40px_-20px_rgba(0,0,0,0.6)]"
                     >
                       <div className="px-4 py-[10px] border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:9.5px] tracking-[0.2em] uppercase text-[var(--dim)]">
-                        Öt terület
+                        Hét terület
                       </div>
                       {ARZENAL_SECTIONS.map((s) => (
                         <Link

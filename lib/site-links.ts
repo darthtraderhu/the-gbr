@@ -9,7 +9,7 @@ export const MAIN_NAV_ITEMS = [
   { label: "Írások", href: "/hirek" },
 ];
 
-// Az /arzenal öt szolgáltatás-szekciójának azonosítója — az ott futó
+// Az /arzenal hét szolgáltatás-szekciójának azonosítója — az ott futó
 // INDEX_ITEMS-szel egyezik (app/arzenal/page.tsx).
 export const ARZENAL_SECTIONS = [
   { id: "web", n: "01", name: "Web és webshop" },
@@ -17,6 +17,8 @@ export const ARZENAL_SECTIONS = [
   { id: "ai", n: "03", name: "AI és chatbot" },
   { id: "video", n: "04", name: "Videó és tartalom" },
   { id: "ops", n: "05", name: "Üzemeltetés és fejlesztés" },
+  { id: "access", n: "06", name: "Akadálymentesítés" },
+  { id: "pulzus", n: "07", name: "Pulzus" },
 ];
 
 export const LEGAL_LINKS = [
