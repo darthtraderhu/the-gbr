@@ -97,3 +97,5 @@ Ha az eszköz azt írja, hogy „a Largest Contentful Paint 4,2 másodperc", azz
 ---
 
 Ha kíváncsi vagy, hogy nálad mi a helyzet, [írj egy sort](/init). Az első mérést elküldjük — akkor is, ha nem lesz belőle együttműködés.
+
+Bővebben a szolgáltatásról: [Pulzus](/arzenal#pulzus).

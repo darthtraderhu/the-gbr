@@ -3,7 +3,7 @@ import { formatHungarianDate } from "../../../lib/date";
 import Link from "next/link";
 import { Metadata } from "next";
 import { SITE_URL } from "@/lib/site";
-import { blogPostingSchema, breadcrumbSchema } from "@/lib/jsonld";
+import { blogPostingSchema, breadcrumbSchema, softwareApplicationSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import ShareBar from "./ShareBar";
@@ -30,7 +30,7 @@ export async function generateMetadata({
       description: postData.excerpt,
       type: "article",
       publishedTime: postData.date,
-      authors: ["THE GBR"],
+      authors: ["Tóth Gábor"],
     },
     twitter: {
       card: "summary_large_image",
@@ -81,6 +81,16 @@ export default async function PosztOldal({ params }: { params: Promise<{ id: str
             { name: "Írások", url: `${SITE_URL}/hirek` },
             { name: postData.title, url: articleUrl },
           ]),
+          ...(id === "miert-epit-sajat-termeket"
+            ? [
+                softwareApplicationSchema({
+                  name: "Gimbal",
+                  description:
+                    "Könyvelési logikára épülő pénzügyi nyilvántartó alkalmazás vállalkozóknak és kereskedőknek — rögzített tételek utólag nem írhatók felül, csak ellentételezhetők. Jelenleg zárt bétában.",
+                  url: articleUrl,
+                }),
+              ]
+            : []),
         ]}
       />
 
@@ -105,7 +115,7 @@ export default async function PosztOldal({ params }: { params: Promise<{ id: str
           <Link href="/hirek" className="hover:text-[var(--signal)] transition-colors">
             &larr; Vissza az írásokhoz
           </Link>
-          <span>THE GBR</span>
+          <span>Tóth Gábor</span>
         </div>
       </Rail>
 

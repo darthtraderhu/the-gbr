@@ -256,11 +256,11 @@ export default function SeoAeoPage() {
                   Szolgáltatások | THE GBR
                 </div>
                 <p className="[font-size:var(--text-sm)] text-[var(--ink-2)] m-0">
-                  Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó és
-                  üzemeltetés. Öt terület, házon belül…
+                  Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó,
+                  üzemeltetés és akadálymentesítés. Hét terület, házon belül…
                 </p>
                 <div className="mt-[var(--space-3)] pt-[var(--space-3)] border-t border-[var(--rule-soft)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.12em] uppercase text-[var(--signal-deep)]">
-                  Gyakori kérdések · 6 elem megjelenítve
+                  Gyakori kérdések · 8 elem megjelenítve
                 </div>
               </div>
             </div>

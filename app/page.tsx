@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getSortedPostsData } from "../lib/posts"; // <-- BEHÚZZUK A MOTORT!
-import { websiteSchema } from "@/lib/jsonld";
+import { websiteSchema, professionalServiceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, SectionHeader, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import HeroInstrument from "./HeroInstrument";
@@ -158,6 +158,7 @@ export default function Home() {
   return (
     <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd data={websiteSchema()} />
+      <JsonLd data={professionalServiceSchema()} />
 
       {/* ===== 01 / MŰSZER — a hero maga a bizonyíték ===== */}
       <Rail label="01 / Műszer" dark>

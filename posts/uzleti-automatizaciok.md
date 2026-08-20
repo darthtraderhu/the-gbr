@@ -6,7 +6,7 @@ category: "AI & TECH"
 readTime: "8 perc"
 ---
 
-# Szabadítsd Fel az Idődet
+## Szabadítsd Fel az Idődet
 
 Amikor a lead beérkezik a weboldaladról, mi történik? Valaki kézzel pötyögi be az Excelbe?
 

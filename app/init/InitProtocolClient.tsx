@@ -206,6 +206,12 @@ export default function InitProtocolClient() {
       style={{ backgroundColor: "var(--ground)", color: "var(--ink)" }}
       className="min-h-screen flex flex-col font-body"
     >
+      {/* Vizuálisan rejtett h1 — az oldalnak nincs látható nagy címsora
+          (fókuszált konverziós folyamat), de a lépés-címek (h2) alá kell
+          egy valódi h1, hogy a címsor-hierarchia és a képernyőolvasók
+          számára a lapcím ne maradjon ki. */}
+      <h1 className="sr-only">Beszéljünk a projektedről</h1>
+
       {/* ===== FEJLÉC ===== */}
       <div className="border-b border-[var(--rule)]">
         <div className="flex items-center gap-4 flex-wrap px-6 py-[18px]">

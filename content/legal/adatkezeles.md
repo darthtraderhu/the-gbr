@@ -3,8 +3,6 @@ title: "Adatkezelési tájékoztató | THE GBR"
 description: "Milyen személyes adatokat kezel a GBR Marketing Solutions Kft. a www.thegbr.eu használata és a szolgáltatások igénybevétele során, milyen jogalapon, meddig, és kinek továbbítjuk — GDPR szerinti tájékoztató."
 ---
 
-# Adatkezelési tájékoztató
-
 **Hatályos:** 2026. augusztus 16.
 **Verzió:** 1.0
 **Weboldal:** www.thegbr.eu

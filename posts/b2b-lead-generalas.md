@@ -6,7 +6,7 @@ category: "MARKETING"
 readTime: "4 perc"
 ---
 
-# Zéró Bullshit Marketing
+## Zéró Bullshit Marketing
 
 A döntéshozók utálják, ha zavarják őket. A modern B2B marketing arról szól, hogy **akkor legyél ott, amikor ők keresnek megoldást.**
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_URL } from "@/lib/site";
-import { breadcrumbSchema, faqPageSchema } from "@/lib/jsonld";
+import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 
@@ -33,6 +33,54 @@ const INDEX_ITEMS = [
   { id: "ops", n: "05", name: "Üzemeltetés és fejlesztés" },
   { id: "access", n: "06", name: "Akadálymentesítés" },
   { id: "pulzus", n: "07", name: "Pulzus" },
+];
+
+// Egész mondatos leírás szolgáltatásonként — a Service séma description
+// mezője, hogy az AI-keresők idézhető kontextust kapjanak (AEO), ne csak
+// kulcsszavakat.
+const SERVICE_SCHEMA_ITEMS = [
+  {
+    id: "web",
+    name: "Web és webshop",
+    description:
+      "Egyedi dizájn alapú weboldal- és webshopfejlesztés Next.js alapokon, technikai SEO-val és biztonsági alapbeállításokkal.",
+  },
+  {
+    id: "ads",
+    name: "Performance marketing",
+    description:
+      "Google és Meta hirdetéskezelés, ahol a kattintástól a megkeresésig követjük a konverziót, és heti jelentésben számolunk el.",
+  },
+  {
+    id: "ai",
+    name: "AI és chatbot",
+    description:
+      "OpenAI-alapú chatbot-integráció a weboldalon, saját tartalomra hangolva, emberi átirányítással a komolyabb kérdéseknél.",
+  },
+  {
+    id: "video",
+    name: "Videó és tartalom",
+    description:
+      "Cégbemutató, termék- és közösségimédia-videók gyártása, a weboldal arculatával egységes kivitelben.",
+  },
+  {
+    id: "ops",
+    name: "Üzemeltetés és fejlesztés",
+    description:
+      "Folyamatos weboldal-üzemeltetés: monitoring, hibariasztás, havi fejlesztési óraszám és rendszeres jelentés.",
+  },
+  {
+    id: "access",
+    name: "Akadálymentesítés",
+    description:
+      "Weboldalak technikai akadálymentesítési felmérése és javítása — kontraszt, billentyűzetes bejárhatóság, képernyőolvasó-kompatibilitás és feliratozás.",
+  },
+  {
+    id: "pulzus",
+    name: "Pulzus",
+    description:
+      "Havi figyelő szolgáltatás élő weboldalakhoz: elérhetőség, sebesség, SSL-tanúsítvány és Google-profil figyelése, összefoglalva egy havi levélben.",
+  },
 ];
 
 const WEB_FEATURES = [
@@ -248,6 +296,16 @@ export default function Arzenal() {
         ])}
       />
       <JsonLd data={faqPageSchema(FAQ_ITEMS)} />
+      {SERVICE_SCHEMA_ITEMS.map((item) => (
+        <JsonLd
+          key={item.id}
+          data={serviceSchema({
+            name: item.name,
+            description: item.description,
+            url: `${SITE_URL}/arzenal#${item.id}`,
+          })}
+        />
+      ))}
 
       {/* ===== SÖTÉT FEJLÉC + INDEX ===== */}
       <Rail label="Szolgáltatások" dark>
@@ -454,6 +512,14 @@ export default function Arzenal() {
               fejlesztjük.
             </>,
             "Egy felelős emberrel dolgozol, aki ismeri a projekted. Nem ügyfélszolgálati sorszámot kapsz.",
+            <>
+              Ezt nem csak ügyfeleknek mondjuk: a saját termékünket, a Gimbalt is mi
+              üzemeltetjük — el is mondtuk,{" "}
+              <Link href="/hirek/miert-epit-sajat-termeket" className="text-[var(--ink)] underline">
+                mit tanultunk belőle
+              </Link>
+              .
+            </>,
           ]}
           features={OPS_FEATURES}
           device={
@@ -500,6 +566,13 @@ export default function Arzenal() {
                 a technikai akadályokat felmérjük, dokumentáljuk és megszüntetjük
               </strong>{" "}
               — és hogy a végén írásban megkapja, mi változott.
+            </>,
+            <>
+              Részletesebben írtunk arról,{" "}
+              <Link href="/hirek/akadalymentesites" className="text-[var(--ink)] underline">
+                mit jelent az, hogy egy weboldal akadálymentes
+              </Link>
+              .
             </>,
           ]}
           features={ACCESS_FEATURES}
@@ -573,6 +646,13 @@ export default function Arzenal() {
               <strong className="text-[var(--ink)]">A választ a gép írja, de ön küldi.</strong>{" "}
               Elkészítjük a válaszjavaslatot, de az ön nevében soha nem posztolunk automatikusan.
               Egy elhamarkodott válasz többet árt, mint amennyit tíz köszönőlevél használ.
+            </>,
+            <>
+              Egy konkrét esetet is megmutatunk arról,{" "}
+              <Link href="/hirek/pulzus-ot-masodperc" className="text-[var(--ink)] underline">
+                mi derül ki, ha valaki tényleg megméri az oldalt
+              </Link>
+              .
             </>,
           ]}
           features={PULZUS_FEATURES}

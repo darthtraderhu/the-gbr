@@ -91,4 +91,4 @@ A Gimbal jelenleg **zárt bétában** fut, és keresünk hozzá vállalkozókat,
 
 A béta ingyenes, és aki most csatlakozik, annak az is marad. Cserébe egyetlen dolgot kérünk: mondd meg őszintén, mi a baja.
 
-[Írj egy sort](/init), és küldjük a hozzáférést. Vagy nézd meg, [mit építünk másoknak](/arzenal).
+[Írj egy sort](/init), és küldjük a hozzáférést. Vagy nézd meg, [mit építünk és üzemeltetünk másoknak](/arzenal#ops).

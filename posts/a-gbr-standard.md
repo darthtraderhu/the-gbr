@@ -6,7 +6,7 @@ category: "E-COMMERCE"
 readTime: "5 perc"
 ---
 
-# A Szindikátus
+## A Szindikátus
 
 A marketing és az IT összeolvadt. Aki ezt nem ismeri fel, az lemarad. 
 

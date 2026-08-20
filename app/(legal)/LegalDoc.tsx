@@ -69,9 +69,9 @@ export default function LegalDoc({ doc }: { doc: Doc }) {
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(200px,24%)_1fr]">
           <nav className="border-b lg:border-b-0 lg:border-r border-[var(--rule)] px-6 lg:px-[clamp(20px,2vw,28px)] py-[clamp(30px,3.4vw,50px)]">
             <div className="lg:sticky lg:top-16">
-              <h4 className="[font-family:var(--font-mono)] text-[length:9.5px] tracking-[0.2em] uppercase text-[var(--mid)] font-normal mb-[var(--space-4)]">
+              <p className="[font-family:var(--font-mono)] text-[length:9.5px] tracking-[0.2em] uppercase text-[var(--mid)] font-normal mb-[var(--space-4)]">
                 Tartalom
-              </h4>
+              </p>
               {doc.toc.map((entry, i) => (
                 <a
                   key={entry.id}

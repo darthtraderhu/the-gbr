@@ -21,15 +21,19 @@ try {
 } catch (e) {}
 `;
 
-// BUMM! Kőkemény globális B2B SEO, OpenGraph és Analytics alapok
+// Globális fallback — csak akkor jelenik meg, ha egy oldal nem ad meg saját
+// metadata-t (minden route-nak van sajátja, ld. SEO-audit). A szöveg a
+// homepage HOME_DESCRIPTION-jével egyező hangot követi, nem a régi
+// "sötét/neon terminál" márkahangot.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "THE GBR | Full-Stack B2B Agency",
+  title: "THE GBR | Fejlesztés és üzemeltetés B2B cégeknek",
   description:
-    "A marketing és az IT összeolvadt. A Jövő Egy Kézből. Next.js alapú architektúrák, AI integráció és adatvezérelt marketing.",
+    "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek.",
   openGraph: {
-    title: "THE GBR | Full-Stack B2B Agency",
-    description: "A marketing és az IT összeolvadt. A Jövő Egy Kézből.",
+    title: "THE GBR | Fejlesztés és üzemeltetés B2B cégeknek",
+    description:
+      "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek.",
     url: SITE_URL,
     siteName: "THE GBR",
     locale: "hu_HU",
@@ -37,8 +41,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "THE GBR | Full-Stack B2B Agency",
-    description: "A marketing és az IT összeolvadt. A Jövő Egy Kézből.",
+    title: "THE GBR | Fejlesztés és üzemeltetés B2B cégeknek",
+    description:
+      "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek.",
   },
   // A Search Console-hitelesítés még nincs beállítva. Ha a HTML meta-tages
   // módot használjuk, ide kerül a valós kód: verification: { google: "..." }.

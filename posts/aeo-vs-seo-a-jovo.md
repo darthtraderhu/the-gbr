@@ -4,11 +4,11 @@ date: "2026-06-13"
 excerpt: "A hagyományos SEO halott. A jövő az Answer Engine Optimization (AEO), ahol a gépi intelligenciát kell meggyőznöd arról, hogy a te entitásod a legjobb válasz."
 ---
 
-# AEO vs. SEO: Így optimalizálj a ChatGPT és a Gemini korában
+## AEO vs. SEO: Így optimalizálj a ChatGPT és a Gemini korában
 
 A paradigmaváltás megtörtént. A jövő döntéshozói már nem kulcsszavakat pötyögnek a Google-be, hanem komplex kérdéseket tesznek fel a mesterséges intelligenciának (LLM-ek, mint a ChatGPT vagy a Gemini). Ha a te rendszered nincs felkészítve az **Answer Engine Optimization (AEO)** protokollra, láthatatlan maradsz.
 
-### Mi az az AEO?
+#### Mi az az AEO?
 Míg a klasszikus SEO a találati listák (SERP) manipulálásáról szólt, az AEO célja, hogy az AI rendszerek a te cégedet adják meg direkt, megbízható válaszként. Az algoritmus nem marketing szöveget olvas, hanem **adatstruktúrákat elemez**.
 
 **Így építjük be a THE GBR architektúrába:**

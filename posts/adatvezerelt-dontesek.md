@@ -6,7 +6,7 @@ category: "SZINDIKÁTUS"
 readTime: "3 perc"
 ---
 
-# A Skálázás Képlete
+## A Skálázás Képlete
 
 Sok cégvezető "érzésből" marketingezik. Ez a biztos út a csődhöz. A THE GBR-nél mi kőkemény analitikára építünk:
 

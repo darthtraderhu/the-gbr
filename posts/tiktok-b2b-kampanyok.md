@@ -6,7 +6,7 @@ category: "MARKETING"
 readTime: "6 perc"
 ---
 
-# A Figyelem Új Központja
+## A Figyelem Új Központja
 
 A B2B döntéshozók is emberek, és ők is görgetik a TikTokot. A platform jelenleg a legolcsóbb figyelmet kínálja a piacon.
 

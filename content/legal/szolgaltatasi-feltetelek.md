@@ -3,8 +3,6 @@ title: "Szolgáltatási feltételek | THE GBR"
 description: "A www.thegbr.eu weboldal használatának feltételei: kapcsolatfelvétel jogi jellege, szellemi tulajdon, felelősségkorlátozás, tiltott magatartások és az irányadó jog."
 ---
 
-# Szolgáltatási feltételek
-
 **Hatályos:** 2026. augusztus 16.
 **Weboldal:** www.thegbr.eu
 

@@ -3,8 +3,6 @@ title: "AI-használati tájékoztató | THE GBR"
 description: "Hogyan működik a www.thegbr.eu mesterségesintelligencia-alapú chat funkciója, mi történik a beírt adatokkal, és mire nem használható a chat válasza."
 ---
 
-# AI-használati tájékoztató
-
 **Hatályos:** 2026. augusztus 16.
 **Weboldal:** www.thegbr.eu
 

@@ -92,3 +92,5 @@ Ez azért számít, mert az akadálymentesítési jelentések nagy része olyan,
 ---
 
 Ha kíváncsi vagy, hol tart most az oldalad, [kérj felmérést](/init). A listát akkor is megkapod, ha nem velünk dolgozol tovább.
+
+Bővebben a szolgáltatásról: [Akadálymentesítés](/arzenal#access).

@@ -6,7 +6,7 @@ category: "AI & TECH"
 readTime: "7 perc"
 ---
 
-# Az Önjáró Értékesítőd
+## Az Önjáró Értékesítőd
 
 Mi lenne, ha a legjobb értékesítőd sosem aludna, nem kérne fizetésemelést, és egyszerre ezer ügyféllel tudna tárgyalni?
 

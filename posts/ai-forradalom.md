@@ -4,7 +4,7 @@ date: "2026-06-12"
 excerpt: "Miért marad le az a B2B cég, aki nem használ mesterséges intelligenciát a weboldalán?"
 ---
 
-# Üdv a jövőben!
+## Üdv a jövőben!
 
 A THE GBR rendszerei immár kőkemény neurális hálózatokra épülnek. A hagyományos weboldalak kora lejárt. 
 

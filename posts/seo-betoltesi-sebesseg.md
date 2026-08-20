@@ -6,7 +6,7 @@ category: "E-COMMERCE"
 readTime: "5 perc"
 ---
 
-# Mérnöki Precizitás az Algoritmusok Ellen
+## Mérnöki Precizitás az Algoritmusok Ellen
 
 A THE GBR által fejlesztett Next.js alapú architektúrák alapból maximalizálják a SEO teljesítményt. Miért?
 

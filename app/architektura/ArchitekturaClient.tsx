@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { faqPageSchema } from "@/lib/jsonld";
+import { SITE_URL } from "@/lib/site";
+import { faqPageSchema, offerSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 
@@ -233,6 +234,16 @@ export default function ArchitekturaClient() {
   return (
     <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd data={faqPageSchema(FAQ_ITEMS)} />
+      {PACKAGES.map((pkg) => (
+        <JsonLd
+          key={pkg.id}
+          data={offerSchema({
+            name: pkg.name,
+            description: `${pkg.desc} Ár: ${pkg.price}, ${pkg.priceNote} — nincs fix árlista, a végleges ajánlat egyedi felmérés alapján készül.`,
+            url: `${SITE_URL}/architektura#${pkg.id}`,
+          })}
+        />
+      ))}
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -430,6 +441,15 @@ export default function ArchitekturaClient() {
               <Button asChild variant={pkg.hot ? "primary" : "ghost"}>
                 <Link href={pkg.href}>Beszéljünk róla &rarr;</Link>
               </Button>
+              {pkg.id === "csomag-pulzus" && (
+                <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
+                  Egy konkrét esetet is megmutatunk arról,{" "}
+                  <Link href="/hirek/pulzus-ot-masodperc" className="text-[var(--ink)] underline">
+                    mi derül ki, ha valaki tényleg megméri az oldalt
+                  </Link>
+                  .
+                </p>
+              )}
             </div>
           </section>
         </Rail>

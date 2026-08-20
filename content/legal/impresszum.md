@@ -3,8 +3,6 @@ title: "Impresszum | THE GBR"
 description: "A www.thegbr.eu üzemeltetőjének, a GBR Marketing Solutions Kft.-nek a cégadatai, elérhetőségei és a tárhelyszolgáltató adatai az elektronikus kereskedelmi törvény szerint."
 ---
 
-# Impresszum
-
 A www.thegbr.eu weboldal üzemeltetőjének adatai az elektronikus kereskedelmi szolgáltatásokról szóló **2001. évi CVIII. törvény 4. §-a** alapján.
 
 ---

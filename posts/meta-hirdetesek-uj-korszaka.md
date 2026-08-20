@@ -6,7 +6,7 @@ category: "MARKETING"
 readTime: "6 perc"
 ---
 
-# Engedd el a Mikromenedzselést
+## Engedd el a Mikromenedzselést
 
 Két éve még te mondtad meg a Facebooknak, hogy kit keressen. Ma, ha ezt teszed, korlátozod a rendszert.
 

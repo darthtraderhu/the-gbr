@@ -12,8 +12,8 @@ export default async function Image() {
     <OgTemplate
       topLabel="Szolgáltatások"
       titleLine1="Szolgáltatások"
-      titleLine2="öt terület"
-      subtitle="Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó és üzemeltetés. Öt terület, házon belül."
+      titleLine2="hét terület"
+      subtitle="Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, üzemeltetés, akadálymentesítés és Pulzus. Hét terület, házon belül."
     />,
     { ...size, fonts }
   );

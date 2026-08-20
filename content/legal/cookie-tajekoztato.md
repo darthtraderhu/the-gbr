@@ -3,8 +3,6 @@ title: "Cookie-tájékoztató | THE GBR"
 description: "Milyen sütiket használ a www.thegbr.eu, mire szolgálnak, mennyi ideig tárolódnak, és hogyan kezelheti vagy tilthatja le őket a weboldalon és a böngészőjében."
 ---
 
-# Cookie-tájékoztató
-
 **Hatályos:** 2026. augusztus 16.
 **Weboldal:** www.thegbr.eu
 

@@ -35,12 +35,104 @@ export const ORGANIZATION = {
   vatID: "HU28814706",
 };
 
+// A hét /arzenal-szolgáltatás területe — az AEO-cél, hogy az AI-keresők
+// entitásként kössék a céghez ezeket a témákat (ld. app/arzenal/page.tsx
+// INDEX_ITEMS-szel egyező sorrend).
+export const KNOWS_ABOUT = [
+  "Weboldal- és webshopfejlesztés",
+  "Performance marketing (Google és Meta hirdetés)",
+  "AI-integráció és chatbot fejlesztés",
+  "Videó- és tartalomgyártás",
+  "Weboldal-üzemeltetés és folyamatos fejlesztés",
+  "Digitális akadálymentesítés",
+  "Weboldal- és online megjelenés figyelése",
+];
+
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
     ...ORGANIZATION,
+    knowsAbout: KNOWS_ABOUT,
   };
 }
+
+// Az /arzenal hét szolgáltatás-blokkjának Service sémája — provider mindig
+// az Organization. A description egész mondat, nem kulcsszóhalmaz, hogy
+// az AI-keresők idézhető kontextust kapjanak (AEO).
+export function serviceSchema(params: { name: string; description: string; url: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: params.name,
+    description: params.description,
+    url: params.url,
+    provider: ORGANIZATION,
+  };
+}
+
+// A /architektura csomagjaihoz — szándékosan nincs price/priceSpecification
+// mező, mert nincs fix árlista (ld. AGENTS.md: nem írunk ki eredményt vagy
+// árat, amit nem tudunk tartani). Az árazási logikát a description mondatba
+// írjuk bele, szövegesen.
+export function offerSchema(params: { name: string; description: string; url: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    name: params.name,
+    description: params.description,
+    url: params.url,
+    seller: ORGANIZATION,
+  };
+}
+
+// A főoldalra: az Organization ugyanazon valós adataival (cím, geo,
+// elérhetőség), de ProfessionalService típussal — szándékosan nyitvatartás
+// (openingHoursSpecification) nélkül, mert az oldal nem fizikai
+// ügyfélfogadásról szól.
+export function professionalServiceSchema() {
+  return {
+    "@context": "https://schema.org",
+    ...ORGANIZATION,
+    "@type": "ProfessionalService" as const,
+    knowsAbout: KNOWS_ABOUT,
+  };
+}
+
+// Csak ott rendereljük, ahol a cikk ténylegesen egy konkrét szoftverről
+// szól (ld. posts/miert-epit-sajat-termeket.md — Gimbal). A cikkben tényként
+// szereplő adatokra szorítkozik: zárt béta, ingyenes, pénzügyi kategória.
+export function softwareApplicationSchema(params: {
+  name: string;
+  description: string;
+  url: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: params.name,
+    description: params.description,
+    url: params.url,
+    applicationCategory: "FinanceApplication",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "HUF",
+      description: "Zárt béta, ingyenes hozzáféréssel.",
+    },
+  };
+}
+
+// A cikkek szerzője — a főoldal "A cég mögött" idézetéhez kötött, ott
+// már publikált név (ld. app/page.tsx: "Tóth Gábor · Sales & Management").
+// Nem az impresszum "Képviselő" mezője — az a kft. bejegyzett képviselője,
+// más szerep, ld. content/legal/impresszum.md.
+export const AUTHOR = {
+  "@type": "Person" as const,
+  name: "Tóth Gábor",
+  jobTitle: "Sales & Management",
+  worksFor: ORGANIZATION,
+  url: SITE_URL,
+};
 
 export function websiteSchema() {
   return {
@@ -70,7 +162,7 @@ export function blogPostingSchema(params: {
     dateModified: params.dateModified ?? params.datePublished,
     url: params.url,
     ...(params.image ? { image: params.image } : {}),
-    author: ORGANIZATION,
+    author: AUTHOR,
     publisher: ORGANIZATION,
     inLanguage: "hu-HU",
   };

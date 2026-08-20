@@ -13,7 +13,7 @@ export default async function Image() {
       topLabel="Csomagok és árazás"
       titleLine1="Csomagok"
       titleLine2="és árazás"
-      subtitle="Három tipikus felállás weboldal-fejlesztéstől a folyamatos üzemeltetésig. Tervezd meg a keretet, és nézd meg, mit kapsz érte."
+      subtitle="Három tipikus felállás weboldal-fejlesztéstől a folyamatos üzemeltetésig, plusz a Pulzus havi figyelő szolgáltatás. Tervezd meg a keretet, és nézd meg, mit kapsz érte."
     />,
     { ...size, fonts }
   );
