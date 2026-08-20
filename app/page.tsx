@@ -6,6 +6,11 @@ import JsonLd from "@/app/components/JsonLd";
 import { Button, SectionHeader, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import HeroInstrument from "./HeroInstrument";
 
+// A cikk-ütemezés (lib/posts.ts) miatt a főoldal legutóbbi-cikkek blokkja is
+// naponta frissül — enélkül egy ütemezett cikk a dátuma napján sem jelenne
+// meg, amíg nincs új deploy.
+export const revalidate = 86400;
+
 const HOME_DESCRIPTION =
   "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek. Válasz két munkanapon belül.";
 

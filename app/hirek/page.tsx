@@ -5,6 +5,11 @@ import { breadcrumbSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import HirekClient from "./HirekClient";
 
+// A cikk-ütemezés (lib/posts.ts) miatt ez az oldal statikusan épül, de a
+// tartalma naponta lejár — így egy ütemezett cikk a megadott napon (a
+// következő beérkező kéréssel) automatikusan felkerül új deploy nélkül is.
+export const revalidate = 86400;
+
 export const metadata: Metadata = {
   title: "Írások | THE GBR",
   description:

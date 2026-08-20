@@ -2,6 +2,10 @@ import type { MetadataRoute } from "next";
 import { getSortedPostsData } from "@/lib/posts";
 import { SITE_URL } from "@/lib/site";
 
+// A cikk-ütemezés (lib/posts.ts) miatt a sitemap is naponta frissül, hogy egy
+// ütemezett cikk a dátuma napján magától bekerüljön, ne csak új deploy után.
+export const revalidate = 86400;
+
 const staticRoutes: Array<{
   path: string;
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];

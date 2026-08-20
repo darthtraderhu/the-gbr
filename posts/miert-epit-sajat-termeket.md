@@ -1,6 +1,6 @@
 ---
 title: "Miért épít saját terméket egy ügynökség?"
-date: "2026-08-20"
+date: "2026-09-17"
 category: "Fejlesztés"
 excerpt: "Építettünk egy pénzügyi nyilvántartót — magunknak. Aztán kiderült, hogy a vállalkozóknak ugyanaz hiányzik: nem a könyvelés, hanem a rálátás."
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Öt másodperc — és senki nem tudott róla"
-date: "2026-08-20"
+date: "2026-09-03"
 category: "Üzemeltetés"
 excerpt: "Egy webshop termékoldalai öt másodpercig töltődtek. Három évig. A tulajdonos nem tudta, mert nincs, ami szólna — és egy sebességteszt sem mondta volna meg, miért."
 ---
