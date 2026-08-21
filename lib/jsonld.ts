@@ -59,13 +59,19 @@ export function organizationSchema() {
 // Az /arzenal hét szolgáltatás-blokkjának Service sémája — provider mindig
 // az Organization. A description egész mondat, nem kulcsszóhalmaz, hogy
 // az AI-keresők idézhető kontextust kapjanak (AEO).
-export function serviceSchema(params: { name: string; description: string; url: string }) {
+export function serviceSchema(params: {
+  name: string;
+  description: string;
+  url: string;
+  inLanguage?: string;
+}) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name: params.name,
     description: params.description,
     url: params.url,
+    inLanguage: params.inLanguage ?? "hu-HU",
     provider: ORGANIZATION,
   };
 }
@@ -74,13 +80,19 @@ export function serviceSchema(params: { name: string; description: string; url: 
 // mező, mert nincs fix árlista (ld. AGENTS.md: nem írunk ki eredményt vagy
 // árat, amit nem tudunk tartani). Az árazási logikát a description mondatba
 // írjuk bele, szövegesen.
-export function offerSchema(params: { name: string; description: string; url: string }) {
+export function offerSchema(params: {
+  name: string;
+  description: string;
+  url: string;
+  inLanguage?: string;
+}) {
   return {
     "@context": "https://schema.org",
     "@type": "Offer",
     name: params.name,
     description: params.description,
     url: params.url,
+    inLanguage: params.inLanguage ?? "hu-HU",
     seller: ORGANIZATION,
   };
 }
@@ -105,6 +117,7 @@ export function softwareApplicationSchema(params: {
   name: string;
   description: string;
   url: string;
+  inLanguage?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -112,6 +125,7 @@ export function softwareApplicationSchema(params: {
     name: params.name,
     description: params.description,
     url: params.url,
+    inLanguage: params.inLanguage ?? "hu-HU",
     applicationCategory: "FinanceApplication",
     offers: {
       "@type": "Offer",
@@ -134,13 +148,14 @@ export const AUTHOR = {
   url: SITE_URL,
 };
 
-export function websiteSchema() {
+export function websiteSchema(opts?: { locale?: "hu" | "en" }) {
+  const locale = opts?.locale ?? "hu";
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "THE GBR",
-    url: SITE_URL,
-    inLanguage: "hu-HU",
+    url: locale === "en" ? `${SITE_URL}/en` : SITE_URL,
+    inLanguage: locale === "en" ? "en" : "hu-HU",
     publisher: ORGANIZATION,
   };
 }
@@ -152,6 +167,7 @@ export function blogPostingSchema(params: {
   dateModified?: string;
   url: string;
   image?: string;
+  inLanguage?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -164,14 +180,18 @@ export function blogPostingSchema(params: {
     ...(params.image ? { image: params.image } : {}),
     author: AUTHOR,
     publisher: ORGANIZATION,
-    inLanguage: "hu-HU",
+    inLanguage: params.inLanguage ?? "hu-HU",
   };
 }
 
-export function faqPageSchema(items: { question: string; answer: string }[]) {
+export function faqPageSchema(
+  items: { question: string; answer: string }[],
+  opts?: { inLanguage?: string }
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    ...(opts?.inLanguage ? { inLanguage: opts.inLanguage } : {}),
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,

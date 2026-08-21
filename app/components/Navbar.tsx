@@ -5,16 +5,22 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { requestChatOpen } from "./chat-bus";
-import { MAIN_NAV_ITEMS, ARZENAL_SECTIONS, LEGAL_LINKS } from "@/lib/site-links";
-
-const BOTTOM_LINKS = [
-  { name: "Csomagok", icon: "▤", href: "/architektura" },
-  { name: "Írások", icon: "▦", href: "/hirek" },
-];
+import {
+  MAIN_NAV_ITEMS,
+  MAIN_NAV_ITEMS_EN,
+  ARZENAL_SECTIONS,
+  ARZENAL_SECTIONS_EN,
+  LEGAL_LINKS,
+} from "@/lib/site-links";
+import { getEnglishEquivalent, getHungarianEquivalent } from "@/lib/i18n-routes";
+import huMessages from "@/messages/hu.json";
+import enMessages from "@/messages/en.json";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isEn = pathname?.startsWith("/en") ?? false;
+  const t = isEn ? enMessages.Nav : huMessages.Nav;
 
   // Útvonalváltáskor mindig zárjuk a mobil menüt — render közbeni
   // állapot-igazítás (ld. React dok.: "Adjusting state on a prop
@@ -25,9 +31,20 @@ export default function Navbar() {
     setIsMenuOpen(false);
   }
 
-  // Az /init oldalon (fókuszált kapcsolatfelvételi folyamat) nincs sem
-  // felső, sem alsó navigáció.
-  if (pathname === "/init") return null;
+  // Az /init (és angolul a /en/contact) oldalon — fókuszált
+  // kapcsolatfelvételi folyamat — nincs sem felső, sem alsó navigáció.
+  if (pathname === "/init" || pathname === "/en/contact") return null;
+
+  const navItems = isEn ? MAIN_NAV_ITEMS_EN : MAIN_NAV_ITEMS;
+  const sections = isEn ? ARZENAL_SECTIONS_EN : ARZENAL_SECTIONS;
+  const servicesHref = isEn ? "/en/services" : "/arzenal";
+  const homeHref = isEn ? "/en" : "/";
+  const ctaHref = isEn ? "/en/contact" : "/init";
+  const switcherHref = isEn ? getHungarianEquivalent(pathname ?? "/en") : getEnglishEquivalent(pathname ?? "/");
+  const bottomLinks = [
+    { name: t.engagement, icon: "▤", href: isEn ? "/en/engagement" : "/architektura" },
+    { name: t.writing, icon: "▦", href: isEn ? "/en/writing" : "/hirek" },
+  ];
 
   return (
     <>
@@ -39,16 +56,16 @@ export default function Navbar() {
       >
         <div className="flex items-center gap-5 px-6 py-[18px]">
           <Link
-            href="/"
+            href={homeHref}
             className="font-display font-extrabold text-[20px] tracking-[-0.045em] hover:opacity-80 transition-opacity"
           >
             THE GBR<span className="text-[var(--signal)]">.</span>
           </Link>
 
           <nav className="ml-auto hidden md:flex items-center gap-6">
-            {MAIN_NAV_ITEMS.map((link) => {
+            {navItems.map((link) => {
               const isActive = pathname === link.href;
-              const isServices = link.href === "/arzenal";
+              const isServices = link.href === servicesHref;
               const linkEl = (
                 <Link
                   href={link.href}
@@ -84,12 +101,12 @@ export default function Navbar() {
                       className="w-[300px] border border-[var(--rule)] shadow-[0_20px_40px_-20px_rgba(0,0,0,0.6)]"
                     >
                       <div className="px-4 py-[10px] border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:9.5px] tracking-[0.2em] uppercase text-[var(--dim)]">
-                        Hét terület
+                        {t.sevenAreas}
                       </div>
-                      {ARZENAL_SECTIONS.map((s) => (
+                      {sections.map((s) => (
                         <Link
                           key={s.id}
-                          href={`/arzenal#${s.id}`}
+                          href={`${servicesHref}#${s.id}`}
                           className="flex items-center gap-3 px-4 py-3 border-b border-[var(--rule)] last:border-b-0 hover:bg-[var(--panel)] transition-colors group/item"
                         >
                           <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] text-[var(--dim)] group-hover/item:text-[var(--signal)] transition-colors">
@@ -105,20 +122,27 @@ export default function Navbar() {
                 </div>
               );
             })}
+            <Link
+              href={switcherHref}
+              className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] text-[var(--mid)] hover:text-[var(--ink)] transition-colors border border-[var(--rule)] px-[10px] py-[4px]"
+              aria-label={t.switchLabel}
+            >
+              {isEn ? huMessages.LanguageSwitcher.hu : enMessages.LanguageSwitcher.en}
+            </Link>
             <ThemeToggle />
             <Link
-              href="/init"
+              href={ctaHref}
               className="font-display font-bold text-[12.5px] tracking-[-0.01em] px-[17px] py-[10px] bg-[var(--signal)] text-[#101400] border border-[var(--signal)] hover:bg-[var(--signal-deep)] hover:border-[var(--signal-deep)] transition-colors"
             >
-              Pitcheld el
+              {t.cta}
             </Link>
           </nav>
 
           <Link
-            href="/init"
+            href={ctaHref}
             className="ml-auto md:hidden font-display font-bold text-[12px] px-[14px] py-[9px] bg-[var(--signal)] text-[#101400] border border-[var(--signal)]"
           >
-            Pitcheld el
+            {t.cta}
           </Link>
         </div>
       </header>
@@ -142,11 +166,11 @@ export default function Navbar() {
           )}
           <span className="[font-family:var(--font-mono)] text-[15px] leading-none">☰</span>
           <span className="[font-family:var(--font-mono)] text-[8.5px] tracking-[0.12em] uppercase">
-            Menü
+            {t.mobileMenu}
           </span>
         </button>
 
-        {BOTTOM_LINKS.map((link) => {
+        {bottomLinks.map((link) => {
           const isActive = pathname === link.href;
           return (
             <Link
@@ -176,18 +200,18 @@ export default function Navbar() {
         >
           <span className="[font-family:var(--font-mono)] text-[15px] leading-none">◇</span>
           <span className="[font-family:var(--font-mono)] text-[8.5px] tracking-[0.12em] uppercase">
-            Chat
+            {t.mobileChat}
           </span>
         </button>
 
         <Link
-          href="/init"
+          href={ctaHref}
           className="flex flex-col items-center justify-center gap-[6px] pt-[11px] pb-[calc(11px+env(safe-area-inset-bottom))] px-1"
           style={{ backgroundColor: "var(--signal)", color: "#101400" }}
         >
           <span className="[font-family:var(--font-mono)] text-[15px] leading-none">&rarr;</span>
           <span className="[font-family:var(--font-mono)] text-[8.5px] tracking-[0.12em] uppercase font-semibold">
-            Pitch
+            {t.mobileCta}
           </span>
         </Link>
       </nav>
@@ -203,19 +227,26 @@ export default function Navbar() {
             <span className="font-display font-extrabold text-[19px] tracking-[-0.045em]">
               THE GBR<span className="text-[var(--signal)]">.</span>
             </span>
+            <Link
+              href={switcherHref}
+              onClick={() => setIsMenuOpen(false)}
+              className="ml-auto [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] text-[var(--mid)] border border-[var(--rule)] px-[10px] py-[4px]"
+            >
+              {isEn ? huMessages.LanguageSwitcher.hu : enMessages.LanguageSwitcher.en}
+            </Link>
             <button
               type="button"
               onClick={() => setIsMenuOpen(false)}
-              aria-label="Menü bezárása"
-              className="ml-auto [font-family:var(--font-mono)] text-[20px] text-[var(--mid)]"
+              aria-label={t.closeMenu}
+              className="[font-family:var(--font-mono)] text-[20px] text-[var(--mid)]"
             >
               ✕
             </button>
           </div>
 
           <div className="pb-[calc(24px+env(safe-area-inset-bottom))]">
-            {MAIN_NAV_ITEMS.map((item, i) => {
-              const isServices = item.href === "/arzenal";
+            {navItems.map((item, i) => {
+              const isServices = item.href === servicesHref;
               return (
                 <div key={item.href} className="border-b border-[var(--rule)]">
                   <Link
@@ -232,10 +263,10 @@ export default function Navbar() {
                   </Link>
                   {isServices && (
                     <div className="pb-[10px]">
-                      {ARZENAL_SECTIONS.map((s) => (
+                      {sections.map((s) => (
                         <Link
                           key={s.id}
-                          href={`/arzenal#${s.id}`}
+                          href={`${servicesHref}#${s.id}`}
                           onClick={() => setIsMenuOpen(false)}
                           className="flex items-center gap-3 pl-[58px] pr-6 py-[10px]"
                         >
@@ -254,8 +285,13 @@ export default function Navbar() {
             })}
 
             <div className="px-6 pt-[24px] pb-[8px] [font-family:var(--font-mono)] text-[length:9.5px] tracking-[0.2em] uppercase text-[var(--dim)]">
-              Jogi
+              {isEn ? enMessages.Footer.legalColumn : huMessages.Footer.legalColumn}
             </div>
+            {isEn && (
+              <p className="px-6 pb-[14px] [font-size:12.5px] leading-relaxed text-[var(--dim)] max-w-[46ch]">
+                {enMessages.Footer.legalNote}
+              </p>
+            )}
             {LEGAL_LINKS.map((link) => (
               <Link
                 key={link.href}

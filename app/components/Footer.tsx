@@ -2,15 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MAIN_NAV_ITEMS, LEGAL_LINKS } from "@/lib/site-links";
-
-const AGENCY_LINKS = [{ label: "Főoldal", href: "/" }, ...MAIN_NAV_ITEMS];
+import { MAIN_NAV_ITEMS, MAIN_NAV_ITEMS_EN, LEGAL_LINKS } from "@/lib/site-links";
+import huMessages from "@/messages/hu.json";
+import enMessages from "@/messages/en.json";
 
 export default function Footer() {
   const pathname = usePathname();
+  const isEn = pathname?.startsWith("/en") ?? false;
 
-  // Az /init oldalon (fókuszált kapcsolatfelvételi folyamat) itt is elrejtjük.
-  if (pathname === "/init") return null;
+  // Az /init (és angolul a /en/contact) oldalon itt is elrejtjük.
+  if (pathname === "/init" || pathname === "/en/contact") return null;
+
+  const messages = isEn ? enMessages : huMessages;
+  const agencyLinks = isEn
+    ? [{ label: messages.Footer.home, href: "/en" }, ...MAIN_NAV_ITEMS_EN]
+    : [{ label: messages.Footer.home, href: "/" }, ...MAIN_NAV_ITEMS];
+  const ctaHref = isEn ? "/en/contact" : "/init";
 
   return (
     <footer
@@ -24,16 +31,16 @@ export default function Footer() {
             THE GBR<span className="text-[var(--signal)]">.</span>
           </div>
           <p className="[font-size:var(--text-sm)] text-[var(--mid)] max-w-[32ch]">
-            Fejlesztés és üzemeltetés B2B-ben.
+            {messages.Footer.tagline}
           </p>
         </div>
 
         <div>
           <div className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)] mb-[var(--space-4)]">
-            Ügynökség
+            {messages.Footer.agencyColumn}
           </div>
           <ul className="m-0 p-0 list-none flex flex-col gap-[var(--space-3)]">
-            {AGENCY_LINKS.map((link) => (
+            {agencyLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
@@ -48,7 +55,7 @@ export default function Footer() {
 
         <div>
           <div className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)] mb-[var(--space-4)]">
-            Kapcsolat
+            {messages.Footer.contactColumn}
           </div>
           <ul className="m-0 p-0 list-none flex flex-col gap-[var(--space-3)]">
             <li>
@@ -69,10 +76,10 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/init"
+                href={ctaHref}
                 className="[font-size:var(--text-sm)] text-[var(--signal)] hover:text-[var(--ink)] transition-colors"
               >
-                Írj nekünk &rarr;
+                {messages.Footer.writeToUs}
               </Link>
             </li>
           </ul>
@@ -80,8 +87,13 @@ export default function Footer() {
 
         <div>
           <div className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)] mb-[var(--space-4)]">
-            Jogi
+            {messages.Footer.legalColumn}
           </div>
+          {isEn && (
+            <p className="[font-size:12.5px] leading-relaxed text-[var(--dim)] max-w-[34ch] mb-[var(--space-4)]">
+              {enMessages.Footer.legalNote}
+            </p>
+          )}
           <ul className="m-0 p-0 list-none flex flex-col gap-[var(--space-3)]">
             {LEGAL_LINKS.map((link) => (
               <li key={link.href}>
@@ -98,7 +110,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-[var(--rule)] px-6 py-[var(--space-6)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] uppercase text-[var(--dim)] text-center md:text-right">
-        © {new Date().getFullYear()} THE GBR. Minden jog fenntartva.
+        © {new Date().getFullYear()} THE GBR. {messages.Footer.rightsReserved}
       </div>
     </footer>
   );

@@ -1,0 +1,29 @@
+{
+  "Nav": {
+    "services": "Szolgáltatások",
+    "engagement": "Csomagok",
+    "seo": "SEO",
+    "about": "Rólunk",
+    "writing": "Írások",
+    "cta": "Pitcheld el",
+    "mobileMenu": "Menü",
+    "mobileChat": "Chat",
+    "mobileCta": "Pitch",
+    "sevenAreas": "Hét terület",
+    "closeMenu": "Menü bezárása",
+    "switchLabel": "Váltás angolra"
+  },
+  "Footer": {
+    "tagline": "Fejlesztés és üzemeltetés B2B-ben.",
+    "agencyColumn": "Ügynökség",
+    "contactColumn": "Kapcsolat",
+    "legalColumn": "Jogi",
+    "writeToUs": "Írj nekünk →",
+    "home": "Főoldal",
+    "rightsReserved": "Minden jog fenntartva."
+  },
+  "LanguageSwitcher": {
+    "hu": "HU",
+    "en": "EN"
+  }
+}

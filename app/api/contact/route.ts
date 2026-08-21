@@ -48,6 +48,10 @@ const contactSchema = z.object({
   honeypot: z.string().optional().default(""),
   // A kliens Date.now()-ja az űrlap megjelenésekor — időalapú bot-szűréshez.
   startedAt: z.number(),
+  // Melyik nyelvű űrlapból jött a beküldés — ez dönti el a visszaigazoló
+  // e-mail nyelvét. Hiányában magyar (visszafelé kompatibilis a meglévő
+  // /init hívásokkal, amik ezt a mezőt nem küldik).
+  lang: z.enum(["hu", "en"]).optional().default("hu"),
 });
 
 function isAllowedOrigin(origin: string | null): boolean {
@@ -67,6 +71,23 @@ function budgetLabel(keret: z.infer<typeof contactSchema>["keret"]): string {
       return "8 millió Ft felett";
     case "nem-tudom":
       return "Még nem tudja";
+  }
+}
+
+// Az angol /en/contact ugyanazokat a belső kereteket küldi (1-3M/3-8M/8M+/
+// nem-tudom) — a UI-n ott már eleve EUR-sávként jelenik meg (ld.
+// app/en/contact/ContactClient.tsx), itt csak az e-mail-szöveghez kell az
+// angol címke.
+function budgetLabelEn(keret: z.infer<typeof contactSchema>["keret"]): string {
+  switch (keret) {
+    case "1-3M":
+      return "€3–8k";
+    case "3-8M":
+      return "€8–20k";
+    case "8M+":
+      return "€20k+";
+    case "nem-tudom":
+      return "Not sure yet";
   }
 }
 
@@ -107,7 +128,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const { nev, ceg, email, telefon, kategoria, leiras, keret, hatarido, honeypot, startedAt } =
+  const { nev, ceg, email, telefon, kategoria, leiras, keret, hatarido, honeypot, startedAt, lang } =
     parsed.data;
 
   // 4. Bot-szűrés: kitöltött honeypot VAGY túl gyors submit.
@@ -156,16 +177,19 @@ export async function POST(req: Request) {
         from: LEAD_FROM_EMAIL,
         to: NOTIFICATION_TO,
         replyTo: email,
-        subject: `Új lead: ${nev}${ceg ? ` — ${ceg}` : ""} (${budgetLabel(keret)})`,
+        subject: `${lang === "en" ? "[EN] " : ""}Új lead: ${nev}${ceg ? ` — ${ceg}` : ""} (${
+          lang === "en" ? budgetLabelEn(keret) : budgetLabel(keret)
+        })`,
         text: [
           "Új megkeresés érkezett a weboldalon keresztül.",
           "",
+          `Nyelv: ${lang === "en" ? "angol (/en/contact)" : "magyar (/init)"}`,
           `Név: ${nev}`,
           `Cég: ${ceg ?? "—"}`,
           `E-mail: ${email}`,
           `Telefon: ${telefon ?? "—"}`,
           `Kategória: ${kategoria}`,
-          `Keret: ${budgetLabel(keret)}`,
+          `Keret: ${lang === "en" ? budgetLabelEn(keret) : budgetLabel(keret)}`,
           `Határidő: ${hatarido ?? "—"}`,
           "",
           "--- PROJEKT LEÍRÁSA ---",
@@ -179,31 +203,59 @@ export async function POST(req: Request) {
           `Lead ID: ${savedLead.id}`,
         ].join("\n"),
       }),
-      resend.emails.send({
-        from: LEAD_FROM_EMAIL,
-        to: email,
-        subject: "Megkaptuk a megkeresésed — THE GBR",
-        text: [
-          `Kedves ${nev}!`,
-          "",
-          "Köszönjük a megkeresésed. Az alábbi adatokat rögzítettük:",
-          "",
-          `Kategória: ${kategoria}`,
-          `Tervezett keret: ${budgetLabel(keret)}`,
-          ...(hatarido ? [`Határidő: ${hatarido}`] : []),
-          "",
-          "Amit írtál:",
-          leiras,
-          "",
-          "Munkatársaink két munkanapon belül felveszik veled a kapcsolatot a megadott elérhetőségeken.",
-          "",
-          "Ha időközben kérdésed van, írj közvetlenül: gabor@thegbr.eu",
-          "",
-          "Üdvözlettel,",
-          "THE GBR csapata",
-          "GBR Marketing Solutions Kft.",
-        ].join("\n"),
-      }),
+      resend.emails.send(
+        lang === "en"
+          ? {
+              from: LEAD_FROM_EMAIL,
+              to: email,
+              subject: "We've got it — THE GBR",
+              text: [
+                `Hi ${nev},`,
+                "",
+                "Thanks for getting in touch. We've recorded the following:",
+                "",
+                `Category: ${kategoria}`,
+                `Planned budget: ${budgetLabelEn(keret)}`,
+                ...(hatarido ? [`Timeline: ${hatarido}`] : []),
+                "",
+                "What you wrote:",
+                leiras,
+                "",
+                "We'll get back to you within two business days at the contact details you gave us.",
+                "",
+                "If anything else comes to mind meanwhile, just write: gabor@thegbr.eu",
+                "",
+                "Best,",
+                "THE GBR",
+                "GBR Marketing Solutions Kft.",
+              ].join("\n"),
+            }
+          : {
+              from: LEAD_FROM_EMAIL,
+              to: email,
+              subject: "Megkaptuk a megkeresésed — THE GBR",
+              text: [
+                `Kedves ${nev}!`,
+                "",
+                "Köszönjük a megkeresésed. Az alábbi adatokat rögzítettük:",
+                "",
+                `Kategória: ${kategoria}`,
+                `Tervezett keret: ${budgetLabel(keret)}`,
+                ...(hatarido ? [`Határidő: ${hatarido}`] : []),
+                "",
+                "Amit írtál:",
+                leiras,
+                "",
+                "Munkatársaink két munkanapon belül felveszik veled a kapcsolatot a megadott elérhetőségeken.",
+                "",
+                "Ha időközben kérdésed van, írj közvetlenül: gabor@thegbr.eu",
+                "",
+                "Üdvözlettel,",
+                "THE GBR csapata",
+                "GBR Marketing Solutions Kft.",
+              ].join("\n"),
+            }
+      ),
     ]);
 
     if (notificationResult.error) {

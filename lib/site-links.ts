@@ -28,3 +28,25 @@ export const LEGAL_LINKS = [
   { label: "ÁSZF", href: "/szolgaltatasi-feltetelek" },
   { label: "Impresszum", href: "/impresszum" },
 ];
+
+// Angol navigáció — saját angol slugok alatt (/en/...), a design/
+// thegbr-english-copy.md szerint. A jogi oldalaknak nincs angol
+// megfelelője: a LEGAL_LINKS (magyar URL-ek) közösek, csak a Footer/Navbar
+// EN ága elé kerül egy angol nyelvű megjegyzés (ld. Footer.tsx).
+export const MAIN_NAV_ITEMS_EN = [
+  { label: "Services", href: "/en/services" },
+  { label: "Engagement", href: "/en/engagement" },
+  { label: "SEO", href: "/en/seo" },
+  { label: "About", href: "/en/about" },
+  { label: "Writing", href: "/en/writing" },
+];
+
+export const ARZENAL_SECTIONS_EN = [
+  { id: "web", n: "01", name: "Web and commerce" },
+  { id: "ads", n: "02", name: "Performance marketing" },
+  { id: "ai", n: "03", name: "AI integration" },
+  { id: "video", n: "04", name: "Video and content" },
+  { id: "ops", n: "05", name: "Operations and maintenance" },
+  { id: "access", n: "06", name: "Accessibility" },
+  { id: "pulse", n: "07", name: "Pulse" },
+];

@@ -5,28 +5,9 @@ import { remark } from "remark";
 import html from "remark-html";
 import { z } from "zod";
 import { notFound } from "next/navigation";
+import { isPublished } from "./publish-schedule";
 
 const postsDirectory = path.join(process.cwd(), "posts");
-
-// Cikk-ütemezés: a frontmatter `date` mezője jövőbeli is lehet — ilyenkor a
-// cikk a megadott napig nem jelenik meg sehol (lista, kapcsolódó cikkek,
-// sitemap), a közvetlen URL pedig 404-et ad, hogy ne legyen kiszivárogtatható.
-// Fejlesztéskor (NODE_ENV === "development") minden cikk látszik, hogy
-// helyben át lehessen nézni ütemezés előtt is.
-//
-// Az összehasonlítás magyar naptári nap szerint történik, nem UTC-ben — a
-// `date` mindig "ÉÉÉÉ-HH-NN" formátumú (ld. postFrontmatterSchema), ezért
-// elég a mai budapesti naptári napot ugyanilyen "ÉÉÉÉ-HH-NN" string
-// alakban előállítani, és lexikografikusan összevetni. Ez a hajnali
-// órákban sem csúszik el, mert sosem UTC-óraszámítás történik.
-function getTodayBudapest(): string {
-  return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Budapest" }).format(new Date());
-}
-
-function isPublished(date: string): boolean {
-  if (process.env.NODE_ENV === "development") return true;
-  return date <= getTodayBudapest();
-}
 
 // A frontmatter-mezők futásidejű ellenőrzése: hiányos/hibás .md fájl esetén
 // a build egyértelmű hibaüzenettel áll le, nem csendben renderel undefined-et.

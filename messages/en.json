@@ -1,0 +1,744 @@
+{
+  "Nav": {
+    "services": "Services",
+    "engagement": "Engagement",
+    "seo": "SEO",
+    "about": "About",
+    "writing": "Writing",
+    "cta": "Start a conversation",
+    "mobileMenu": "Menu",
+    "mobileChat": "Chat",
+    "mobileCta": "Start",
+    "sevenAreas": "Seven areas",
+    "closeMenu": "Close menu",
+    "switchLabel": "Switch to Hungarian"
+  },
+  "Footer": {
+    "tagline": "Development and operations · EU-based",
+    "agencyColumn": "Agency",
+    "contactColumn": "Contact",
+    "legalColumn": "Legal",
+    "writeToUs": "Get started →",
+    "home": "Home",
+    "rightsReserved": "All rights reserved.",
+    "legalNote": "Our privacy notice and terms are published in Hungarian, as our company is registered in Hungary and operates under Hungarian and EU law. An English summary is available on request.",
+    "legalLine": "Registered in Hungary · EU VAT: HU28814706 · Operating under GDPR"
+  },
+  "LanguageSwitcher": {
+    "hu": "HU",
+    "en": "EN"
+  },
+
+  "Metadata": {
+    "home": {
+      "title": "THE GBR — Development partner for agencies",
+      "description": "EU-based development studio. Next.js builds, commerce, and ongoing operations — as your team, white-label or named."
+    },
+    "services": {
+      "title": "Services — THE GBR",
+      "description": "Web and commerce, performance marketing, AI integration, video, operations, accessibility and monitoring. Seven areas, in-house."
+    },
+    "engagement": {
+      "title": "How we work — THE GBR",
+      "description": "Three engagement models for agencies: fixed-scope projects, retained capacity, and build-and-operate."
+    },
+    "seo": {
+      "title": "Search and AI visibility — THE GBR",
+      "description": "Technical SEO and structured data that both Google and AI search can read. Check ours — the links are live."
+    },
+    "about": {
+      "title": "About — THE GBR",
+      "description": "Two decades in commerce, six years as a company, and our own products in production."
+    },
+    "writing": {
+      "title": "Writing — THE GBR",
+      "description": "Not a content mill. What we write about, we did first."
+    },
+    "contact": {
+      "title": "Start a conversation — THE GBR",
+      "description": "Tell us what you need and we'll reply within two business days. If we're not a fit, we'll say that too."
+    }
+  },
+
+  "Home": {
+    "topStrip": "This page is measuring itself right now",
+    "headlineLine1": "We don't say",
+    "headlineLine2": "we're fast.",
+    "subhead1": "We show you. The numbers below weren't written by us — your browser measured them, just now, loading this page.",
+    "subhead2": "This is the standard we hold our client work to.",
+    "ctaPrimary": "Start a conversation",
+    "ctaSecondary": "How we work with agencies",
+    "ctaFinePrint": "Reply within 2 business days",
+    "instrumentLabels": {
+      "loadTime": "Load time",
+      "serverResponse": "Server response",
+      "dataTransferred": "Data transferred",
+      "networkRequests": "Network requests"
+    },
+    "instrumentBenchmarks": {
+      "loadTime": "avg. 2,400 ms",
+      "serverResponse": "avg. 800 ms",
+      "dataTransferred": "avg. 2,300 kB",
+      "networkRequests": "avg. 74"
+    },
+    "verdict": "This page loaded <b>{x}×</b> faster than the average European business site — using <b>{y}×</b> less data. No trick: there's simply less unnecessary weight in it.",
+    "videoEyebrow": "Two minutes on how we work",
+    "videoCaption": "Company introduction · 2:14 · Subtitled",
+    "forAgenciesEyebrow": "FOR AGENCIES",
+    "forAgenciesHeadline": "Your overflow, handled properly",
+    "forAgenciesP1": "We're a small development studio in Hungary, inside the EU. Most of our work comes through agencies — the projects they've won but can't staff, the ones needing engineering depth their team doesn't have, or the ones that landed at the wrong time.",
+    "forAgenciesP2": "<b>We work as your team, not next to it.</b> White-label if you want it, named if you prefer. Your client relationship stays yours.",
+    "fourPoints": [
+      {
+        "title": "EU-based, EU-billed",
+        "body": "Hungarian company, EU VAT, invoicing inside the single market. GDPR isn't a checkbox we tick — it's the law we already operate under. No third-country transfer paperwork."
+      },
+      {
+        "title": "Overlapping hours",
+        "body": "Central European Time. The same working day as our European partners; for US teams, work happens while you sleep and lands before your morning stand-up."
+      },
+      {
+        "title": "Rates that make the maths work",
+        "body": "Central European rates with Western European engineering standards. For most agencies we cost less than an internal hire — with no recruitment, no onboarding, no bench."
+      },
+      {
+        "title": "One developer, not a rotating pool",
+        "body": "The same person on your project from start to finish. No handovers, no re-explaining, no account manager relaying half-understood requirements."
+      }
+    ],
+    "whatWeDoEyebrow": "WHAT WE DO",
+    "whatWeDoHeadline": "Two things, not twelve",
+    "whatWeDoIntro": "A list of everything convinces nobody. We're good at two things, and they belong together.",
+    "developTitle": "01 — DEVELOP · We build it",
+    "developIntro": "Websites and stores on Next.js, with the engineering underneath — not just a nice-looking first screen.",
+    "developItems": [
+      "Web apps and stores from scratch, or on top of an existing backend",
+      "Installable web apps (PWA) — no app store required",
+      "Technical SEO built in: sitemaps, structured data, canonicals",
+      "Security and performance from the start, not patched on afterwards",
+      "Accessibility to WCAG standards",
+      "Design systems and interface work when there isn't one"
+    ],
+    "manageTitle": "02 — MANAGE · And we keep it running",
+    "manageIntro": "This is where a project succeeds or fails. Launch isn't the end — that's when it starts earning.",
+    "manageItems": [
+      "Monitoring, alerting, incident response",
+      "Ongoing development against a monthly retainer",
+      "Content, campaigns, measurement",
+      "Monthly status report on the site and its search presence (Pulse)",
+      "Compliance maintained as regulations change",
+      "One accountable contact, not a ticket queue"
+    ],
+    "stackEyebrow": "STACK",
+    "stackHeadline": "What we work with",
+    "stackIntro": "Not every project needs the same tools. These are what we use daily, and what we take responsibility for.",
+    "stackList": "Next.js · React · TypeScript · Supabase · PostgreSQL · WooCommerce · Vercel · OpenAI API",
+    "workEyebrow": "WORK",
+    "workHeadline": "What we're building",
+    "workIntro": "Client work and our own products. The latter isn't portfolio filler — it's here because we operate these ourselves, and that's the difference.",
+    "workCards": [
+      {
+        "tag": "CLIENT · IN PROGRESS",
+        "title": "Power equipment store",
+        "body": "Exclusive importer, decades in the market. Phased rebuild of a live, trading store — the shop doesn't go down for a minute.",
+        "footer": "~400 products · Next.js"
+      },
+      {
+        "tag": "OWN PRODUCT · LIVE",
+        "title": "Financial application",
+        "body": "Our own build, on our own infrastructure. Nobody else to blame when it breaks — which is exactly why we know what operating means.",
+        "footer": "Live · Supabase"
+      },
+      {
+        "tag": "OWN PRODUCT · LIVE",
+        "title": "Trading education platform",
+        "body": "Content, community and tools in one place. Bilingual, continuously operated.",
+        "footer": "Bilingual · Next.js"
+      }
+    ],
+    "whyEyebrow": "WHY IT MATTERS",
+    "whyHeadline": "Anyone can ship. Fewer can run it.",
+    "whyIntro": "A portfolio shows what got built. It doesn't show what happened to it six months later. That's where the real work starts — and where most agencies stop.",
+    "whyRows": [
+      {
+        "heading": "We run what we build",
+        "body": "What we build, we keep running. Monitoring, alerting, incident handling — not a separate negotiation."
+      },
+      {
+        "heading": "Reply within two business days",
+        "body": "A commitment, not a promise. If we're going to be late, we say so in advance."
+      },
+      {
+        "heading": "One accountable person",
+        "body": "Not a ticket number — someone who knows your project."
+      }
+    ],
+    "closingHeadline": "Tell us what you're up against",
+    "closingBody": "We don't take every project — which is why we ask first. Describe what you need and we'll reply within two business days. If we're not the right fit, we'll tell you that too, and point you somewhere better if we can.",
+    "closingButton": "Get started →",
+    "closingBelow": "Or email directly: gabor@thegbr.eu"
+  },
+
+  "Services": {
+    "headline": "Services.",
+    "intro1": "Seven areas we handle in-house. If a project doesn't need all seven, we don't sell you all seven.",
+    "intro2": "<b>We also work as a development partner</b> — for Hungarian and Western European agencies alike.",
+    "indexNames": {
+      "web": "Web and commerce",
+      "ads": "Performance marketing",
+      "ai": "AI integration",
+      "video": "Video and content",
+      "ops": "Operations and maintenance",
+      "access": "Accessibility",
+      "pulse": "Pulse"
+    },
+    "web": {
+      "headline": "Sites and stores that are measurably fast",
+      "p1": "The problem with template builds isn't that they're ugly — it's that they're slow, and nobody can tell you why. We build on Next.js, where load speed, search visibility and security are part of the structure rather than a later fix.",
+      "p2": "With a live store, nothing goes offline: we replace pages in phases while the shop keeps trading.",
+      "items": [
+        "Custom design and a reusable design system",
+        "Technical SEO: sitemaps, structured data, canonicals",
+        "Installable web app version (PWA)",
+        "Building on top of an existing backend — WooCommerce, Shopify",
+        "Security headers, rate limiting, input validation",
+        "Phased cutover for live systems"
+      ],
+      "deviceHeader": "PROOF · WE BUILT THIS PAGE TOO"
+    },
+    "ads": {
+      "headline": "Advertising that ends in a number",
+      "p1": "Most campaign reports tell you how many people saw the ad. That isn't a result. We follow the path from click to enquiry, and show you weekly what brought business and what didn't.",
+      "p2": "If a channel isn't working, we say so — we don't keep spending on it.",
+      "items": [
+        "Google and Meta campaigns, B2B focus",
+        "Conversion tracking through to the enquiry",
+        "Campaign-specific landing pages",
+        "Weekly reporting in plain language"
+      ],
+      "deviceBelow": "Sample, not client data. This is the format you'd receive weekly — with your own numbers.",
+      "sampleRows": [
+        { "label": "Click → enquiry", "value": "tracked" },
+        { "label": "Best channel this week", "value": "named" },
+        { "label": "What we're stopping", "value": "explained" }
+      ]
+    },
+    "ai": {
+      "headline": "AI, in its proper place",
+      "p1": "AI isn't magic and it doesn't replace your support team. What it's good for: giving visitors an answer at midnight to the simple questions, and getting them to where a person can actually help.",
+      "p2": "There's one running on this page — try it. And next to it, an <link>AI usage notice</link>, because the EU AI Act requires transparency and because it's the right thing to do.",
+      "items": [
+        "OpenAI-based chat, tuned to your own content",
+        "Escalation to a human when the question is serious",
+        "Compliance: AI notice, documented data flows",
+        "Internal automation: document processing, summarisation"
+      ],
+      "deviceBelow": "The chat informs. It doesn't quote. Price and timeline come from a person.",
+      "transcript": {
+        "visitorLabel": "Visitor",
+        "visitorMessage": "Do you build on top of an existing WooCommerce store?",
+        "botLabel": "GBR AI",
+        "botMessage": "Yes, that's the most common setup — the backend stays, the front end is rebuilt. Best way to get specifics: describe the project at /en/contact."
+      }
+    },
+    "video": {
+      "headline": "A website alone isn't enough",
+      "p1": "A good site needs content. Brand films, product video, short social formats — directed by us, in the same visual language as the site. So you don't end up with a polished page and video that came from somewhere else.",
+      "items": [
+        "Company and brand film",
+        "Product video for commerce",
+        "Short formats for social",
+        "Editing, colour, subtitling"
+      ]
+    },
+    "ops": {
+      "headline": "Launch isn't the end",
+      "p1": "Most agencies stop here. But a website starts earning after launch — and that's also when it starts to degrade. If you want us to, we keep it: watching, fixing, improving.",
+      "p2": "You work with one accountable person who knows the project. Not a ticket number.",
+      "items": [
+        "Monitoring and alerting — we know before you do",
+        "Ongoing development against monthly hours",
+        "Automated content engine: the blog updates itself",
+        "Compliance maintained as regulations change",
+        "Weekly or fortnightly progress reporting",
+        "One accountable contact"
+      ],
+      "deviceHeader": "LOG",
+      "logLines": [
+        { "t": "06:00", "msg": "Content generation started" },
+        { "t": "06:04", "msg": "Article published to the blog" },
+        { "t": "06:05", "msg": "Sitemap updated, search engines notified" }
+      ]
+    },
+    "access": {
+      "headline": "Some people can't use your site",
+      "p1": "Someone using a screen reader, someone navigating by keyboard, someone with low vision or an unsteady hand — they'd buy too, but often they can't. Not because the site is bad, but because nobody considered them when it was designed.",
+      "p2": "The European Accessibility Act has also extended to consumer-facing online services since 2025. Exactly who it covers is a legal question, and a lawyer answers that — <b>we assess and fix the technical side.</b>",
+      "items": [
+        "Assessment: what blocks use, and how serious it is",
+        "Contrast, text sizing, target sizes",
+        "Keyboard navigability, visible focus",
+        "Screen reader usability: semantic structure, image descriptions",
+        "Forms: clear labels, understandable errors",
+        "Video subtitling",
+        "Written report of what changed"
+      ],
+      "deviceHeader": "SAMPLE FINDINGS",
+      "deviceBelow": "Illustrative. The actual list comes from the assessment and differs per site.",
+      "findingsTable": [
+        { "finding": "Button contrast 3.1:1", "meaning": "Hard to read for low vision", "severity": "High" },
+        { "finding": "47 images without alt text", "meaning": "Screen readers can't announce them", "severity": "High" },
+        { "finding": "Focus indicator missing", "meaning": "Keyboard users can't track position", "severity": "High" },
+        { "finding": "Form fields without labels", "meaning": "Unclear what to enter", "severity": "Medium" },
+        { "finding": "28px tap targets", "meaning": "Hard to hit on mobile, or with limited dexterity", "severity": "Medium" }
+      ],
+      "emphasis": "Compliance is a legal determination, and a lawyer makes it. What we commit to is that <b>we assess, document and remove the technical barriers</b> — and that you get it in writing."
+    },
+    "pulse": {
+      "headline": "One email a month on how the internet sees you",
+      "p1": "Most websites get built, and then nobody looks at them again. If it slows down, if a certificate expires, if the contact form breaks — you find out when a customer tells you. Or you don't.",
+      "p2": "<b>Pulse watches it for you.</b> Not scores — a letter about what changed and what's worth doing.",
+      "items": [
+        "Uptime monitoring — alert on failure",
+        "Load speed: we report the change, not the score",
+        "SSL certificate expiry — flagged in advance",
+        "Monthly contact form test",
+        "Indexing: is the site visible in search",
+        "Google profile: new reviews, shifting average",
+        "Review requests after purchase",
+        "Suggested replies to reviews — you send them",
+        "Monthly letter in plain language"
+      ],
+      "deviceHeader": "SAMPLE LETTER",
+      "deviceBelow": "Sample. The actual letter is built from your data.",
+      "letter": {
+        "title": "August summary",
+        "siteLabel": "Your site",
+        "siteLine1": "Up all month. Load time 2.1s — that's fine.",
+        "siteLine2": "⚠️ Your SSL certificate expires in 24 days. If it isn't renewed, browsers will flag the site as \"not secure\".",
+        "googleLabel": "How Google sees it",
+        "googleLine": "8 new reviews came in. Average moved from 4.7 to 4.8.",
+        "watchLabel": "Worth watching",
+        "watchLine": "Two reviews mention it's hard to reach you by phone. If that keeps coming up, a call-back request on the site might help.",
+        "actionsLabel": "What you can do this month",
+        "action1": "Renew SSL — we'll handle it if you ask",
+        "action2": "Update opening hours on the Google profile for the long weekend"
+      },
+      "emphasis1": "<b>We ask for a review, not a rating.</b> Google prohibits soliciting only positive reviews. We don't: the customer gets a neutral request. If the work is good, the good reviews follow.",
+      "emphasis2": "<b>The machine drafts the reply. You send it.</b> We prepare the response, but we never post in your name automatically. One badly judged reply does more damage than ten thank-yous repair."
+    },
+    "faq": [
+      {
+        "question": "Do you guarantee accessibility compliance?",
+        "answer": "No. Compliance is a legal determination and a lawyer makes it. What we guarantee: the technical barriers get assessed, documented and removed, and you get a written record of what changed."
+      },
+      {
+        "question": "Does Pulse fix problems automatically?",
+        "answer": "No. Pulse detects and reports. Fixing is either a separate instruction or comes out of a monthly retainer — because an automatic change to a live site without anyone looking at it is how outages happen."
+      },
+      {
+        "question": "How is the final price set?",
+        "answer": "After scoping. We discuss what you need, review the existing systems, then give a fixed price and date — not a range."
+      },
+      {
+        "question": "Can you work white-label?",
+        "answer": "Yes, and most of our agency work is. Your client relationship stays yours. If you'd rather name us, that's fine too."
+      }
+    ],
+    "faqHeading": "Questions we actually get asked",
+    "ctaHeadline": "Tell us what you're up against",
+    "ctaBody": "We don't take every project — which is why we ask first. Two business days, and we'll tell you if we're not the right fit.",
+    "ctaButton": "Get started →"
+  },
+
+  "Engagement": {
+    "headline": "How we work together",
+    "intro": "No fixed price list, because no two projects are alike. What we do have: three ways this usually runs, and a planner that shows what a given budget actually buys.",
+    "plannerHeader": "PLANNER",
+    "plannerSubheader": "What a given budget covers",
+    "plannerLeftLabel": "Monthly budget",
+    "plannerLeftHint": "Drag to see what fits",
+    "plannerRightLabel": "WHAT WE CAN DELIVER",
+    "deliverableLabels": {
+      "channels": "Active channels",
+      "creatives": "Creatives / month",
+      "video": "Video assets / month",
+      "landing": "Landing pages",
+      "reporting": "Reporting",
+      "optimization": "Optimisation cycles"
+    },
+    "plannerFootnote": "These figures show typical scope, not results. What a campaign returns depends on the industry, the product and the market — we'll see that together at the end of the first month, not before it.",
+    "models": [
+      {
+        "id": "project",
+        "tag": "PROJECT",
+        "name": "Fixed scope delivery",
+        "priceNote": "Quoted after scoping",
+        "desc": "You've won the work, scoped it, and need it built. Fixed scope, fixed price, fixed date. We deliver, you ship it under your name.",
+        "items": [
+          "Technical scoping and written estimate",
+          "Full build to your specification",
+          "Written contract with IP assignment and data processing terms",
+          "Staged delivery with visible progress",
+          "Handover documentation"
+        ],
+        "notIncluded": "Ongoing operation after handover. If you want us to keep running it, that's Model 03."
+      },
+      {
+        "id": "retained",
+        "tag": "MOST COMMON",
+        "name": "Retained capacity",
+        "priceNote": "Monthly, by hours",
+        "desc": "A set number of hours each month, reserved for you. Use them for whatever comes up — features, fixes, audits, or the emergency that always arrives on a Friday.",
+        "items": [
+          "Everything from Model 01",
+          "Reserved hours each month",
+          "Priority response within agreed hours",
+          "Unused hours roll forward one month",
+          "Direct contact, no ticket queue"
+        ],
+        "notIncluded": "Guaranteed availability outside agreed hours. Genuine 24/7 cover is a separate arrangement."
+      },
+      {
+        "id": "fullcover",
+        "tag": "FULL COVER",
+        "name": "Build and operate",
+        "priceNote": "Monthly retainer",
+        "desc": "When you don't want to coordinate suppliers. One accountable partner, everything in place — and we tell you when something breaks, rather than you noticing.",
+        "items": [
+          "Everything from Model 02",
+          "Monitoring and alerting",
+          "Ongoing development",
+          "Compliance maintained",
+          "Monthly written reporting",
+          "One accountable contact"
+        ],
+        "notIncluded": "Custom internal systems (ERP, CRM) — those are separate projects with separate pricing. Connecting to them we handle."
+      },
+      {
+        "id": "pulse",
+        "tag": "ONGOING",
+        "name": "Pulse",
+        "priceNote": "Monthly, cancellable",
+        "desc": "For a site that already works, where you just want to know it's fine. Monthly monitoring and a letter about what changed.",
+        "items": [
+          "Website monitoring: uptime, speed, certificate, form",
+          "Google profile: reviews and local visibility",
+          "Review requests after purchase",
+          "Monthly letter with concrete suggestions",
+          "Development hours on request"
+        ],
+        "notIncluded": "Website development. Pulse watches and reports — a fix is a separate instruction, or comes out of the monthly hours."
+      }
+    ],
+    "howWeWorkEyebrow": "HOW WE WORK",
+    "howWeWorkHeadline": "What you can expect",
+    "howWeWorkIntro": "We don't publish percentage guarantees, because they either can't be kept or they belong in the contract. Instead, here's how we actually operate.",
+    "howWeWorkItems": [
+      {
+        "title": "Infrastructure",
+        "body": "We deploy on Vercel, which provides global CDN and automatic scaling. Availability is covered by the provider's own guarantee — that's theirs to make, not ours."
+      },
+      {
+        "title": "Incident handling",
+        "body": "Monitoring runs on the systems we operate. For critical failures we respond within hours on working days — the specific response time belongs in the operating agreement, not on a marketing page."
+      },
+      {
+        "title": "Data protection",
+        "body": "Privacy notice, cookie handling, data processing agreement — part of the project, not an afterthought. Compliance is ongoing work, so we maintain it."
+      },
+      {
+        "title": "Transparency",
+        "body": "Weekly or fortnightly written reporting on what happened and what's next. If something slips, you hear it in advance — not on the deadline."
+      }
+    ],
+    "faq": [
+      {
+        "question": "How is the final price set?",
+        "answer": "After scoping. We discuss what you need, review the existing systems, then give a fixed price and date — not a range. If scoping shows you need something different from what you asked for, we say so."
+      },
+      {
+        "question": "Is there a minimum commitment?",
+        "answer": "No. Project work runs per project; retainers are monthly and cancellable on the notice period in the agreement."
+      },
+      {
+        "question": "Can you work white-label?",
+        "answer": "Yes, and most of our agency work is. Your client relationship stays yours. If you'd rather name us, that's fine too."
+      },
+      {
+        "question": "What if the client needs something you haven't listed?",
+        "answer": "Ask. If we can't do it well, we'll say so — and often we can point you to someone who can."
+      },
+      {
+        "question": "Who owns the code?",
+        "answer": "Your client, or you, depending on your arrangement. IP assignment is in the contract from the start. Nothing is locked to us."
+      }
+    ],
+    "faqHeading": "Questions we actually get asked",
+    "ctaHeadline": "Tell us what you're up against",
+    "ctaBody": "Describe the project and we'll reply within two business days. If we're not the right fit, we'll say that too.",
+    "ctaButton": "Get started →"
+  },
+
+  "Seo": {
+    "headlineLine1": "Good copy alone",
+    "headlineLine2": "won't get you found.",
+    "intro": "Search has split in two. Google measures the technical foundation; AI search reads structured data, not marketing prose. We build both — and we don't just talk about it.",
+    "proofPanel": [
+      { "claim": "Dynamic sitemap", "where": "thegbr.eu/sitemap.xml" },
+      { "claim": "Robots.txt with sitemap reference", "where": "thegbr.eu/robots.txt" },
+      { "claim": "Structured data — valid, verifiable", "where": "Google Rich Results Test" },
+      { "claim": "Measured performance", "where": "PageSpeed Insights" }
+    ],
+    "proofClosing": "Most SEO agencies don't have a sitemap on their own site. Go and look — seriously, open it. If any of ours doesn't work, tell us and we'll fix it.",
+    "changedHeadline": "It became two separate searches",
+    "changedLeftTitle": "Google's technical bar has risen.",
+    "changedLeftBody": "Load speed, layout stability and response time are ranking factors now, not comfort issues. A slow site doesn't lose because it's ugly — it loses because Google ranks it lower.",
+    "changedRightTitle": "And a second route appeared.",
+    "changedRightBody": "More people simply ask an AI. These systems don't read keywords, they read structure. If that structure isn't machine-readable, someone else appears in the answer.",
+    "pillarSeoTitle": "01 · SEO — Technical foundation",
+    "pillarSeoIntro": "What Google measures. Server-side rendering means the crawler sees content immediately — no waiting for a browser to assemble it.",
+    "pillarSeoItems": [
+      "Server-side rendering — the crawler reads content immediately",
+      "Automatic sitemap and robots.txt — new pages included without anyone remembering",
+      "Core Web Vitals — the three metrics Google actually measures",
+      "Canonicals and redirects — the most expensive mistake to skip during a migration"
+    ],
+    "pillarAeoTitle": "02 · AEO — AI visibility",
+    "pillarAeoIntro": "What language models read. We can't guarantee an AI cites you — nobody can. What we can do is make sure <b>there's something worth citing</b>: clean structure, unambiguous data, machine-readable.",
+    "pillarAeoItems": [
+      "Schema.org and JSON-LD — company data, articles, services, FAQs",
+      "Structured FAQs — can appear directly in results, before the click",
+      "Unambiguous company data — the same everywhere, no contradictions",
+      "Content that answers questions — not keyword stuffing"
+    ],
+    "processSteps": [
+      {
+        "title": "01 · Assessment",
+        "body": "Where you stand: speed, indexing, structure, structured data. You get a list of what's missing — whether or not you continue with us."
+      },
+      {
+        "title": "02 · Build",
+        "body": "Fixing the technical foundation. If the current system can't carry it, a rebuild — but phased, so you don't lose traffic on the way."
+      },
+      {
+        "title": "03 · Maintenance",
+        "body": "Search engines change, and so does your site. If you want operations too, we track it."
+      }
+    ],
+    "faq": [
+      {
+        "question": "How long before results show?",
+        "answer": "Technical fixes appear in indexing within weeks. Ranking movement is slower — three to six months for competitive terms. Anyone promising faster either doesn't understand it or isn't being honest."
+      },
+      {
+        "question": "Do you guarantee first position?",
+        "answer": "No, and avoid anyone who does. Google decides ranking, not your supplier. What we can guarantee: the technical foundation will be sound, measurable, and verifiable by you."
+      },
+      {
+        "question": "Is AEO actually worth it?",
+        "answer": "It brings little traffic today, but it's growing fast — and the structured data it requires also helps in conventional Google results. So it isn't wasted spend even if AI search grows slower than expected."
+      },
+      {
+        "question": "Can you improve an existing site, or only build new?",
+        "answer": "Both. The assessment tells you which is better value — sometimes fixing the current system is cheaper and faster."
+      },
+      {
+        "question": "How do I know you actually did it?",
+        "answer": "The same way you can check us: sitemap, robots.txt, Rich Results Test, PageSpeed. Public, free tools — you don't have to take our word for it."
+      }
+    ],
+    "faqHeading": "Questions we actually get asked",
+    "ctaHeadline": "Tell us what you're up against",
+    "ctaBody": "Two business days, and we'll tell you if we're not the right fit.",
+    "ctaButton": "Get started →"
+  },
+
+  "About": {
+    "headline": "We didn't start as developers.",
+    "intro1": "Two decades in sales and marketing came before a line of code. Which is why the question here isn't which technology to build with — it's whether it brings customers.",
+    "intro2": "The company is six years old. The experience behind it is older.",
+    "facts": [
+      { "value": "20+ years", "label": "Commercial experience" },
+      { "value": "6 years", "label": "Company operating" },
+      { "value": "B2B", "label": "Where we specialise" }
+    ],
+    "pathEyebrow": "THE PATH",
+    "pathHeadline": "How we got here",
+    "timeline": [
+      {
+        "year": "2002",
+        "label": "Sales",
+        "heading": "Started in direct sales",
+        "body": "That's where the important lesson came from: the buyer doesn't care about the product, only whether it solves their problem. Every decision since has followed from that."
+      },
+      {
+        "year": "2015",
+        "label": "Digital",
+        "heading": "The market moved online",
+        "body": "Commercial experience combined with campaign management and pages built to convert. From then on it was measurable which worked and which didn't."
+      },
+      {
+        "year": "2020",
+        "label": "The company",
+        "heading": "GBR Marketing Solutions Kft. was founded",
+        "body": "Not as an agency, but to turn what had been one person's work into a system."
+      },
+      {
+        "year": "2026",
+        "label": "Build and operate",
+        "heading": "Today we don't just advertise",
+        "body": "We build the system underneath. We develop and operate our own products too — not for the portfolio, but because that's how you learn what being responsible for a live system means."
+      }
+    ],
+    "howWeWorkEyebrow": "HOW WE WORK",
+    "howWeWorkHeadline": "Small team, dependable partners",
+    "howWeWorkIntro": "We're not a large agency and we don't intend to become one. Most of the work happens in-house, where we can answer for the quality directly. Where specialist skill is needed, we bring in partners we've worked with before.",
+    "howWeWorkNote": "You deal with one contact. Coordination is our job, not yours.",
+    "inHouseTitle": "In-house",
+    "inHouseSub": "We answer for these directly",
+    "inHouseItems": [
+      "Development — sites, stores, integrations",
+      "Technical SEO and structured data",
+      "Operations, monitoring, incident handling",
+      "Brand, design systems, copy",
+      "Campaign management and measurement"
+    ],
+    "partnersTitle": "Partners",
+    "partnersSub": "Vetted, returning partners",
+    "partnersItems": [
+      "Video production and post",
+      "Legal — data protection, contracts",
+      "Accounting and invoicing integration",
+      "Specialist skills a given project requires"
+    ],
+    "contactTitle": "One contact",
+    "contactBody": "You don't coordinate suppliers. You talk to one person who knows the project and answers for delivery.",
+    "declineTitle": "What we turn down",
+    "declineBody": "There are things we don't do — and we say so upfront. You're better off being sent to someone who does it well than having us start and discover halfway that we can't.",
+    "alsoLine": "We also work as a development partner for Hungarian and Western European agencies alike.",
+    "principlesEyebrow": "PRINCIPLES",
+    "principlesHeadline": "Three things we hold to",
+    "principles": [
+      {
+        "title": "01 · We tell you when something isn't working",
+        "body": "If a campaign isn't producing, we report it rather than dress it up. If a project is slipping, you hear it in advance, not on the deadline. Bad news on time is worth more than good news late."
+      },
+      {
+        "title": "02 · We don't promise what we can't measure",
+        "body": "Rankings, returns, customer numbers — we don't guarantee those, because we don't determine them. What we do guarantee: technical quality, the deadline, and that you can verify what was built."
+      },
+      {
+        "title": "03 · We don't take every project",
+        "body": "If a project isn't a fit, we say so at the start, not halfway through. That's why we ask first, and why there's a budget question on the form."
+      }
+    ],
+    "ctaHeadline": "Tell us what you're up against",
+    "ctaBody": "Two business days, and we'll tell you if we're not the right fit.",
+    "ctaButton": "Get started →"
+  },
+
+  "Writing": {
+    "headline": "Writing.",
+    "intro": "Not a content mill. What we write about, we did first — on our own site or in a client project.",
+    "filterAll": "All",
+    "filters": {
+      "Akadálymentesítés": "Accessibility",
+      "Üzemeltetés": "Operations",
+      "Fejlesztés": "Engineering"
+    },
+    "readMore": "Read more →",
+    "loadOlder": "Load older posts",
+    "backToWriting": "← Back to writing",
+    "moreWriting": "More writing",
+    "share": "Share",
+    "copyLink": "Copy link",
+    "updated": "Updated:",
+    "minRead": "min read",
+    "categoryFallback": "Writing",
+    "ctaEyebrow": "Similar problem?",
+    "ctaHeadline": "Let's see where you stand",
+    "ctaBody": "You'll get a list of what's missing at the end of the assessment — even if you don't continue with us. We reply within two business days.",
+    "ctaButton": "Get started →"
+  },
+
+  "Contact": {
+    "backLink": "← Back to home",
+    "replyTime": "Reply within 2 business days",
+    "introLine1": "Three steps, about two minutes.",
+    "introLine2": "We don't take every project — which is why we ask first.",
+    "step1Heading": "What are we looking at?",
+    "step1Options": [
+      { "id": "new", "label": "Build something new", "desc": "Web app, store or platform from scratch" },
+      { "id": "existing", "label": "Take over something existing", "desc": "Inherited codebase, stalled build, or migration" },
+      { "id": "ongoing", "label": "Ongoing capacity", "desc": "Reserved hours each month" },
+      { "id": "unsure", "label": "Not sure yet", "desc": "Let's talk it through" }
+    ],
+    "descriptionLabel": "What are you dealing with, and what does success look like?",
+    "descriptionPlaceholder": "e.g. We've won a client with a WooCommerce store — 400 products, very slow, needs a full frontend rebuild without downtime. Our team is booked until Q1 and we need someone who can start in September.",
+    "counterCharsLeft": "{count} characters to go",
+    "counterReady": "✓ ready",
+    "descriptionHint": "The more specific, the more useful our answer.",
+    "step2Heading": "What budget are you working with?",
+    "step2Framing": "We ask because it saves us both time. If the budget doesn't match the work, we'd rather say so now than after three calls.",
+    "budgetOptions": ["€3–8k", "€8–20k", "€20k+", "Not sure yet"],
+    "deadlineLabel": "Timeline (optional)",
+    "deadlinePlaceholder": "e.g. Q4 2026, or a specific date",
+    "step3NameLabel": "Your name",
+    "step3NamePlaceholder": "Jane Smith",
+    "step3CompanyLabel": "Company",
+    "step3CompanyPlaceholder": "Acme Digital",
+    "step3EmailLabel": "Email",
+    "step3EmailPlaceholder": "you@company.com",
+    "step3PhoneLabel": "Phone (optional)",
+    "step3PhonePlaceholder": "+44 20 1234 5678",
+    "consentPrivacy": "I accept the Privacy Notice.",
+    "consentTerms": "I accept the Terms of Service.",
+    "sending": "Sending…",
+    "errorServer": "Something went wrong. Try again in a moment — if it still fails, email us directly: gabor@thegbr.eu",
+    "errorNetwork": "We couldn't reach the server. Check your connection, or email us directly: gabor@thegbr.eu",
+    "successHeading": "Got it.",
+    "successBody1": "We've sent a confirmation to the address you gave — if it doesn't arrive within a few minutes, check your spam folder.",
+    "successBody2": "We'll reply within two business days. If anything else comes to mind meanwhile, just write: gabor@thegbr.eu",
+    "receiptReceived": "Received",
+    "receiptReference": "Reference",
+    "receiptResponse": "Response within 2 business days",
+    "backToHome": "Back to home",
+    "stepLabels": {
+      "1": "01 — The project",
+      "2": "02 — Budget and timing",
+      "3": "03 — Contact"
+    },
+    "sideLabels": {
+      "1": "01 / The project",
+      "2": "02 / Budget",
+      "3": "03 / Contact",
+      "4": "Done"
+    }
+  },
+
+  "NotFound": {
+    "eyebrow": "ERROR · 404",
+    "code": "404",
+    "heading": "This page isn't here",
+    "body": "Either the address has a typo, or we moved this content a while ago. If you came from somewhere else and this is frustrating, tell us — a broken link is our problem, not yours.",
+    "backButton": "Back to home",
+    "reportButton": "Report it",
+    "stripLabel": "MAYBE YOU WANTED",
+    "suggestions": [
+      { "label": "Services", "href": "/en/services" },
+      { "label": "Engagement", "href": "/en/engagement" },
+      { "label": "Writing", "href": "/en/writing" },
+      { "label": "Contact", "href": "/en/contact" }
+    ]
+  },
+  "ErrorPage": {
+    "eyebrow": "UNEXPECTED ERROR",
+    "code": "500",
+    "heading": "Something broke on our end",
+    "body": "Not your fault. The system has flagged it and we'll look. Try again in a few minutes — if it still fails, email us directly: gabor@thegbr.eu",
+    "reloadButton": "Reload",
+    "backButton": "Back to home",
+    "reference": "ERROR REFERENCE — quote this if you write"
+  }
+}
