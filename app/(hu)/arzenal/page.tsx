@@ -244,7 +244,7 @@ function ServiceBlock({
   device: React.ReactNode;
 }) {
   return (
-    <section id={id} className="border-b border-[var(--rule)] scroll-mt-16">
+    <section id={id} className="border-b border-[var(--rule)]">
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(150px,20%)_1fr] gap-[var(--space-8)] sm:gap-[var(--space-12)] px-6 pt-[var(--space-12)] sm:pt-[var(--space-20)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
         <div>
           <div className="font-display font-black [font-size:var(--text-svc-num)] leading-[0.76] tracking-[-0.06em] text-[var(--rule)]">

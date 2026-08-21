@@ -176,6 +176,28 @@
   --signal-deep: #88a800;
 }
 
+/* A ragadós fejléc (Navbar.tsx) magassága — a Navbar JS-ből méri le
+   pontosan és írja felül (ResizeObserver), ez csak a betöltés előtti/
+   no-JS eshetőség biztonsági hálója. Mobilon és asztalon más a fejléc
+   magassága (a mobil fejlécben ott a nyelvváltó és a CTA is), ezért két
+   becsült érték van a Tailwind md töréspontja (768px) szerint. */
+:root {
+  --header-height: 80px;
+}
+@media (min-width: 768px) {
+  :root {
+    --header-height: 76px;
+  }
+}
+
+html {
+  /* Horgony-ugrásnál (pl. /arzenal#access) és route-váltásnál a tartalom
+     teteje ne kerüljön a ragadós fejléc alá — egyetlen, központi hely,
+     nem oldalanként szórt scroll-mt-* osztályok (azok könnyen
+     elavulnak, ha a fejléc magassága változik). */
+  scroll-padding-top: var(--header-height);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

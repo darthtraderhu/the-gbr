@@ -187,7 +187,7 @@ export default function SeoAeoPage() {
           </div>
         </section>
 
-        <div id="bizonyitek" className="border-t border-[var(--rule)] scroll-mt-16">
+        <div id="bizonyitek" className="border-t border-[var(--rule)]">
           <div className="flex flex-wrap justify-between gap-3 px-6 py-3 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)]">
             <span>Bizonyíték · ezt az oldalt is így építettük</span>
             <span>Kattintható</span>

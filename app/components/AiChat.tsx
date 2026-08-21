@@ -1,18 +1,22 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useChatOpenRequests } from "./chat-bus";
+import huMessages from "@/messages/hu.json";
+import enMessages from "@/messages/en.json";
 
 type ChatMessage = { sender: "user" | "ai"; text: string };
 
-const INITIAL_MESSAGE: ChatMessage = {
-  sender: "ai",
-  text: "Szia! Segítek eligazodni az oldalon. Kérlek, ne írj ide személyes adatot — ha ajánlatot szeretnél, a kapcsolati űrlap a jó hely.",
-};
-
 export default function AiChat() {
+  const pathname = usePathname();
+  const isEn = pathname?.startsWith("/en") ?? false;
+  const t = isEn ? enMessages.Chat : huMessages.Chat;
+
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    { sender: "ai", text: t.initialMessage },
+  ]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -41,6 +45,10 @@ export default function AiChat() {
         body: JSON.stringify({
           message: userMsg,
           history: currentHistory,
+          // Az oldal nyelve — a rendszerprompt ez alapján válaszol
+          // alapértelmezetten, de ha a látogató más nyelven ír, azon a
+          // nyelven kap választ (ld. app/api/chat/route.ts).
+          locale: isEn ? "en" : "hu",
         }),
       });
 
@@ -48,10 +56,7 @@ export default function AiChat() {
       setMessages((prev) => [...prev, { sender: "ai", text: data.reply }]);
     } catch (error) {
       console.error("Chat hívási hiba:", error);
-      setMessages((prev) => [
-        ...prev,
-        { sender: "ai", text: "A kérés nem sikerült. Próbáld újra, vagy írj: gabor@thegbr.eu" },
-      ]);
+      setMessages((prev) => [...prev, { sender: "ai", text: t.networkError }]);
     } finally {
       setIsTyping(false);
     }
@@ -69,7 +74,7 @@ export default function AiChat() {
           style={{ backgroundColor: "var(--ground)", color: "var(--ink)" }}
         >
           <span className="w-[6px] h-[6px] bg-[var(--signal)] block animate-pulse" />
-          Kérdésed van?
+          {t.launcherLabel}
         </button>
       )}
 
@@ -84,13 +89,13 @@ export default function AiChat() {
             <div>
               <div className="font-display font-bold text-[14px] tracking-[-0.02em]">GBR AI</div>
               <div className="[font-family:var(--font-mono)] text-[9px] tracking-[0.18em] uppercase text-[var(--dim)]">
-                Válaszol · nem ajánl
+                {t.panelSubtitle}
               </div>
             </div>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              aria-label="Bezárás"
+              aria-label={t.close}
               className="ml-auto text-[var(--mid)] hover:text-[var(--ink)] transition-colors [font-family:var(--font-mono)] text-[15px]"
             >
               ✕
@@ -98,7 +103,7 @@ export default function AiChat() {
           </div>
 
           <div className="px-[18px] py-[10px] border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[9px] tracking-[0.14em] uppercase text-[var(--dim)]">
-            AI válaszol · árat és határidőt ember mond
+            {t.noticeLine}
           </div>
 
           <div className="px-[18px] py-[18px] overflow-y-auto flex-1">
@@ -112,7 +117,7 @@ export default function AiChat() {
                     msg.sender === "ai" ? "text-[var(--signal)]" : "text-[var(--dim)]"
                   }`}
                 >
-                  {msg.sender === "ai" ? "GBR AI" : "Te"}
+                  {msg.sender === "ai" ? "GBR AI" : t.you}
                 </span>
                 <p
                   className={`m-0 text-[15px] leading-[1.55] ${
@@ -143,7 +148,7 @@ export default function AiChat() {
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Írj egy kérdést…"
+              placeholder={t.inputPlaceholder}
               className="flex-1 bg-transparent border-0 text-[15px] py-[6px] text-[var(--ink)] placeholder:text-[var(--dim)] focus:outline-none"
             />
             <button
@@ -151,7 +156,7 @@ export default function AiChat() {
               disabled={!inputValue.trim() || isTyping}
               className="[font-family:var(--font-mono)] text-[11px] tracking-[0.1em] uppercase px-[14px] py-[9px] bg-[var(--signal)] text-[#101400] disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
             >
-              Küld
+              {t.send}
             </button>
           </form>
         </div>

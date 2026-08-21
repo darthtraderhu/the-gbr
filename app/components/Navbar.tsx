@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { requestChatOpen } from "./chat-bus";
 import {
@@ -21,6 +21,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isEn = pathname?.startsWith("/en") ?? false;
   const t = isEn ? enMessages.Nav : huMessages.Nav;
+  const headerRef = useRef<HTMLElement>(null);
 
   // Útvonalváltáskor mindig zárjuk a mobil menüt — render közbeni
   // állapot-igazítás (ld. React dok.: "Adjusting state on a prop
@@ -30,6 +31,26 @@ export default function Navbar() {
     setPrevPathname(pathname);
     setIsMenuOpen(false);
   }
+
+  // A ragadós fejléc tényleges magasságát írjuk a --header-height CSS
+  // változóba (globals.css: html { scroll-padding-top: var(--header-height) }),
+  // hogy horgony-ugráskor és route-váltáskor a tartalom teteje sose kerüljön
+  // a fejléc alá. Mért érték, nem tippelt — a mobil és az asztali fejléc
+  // magassága eltér (ld. lejjebb a mobil-only nyelvváltó/CTA), és
+  // ResizeObserverrel automatikusan követi, ha ez a jövőben változna.
+  useEffect(() => {
+    const headerEl = headerRef.current;
+    if (!headerEl) return;
+
+    const updateHeaderHeight = () => {
+      document.documentElement.style.setProperty("--header-height", `${headerEl.offsetHeight}px`);
+    };
+
+    updateHeaderHeight();
+    const resizeObserver = new ResizeObserver(updateHeaderHeight);
+    resizeObserver.observe(headerEl);
+    return () => resizeObserver.disconnect();
+  }, []);
 
   // Az /init (és angolul a /en/contact) oldalon — fókuszált
   // kapcsolatfelvételi folyamat — nincs sem felső, sem alsó navigáció.
@@ -50,6 +71,7 @@ export default function Navbar() {
     <>
       {/* ===== ASZTALI / FELSŐ NAVIGÁCIÓ ===== */}
       <header
+        ref={headerRef}
         data-theme="dark"
         className="sticky top-0 z-[60] border-b border-[var(--rule)] backdrop-blur-md"
         style={{ backgroundColor: "rgba(11,14,16,.94)", color: "var(--ink)" }}
@@ -139,10 +161,18 @@ export default function Navbar() {
           </nav>
 
           <Link
-            href={ctaHref}
-            className="ml-auto md:hidden font-display font-bold text-[12px] px-[14px] py-[9px] bg-[var(--signal)] text-[#101400] border border-[var(--signal)]"
+            href={switcherHref}
+            className="ml-auto md:hidden shrink-0 h-[44px] px-[10px] flex items-center justify-center [font-family:var(--font-mono)] text-[11px] tracking-[0.1em] text-[var(--mid)] border border-[var(--rule)]"
+            aria-label={t.switchLabel}
           >
-            {t.cta}
+            {isEn ? huMessages.LanguageSwitcher.hu : enMessages.LanguageSwitcher.en}
+          </Link>
+
+          <Link
+            href={ctaHref}
+            className="md:hidden shrink-0 h-[44px] px-[14px] flex items-center justify-center font-display font-bold text-[12px] bg-[var(--signal)] text-[#101400] border border-[var(--signal)]"
+          >
+            {t.mobileCta}
           </Link>
         </div>
       </header>
@@ -227,18 +257,11 @@ export default function Navbar() {
             <span className="font-display font-extrabold text-[19px] tracking-[-0.045em]">
               THE GBR<span className="text-[var(--signal)]">.</span>
             </span>
-            <Link
-              href={switcherHref}
-              onClick={() => setIsMenuOpen(false)}
-              className="ml-auto [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] text-[var(--mid)] border border-[var(--rule)] px-[10px] py-[4px]"
-            >
-              {isEn ? huMessages.LanguageSwitcher.hu : enMessages.LanguageSwitcher.en}
-            </Link>
             <button
               type="button"
               onClick={() => setIsMenuOpen(false)}
               aria-label={t.closeMenu}
-              className="[font-family:var(--font-mono)] text-[20px] text-[var(--mid)]"
+              className="ml-auto [font-family:var(--font-mono)] text-[20px] text-[var(--mid)]"
             >
               ✕
             </button>

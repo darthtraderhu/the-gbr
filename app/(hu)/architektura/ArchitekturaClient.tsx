@@ -388,7 +388,7 @@ export default function ArchitekturaClient() {
       {/* ===== CSOMAGOK ===== */}
       {PACKAGES.map((pkg) => (
         <Rail key={pkg.id} label={pkg.railLabel}>
-          <section id={pkg.id} className="border-b border-[var(--rule)] scroll-mt-16">
+          <section id={pkg.id} className="border-b border-[var(--rule)]">
             <div className="grid grid-cols-1 lg:grid-cols-[minmax(150px,20%)_1fr_minmax(0,26%)] gap-[var(--space-6)] sm:gap-[var(--space-10)] px-6 pt-[var(--space-12)] sm:pt-[var(--space-20)] pb-[var(--space-6)] sm:pb-[var(--space-9)]">
               <div>
                 <div className="font-display font-black [font-size:var(--text-numeral-xl)] leading-[0.78] tracking-[-0.06em] text-[var(--rule)]">

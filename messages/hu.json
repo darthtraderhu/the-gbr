@@ -25,5 +25,16 @@
   "LanguageSwitcher": {
     "hu": "HU",
     "en": "EN"
+  },
+  "Chat": {
+    "launcherLabel": "Kérdésed van?",
+    "panelSubtitle": "Válaszol · nem ajánl",
+    "noticeLine": "AI válaszol · árat és határidőt ember mond",
+    "initialMessage": "Szia! Segítek eligazodni az oldalon. Kérlek, ne írj ide személyes adatot — ha ajánlatot szeretnél, a kapcsolati űrlap a jó hely.",
+    "inputPlaceholder": "Írj egy kérdést…",
+    "send": "Küld",
+    "close": "Bezárás",
+    "you": "Te",
+    "networkError": "A kérés nem sikerült. Próbáld újra, vagy írj: gabor@thegbr.eu"
   }
 }

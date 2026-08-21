@@ -29,6 +29,18 @@
     "en": "EN"
   },
 
+  "Chat": {
+    "launcherLabel": "Got a question?",
+    "panelSubtitle": "Answers · doesn't quote",
+    "noticeLine": "AI replies · price and timeline from a person",
+    "initialMessage": "Hi! I'm here to help you find your way around. Please don't share personal data here — if you'd like a quote, the contact form is the right place.",
+    "inputPlaceholder": "Type a question…",
+    "send": "Send",
+    "close": "Close",
+    "you": "You",
+    "networkError": "The request failed. Try again, or email: gabor@thegbr.eu"
+  },
+
   "Metadata": {
     "home": {
       "title": "THE GBR — Development partner for agencies",

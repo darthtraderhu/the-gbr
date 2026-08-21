@@ -17,33 +17,70 @@ const chatMessageSchema = z.object({
 const chatRequestSchema = z.object({
   message: z.string().trim().min(1).max(1000),
   history: z.array(chatMessageSchema).max(20),
+  // Az oldal nyelve (nem a böngészőé) — a rendszerprompt alapértelmezett
+  // válasznyelvét ez adja, de a modell a látogató saját nyelvét követi, ha
+  // az eltér (ld. buildSystemPrompt).
+  locale: z.enum(["hu", "en"]).optional().default("hu"),
 });
 
+// A rendszerutasítás nyelvfüggő: az oldal nyelve az alapértelmezett
+// válasznyelv, de a modell a látogató saját nyelvén válaszol, ha az más
+// (ld. AiChat.tsx — a felület nyelve az oldalé marad, csak a beszélgetés
+// nyelve követi a látogatót).
+function buildSystemPrompt(locale: "hu" | "en"): string {
+  if (locale === "en") {
+    return `
+      You are the AI assistant for THE GBR, a full-stack B2B development studio.
+      Reply in English by default. If the visitor writes in a different language, reply in that language instead — the interface stays English, but you follow the visitor's own language.
+      Style: professional, direct, confident, no fluff. Short, clear sentences. No emoji, or at most one where it genuinely helps.
+      Goal: help the visitor understand what THE GBR does, then point them to the right next step.
+      - For engagement models or pricing questions, point them to "Engagement" (/en/engagement).
+      - If they're ready to start, or the question is complex, serious, contractual or pricing-specific, ask them to describe the project via "Contact" (/en/contact) — a person replies within two business days. You may also mention +36705139838.
+      - Never quote a price or a deadline yourself — that comes from a person after scoping.
+      Only answer questions related to B2B business, software development or marketing.
+    `;
+  }
+  return `
+    Te a THE GBR (full-stack B2B fejlesztő ügynökség) mesterséges intelligencia asszisztense vagy.
+    Alapból magyarul válaszolsz. Ha a látogató más nyelven ír, azon a nyelven válaszolj — a felület magyar marad, de a beszélgetés nyelvét a látogatóé követed.
+    A stílusod: profi, magabiztos és lényegretörő. Rövid, ütős mondatokban válaszolsz. Nem használsz hangulatjeleket, csak indokolt esetben, maximum egyet.
+    Célod: segíteni eligazodni azon, mit csinál a THE GBR, aztán a megfelelő következő lépéshez irányítani.
+    - Csomagokról vagy árazásról kérdezve irányítsd a "Csomagok" oldalra (/architektura).
+    - Ha elindulna, vagy a kérdés összetett, komoly, szerződéses vagy árazási részletekre megy ki, kérd meg, hogy írja le a projektjét a kapcsolati oldalon (/init) — ott két munkanapon belül válaszol egy ember. A +36705139838-as számot is megemlítheted.
+    - Sosem mondasz saját magad árat vagy határidőt — azt a felmérés után egy ember mondja.
+    Csak B2B üzlettel, szoftverfejlesztéssel vagy marketinggel kapcsolatos kérdésre válaszolj.
+  `;
+}
+
 export async function POST(req: Request) {
+  // A catch ágban is kelleni fog a hibaüzenet nyelvéhez — a try-blokkon
+  // kívül deklarálva, hogy elérhető legyen ott is.
+  let requestLocale: "hu" | "en" = "hu";
+
   try {
     const body = await req.json();
     const parsed = chatRequestSchema.safeParse(body);
 
     if (!parsed.success) {
+      // A séma-validálás elbukott, de a nyelvet — csak a hibaüzenethez —
+      // még megpróbáljuk kiolvasni a nyers testből.
+      const rawLocale = (body as { locale?: unknown })?.locale;
+      const errorLocale = rawLocale === "en" ? "en" : "hu";
       return NextResponse.json(
-        { reply: "SYS.ERROR: Érvénytelen kérés formátum." },
+        {
+          reply:
+            errorLocale === "en"
+              ? "SYS.ERROR: Invalid request format."
+              : "SYS.ERROR: Érvénytelen kérés formátum.",
+        },
         { status: 400 }
       );
     }
 
-    const { message, history } = parsed.data;
+    const { message, history, locale } = parsed.data;
+    requestLocale = locale;
 
-    // A THE GBR RENDSZERUTASÍTÁS (Prompt)
-    const systemPrompt = `
-      Te a THE GBR (egy prémium Full-Stack B2B ügynökség) mesterséges intelligencia asszisztense vagy. 
-      A neved GBR_AI_NODE. 
-      A stílusod: profi, technokrata, magabiztos és lényegretörő (zéró bullshit). 
-      Rövid, ütős mondatokban válaszolsz. Nem használsz hangulatjeleket, csak indokolt esetben maximum egyet.
-      Célod: Eladni a THE GBR Next.js és AI alapú webes architektúráit. 
-      Ha az ügyfél árakat kér, tereld a "Csomagok" menüpont ROI kalkulátorához. 
-      Ha konkrétan el akar indulni, kérd meg, hogy kattintson a 'Projekt Indítása' gombra, vagy hívja a +36705139838 számot.
-      Ne válaszolj olyan kérdésekre, ami nem B2B üzlet, programozás vagy marketing.
-    `;
+    const systemPrompt = buildSystemPrompt(locale);
 
     // Előző üzenetek formázása az OpenAI-nak (hogy emlékezzen a beszélgetésre)
     const formattedHistory: ChatCompletionMessageParam[] = history.map((msg) => ({
@@ -82,7 +119,9 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         reply:
-          "SYS.ERROR: A neurális kapcsolat megszakadt az OpenAI szervereivel. Kérem, hívja a +36705139838-as forródrótot.",
+          requestLocale === "en"
+            ? "SYS.ERROR: Couldn't reach the AI service. Please email gabor@thegbr.eu or call +36705139838."
+            : "SYS.ERROR: A neurális kapcsolat megszakadt az OpenAI szervereivel. Kérem, hívja a +36705139838-as forródrótot.",
       },
       { status: 500 }
     );
