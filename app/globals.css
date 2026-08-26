@@ -367,6 +367,29 @@ h2 {
   border: 1px solid var(--rule);
   padding: 2px 6px;
 }
+/* Kódblokk (```): a fenti .prose-gbr code inline stílusa enélkül a <pre><code>
+   párra is rááll — a border/padding minden sor szélességéhez tapadva
+   szaggatottá törné a blokkot. A pre kap saját dobozt, a benne lévő code
+   pedig visszaáll "csupasz" szövegre. overflow-x:auto, mert a markdown nyers
+   <pre>-t ad ki tördelés nélkül — mobilon enélkül az oldal görgetne vízszintesen. */
+.prose-gbr pre {
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 1.5vw, 15px);
+  line-height: 1.7;
+  color: var(--ink-2);
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  margin: 32px 0;
+  padding: 18px 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.prose-gbr pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
 .prose-gbr figure {
   margin: 34px 0;
 }
