@@ -84,7 +84,7 @@ export default function Navbar() {
             THE GBR<span className="text-[var(--signal)]">.</span>
           </Link>
 
-          <nav className="ml-auto hidden md:flex items-center gap-6">
+          <nav className="ml-auto hidden lg:flex items-center gap-6">
             {navItems.map((link) => {
               const isActive = pathname === link.href;
               const isServices = link.href === servicesHref;
@@ -162,7 +162,7 @@ export default function Navbar() {
 
           <Link
             href={switcherHref}
-            className="ml-auto md:hidden shrink-0 h-[44px] px-[10px] flex items-center justify-center [font-family:var(--font-mono)] text-[11px] tracking-[0.1em] text-[var(--mid)] border border-[var(--rule)]"
+            className="ml-auto lg:hidden shrink-0 h-[44px] px-[10px] flex items-center justify-center [font-family:var(--font-mono)] text-[11px] tracking-[0.1em] text-[var(--mid)] border border-[var(--rule)]"
             aria-label={t.switchLabel}
           >
             {isEn ? huMessages.LanguageSwitcher.hu : enMessages.LanguageSwitcher.en}
@@ -170,7 +170,7 @@ export default function Navbar() {
 
           <Link
             href={ctaHref}
-            className="md:hidden shrink-0 h-[44px] px-[14px] flex items-center justify-center font-display font-bold text-[12px] bg-[var(--signal)] text-[#101400] border border-[var(--signal)]"
+            className="lg:hidden shrink-0 h-[44px] px-[14px] flex items-center justify-center font-display font-bold text-[12px] bg-[var(--signal)] text-[#101400] border border-[var(--signal)]"
           >
             {t.mobileCta}
           </Link>
@@ -180,7 +180,7 @@ export default function Navbar() {
       {/* ===== MOBIL ALSÓ SÁV ===== */}
       <nav
         data-theme="dark"
-        className="md:hidden fixed left-0 right-0 bottom-0 z-[75] grid grid-cols-5 border-t border-[var(--rule)]"
+        className="lg:hidden fixed left-0 right-0 bottom-0 z-[75] grid grid-cols-5 border-t border-[var(--rule)]"
         style={{ backgroundColor: "var(--ground)" }}
       >
         <button
@@ -250,7 +250,7 @@ export default function Navbar() {
       {isMenuOpen && (
         <div
           data-theme="dark"
-          className="md:hidden fixed inset-0 z-[85] overflow-y-auto"
+          className="lg:hidden fixed inset-0 z-[85] overflow-y-auto"
           style={{ backgroundColor: "var(--ground)", color: "var(--ink)" }}
         >
           <div className="flex items-center gap-4 px-6 py-[18px] border-b border-[var(--rule)]">

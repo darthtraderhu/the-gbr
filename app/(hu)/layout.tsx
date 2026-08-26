@@ -73,7 +73,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
-      <body className="font-body bg-[var(--ground)] text-[var(--ink)] antialiased pb-[66px] md:pb-0">
+      <body className="font-body bg-[var(--ground)] text-[var(--ink)] antialiased pb-[66px] lg:pb-0">
         {/* Szervezeti JSON-LD — minden oldalon jelen van, ez a kiadó/publisher. */}
         <JsonLd data={organizationSchema()} />
 

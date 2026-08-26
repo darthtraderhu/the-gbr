@@ -178,15 +178,19 @@
 
 /* A ragadós fejléc (Navbar.tsx) magassága — a Navbar JS-ből méri le
    pontosan és írja felül (ResizeObserver), ez csak a betöltés előtti/
-   no-JS eshetőség biztonsági hálója. Mobilon és asztalon más a fejléc
-   magassága (a mobil fejlécben ott a nyelvváltó és a CTA is), ezért két
-   becsült érték van a Tailwind md töréspontja (768px) szerint. */
+   no-JS eshetőség biztonsági hálója. A "mobil" elrendezés (nyelvváltó +
+   CTA a fejlécben, lenyíló menü) egészen a Tailwind lg töréspontjáig
+   (1024px) fut — a md (768px) és lg között a teljes asztali nav
+   (5 menüpont + nyelvváltó + témaváltó + CTA) egy sorban nem fér el,
+   ezért nem ott vált. A mért érték (81px mobil / 78px asztali) fölé
+   szándékosan pár pixel ráhagyással, nehogy a JS-mérés előtti első
+   render egy pillanatra a fejléc alá takarja a horgony-célpontot. */
 :root {
-  --header-height: 80px;
+  --header-height: 84px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   :root {
-    --header-height: 76px;
+    --header-height: 80px;
   }
 }
 
