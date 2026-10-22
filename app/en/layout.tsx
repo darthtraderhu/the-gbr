@@ -10,6 +10,7 @@ import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import AiChat from "@/app/components/AiChat";
 import JsonLd from "@/app/components/JsonLd";
+import BackgroundMotif from "@/app/components/BackgroundMotif";
 
 // Ugyanaz a villanásmentes témabeállítás, mint a (hu) gyökér layoutban —
 // mindkét nyelvi fa saját root layout, mert az <html lang> nyelvenként más
@@ -67,6 +68,9 @@ export default function EnglishRootLayout({
       </head>
       <body className="font-body bg-[var(--ground)] text-[var(--ink)] antialiased pb-[66px] lg:pb-0">
         <JsonLd data={organizationSchema()} />
+
+        {/* Halvány sas háttérmotívum — dekoráció, a tartalom mögött */}
+        <BackgroundMotif />
 
         <Navbar />
 

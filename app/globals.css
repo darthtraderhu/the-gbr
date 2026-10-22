@@ -26,6 +26,7 @@
   --signal: #93b300;
   --signal-deep: #88a800;
   --attention: #b8501c;
+  --motif-opacity: 0.035; /* háttérmotívum fedése (BackgroundMotif) */
 
   /* Térköz-skála — 4px alap (1 egység = 0.25rem = 4px) */
   --space-1: 0.25rem; /* 4px */
@@ -158,6 +159,7 @@
   --rule-strong: #39413c; /* kiemelt szegély sötétben (pl. körvonalas gomb, átlag-jelölő) */
   --signal: #a8d400;
   --signal-deep: #7a9400; /* a --signal sötétített változata gomb-hoverhez */
+  --motif-opacity: 0.05; /* sötét alapon ugyanaz a fedés halványabbnak hat */
 }
 
 /* Explicit világos felülírás — robosztusság kedvéért, ha a kaszkádba
@@ -174,6 +176,7 @@
   --rule-strong: #bfc5bc;
   --signal: #93b300;
   --signal-deep: #88a800;
+  --motif-opacity: 0.035;
 }
 
 /* A ragadós fejléc (Navbar.tsx) magassága — a Navbar JS-ből méri le
@@ -499,5 +502,34 @@ h2 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Háttérmotívum (BackgroundMotif.tsx) — rögzített réteg, ami minden oldal
+   tartalma fölött úszik, de a fejléc és a chat alatt marad. A szakaszok
+   többsége saját, átlátszatlan hátteret fest (sötét blokkok, panelek), ezért
+   egy mögéjük tett réteg szinte sehol nem látszana. A mix-blend-mode:
+   difference miatt ugyanaz a fehér vonal világos alapon halványan sötétít,
+   sötét alapon halványan világosít — így téma- és szakaszfüggetlen. */
+.background-motif {
+  position: fixed;
+  z-index: 1;
+  pointer-events: none;
+  background-color: #fff;
+  mask: url("/motif/nyul.webp") center / contain no-repeat;
+  mix-blend-mode: difference;
+  opacity: var(--motif-opacity);
+  right: -6vw;
+  top: calc(var(--header-height) + 6vh);
+  width: min(62vh, 70vw);
+  aspect-ratio: 1100 / 1069;
+}
+/* Mobilon a szövegoszlop a teljes szélességet kitölti — a motívum ott jobban
+   kicsúszik a képből és halványabb, hogy ne üljön rá a folyószövegre. */
+@media (max-width: 640px) {
+  .background-motif {
+    right: -22vw;
+    width: 64vw;
+    opacity: calc(var(--motif-opacity) * 0.8);
   }
 }

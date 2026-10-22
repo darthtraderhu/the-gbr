@@ -11,6 +11,7 @@ import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import AiChat from "@/app/components/AiChat";
 import JsonLd from "@/app/components/JsonLd";
+import BackgroundMotif from "@/app/components/BackgroundMotif";
 
 // Villanásmentes témabeállítás — a tárolt választást már a hidratáció előtt
 // alkalmazza, mielőtt a böngésző a világos alapértelmezéssel kifestene
@@ -78,6 +79,9 @@ export default function RootLayout({
         <JsonLd data={organizationSchema()} />
 
         {/* A Globális Menü — felül asztalon, alul mobilon */}
+        {/* Halvány sas háttérmotívum — dekoráció, a tartalom mögött */}
+        <BackgroundMotif />
+
         <Navbar />
 
         {/* Az adott aloldal tartalma */}
