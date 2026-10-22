@@ -81,7 +81,7 @@ const SERVICE_SCHEMA_ITEMS = [
     id: "pulzus",
     name: "Pulzus",
     description:
-      "Havi figyelő szolgáltatás élő weboldalakhoz: elérhetőség, sebesség, SSL-tanúsítvány és Google-profil figyelése, összefoglalva egy havi levélben.",
+      "Havi figyelő szolgáltatás élő weboldalakhoz: elérhetőség, sebesség, SSL-tanúsítvány és Google-profil figyelése, összefoglalva egy havi levélben. Jogi modullal: a sütik és külső kódok havi változását webjogász partner értékeli, és szükség esetén frissíti a jogi dokumentumokat.",
   },
   {
     id: "it",
@@ -148,6 +148,9 @@ const PULZUS_FEATURES = [
   "Google-profil: új értékelések, változó átlag",
   "Értékelés-kérés a vásárlás után",
   "Válaszjavaslat az értékelésekre — a küldés az öné",
+  "Jogi modul: sütik és külső kódok havi feltérképezése, változásjelzéssel",
+  "Fut-e mérő- vagy hirdetési kód a süti-hozzájárulás előtt",
+  "Jogi dokumentumok felülvizsgálata webjogász partnerrel",
   "Havi levél magyarul, konkrét javaslatokkal",
 ];
 
@@ -253,6 +256,11 @@ const FAQ_ITEMS = [
     question: "A Pulzus mit csinál, ha talál valami rosszat?",
     answer:
       "Nem javít automatikusan. A havi levélben megmondja, mi változott és mit érdemes tenni — a javítás külön megrendelés, vagy a Pulzus havi órakeretének terhére megy, ha azt választja.",
+  },
+  {
+    question: "A Pulzus jogi modulja garantálja a jogi megfelelést?",
+    answer:
+      "Nem. A megfelelésről jogász nyilatkozik, nem mi. Amit a modul ad: havonta dokumentáljuk, milyen sütiket és külső kódokat tölt ténylegesen az oldal, és ha ez eltér a jogi dokumentumoktól, webjogász partnerünk értékeli és szükség esetén frissíti őket. A jogi munka díját és terjedelmét a jogász határozza meg.",
   },
   {
     question: "Kis irodának is érdemes külső rendszergazda?",
@@ -708,6 +716,13 @@ export default function Arzenal() {
               Egy elhamarkodott válasz többet árt, mint amennyit tíz köszönőlevél használ.
             </>,
             <>
+              <strong className="text-[var(--ink)]">Jogi modul: mi mérünk, a jogász minősít.</strong>{" "}
+              Az adatkezelési és a süti-tájékoztató akkor avul el, amikor az oldal változik: egy új
+              chat vagy hirdetési mérőkód, és a dokumentum már mást ír, mint amit az oldal csinál.
+              Havonta megnézzük, mit tölt ténylegesen az oldal, és a változást webjogász partnerünk
+              értékeli. A megfelelésről ő nyilatkozik, nem mi.
+            </>,
+            <>
               Egy konkrét esetet is megmutatunk arról,{" "}
               <Link href="/hirek/pulzus-ot-masodperc" className="text-[var(--ink)] underline">
                 mi derül ki, ha valaki tényleg megméri az oldalt
@@ -740,6 +755,15 @@ export default function Arzenal() {
                   </p>
                   <p className="m-0 leading-relaxed">
                     8 új értékelés érkezett. Az átlaga 4,7-ről 4,8-ra emelkedett.
+                  </p>
+                </div>
+                <div>
+                  <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
+                    Jogi dokumentumok
+                  </p>
+                  <p className="m-0 leading-relaxed">
+                    Augusztus 12. óta egy új hirdetési mérőkód fut az oldalon. A süti-tájékoztató nem
+                    említi — a technikai leírást továbbítottuk a jogász partnernek.
                   </p>
                 </div>
                 <div>
