@@ -217,7 +217,7 @@ Label the options **HU** and **EN**. Hungarian is default; the switcher preserve
 
 **Headline:** **Services.**
 
-> Seven areas we handle in-house. If a project doesn't need all seven, we don't sell you all seven.
+> Eight areas we handle in-house. If a project doesn't need all eight, we don't sell you all eight.
 >
 > **We also work as a development partner** — for Hungarian and Western European agencies alike.
 
@@ -849,7 +849,7 @@ Label the options **HU** and **EN**. Hungarian is default; the switcher preserve
 | Route | Title | Description |
 |---|---|---|
 | `/` | THE GBR — Development partner for agencies | EU-based development studio. Next.js builds, commerce, and ongoing operations — as your team, white-label or named. |
-| Services | Services — THE GBR | Web and commerce, performance marketing, AI integration, video, operations, accessibility and monitoring. Seven areas, in-house. |
+| Services | Services — THE GBR | Web and commerce, performance marketing, AI integration, video, web operations, accessibility, monitoring and IT operations. Eight areas, in-house. |
 | Engagement | How we work — THE GBR | Three engagement models for agencies: fixed-scope projects, retained capacity, and build-and-operate. |
 | SEO | Search and AI visibility — THE GBR | Technical SEO and structured data that both Google and AI search can read. Check ours — the links are live. |
 | About | About — THE GBR | Two decades in commerce, six years as a company, and our own products in production. |

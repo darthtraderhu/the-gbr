@@ -114,6 +114,11 @@ export default async function EnglishServices() {
     meaning: string;
     severity: string;
   }[];
+  const itFindings = t.raw("it.findingsTable") as {
+    finding: string;
+    meaning: string;
+    severity: string;
+  }[];
 
   return (
     <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
@@ -206,7 +211,10 @@ export default async function EnglishServices() {
               <table className="w-full border-collapse [font-size:var(--text-sm)]">
                 <tbody>
                   {adsRows.map((row) => (
-                    <tr key={row.label} className="border-b border-[var(--rule-soft)] last:border-b-0">
+                    <tr
+                      key={row.label}
+                      className="border-b border-[var(--rule-soft)] last:border-b-0"
+                    >
                       <td className="py-[var(--space-3)] text-[var(--mid)]">{row.label}</td>
                       <td className="py-[var(--space-3)] text-[var(--signal-deep)] text-right [font-family:var(--font-mono)]">
                         {row.value}
@@ -297,11 +305,11 @@ export default async function EnglishServices() {
       </Rail>
 
       {/* ===== 05 OPS ===== */}
-      <Rail label="05 / Operations">
+      <Rail label="05 / Web operations">
         <ServiceBlock
           id="ops"
           n="05"
-          label="Operations"
+          label="Web operations"
           title={t("ops.headline")}
           paragraphs={[t("ops.p1"), t("ops.p2")]}
           features={t.raw("ops.items") as string[]}
@@ -357,7 +365,10 @@ export default async function EnglishServices() {
                   </thead>
                   <tbody>
                     {findings.map((row) => (
-                      <tr key={row.finding} className="border-b border-[var(--rule-soft)] last:border-b-0">
+                      <tr
+                        key={row.finding}
+                        className="border-b border-[var(--rule-soft)] last:border-b-0"
+                      >
                         <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--ink-2)]">
                           {row.finding}
                         </td>
@@ -439,6 +450,60 @@ export default async function EnglishServices() {
         />
       </Rail>
 
+      {/* ===== 08 IT OPERATIONS ===== */}
+      <Rail label="08 / IT">
+        <ServiceBlock
+          id="it"
+          n="08"
+          label="IT operations"
+          title={t("it.headline")}
+          paragraphs={[t("it.p1"), <span key="p2">{t.rich("it.p2", { b: B })}</span>, t("it.p3")]}
+          features={t.raw("it.items") as string[]}
+          device={
+            <DevFrame header={t("it.deviceHeader")} headerRight="Sample">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[480px] border-collapse [font-size:var(--text-sm)]">
+                  <thead>
+                    <tr className="border-b border-[var(--rule-soft)]">
+                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
+                        Finding
+                      </th>
+                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
+                        Meaning
+                      </th>
+                      <th className="py-[var(--space-2)] text-right font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
+                        Severity
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {itFindings.map((row) => (
+                      <tr
+                        key={row.finding}
+                        className="border-b border-[var(--rule-soft)] last:border-b-0"
+                      >
+                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--ink-2)]">
+                          {row.finding}
+                        </td>
+                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--mid)]">
+                          {row.meaning}
+                        </td>
+                        <td className="py-[var(--space-3)] text-right [font-family:var(--font-mono)] text-[var(--signal-deep)] whitespace-nowrap">
+                          {row.severity}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
+                {t("it.deviceBelow")}
+              </p>
+            </DevFrame>
+          }
+        />
+      </Rail>
+
       {/* ===== FAQ ===== */}
       <Rail label="FAQ">
         <style
@@ -459,7 +524,11 @@ export default async function EnglishServices() {
         </section>
         <div className="border-t border-[var(--rule)]">
           {faq.map((item, i) => (
-            <details key={item.question} className="faq-q border-b border-[var(--rule)]" open={i === 0}>
+            <details
+              key={item.question}
+              className="faq-q border-b border-[var(--rule)]"
+              open={i === 0}
+            >
               <summary className="list-none cursor-pointer grid grid-cols-[1fr_28px] gap-[var(--space-5)] items-baseline px-6 py-[var(--space-6)] font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.022em] hover:bg-[var(--panel)] transition-colors [&::-webkit-details-marker]:hidden">
                 <span>{item.question}</span>
                 <span className="[font-family:var(--font-mono)] [font-size:var(--text-lg)] text-[var(--signal-deep)] text-right">

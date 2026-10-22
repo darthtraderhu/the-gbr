@@ -46,6 +46,9 @@ export const KNOWS_ABOUT = [
   "Weboldal-üzemeltetés és folyamatos fejlesztés",
   "Digitális akadálymentesítés",
   "Weboldal- és online megjelenés figyelése",
+  "Irodai IT-üzemeltetés és rendszergazdai szolgáltatás",
+  "Microsoft 365 és Teams bevezetése, üzemeltetése",
+  "Hálózat, szerver és VPN kialakítása",
 ];
 
 export function organizationSchema() {
@@ -56,7 +59,7 @@ export function organizationSchema() {
   };
 }
 
-// Az /arzenal hét szolgáltatás-blokkjának Service sémája — provider mindig
+// Az /arzenal nyolc szolgáltatás-blokkjának Service sémája — provider mindig
 // az Organization. A description egész mondat, nem kulcsszóhalmaz, hogy
 // az AI-keresők idézhető kontextust kapjanak (AEO).
 export function serviceSchema(params: {

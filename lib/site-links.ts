@@ -9,16 +9,17 @@ export const MAIN_NAV_ITEMS = [
   { label: "Írások", href: "/hirek" },
 ];
 
-// Az /arzenal hét szolgáltatás-szekciójának azonosítója — az ott futó
+// Az /arzenal nyolc szolgáltatás-szekciójának azonosítója — az ott futó
 // INDEX_ITEMS-szel egyezik (app/arzenal/page.tsx).
 export const ARZENAL_SECTIONS = [
   { id: "web", n: "01", name: "Web és webshop" },
   { id: "ads", n: "02", name: "Performance marketing" },
   { id: "ai", n: "03", name: "AI és chatbot" },
   { id: "video", n: "04", name: "Videó és tartalom" },
-  { id: "ops", n: "05", name: "Üzemeltetés és fejlesztés" },
+  { id: "ops", n: "05", name: "Web-üzemeltetés és fejlesztés" },
   { id: "access", n: "06", name: "Akadálymentesítés" },
   { id: "pulzus", n: "07", name: "Pulzus" },
+  { id: "it", n: "08", name: "IT-üzemeltetés" },
 ];
 
 export const LEGAL_LINKS = [
@@ -46,7 +47,8 @@ export const ARZENAL_SECTIONS_EN = [
   { id: "ads", n: "02", name: "Performance marketing" },
   { id: "ai", n: "03", name: "AI integration" },
   { id: "video", n: "04", name: "Video and content" },
-  { id: "ops", n: "05", name: "Operations and maintenance" },
+  { id: "ops", n: "05", name: "Web operations and maintenance" },
   { id: "access", n: "06", name: "Accessibility" },
   { id: "pulse", n: "07", name: "Pulse" },
+  { id: "it", n: "08", name: "IT operations" },
 ];

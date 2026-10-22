@@ -50,6 +50,7 @@ const MANAGE_ITEMS = [
   "Tartalom, kampány, mérés",
   "Automatizált tartalommotor",
   "Havi állapotjelentés a weboldalról és a Google-megjelenésről (Pulzus)",
+  "Irodai informatika: rendszergazda, hálózat, Microsoft 365",
   "Egy felelős kapcsolattartó",
 ];
 

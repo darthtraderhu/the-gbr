@@ -8,7 +8,7 @@ import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 export const metadata: Metadata = {
   title: "Szolgáltatások | THE GBR",
   description:
-    "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, üzemeltetés, akadálymentesítés és a Pulzus figyelő szolgáltatás. Hét terület, házon belül — B2B ügyfeleknek.",
+    "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Nyolc terület, házon belül — B2B ügyfeleknek.",
   alternates: {
     canonical: "/arzenal",
     languages: { hu: "/arzenal", en: "/en/services", "x-default": "/arzenal" },
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Szolgáltatások | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, üzemeltetés, akadálymentesítés és a Pulzus figyelő szolgáltatás. Hét terület, házon belül.",
+      "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Nyolc terület, házon belül.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Szolgáltatások | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, üzemeltetés, akadálymentesítés és a Pulzus figyelő szolgáltatás. Hét terület, házon belül.",
+      "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Nyolc terület, házon belül.",
   },
 };
 
@@ -31,9 +31,10 @@ const INDEX_ITEMS = [
   { id: "ads", n: "02", name: "Performance marketing" },
   { id: "ai", n: "03", name: "AI és chatbot" },
   { id: "video", n: "04", name: "Videó és tartalom" },
-  { id: "ops", n: "05", name: "Üzemeltetés és fejlesztés" },
+  { id: "ops", n: "05", name: "Web-üzemeltetés és fejlesztés" },
   { id: "access", n: "06", name: "Akadálymentesítés" },
   { id: "pulzus", n: "07", name: "Pulzus" },
+  { id: "it", n: "08", name: "IT-üzemeltetés" },
 ];
 
 // Egész mondatos leírás szolgáltatásonként — a Service séma description
@@ -66,7 +67,7 @@ const SERVICE_SCHEMA_ITEMS = [
   },
   {
     id: "ops",
-    name: "Üzemeltetés és fejlesztés",
+    name: "Web-üzemeltetés és fejlesztés",
     description:
       "Folyamatos weboldal-üzemeltetés: monitoring, hibariasztás, havi fejlesztési óraszám és rendszeres jelentés.",
   },
@@ -81,6 +82,12 @@ const SERVICE_SCHEMA_ITEMS = [
     name: "Pulzus",
     description:
       "Havi figyelő szolgáltatás élő weboldalakhoz: elérhetőség, sebesség, SSL-tanúsítvány és Google-profil figyelése, összefoglalva egy havi levélben.",
+  },
+  {
+    id: "it",
+    name: "IT-üzemeltetés és rendszergazdai szolgáltatás",
+    description:
+      "Irodai IT-üzemeltetés kis és nagyobb csapatoknak: rendszerfelmérés, rendszergazdai feladatok, távfelügyelet, szerver, hálózat, VPN, levelezés, Microsoft 365 és Teams, nyomtatók és mobilflotta kezelése, 15 év tapasztalattal.",
   },
 ];
 
@@ -144,6 +151,49 @@ const PULZUS_FEATURES = [
   "Havi levél magyarul, konkrét javaslatokkal",
 ];
 
+const IT_FEATURES = [
+  "Meglévő IT-rendszer felmérése, írásos összefoglalóval",
+  "Rendszergazdai feladatok irodában, home office-ban és mobil eszközökön",
+  "Távfelügyelet és távoli segítség: rákapcsolódunk, nem kell kiszállásra várni",
+  "Szerverkörnyezet kialakítása és üzemeltetése",
+  "Hálózat kiépítése: kábeles és wifi",
+  "Biztonságos távoli elérés, VPN",
+  "Nyomtatók kezelése és karbantartása",
+  "Levelezőrendszer kialakítása és üzemeltetése",
+  "Microsoft 365 és Teams: távmunka és távoktatás bevezetése, üzemeltetése",
+  "Céges mobilflotta: díjcsomagok és költségek átnézése",
+  "Meglévő szoftverek és eszközök üzemeltetése",
+  "Egyedi szoftver és belső rendszerek fejlesztése",
+];
+
+const IT_SAMPLE_ROWS = [
+  {
+    finding: "Van mentés, de visszaállítást senki nem próbált",
+    meaning: "Baj esetén derül ki, hogy működik-e",
+    severity: "Magas",
+  },
+  {
+    finding: "Kilépett munkatárs fiókja még aktív",
+    meaning: "Hozzáfér a céges levelekhez, fájlokhoz",
+    severity: "Magas",
+  },
+  {
+    finding: "Közös rendszergazda-jelszó, évek óta ugyanaz",
+    meaning: "Nem követhető, ki mit állított át",
+    severity: "Magas",
+  },
+  {
+    finding: "Vendég és könyvelés ugyanazon a wifin",
+    meaning: "Egy fertőzött vendéggép elérheti a belső gépeket",
+    severity: "Közepes",
+  },
+  {
+    finding: "Lejárt támogatású operációs rendszer",
+    meaning: "Nem kap biztonsági frissítést",
+    severity: "Közepes",
+  },
+];
+
 const ACCESS_SAMPLE_ROWS = [
   { finding: "Kontraszt 3,1:1 a gombokon", meaning: "Gyengénlátónak nehezen olvasható", severity: "Magas" },
   { finding: "47 kép leírás nélkül", meaning: "Képernyőolvasó nem tudja felolvasni", severity: "Magas" },
@@ -203,6 +253,11 @@ const FAQ_ITEMS = [
     question: "A Pulzus mit csinál, ha talál valami rosszat?",
     answer:
       "Nem javít automatikusan. A havi levélben megmondja, mi változott és mit érdemes tenni — a javítás külön megrendelés, vagy a Pulzus havi órakeretének terhére megy, ha azt választja.",
+  },
+  {
+    question: "Kis irodának is érdemes külső rendszergazda?",
+    answer:
+      "Igen, gyakran éppen nekik. Ahol nincs saját informatikus, ott jellemzően valamelyik munkatárs viszi „mellékesen”, és ez addig működik, amíg nincs baj. Felméréssel kezdünk, és megmondjuk, mekkora rendszeres munkát kíván az önöké. Ha keveset, azt is.",
   },
 ];
 
@@ -315,8 +370,8 @@ export default function Arzenal() {
             Szolgáltatások<span className="text-[var(--signal)]">.</span>
           </h1>
           <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-8)]">
-            Hét terület, amit házon belül végzünk. Ha egy projekthez nem mind a hét kell, nem is
-            adjuk el mind a hetet.
+            Nyolc terület, amit házon belül végzünk. Ha egy projekthez nem mind a nyolc kell, nem
+            is adjuk el mind a nyolcat.
           </p>
           <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-5)]">
             Fejlesztési partnerként is dolgozunk — magyar és nyugat-európai ügynökségeknek
@@ -503,11 +558,11 @@ export default function Arzenal() {
       </Rail>
 
       {/* ===== 05 ÜZEMELTETÉS ===== */}
-      <Rail label="05 / Üzemeltetés">
+      <Rail label="05 / Web-üzemeltetés">
         <ServiceBlock
           id="ops"
           n="05"
-          label="Üzemeltetés"
+          label="Web-üzemeltetés"
           title="Az átadás nem a vége"
           paragraphs={[
             <>
@@ -708,6 +763,70 @@ export default function Arzenal() {
               </div>
               <p className="mt-[var(--space-4)] pt-[var(--space-4)] border-t border-[var(--rule-soft)] [font-size:var(--text-sm)] text-[var(--mid)]">
                 Minta. A tényleges levél az ön adataiból áll össze.
+              </p>
+            </DevFrame>
+          }
+        />
+      </Rail>
+
+      {/* ===== 08 IT-ÜZEMELTETÉS ===== */}
+      <Rail label="08 / IT">
+        <ServiceBlock
+          id="it"
+          n="08"
+          label="IT-üzemeltetés"
+          title="Az irodai informatika, amire nem kell gondolnia"
+          paragraphs={[
+            "Egy irodában ritkán az a gond, hogy nincs informatika. Inkább az, hogy senki nem tudja egészben: ki fér hozzá mihez, van-e mentés, és kit kell hívni, ha reggel nem indul a levelezés.",
+            <>
+              <strong className="text-[var(--ink)]">
+                15 éve üzemeltetünk informatikai rendszereket
+              </strong>{" "}
+              kis és nagyobb irodáknak, home office-ban dolgozó csapatoknak — a szervertől a
+              nyomtatón át a munkatársak telefonjáig.
+            </>,
+            "Felméréssel kezdünk: megnézzük, mi van most, és írásban megkapja, mit találtunk és mit javasolunk. Utána ön dönti el, mit bíz ránk.",
+          ]}
+          features={IT_FEATURES}
+          device={
+            <DevFrame header="Amit egy IT-felmérés tipikusan talál" headerRight="Minta">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[480px] border-collapse [font-size:var(--text-sm)]">
+                  <thead>
+                    <tr className="border-b border-[var(--rule-soft)]">
+                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
+                        Amit találunk
+                      </th>
+                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
+                        Mit jelent
+                      </th>
+                      <th className="py-[var(--space-2)] text-right font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
+                        Súly
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {IT_SAMPLE_ROWS.map((row) => (
+                      <tr
+                        key={row.finding}
+                        className="border-b border-[var(--rule-soft)] last:border-b-0"
+                      >
+                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--ink-2)]">
+                          {row.finding}
+                        </td>
+                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--mid)]">
+                          {row.meaning}
+                        </td>
+                        <td className="py-[var(--space-3)] text-right [font-family:var(--font-mono)] text-[var(--signal-deep)] whitespace-nowrap">
+                          {row.severity}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
+                Illusztráció. A tényleges lista a felmérés után áll össze, irodánként eltér.
               </p>
             </DevFrame>
           }
