@@ -403,6 +403,7 @@ export default async function EnglishServices() {
             <span key="p2">{t.rich("pulse.p2", { b: B })}</span>,
             <span key="e1">{t.rich("pulse.emphasis1", { b: B })}</span>,
             <span key="e2">{t.rich("pulse.emphasis2", { b: B })}</span>,
+            <span key="e3">{t.rich("pulse.emphasis3", { b: B })}</span>,
           ]}
           features={t.raw("pulse.items") as string[]}
           device={
@@ -425,6 +426,12 @@ export default async function EnglishServices() {
                     {t("pulse.letter.googleLabel")}
                   </p>
                   <p className="m-0 leading-relaxed">{t("pulse.letter.googleLine")}</p>
+                </div>
+                <div>
+                  <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
+                    {t("pulse.letter.legalLabel")}
+                  </p>
+                  <p className="m-0 leading-relaxed">{t("pulse.letter.legalLine")}</p>
                 </div>
                 <div>
                   <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">

@@ -320,6 +320,9 @@
         "Google profile: new reviews, shifting average",
         "Review requests after purchase",
         "Suggested replies to reviews — you send them",
+        "Legal module: monthly map of cookies and third-party scripts, with change alerts",
+        "Does any tracking or ad script load before cookie consent",
+        "Changes flagged for review by our partner web lawyer, or your own",
         "Monthly letter in plain language"
       ],
       "deviceHeader": "SAMPLE LETTER",
@@ -331,6 +334,8 @@
         "siteLine2": "⚠️ Your SSL certificate expires in 24 days. If it isn't renewed, browsers will flag the site as \"not secure\".",
         "googleLabel": "How Google sees it",
         "googleLine": "8 new reviews came in. Average moved from 4.7 to 4.8.",
+        "legalLabel": "Legal documents",
+        "legalLine": "A new ad tracking script has been running since 12 August. The cookie notice doesn't mention it — we've sent the technical details for legal review.",
         "watchLabel": "Worth watching",
         "watchLine": "Two reviews mention it's hard to reach you by phone. If that keeps coming up, a call-back request on the site might help.",
         "actionsLabel": "What you can do this month",
@@ -338,7 +343,8 @@
         "action2": "Update opening hours on the Google profile for the long weekend"
       },
       "emphasis1": "<b>We ask for a review, not a rating.</b> Google prohibits soliciting only positive reviews. We don't: the customer gets a neutral request. If the work is good, the good reviews follow.",
-      "emphasis2": "<b>The machine drafts the reply. You send it.</b> We prepare the response, but we never post in your name automatically. One badly judged reply does more damage than ten thank-yous repair."
+      "emphasis2": "<b>The machine drafts the reply. You send it.</b> We prepare the response, but we never post in your name automatically. One badly judged reply does more damage than ten thank-yous repair.",
+      "emphasis3": "<b>Legal module: we measure, a lawyer decides.</b> A privacy or cookie notice goes stale the moment the site changes — one new chat widget or ad script and the document no longer describes what the site does. Each month we record what the site actually loads, and a web lawyer reviews the change. Compliance is their call, not ours."
     },
     "it": {
       "headline": "Office IT you don't have to think about",
@@ -397,6 +403,10 @@
       {
         "question": "Does Pulse fix problems automatically?",
         "answer": "No. Pulse detects and reports. Fixing is either a separate instruction or comes out of a monthly retainer — because an automatic change to a live site without anyone looking at it is how outages happen."
+      },
+      {
+        "question": "Does the Pulse legal module guarantee compliance?",
+        "answer": "No. A lawyer determines compliance, not us. What the module gives you: a monthly record of which cookies and third-party scripts the site actually loads, and when that drifts from the legal documents, a web lawyer reviews and updates them as needed. The lawyer sets the scope and fee of the legal work."
       },
       {
         "question": "How is the final price set?",
@@ -491,6 +501,7 @@
           "Website monitoring: uptime, speed, certificate, form",
           "Google profile: reviews and local visibility",
           "Review requests after purchase",
+          "Legal module: cookie and script monitoring, lawyer review",
           "Monthly letter with concrete suggestions",
           "Development hours on request"
         ],

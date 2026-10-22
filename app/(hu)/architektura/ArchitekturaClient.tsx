@@ -170,6 +170,7 @@ const PACKAGES = [
       "Weboldal-figyelés: elérhetőség, sebesség, tanúsítvány, űrlap",
       "Google-profil: értékelések és helyi megjelenés",
       "Értékelés-kérés a vásárlás után",
+      "Jogi modul: süti- és szkriptfigyelés, webjogász-felülvizsgálat",
       "Havi levél konkrét javaslatokkal",
       "Igény szerint havi fejlesztési óra",
     ],
