@@ -26,7 +26,7 @@
   --signal: #93b300;
   --signal-deep: #88a800;
   --attention: #b8501c;
-  --motif-opacity: 0.035; /* háttérmotívum fedése (BackgroundMotif) */
+  --motif-opacity: 0.08; /* háttérmotívum fedése (BackgroundMotif) */
 
   /* Térköz-skála — 4px alap (1 egység = 0.25rem = 4px) */
   --space-1: 0.25rem; /* 4px */
@@ -159,7 +159,7 @@
   --rule-strong: #39413c; /* kiemelt szegély sötétben (pl. körvonalas gomb, átlag-jelölő) */
   --signal: #a8d400;
   --signal-deep: #7a9400; /* a --signal sötétített változata gomb-hoverhez */
-  --motif-opacity: 0.05; /* sötét alapon ugyanaz a fedés halványabbnak hat */
+  --motif-opacity: 0.1; /* sötét alapon ugyanaz a fedés halványabbnak hat */
 }
 
 /* Explicit világos felülírás — robosztusság kedvéért, ha a kaszkádba
@@ -176,7 +176,7 @@
   --rule-strong: #bfc5bc;
   --signal: #93b300;
   --signal-deep: #88a800;
-  --motif-opacity: 0.035;
+  --motif-opacity: 0.08;
 }
 
 /* A ragadós fejléc (Navbar.tsx) magassága — a Navbar JS-ből méri le
@@ -519,17 +519,17 @@ h2 {
   mask: url("/motif/nyul.webp") center / contain no-repeat;
   mix-blend-mode: difference;
   opacity: var(--motif-opacity);
-  right: -6vw;
-  top: calc(var(--header-height) + 6vh);
-  width: min(62vh, 70vw);
+  right: -3vw;
+  top: calc(var(--header-height) + 2vh);
+  width: min(80vh, 62vw);
   aspect-ratio: 1100 / 1069;
 }
 /* Mobilon a szövegoszlop a teljes szélességet kitölti — a motívum ott jobban
-   kicsúszik a képből és halványabb, hogy ne üljön rá a folyószövegre. */
+   kicsúszik a képből és kicsit halványabb, hogy ne nyomja el a folyószöveget. */
 @media (max-width: 640px) {
   .background-motif {
-    right: -22vw;
-    width: 64vw;
-    opacity: calc(var(--motif-opacity) * 0.8);
+    right: -18vw;
+    width: 82vw;
+    opacity: calc(var(--motif-opacity) * 0.85);
   }
 }
