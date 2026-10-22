@@ -9,7 +9,7 @@
     "mobileMenu": "Menu",
     "mobileChat": "Chat",
     "mobileCta": "Start",
-    "sevenAreas": "Seven areas",
+    "allAreas": "Eight areas",
     "closeMenu": "Close menu",
     "switchLabel": "Switch to Hungarian"
   },
@@ -48,7 +48,7 @@
     },
     "services": {
       "title": "Services — THE GBR",
-      "description": "Web and commerce, performance marketing, AI integration, video, operations, accessibility and monitoring. Seven areas, in-house."
+      "description": "Web and commerce, performance marketing, AI integration, video, web operations, accessibility, monitoring and IT operations. Eight areas, in-house."
     },
     "engagement": {
       "title": "How we work — THE GBR",
@@ -193,16 +193,17 @@
 
   "Services": {
     "headline": "Services.",
-    "intro1": "Seven areas we handle in-house. If a project doesn't need all seven, we don't sell you all seven.",
+    "intro1": "Eight areas we handle in-house. If a project doesn't need all eight, we don't sell you all eight.",
     "intro2": "<b>We also work as a development partner</b> — for Hungarian and Western European agencies alike.",
     "indexNames": {
       "web": "Web and commerce",
       "ads": "Performance marketing",
       "ai": "AI integration",
       "video": "Video and content",
-      "ops": "Operations and maintenance",
+      "ops": "Web operations and maintenance",
       "access": "Accessibility",
-      "pulse": "Pulse"
+      "pulse": "Pulse",
+      "it": "IT operations"
     },
     "web": {
       "headline": "Sites and stores that are measurably fast",
@@ -339,6 +340,55 @@
       "emphasis1": "<b>We ask for a review, not a rating.</b> Google prohibits soliciting only positive reviews. We don't: the customer gets a neutral request. If the work is good, the good reviews follow.",
       "emphasis2": "<b>The machine drafts the reply. You send it.</b> We prepare the response, but we never post in your name automatically. One badly judged reply does more damage than ten thank-yous repair."
     },
+    "it": {
+      "headline": "Office IT you don't have to think about",
+      "p1": "In most offices the problem isn't a lack of IT. It's that nobody has the whole picture: who can access what, whether there's a backup, and who to call when email won't start in the morning.",
+      "p2": "<b>We've run IT systems for 15 years</b> — for small and larger offices and remote teams, from the server through the printers to everyone's phone.",
+      "p3": "We start with an assessment: we look at what's there now, and you get a written summary of what we found and what we recommend. Then you decide what to hand over to us.",
+      "items": [
+        "Assessment of your existing IT, with a written summary",
+        "System administration for offices, home offices and mobile devices",
+        "Remote monitoring and remote support: we connect in, no waiting for a site visit",
+        "Server environment setup and operation",
+        "Network build-out: cabled and wifi",
+        "Secure remote access, VPN",
+        "Printer management and maintenance",
+        "Email system setup and operation",
+        "Microsoft 365 and Teams: rollout and operation for remote work and remote learning",
+        "Company mobile fleet: plans and costs reviewed",
+        "Operation of your existing software and hardware",
+        "Custom software and internal systems"
+      ],
+      "deviceHeader": "What an IT assessment typically finds",
+      "deviceBelow": "Illustrative. The actual list comes from the assessment and differs per office.",
+      "findingsTable": [
+        {
+          "finding": "Backups exist, but nobody has tested a restore",
+          "meaning": "You find out whether it works when it's needed",
+          "severity": "High"
+        },
+        {
+          "finding": "A former employee's account is still active",
+          "meaning": "They can still reach company email and files",
+          "severity": "High"
+        },
+        {
+          "finding": "Shared admin password, unchanged for years",
+          "meaning": "No way to tell who changed what",
+          "severity": "High"
+        },
+        {
+          "finding": "Guests and accounting on the same wifi",
+          "meaning": "An infected guest device can reach internal machines",
+          "severity": "Medium"
+        },
+        {
+          "finding": "Operating system past end of support",
+          "meaning": "No more security updates",
+          "severity": "Medium"
+        }
+      ]
+    },
     "faq": [
       {
         "question": "Do you guarantee accessibility compliance?",
@@ -355,6 +405,10 @@
       {
         "question": "Can you work white-label?",
         "answer": "Yes, and most of our agency work is. Your client relationship stays yours. If you'd rather name us, that's fine too."
+      },
+      {
+        "question": "Does a small office need outside IT support?",
+        "answer": "Often it's the small ones that need it most. Without an in-house IT person, someone usually handles it on the side, and that works until something breaks. We start with an assessment and tell you how much ongoing work your setup actually needs. If it's not much, we say so."
       }
     ],
     "faqHeading": "Questions we actually get asked",
