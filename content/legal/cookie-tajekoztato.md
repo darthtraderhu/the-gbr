@@ -1,6 +1,6 @@
 ---
 title: "Cookie-tájékoztató | THE GBR"
-description: "Milyen sütiket használ a www.thegbr.eu, mire szolgálnak, mennyi ideig tárolódnak, és hogyan kezelheti vagy tilthatja le őket a weboldalon és a böngészőjében."
+description: "Milyen sütiket használ a www.thegbr.eu, mire szolgálnak, mennyi ideig tárolódnak, és hogyan kezelheted vagy tilthatod le őket a weboldalon és a böngésződben."
 ---
 
 **Hatályos:** 2026. augusztus 16.
@@ -10,7 +10,7 @@ description: "Milyen sütiket használ a www.thegbr.eu, mire szolgálnak, mennyi
 
 ## 1. Mi az a süti?
 
-A süti (cookie) egy kisméretű adatfájl, amelyet a weboldal helyez el az Ön eszközén a látogatás során. A sütik segítségével a weboldal felismeri az Ön böngészőjét, és emlékezik bizonyos beállításokra.
+A süti (cookie) egy kisméretű adatfájl, amelyet a weboldal helyez el az eszközödön a látogatás során. A sütik segítségével a weboldal felismeri a böngésződet, és emlékezik bizonyos beállításokra.
 
 Ez a tájékoztató a sütikre és a hasonló technológiákra (helyi tárolás, munkamenet-tárolás) egyaránt vonatkozik.
 
@@ -20,23 +20,23 @@ Ez a tájékoztató a sütikre és a hasonló technológiákra (helyi tárolás,
 
 ### 2.1. Működéshez feltétlenül szükséges sütik
 
-Ezek nélkül a weboldal nem működik megfelelően. **Ezekhez nem kérünk hozzájárulást**, mert kizárólag az Ön által kért szolgáltatás nyújtásához szükségesek (GDPR 6. cikk (1) f) — jogos érdek).
+Ezek nélkül a weboldal nem működik megfelelően. **Ezekhez nem kérünk hozzájárulást**, mert kizárólag az általad kért szolgáltatás nyújtásához szükségesek (GDPR 6. cikk (1) f) — jogos érdek).
 
 | Süti | Cél | Élettartam |
 |---|---|---|
 | Munkamenet-azonosító | A látogatás állapotának fenntartása | A böngésző bezárásáig |
-| Süti-hozzájárulás tárolása | Az Ön süti-beállításának megjegyzése | 6 hónap |
+| Süti-hozzájárulás tárolása | A süti-beállításod megjegyzése | 6 hónap |
 | Biztonsági sütik | Visszaélés-megelőzés, űrlapvédelem | Munkamenet |
 
 ### 2.2. Statisztikai sütik
 
-A weboldal használatának mérésére szolgálnak: hány látogató érkezik, mely oldalakat nézik meg, honnan érkeznek. **Ezek elhelyezéséhez az Ön hozzájárulása szükséges** (GDPR 6. cikk (1) a)).
+A weboldal használatának mérésére szolgálnak: hány látogató érkezik, mely oldalakat nézik meg, honnan érkeznek. **Ezek elhelyezéséhez a hozzájárulásod szükséges** (GDPR 6. cikk (1) a)).
 
 | Szolgáltatás | Cél | Élettartam |
 |---|---|---|
 | Google Analytics 4 (`_ga`, `_ga_<azonosító>`) — Google Ireland Limited | Látogatottság mérése | 2 év |
 
-A Google Analytics csak akkor töltődik be, ha a megjelenő süti-sávon az „Elfogadom” gombra kattint. Elutasítás esetén statisztikai süti nem kerül az eszközére. A tárhelyszolgáltató (Vercel) saját látogatottság-mérése sütit nem használ, ezért ahhoz hozzájárulás nem szükséges.
+A Google Analytics csak akkor töltődik be, ha a megjelenő süti-sávon az „Elfogadom” gombra kattintasz. Elutasítás esetén statisztikai süti nem kerül az eszközödre. A tárhelyszolgáltató (Vercel) saját látogatottság-mérése sütit nem használ, ezért ahhoz hozzájárulás nem szükséges.
 
 ### 2.3. Marketing sütik
 
@@ -54,15 +54,15 @@ Részletek az [Adatkezelési tájékoztatóban](/adatkezeles).
 
 ---
 
-## 4. Hogyan kezelheti a sütiket?
+## 4. Hogyan kezelheted a sütiket?
 
 ### A weboldalon
 
-A süti-beállításokat bármikor módosíthatja a weboldal alján található **„Süti-beállítások"** hivatkozásra kattintva. A hozzájárulását bármikor visszavonhatja.
+A süti-beállításokat bármikor módosíthatod a weboldal alján található **„Süti-beállítások"** hivatkozásra kattintva. A hozzájárulásodat bármikor visszavonhatod.
 
 ### A böngészőben
 
-A böngészők beállításaiban letilthatja vagy törölheti a sütiket:
+A böngészők beállításaiban letilthatod vagy törölheted a sütiket:
 
 - **Chrome:** Beállítások → Adatvédelem és biztonság → Harmadik féltől származó cookie-k
 - **Firefox:** Beállítások → Adatvédelem és biztonság → Sütik és oldaladatok

@@ -66,7 +66,7 @@ A weboldalon mesterséges intelligenciára épülő chat funkció működik. A f
 | **Megőrzés** | 30 nap |
 | **Adattovábbítás** | A beírt üzenetek feldolgozás céljából továbbításra kerülnek az **Anthropic, PBC** (Egyesült Államok) részére. Részletek az 5. és 6. pontban. |
 
-> **Fontos figyelmeztetés:** Kérjük, hogy a chatbe **ne írjon be személyes adatot**, sem a sajátját, sem harmadik személyét, és ne osszon meg bizalmas vagy üzleti titoknak minősülő információt. Amennyiben ilyet ír be, az továbbításra kerül az Anthropic részére. A chat nem alkalmas ajánlatkérésre — erre a kapcsolatfelvételi űrlap szolgál.
+> **Fontos figyelmeztetés:** Kérjük, hogy a chatbe **ne írj be személyes adatot**, sem a sajátodat, sem harmadik személyét, és ne ossz meg bizalmas vagy üzleti titoknak minősülő információt. Amennyiben ilyet írsz be, az továbbításra kerül az Anthropic részére. A chat nem alkalmas ajánlatkérésre — erre a kapcsolatfelvételi űrlap szolgál.
 
 **Automatizált döntéshozatal:** A chat funkció nem hoz az érintettre nézve joghatással járó vagy őt hasonlóképpen jelentős mértékben érintő automatizált döntést. Profilalkotás nem történik.
 
@@ -150,25 +150,25 @@ Az érintett a fenti garanciák másolatát az 1. pontban megadott e-mail címen
 
 ## 7. Az érintett jogai
 
-Ön az alábbi jogokkal élhet a személyes adatai kezelésével kapcsolatban:
+Az alábbi jogokkal élhetsz a személyes adataid kezelésével kapcsolatban:
 
-**Hozzáférés (GDPR 15. cikk)** — Tájékoztatást kérhet arról, hogy kezelünk-e Önre vonatkozó személyes adatot, és ha igen, másolatot kérhet róla.
+**Hozzáférés (GDPR 15. cikk)** — Tájékoztatást kérhetsz arról, hogy kezelünk-e rád vonatkozó személyes adatot, és ha igen, másolatot kérhetsz róla.
 
-**Helyesbítés (16. cikk)** — Kérheti a pontatlan adatok helyesbítését, a hiányos adatok kiegészítését.
+**Helyesbítés (16. cikk)** — Kérheted a pontatlan adatok helyesbítését, a hiányos adatok kiegészítését.
 
-**Törlés (17. cikk)** — Kérheti adatai törlését, ha azok kezelésére már nincs szükség, ha visszavonja a hozzájárulását, vagy ha az adatkezelés jogellenes. A törlési jog nem áll fenn, amíg jogszabály (pl. a számviteli megőrzési kötelezettség) az adat megőrzését írja elő.
+**Törlés (17. cikk)** — Kérheted az adataid törlését, ha azok kezelésére már nincs szükség, ha visszavonod a hozzájárulásodat, vagy ha az adatkezelés jogellenes. A törlési jog nem áll fenn, amíg jogszabály (pl. a számviteli megőrzési kötelezettség) az adat megőrzését írja elő.
 
-**Az adatkezelés korlátozása (18. cikk)** — Kérheti az adatkezelés korlátozását, például amíg az adat pontosságát vitatja.
+**Az adatkezelés korlátozása (18. cikk)** — Kérheted az adatkezelés korlátozását, például amíg az adat pontosságát vitatod.
 
-**Adathordozhatóság (20. cikk)** — A hozzájáruláson vagy szerződésen alapuló, automatizált adatkezelés esetén kérheti, hogy adatait tagolt, géppel olvasható formátumban megkapja, vagy azokat közvetlenül másik adatkezelőnek továbbítsuk.
+**Adathordozhatóság (20. cikk)** — A hozzájáruláson vagy szerződésen alapuló, automatizált adatkezelés esetén kérheted, hogy az adataidat tagolt, géppel olvasható formátumban megkapd, vagy azokat közvetlenül másik adatkezelőnek továbbítsuk.
 
-**Tiltakozás (21. cikk)** — Tiltakozhat a jogos érdeken alapuló adatkezelés ellen. Ebben az esetben az adatkezelést megszüntetjük, kivéve, ha azt olyan kényszerítő erejű jogos okok indokolják, amelyek elsőbbséget élveznek az Ön érdekeivel szemben.
+**Tiltakozás (21. cikk)** — Tiltakozhatsz a jogos érdeken alapuló adatkezelés ellen. Ebben az esetben az adatkezelést megszüntetjük, kivéve, ha azt olyan kényszerítő erejű jogos okok indokolják, amelyek elsőbbséget élveznek az érdekeiddel szemben.
 
-**Hozzájárulás visszavonása (7. cikk)** — A hozzájáruláson alapuló adatkezelés esetén hozzájárulását bármikor visszavonhatja. A visszavonás nem érinti a visszavonás előtti adatkezelés jogszerűségét.
+**Hozzájárulás visszavonása (7. cikk)** — A hozzájáruláson alapuló adatkezelés esetén a hozzájárulásodat bármikor visszavonhatod. A visszavonás nem érinti a visszavonás előtti adatkezelés jogszerűségét.
 
-### Hogyan élhet ezekkel a jogokkal?
+### Hogyan élhetsz ezekkel a jogokkal?
 
-Kérelmét az 1. pontban megadott e-mail címen vagy postai címen nyújthatja be. Kérelmét **a beérkezéstől számított 1 hónapon belül** teljesítjük. Ez a határidő indokolt esetben további 2 hónappal meghosszabbítható, amiről a kérelem beérkezésétől számított 1 hónapon belül tájékoztatjuk.
+A kérelmedet az 1. pontban megadott e-mail címen vagy postai címen nyújthatod be. A kérelmedet **a beérkezéstől számított 1 hónapon belül** teljesítjük. Ez a határidő indokolt esetben további 2 hónappal meghosszabbítható, amiről a kérelem beérkezésétől számított 1 hónapon belül tájékoztatunk.
 
 A kérelem teljesítése díjmentes. Ha a kérelem egyértelműen megalapozatlan vagy túlzó, ésszerű díjat számíthatunk fel, vagy megtagadhatjuk a teljesítést.
 
@@ -188,7 +188,7 @@ A kérelem teljesítése díjmentes. Ha a kérelem egyértelműen megalapozatlan
 
 ### Bírósági jogérvényesítés
 
-Jogainak megsértése esetén bírósághoz fordulhat. A per elbírálása a törvényszék hatáskörébe tartozik, és — az Ön választása szerint — a lakóhelye vagy tartózkodási helye szerinti törvényszék előtt is megindítható. A bíróság az ügyben soron kívül jár el.
+Jogaid megsértése esetén bírósághoz fordulhatsz. A per elbírálása a törvényszék hatáskörébe tartozik, és — választásod szerint — a lakóhelyed vagy tartózkodási helyed szerinti törvényszék előtt is megindítható. A bíróság az ügyben soron kívül jár el.
 
 ---
 
