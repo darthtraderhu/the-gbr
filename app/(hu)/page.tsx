@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getSortedPostsData } from "@/lib/posts"; // <-- BEHÚZZUK A MOTORT!
-import { websiteSchema, professionalServiceSchema } from "@/lib/jsonld";
+import { websiteSchema, professionalServiceSchema, videoObjectSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, SectionHeader, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import ServiceIndex from "@/app/components/ServiceIndex";
 import { ARZENAL_SECTIONS } from "@/lib/site-links";
+import IntroVideo from "@/app/components/IntroVideo";
 import HeroInstrument from "./HeroInstrument";
 
 // A cikk-ütemezés (lib/posts.ts) miatt a főoldal legutóbbi-cikkek blokkja is
@@ -174,6 +175,15 @@ const PROCESS_STEPS = [
   },
 ];
 
+// A cégbemutató videó — forrása a video/ mappa Remotion-projektje. Ha a
+// videó szövege változik, ez a leirat is frissítendő.
+const INTRO_VIDEO = {
+  src: "/video/cegbemutato.mp4",
+  poster: "/video/cegbemutato-poster.jpg",
+  transcript:
+    "A legjobb kampány sem segít, ha a rendszer mögötte nem működik. Két dolgot csinálunk, nem tizenkettőt: megépítjük a weboldalt vagy webshopot Next.js alapon, és visszük tovább — üzemeltetés, monitoring, folyamatos fejlesztés. A folyamat négy szakasza: felmérés, ahol megnézzük, mi van most, és a végén tudod, mibe kerül és mennyi idő; terv és keret fix hatókörrel, fix árazással és írásos szerződéssel; építés szakaszokban, kéthetente látható eredménnyel; végül átadás és üzemeltetés dokumentációval, monitoringgal és riasztással. Minden szakasz végén van valami, amit meg tudsz nézni. Pitcheld el a projekted a thegbr.eu/init oldalon — válasz 2 munkanapon belül.",
+};
+
 export default function Home() {
   const allPostsData = getSortedPostsData();
   const [leadPost, ...restPosts] = allPostsData;
@@ -183,6 +193,18 @@ export default function Home() {
     <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd data={websiteSchema()} />
       <JsonLd data={professionalServiceSchema()} />
+      <JsonLd
+        data={videoObjectSchema({
+          name: "THE GBR cégbemutató: hogyan dolgozunk",
+          description:
+            "Egyperces bemutató arról, hogyan építünk és üzemeltetünk weboldalakat B2B cégeknek, és milyen szakaszokban halad egy projekt.",
+          contentPath: INTRO_VIDEO.src,
+          thumbnailPath: INTRO_VIDEO.poster,
+          uploadDate: "2026-10-23",
+          duration: "PT1M4S",
+          transcript: INTRO_VIDEO.transcript,
+        })}
+      />
 
       {/* ===== 01 / MŰSZER — a hero maga a bizonyíték ===== */}
       <Rail label="01 / Műszer" dark>
@@ -222,30 +244,22 @@ export default function Home() {
       {/* ===== 02 / VIDEÓ — élig futó ===== */}
       <Rail label="02 / Videó">
         <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-3.5 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
-          <span>Két perc arról, hogyan dolgozunk</span>
-          <span>Cégbemutató · Hamarosan</span>
+          <span>Egy perc arról, hogyan dolgozunk</span>
+          <span>Cégbemutató · 1:04 · Hang nélkül</span>
         </div>
-        <div
-          className="aspect-[21/9] flex items-center justify-center border-b border-[var(--rule)]"
-          style={{
-            background:
-              "linear-gradient(150deg, var(--rule-soft) 0%, var(--rule) 50%, var(--ground) 100%)",
-          }}
-        >
-          <div
-            className="w-[var(--space-20)] h-[var(--space-20)] rounded-full border border-[var(--ink)] flex items-center justify-center"
-            style={{ backgroundColor: "color-mix(in srgb, var(--panel) 55%, transparent)" }}
-          >
-            <span
-              className="ml-1 block w-0 h-0"
-              style={{
-                borderTop: "11px solid transparent",
-                borderBottom: "11px solid transparent",
-                borderLeft: "18px solid var(--ink)",
-              }}
-            />
-          </div>
-        </div>
+        <IntroVideo
+          src={INTRO_VIDEO.src}
+          poster={INTRO_VIDEO.poster}
+          label="THE GBR cégbemutató: hogyan dolgozunk"
+        />
+        <details className="group px-6 py-3.5 border-b border-[var(--rule)]">
+          <summary className="cursor-pointer [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] hover:text-[var(--ink)]">
+            A videó szövege
+          </summary>
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[72ch] mt-[var(--space-4)] mb-[var(--space-2)]">
+            {INTRO_VIDEO.transcript}
+          </p>
+        </details>
       </Rail>
 
       {/* ===== 03 / A CÉG MÖGÖTT — óriás idézet ===== */}

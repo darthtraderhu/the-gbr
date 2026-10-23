@@ -2,6 +2,8 @@ node_modules
 .next
 out
 build
+video/node_modules
+video/out
 public
 
 # Jogi és marketing tartalom: ezeket szándékosan nem formázza a Prettier,

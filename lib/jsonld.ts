@@ -218,3 +218,30 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
     })),
   };
 }
+
+// A főoldali cégbemutató videó (public/video, forrása a video/ mappa
+// Remotion-projektje). A transcript a videó teljes szövege, hogy a keresők
+// a tartalmát is lássák, ne csak a fájlt.
+export function videoObjectSchema(params: {
+  name: string;
+  description: string;
+  contentPath: string;
+  thumbnailPath: string;
+  uploadDate: string;
+  duration: string;
+  transcript: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: params.name,
+    description: params.description,
+    contentUrl: `${SITE_URL}${params.contentPath}`,
+    thumbnailUrl: `${SITE_URL}${params.thumbnailPath}`,
+    uploadDate: params.uploadDate,
+    duration: params.duration,
+    inLanguage: "hu-HU",
+    transcript: params.transcript,
+    publisher: ORGANIZATION,
+  };
+}
