@@ -22,7 +22,7 @@ Az uniós mesterségesintelligencia-rendelet **(EU) 2024/1689** átláthatóság
 
 A weboldalon elérhető chat **nem élő ügyintéző, hanem mesterséges intelligencia.** A válaszokat egy nagy nyelvi modell generálja automatikusan, emberi közreműködés nélkül.
 
-**Szolgáltató:** OpenAI, L.L.C. (Egyesült Államok)
+**Szolgáltató:** Anthropic, PBC (Egyesült Államok)
 
 ### 2.2. Tartalomkészítés
 
@@ -32,7 +32,7 @@ Weboldalunk egyes tartalmainak elkészítéséhez mesterséges intelligenciát i
 
 ## 3. Mi történik a chatbe beírt adatokkal?
 
-Az Ön által beírt üzenetek **továbbításra kerülnek az OpenAI részére**, amely az Egyesült Államokban működik. Az adattovábbítás jogi garanciáiról az [Adatkezelési tájékoztató](/adatkezeles) 6. pontja rendelkezik.
+Az Ön által beírt üzenetek **továbbításra kerülnek az Anthropic részére**, amely az Egyesült Államokban működik. Az adattovábbítás jogi garanciáiról az [Adatkezelési tájékoztató](/adatkezeles) 6. pontja rendelkezik.
 
 **Kérjük, hogy a chatbe ne írjon be:**
 
