@@ -46,6 +46,7 @@ const DEVELOP_ITEMS = [
   "Biztonság és teljesítmény alapból",
   "Akadálymentesítés a WCAG szerint",
   "Arculat, design rendszer, szövegezés",
+  "Egyedi szoftver és folyamat-automatizáció: belső rendszerek, összekötött alkalmazások",
 ];
 
 const MANAGE_ITEMS = [
@@ -363,8 +364,8 @@ export default function Home() {
           ))}
         </div>
         <ServiceIndex
-          eyebrow="Részletesen · nyolc terület"
-          lead="A két dolog nyolc területen áll össze. Mindegyikről bővebben a szolgáltatások oldalon."
+          eyebrow="Részletesen · kilenc terület"
+          lead="A két dolog kilenc területen áll össze. Mindegyikről bővebben a szolgáltatások oldalon."
           items={ARZENAL_SECTIONS}
           basePath="/arzenal"
         />

@@ -41,6 +41,8 @@ export const ORGANIZATION = {
 export const KNOWS_ABOUT = [
   "Weboldal- és webshopfejlesztés",
   "Performance marketing (Google és Meta hirdetés)",
+  "Egyedi szoftverfejlesztés",
+  "Üzleti folyamatok automatizálása, rendszerintegráció",
   "AI-integráció és chatbot fejlesztés",
   "Videó- és tartalomgyártás",
   "Weboldal-üzemeltetés és folyamatos fejlesztés",
@@ -59,7 +61,7 @@ export function organizationSchema() {
   };
 }
 
-// Az /arzenal nyolc szolgáltatás-blokkjának Service sémája — provider mindig
+// Az /arzenal kilenc szolgáltatás-blokkjának Service sémája — provider mindig
 // az Organization. A description egész mondat, nem kulcsszóhalmaz, hogy
 // az AI-keresők idézhető kontextust kapjanak (AEO).
 export function serviceSchema(params: {

@@ -9,7 +9,7 @@
     "mobileMenu": "Menu",
     "mobileChat": "Chat",
     "mobileCta": "Start",
-    "allAreas": "Eight areas",
+    "allAreas": "Nine areas",
     "closeMenu": "Close menu",
     "switchLabel": "Switch to Hungarian"
   },
@@ -56,7 +56,7 @@
     },
     "services": {
       "title": "Services — THE GBR",
-      "description": "Web and commerce, performance marketing, AI integration, video, web operations, accessibility, monitoring and IT operations. Eight areas, in-house."
+      "description": "Web and commerce, performance marketing, custom software and automation, AI integration, video, web operations, accessibility, monitoring and IT operations. Nine areas, in-house."
     },
     "engagement": {
       "title": "How we work — THE GBR",
@@ -142,7 +142,8 @@
       "Technical SEO built in: sitemaps, structured data, canonicals",
       "Security and performance from the start, not patched on afterwards",
       "Accessibility to WCAG standards",
-      "Design systems and interface work when there isn't one"
+      "Design systems and interface work when there isn't one",
+      "Custom software and process automation: internal tools, connected systems"
     ],
     "manageTitle": "02 — MANAGE · And we keep it running",
     "manageIntro": "This is where a project succeeds or fails. Launch isn't the end — that's when it starts earning.",
@@ -155,8 +156,8 @@
       "Office IT: system administration, networks, Microsoft 365",
       "One accountable contact, not a ticket queue"
     ],
-    "serviceIndexEyebrow": "In detail · eight areas",
-    "serviceIndexLead": "The two things break down into eight areas. Each one is covered in detail on the services page.",
+    "serviceIndexEyebrow": "In detail · nine areas",
+    "serviceIndexLead": "The two things break down into nine areas. Each one is covered in detail on the services page.",
     "auditEyebrow": "Website audit",
     "auditHeadline": "Before we propose anything, we look at what's there",
     "auditIntro": "We review an existing website from the outside — no access needed. You get a written report: what works, what doesn't, and what to fix first.",
@@ -233,11 +234,12 @@
 
   "Services": {
     "headline": "Services.",
-    "intro1": "Eight areas we handle in-house. If a project doesn't need all eight, we don't sell you all eight.",
+    "intro1": "Nine areas we handle in-house. If a project doesn't need all nine, we don't sell you all nine.",
     "intro2": "<b>We also work as a development partner</b> — for Hungarian and Western European agencies alike.",
     "indexNames": {
       "web": "Web and commerce",
       "ads": "Performance marketing",
+      "software": "Custom software and automation",
       "ai": "AI integration",
       "video": "Video and content",
       "ops": "Web operations and maintenance",
@@ -274,6 +276,31 @@
         { "label": "Click → enquiry", "value": "tracked" },
         { "label": "Best channel this week", "value": "named" },
         { "label": "What we're stopping", "value": "explained" }
+      ]
+    },
+    "software": {
+      "headline": "What's done by hand today runs on its own tomorrow",
+      "p1": "In most companies someone spends part of every day copying things from one place to another: webshop orders into the invoicing system, enquiries from the contact form into a spreadsheet, the spreadsheet into the monthly report. It isn't a mistake, just expensive — and it's the first thing to slip when things get busy.",
+      "p2": "<b>We connect those systems so the work runs on its own.</b> Where an off-the-shelf automation tool is enough, we use it; where it isn't, we write code. If no suitable software exists for a process, we build it: an internal system, a client portal, an admin interface.",
+      "p3": "We start with an assessment: you get a written summary of which processes are worth automating and which aren't. Every automation logs its runs and raises an alert on failure, because a process that stops silently is worse than doing it by hand.",
+      "items": [
+        "Process assessment: what's done by hand today, and what's worth automating",
+        "Connecting systems: webshop, invoicing, CRM, email, spreadsheets",
+        "Automation with an off-the-shelf tool or custom code, whichever is cheaper to maintain in the long run",
+        "Custom internal systems, client portals, admin interfaces",
+        "Logging and alerting: you know when something didn't run",
+        "Handover with documentation, so we're not the only ones who understand it",
+        "Ongoing operation and development, if you want it"
+      ],
+      "deviceHeader": "An automation's log",
+      "deviceBelow": "Illustrative. The steps depend on the process.",
+      "logLines": [
+        { "t": "08:12", "msg": "New order received in the webshop" },
+        { "t": "08:12", "msg": "Invoice issued in the invoicing system" },
+        { "t": "08:13", "msg": "Confirmation email sent to the customer" },
+        { "t": "08:13", "msg": "Order recorded in the stock spreadsheet" },
+        { "t": "09:40", "msg": "Invoicing system didn't respond — retrying in 5 minutes, alert sent" },
+        { "t": "09:45", "msg": "Retry succeeded, the item has been processed" }
       ]
     },
     "ai": {
@@ -402,8 +429,7 @@
         "Email system setup and operation",
         "Microsoft 365 and Teams: rollout and operation for remote work and remote learning",
         "Company mobile fleet: plans and costs reviewed",
-        "Operation of your existing software and hardware",
-        "Custom software and internal systems"
+        "Operation of your existing software and hardware"
       ],
       "deviceHeader": "What an IT assessment typically finds",
       "deviceBelow": "Illustrative. The actual list comes from the assessment and differs per office.",
@@ -459,7 +485,9 @@
       {
         "question": "Does a small office need outside IT support?",
         "answer": "Often it's the small ones that need it most. Without an in-house IT person, someone usually handles it on the side, and that works until something breaks. We start with an assessment and tell you how much ongoing work your setup actually needs. If it's not much, we say so."
-      }
+      },
+      {"question": "Do we have to replace our existing systems to automate?", "answer": "Usually not. We connect what you already have: the webshop, the invoicing system, the spreadsheets. We only recommend new software when the existing one can't do what's needed — and the assessment explains why in writing."},
+      {"question": "What happens if an automation stops?", "answer": "It doesn't stop silently. Every run is logged, and a failure sends an alert to whoever is responsible — us, if you hand over operations, or the person you designate. Missed items can be processed again from the log."}
     ],
     "faqHeading": "Questions we actually get asked",
     "ctaHeadline": "Tell us what you're up against",

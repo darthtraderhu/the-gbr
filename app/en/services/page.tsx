@@ -119,6 +119,7 @@ export default async function EnglishServices() {
     meaning: string;
     severity: string;
   }[];
+  const softwareLog = t.raw("software.logLines") as { t: string; msg: string }[];
 
   return (
     <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
@@ -231,10 +232,46 @@ export default async function EnglishServices() {
         />
       </Rail>
 
-      {/* ===== 03 AI ===== */}
-      <Rail label="03 / AI">
+      {/* ===== 03 CUSTOM SOFTWARE AND AUTOMATION ===== */}
+      <Rail label="03 / Software">
         <ServiceBlock
+          id="software"
           n="03"
+          label="Software and automation"
+          title={t("software.headline")}
+          paragraphs={[
+            t("software.p1"),
+            <span key="p2">{t.rich("software.p2", { b: B })}</span>,
+            t("software.p3"),
+          ]}
+          features={t.raw("software.items") as string[]}
+          device={
+            <DevFrame header={t("software.deviceHeader")} headerRight="Sample">
+              <div className="[font-family:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--ink-2)]">
+                {softwareLog.map((line, i) => (
+                  <div
+                    key={`${line.t}-${line.msg}`}
+                    className={`grid grid-cols-[74px_1fr] gap-[var(--space-4)] py-[var(--space-2)] ${
+                      i < softwareLog.length - 1 ? "border-b border-[var(--rule-soft)]" : ""
+                    }`}
+                  >
+                    <b className="text-[var(--signal-deep)] font-medium">{line.t}</b>
+                    <span>{line.msg}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
+                {t("software.deviceBelow")}
+              </p>
+            </DevFrame>
+          }
+        />
+      </Rail>
+
+      {/* ===== 04 AI ===== */}
+      <Rail label="04 / AI">
+        <ServiceBlock
+          n="04"
           label="AI integration"
           id="ai"
           title={t("ai.headline")}
@@ -275,10 +312,10 @@ export default async function EnglishServices() {
         />
       </Rail>
 
-      {/* ===== 04 VIDEO ===== */}
-      <Rail label="04 / Video">
+      {/* ===== 05 VIDEO ===== */}
+      <Rail label="05 / Video">
         <ServiceBlock
-          n="04"
+          n="05"
           label="Video and content"
           title={t("video.headline")}
           id="video"
@@ -304,11 +341,11 @@ export default async function EnglishServices() {
         />
       </Rail>
 
-      {/* ===== 05 OPS ===== */}
-      <Rail label="05 / Web operations">
+      {/* ===== 06 OPS ===== */}
+      <Rail label="06 / Web operations">
         <ServiceBlock
           id="ops"
-          n="05"
+          n="06"
           label="Web operations"
           title={t("ops.headline")}
           paragraphs={[t("ops.p1"), t("ops.p2")]}
@@ -333,11 +370,11 @@ export default async function EnglishServices() {
         />
       </Rail>
 
-      {/* ===== 06 ACCESSIBILITY ===== */}
-      <Rail label="06 / Accessibility">
+      {/* ===== 07 ACCESSIBILITY ===== */}
+      <Rail label="07 / Accessibility">
         <ServiceBlock
           id="access"
-          n="06"
+          n="07"
           label="Accessibility"
           title={t("access.headline")}
           paragraphs={[
@@ -391,11 +428,11 @@ export default async function EnglishServices() {
         />
       </Rail>
 
-      {/* ===== 07 PULSE ===== */}
-      <Rail label="07 / Pulse">
+      {/* ===== 08 PULSE ===== */}
+      <Rail label="08 / Pulse">
         <ServiceBlock
           id="pulse"
-          n="07"
+          n="08"
           label="Pulse"
           title={t("pulse.headline")}
           paragraphs={[
@@ -457,11 +494,11 @@ export default async function EnglishServices() {
         />
       </Rail>
 
-      {/* ===== 08 IT OPERATIONS ===== */}
-      <Rail label="08 / IT">
+      {/* ===== 09 IT OPERATIONS ===== */}
+      <Rail label="09 / IT">
         <ServiceBlock
           id="it"
-          n="08"
+          n="09"
           label="IT operations"
           title={t("it.headline")}
           paragraphs={[t("it.p1"), <span key="p2">{t.rich("it.p2", { b: B })}</span>, t("it.p3")]}
