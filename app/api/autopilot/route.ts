@@ -11,6 +11,12 @@ const anthropic = new Anthropic();
 const POST_MODEL = "claude-opus-5-5";
 const GRAPH_API = "https://graph.facebook.com/v21.0";
 
+// A cikkek közötti napokon ezeken a napokon egy korábbi cikket ajánlunk
+// (0 = vasárnap … 6 = szombat): kedd és csütörtök.
+const ARCHIVE_DAYS = [2, 4];
+// Az ennél frissebb cikkek még nem kerülnek az archív körforgásba.
+const ARCHIVE_MIN_AGE_DAYS = 30;
+
 // A cikk a márka névjegye, a poszt csak ajánló hozzá: semmi olyat nem
 // állíthat, ami a cikkben nincs benne (ld. AGENTS.md — nincs alá nem
 // támasztott állítás, ügyfél nem nevezhető meg).
@@ -23,6 +29,7 @@ Szabályok:
 - Ügyfelet, márkát, domaint ne nevezz meg.
 - Hangnem: nyugodt, szakmai, közérthető. Nem harsány, nem kattintásvadász, nem "kőkemény".
 - Felépítés: egy mondat a problémáról, amit az olvasó ismer; két-három mondat arról, mit tud meg a cikkből; egy rövid mondat, hogy érdemes elolvasni.
+- Ha a cikk korábbi (archív), ne írd, hogy most jelent meg; a téma időszerűségéből indulj ki.
 - Hossz: 350–600 karakter. Legfeljebb egy emoji, de inkább egy se. Hashtag nincs.
 - Linket ne írj a szövegbe, azt a rendszer csatolja.
 - Csak a poszt szövegét add vissza, bevezető vagy magyarázat nélkül.
@@ -41,7 +48,34 @@ function isAuthorized(authHeader: string | null, cronSecret: string): boolean {
   return timingSafeEqual(expected, provided);
 }
 
-async function writePost(article: ReturnType<typeof getPostMarkdown>): Promise<string> {
+// Napok száma 1970-01-01 óta egy ÉÉÉÉ-HH-NN dátumra (UTC-ben számolva, hogy
+// az óraátállítás ne okozzon eltérést).
+function dayNumber(date: string): number {
+  return Math.floor(Date.parse(`${date}T00:00:00Z`) / 86_400_000);
+}
+
+type PostSummary = ReturnType<typeof getSortedPostsData>[number];
+
+// Rögzített körforgás adatbázis nélkül: az archív napok sorszáma adja, melyik
+// cikk jön. Ha új cikk kerül az archívumba, a sorrend eltolódhat, így egy cikk
+// néha a vártnál előbb vagy később kerül elő újra — ez elfogadható ár azért,
+// hogy ne kelljen állapotot tárolni.
+function pickArchivePost(published: PostSummary[], today: string): PostSummary | null {
+  const weekday = new Date(`${today}T00:00:00Z`).getUTCDay();
+  const slotInWeek = ARCHIVE_DAYS.indexOf(weekday);
+  if (slotInWeek === -1) return null;
+
+  const todayNumber = dayNumber(today);
+  const pool = published
+    .filter((post) => todayNumber - dayNumber(post.date) >= ARCHIVE_MIN_AGE_DAYS)
+    .sort((a, b) => (a.date === b.date ? a.id.localeCompare(b.id) : a.date.localeCompare(b.date)));
+  if (pool.length === 0) return null;
+
+  const slot = Math.floor(todayNumber / 7) * ARCHIVE_DAYS.length + slotInWeek;
+  return pool[slot % pool.length];
+}
+
+async function writePost(article: ReturnType<typeof getPostMarkdown>, isArchive: boolean): Promise<string> {
   const response = await anthropic.beta.messages.create({
     model: POST_MODEL,
     max_tokens: 4096,
@@ -52,7 +86,7 @@ async function writePost(article: ReturnType<typeof getPostMarkdown>): Promise<s
     messages: [
       {
         role: "user",
-        content: `Cím: ${article.title}\nRövid leírás: ${article.excerpt}\n\nA cikk szövege:\n${article.content}`,
+        content: `${isArchive ? "Korábbi (archív) cikk." : "Ma megjelent cikk."}\nCím: ${article.title}\nRövid leírás: ${article.excerpt}\n\nA cikk szövege:\n${article.content}`,
       },
     ],
   });
@@ -99,9 +133,9 @@ async function publishToFacebook(message: string, link: string): Promise<string>
   return checkData.permalink_url ?? data.id;
 }
 
-// Naponta fut (vercel.json). Csak akkor posztol, ha az ütemezés szerint ma
-// élesedik egy cikk — a cikkek kéthetente jelennek meg, így a legtöbb nap
-// nem történik semmi. Kézi teszt (CRON_SECRET-tel):
+// Naponta fut (vercel.json). Ha az ütemezés szerint ma élesedik egy cikk,
+// azt ajánlja; ha nem, az ARCHIVE_DAYS napjain egy korábbi cikket. A többi
+// napon nem posztol. Kézi teszt (CRON_SECRET-tel):
 //   ?id=<cikk-slug>   egy adott, már megjelent cikkhez
 //   &dryRun=1         csak megírja a szöveget, nem posztol
 export async function GET(request: Request) {
@@ -122,25 +156,39 @@ export async function GET(request: Request) {
   // jövőbe ütemezetteket, így egy kézi ?id= sem tud korán posztolni.
   const published = getSortedPostsData();
   const today = getTodayBudapest();
-  const targets = requestedId
-    ? published.filter((post) => post.id === requestedId)
-    : published.filter((post) => post.date === today);
+  let targets: PostSummary[];
+  let isArchive = false;
+  if (requestedId) {
+    targets = published.filter((post) => post.id === requestedId);
+    isArchive = targets.some((post) => post.date !== today);
+  } else {
+    targets = published.filter((post) => post.date === today);
+    if (targets.length === 0) {
+      const archivePost = pickArchivePost(published, today);
+      if (archivePost) {
+        targets = [archivePost];
+        isArchive = true;
+      }
+    }
+  }
 
   if (targets.length === 0) {
     return NextResponse.json({
       success: true,
       posted: [],
-      note: requestedId ? `Nincs megjelent cikk ezzel az azonosítóval: ${requestedId}` : `Ma (${today}) nem jelenik meg cikk`,
+      note: requestedId
+        ? `Nincs megjelent cikk ezzel az azonosítóval: ${requestedId}`
+        : `Ma (${today}) nincs posztolnivaló`,
     });
   }
 
   const results: Array<{ id: string; text: string; permalink?: string }> = [];
   try {
     for (const post of targets) {
-      const text = await writePost(getPostMarkdown(post.id));
+      const text = await writePost(getPostMarkdown(post.id), isArchive);
       const link = `${SITE_URL}/hirek/${post.id}`;
       const permalink = dryRun ? undefined : await publishToFacebook(text, link);
-      console.log("[AUTOPILOT]", dryRun ? "próbafuttatás" : "kiposztolva", post.id, permalink ?? "");
+      console.log("[AUTOPILOT]", dryRun ? "próbafuttatás" : "kiposztolva", isArchive ? "(archív)" : "(új)", post.id, permalink ?? "");
       results.push({ id: post.id, text, permalink });
     }
     return NextResponse.json({ success: true, dryRun, posted: results });
