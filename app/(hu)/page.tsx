@@ -251,6 +251,7 @@ export default function Home() {
           src={INTRO_VIDEO.src}
           poster={INTRO_VIDEO.poster}
           label="THE GBR cégbemutató: hogyan dolgozunk"
+          playLabel="Lejátszás: THE GBR cégbemutató"
         />
         <details className="group px-6 py-3.5 border-b border-[var(--rule)]">
           <summary className="cursor-pointer [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] hover:text-[var(--ink)]">
