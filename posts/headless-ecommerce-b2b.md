@@ -1,17 +1,37 @@
 ---
-title: "Headless E-commerce: A B2B nagykereskedelem jövője"
+title: "Headless webshop: mikor éri meg, és mikor felesleges?"
 date: "2026-06-17"
-excerpt: "Válaszd le a front-endet a back-endről! A headless architektúra példátlan sebességet és rugalmasságot ad a B2B webáruházaknak."
+updated: "2026-10-23"
+category: "Fejlesztés"
+excerpt: "A headless webshop szétválasztja a vásárlói felületet a háttérrendszertől. Nagyobb B2B kereskedésnél sokat adhat, egy kisebb boltnál viszont felesleges bonyolítás lehet."
 ---
 
-## Headless E-commerce: A B2B nagykereskedelem jövője
+A „headless" szó egyre gyakrabban kerül elő webshop-fejlesztéskor. Érdemes tisztázni, mit jelent, és kinek való.
 
-A hagyományos webáruház motorok (Shopify, WooCommerce) egyben kezelik a felhasználói felületet (front-end) és az adatbázist (back-end). Ahogy egy B2B cég növekszik – egyedi árazások, komplex ERP integrációk, több tízezer termék –, ezek a rendszerek belassulnak és összeomlanak.
+## Mit jelent a headless?
 
-#### Lépj be a Headless korába
-A headless architektúra levágja a "fejet". A háttérben futhat a stabil adatbázisod (pl. Supabase, Shopify API), míg a felhasználók egy villámgyors, Next.js alapú front-enddel találkoznak.
+Egy hagyományos webshopban (például WooCommerce-ben vagy Shopifyban) a vásárlói felület és a háttérrendszer egy egységet alkot. A termékek, a rendelések és a megjelenés ugyanabban a rendszerben vannak.
 
-**A Headless előnyei a THE GBR protokolljában:**
-1. **Példátlan betöltési sebesség:** A statikus generálásnak köszönhetően a termékoldalak milliszekundumok alatt töltenek be.
-2. **Omnichannel dominancia:** Ugyanaz a back-end szolgálhatja ki a webshopot, a mobil appot és az intelligens kijelzőket.
-3. **Szabad UI/UX:** Nincsenek sablon korlátok. Olyan high-end vásárlói élményt kódolunk, amilyet megálmodtál.
+Headless felépítésnél a kettő külön van. A háttérben marad a megszokott rendszer, ami a termékeket, készletet és rendeléseket kezeli, a vásárló pedig egy külön, egyedileg fejlesztett felülettel találkozik.
+
+## Mikor éri meg?
+
+**Ha a meglévő rendszer korlátoz.** Például egyedi árazás kell partnerenként, bonyolult termékkonfiguráció, vagy egy vállalatirányítási rendszerrel (ERP) való szoros kapcsolat, amit a sablon nem tud.
+
+**Ha a sebesség és a megjelenés üzletileg számít**, és a meglévő sablonnal már nem lehet tovább javítani.
+
+**Ha több felületet kell kiszolgálni** ugyanabból a háttérből: webshopot, partnerportált, esetleg mobilalkalmazást.
+
+## Mikor felesleges?
+
+**Ha a meglévő webshop jól működik**, és csak kisebb javításokra van szükség. Ilyenkor a meglévő rendszer fölé építés vagy a sablon rendbetétele olcsóbb és gyorsabb.
+
+**Ha nincs, aki üzemeltesse.** Egy headless rendszer két részből áll, és mindkettőt karban kell tartani.
+
+## Egy köztes út
+
+Nem mindig kell mindent egyszerre lecserélni. Gyakran jó megoldás, ha a meglévő WooCommerce vagy Shopify marad a háttérben, és csak a vásárlói felület vagy annak egy része készül újra. Így a megszokott adminfelület marad, a vásárló viszont gyorsabb, jobban használható oldalt kap.
+
+---
+
+Ha bizonytalan vagy, hogy nálad megérné-e, [írd le, milyen rendszeren fut most a webshop](/init). Megmondjuk, melyik út lenne értelmes. Részletek: [web és webshop](/arzenal#web).

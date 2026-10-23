@@ -1,19 +1,37 @@
 ---
-title: "AEO vs. SEO: Így optimalizálj a ChatGPT és a Gemini korában"
+title: "AEO és SEO: mi változik, amikor az AI válaszol a Google helyett?"
 date: "2026-06-13"
-excerpt: "A hagyományos SEO halott. A jövő az Answer Engine Optimization (AEO), ahol a gépi intelligenciát kell meggyőznöd arról, hogy a te entitásod a legjobb válasz."
+updated: "2026-10-23"
+category: "SEO és AEO"
+excerpt: "Egyre többen tesznek fel kérdést ChatGPT-nek vagy Geminiinek, mielőtt egy weboldalra kattintanának. Mit jelent ez egy cég weboldalára nézve, és mit lehet tenni érte?"
 ---
 
-## AEO vs. SEO: Így optimalizálj a ChatGPT és a Gemini korában
+Régen a keresés úgy nézett ki, hogy valaki beírt pár szót a Google-be, és kapott tíz linket. Ma egyre többen teljes kérdést tesznek fel egy AI-asszisztensnek, és egy összefoglaló választ kapnak, néhány forrással.
 
-A paradigmaváltás megtörtént. A jövő döntéshozói már nem kulcsszavakat pötyögnek a Google-be, hanem komplex kérdéseket tesznek fel a mesterséges intelligenciának (LLM-ek, mint a ChatGPT vagy a Gemini). Ha a te rendszered nincs felkészítve az **Answer Engine Optimization (AEO)** protokollra, láthatatlan maradsz.
+**Ebből két dolog következik.** Az egyik, hogy a jó helyezés a találati listán már nem az egyetlen cél. A másik, hogy számít, a te oldalad is ott van-e a források között.
 
-#### Mi az az AEO?
-Míg a klasszikus SEO a találati listák (SERP) manipulálásáról szólt, az AEO célja, hogy az AI rendszerek a te cégedet adják meg direkt, megbízható válaszként. Az algoritmus nem marketing szöveget olvas, hanem **adatstruktúrákat elemez**.
+## Mi az AEO?
 
-**Így építjük be a THE GBR architektúrába:**
-1. **Szemantikus háló (Schema.org):** Kőkemény JSON-LD mikroadatokat fecskendezünk a Next.js kódba, ami kontextust ad az AI-nak.
-2. **Entitás alapú tartalom:** Nem kulcsszavakra lövünk, hanem témakörök (entitások) köré építjük a hitelességet.
-3. **Konverzációs NLP:** Úgy írjuk a struktúrát, hogy az a természetes nyelvfeldolgozó (NLP) modellek számára emészthető legyen.
+Az AEO (Answer Engine Optimization) azt jelenti, hogy az oldalt úgy építjük fel, hogy az AI-alapú keresők könnyen megértsék, mit csinál a cég, és idézhető válaszként használhassák a tartalmát.
 
-Ne a keresőket hajtsd. Legyél te a válasz.
+**Nem a SEO helyett van, hanem mellette.** A technikai alapok ugyanazok: gyors, jól felépített, indexelhető oldal. Az AEO erre épít rá.
+
+## Mit lehet tenni érte?
+
+**Strukturált adat.** Gépileg olvasható leírás a cégről, a szolgáltatásokról, a cikkekről (Schema.org, JSON-LD). Ebből egy kereső biztosan tudja, mi a cég neve, mivel foglalkozik, és hol érhető el.
+
+**Kérdésekre válaszoló tartalom.** Ha az ügyfeleid kérdéseket tesznek fel, legyen az oldalon egyenes válasz ezekre a kérdésekre. Ne csak szolgáltatásnevek és jelzők, hanem egész mondatok arról, mit csinálsz, kinek, és hogyan.
+
+**Egyértelmű szerkezet.** Címsorok, rövid bekezdések, a lényeg elöl. Ami egy embernek könnyen átfutható, azt egy gép is könnyebben dolgozza fel.
+
+**Következetes adatok.** A cégnév, a cím és az elérhetőség mindenhol ugyanaz legyen: az oldalon, a Google-profilban és a közösségi oldalakon.
+
+## Amit nem lehet
+
+Senki nem tudja garantálni, hogy egy AI-asszisztens a te cégedet fogja ajánlani. Ezek a rendszerek sok forrásból dolgoznak, és a működésüket nem a weboldalak tulajdonosai határozzák meg.
+
+Amit meg lehet tenni: hogy az oldal tartalma érthető, pontos és gépileg is olvasható legyen. A többi már a tartalom minőségén múlik.
+
+---
+
+Ha kíváncsi vagy, mit lát most az AI-keresőkből az oldaladból, [írd le, melyik oldalról van szó](/init). Megnézzük, és megírjuk, mit javasolnánk. Részletek: [SEO és AEO](/seo).

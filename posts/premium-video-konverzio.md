@@ -1,17 +1,33 @@
 ---
-title: "A vizuális fegyvertár: Miért a prémium videó a B2B marketing csúcsa?"
+title: "Miért ér többet egy saját videó, mint tíz stockfotó?"
 date: "2026-06-19"
-excerpt: "A stock fotók hiteltelenek. A modern B2B döntéshozó látni akarja a rendszered, a gyáradat, a csapatodat. A high-end videó bizalmat épít."
+updated: "2026-10-23"
+category: "Konverzió"
+excerpt: "Egy B2B döntéshozó látni akarja, kivel dolgozna: a csapatot, a gyártást, a terméket működés közben. A saját videó ezt megmutatja, a stockfotó nem."
 ---
 
-## A vizuális fegyvertár: Miért a prémium videó a B2B marketing csúcsa?
+A stockfotók könnyen elérhetők, olcsók, és mindenhol ugyanazok. Egy mosolygó csapat egy tárgyalóasztal körül nem mond semmit arról, ki vagy, és mit csinálsz.
 
-Hiába építünk világklasszis technológiai architektúrát, ha a tartalom, ami kitölti, egy unalmas Word dokumentum szintjén mozog. A 2026-os B2B piacon a figyelem a legdrágább valuta, és ezt csak prémium minőségű vizuális tartalommal tudod megvenni.
+**Egy döntéshozó, mielőtt megkeres, azt akarja tudni, kivel lenne dolga.** Erre a saját videó a legközvetlenebb válasz.
 
-#### A THE GBR Videógyártási Protokoll
-A nyers kód és az adat mellett a vizualitás a harmadik pillér.
-* **Brand Videók:** Dinamikus, mozifilmes minőségű bemutatkozók, amelyek azonnal pozicionálják a céget a piac csúcsára.
-* **Technológiai Explainer:** Unalmas specifikációk helyett letisztult animációkkal (motion graphics) és drónfelvételekkel magyarázzuk el, mitől jobb a te géped/szolgáltatásod.
-* **Social Media Arzenál:** TikTok és Reels optimalizált, agresszív vágású rövid videók, amik leállítják a görgetést a hírfolyamban.
+## Mire jó egy céges videó?
 
-A bizalmat nem lehet kulcsszavakkal felépíteni. Meg kell mutatni a valóságot, kőkemény minőségben.
+**Bemutatkozás.** Pár perc arról, kik vagytok, mit csináltok, hogyan dolgoztok. Az arcok és a valódi környezet bizalmat épít.
+
+**Termék működés közben.** Egy gép, egy szoftver vagy egy szolgáltatás bemutatása sokszor egyszerűbb mozgóképpel, mint három oldal leírással.
+
+**Rövid változatok a közösségi médiára.** Ugyanabból a forgatásból több rövid videó is készülhet, ami a LinkedInen vagy a Facebookon rövidebb idő alatt átadja a lényeget.
+
+## Mire érdemes figyelni?
+
+**Legyen célja.** Mielőtt forgatás lenne, döntsd el, hol fog megjelenni a videó, kinek szól, és mit kell utána tennie a nézőnek.
+
+**Legyen egységes az arculattal.** A videó ugyanazt a képet adja a cégről, mint a weboldal és a többi anyag.
+
+**Legyen felirat.** A közösségi médiában sokan hang nélkül nézik a videókat, és a feliratozás az akadálymentesség miatt is fontos.
+
+**Legyen rövid.** Inkább legyen két rövid, célzott videó, mint egy hosszú, ami mindenről szól.
+
+---
+
+Ha szeretnéd megmutatni, milyen a céged valójában, [írd le, mit szeretnél bemutatni](/init). Részletek: [videó és tartalom](/arzenal#video).

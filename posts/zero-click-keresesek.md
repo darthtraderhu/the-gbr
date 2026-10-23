@@ -1,18 +1,39 @@
 ---
-title: "Zero-Click Keresések: Így urald a Google találati listáját kattintás nélkül"
+title: "Kattintás nélküli keresések: mit jelent, ha a Google maga válaszol?"
 date: "2026-06-15"
-excerpt: "A Google keresések több mint fele ma már kattintás nélkül ér véget. Így szerezz B2B leadeket akkor is, ha senki nem nyitja meg az oldalad."
+updated: "2026-10-23"
+category: "SEO és AEO"
+excerpt: "Egyre több keresés ér véget a találati oldalon, kattintás nélkül: a Google maga mutatja a választ. A cégnek ilyenkor az a cél, hogy a válaszban a neve és a pontos adatai jelenjenek meg."
 ---
 
-## Zero-Click Keresések: Így urald a Google találati listáját kattintás nélkül
+Ha ma rákeresel egy cég nyitvatartására, egy fogalom jelentésére vagy egy egyszerű kérdésre, gyakran a találati oldalon megkapod a választ. Nem kell rákattintanod semmire.
 
-Felejtsd el az átkattintási arányt (CTR). A Google algoritmusa ma már arra törekszik, hogy a felhasználó a találati oldalon (SERP) belül kapja meg a választ a kérdésére. Kiemelt kivonatok (Featured Snippets), tudáspanelek, Google Cégem (GBP) és SGE (Search Generative Experience) – ezek a jövő fegyverei.
+**Ezt hívják kattintás nélküli keresésnek.** A weboldalak tulajdonosai számára ez elsőre rossz hírnek hangzik, de nem feltétlenül az.
 
-#### A Zero-Click stratégia alapjai
-Ahelyett, hogy harcolnál ellene, használd ki. A B2B piacon a márkaismertség és az autoritás (szaktekintély) az első lépés a zárás felé.
+## Hol jelenik meg a válasz?
 
-1. **Strukturált adatok maximalizálása:** Olyan golyóálló kódolást alkalmazunk a Next.js oldalaidon, amivel a Google gondolkodás nélkül emeli ki a te tartalmadat a 0. pozícióba.
-2. **Közvetlen válaszok:** A cikkeket Inverted Pyramid (fordított piramis) stílusban írjuk – a lényeg legfelül, kőkeményen tálalva.
-3. **Márka dominancia:** Amikor a döntéshozó keres, a TE céged neve kell, hogy villogjon a képernyőn független, megbízható forrásként.
+**Kiemelt kivonat.** A találati lista tetején egy rövid szövegrészlet egy weboldalról, ami közvetlenül válaszol a kérdésre.
 
-Építs behozhatatlan entitást a Mátrixba!
+**Cégprofil.** A Google-cégprofil a nevet, a címet, a nyitvatartást, a telefonszámot és az értékeléseket mutatja.
+
+**AI-összefoglalók.** Egyes kereséseknél a Google mesterséges intelligenciával összefoglalt választ ad, forrásokkal.
+
+## Mit jelent ez egy B2B cégnek?
+
+Egy döntéshozó első keresése gyakran nem vásárlás, hanem tájékozódás. Ha ilyenkor a te cégedet látja egy pontos válasz mellett, az akkor is számít, ha nem kattint. **Ismerős lesz a név, amikor később szüksége lesz rád.**
+
+## Mit lehet tenni érte?
+
+**Gondozott Google-cégprofil.** Pontos adatok, aktuális nyitvatartás, megválaszolt értékelések. Sok keresésnél ez az első, amit látnak.
+
+**Egyenes válaszok az oldalon.** Ha az ügyfeleid kérdéseket tesznek fel, legyen az oldalon rövid, egyértelmű válasz ezekre, a lényeggel az elején.
+
+**Strukturált adat.** Gépileg olvasható leírás a cégről és a tartalomról, amiből a kereső biztosan tudja, mi micsoda.
+
+**Következetes adatok.** A cégnév, a cím és az elérhetőség mindenhol ugyanaz legyen.
+
+Kiemelt helyet senki nem tud garantálni, ezt a kereső dönti el. Amit meg lehet tenni: hogy az oldal és a profil tartalma pontos, érthető és könnyen feldolgozható legyen.
+
+---
+
+Ha szeretnéd tudni, mit mutat most rólad a Google, [írd le a céged nevét](/init). Részletek: [SEO és AEO](/seo).

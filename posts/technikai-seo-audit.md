@@ -1,17 +1,41 @@
 ---
-title: "Technikai SEO Audit: A láthatatlan kódhibák, amik tönkreteszik a cégedet"
+title: "Technikai SEO-felmérés: a hibák, amik nem látszanak az oldalon"
 date: "2026-06-21"
-excerpt: "A marketinged tökéletes, a posztok mennek, de a Google eltemetett a 3. oldalon? A hiba a forráskódban van. Indítsd el az audit protokollt."
+updated: "2026-10-23"
+category: "SEO és AEO"
+excerpt: "Az oldal szép, a tartalom jó, mégsem jön keresésből látogató? Gyakran olyan technikai hiba áll a háttérben, ami a látogatónak nem tűnik fel, a keresőnek viszont igen."
 ---
 
-## Technikai SEO Audit: A láthatatlan kódhibák, amik tönkreteszik a cégedet
+Egy weboldal kétféleképpen nézhető. A látogató a képeket, a szövegeket és a gombokat látja. A kereső a kódot, a szerkezetet és a technikai jelzéseket.
 
-Sok B2B cég dollár tízezreket éget el hirdetésekre és PR cikkekre, miközben a saját weblapjuk forráskódja lyukas, mint a szita. A Google algoritmusai kíméletlenek: ha a technikai alapok nincsenek rendben, sosem fogod uralni az organikus találatokat.
+**Ami az egyiknek rendben van, az a másiknak lehet hibás.** Egy technikai SEO-felmérés azt nézi, amit a kereső lát.
 
-#### A THE GBR Audit Protokoll
-Nem "tippelgetünk". Kőkemény diagnosztikát futtatunk a szervereden.
-* **Core Web Vitals Analízis:** Betöltési sebesség (LCP), interaktivitás (INP) és vizuális stabilitás (CLS) mérése milliszekundum pontossággal.
-* **Indexelési blokkok:** Megkeressük azokat a hibás JavaScript rendereléseket és noindex tageket, amik miatt a robotok vakok a tartalmadra.
-* **Szerver architektúra:** Megvizsgáljuk, hogy a hostingod és a kódod kapcsolata megfelelő-e az agresszív skálázáshoz.
+## Amit egy felmérés megvizsgál
 
-Nincs több rizsa. Adatokat elemzünk, problémát lokalizálunk, kódot javítunk. Bumm.
+**Indexelhetőség.** Megtalálja-e a kereső az oldalakat? Van-e sitemap, és jó-e a robots.txt? Nincs-e egy fontos oldalon véletlenül „noindex" jelzés, ami kizárja a keresésből?
+
+**Ismétlődő tartalom.** Ugyanaz az oldal elérhető-e több címen is (például www-vel és anélkül, vagy http-n és https-en)? Van-e kanonikus cím, ami megmondja, melyik az igazi?
+
+**Sebesség és használhatóság.** Hogyan teljesít az oldal a Core Web Vitals mutatókban, különösen telefonon?
+
+**Strukturált adat.** Van-e gépileg olvasható leírás a cégről, a szolgáltatásokról, a cikkekről? Helyes-e?
+
+**Hibás linkek és átirányítások.** Vannak-e nem működő belső linkek, vagy átirányítási láncok, amik lassítják a bejárást?
+
+**Címek és leírások.** Minden oldalnak van-e saját címe és leírása, vagy mindenhol ugyanaz szerepel?
+
+## Mi lesz a felmérés eredménye?
+
+Egy jó felmérés nem egy száz soros, automatikusan generált lista. Hanem egy rangsorolt összefoglaló: mi a hiba, mit okoz, mennyire sürgős, és mi a javítás.
+
+**A legtöbb oldalon néhány hiba felel a gondok nagy részéért.** Azokkal érdemes kezdeni.
+
+## Amit egy felmérés nem tud
+
+Nem garantál helyezést. A technikai alapok szükségesek, de a jó helyezéshez jó tartalom is kell, és a versenytársak sem állnak egy helyben.
+
+Amit tud: eltávolítja azokat az akadályokat, amik miatt a jó tartalom sem érvényesülhet.
+
+---
+
+Ha szeretnéd tudni, mit lát a kereső az oldaladból, [írd le, melyik oldalról van szó](/init). Részletek: [SEO és AEO](/seo).
