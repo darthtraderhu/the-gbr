@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 import { SITE_URL } from "@/lib/site";
@@ -8,6 +7,7 @@ import { fontDisplay, fontBody, fontMono } from "@/lib/fonts";
 
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
+import CookieConsent from "@/app/components/CookieConsent";
 import AiChat from "@/app/components/AiChat";
 import JsonLd from "@/app/components/JsonLd";
 import BackgroundMotif from "@/app/components/BackgroundMotif";
@@ -81,9 +81,13 @@ export default function EnglishRootLayout({
         <AiChat />
 
         <Analytics />
+
+
+        {/* Google Analytics csak hozzájárulás után tölt be (ld. CookieConsent) */}
+
+        <CookieConsent />
       </body>
 
-      <GoogleAnalytics gaId="G-HLK1LCQB5C" />
     </html>
   );
 }

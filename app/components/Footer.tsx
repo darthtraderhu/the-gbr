@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { openCookieSettings } from "@/app/components/CookieConsent";
 import { MAIN_NAV_ITEMS, MAIN_NAV_ITEMS_EN, LEGAL_LINKS } from "@/lib/site-links";
 import huMessages from "@/messages/hu.json";
 import enMessages from "@/messages/en.json";
@@ -105,6 +106,16 @@ export default function Footer() {
                 </Link>
               </li>
             ))}
+            {/* A süti-tájékoztató 4. pontja erre a hivatkozásra utal. */}
+            <li>
+              <button
+                type="button"
+                onClick={openCookieSettings}
+                className="[font-size:var(--text-sm)] text-[var(--mid)] hover:text-[var(--ink)] transition-colors text-left"
+              >
+                {messages.CookieConsent.settings}
+              </button>
+            </li>
           </ul>
         </div>
       </div>

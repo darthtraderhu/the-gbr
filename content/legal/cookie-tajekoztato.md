@@ -34,9 +34,9 @@ A weboldal használatának mérésére szolgálnak: hány látogató érkezik, m
 
 | Szolgáltatás | Cél | Élettartam |
 |---|---|---|
-| *(még nincs bevezetve)* | Látogatottság mérése | — |
+| Google Analytics 4 (`_ga`, `_ga_<azonosító>`) — Google Ireland Limited | Látogatottság mérése | 2 év |
 
-*Ha cookie-mentes analitikai megoldást használunk, ez a szakasz módosul, és hozzájárulás nem szükséges.*
+A Google Analytics csak akkor töltődik be, ha a megjelenő süti-sávon az „Elfogadom” gombra kattint. Elutasítás esetén statisztikai süti nem kerül az eszközére. A tárhelyszolgáltató (Vercel) saját látogatottság-mérése sütit nem használ, ezért ahhoz hozzájárulás nem szükséges.
 
 ### 2.3. Marketing sütik
 

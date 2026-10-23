@@ -130,7 +130,7 @@ Az adatkezelés során az alábbi szolgáltatókat vesszük igénybe. Ezek a szo
 | **OpenAI, L.L.C.** | AI chat funkció működtetése | Egyesült Államok | A chatbe beírt üzenetek |
 | **Supabase, Inc.** | Adatbázis- és tárhelyszolgáltatás *(tervezett)* | EU-s régió (tervezett) | Megkeresések, dokumentumok |
 | **Resend, Inc.** | Tranzakciós e-mailek kiküldése *(tervezett)* | Egyesült Államok | Név, e-mail cím, az üzenet tartalma |
-| *(még nincs kiválasztva)* | Látogatottság-mérés *(tervezett)* | — | — |
+| **Google Ireland Limited** | Látogatottság-mérés (Google Analytics 4), kizárólag hozzájárulás esetén | Írország (EU) | Böngészési adatok, eszköz- és sütiazonosító |
 | Könyvelő | Könyvelési szolgáltatás | Magyarország | Számlázási adatok |
 
 *A „tervezett" jelöléssel ellátott szolgáltatók igénybevételekor ezt a tájékoztatót frissítjük.*
