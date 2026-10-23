@@ -1,6 +1,11 @@
 const WINDOW_MS = 10 * 60 * 1000; // 10 perc
 const MAX_REQUESTS = 3;
 
+type RateLimitOptions = {
+  windowMs?: number;
+  max?: number;
+};
+
 // In-memory ablak IP-nként. Ez a folyamat memóriájában él, tehát egyetlen
 // warm szerverpéldányon belül működik helyesen — több párhuzamos Vercel
 // függvénypéldány esetén nem oszt meg állapotot egymás közt. Amíg nincs
@@ -8,11 +13,16 @@ const MAX_REQUESTS = 3;
 // nem egy garantáltan pontos globális limit.
 const hits = new Map<string, number[]>();
 
-export function isRateLimited(key: string): boolean {
+// A kulcsot végpontonként előtagolni kell (pl. "chat:<ip>"), ha a végpont
+// saját korlátot használ — különben a végpontok egymás keretét fogyasztják.
+export function isRateLimited(
+  key: string,
+  { windowMs = WINDOW_MS, max = MAX_REQUESTS }: RateLimitOptions = {}
+): boolean {
   const now = Date.now();
-  const recent = (hits.get(key) ?? []).filter((t) => now - t < WINDOW_MS);
+  const recent = (hits.get(key) ?? []).filter((t) => now - t < windowMs);
 
-  if (recent.length >= MAX_REQUESTS) {
+  if (recent.length >= max) {
     hits.set(key, recent);
     return true;
   }

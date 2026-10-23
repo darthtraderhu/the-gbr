@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import { z } from "zod";
+import { getClientIp, isRateLimited } from "@/lib/rate-limit";
+import { SITE_URL } from "@/lib/site";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -52,10 +54,50 @@ function buildSystemPrompt(locale: "hu" | "en"): string {
   `;
 }
 
+// Egy valódi beszélgetés 10 perc alatt bőven elfér ennyi üzenetben; e fölött
+// már automatizált hívásra (költség-DoS) utal.
+const CHAT_RATE_LIMIT = { windowMs: 10 * 60 * 1000, max: 20 };
+
+// Csak a saját oldalunkról érkező böngészős hívást szolgáljuk ki. A Vercel
+// preview-domainek és a helyi fejlesztés is átmegy, hogy ott is tesztelhető
+// legyen. Az Origin fejléc hamisítható, ezért ez nem védelem, csak szűrő —
+// a tényleges korlátot a rate limit adja.
+function isAllowedOrigin(origin: string | null): boolean {
+  if (!origin) return false;
+  try {
+    const { hostname, protocol } = new URL(origin);
+    const siteHost = new URL(SITE_URL).hostname;
+    if (hostname === siteHost || hostname === siteHost.replace(/^www\./, "")) return true;
+    if (protocol === "https:" && hostname.endsWith(".vercel.app")) return true;
+    return process.env.NODE_ENV === "development" && hostname === "localhost";
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(req: Request) {
   // A catch ágban is kelleni fog a hibaüzenet nyelvéhez — a try-blokkon
   // kívül deklarálva, hogy elérhető legyen ott is.
   let requestLocale: "hu" | "en" = "hu";
+
+  if (!isAllowedOrigin(req.headers.get("origin"))) {
+    return NextResponse.json({ reply: "Forbidden." }, { status: 403 });
+  }
+
+  // A limit a kérés beolvasása előtt fut, hogy a túlterhelő hívás se
+  // body-feldolgozást, se OpenAI-költséget ne okozzon. A válasz nyelve itt
+  // még nem ismert, ezért kétnyelvű.
+  const ip = getClientIp(req);
+  if (isRateLimited(`chat:${ip}`, CHAT_RATE_LIMIT)) {
+    console.warn("[CHAT-RATE-LIMITED] IP:", ip);
+    return NextResponse.json(
+      {
+        reply:
+          "Túl sok üzenet rövid idő alatt. Kérjük, próbálja újra néhány perc múlva, vagy írjon a gabor@thegbr.eu címre. / Too many messages in a short time. Please try again in a few minutes, or email gabor@thegbr.eu.",
+      },
+      { status: 429 }
+    );
+  }
 
   try {
     const body = await req.json();
@@ -70,8 +112,8 @@ export async function POST(req: Request) {
         {
           reply:
             errorLocale === "en"
-              ? "SYS.ERROR: Invalid request format."
-              : "SYS.ERROR: Érvénytelen kérés formátum.",
+              ? "Invalid request format."
+              : "Érvénytelen kérésformátum.",
         },
         { status: 400 }
       );
@@ -120,8 +162,8 @@ export async function POST(req: Request) {
       {
         reply:
           requestLocale === "en"
-            ? "SYS.ERROR: Couldn't reach the AI service. Please email gabor@thegbr.eu or call +36705139838."
-            : "SYS.ERROR: A neurális kapcsolat megszakadt az OpenAI szervereivel. Kérem, hívja a +36705139838-as forródrótot.",
+            ? "The assistant is unavailable right now. Please email gabor@thegbr.eu or call +36705139838."
+            : "Az asszisztens most nem érhető el. Kérjük, írjon a gabor@thegbr.eu címre, vagy hívja a +36705139838-as számot.",
       },
       { status: 500 }
     );

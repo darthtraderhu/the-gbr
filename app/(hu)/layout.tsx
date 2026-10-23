@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google"; // ÚJ IMPORT: A hivatalos GA4 modul
 import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 import { SITE_URL } from "@/lib/site";
@@ -9,6 +8,7 @@ import { fontDisplay, fontBody, fontMono } from "@/lib/fonts";
 // Importáljuk a komponenseket
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
+import CookieConsent from "@/app/components/CookieConsent";
 import AiChat from "@/app/components/AiChat";
 import JsonLd from "@/app/components/JsonLd";
 import BackgroundMotif from "@/app/components/BackgroundMotif";
@@ -95,10 +95,11 @@ export default function RootLayout({
 
         {/* Vercel Analytics — a hoszting platform saját, cookie nélküli látogatómérése */}
         <Analytics />
+
+        {/* Google Analytics csak hozzájárulás után tölt be (ld. CookieConsent) */}
+        <CookieConsent />
       </body>
 
-      {/* A hivatalos, szupergyors Google Analytics 4 integráció! */}
-      <GoogleAnalytics gaId="G-HLK1LCQB5C" />
     </html>
   );
 }
