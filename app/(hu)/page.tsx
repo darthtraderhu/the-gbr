@@ -4,6 +4,8 @@ import { getSortedPostsData } from "@/lib/posts"; // <-- BEHÚZZUK A MOTORT!
 import { websiteSchema, professionalServiceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, SectionHeader, Rail, Seam, Eyebrow } from "@/app/components/ui";
+import ServiceIndex from "@/app/components/ServiceIndex";
+import { ARZENAL_SECTIONS } from "@/lib/site-links";
 import HeroInstrument from "./HeroInstrument";
 
 // A cikk-ütemezés (lib/posts.ts) miatt a főoldal legutóbbi-cikkek blokkja is
@@ -41,6 +43,7 @@ const DEVELOP_ITEMS = [
   "Telefonra telepíthető webalkalmazás (PWA)",
   "Technikai SEO: sitemap, strukturált adat",
   "Biztonság és teljesítmény alapból",
+  "Akadálymentesítés a WCAG szerint",
   "Arculat, design rendszer, szövegezés",
 ];
 
@@ -50,8 +53,18 @@ const MANAGE_ITEMS = [
   "Tartalom, kampány, mérés",
   "Automatizált tartalommotor",
   "Havi állapotjelentés a weboldalról és a Google-megjelenésről (Pulzus)",
+  "Jogi modul a Pulzushoz: sütik és külső kódok havi figyelése, webjogász partnerrel",
   "Irodai informatika: rendszergazda, hálózat, Microsoft 365",
   "Egy felelős kapcsolattartó",
+];
+
+// A weboldal-átvilágítás fejezetei — ugyanazok, mint a kiküldött riportoké.
+const AUDIT_CHAPTERS = [
+  "Első benyomás és sebesség, mobilon is",
+  "Mit lát a Google és a mesterséges intelligencia (SEO, AEO)",
+  "Használható-e mindenkinek (akadálymentesség)",
+  "Adatkezelés, sütik, hozzájárulás, cégadatok",
+  "Ami kívülről látszik: biztonsági beállítások, elavult elemek",
 ];
 
 const TECH_STACK = [
@@ -325,10 +338,58 @@ export default function Home() {
             </div>
           ))}
         </div>
+        <ServiceIndex
+          eyebrow="Részletesen · nyolc terület"
+          lead="A két dolog nyolc területen áll össze. Mindegyikről bővebben a szolgáltatások oldalon."
+          items={ARZENAL_SECTIONS}
+          basePath="/arzenal"
+        />
       </Rail>
 
-      {/* ===== 05 / STACK — tipográfiai fal ===== */}
-      <Rail label="05 / Stack">
+      {/* ===== 05 / ÁTVILÁGÍTÁS — belépési pont ===== */}
+      <Rail label="05 / Átvilágítás">
+        <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)] grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[var(--space-10)] lg:gap-[var(--space-16)] items-start border-t border-[var(--rule)]">
+          <div>
+            <Eyebrow>Weboldal-átvilágítás</Eyebrow>
+            <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[16ch] text-[var(--ink)]">
+              Mielőtt bármit ajánlanánk, megnézzük, mi van most
+            </h2>
+            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-6)]">
+              A meglévő weboldaladat kívülről vizsgáljuk meg, hozzáférést nem kérünk. Az eredményt
+              írásos riportban kapod meg: mi működik, mi nem, és mit érdemes először javítani.
+            </p>
+            <div className="mt-[var(--space-8)]">
+              <Button asChild>
+                <Link href="/init">Kérj átvilágítást</Link>
+              </Button>
+            </div>
+          </div>
+          <div>
+            <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] mb-[var(--space-4)]">
+              Amit megvizsgálunk
+            </p>
+            <ol className="m-0 p-0 list-none border-t border-[var(--rule)]">
+              {AUDIT_CHAPTERS.map((chapter, i) => (
+                <li
+                  key={chapter}
+                  className="grid grid-cols-[40px_1fr] gap-[var(--space-4)] py-[var(--space-4)] border-b border-[var(--rule)] items-baseline"
+                >
+                  <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--mid)]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="[font-size:var(--text-base)] text-[var(--ink-2)]">{chapter}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)] mt-[var(--space-4)]">
+              Riport PDF-ben · sorrendbe tett teendőlistával
+            </p>
+          </div>
+        </section>
+      </Rail>
+
+      {/* ===== 06 / STACK — tipográfiai fal ===== */}
+      <Rail label="06 / Stack">
         <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)]">
           <Eyebrow>Műszaki alap · amivel dolgozunk</Eyebrow>
           <p className="font-display font-extrabold [font-size:var(--text-wall)] leading-[1.02] tracking-[-0.045em] text-[var(--ink)] [overflow-wrap:anywhere]">
@@ -346,8 +407,8 @@ export default function Home() {
         </section>
       </Rail>
 
-      {/* ===== 06 / MUNKÁK — jegyzék ===== */}
-      <Rail label="06 / Munkák">
+      {/* ===== 07 / MUNKÁK — jegyzék ===== */}
+      <Rail label="07 / Munkák">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Munkák"
@@ -389,8 +450,8 @@ export default function Home() {
 
       <Seam />
 
-      {/* ===== 07 / MIÉRT SZÁMÍT — sötét állítás ===== */}
-      <Rail label="07 / Miért számít" dark>
+      {/* ===== 08 / MIÉRT SZÁMÍT — sötét állítás ===== */}
+      <Rail label="08 / Miért számít" dark>
         <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
           <Eyebrow>Miért számít</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[14ch] text-[var(--ink)]">
@@ -421,8 +482,8 @@ export default function Home() {
 
       <Seam />
 
-      {/* ===== 08 / CSOMAGOK — összehasonlító táblázat ===== */}
-      <Rail label="08 / Csomagok" dark={false}>
+      {/* ===== 09 / CSOMAGOK — összehasonlító táblázat ===== */}
+      <Rail label="09 / Csomagok" dark={false}>
         <section id="packages" className="px-6 py-[var(--space-16)] sm:py-[var(--space-24)]">
           <SectionHeader
             eyebrow="Együttműködés"
@@ -501,8 +562,8 @@ export default function Home() {
         </section>
       </Rail>
 
-      {/* ===== 09 / FOLYAMAT ===== */}
-      <Rail label="09 / Folyamat">
+      {/* ===== 10 / FOLYAMAT ===== */}
+      <Rail label="10 / Folyamat">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Folyamat"
@@ -533,8 +594,8 @@ export default function Home() {
         </div>
       </Rail>
 
-      {/* ===== 10 / ÍRÁSOK — kiemelt + lista ===== */}
-      <Rail label="10 / Írások">
+      {/* ===== 11 / ÍRÁSOK — kiemelt + lista ===== */}
+      <Rail label="11 / Írások">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Írások"
@@ -599,8 +660,8 @@ export default function Home() {
 
       <Seam />
 
-      {/* ===== 11 / KAPCSOLAT — záró CTA ===== */}
-      <Rail label="11 / Kapcsolat" dark>
+      {/* ===== 12 / KAPCSOLAT — záró CTA ===== */}
+      <Rail label="12 / Kapcsolat" dark>
         <section id="contact" className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
           <Eyebrow>Kapcsolat</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-final)] leading-[0.9] tracking-[-0.055em] max-w-[12ch] mb-[var(--space-6)] text-[var(--ink)]">
