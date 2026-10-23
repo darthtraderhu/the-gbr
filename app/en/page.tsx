@@ -46,6 +46,7 @@ export default async function EnglishHome() {
   }[];
   const whyRows = t.raw("whyRows") as { heading: string; body: string }[];
   const auditChapters = t.raw("auditChapters") as string[];
+  const aeoFacts = t.raw("aeoFacts") as { value: string; label: string }[];
   const tServices = await getTranslations({ locale: "en", namespace: "Services" });
   const serviceIndexItems = ARZENAL_SECTIONS_EN.map((item) => ({
     ...item,
@@ -253,8 +254,43 @@ export default async function EnglishHome() {
         </section>
       </Rail>
 
-      {/* ===== 06 / STACK ===== */}
-      <Rail label="06 / Stack">
+      {/* ===== 06 / AI VISIBILITY ===== */}
+      <Rail label="06 / AI visibility">
+        <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)] grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[var(--space-10)] lg:gap-[var(--space-16)] items-start border-t border-[var(--rule)]">
+          <div>
+            <Eyebrow>{t("aeoEyebrow")}</Eyebrow>
+            <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[16ch] text-[var(--ink)]">
+              {t("aeoHeadline")}
+            </h2>
+            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-6)]">
+              {t("aeoIntro")}
+            </p>
+            <p className="[font-size:var(--text-sm)] leading-relaxed text-[var(--mid)] max-w-[46ch] mt-[var(--space-4)]">
+              {t("aeoNote")}
+            </p>
+            <div className="mt-[var(--space-8)]">
+              <Button asChild variant="ghost">
+                <Link href="/en/seo">{t("aeoCta")}</Link>
+              </Button>
+            </div>
+          </div>
+          <dl className="m-0 grid grid-cols-2 gap-px bg-[var(--rule)] border border-[var(--rule)]">
+            {aeoFacts.map((fact) => (
+              <div key={fact.label} className="bg-[var(--panel)] px-[var(--space-5)] py-[var(--space-6)]">
+                <dt className="font-display font-black [font-size:var(--text-3xl)] leading-none tracking-[-0.04em] text-[var(--ink)]">
+                  {fact.value}
+                </dt>
+                <dd className="m-0 mt-[var(--space-3)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
+                  {fact.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      </Rail>
+
+      {/* ===== 07 / STACK ===== */}
+      <Rail label="07 / Stack">
         <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)]">
           <Eyebrow>{t("stackHeadline")}</Eyebrow>
           <p className="font-display font-extrabold [font-size:var(--text-wall)] leading-[1.02] tracking-[-0.045em] text-[var(--ink)] [overflow-wrap:anywhere]">
@@ -266,8 +302,8 @@ export default async function EnglishHome() {
         </section>
       </Rail>
 
-      {/* ===== 07 / WORK ===== */}
-      <Rail label="07 / Work">
+      {/* ===== 08 / WORK ===== */}
+      <Rail label="08 / Work">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader eyebrow={t("workEyebrow")} title={t("workHeadline")} lead={t("workIntro")} />
         </div>
@@ -305,8 +341,8 @@ export default async function EnglishHome() {
 
       <Seam />
 
-      {/* ===== 08 / WHY IT MATTERS ===== */}
-      <Rail label="08 / Why it matters" dark>
+      {/* ===== 09 / WHY IT MATTERS ===== */}
+      <Rail label="09 / Why it matters" dark>
         <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
           <Eyebrow>{t("whyEyebrow")}</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[16ch] text-[var(--ink)]">
@@ -337,8 +373,8 @@ export default async function EnglishHome() {
 
       <Seam />
 
-      {/* ===== 09 / CONTACT ===== */}
-      <Rail label="09 / Contact" dark>
+      {/* ===== 10 / CONTACT ===== */}
+      <Rail label="10 / Contact" dark>
         <section className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
           <Eyebrow>Contact</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-final)] leading-[0.9] tracking-[-0.055em] max-w-[15ch] mb-[var(--space-6)] text-[var(--ink)]">
