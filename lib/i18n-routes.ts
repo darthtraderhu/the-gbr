@@ -26,6 +26,8 @@ export const TRANSLATED_ARTICLES: Record<string, string> = {
   "adatkezelesi-tajekoztato-ami-mast-ir": "privacy-notice-that-describes-another-site",
   "hirdetes-meres-nelkul": "the-ad-was-fine",
   "mit-lat-az-oldaladbol-a-chatgpt": "what-chatgpt-sees-on-your-site",
+  "ki-fer-hozza-a-ceges-fiokokhoz": "who-can-still-log-in",
+  "kie-a-weboldalad": "who-owns-your-website",
 };
 
 export const ARTICLE_HU_SLUG: Record<string, string> = Object.fromEntries(

@@ -94,3 +94,15 @@ export async function getPostData(id: string) {
     ...frontmatter,
   };
 }
+
+// Nyers markdown egy cikkhez — a Facebook-posztoló (app/api/autopilot) ebből
+// írja meg az ajánló szöveget. Az ütemezést a hívó ellenőrzi.
+export function getPostMarkdown(id: string) {
+  const fullPath = path.join(postsDirectory, `${id}.md`);
+  const matterResult = matter(fs.readFileSync(fullPath, "utf8"));
+  return {
+    id,
+    content: matterResult.content,
+    ...postFrontmatterSchema.parse(matterResult.data),
+  };
+}
