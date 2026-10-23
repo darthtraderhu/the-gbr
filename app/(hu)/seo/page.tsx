@@ -347,9 +347,9 @@ export default function SeoAeoPage() {
                   Szolgáltatások | THE GBR
                 </div>
                 <p className="[font-size:var(--text-sm)] text-[var(--ink-2)] m-0">
-                  Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó,
-                  web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Nyolc
-                  terület, házon belül…
+                  Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és
+                  automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus
+                  és irodai IT-üzemeltetés. Kilenc terület, házon belül…
                 </p>
                 <div className="mt-[var(--space-3)] pt-[var(--space-3)] border-t border-[var(--rule-soft)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.12em] uppercase text-[var(--signal-deep)]">
                   Gyakori kérdések · 9 elem megjelenítve

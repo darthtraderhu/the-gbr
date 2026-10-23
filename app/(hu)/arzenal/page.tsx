@@ -8,7 +8,7 @@ import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 export const metadata: Metadata = {
   title: "Szolgáltatások | THE GBR",
   description:
-    "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Nyolc terület, házon belül — B2B ügyfeleknek.",
+    "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, házon belül — B2B ügyfeleknek.",
   alternates: {
     canonical: "/arzenal",
     languages: { hu: "/arzenal", en: "/en/services", "x-default": "/arzenal" },
@@ -16,25 +16,26 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Szolgáltatások | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Nyolc terület, házon belül.",
+      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, házon belül.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Szolgáltatások | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Nyolc terület, házon belül.",
+      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, házon belül.",
   },
 };
 
 const INDEX_ITEMS = [
   { id: "web", n: "01", name: "Web és webshop" },
   { id: "ads", n: "02", name: "Performance marketing" },
-  { id: "ai", n: "03", name: "AI és chatbot" },
-  { id: "video", n: "04", name: "Videó és tartalom" },
-  { id: "ops", n: "05", name: "Web-üzemeltetés és fejlesztés" },
-  { id: "access", n: "06", name: "Akadálymentesítés" },
-  { id: "pulzus", n: "07", name: "Pulzus" },
-  { id: "it", n: "08", name: "IT-üzemeltetés" },
+  { id: "software", n: "03", name: "Egyedi szoftver és automatizáció" },
+  { id: "ai", n: "04", name: "AI és chatbot" },
+  { id: "video", n: "05", name: "Videó és tartalom" },
+  { id: "ops", n: "06", name: "Web-üzemeltetés és fejlesztés" },
+  { id: "access", n: "07", name: "Akadálymentesítés" },
+  { id: "pulzus", n: "08", name: "Pulzus" },
+  { id: "it", n: "09", name: "IT-üzemeltetés" },
 ];
 
 // Egész mondatos leírás szolgáltatásonként — a Service séma description
@@ -52,6 +53,12 @@ const SERVICE_SCHEMA_ITEMS = [
     name: "Performance marketing",
     description:
       "Google és Meta hirdetéskezelés, ahol a kattintástól a megkeresésig követjük a konverziót, és heti jelentésben számolunk el.",
+  },
+  {
+    id: "software",
+    name: "Egyedi szoftver és automatizáció",
+    description:
+      "Üzleti folyamatok automatizálása és egyedi szoftverfejlesztés: a webshop, a számlázó, a CRM és a táblázatok összekötése kész automatizációs eszközzel vagy saját kóddal, belső rendszerek és ügyfélportálok fejlesztése, naplózással, hibariasztással és dokumentált átadással.",
   },
   {
     id: "ai",
@@ -166,7 +173,25 @@ const IT_FEATURES = [
   "Microsoft 365 és Teams: távmunka és távoktatás bevezetése, üzemeltetése",
   "Céges mobilflotta: díjcsomagok és költségek átnézése",
   "Meglévő szoftverek és eszközök üzemeltetése",
-  "Egyedi szoftver és belső rendszerek fejlesztése",
+];
+
+const SOFTWARE_FEATURES = [
+  "Folyamatfelmérés: mi megy ma kézzel, és mit érdemes automatizálni",
+  "Rendszerek összekötése: webshop, számlázó, CRM, e-mail, táblázat",
+  "Automatizáció kész eszközzel vagy saját kóddal, amelyik hosszabb távon olcsóbban fenntartható",
+  "Egyedi belső rendszer, ügyfélportál, adminfelület",
+  "Naplózás és hibariasztás: kiderül, ha valami nem futott le",
+  "Átadás dokumentációval, hogy ne csak mi értsük",
+  "Üzemeltetés és továbbfejlesztés, ha kéri",
+];
+
+const SOFTWARE_LOG = [
+  { t: "08:12", msg: "Új rendelés érkezett a webshopba" },
+  { t: "08:12", msg: "Számla kiállítva a számlázóban" },
+  { t: "08:13", msg: "Visszaigazoló e-mail elküldve a vevőnek" },
+  { t: "08:13", msg: "Rendelés rögzítve a raktártáblázatban" },
+  { t: "09:40", msg: "A számlázó nem válaszolt — újrapróbálás 5 perc múlva, riasztás elküldve" },
+  { t: "09:45", msg: "Újrapróbálás sikeres, a tétel pótolva" },
 ];
 
 const IT_SAMPLE_ROWS = [
@@ -266,6 +291,16 @@ const FAQ_ITEMS = [
     question: "Kis irodának is érdemes külső rendszergazda?",
     answer:
       "Igen, gyakran éppen nekik. Ahol nincs saját informatikus, ott jellemzően valamelyik munkatárs viszi „mellékesen”, és ez addig működik, amíg nincs baj. Felméréssel kezdünk, és megmondjuk, mekkora rendszeres munkát kíván az önöké. Ha keveset, azt is.",
+  },
+  {
+    question: "Le kell cserélnünk a meglévő rendszereinket az automatizációhoz?",
+    answer:
+      "Általában nem. Azt kötjük össze, ami már megvan: a webshopot, a számlázót, a táblázatokat. Új szoftvert akkor javaslunk, ha a meglévő nem tudja, amire szükség van — és ezt a felmérésben írásban meg is indokoljuk.",
+  },
+  {
+    question: "Mi történik, ha egy automatizáció leáll?",
+    answer:
+      "Nem csendben áll le. Minden futás naplózódik, hiba esetén riasztás megy a felelősnek — nekünk, ha az üzemeltetést is ránk bízza, vagy az önök kijelölt munkatársának. A kimaradt tételek a napló alapján pótolhatók.",
   },
 ];
 
@@ -378,8 +413,8 @@ export default function Arzenal() {
             Szolgáltatások<span className="text-[var(--signal)]">.</span>
           </h1>
           <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-8)]">
-            Nyolc terület, amit házon belül végzünk. Ha egy projekthez nem mind a nyolc kell, nem
-            is adjuk el mind a nyolcat.
+            Kilenc terület, amit házon belül végzünk. Ha egy projekthez nem mind a kilenc kell, nem
+            is adjuk el mind a kilencet.
           </p>
           <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-5)]">
             Fejlesztési partnerként is dolgozunk — magyar és nyugat-európai ügynökségeknek
@@ -480,10 +515,53 @@ export default function Arzenal() {
         />
       </Rail>
 
-      {/* ===== 03 AI ===== */}
-      <Rail label="03 / AI">
+      {/* ===== 03 EGYEDI SZOFTVER ÉS AUTOMATIZÁCIÓ ===== */}
+      <Rail label="03 / Szoftver">
         <ServiceBlock
+          id="software"
           n="03"
+          label="Szoftver és automatizáció"
+          title="Ami ma kézzel megy, holnap magától"
+          paragraphs={[
+            "A legtöbb cégnél van valaki, aki naponta átmásol valamit egyik helyről a másikra: a webshop rendeléseit a számlázóba, az űrlapról érkező megkereséseket egy táblázatba, a táblázatot a havi jelentésbe. Ez nem hiba, csak drága — és éppen akkor marad el, amikor a legnagyobb a hajtás.",
+            <>
+              <strong className="text-[var(--ink)]">
+                Ezeket a rendszereket összekötjük, hogy a munka magától fusson.
+              </strong>{" "}
+              Ahol elég egy kész automatizációs eszköz, azt használjuk; ahol nem, saját kódot
+              írunk. Ha egy folyamathoz nincs megfelelő szoftver, megépítjük: belső rendszert,
+              ügyfélportált, adminfelületet.
+            </>,
+            "Felméréssel kezdünk: írásban megkapja, melyik folyamatot érdemes automatizálni, és melyiket nem. Minden automatizáció naplóz és hiba esetén riaszt, mert egy csendben leállt folyamat rosszabb, mint a kézi munka.",
+          ]}
+          features={SOFTWARE_FEATURES}
+          device={
+            <DevFrame header="Egy automatizáció naplója" headerRight="Minta">
+              <div className="[font-family:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--ink-2)]">
+                {SOFTWARE_LOG.map((line, i) => (
+                  <div
+                    key={`${line.t}-${line.msg}`}
+                    className={`grid grid-cols-[74px_1fr] gap-[var(--space-4)] py-[var(--space-2)] ${
+                      i < SOFTWARE_LOG.length - 1 ? "border-b border-[var(--rule-soft)]" : ""
+                    }`}
+                  >
+                    <b className="text-[var(--signal-deep)] font-medium">{line.t}</b>
+                    <span>{line.msg}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
+                Szemléltetés. A lépések a folyamattól függenek.
+              </p>
+            </DevFrame>
+          }
+        />
+      </Rail>
+
+      {/* ===== 04 AI ===== */}
+      <Rail label="04 / AI">
+        <ServiceBlock
+          n="04"
           label="AI és chatbot"
           id="ai"
           title="AI, ami a helyén van"
@@ -527,10 +605,10 @@ export default function Arzenal() {
         />
       </Rail>
 
-      {/* ===== 04 VIDEÓ ===== */}
-      <Rail label="04 / Videó">
+      {/* ===== 05 VIDEÓ ===== */}
+      <Rail label="05 / Videó">
         <ServiceBlock
-          n="04"
+          n="05"
           label="Videó és tartalom"
           title="A weboldal önmagában nem elég"
           id="video"
@@ -565,11 +643,11 @@ export default function Arzenal() {
         />
       </Rail>
 
-      {/* ===== 05 ÜZEMELTETÉS ===== */}
-      <Rail label="05 / Web-üzemeltetés">
+      {/* ===== 06 ÜZEMELTETÉS ===== */}
+      <Rail label="06 / Web-üzemeltetés">
         <ServiceBlock
           id="ops"
-          n="05"
+          n="06"
           label="Web-üzemeltetés"
           title="Az átadás nem a vége"
           paragraphs={[
@@ -610,11 +688,11 @@ export default function Arzenal() {
         />
       </Rail>
 
-      {/* ===== 06 AKADÁLYMENTESÍTÉS ===== */}
-      <Rail label="06 / Akadálymentesítés">
+      {/* ===== 07 AKADÁLYMENTESÍTÉS ===== */}
+      <Rail label="07 / Akadálymentesítés">
         <ServiceBlock
           id="access"
-          n="06"
+          n="07"
           label="Akadálymentesítés"
           title="Van, aki nem tudja használni az oldalát"
           paragraphs={[
@@ -689,11 +767,11 @@ export default function Arzenal() {
         />
       </Rail>
 
-      {/* ===== 07 PULZUS ===== */}
-      <Rail label="07 / Pulzus">
+      {/* ===== 08 PULZUS ===== */}
+      <Rail label="08 / Pulzus">
         <ServiceBlock
           id="pulzus"
-          n="07"
+          n="08"
           label="Pulzus"
           title="Havonta egy levél arról, hogyan látja önt az internet"
           paragraphs={[
@@ -793,11 +871,11 @@ export default function Arzenal() {
         />
       </Rail>
 
-      {/* ===== 08 IT-ÜZEMELTETÉS ===== */}
-      <Rail label="08 / IT">
+      {/* ===== 09 IT-ÜZEMELTETÉS ===== */}
+      <Rail label="09 / IT">
         <ServiceBlock
           id="it"
-          n="08"
+          n="09"
           label="IT-üzemeltetés"
           title="Az irodai informatika, amire nem kell gondolnia"
           paragraphs={[
