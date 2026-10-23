@@ -10,9 +10,16 @@ import { usePathname } from "next/navigation";
 export default function BackgroundMotif() {
   const pathname = usePathname();
 
-  // Az /init (és angolul a /en/contact) fókuszált folyamat — ott, ahogy a
-  // Navbar és a Footer, a motívum sem jelenik meg.
-  if (pathname === "/init" || pathname === "/en/contact") return null;
+  // Az /init (és angolul a /en/contact) fókuszált folyamat: nincs rajta
+  // Navbar és Footer, ezért ott a motívum kisebb és feljebb ül.
+  const compact = pathname === "/init" || pathname === "/en/contact";
 
-  return <div aria-hidden="true" className="background-motif" />;
+  return (
+    <div
+      aria-hidden="true"
+      className={
+        compact ? "background-motif background-motif--compact" : "background-motif"
+      }
+    />
+  );
 }
