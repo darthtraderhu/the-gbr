@@ -34,4 +34,4 @@ Sokszor nem kell hozzá egyedi fejlesztés. Az automatizációs szolgáltatások
 
 ---
 
-Ha szeretnéd tudni, nálad melyik feladat automatizálható a legkönnyebben, [írd le, mi visz el sok időt](/init). Részletek: [AI és chatbot](/arzenal#ai).
+Ha szeretnéd tudni, nálad melyik feladat automatizálható a legkönnyebben, [írd le, mi visz el sok időt](/init). Részletek: [Egyedi szoftver és automatizáció](/arzenal#software).
