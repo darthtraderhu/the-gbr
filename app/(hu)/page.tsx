@@ -60,6 +60,15 @@ const MANAGE_ITEMS = [
 ];
 
 // A weboldal-átvilágítás fejezetei — ugyanazok, mint a kiküldött riportoké.
+// Az AI-láthatóság szekció tényei — a /seo oldal AEO-felmérésével egyeznek
+// (AEO_CHECKS: 8 pont, AI_TEST_FACTS: felületek, ismétlés, átadás).
+const AEO_FACTS = [
+  { value: "8", label: "pont, amit az oldaladon megnézünk" },
+  { value: "5", label: "AI-felület, ahol rákérdezünk" },
+  { value: "3×", label: "legalább minden kérdés" },
+  { value: "72 óra", label: "alatt kész az írásos eredmény" },
+];
+
 const AUDIT_CHAPTERS = [
   "Első benyomás és sebesség, mobilon is",
   "Mit lát a Google és a mesterséges intelligencia (SEO, AEO)",
@@ -403,8 +412,46 @@ export default function Home() {
         </section>
       </Rail>
 
-      {/* ===== 06 / STACK — tipográfiai fal ===== */}
-      <Rail label="06 / Stack">
+      {/* ===== 06 / AI-LÁTHATÓSÁG — AEO ===== */}
+      <Rail label="06 / AI-láthatóság">
+        <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)] grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[var(--space-10)] lg:gap-[var(--space-16)] items-start border-t border-[var(--rule)]">
+          <div>
+            <Eyebrow>AI-láthatóság (AEO)</Eyebrow>
+            <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[16ch] text-[var(--ink)]">
+              Ha az AI-t kérdezik, a te cégedet említi?
+            </h2>
+            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-6)]">
+              Egyre több vevő nem a Google-ben keres szállítót, hanem megkérdezi a ChatGPT-t. Megnézzük,
+              mit lát belőled egy AI, többször és több felületen rákérdezünk, és leírjuk, mit kell
+              javítani, hogy legyen mit idéznie rólad.
+            </p>
+            <p className="[font-size:var(--text-sm)] leading-relaxed text-[var(--mid)] max-w-[46ch] mt-[var(--space-4)]">
+              Azt, hogy egy AI téged ajánl, senki nem tudja garantálni. Azt igen, hogy az oldalad
+              olvasható legyen számára.
+            </p>
+            <div className="mt-[var(--space-8)]">
+              <Button asChild variant="ghost">
+                <Link href="/seo">Hogyan csináljuk &rarr;</Link>
+              </Button>
+            </div>
+          </div>
+          <dl className="m-0 grid grid-cols-2 gap-px bg-[var(--rule)] border border-[var(--rule)]">
+            {AEO_FACTS.map((fact) => (
+              <div key={fact.label} className="bg-[var(--panel)] px-[var(--space-5)] py-[var(--space-6)]">
+                <dt className="font-display font-black [font-size:var(--text-3xl)] leading-none tracking-[-0.04em] text-[var(--ink)]">
+                  {fact.value}
+                </dt>
+                <dd className="m-0 mt-[var(--space-3)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
+                  {fact.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      </Rail>
+
+      {/* ===== 07 / STACK — tipográfiai fal ===== */}
+      <Rail label="07 / Stack">
         <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)]">
           <Eyebrow>Műszaki alap · amivel dolgozunk</Eyebrow>
           <p className="font-display font-extrabold [font-size:var(--text-wall)] leading-[1.02] tracking-[-0.045em] text-[var(--ink)] [overflow-wrap:anywhere]">
@@ -422,8 +469,8 @@ export default function Home() {
         </section>
       </Rail>
 
-      {/* ===== 07 / MUNKÁK — jegyzék ===== */}
-      <Rail label="07 / Munkák">
+      {/* ===== 08 / MUNKÁK — jegyzék ===== */}
+      <Rail label="08 / Munkák">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Munkák"
@@ -465,8 +512,8 @@ export default function Home() {
 
       <Seam />
 
-      {/* ===== 08 / MIÉRT SZÁMÍT — sötét állítás ===== */}
-      <Rail label="08 / Miért számít" dark>
+      {/* ===== 09 / MIÉRT SZÁMÍT — sötét állítás ===== */}
+      <Rail label="09 / Miért számít" dark>
         <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
           <Eyebrow>Miért számít</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[14ch] text-[var(--ink)]">
@@ -497,8 +544,8 @@ export default function Home() {
 
       <Seam />
 
-      {/* ===== 09 / CSOMAGOK — összehasonlító táblázat ===== */}
-      <Rail label="09 / Csomagok" dark={false}>
+      {/* ===== 10 / CSOMAGOK — összehasonlító táblázat ===== */}
+      <Rail label="10 / Csomagok" dark={false}>
         <section id="packages" className="px-6 py-[var(--space-16)] sm:py-[var(--space-24)]">
           <SectionHeader
             eyebrow="Együttműködés"
@@ -577,8 +624,8 @@ export default function Home() {
         </section>
       </Rail>
 
-      {/* ===== 10 / FOLYAMAT ===== */}
-      <Rail label="10 / Folyamat">
+      {/* ===== 11 / FOLYAMAT ===== */}
+      <Rail label="11 / Folyamat">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Folyamat"
@@ -609,8 +656,8 @@ export default function Home() {
         </div>
       </Rail>
 
-      {/* ===== 11 / ÍRÁSOK — kiemelt + lista ===== */}
-      <Rail label="11 / Írások">
+      {/* ===== 12 / ÍRÁSOK — kiemelt + lista ===== */}
+      <Rail label="12 / Írások">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Írások"
@@ -675,8 +722,8 @@ export default function Home() {
 
       <Seam />
 
-      {/* ===== 12 / KAPCSOLAT — záró CTA ===== */}
-      <Rail label="12 / Kapcsolat" dark>
+      {/* ===== 13 / KAPCSOLAT — záró CTA ===== */}
+      <Rail label="13 / Kapcsolat" dark>
         <section id="contact" className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
           <Eyebrow>Kapcsolat</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-final)] leading-[0.9] tracking-[-0.055em] max-w-[12ch] mb-[var(--space-6)] text-[var(--ink)]">

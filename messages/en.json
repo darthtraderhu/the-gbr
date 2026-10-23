@@ -169,6 +169,17 @@
       "What's visible from outside: security settings, outdated components"
     ],
     "auditDeliverable": "PDF report · with a prioritised to-do list",
+    "aeoEyebrow": "AI visibility (AEO)",
+    "aeoHeadline": "When people ask an AI, does it mention you?",
+    "aeoIntro": "More buyers skip Google and ask ChatGPT for a supplier. We check what an AI can see of your site, ask it repeatedly on several platforms, and write down what needs fixing so it has something to cite.",
+    "aeoNote": "Nobody can guarantee an AI will recommend you. We can make sure your site is readable to it.",
+    "aeoCta": "How we do it →",
+    "aeoFacts": [
+      { "value": "8", "label": "checks on your site" },
+      { "value": "5", "label": "AI platforms we ask" },
+      { "value": "3×", "label": "each question, at least" },
+      { "value": "72 h", "label": "to a written result" }
+    ],
     "auditCta": "Request an audit",
     "stackEyebrow": "STACK",
     "stackHeadline": "What we work with",
