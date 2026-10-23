@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
-import OpenAI from "openai";
-import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 import { SITE_URL } from "@/lib/site";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// A kulcsot az ANTHROPIC_API_KEY környezeti változóból olvassa.
+const anthropic = new Anthropic();
+
+const CHAT_MODEL = "claude-opus-5-5";
 
 // Bejövő kérés-séma: role-whitelist (csak "user"/"ai"), üzenethossz- és
 // history-méret-korlát, hogy a végpont ne legyen nyitott költség-DoS vektor.
@@ -85,7 +85,7 @@ export async function POST(req: Request) {
   }
 
   // A limit a kérés beolvasása előtt fut, hogy a túlterhelő hívás se
-  // body-feldolgozást, se OpenAI-költséget ne okozzon. A válasz nyelve itt
+  // body-feldolgozást, se API-költséget ne okozzon. A válasz nyelve itt
   // még nem ismert, ezért kétnyelvű.
   const ip = getClientIp(req);
   if (isRateLimited(`chat:${ip}`, CHAT_RATE_LIMIT)) {
@@ -124,33 +124,56 @@ export async function POST(req: Request) {
 
     const systemPrompt = buildSystemPrompt(locale);
 
-    // Előző üzenetek formázása az OpenAI-nak (hogy emlékezzen a beszélgetésre)
-    const formattedHistory: ChatCompletionMessageParam[] = history.map((msg) => ({
+    // Előző üzenetek formázása (hogy emlékezzen a beszélgetésre). A kliens
+    // history-ja a nyitó AI-üdvözléssel kezdődik, az API viszont felhasználói
+    // üzenettel kezdődő beszélgetést vár — ezért a vezető AI-üzeneteket
+    // kihagyjuk.
+    const firstUserIndex = history.findIndex((msg) => msg.sender === "user");
+    const formattedHistory: Anthropic.Beta.BetaMessageParam[] = (
+      firstUserIndex === -1 ? [] : history.slice(firstUserIndex)
+    ).map((msg) => ({
       role: msg.sender === "ai" ? "assistant" : "user",
       content: msg.text,
     }));
 
-    // OpenAI API hívás (gpt-3.5-turbo a leggyorsabb és költséghatékonyabb a chathez)
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        { role: "system", content: systemPrompt },
-        ...formattedHistory,
-        { role: "user", content: message },
-      ],
-      temperature: 0.7, // Kreativitás (0.7 pont jó egy asszisztensnek)
-      max_tokens: 200, // Ne írjon regényeket
+    // Alacsony effort: eligazító chat, rövid válaszokkal. A "default"
+    // fallback-lánc egy biztonsági elutasítás esetén ugyanazon a híváson
+    // belül egy másik modellel válaszol, ahelyett hogy a látogató üres
+    // választ kapna.
+    const response = await anthropic.beta.messages.create({
+      model: CHAT_MODEL,
+      max_tokens: 2048,
+      system: systemPrompt,
+      output_config: { effort: "low" },
+      betas: ["server-side-fallback-2026-07-01"],
+      fallbacks: "default",
+      messages: [...formattedHistory, { role: "user", content: message }],
     });
 
-    return NextResponse.json({ reply: response.choices[0].message.content });
+    const reply = response.content
+      .filter((block): block is Anthropic.Beta.BetaTextBlock => block.type === "text")
+      .map((block) => block.text)
+      .join("")
+      .trim();
+
+    // Ha a teljes lánc elutasított, vagy nem jött szöveg, ne üres buborék
+    // jelenjen meg, hanem az emberi elérhetőség.
+    if (response.stop_reason === "refusal" || !reply) {
+      return NextResponse.json({
+        reply:
+          locale === "en"
+            ? "I can't help with that here. Please email gabor@thegbr.eu or call +36705139838."
+            : "Ebben itt nem tudok segíteni. Kérjük, írjon a gabor@thegbr.eu címre, vagy hívja a +36705139838-as számot.",
+      });
+    }
+
+    return NextResponse.json({ reply });
   } catch (error) {
-    // Strukturált naplózás: OpenAI API-hiba esetén a státuszkód, hibakód és
-    // típus is látszik a szerver logban, nem csak egy generikus Error-dump.
-    if (error instanceof OpenAI.APIError) {
-      console.error("OpenAI API hiba:", {
+    // Strukturált naplózás: API-hiba esetén a státuszkód és a kérés-azonosító
+    // is látszik a szerver logban, nem csak egy generikus Error-dump.
+    if (error instanceof Anthropic.APIError) {
+      console.error("Anthropic API hiba:", {
         status: error.status,
-        code: error.code,
-        type: error.type,
         message: error.message,
         requestID: error.requestID,
       });

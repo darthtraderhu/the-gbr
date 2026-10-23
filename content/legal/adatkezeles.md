@@ -64,9 +64,9 @@ A weboldalon mesterséges intelligenciára épülő chat funkció működik. A f
 | **Kezelt adatok** | A chatbe beírt üzenetek teljes tartalma, a beszélgetés menete, időpont, technikai azonosítók |
 | **Jogalap** | GDPR 6. cikk (1) f) — jogos érdek: hatékony ügyfélkommunikáció és tájékoztatás biztosítása |
 | **Megőrzés** | 30 nap |
-| **Adattovábbítás** | A beírt üzenetek feldolgozás céljából továbbításra kerülnek az **OpenAI, L.L.C.** (Egyesült Államok) részére. Részletek az 5. és 6. pontban. |
+| **Adattovábbítás** | A beírt üzenetek feldolgozás céljából továbbításra kerülnek az **Anthropic, PBC** (Egyesült Államok) részére. Részletek az 5. és 6. pontban. |
 
-> **Fontos figyelmeztetés:** Kérjük, hogy a chatbe **ne írjon be személyes adatot**, sem a sajátját, sem harmadik személyét, és ne osszon meg bizalmas vagy üzleti titoknak minősülő információt. Amennyiben ilyet ír be, az továbbításra kerül az OpenAI részére. A chat nem alkalmas ajánlatkérésre — erre a kapcsolatfelvételi űrlap szolgál.
+> **Fontos figyelmeztetés:** Kérjük, hogy a chatbe **ne írjon be személyes adatot**, sem a sajátját, sem harmadik személyét, és ne osszon meg bizalmas vagy üzleti titoknak minősülő információt. Amennyiben ilyet ír be, az továbbításra kerül az Anthropic részére. A chat nem alkalmas ajánlatkérésre — erre a kapcsolatfelvételi űrlap szolgál.
 
 **Automatizált döntéshozatal:** A chat funkció nem hoz az érintettre nézve joghatással járó vagy őt hasonlóképpen jelentős mértékben érintő automatizált döntést. Profilalkotás nem történik.
 
@@ -127,7 +127,7 @@ Az adatkezelés során az alábbi szolgáltatókat vesszük igénybe. Ezek a szo
 |---|---|---|---|
 | **Vercel Inc.** | Tárhely- és üzemeltetési szolgáltatás | Egyesült Államok | A weboldal működéséhez szükséges valamennyi adat, szerverlogok |
 | **Formspree, Inc.** | Kapcsolatfelvételi űrlap feldolgozása *(átmeneti megoldás)* | Egyesült Államok | Az űrlapon megadott adatok |
-| **OpenAI, L.L.C.** | AI chat funkció működtetése | Egyesült Államok | A chatbe beírt üzenetek |
+| **Anthropic, PBC** | AI chat funkció működtetése | Egyesült Államok | A chatbe beírt üzenetek |
 | **Supabase, Inc.** | Adatbázis- és tárhelyszolgáltatás *(tervezett)* | EU-s régió (tervezett) | Megkeresések, dokumentumok |
 | **Resend, Inc.** | Tranzakciós e-mailek kiküldése *(tervezett)* | Egyesült Államok | Név, e-mail cím, az üzenet tartalma |
 | **Google Ireland Limited** | Látogatottság-mérés (Google Analytics 4), kizárólag hozzájárulás esetén | Írország (EU) | Böngészési adatok, eszköz- és sütiazonosító |
