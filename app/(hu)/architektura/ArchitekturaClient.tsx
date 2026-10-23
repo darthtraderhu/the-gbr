@@ -163,7 +163,7 @@ const PACKAGES = [
     tag: "Folyamatos",
     hot: false,
     name: "Pulzus",
-    desc: "Ha van már működő oldala, és csak azt szeretné tudni, hogy rendben van-e. Havi figyelés és egy levél arról, mi változott.",
+    desc: "Ha van már működő oldalad, és csak azt szeretnéd tudni, hogy rendben van-e. Havi figyelés és egy levél arról, mi változott.",
     price: "Havidíjas",
     priceNote: "havonta, felmondható",
     items: [

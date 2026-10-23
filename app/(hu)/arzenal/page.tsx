@@ -154,7 +154,7 @@ const PULZUS_FEATURES = [
   "Indexeltség: látszik-e az oldal a keresőben",
   "Google-profil: új értékelések, változó átlag",
   "Értékelés-kérés a vásárlás után",
-  "Válaszjavaslat az értékelésekre — a küldés az öné",
+  "Válaszjavaslat az értékelésekre — a küldés a tiéd",
   "Jogi modul: sütik és külső kódok havi feltérképezése, változásjelzéssel",
   "Fut-e mérő- vagy hirdetési kód a süti-hozzájárulás előtt",
   "Jogi dokumentumok felülvizsgálata webjogász partnerrel",
@@ -182,7 +182,7 @@ const SOFTWARE_FEATURES = [
   "Egyedi belső rendszer, ügyfélportál, adminfelület",
   "Naplózás és hibariasztás: kiderül, ha valami nem futott le",
   "Átadás dokumentációval, hogy ne csak mi értsük",
-  "Üzemeltetés és továbbfejlesztés, ha kéri",
+  "Üzemeltetés és továbbfejlesztés, ha kéred",
 ];
 
 const SOFTWARE_LOG = [
@@ -275,12 +275,12 @@ const FAQ_ITEMS = [
   {
     question: "Az akadálymentesítési felmérés garantálja a jogi megfelelést?",
     answer:
-      "Nem. A megfelelés jogi minősítés, arról ügyvéd nyilatkozik. Mi a technikai akadályokat mérjük fel, dokumentáljuk és szüntetjük meg — a jogi tanácsadást a saját jogászával intézi.",
+      "Nem. A megfelelés jogi minősítés, arról ügyvéd nyilatkozik. Mi a technikai akadályokat mérjük fel, dokumentáljuk és szüntetjük meg — a jogi tanácsadást a saját jogászoddal intézed.",
   },
   {
     question: "A Pulzus mit csinál, ha talál valami rosszat?",
     answer:
-      "Nem javít automatikusan. A havi levélben megmondja, mi változott és mit érdemes tenni — a javítás külön megrendelés, vagy a Pulzus havi órakeretének terhére megy, ha azt választja.",
+      "Nem javít automatikusan. A havi levélben megmondja, mi változott és mit érdemes tenni — a javítás külön megrendelés, vagy a Pulzus havi órakeretének terhére megy, ha azt választod.",
   },
   {
     question: "A Pulzus jogi modulja garantálja a jogi megfelelést?",
@@ -300,7 +300,7 @@ const FAQ_ITEMS = [
   {
     question: "Mi történik, ha egy automatizáció leáll?",
     answer:
-      "Nem csendben áll le. Minden futás naplózódik, hiba esetén riasztás megy a felelősnek — nekünk, ha az üzemeltetést is ránk bízza, vagy az önök kijelölt munkatársának. A kimaradt tételek a napló alapján pótolhatók.",
+      "Nem csendben áll le. Minden futás naplózódik, hiba esetén riasztás megy a felelősnek — nekünk, ha az üzemeltetést is ránk bízod, vagy a kijelölt munkatársatoknak. A kimaradt tételek a napló alapján pótolhatók.",
   },
 ];
 
@@ -532,7 +532,7 @@ export default function Arzenal() {
               írunk. Ha egy folyamathoz nincs megfelelő szoftver, megépítjük: belső rendszert,
               ügyfélportált, adminfelületet.
             </>,
-            "Felméréssel kezdünk: írásban megkapja, melyik folyamatot érdemes automatizálni, és melyiket nem. Minden automatizáció naplóz és hiba esetén riaszt, mert egy csendben leállt folyamat rosszabb, mint a kézi munka.",
+            "Felméréssel kezdünk: írásban megkapod, melyik folyamatot érdemes automatizálni, és melyiket nem. Minden automatizáció naplóz és hiba esetén riaszt, mert egy csendben leállt folyamat rosszabb, mint a kézi munka.",
           ]}
           features={SOFTWARE_FEATURES}
           device={
@@ -694,7 +694,7 @@ export default function Arzenal() {
           id="access"
           n="07"
           label="Akadálymentesítés"
-          title="Van, aki nem tudja használni az oldalát"
+          title="Van, aki nem tudja használni az oldaladat"
           paragraphs={[
             "Aki képernyőolvasót használ, aki csak billentyűzettel navigál, akinek gyengébb a látása vagy remeg a keze — ők ugyanúgy vásárolnának, csak sokszor nem tudnak. Nem azért, mert az oldal rossz, hanem mert senki nem gondolt rájuk a tervezésekor.",
             <>
@@ -711,7 +711,7 @@ export default function Arzenal() {
               <strong className="text-[var(--ink)]">
                 a technikai akadályokat felmérjük, dokumentáljuk és megszüntetjük
               </strong>{" "}
-              — és hogy a végén írásban megkapja, mi változott.
+              — és hogy a végén írásban megkapod, mi változott.
             </>,
             <>
               Részletesebben írtunk arról,{" "}
@@ -773,7 +773,7 @@ export default function Arzenal() {
           id="pulzus"
           n="08"
           label="Pulzus"
-          title="Havonta egy levél arról, hogyan látja önt az internet"
+          title="Havonta egy levél arról, hogyan lát téged az internet"
           paragraphs={[
             "A legtöbb weboldal elkészül, aztán senki nem nézi meg többé. Ha lelassul, ha lejár egy tanúsítvány, ha elromlik a kapcsolati űrlap — az derül ki, amikor egy ügyfél szól. Vagy nem derül ki.",
             <>
@@ -789,8 +789,8 @@ export default function Arzenal() {
               jön.
             </>,
             <>
-              <strong className="text-[var(--ink)]">A választ a gép írja, de ön küldi.</strong>{" "}
-              Elkészítjük a válaszjavaslatot, de az ön nevében soha nem posztolunk automatikusan.
+              <strong className="text-[var(--ink)]">A választ a gép írja, de te küldöd.</strong>{" "}
+              Elkészítjük a válaszjavaslatot, de a nevedben soha nem posztolunk automatikusan.
               Egy elhamarkodott válasz többet árt, mint amennyit tíz köszönőlevél használ.
             </>,
             <>
@@ -823,8 +823,8 @@ export default function Arzenal() {
                     Egész hónapban elérhető volt. A betöltési idő 2,1 mp — ez rendben van.
                   </p>
                   <p className="m-0 leading-relaxed text-[var(--attention)]">
-                    ⚠️ Az SSL-tanúsítványa 24 nap múlva lejár. Ha nem újul meg, a böngészők „nem
-                    biztonságos” jelzést tesznek az oldalára.
+                    ⚠️ Az SSL-tanúsítványod 24 nap múlva lejár. Ha nem újul meg, a böngészők „nem
+                    biztonságos” jelzést tesznek az oldaladra.
                   </p>
                 </div>
                 <div>
@@ -855,16 +855,16 @@ export default function Arzenal() {
                 </div>
                 <div>
                   <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
-                    Amit ebben a hónapban tehet
+                    Amit ebben a hónapban tehetsz
                   </p>
                   <ol className="m-0 pl-[1.1em] space-y-[var(--space-1)]">
-                    <li>SSL megújítása — intézzük, ha kéri</li>
+                    <li>SSL megújítása — intézzük, ha kéred</li>
                     <li>Nyitvatartás frissítése a Google-profilban a hosszú hétvégére</li>
                   </ol>
                 </div>
               </div>
               <p className="mt-[var(--space-4)] pt-[var(--space-4)] border-t border-[var(--rule-soft)] [font-size:var(--text-sm)] text-[var(--mid)]">
-                Minta. A tényleges levél az ön adataiból áll össze.
+                Minta. A tényleges levél a te adataidból áll össze.
               </p>
             </DevFrame>
           }
@@ -877,7 +877,7 @@ export default function Arzenal() {
           id="it"
           n="09"
           label="IT-üzemeltetés"
-          title="Az irodai informatika, amire nem kell gondolnia"
+          title="Az irodai informatika, amire nem kell gondolnod"
           paragraphs={[
             "Egy irodában ritkán az a gond, hogy nincs informatika. Inkább az, hogy senki nem tudja egészben: ki fér hozzá mihez, van-e mentés, és kit kell hívni, ha reggel nem indul a levelezés.",
             <>
@@ -887,7 +887,7 @@ export default function Arzenal() {
               kis és nagyobb irodáknak, home office-ban dolgozó csapatoknak — a szervertől a
               nyomtatón át a munkatársak telefonjáig.
             </>,
-            "Felméréssel kezdünk: megnézzük, mi van most, és írásban megkapja, mit találtunk és mit javasolunk. Utána ön dönti el, mit bíz ránk.",
+            "Felméréssel kezdünk: megnézzük, mi van most, és írásban megkapod, mit találtunk és mit javasolunk. Utána te döntöd el, mit bízol ránk.",
           ]}
           features={IT_FEATURES}
           device={

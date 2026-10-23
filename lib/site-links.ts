@@ -19,9 +19,9 @@ export const ARZENAL_SECTIONS = [
   { id: "ai", n: "04", name: "AI és chatbot", headline: "AI, ami a helyén van" },
   { id: "video", n: "05", name: "Videó és tartalom", headline: "A weboldal önmagában nem elég" },
   { id: "ops", n: "06", name: "Web-üzemeltetés és fejlesztés", headline: "Az átadás nem a vége" },
-  { id: "access", n: "07", name: "Akadálymentesítés", headline: "Van, aki nem tudja használni az oldalát" },
-  { id: "pulzus", n: "08", name: "Pulzus", headline: "Havonta egy levél arról, hogyan látja önt az internet" },
-  { id: "it", n: "09", name: "IT-üzemeltetés", headline: "Az irodai informatika, amire nem kell gondolnia" },
+  { id: "access", n: "07", name: "Akadálymentesítés", headline: "Van, aki nem tudja használni az oldaladat" },
+  { id: "pulzus", n: "08", name: "Pulzus", headline: "Havonta egy levél arról, hogyan lát téged az internet" },
+  { id: "it", n: "09", name: "IT-üzemeltetés", headline: "Az irodai informatika, amire nem kell gondolnod" },
 ];
 
 export const LEGAL_LINKS = [
