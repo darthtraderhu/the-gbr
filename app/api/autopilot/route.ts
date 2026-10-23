@@ -16,9 +16,8 @@ const GRAPH_API = "https://graph.facebook.com/v21.0";
 const ARCHIVE_DAYS = [2, 4];
 // Az ennél frissebb cikkek még nem kerülnek az archív körforgásba.
 const ARCHIVE_MIN_AGE_DAYS = 30;
-// Ezeket nem ajánljuk újra: az esettanulmány még a régi hangon, ellenőrizetlen
-// eredményekkel szerepel, átírásáról vagy kivezetéséről döntés kell.
-const ARCHIVE_EXCLUDE = new Set(["esettanulmany-the-loot"]);
+// Ezeket a cikkeket nem ajánljuk újra a Facebookon.
+const ARCHIVE_EXCLUDE = new Set<string>([]);
 
 // A cikk a márka névjegye, a poszt csak ajánló hozzá: semmi olyat nem
 // állíthat, ami a cikkben nincs benne (ld. AGENTS.md — nincs alá nem
