@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_URL } from "@/lib/site";
+import { getSortedPostsData } from "@/lib/posts";
 import { breadcrumbSchema, faqPageSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
+
+// A kapcsolódó cikkek listája az ütemezett cikkek miatt naponta frissül.
+export const revalidate = 86400;
 
 const DESCRIPTION =
   "Technikai SEO és strukturált adat, amitől a Google és az AI-keresők is megtalálják a céged. Ezt az oldalt is így építettük — ellenőrizheted.";
@@ -33,9 +37,14 @@ const PROOF_ITEMS = [
     href: "/sitemap.xml",
   },
   {
-    label: "Robots.txt sitemap-hivatkozással",
+    label: "Robots.txt: sitemap és AI-robotok név szerint",
     where: "thegbr.eu/robots.txt",
     href: "/robots.txt",
+  },
+  {
+    label: "Oldaltérkép nyelvi modelleknek",
+    where: "thegbr.eu/llms.txt",
+    href: "/llms.txt",
   },
   {
     label: "Strukturált adat (JSON-LD)",
@@ -70,6 +79,10 @@ const SEO_ITEMS = [
 
 const AEO_ITEMS = [
   {
+    title: "AI-robotok beengedése",
+    desc: "A robots.txt név szerint engedi a ChatGPT, a Claude és a Perplexity robotjait, és a Gemini előtt is nyitva áll. Amit nem olvashatnak, azt nem is idézhetik.",
+  },
+  {
     title: "Schema.org és JSON-LD",
     desc: "Cégadatok, cikkek, szolgáltatások, gyakori kérdések — géppel olvasható formában.",
   },
@@ -84,6 +97,59 @@ const AEO_ITEMS = [
   {
     title: "Kérdésre válaszoló tartalom",
     desc: "Nem kulcsszóhalmozás, hanem az, hogy tényleg megválaszolod, amit kérdeznek.",
+  },
+];
+
+// Az AEO-felmérés ellenőrzőlistája — ugyanazok a pontok, amiket a
+// „Mit lát az oldaladból a ChatGPT?" cikk vizsgálatai alapján nézünk.
+const AEO_CHECKS = [
+  {
+    title: "Beengedi-e a robots.txt az AI-robotokat",
+    desc: "GPTBot, ClaudeBot, PerplexityBot és a többiek. Ha egy rossz sor kizárja őket, a többi pont már nem számít.",
+  },
+  {
+    title: "Elmondja-e a főoldal szövegesen, ki vagy",
+    desc: "Nem képen és nem szlogenben: mit kínálsz, kinek, mióta. Az AI képből nem dolgozik.",
+  },
+  {
+    title: "Egyedi cím és leírás minden fontos oldalon",
+    desc: "Ha hiányzik, a kereső maga választ szövegrészletet, és az jellemzően a menü.",
+  },
+  {
+    title: "Strukturált adat (JSON-LD)",
+    desc: "Cég, szolgáltatás, termék, gyakori kérdések: van-e, és hiba nélkül olvasható-e.",
+  },
+  {
+    title: "Kérdésenként tagolt gyakori kérdések",
+    desc: "Minden kérdés külön címsor alatt, hogy a gép lássa, hol kezdődik a válasz.",
+  },
+  {
+    title: "Mindenhol egyező cégadatok",
+    desc: "Név, cím, telefonszám az oldalon, a Google-cégprofilban és a közösségi oldalakon. Az ellentmondás bizonytalanná teszi az AI-t.",
+  },
+  {
+    title: "Bizalmi jelek a főoldalon",
+    desc: "Gyártói partnerség, alapítás éve, referenciák: ott, ahol látszanak, nem három kattintásnyira.",
+  },
+  {
+    title: "Tiszta sitemap",
+    desc: "Csak valódi oldalak, duplikátumok, hibaoldalak és keresési találatok nélkül.",
+  },
+];
+
+// Az AI-próba három tulajdonsága — a felmérés második fele.
+const AI_TEST_FACTS = [
+  {
+    label: "Felületek",
+    text: "ChatGPT, Gemini, Perplexity, Microsoft Copilot és Claude, valamint a Google MI-összefoglalója, ahol megjelenik.",
+  },
+  {
+    label: "Ismétlés",
+    text: "Kérdésenként legalább háromszor, új, előzmény nélküli munkamenetben, asztali gépen és mobilon is. Az AI-válasz futásonként változik, egyetlen próba semmit nem bizonyít.",
+  },
+  {
+    label: "Átadás",
+    text: "Minden válasz szó szerint, dátummal és felülettel, mellette összesítés: hányszor említett, és pontosan írta-e le, mit csinálsz.",
   },
 ];
 
@@ -128,6 +194,26 @@ const FAQ_ITEMS = [
       "Az AI-keresőkre való felkészítés. Ma még kevés forgalmat hoz, de gyorsan nő — és a strukturált adat, amit hozzá kell építeni, a hagyományos Google-találatokban is segít. Vagyis nem elszórt pénz akkor sem, ha az AI-keresés lassabban terjed, mint várjuk.",
   },
   {
+    question: "Mi a különbség a SEO és az AEO között?",
+    answer:
+      "A SEO azt célozza, hogy a Google találati listájában előrébb kerülj. Az AEO azt, hogy amikor valaki egy AI-asszisztenst kérdez, az pontosan és forrásként tudjon rólad beszélni. Az alapok nagyrészt közösek: gyors, tiszta, szövegesen is érthető oldal. Az AEO ehhez hozzáteszi a strukturált adatot és a kérdés-válasz formában tagolt tartalmat.",
+  },
+  {
+    question: "Mérhető az AEO?",
+    answer:
+      "Nem úgy, mint a Google-helyezés: nincs nyilvános rangsor, és az AI-válasz futásonként változik. Ezért kérdezünk többször, több felületen, és ezért adjuk át a válaszokat szó szerint. Emellett az analitikában látszik, ha valaki AI-felületről, például a chatgpt.com-ról vagy a perplexity.ai-ról érkezik az oldaladra.",
+  },
+  {
+    question: "Mennyi idő az AEO-felmérés?",
+    answer:
+      "72 óra attól számítva, hogy egyeztettük a kérdéssort. Ennyi idő alatt írásban megkapod, mit lát az oldaladból egy kereső és egy AI-asszisztens, mit válaszoltak az AI-k a kérdéseidre, és mit érdemes javítani.",
+  },
+  {
+    question: "Mit kell nekem adnom hozzá?",
+    answer:
+      "Tényeket. Mit kínálsz, kinek, mióta, milyen partneri státuszod és referenciáid vannak, és mit kérdeznek tőled a vevők. Ezekből épül fel a tartalom: magunktól nem írunk állításokat a cégedről.",
+  },
+  {
     question: "Meglévő oldalt is tudtok javítani, vagy csak újat építeni?",
     answer:
       "Mindkettő megy. A felmérés végén megmondjuk, melyik éri meg jobban — van, amikor a meglévő rendszer javítása olcsóbb és gyorsabb.",
@@ -140,6 +226,10 @@ const FAQ_ITEMS = [
 ];
 
 export default function SeoAeoPage() {
+  const relatedPosts = getSortedPostsData()
+    .filter((post) => post.category === "SEO és AEO")
+    .slice(0, 3);
+
   return (
     <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd
@@ -441,6 +531,88 @@ export default function SeoAeoPage() {
         </div>
       </Rail>
 
+      {/* ===== AEO-FELMÉRÉS ===== */}
+      <Rail label="AEO-felmérés">
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-9)] border-t border-[var(--rule)]">
+          <Eyebrow>AEO-felmérés</Eyebrow>
+          <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[18ch] text-[var(--ink)]">
+            72 óra alatt megmutatjuk, mit lát belőled egy AI
+          </h2>
+          <p className="[font-size:var(--text-lg)] leading-relaxed text-[var(--ink-2)] max-w-[58ch] mt-[var(--space-6)]">
+            Két részből áll. Átnézzük az oldaladat úgy, ahogy egy gép olvassa, és megkérdezzük magukat
+            az AI-asszisztenseket is. A kérdéssor egyeztetése után 72 órán belül írásban kapod meg az
+            eredményt.
+          </p>
+        </section>
+
+        <div className="border-t border-[var(--rule)]">
+          <div className="px-6 py-3 border-b border-[var(--rule)] bg-[var(--panel)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
+            01 — Mit nézünk meg az oldaladon
+          </div>
+          <ol className="m-0 p-0 list-none grid grid-cols-1 md:grid-cols-2">
+            {AEO_CHECKS.map((item, i) => (
+              <li
+                key={item.title}
+                className={`grid grid-cols-[34px_1fr] gap-[var(--space-4)] px-6 py-[var(--space-6)] border-b border-[var(--rule)] ${
+                  i % 2 === 0 ? "md:border-r" : ""
+                }`}
+              >
+                <span className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.1em] text-[var(--signal-deep)] pt-[3px]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="font-display font-bold [font-size:var(--text-lg)] tracking-[-0.015em] leading-snug m-0">
+                    {item.title}
+                  </h3>
+                  <p className="m-0 mt-[var(--space-2)] [font-size:var(--text-sm)] leading-relaxed text-[var(--mid)] max-w-[46ch]">
+                    {item.desc}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div className="border-t border-[var(--rule)] mt-[var(--space-10)]">
+          <div className="px-6 py-3 border-b border-[var(--rule)] bg-[var(--panel)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
+            02 — Az AI-próba
+          </div>
+          <div className="px-6 pt-[var(--space-8)] sm:pt-[var(--space-10)] pb-[var(--space-6)]">
+            <h3 className="font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.028em] mb-[var(--space-4)]">
+              Megkérdezzük a gépet, többször
+            </h3>
+            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[58ch] m-0">
+              Együtt összeállítunk egy kérdéssort azokból a kérdésekből, amiket a vevőid tényleg
+              feltennének egy AI-nak. Aztán ezeket feltesszük, és leírjuk, mit válaszolt.
+            </p>
+          </div>
+          <dl className="m-0 grid grid-cols-1 md:grid-cols-3 border-t border-[var(--rule)]">
+            {AI_TEST_FACTS.map((fact, i) => (
+              <div
+                key={fact.label}
+                className={`px-6 py-[var(--space-6)] sm:py-[var(--space-8)] border-b md:border-b-0 border-[var(--rule)] ${
+                  i < AI_TEST_FACTS.length - 1 ? "md:border-r" : ""
+                }`}
+              >
+                <dt className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--signal-deep)]">
+                  {fact.label}
+                </dt>
+                <dd className="m-0 mt-[var(--space-3)] [font-size:var(--text-sm)] leading-relaxed text-[var(--ink-2)]">
+                  {fact.text}
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <div className="border-t border-[var(--rule)] px-6 pt-[var(--space-5)] pb-[var(--space-16)] sm:pb-[var(--space-20)]">
+            <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)] max-w-[72ch] m-0">
+              Ez pillanatkép, nem garancia: azt, hogy egy AI téged ajánl, senki nem tudja megígérni.
+              Ha a javításokat velünk csinálod, ugyanazzal a kérdéssorral visszamérünk, így látod, mi
+              változott.
+            </p>
+          </div>
+        </div>
+      </Rail>
+
       {/* ===== FOLYAMAT ===== */}
       <Rail label="Folyamat">
         <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-9)] border-t border-[var(--rule)]">
@@ -505,6 +677,40 @@ export default function SeoAeoPage() {
         </div>
       </Rail>
 
+      {/* ===== KAPCSOLÓDÓ CIKKEK ===== */}
+      {relatedPosts.length > 0 && (
+        <Rail label="Írások">
+          <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-9)] border-t border-[var(--rule)]">
+            <Eyebrow>Bővebben</Eyebrow>
+            <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[18ch] text-[var(--ink)]">
+              Amit a témáról leírtunk
+            </h2>
+          </section>
+          <div className="grid grid-cols-1 lg:grid-cols-3 border-t border-[var(--rule)]">
+            {relatedPosts.map((post, i) => (
+              <Link
+                key={post.id}
+                href={`/hirek/${post.id}`}
+                className={`group block px-6 py-[var(--space-8)] border-b lg:border-b-0 border-[var(--rule)] hover:bg-[var(--panel)] transition-colors ${
+                  i < relatedPosts.length - 1 ? "lg:border-r" : ""
+                }`}
+              >
+                <div className="flex flex-wrap gap-3 [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.18em] uppercase text-[var(--mid)]">
+                  <span className="text-[var(--signal-deep)]">{post.category}</span>
+                  <span>{post.readTime}</span>
+                </div>
+                <h3 className="font-body font-semibold [font-size:var(--text-xl)] leading-[1.24] tracking-[-0.008em] mt-[var(--space-3)] group-hover:text-[var(--signal-deep)] transition-colors">
+                  {post.title}
+                </h3>
+                <p className="[font-size:var(--text-sm)] text-[var(--ink-2)] leading-relaxed mt-[var(--space-3)] m-0">
+                  {post.excerpt}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </Rail>
+      )}
+
       <Seam />
 
       {/* ===== CTA ===== */}
@@ -516,7 +722,8 @@ export default function SeoAeoPage() {
           </h2>
           <p className="[font-size:var(--text-base)] text-[var(--ink-2)] max-w-[54ch] leading-relaxed mb-[var(--space-8)]">
             A felmérés végén kapsz egy listát arról, mi hiányzik a technikai alapokból — akkor is,
-            ha nem velünk dolgozol tovább. Két munkanapon belül válaszolunk.
+            ha nem velünk dolgozol tovább. Két munkanapon belül válaszolunk, az AEO-felmérést pedig a
+            kérdéssor egyeztetése után 72 órán belül átadjuk.
           </p>
           <Button asChild>
             <Link href="/init">Kérj felmérést &rarr;</Link>
