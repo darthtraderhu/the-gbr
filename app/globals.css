@@ -524,6 +524,12 @@ h2 {
   width: min(80vh, 62vw);
   aspect-ratio: 1100 / 1069;
 }
+/* Az /init (és /en/contact) oldalon nincs fejléc, és a varázsló a fókusz —
+   ott a motívum kisebb, és a fejléc-magasság helyett a lap tetejéhez igazodik. */
+.background-motif--compact {
+  top: 4vh;
+  width: min(60vh, 46vw);
+}
 /* Mobilon a szövegoszlop a teljes szélességet kitölti — a motívum ott jobban
    kicsúszik a képből és kicsit halványabb, hogy ne nyomja el a folyószöveget. */
 @media (max-width: 640px) {
@@ -531,5 +537,8 @@ h2 {
     right: -18vw;
     width: 82vw;
     opacity: calc(var(--motif-opacity) * 0.85);
+  }
+  .background-motif--compact {
+    width: 64vw;
   }
 }
