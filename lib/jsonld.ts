@@ -230,6 +230,7 @@ export function videoObjectSchema(params: {
   uploadDate: string;
   duration: string;
   transcript: string;
+  inLanguage?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -240,7 +241,7 @@ export function videoObjectSchema(params: {
     thumbnailUrl: `${SITE_URL}${params.thumbnailPath}`,
     uploadDate: params.uploadDate,
     duration: params.duration,
-    inLanguage: "hu-HU",
+    inLanguage: params.inLanguage ?? "hu-HU",
     transcript: params.transcript,
     publisher: ORGANIZATION,
   };

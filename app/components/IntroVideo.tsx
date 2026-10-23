@@ -12,10 +12,12 @@ export default function IntroVideo({
   src,
   poster,
   label,
+  playLabel,
 }: {
   src: string;
   poster: string;
   label: string;
+  playLabel: string;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
@@ -41,7 +43,7 @@ export default function IntroVideo({
         <button
           type="button"
           onClick={start}
-          aria-label={`Lejátszás: ${label}`}
+          aria-label={playLabel}
           className="group absolute inset-0 flex items-center justify-center sm:justify-end sm:pr-[14%] cursor-pointer"
         >
           <Image src={poster} alt="" fill sizes="100vw" className="object-cover" />

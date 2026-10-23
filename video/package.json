@@ -5,8 +5,8 @@
   "description": "A főoldali cégbemutató videó Remotion-forrása. Nem része a Next.js buildnek.",
   "scripts": {
     "studio": "remotion studio",
-    "render": "remotion render Cegbemutato out/cegbemutato.mp4",
-    "poster": "remotion still Cegbemutato out/cegbemutato-poster.jpg --frame=60"
+    "render": "remotion render Cegbemutato out/cegbemutato.mp4 && remotion render IntroEn out/intro-en.mp4",
+    "poster": "remotion still Cegbemutato out/cegbemutato-poster.jpg --frame=60 && remotion still IntroEn out/intro-en-poster.jpg --frame=60"
   },
   "dependencies": {
     "@fontsource/archivo": "5.3.0",

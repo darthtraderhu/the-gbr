@@ -2,7 +2,14 @@ import "@fontsource/archivo/800.css";
 import "@fontsource/archivo/900.css";
 import "@fontsource/source-serif-4/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
-import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import {
   AbsoluteFill,
   Easing,
@@ -12,6 +19,7 @@ import {
   interpolate,
   useCurrentFrame,
 } from "remotion";
+import { EN, HU, type VideoCopy } from "./copy";
 
 // Az oldal világos témájának tokenjei (app/globals.css) — ugyanaz a paletta,
 // hogy a videó ne „valahonnan összeszedett” anyagnak hasson.
@@ -36,8 +44,7 @@ const F = {
 const FPS = 30;
 const s = (sec: number) => Math.round(sec * FPS);
 
-// Jelenetek: [kezdet, hossz] másodpercben. A szövegek a főoldal meglévő,
-// jóváhagyott szövegeiből jönnek — új állítást a videó nem tesz.
+// Jelenetek: [kezdet, hossz] másodpercben, mindkét nyelven ugyanaz az időzítés.
 const SCENES = {
   open: [0, 4.5],
   quote: [4.5, 7.5],
@@ -50,36 +57,10 @@ const SCENES = {
 export const DURATION = s(64);
 
 const STEP_LEN = SCENES.steps[1] / 4;
+const CHAPTER_STARTS = [SCENES.quote[0], SCENES.two[0], SCENES.steps[0], SCENES.promise[0]];
 
-const STEPS = [
-  {
-    num: "01",
-    title: "Felmérés",
-    text: "Megnézzük, mi van most — kód, adatok, számok. Nem tippelünk. Ennek a végén tudod, mibe kerül és mennyi idő.",
-  },
-  {
-    num: "02",
-    title: "Terv és keret",
-    text: "Fix hatókör, fix árazás, írásos szerződés — szellemi tulajdonnal és adatkezeléssel együtt. Nem ad hoc.",
-  },
-  {
-    num: "03",
-    title: "Építés szakaszokban",
-    text: "Kéthetente látható eredmény. Élő rendszernél fokozatos átállás — a bolt nem áll le.",
-  },
-  {
-    num: "04",
-    title: "Átadás és üzemeltetés",
-    text: "Dokumentáció, monitoring, riasztás. Innentől jön a „manage” rész — ha kéred.",
-  },
-];
-
-const CHAPTERS = [
-  { label: "Elv", from: SCENES.quote[0] },
-  { label: "Két dolog", from: SCENES.two[0] },
-  { label: "Folyamat", from: SCENES.steps[0] },
-  { label: "Kapcsolat", from: SCENES.promise[0] },
-];
+const CopyContext = createContext<VideoCopy>(HU);
+const useCopy = () => useContext(CopyContext);
 
 const ease = Easing.bezier(0.16, 1, 0.3, 1);
 
@@ -162,6 +143,7 @@ function timecode(frame: number) {
 
 function Chrome() {
   const frame = useCurrentFrame();
+  const copy = useCopy();
   const progress = frame / (DURATION - 1);
   const ticks = Math.round(DURATION / FPS);
   const chromeIn = interpolate(frame, [0, 18], [0, 1], { extrapolateRight: "clamp" });
@@ -183,7 +165,7 @@ function Chrome() {
       >
         <Mono style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <span style={{ width: 10, height: 10, background: C.signal, display: "block" }} />
-          THE GBR · Hogyan dolgozunk
+          {copy.header}
         </Mono>
         <Mono style={{ color: C.ink, letterSpacing: "0.14em" }}>
           {timecode(frame)} <span style={{ color: C.ruleStrong }}>/ {timecode(DURATION)}</span>
@@ -191,12 +173,13 @@ function Chrome() {
       </div>
 
       <div style={{ position: "absolute", left: PAD, right: PAD, bottom: 56, height: 56 }}>
-        {CHAPTERS.map((ch) => {
-          const x = ch.from / (DURATION / FPS);
-          const active = frame >= s(ch.from);
+        {copy.chapters.map((label, i) => {
+          const from = CHAPTER_STARTS[i];
+          const x = from / (DURATION / FPS);
+          const active = frame >= s(from);
           return (
             <Mono
-              key={ch.label}
+              key={label}
               style={{
                 position: "absolute",
                 left: `${x * 100}%`,
@@ -208,7 +191,7 @@ function Chrome() {
                 lineHeight: "28px",
               }}
             >
-              {ch.label}
+              {label}
             </Mono>
           );
         })}
@@ -254,6 +237,7 @@ function Chrome() {
 
 function Open() {
   const frame = useCurrentFrame();
+  const copy = useCopy();
   return (
     <Scene len={s(SCENES.open[1])}>
       <Stage>
@@ -261,7 +245,7 @@ function Open() {
           <Wordmark size={260} />
         </div>
         <div style={{ ...enter(frame, 30), marginTop: 40 }}>
-          <Mono style={{ fontSize: 26 }}>Fejlesztés és üzemeltetés B2B cégeknek</Mono>
+          <Mono style={{ fontSize: 26 }}>{copy.openLine}</Mono>
         </div>
       </Stage>
     </Scene>
@@ -270,6 +254,7 @@ function Open() {
 
 function Quote() {
   const frame = useCurrentFrame();
+  const copy = useCopy();
   const headline: CSSProperties = {
     fontFamily: F.display,
     fontWeight: 800,
@@ -282,14 +267,12 @@ function Quote() {
     <Scene len={s(SCENES.quote[1])}>
       <Stage>
         <div style={enter(frame, 0)}>
-          <Mono>A cég mögött</Mono>
+          <Mono>{copy.quoteEyebrow}</Mono>
         </div>
         <p style={{ ...headline, ...enter(frame, 8, 24), color: C.ink, marginTop: 36 }}>
-          A legjobb kampány sem segít,
+          {copy.quote[0]}
         </p>
-        <p style={{ ...headline, ...enter(frame, 40, 24), color: C.ruleStrong }}>
-          ha a rendszer mögötte nem működik.
-        </p>
+        <p style={{ ...headline, ...enter(frame, 40, 24), color: C.ruleStrong }}>{copy.quote[1]}</p>
       </Stage>
     </Scene>
   );
@@ -297,25 +280,12 @@ function Quote() {
 
 function TwoThings() {
   const frame = useCurrentFrame();
-  const rows = [
-    {
-      n: "01",
-      lab: "Develop",
-      title: "Megépítjük",
-      desc: "Weboldalak és webshopok Next.js alapon, a mérnöki részletekkel együtt.",
-    },
-    {
-      n: "02",
-      lab: "Manage",
-      title: "És visszük tovább",
-      desc: "Az átadás nem a vége. Üzemeltetés, monitoring, folyamatos fejlesztés.",
-    },
-  ];
+  const copy = useCopy();
   return (
     <Scene len={s(SCENES.two[1])}>
       <Stage>
         <div style={enter(frame, 0)}>
-          <Mono>Amit csinálunk</Mono>
+          <Mono>{copy.twoEyebrow}</Mono>
         </div>
         <h2
           style={{
@@ -329,7 +299,8 @@ function TwoThings() {
             color: C.ink,
           }}
         >
-          Két dolog, nem tizenkettő<span style={{ color: C.signal }}>.</span>
+          {copy.twoHeadline}
+          <span style={{ color: C.signal }}>.</span>
         </h2>
         <div
           style={{
@@ -338,7 +309,7 @@ function TwoThings() {
             borderTop: `1px solid ${C.rule}`,
           }}
         >
-          {rows.map((row, i) => {
+          {copy.rows.map((row, i) => {
             const start = 50 + i * 40;
             const lit = interpolate(frame, [start + 20, start + 40], [0, 1], {
               extrapolateLeft: "clamp",
@@ -346,7 +317,7 @@ function TwoThings() {
             });
             return (
               <div
-                key={row.n}
+                key={row.lab}
                 style={{
                   ...enter(frame, start, 24),
                   display: "grid",
@@ -370,7 +341,7 @@ function TwoThings() {
                       opacity: 0.5 + lit * 0.5,
                     }}
                   >
-                    {row.n}
+                    {String(i + 1).padStart(2, "0")}
                   </div>
                   <Mono style={{ display: "block", marginTop: 20, fontSize: 18 }}>{row.lab}</Mono>
                 </div>
@@ -411,27 +382,28 @@ function TwoThings() {
 
 function Steps() {
   const frame = useCurrentFrame();
+  const { steps, stepsEyebrow } = useCopy();
   const stepFrames = s(STEP_LEN);
-  const current = Math.min(STEPS.length - 1, Math.floor(frame / stepFrames));
+  const current = Math.min(steps.length - 1, Math.floor(frame / stepFrames));
   const local = frame - current * stepFrames;
-  const step = STEPS[current];
+  const step = steps[current];
   const leave = interpolate(local, [stepFrames - 10, stepFrames], [1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const isLast = current === STEPS.length - 1;
+  const isLast = current === steps.length - 1;
 
   return (
     <Scene len={s(SCENES.steps[1])}>
       <Stage>
         <div style={enter(frame, 0)}>
-          <Mono>Folyamat · Nincs meglepetés a végén</Mono>
+          <Mono>{stepsEyebrow}</Mono>
         </div>
 
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "560px 1fr",
+            gridTemplateColumns: "660px 1fr",
             gap: 80,
             alignItems: "start",
             marginTop: 48,
@@ -440,12 +412,12 @@ function Steps() {
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-            {STEPS.map((st, i) => {
+            {steps.map((st, i) => {
               const active = i === current;
               const done = i < current;
               return (
                 <div
-                  key={st.num}
+                  key={st.title}
                   style={{
                     display: "flex",
                     alignItems: "baseline",
@@ -462,13 +434,13 @@ function Steps() {
                       color: active ? C.signal : done ? C.ink : C.ruleStrong,
                     }}
                   >
-                    {st.num}
+                    {String(i + 1).padStart(2, "0")}
                   </span>
                   <span
                     style={{
                       fontFamily: F.display,
                       fontWeight: 800,
-                      fontSize: 44,
+                      fontSize: 36,
                       letterSpacing: "-0.025em",
                       color: active ? C.ink : done ? C.mid : C.ruleStrong,
                     }}
@@ -495,14 +467,14 @@ function Steps() {
                 top: -10,
               }}
             >
-              {step.num}
+              {String(current + 1).padStart(2, "0")}
             </div>
             <div
               style={{
                 ...enter(local, 8, 22),
                 fontFamily: F.display,
                 fontWeight: 900,
-                fontSize: 92,
+                fontSize: 84,
                 letterSpacing: "-0.045em",
                 lineHeight: 1,
                 color: C.ink,
@@ -534,6 +506,7 @@ function Steps() {
 
 function Pledge() {
   const frame = useCurrentFrame();
+  const copy = useCopy();
   return (
     <Scene len={s(SCENES.promise[1])}>
       <Stage>
@@ -549,8 +522,8 @@ function Pledge() {
             maxWidth: "20ch",
           }}
         >
-          Minden szakasz végén van valami
-          <span style={{ color: C.ruleStrong }}>, amit meg tudsz nézni.</span>
+          {copy.pledge[0]}
+          <span style={{ color: C.ruleStrong }}>{copy.pledge[1]}</span>
         </div>
       </Stage>
     </Scene>
@@ -559,6 +532,7 @@ function Pledge() {
 
 function Close() {
   const frame = useCurrentFrame();
+  const copy = useCopy();
   return (
     <Scene len={s(SCENES.close[1]) + 12}>
       <Stage>
@@ -585,12 +559,10 @@ function Close() {
               padding: "26px 44px",
             }}
           >
-            Pitcheld el a projekted
+            {copy.cta}
           </span>
-          <Mono style={{ fontSize: 26, color: C.ink, letterSpacing: "0.12em" }}>
-            thegbr.eu/init
-          </Mono>
-          <Mono style={{ fontSize: 22 }}>Válasz 2 munkanapon belül</Mono>
+          <Mono style={{ fontSize: 26, color: C.ink, letterSpacing: "0.12em" }}>{copy.ctaUrl}</Mono>
+          <Mono style={{ fontSize: 22 }}>{copy.ctaNote}</Mono>
         </div>
       </Stage>
     </Scene>
@@ -614,7 +586,7 @@ function useFontsReady() {
   }, [handle]);
 }
 
-export function Cegbemutato() {
+export function Cegbemutato({ lang }: { lang: "hu" | "en" }) {
   useFontsReady();
   const scene = (key: keyof typeof SCENES) => ({
     from: s(SCENES[key][0]),
@@ -622,26 +594,28 @@ export function Cegbemutato() {
   });
 
   return (
-    <AbsoluteFill style={{ background: C.ground, color: C.ink }}>
-      <Sequence {...scene("open")}>
-        <Open />
-      </Sequence>
-      <Sequence {...scene("quote")}>
-        <Quote />
-      </Sequence>
-      <Sequence {...scene("two")}>
-        <TwoThings />
-      </Sequence>
-      <Sequence {...scene("steps")}>
-        <Steps />
-      </Sequence>
-      <Sequence {...scene("promise")}>
-        <Pledge />
-      </Sequence>
-      <Sequence {...scene("close")}>
-        <Close />
-      </Sequence>
-      <Chrome />
-    </AbsoluteFill>
+    <CopyContext.Provider value={lang === "en" ? EN : HU}>
+      <AbsoluteFill style={{ background: C.ground, color: C.ink }}>
+        <Sequence {...scene("open")}>
+          <Open />
+        </Sequence>
+        <Sequence {...scene("quote")}>
+          <Quote />
+        </Sequence>
+        <Sequence {...scene("two")}>
+          <TwoThings />
+        </Sequence>
+        <Sequence {...scene("steps")}>
+          <Steps />
+        </Sequence>
+        <Sequence {...scene("promise")}>
+          <Pledge />
+        </Sequence>
+        <Sequence {...scene("close")}>
+          <Close />
+        </Sequence>
+        <Chrome />
+      </AbsoluteFill>
+    </CopyContext.Provider>
   );
 }

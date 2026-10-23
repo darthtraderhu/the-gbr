@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { websiteSchema, professionalServiceSchema } from "@/lib/jsonld";
+import { websiteSchema, professionalServiceSchema, videoObjectSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, SectionHeader, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import ServiceIndex from "@/app/components/ServiceIndex";
 import { ARZENAL_SECTIONS_EN } from "@/lib/site-links";
+import IntroVideo from "@/app/components/IntroVideo";
 import HeroInstrument from "./HeroInstrument";
 
 export const revalidate = 86400;
@@ -23,6 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: { card: "summary_large_image", title: t("title"), description: t("description") },
   };
 }
+
+// Az angol cégbemutató videó — forrása a video/ mappa Remotion-projektje
+// (IntroEn kompozíció). A leirat a messages/en.json Home.videoTranscript kulcsa.
+const INTRO_VIDEO_EN = {
+  src: "/video/intro-en.mp4",
+  poster: "/video/intro-en-poster.jpg",
+};
 
 export default async function EnglishHome() {
   const t = await getTranslations({ locale: "en", namespace: "Home" });
@@ -48,6 +56,18 @@ export default async function EnglishHome() {
     <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd data={websiteSchema({ locale: "en" })} />
       <JsonLd data={professionalServiceSchema()} />
+      <JsonLd
+        data={videoObjectSchema({
+          name: t("videoTitle"),
+          description: t("videoDescription"),
+          contentPath: INTRO_VIDEO_EN.src,
+          thumbnailPath: INTRO_VIDEO_EN.poster,
+          uploadDate: "2026-10-23",
+          duration: "PT1M4S",
+          transcript: t("videoTranscript"),
+          inLanguage: "en",
+        })}
+      />
 
       {/* ===== 01 / INSTRUMENT ===== */}
       <Rail label="01 / Instrument" dark>
@@ -92,27 +112,20 @@ export default async function EnglishHome() {
           <span>{t("videoEyebrow")}</span>
           <span>{t("videoCaption")}</span>
         </div>
-        <div
-          className="aspect-[21/9] flex items-center justify-center border-b border-[var(--rule)]"
-          style={{
-            background:
-              "linear-gradient(150deg, var(--rule-soft) 0%, var(--rule) 50%, var(--ground) 100%)",
-          }}
-        >
-          <div
-            className="w-[var(--space-20)] h-[var(--space-20)] rounded-full border border-[var(--ink)] flex items-center justify-center"
-            style={{ backgroundColor: "color-mix(in srgb, var(--panel) 55%, transparent)" }}
-          >
-            <span
-              className="ml-1 block w-0 h-0"
-              style={{
-                borderTop: "11px solid transparent",
-                borderBottom: "11px solid transparent",
-                borderLeft: "18px solid var(--ink)",
-              }}
-            />
-          </div>
-        </div>
+        <IntroVideo
+          src={INTRO_VIDEO_EN.src}
+          poster={INTRO_VIDEO_EN.poster}
+          label={t("videoTitle")}
+          playLabel={t("videoPlay")}
+        />
+        <details className="group px-6 py-3.5 border-b border-[var(--rule)]">
+          <summary className="cursor-pointer [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] hover:text-[var(--ink)]">
+            {t("videoTranscriptLabel")}
+          </summary>
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[72ch] mt-[var(--space-4)] mb-[var(--space-2)]">
+            {t("videoTranscript")}
+          </p>
+        </details>
       </Rail>
 
       {/* ===== 03 / FOR AGENCIES ===== */}
