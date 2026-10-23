@@ -23,6 +23,9 @@ export const TRANSLATED_ARTICLES: Record<string, string> = {
   "pulzus-ot-masodperc": "five-seconds-nobody-knew",
   akadalymentesites: "what-makes-a-website-accessible",
   "miert-epit-sajat-termeket": "why-build-your-own-product",
+  "adatkezelesi-tajekoztato-ami-mast-ir": "privacy-notice-that-describes-another-site",
+  "hirdetes-meres-nelkul": "the-ad-was-fine",
+  "mit-lat-az-oldaladbol-a-chatgpt": "what-chatgpt-sees-on-your-site",
 };
 
 export const ARTICLE_HU_SLUG: Record<string, string> = Object.fromEntries(
