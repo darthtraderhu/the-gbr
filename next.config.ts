@@ -42,6 +42,11 @@ const nextConfig: NextConfig = {
   experimental: {
     globalNotFound: true,
   },
+  // Az /api/autopilot futásidőben olvassa a posts/ mappát — a fájlkövetés
+  // magától nem tudja, hogy a markdown kell a függvényhez.
+  outputFileTracingIncludes: {
+    "/api/autopilot": ["./posts/**/*"],
+  },
   // Az X-Powered-By: Next.js fejléc feleslegesen árulja el a stacket.
   poweredByHeader: false,
   async headers() {
