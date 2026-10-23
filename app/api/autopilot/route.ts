@@ -16,9 +16,8 @@ const GRAPH_API = "https://graph.facebook.com/v21.0";
 const ARCHIVE_DAYS = [2, 4];
 // Az ennél frissebb cikkek még nem kerülnek az archív körforgásba.
 const ARCHIVE_MIN_AGE_DAYS = 30;
-// A 2026. augusztus előtti cikkek még a régi hangon, alá nem támasztott
-// állításokkal készültek — amíg nincsenek átírva, nem ajánljuk őket újra.
-const ARCHIVE_SINCE = "2026-08-01";
+// Ezeket a cikkeket nem ajánljuk újra a Facebookon.
+const ARCHIVE_EXCLUDE = new Set<string>([]);
 
 // A cikk a márka névjegye, a poszt csak ajánló hozzá: semmi olyat nem
 // állíthat, ami a cikkben nincs benne (ld. AGENTS.md — nincs alá nem
@@ -70,7 +69,7 @@ function pickArchivePost(published: PostSummary[], today: string): PostSummary |
 
   const todayNumber = dayNumber(today);
   const pool = published
-    .filter((post) => post.date >= ARCHIVE_SINCE)
+    .filter((post) => !ARCHIVE_EXCLUDE.has(post.id))
     .filter((post) => todayNumber - dayNumber(post.date) >= ARCHIVE_MIN_AGE_DAYS)
     .sort((a, b) => (a.date === b.date ? a.id.localeCompare(b.id) : a.date.localeCompare(b.date)));
   if (pool.length === 0) return null;

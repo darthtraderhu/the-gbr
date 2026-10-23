@@ -1,42 +1,51 @@
 ---
-title: "Next.js vs. WordPress 2: Miért öli meg a konverziódat az elavult technológia?"
+title: "Next.js vagy WordPress? Mikor melyiket érdemes választani"
 date: "2026-06-12"
-description: "A WordPress nagyszerű volt 10 éve. Ma már biztonsági kockázat és sebességgyilkos. Megmutatjuk, miért a Next.js a kőkemény B2B cégek egyetlen életképes választása."
+updated: "2026-10-23"
 category: "Fejlesztés"
+excerpt: "A WordPress nem rossz, és a Next.js nem csodaszer. A kérdés az, mire kell az oldal, ki fogja szerkeszteni, és mennyit számít a sebesség és a biztonság."
 ---
 
-## Next.js vs. WordPress: A Digitális Evolúció
+Gyakran kérdezik tőlünk, hogy WordPresst vagy Next.js-t érdemes-e választani. A rövid válasz: attól függ. A hosszabb válasz szerint néhány kérdés elég ahhoz, hogy eldőljön.
 
-Cégvezetőként milliókat költesz Google és Meta hirdetésekre, hogy forgalmat terelj a weboldaladra. A látogató rákattint a linkre, majd vár... 1 másodperc... 3 másodperc... 5 másodperc. A betöltőképernyő pörög, a felhasználó pedig bezárja az ablakot. **Gratulálunk, épp most égettél el egy újabb potenciális ügyfelet.**
+## A WordPress erősségei
 
-A modern B2B piacon a sebesség nem kényelmi funkció, hanem kőkemény valuta. Ha a rendszered lassú, a konverziód halott. Itt jön a képbe a technológiai generációváltás.
+**Ismert és elterjedt.** Sok fejlesztő ismeri, könnyű hozzá segítséget találni.
 
-### A WordPress Valódi Ára
+**Kényelmes szerkesztés.** A tartalomkezelő felülete megszokott, sok ember tud benne dolgozni.
 
-A WordPress a világ legnépszerűbb tartalomkezelője, de ne felejtsük el: egy 20 éve írt, PHP-alapú monolitikus rendszerről beszélünk. 
+**Rengeteg kész bővítmény.** Sok funkció programozás nélkül hozzáadható.
 
-Mi a probléma vele 2026-ban?
-* **Sebességgyilkos Bővítmények:** Minden extra funkcióhoz egy újabb "plugint" kell telepítened. Ezek a kódok egymásra épülnek, akadályozzák egymást, és brutálisan lelassítják az oldal betöltését.
-* **Biztonsági Rémálom:** Mivel a világ weboldalainak nagy része ezt használja, a hackerek első számú célpontja. Egyetlen elavult bővítmény elég ahhoz, hogy feltörjék az adatbázisodat.
-* **Szerveroldali Renderelés (A lassúság oka):** Minden alkalommal, amikor valaki megnyitja az oldaladat, a szervernek nulláról kell felépítenie az adatbázisból a tartalmat. 
+## A WordPress gyenge pontjai
 
-### A Mátrix Új Szabálya: Next.js
+**A bővítmények ára.** Minden bővítmény plusz kód, amit frissíteni kell, és ami lassíthatja az oldalt. Sok bővítmény mellett nő az esélye, hogy kettő összeakad, vagy egy elavult bővítményen biztonsági rés marad.
 
-A THE GBR-nél nem barkácsolunk. Amikor Full-Stack rendszereket építünk a partnereinknek, a **Next.js** architektúrára támaszkodunk. Ezt a technológiát használja a Netflix, a TikTok és a Twitch is. Nem véletlenül.
+**Folyamatos karbantartás.** A rendszert, a sablont és a bővítményeket rendszeresen frissíteni kell. Ha ez elmarad, nő a kockázat.
 
-#### 1. Villámgyors Betöltés (SSG és SSR)
-A Next.js előre legenerálja a weboldalad tartalmát, így amikor a látogató rákattint a linkedre, az oldal **azonnal, tizedmásodpercek alatt** megjelenik. Nincs adatbázis-várakozás, nincs betöltőképernyő. Ez azonnali konverziónövekedést jelent.
+**Sebesség.** Egy WordPress-oldal is lehet gyors, de egy nehéz sablonnal és sok bővítménnyel könnyű lassúvá tenni.
 
-#### 2. Golyóálló Biztonság (Serverless)
-A modern architektúrának köszönhetően nincs hagyományos értelemben vett, feltörhető adatbázis-kapcsolat a front-end oldalon. A kódod felhőalapú (serverless) hálózatokon fut, ami a hackerek számára áttörhetetlen falat jelent.
+## A Next.js erősségei
 
-#### 3. SEO Fölény (A Google imádja)
-A Google algoritmusa ma már bünteti a lassú oldalakat és jutalmazza a gyorsakat (Core Web Vitals). Egy jól megírt Next.js kóddal technológiai erőfölénybe kerülsz a találati listákon. Hiába ír jobb cikkeket a versenytársad, ha a te rendszered gyorsabb, te leszel legelöl.
+**Sebesség.** Az oldalak nagy része előre elkészülhet, így a látogató gyorsan megkapja a tartalmat.
 
-### A Jövő Egy Kézből
+**Kisebb támadási felület.** Nincs mindenki által ismert adminfelület és bővítményrendszer, amit automatizált támadások keresnek.
 
-Az "olcsó" WordPress weboldal a legdrágább dolog, amit a cégednek vehetsz, mert láthatatlanul emészti fel a marketingbüdzsédet az elpattant látogatók miatt. 
+**Szabad felépítés.** Nincsenek sablonkorlátok, minden úgy készül, ahogy a cégnek kell.
 
-A THE GBR csapata elhozza neked a nagyvállalati technológiát. Olyan egyedi, Next.js alapú rendszereket fejlesztünk, amik nem csak gyönyörűek, de kőkemény fegyverként funkcionálnak a B2B piacon.
+## A Next.js gyenge pontjai
 
-Lépj ki az elavult rendszerekből, és csatlakozz a digitális elithez. 🦾🔥
+**Fejlesztő kell hozzá.** Egy új funkció vagy szerkezeti változás programozást igényel.
+
+**A szerkesztés külön megoldás.** Ha sokan szerkesztenek tartalmat, ehhez külön tartalomkezelőt kell bekötni.
+
+## Hogyan dönts?
+
+- **Ha sokan, gyakran szerkesztenek**, és a funkciók kész bővítményekkel lefedhetők, a WordPress jó választás lehet, de legyen, aki rendszeresen karbantartja.
+- **Ha a sebesség, a biztonság és az egyedi felépítés üzletileg számít**, és van, aki fejleszti, a Next.js a jobb alap.
+- **Ha már van egy működő WordPress vagy WooCommerce oldal**, nem mindig kell lecserélni. Sokszor elég rendbe tenni, vagy egy részét újraépíteni.
+
+A saját oldalunk Next.js-en fut, új weboldalakat is erre építünk, de meglévő WooCommerce vagy Shopify rendszer fölé is dolgozunk.
+
+---
+
+Ha bizonytalan vagy, nálad melyik lenne a jó irány, [írd le, mire használod az oldalt](/init). Részletek: [web és webshop](/arzenal#web).

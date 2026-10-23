@@ -1,6 +1,8 @@
 ---
 title: "Esettanulmány: The Loot - Amikor az E-kereskedelem és a Gamifikáció Szintet Lép"
-date: "2026-06-13"
+# A projekt még készül: amíg nincs valós eredmény, a cikk nem jelenik meg
+# (jövőbeli dátum = 404). Elkészültekor ugyanezen az URL-en, új szöveggel.
+date: "2099-12-31"
 description: "Hogyan építettünk egy villámgyors, Next.js alapú, gamifikált platformot? A The Loot projekt kőkemény technológiai anatómiája és a THE GBR fejlesztési filozófiája."
 category: "Esettanulmány"
 image: "/images/theloot-case-study.jpg"
