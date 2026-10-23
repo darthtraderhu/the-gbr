@@ -591,10 +591,26 @@
     "headlineLine2": "won't get you found.",
     "intro": "Search has split in two. Google measures the technical foundation; AI search reads structured data, not marketing prose. We build both — and we don't just talk about it.",
     "proofPanel": [
-      { "claim": "Dynamic sitemap", "where": "thegbr.eu/sitemap.xml" },
-      { "claim": "Robots.txt with sitemap reference", "where": "thegbr.eu/robots.txt" },
-      { "claim": "Structured data — valid, verifiable", "where": "Google Rich Results Test" },
-      { "claim": "Measured performance", "where": "PageSpeed Insights" }
+      {
+        "claim": "Dynamic sitemap",
+        "where": "thegbr.eu/sitemap.xml"
+      },
+      {
+        "claim": "Robots.txt — sitemap and AI crawlers by name",
+        "where": "thegbr.eu/robots.txt"
+      },
+      {
+        "claim": "Site map for language models",
+        "where": "thegbr.eu/llms.txt"
+      },
+      {
+        "claim": "Structured data — valid, verifiable",
+        "where": "Google Rich Results Test"
+      },
+      {
+        "claim": "Measured performance",
+        "where": "PageSpeed Insights"
+      }
     ],
     "proofClosing": "Most SEO agencies don't have a sitemap on their own site. Go and look — seriously, open it. If any of ours doesn't work, tell us and we'll fix it.",
     "changedHeadline": "It became two separate searches",
@@ -613,11 +629,69 @@
     "pillarAeoTitle": "02 · AEO — AI visibility",
     "pillarAeoIntro": "What language models read. We can't guarantee an AI cites you — nobody can. What we can do is make sure <b>there's something worth citing</b>: clean structure, unambiguous data, machine-readable.",
     "pillarAeoItems": [
+      "AI crawlers allowed — robots.txt names the ChatGPT, Claude and Perplexity crawlers, and stays open to Gemini",
       "Schema.org and JSON-LD — company data, articles, services, FAQs",
       "Structured FAQs — can appear directly in results, before the click",
       "Unambiguous company data — the same everywhere, no contradictions",
       "Content that answers questions — not keyword stuffing"
     ],
+    "auditHeadline": "In 72 hours, we show you what an AI sees of you",
+    "auditIntro": "Two parts. We read your site the way a machine does, and we ask the AI assistants themselves. Once the question set is agreed, you get the written result within 72 hours.",
+    "auditChecksLabel": "01 — What we check on your site",
+    "auditChecks": [
+      {
+        "title": "Does robots.txt let AI crawlers in",
+        "desc": "GPTBot, ClaudeBot, PerplexityBot and the rest. If one wrong line shuts them out, nothing else matters."
+      },
+      {
+        "title": "Does the homepage say in text who you are",
+        "desc": "Not in an image, not in a slogan: what you offer, to whom, since when. AI doesn't read pictures."
+      },
+      {
+        "title": "A unique title and description on every key page",
+        "desc": "Without one, the search engine picks a snippet itself, usually the menu."
+      },
+      {
+        "title": "Structured data (JSON-LD)",
+        "desc": "Company, service, product, FAQs: is it there, and does it parse without errors."
+      },
+      {
+        "title": "FAQs split question by question",
+        "desc": "Every question under its own heading, so a machine can see where each answer starts."
+      },
+      {
+        "title": "Consistent company data everywhere",
+        "desc": "Name, address, phone on the site, the Google Business Profile and social profiles. Contradictions make an AI unsure."
+      },
+      {
+        "title": "Trust signals on the homepage",
+        "desc": "Manufacturer partnerships, founding year, references: where they're visible, not three clicks deep."
+      },
+      {
+        "title": "A clean sitemap",
+        "desc": "Real pages only — no duplicates, error pages or search results."
+      }
+    ],
+    "aiTestLabel": "02 — The AI test",
+    "aiTestTitle": "We ask the machine, more than once",
+    "aiTestBody": "Together we put together the questions your buyers would actually ask an AI. Then we ask them, and write down what came back.",
+    "aiTestFacts": [
+      {
+        "label": "Platforms",
+        "text": "ChatGPT, Gemini, Perplexity, Microsoft Copilot and Claude, plus Google's AI Overview where it appears."
+      },
+      {
+        "label": "Repetition",
+        "text": "At least three runs per question, each in a fresh session with no history, on desktop and on mobile. AI answers change from run to run; a single test proves nothing."
+      },
+      {
+        "label": "Delivery",
+        "text": "Every answer verbatim, with date and platform, plus a summary: how often you were mentioned, and whether what you do was described accurately."
+      }
+    ],
+    "aiTestNote": "This is a snapshot, not a guarantee: nobody can promise an AI will recommend you. If we do the fixes with you, we re-run the same question set so you can see what changed.",
+    "relatedEyebrow": "Further reading",
+    "relatedHeadline": "What we've written on this",
     "processSteps": [
       {
         "title": "01 · Assessment",
@@ -644,6 +718,22 @@
       {
         "question": "Is AEO actually worth it?",
         "answer": "It brings little traffic today, but it's growing fast — and the structured data it requires also helps in conventional Google results. So it isn't wasted spend even if AI search grows slower than expected."
+      },
+      {
+        "question": "What's the difference between SEO and AEO?",
+        "answer": "SEO aims to move you up Google's results. AEO aims to make sure that when someone asks an AI assistant, it can talk about you accurately and cite you as a source. The foundations largely overlap: a fast, clean site that makes sense as text. AEO adds structured data and content organised as questions and answers."
+      },
+      {
+        "question": "Can AEO be measured?",
+        "answer": "Not the way Google rankings can: there's no public ranking, and AI answers vary from run to run. That's why we ask several times on several platforms, and why we hand over the answers verbatim. Your analytics will also show visitors arriving from AI platforms such as chatgpt.com or perplexity.ai."
+      },
+      {
+        "question": "How long does the AEO assessment take?",
+        "answer": "72 hours from when the question set is agreed. In that time you get, in writing, what a search engine and an AI assistant see of your site, what the AIs answered to your questions, and what's worth fixing."
+      },
+      {
+        "question": "What do you need from me?",
+        "answer": "Facts. What you offer, to whom, since when, which partner statuses and references you have, and what buyers ask you. The content is built from those: we don't make up claims about your company."
       },
       {
         "question": "Can you improve an existing site, or only build new?",
