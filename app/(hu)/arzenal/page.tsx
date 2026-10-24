@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
+import ProposalSample, { type ProposalPage } from "@/app/components/ProposalSample";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 
 export const metadata: Metadata = {
@@ -104,6 +105,34 @@ const WEB_FEATURES = [
   "Telefonra telepíthető változat (PWA)",
   "Meglévő rendszer fölé építés — WooCommerce, Shopify",
   "Biztonsági fejlécek, rate limiting, input validáció",
+];
+
+const PROPOSAL_PAGES: ProposalPage[] = [
+  {
+    src: "/minta/dizajnajanlas/01-tartalom.webp",
+    alt: "Dizájnajánlás tartalomjegyzéke tizenhat fejezettel",
+    caption: "Tartalom",
+  },
+  {
+    src: "/minta/dizajnajanlas/02-tipografia.webp",
+    alt: "Tipográfiai fejezet: betűpár és arculati lap a látványtervből",
+    caption: "Tipográfia",
+  },
+  {
+    src: "/minta/dizajnajanlas/03-szinpaletta.webp",
+    alt: "Színpaletta hat színnel és WCAG kontrasztarány-táblázattal",
+    caption: "Színpaletta",
+  },
+  {
+    src: "/minta/dizajnajanlas/04-fooldal.webp",
+    alt: "A főoldal látványterve és szakaszonkénti felépítése",
+    caption: "Főoldal",
+  },
+  {
+    src: "/minta/dizajnajanlas/05-termekoldal.webp",
+    alt: "A termékoldal látványterve lépésenkénti termékválasztóval",
+    caption: "Termékoldal",
+  },
 ];
 
 const ADS_FEATURES = [
@@ -464,11 +493,28 @@ export default function Arzenal() {
           ]}
           features={WEB_FEATURES}
           device={
-            <DevFrame header="Bizonyíték · ezt az oldalt is mi építettük">
-              <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed">
-                Ezt az oldalt is mi építettük — ugyanezekkel az elvekkel.
-              </p>
-            </DevFrame>
+            <>
+              <DevFrame header="Így néz ki egy dizájnajánlásunk" headerRight="Anonimizált részlet">
+                <ProposalSample
+                  intro={
+                    <>
+                      Öt oldal egy 24 oldalas arculati és webdizájn-ajánlásból, amit egy kézműves
+                      webáruháznak készítettünk az oldaluk auditja után: tipográfia, színpaletta
+                      kontrasztméréssel, főoldal- és termékoldal-látványterv. A márkát, a
+                      termékneveket és az árakat kitakartuk, mert az ügyfeleink anyagai nem
+                      nyilvánosak.
+                    </>
+                  }
+                  pages={PROPOSAL_PAGES}
+                  openLabel="megnyitás teljes méretben"
+                />
+              </DevFrame>
+              <DevFrame header="Bizonyíték · ezt az oldalt is mi építettük">
+                <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed">
+                  Ezt az oldalt is mi építettük — ugyanezekkel az elvekkel.
+                </p>
+              </DevFrame>
+            </>
           }
         />
       </Rail>

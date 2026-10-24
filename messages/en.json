@@ -259,7 +259,18 @@
         "Security headers, rate limiting, input validation",
         "Phased cutover for live systems"
       ],
-      "deviceHeader": "PROOF · WE BUILT THIS PAGE TOO"
+      "deviceHeader": "PROOF · WE BUILT THIS PAGE TOO",
+      "sampleHeader": "What one of our design proposals looks like",
+      "sampleTag": "Anonymised excerpt",
+      "sampleIntro": "Five pages from a 24-page brand and web design proposal we prepared for a handmade-goods online store after auditing their site: typography, a colour palette with measured contrast, and home and product page designs. Brand, product names and prices are redacted, because our clients' materials are not public. The pages are in Hungarian.",
+      "sampleOpen": "open full size",
+      "samplePages": {
+        "contents": { "caption": "Contents", "alt": "Design proposal table of contents with sixteen chapters" },
+        "typography": { "caption": "Typography", "alt": "Typography chapter: type pairing and brand sheet from the visual design" },
+        "palette": { "caption": "Colour palette", "alt": "Six-colour palette with a WCAG contrast ratio table" },
+        "home": { "caption": "Home page", "alt": "Home page design and its section-by-section structure" },
+        "product": { "caption": "Product page", "alt": "Product page design with a step-by-step product configurator" }
+      }
     },
     "ads": {
       "headline": "Advertising that ends in a number",

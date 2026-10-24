@@ -4,8 +4,18 @@ import { getTranslations } from "next-intl/server";
 import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
+import ProposalSample from "@/app/components/ProposalSample";
 import { ARZENAL_SECTIONS_EN } from "@/lib/site-links";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
+
+// Ugyanazok az anonimizált oldalképek, mint a magyar szolgáltatásoldalon.
+const PROPOSAL_FILES = [
+  "/minta/dizajnajanlas/01-tartalom.webp",
+  "/minta/dizajnajanlas/02-tipografia.webp",
+  "/minta/dizajnajanlas/03-szinpaletta.webp",
+  "/minta/dizajnajanlas/04-fooldal.webp",
+  "/minta/dizajnajanlas/05-termekoldal.webp",
+];
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations({ locale: "en", namespace: "Metadata.services" });
@@ -189,11 +199,26 @@ export default async function EnglishServices() {
           paragraphs={[t("web.p1"), t("web.p2")]}
           features={t.raw("web.items") as string[]}
           device={
-            <DevFrame header={t("web.deviceHeader")}>
-              <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed">
-                We built this page too — using the same principles.
-              </p>
-            </DevFrame>
+            <>
+              <DevFrame header={t("web.sampleHeader")} headerRight={t("web.sampleTag")}>
+                <ProposalSample
+                  intro={t("web.sampleIntro")}
+                  pages={(["contents", "typography", "palette", "home", "product"] as const).map(
+                    (key, i) => ({
+                      src: PROPOSAL_FILES[i],
+                      alt: t(`web.samplePages.${key}.alt`),
+                      caption: t(`web.samplePages.${key}.caption`),
+                    }),
+                  )}
+                  openLabel={t("web.sampleOpen")}
+                />
+              </DevFrame>
+              <DevFrame header={t("web.deviceHeader")}>
+                <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed">
+                  We built this page too — using the same principles.
+                </p>
+              </DevFrame>
+            </>
           }
         />
       </Rail>
