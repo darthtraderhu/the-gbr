@@ -12,7 +12,7 @@ description: "A www.thegbr.eu weboldal használatának feltételei: kapcsolatfel
 
 Ezek a feltételek a **www.thegbr.eu** weboldal használatára vonatkoznak. Az üzemeltető a **GBR Marketing Solutions Kft.** (a továbbiakban: Szolgáltató), amelynek adatait az [Impresszum](/impresszum) tartalmazza.
 
-A weboldal használatával Ön elfogadja az alábbi feltételeket. Ha nem ért egyet velük, kérjük, ne használja a weboldalt.
+A weboldal használatával elfogadod az alábbi feltételeket. Ha nem értesz egyet velük, kérjük, ne használd a weboldalt.
 
 > **Fontos:** Ez a dokumentum a weboldal használatára vonatkozik. **A Szolgáltató által nyújtott fejlesztési, üzemeltetési és marketingszolgáltatások feltételeit minden esetben külön, egyedi szerződés rendezi** — ezt a dokumentumot nem lehet a szolgáltatásra vonatkozó ajánlatnak vagy szerződéses feltételnek tekinteni.
 

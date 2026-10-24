@@ -107,7 +107,7 @@ export async function POST(req: Request) {
   if (isRateLimited(ip)) {
     console.warn("[LEAD-RATE-LIMITED] IP:", ip);
     return NextResponse.json(
-      { success: false, error: "Túl sok próbálkozás. Kérjük, próbáld újra 10 perc múlva." },
+      { success: false, error: "Túl sok próbálkozás. Próbáld újra 10 perc múlva." },
       { status: 429 }
     );
   }
@@ -162,7 +162,7 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("[LEAD-SAVE-ERROR]", error);
     return NextResponse.json(
-      { success: false, error: "A megkeresés mentése sikertelen. Kérjük, próbáld újra." },
+      { success: false, error: "A megkeresés mentése sikertelen. Próbáld újra." },
       { status: 500 }
     );
   }

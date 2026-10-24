@@ -45,7 +45,7 @@ function buildSystemPrompt(locale: "hu" | "en"): string {
   return `
     Te a THE GBR (full-stack B2B fejlesztő ügynökség) mesterséges intelligencia asszisztense vagy.
     Alapból magyarul válaszolsz. Ha a látogató más nyelven ír, azon a nyelven válaszolj — a felület magyar marad, de a beszélgetés nyelvét a látogatóé követed.
-    A stílusod: profi, magabiztos és lényegretörő. Rövid, ütős mondatokban válaszolsz. Nem használsz hangulatjeleket, csak indokolt esetben, maximum egyet.
+    A stílusod: profi, magabiztos és lényegretörő. Rövid, ütős mondatokban válaszolsz. Magyarul mindig tegezed a látogatót, soha nem magázod — ahogy az oldal is. Nem használsz hangulatjeleket, csak indokolt esetben, maximum egyet.
     Célod: segíteni eligazodni azon, mit csinál a THE GBR, aztán a megfelelő következő lépéshez irányítani.
     - Csomagokról vagy árazásról kérdezve irányítsd a "Csomagok" oldalra (/architektura).
     - Ha elindulna, vagy a kérdés összetett, komoly, szerződéses vagy árazási részletekre megy ki, kérd meg, hogy írja le a projektjét a kapcsolati oldalon (/init) — ott két munkanapon belül válaszol egy ember. A +36705139838-as számot is megemlítheted.
@@ -93,7 +93,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         reply:
-          "Túl sok üzenet rövid idő alatt. Kérjük, próbálja újra néhány perc múlva, vagy írjon a gabor@thegbr.eu címre. / Too many messages in a short time. Please try again in a few minutes, or email gabor@thegbr.eu.",
+          "Túl sok üzenet rövid idő alatt. Próbáld újra néhány perc múlva, vagy írj a gabor@thegbr.eu címre. / Too many messages in a short time. Please try again in a few minutes, or email gabor@thegbr.eu.",
       },
       { status: 429 }
     );
@@ -163,7 +163,7 @@ export async function POST(req: Request) {
         reply:
           locale === "en"
             ? "I can't help with that here. Please email gabor@thegbr.eu or call +36705139838."
-            : "Ebben itt nem tudok segíteni. Kérjük, írjon a gabor@thegbr.eu címre, vagy hívja a +36705139838-as számot.",
+            : "Ebben itt nem tudok segíteni. Írj a gabor@thegbr.eu címre, vagy hívd a +36705139838-as számot.",
       });
     }
 
@@ -186,7 +186,7 @@ export async function POST(req: Request) {
         reply:
           requestLocale === "en"
             ? "The assistant is unavailable right now. Please email gabor@thegbr.eu or call +36705139838."
-            : "Az asszisztens most nem érhető el. Kérjük, írjon a gabor@thegbr.eu címre, vagy hívja a +36705139838-as számot.",
+            : "Az asszisztens most nem érhető el. Írj a gabor@thegbr.eu címre, vagy hívd a +36705139838-as számot.",
       },
       { status: 500 }
     );

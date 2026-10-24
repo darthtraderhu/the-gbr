@@ -10,7 +10,7 @@ description: "Hogyan működik a www.thegbr.eu mesterségesintelligencia-alapú 
 
 ## 1. Miért adjuk ki ezt a tájékoztatót?
 
-A www.thegbr.eu weboldalon mesterséges intelligenciára épülő funkció működik. Fontosnak tartjuk, hogy Ön pontosan tudja, mi történik az adataival, és mit várhat el ettől a funkciótól.
+A www.thegbr.eu weboldalon mesterséges intelligenciára épülő funkció működik. Fontosnak tartjuk, hogy pontosan tudd, mi történik az adataiddal, és mit várhatsz el ettől a funkciótól.
 
 Az uniós mesterségesintelligencia-rendelet **(EU) 2024/1689** átláthatósági követelménye szerint a felhasználót tájékoztatni kell arról, ha mesterséges intelligenciával kommunikál. Ez a tájékoztató ezt a kötelezettséget is teljesíti.
 
@@ -32,21 +32,21 @@ Weboldalunk egyes tartalmainak elkészítéséhez mesterséges intelligenciát i
 
 ## 3. Mi történik a chatbe beírt adatokkal?
 
-Az Ön által beírt üzenetek **továbbításra kerülnek az Anthropic részére**, amely az Egyesült Államokban működik. Az adattovábbítás jogi garanciáiról az [Adatkezelési tájékoztató](/adatkezeles) 6. pontja rendelkezik.
+Az általad beírt üzenetek **továbbításra kerülnek az Anthropic részére**, amely az Egyesült Államokban működik. Az adattovábbítás jogi garanciáiról az [Adatkezelési tájékoztató](/adatkezeles) 6. pontja rendelkezik.
 
-**Kérjük, hogy a chatbe ne írjon be:**
+**Kérjük, hogy a chatbe ne írj be:**
 
-- személyes adatot — sem a sajátját, sem harmadik személyét
+- személyes adatot — sem a sajátodat, sem harmadik személyét
 - bizalmas vagy üzleti titoknak minősülő információt
 - jelszót, hozzáférési adatot, szerződéses részletet
 
-Ha ajánlatot szeretne kérni, vagy a projektjéről szeretne beszélni, kérjük, használja a **kapcsolatfelvételi űrlapot** — az arra szolgál, és ott az adatai a megfelelő védelem mellett kerülnek kezelésre.
+Ha ajánlatot szeretnél kérni, vagy a projektedről szeretnél beszélni, kérjük, használd a **kapcsolatfelvételi űrlapot** — az arra szolgál, és ott az adataid a megfelelő védelem mellett kerülnek kezelésre.
 
 **Megőrzési idő:** 30 nap
 
 ---
 
-## 4. Mit várhat el, és mit nem?
+## 4. Mit várhatsz el, és mit nem?
 
 ### A chat alkalmas arra, hogy
 
@@ -63,13 +63,13 @@ Ha ajánlatot szeretne kérni, vagy a projektjéről szeretne beszélni, kérjü
 
 **A mesterséges intelligencia hibázhat.** Előfordulhat, hogy pontatlan, hiányos vagy félrevezető választ ad. A chat által adott válaszok **tájékoztató jellegűek, és nem minősülnek ajánlattételnek vagy szerződéses nyilatkozatnak.**
 
-Kötelező érvényű információért mindig lépjen kapcsolatba velünk közvetlenül.
+Kötelező érvényű információért mindig lépj kapcsolatba velünk közvetlenül.
 
 ---
 
 ## 5. Automatizált döntéshozatal
 
-A chat funkció **nem hoz** Önre nézve joghatással járó vagy Önt hasonlóképpen jelentős mértékben érintő automatizált döntést, és **nem végez profilalkotást** (GDPR 22. cikk).
+A chat funkció **nem hoz** rád nézve joghatással járó vagy téged hasonlóképpen jelentős mértékben érintő automatizált döntést, és **nem végez profilalkotást** (GDPR 22. cikk).
 
 Minden ügyfélmegkeresést ember bírál el.
 
@@ -77,13 +77,13 @@ Minden ügyfélmegkeresést ember bírál el.
 
 ## 6. Emberi kapcsolatfelvétel
 
-Bármikor kérheti, hogy emberrel beszélhessen. Ehhez használja a kapcsolatfelvételi űrlapot, vagy írjon közvetlenül: gabor@thegbr.eu
+Bármikor kérheted, hogy emberrel beszélhess. Ehhez használd a kapcsolatfelvételi űrlapot, vagy írj közvetlenül: gabor@thegbr.eu
 
 ---
 
 ## 7. Az ügyfélprojektjeinkben használt AI
 
-Amennyiben megbízási szerződés keretében dolgozunk Önnek, és a munka során mesterséges intelligenciát veszünk igénybe, erről a szerződéskötés során külön tájékoztatjuk, és a feltételeket a szerződés rögzíti. Ügyféladatot AI-szolgáltatónak kizárólag az ügyfél előzetes tájékoztatása és hozzájárulása mellett továbbítunk.
+Amennyiben megbízási szerződés keretében dolgozunk neked, és a munka során mesterséges intelligenciát veszünk igénybe, erről a szerződéskötés során külön tájékoztatunk, és a feltételeket a szerződés rögzíti. Ügyféladatot AI-szolgáltatónak kizárólag az ügyfél előzetes tájékoztatása és hozzájárulása mellett továbbítunk.
 
 ---
 
