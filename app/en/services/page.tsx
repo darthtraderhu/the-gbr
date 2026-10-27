@@ -5,10 +5,21 @@ import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import ProposalSample from "@/app/components/ProposalSample";
+import StackProof, { type StackProofItem, type StackProofSource } from "@/app/components/StackProof";
 import { ARZENAL_SECTIONS_EN } from "@/lib/site-links";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 
 // Ugyanazok az anonimizált oldalképek, mint a magyar szolgáltatásoldalon.
+// Next.js / React források — ugyanazok, mint a magyar /arzenal oldalon.
+const STACK_SOURCES: StackProofSource[] = [
+  { label: "nextjs.org/showcase", href: "https://nextjs.org/showcase" },
+  {
+    label: "Vercel: Elkjøp case study",
+    href: "https://vercel.com/customers/elkjops-digital-transformation-with-next-js-and-vercel",
+  },
+  { label: "react.dev", href: "https://react.dev/" },
+];
+
 const PROPOSAL_FILES = [
   "/minta/dizajnajanlas/01-tartalom.webp",
   "/minta/dizajnajanlas/02-tipografia.webp",
@@ -213,10 +224,15 @@ export default async function EnglishServices() {
                   openLabel={t("web.sampleOpen")}
                 />
               </DevFrame>
-              <DevFrame header={t("web.deviceHeader")}>
-                <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed">
-                  We built this page too — using the same principles.
-                </p>
+              <DevFrame header={t("web.stackHeader")} headerRight={t("web.stackTag")}>
+                <StackProof
+                  intro={t("web.stackIntro")}
+                  items={t.raw("web.stackItems") as StackProofItem[]}
+                  note={t("web.stackNote")}
+                  sourcesLabel={t("web.stackSourcesLabel")}
+                  sources={STACK_SOURCES}
+                  checked={t("web.stackChecked")}
+                />
               </DevFrame>
             </>
           }

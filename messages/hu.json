@@ -24,7 +24,7 @@
   },
   "CookieConsent": {
     "title": "Sütik",
-    "body": "A látogatottság méréséhez a Google Analytics sütijeit használnánk, de csak akkor, ha hozzájárul. A működéshez szükséges sütikhez nem kérünk hozzájárulást.",
+    "body": "A látogatottság méréséhez a Google Analytics sütijeit használnánk, de csak akkor, ha hozzájárulsz. A működéshez szükséges sütikhez nem kérünk hozzájárulást.",
     "policyLink": "Cookie-tájékoztató",
     "accept": "Elfogadom",
     "reject": "Elutasítom",

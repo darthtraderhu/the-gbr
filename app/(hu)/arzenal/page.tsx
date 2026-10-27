@@ -4,6 +4,7 @@ import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import ProposalSample, { type ProposalPage } from "@/app/components/ProposalSample";
+import StackProof, { type StackProofItem, type StackProofSource } from "@/app/components/StackProof";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import { DevFrame, FindingsTable } from "@/app/components/ServiceFrame";
 import {
@@ -111,6 +112,50 @@ const SERVICE_SCHEMA_ITEMS: { id: string; name: string; description: string; pat
   },
 ];
 
+
+// Csak olyan márka, ami a forrásban név szerint szerepel. Ha a Showcase
+// változik, a listát és a megtekintés dátumát együtt frissítsd.
+const STACK_ITEMS: StackProofItem[] = [
+  {
+    name: "Nike",
+    tag: "Webáruház",
+    body: "A Next.js hivatalos bemutatóoldalán, a webáruházak (Composable Commerce) között.",
+  },
+  {
+    name: "Sonos",
+    tag: "Webáruház",
+    body: "Ugyanott, ugyanebben a kategóriában.",
+  },
+  {
+    name: "OpenAI és Claude",
+    tag: "AI",
+    body: "Az OpenAI és az Anthropic (Claude) oldala is a bemutatóoldalon szerepel, az AI kategóriában.",
+  },
+  {
+    name: "Netflix Jobs",
+    tag: "Webalkalmazás",
+    body: "A Netflix karrieroldala, a webalkalmazások között.",
+  },
+  {
+    name: "Elkjøp",
+    tag: "Esettanulmány",
+    body: "Északi elektronikai kiskereskedő, Angularról állt át. A Vercel szerint a betöltés (LCP) 50%-kal, a kattintásra adott válasz (INP) 60%-kal javult, a kiadási ciklus 7 hétről 1 napra rövidült. Ezek a Vercel számai, nem a mi mérésünk.",
+  },
+  {
+    name: "thegbr.eu",
+    tag: "Saját munkánk",
+    body: "Ez az oldal is Next.js 16-on és React 19-en fut, ugyanezekkel az elvekkel építettük.",
+  },
+];
+
+const STACK_SOURCES: StackProofSource[] = [
+  { label: "nextjs.org/showcase", href: "https://nextjs.org/showcase" },
+  {
+    label: "Vercel: Elkjøp-esettanulmány",
+    href: "https://vercel.com/customers/elkjops-digital-transformation-with-next-js-and-vercel",
+  },
+  { label: "react.dev", href: "https://react.dev/" },
+];
 
 const PROPOSAL_PAGES: ProposalPage[] = [
   {
@@ -430,10 +475,15 @@ export default function Arzenal() {
                   openLabel="megnyitás teljes méretben"
                 />
               </DevFrame>
-              <DevFrame header="Bizonyíték · ezt az oldalt is mi építettük">
-                <p className="[font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed">
-                  Ezt az oldalt is mi építettük — ugyanezekkel az elvekkel.
-                </p>
+              <DevFrame header="Miért Next.js és React" headerRight="Nyilvános források">
+                <StackProof
+                  intro="A Next.js a Vercel webes keretrendszere, a React a Meta felületépítő könyvtára, erre épül a Next.js. Nem webshop-motor és nem sablon, hanem alap, amire az oldalt a te kínálatodra és folyamataidra tervezzük. Nagy nemzetközi márkák is erre építenek:"
+                  items={STACK_ITEMS}
+                  note="Hogy ők erre építenek, az nem ígéret arra, hogy a te oldalad ugyanannyit javul. Azt mutatja, hogy a technológia bírja a nagy forgalmat, és hosszú távon karbantartott. Mikor nem éri meg: ha a kínálatod és a folyamataid jól beleférnek egy sablonba, a bérelt platform olcsóbb, és ezt meg is mondjuk."
+                  sourcesLabel="Források:"
+                  sources={STACK_SOURCES}
+                  checked="megtekintve 2026. 10. 27."
+                />
               </DevFrame>
             </>
           }
