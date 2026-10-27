@@ -78,7 +78,7 @@ const SERVICE_SCHEMA_ITEMS: { id: string; name: string; description: string; pat
     id: "ai",
     name: "AI és chatbot",
     description:
-      "OpenAI-alapú chatbot-integráció a weboldalon, saját tartalomra hangolva, emberi átirányítással a komolyabb kérdéseknél.",
+      "Chatbot a weboldalon, saját tartalomra hangolva, emberi átirányítással a komolyabb kérdéseknél.",
   },
   {
     id: "video",
@@ -193,7 +193,7 @@ const ADS_FEATURES = [
 ];
 
 const AI_FEATURES = [
-  "OpenAI-alapú chat a weboldalon, saját tartalomra hangolva",
+  "Chat a weboldalon, saját tartalomra hangolva",
   "Átirányítás emberhez, ha a kérdés komoly",
   "Jogi megfelelés: AI-tájékoztató, adattovábbítás dokumentálva",
   "Belső automatizációk: dokumentumfeldolgozás, összefoglalás",
