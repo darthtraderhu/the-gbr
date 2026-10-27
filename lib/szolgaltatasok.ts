@@ -105,6 +105,6 @@ export const IT_FAQ: FaqItem[] = [
   {
     question: "Kis irodának is érdemes külső rendszergazda?",
     answer:
-      "Igen, gyakran éppen nekik. Ahol nincs saját informatikus, ott jellemzően valamelyik munkatárs viszi „mellékesen”, és ez addig működik, amíg nincs baj. Felméréssel kezdünk, és megmondjuk, mekkora rendszeres munkát kíván az önöké. Ha keveset, azt is.",
+      "Igen, gyakran éppen nekik. Ahol nincs saját informatikus, ott jellemzően valamelyik munkatárs viszi „mellékesen”, és ez addig működik, amíg nincs baj. Felméréssel kezdünk, és megmondjuk, mekkora rendszeres munkát kíván a tiétek. Ha keveset, azt is.",
   },
 ];
