@@ -9,19 +9,19 @@ const DESCRIPTION =
   "Húsz év értékesítési tapasztalat, hat éves cég, és egy szűk csapat megbízható partnerekkel. Így dolgozunk, és ezt vállaljuk.";
 
 export const metadata: Metadata = {
-  title: "Rólunk | THE GBR",
+  title: "Rólunk: így dolgozik a GBR Marketing Solutions Kft. | THE GBR",
   description: DESCRIPTION,
   alternates: {
     canonical: "/szindikatus",
     languages: { hu: "/szindikatus", en: "/en/about", "x-default": "/szindikatus" },
   },
   openGraph: {
-    title: "Rólunk | THE GBR",
+    title: "Rólunk: így dolgozik a GBR Marketing Solutions Kft. | THE GBR",
     description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rólunk | THE GBR",
+    title: "Rólunk: így dolgozik a GBR Marketing Solutions Kft. | THE GBR",
     description: DESCRIPTION,
   },
 };

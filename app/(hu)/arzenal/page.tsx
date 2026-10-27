@@ -5,9 +5,20 @@ import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import ProposalSample, { type ProposalPage } from "@/app/components/ProposalSample";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
+import { DevFrame, FindingsTable } from "@/app/components/ServiceFrame";
+import {
+  IT_FAQ,
+  IT_FEATURES,
+  IT_SAMPLE_ROWS,
+  IT_SERVICE,
+  SIZE_FAQ,
+  WEB_FAQ,
+  WEB_FEATURES,
+  WEB_SERVICE,
+} from "@/lib/szolgaltatasok";
 
 export const metadata: Metadata = {
-  title: "Szolgáltatások | THE GBR",
+  title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
   description:
     "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, házon belül — B2B ügyfeleknek.",
   alternates: {
@@ -15,13 +26,13 @@ export const metadata: Metadata = {
     languages: { hu: "/arzenal", en: "/en/services", "x-default": "/arzenal" },
   },
   openGraph: {
-    title: "Szolgáltatások | THE GBR",
+    title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
     description:
       "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, házon belül.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Szolgáltatások | THE GBR",
+    title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
     description:
       "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, házon belül.",
   },
@@ -41,13 +52,14 @@ const INDEX_ITEMS = [
 
 // Egész mondatos leírás szolgáltatásonként — a Service séma description
 // mezője, hogy az AI-keresők idézhető kontextust kapjanak (AEO), ne csak
-// kulcsszavakat.
-const SERVICE_SCHEMA_ITEMS = [
+// kulcsszavakat. Ahol van saját aloldal (path), a Service séma URL-je oda
+// mutat, nem a horgonyra.
+const SERVICE_SCHEMA_ITEMS: { id: string; name: string; description: string; path?: string }[] = [
   {
     id: "web",
     name: "Web és webshop",
-    description:
-      "Egyedi dizájn alapú weboldal- és webshopfejlesztés Next.js alapokon, technikai SEO-val és biztonsági alapbeállításokkal.",
+    description: WEB_SERVICE.description,
+    path: WEB_SERVICE.path,
   },
   {
     id: "ads",
@@ -93,19 +105,12 @@ const SERVICE_SCHEMA_ITEMS = [
   },
   {
     id: "it",
-    name: "IT-üzemeltetés és rendszergazdai szolgáltatás",
-    description:
-      "Irodai IT-üzemeltetés kis és nagyobb csapatoknak: rendszerfelmérés, rendszergazdai feladatok, távfelügyelet, szerver, hálózat, VPN, levelezés, Microsoft 365 és Teams, nyomtatók és mobilflotta kezelése, 15 év tapasztalattal.",
+    name: IT_SERVICE.name,
+    description: IT_SERVICE.description,
+    path: IT_SERVICE.path,
   },
 ];
 
-const WEB_FEATURES = [
-  "Egyedi dizájn és design rendszer",
-  "Technikai SEO: sitemap, strukturált adat, canonical",
-  "Telefonra telepíthető változat (PWA)",
-  "Meglévő rendszer fölé építés — WooCommerce, Shopify",
-  "Biztonsági fejlécek, rate limiting, input validáció",
-];
 
 const PROPOSAL_PAGES: ProposalPage[] = [
   {
@@ -190,19 +195,6 @@ const PULZUS_FEATURES = [
   "Havi levél magyarul, konkrét javaslatokkal",
 ];
 
-const IT_FEATURES = [
-  "Meglévő IT-rendszer felmérése, írásos összefoglalóval",
-  "Rendszergazdai feladatok irodában, home office-ban és mobil eszközökön",
-  "Távfelügyelet és távoli segítség: rákapcsolódunk, nem kell kiszállásra várni",
-  "Szerverkörnyezet kialakítása és üzemeltetése",
-  "Hálózat kiépítése: kábeles és wifi",
-  "Biztonságos távoli elérés, VPN",
-  "Nyomtatók kezelése és karbantartása",
-  "Levelezőrendszer kialakítása és üzemeltetése",
-  "Microsoft 365 és Teams: távmunka és távoktatás bevezetése, üzemeltetése",
-  "Céges mobilflotta: díjcsomagok és költségek átnézése",
-  "Meglévő szoftverek és eszközök üzemeltetése",
-];
 
 const SOFTWARE_FEATURES = [
   "Folyamatfelmérés: mi megy ma kézzel, és mit érdemes automatizálni",
@@ -223,33 +215,6 @@ const SOFTWARE_LOG = [
   { t: "09:45", msg: "Újrapróbálás sikeres, a tétel pótolva" },
 ];
 
-const IT_SAMPLE_ROWS = [
-  {
-    finding: "Van mentés, de visszaállítást senki nem próbált",
-    meaning: "Baj esetén derül ki, hogy működik-e",
-    severity: "Magas",
-  },
-  {
-    finding: "Kilépett munkatárs fiókja még aktív",
-    meaning: "Hozzáfér a céges levelekhez, fájlokhoz",
-    severity: "Magas",
-  },
-  {
-    finding: "Közös rendszergazda-jelszó, évek óta ugyanaz",
-    meaning: "Nem követhető, ki mit állított át",
-    severity: "Magas",
-  },
-  {
-    finding: "Vendég és könyvelés ugyanazon a wifin",
-    meaning: "Egy fertőzött vendéggép elérheti a belső gépeket",
-    severity: "Közepes",
-  },
-  {
-    finding: "Lejárt támogatású operációs rendszer",
-    meaning: "Nem kap biztonsági frissítést",
-    severity: "Közepes",
-  },
-];
 
 const ACCESS_SAMPLE_ROWS = [
   { finding: "Kontraszt 3,1:1 a gombokon", meaning: "Gyengénlátónak nehezen olvasható", severity: "Magas" },
@@ -272,35 +237,8 @@ const OPS_LOG = [
 ];
 
 const FAQ_ITEMS = [
-  {
-    question: "Mennyibe kerül egy weboldal vagy webshop?",
-    answer:
-      "Nincs fix árlista, mert nincs két egyforma projekt. A felmérés végén viszont fix árat és határidőt kapsz, nem sávot. A tipikus felállásokat a csomagoknál látod.",
-  },
-  {
-    question: "Mennyi idő alatt készül el?",
-    answer:
-      "Egy weboldal jellemzően 4–8 hét. Egy élő webshop újraépítése ennél lényegesen több, mert szakaszosan megy — de az első látható változás már hetek alatt megjelenik.",
-  },
-  {
-    question: "Mi történik a régi oldalammal, ha lecseréljük?",
-    answer:
-      "Nem kapcsoljuk le, amíg az új nem működik bizonyítottan. Az URL-eket átirányítjuk, hogy a Google-találatok ne vesszenek el — ez a legdrágább hiba, amit egy platformváltásnál el lehet követni.",
-  },
-  {
-    question: "Kell hozzá értenem a technikához?",
-    answer: "Nem. Ami viszont kell: tudd megmondani, mit szeretnél elérni. A többi a mi dolgunk.",
-  },
-  {
-    question: "Mi van, ha átadás után elromlik valami?",
-    answer:
-      "Ha üzemeltetést is kérsz, mi észleljük előbb, és javítjuk. Ha nem, akkor is felelünk a leszállított munkáért — a részleteket a szerződés rögzíti.",
-  },
-  {
-    question: "Csak nagyvállalatokkal dolgoztok?",
-    answer:
-      "Nem. Van egy alsó határ, ami alatt nem érdemes belefogni — ezt az űrlapon a költségkeret-kérdés szűri. Fölötte a cégméret nem szempont.",
-  },
+  ...WEB_FAQ,
+  SIZE_FAQ,
   {
     question: "Az akadálymentesítési felmérés garantálja a jogi megfelelést?",
     answer:
@@ -316,11 +254,7 @@ const FAQ_ITEMS = [
     answer:
       "Nem. A megfelelésről jogász nyilatkozik, nem mi. Amit a modul ad: havonta dokumentáljuk, milyen sütiket és külső kódokat tölt ténylegesen az oldal, és ha ez eltér a jogi dokumentumoktól, webjogász partnerünk értékeli és szükség esetén frissíti őket. A jogi munka díját és terjedelmét a jogász határozza meg.",
   },
-  {
-    question: "Kis irodának is érdemes külső rendszergazda?",
-    answer:
-      "Igen, gyakran éppen nekik. Ahol nincs saját informatikus, ott jellemzően valamelyik munkatárs viszi „mellékesen”, és ez addig működik, amíg nincs baj. Felméréssel kezdünk, és megmondjuk, mekkora rendszeres munkát kíván az önöké. Ha keveset, azt is.",
-  },
+  ...IT_FAQ,
   {
     question: "Le kell cserélnünk a meglévő rendszereinket az automatizációhoz?",
     answer:
@@ -332,26 +266,6 @@ const FAQ_ITEMS = [
       "Nem csendben áll le. Minden futás naplózódik, hiba esetén riasztás megy a felelősnek — nekünk, ha az üzemeltetést is ránk bízod, vagy a kijelölt munkatársatoknak. A kimaradt tételek a napló alapján pótolhatók.",
   },
 ];
-
-function DevFrame({
-  header,
-  headerRight,
-  children,
-}: {
-  header: string;
-  headerRight?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="border-t border-[var(--rule)] bg-[var(--panel)]">
-      <div className="flex flex-wrap justify-between gap-3 px-6 py-2.5 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
-        <span>{header}</span>
-        {headerRight && <span>{headerRight}</span>}
-      </div>
-      <div className="p-6">{children}</div>
-    </div>
-  );
-}
 
 function ServiceBlock({
   id,
@@ -430,7 +344,7 @@ export default function Arzenal() {
           data={serviceSchema({
             name: item.name,
             description: item.description,
-            url: `${SITE_URL}/arzenal#${item.id}`,
+            url: `${SITE_URL}${item.path ?? `/arzenal#${item.id}`}`,
           })}
         />
       ))}
@@ -490,6 +404,13 @@ export default function Arzenal() {
               szerkezet része.
             </>,
             "Élő webshopnál nem kapcsolunk le semmit: fokozatosan cseréljük az oldalakat, a bolt közben forgalmaz.",
+            <>
+              Részletesen:{" "}
+              <Link href={WEB_SERVICE.path} className="text-[var(--ink)] underline">
+                weboldal- és webshopfejlesztés lépésről lépésre
+              </Link>
+              .
+            </>,
           ]}
           features={WEB_FEATURES}
           device={
@@ -770,44 +691,10 @@ export default function Arzenal() {
           features={ACCESS_FEATURES}
           device={
             <DevFrame header="Amit egy felmérés tipikusan talál" headerRight="Minta">
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-[480px] border-collapse [font-size:var(--text-sm)]">
-                  <thead>
-                    <tr className="border-b border-[var(--rule-soft)]">
-                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Amit találunk
-                      </th>
-                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Mit jelent
-                      </th>
-                      <th className="py-[var(--space-2)] text-right font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Súly
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {ACCESS_SAMPLE_ROWS.map((row) => (
-                      <tr
-                        key={row.finding}
-                        className="border-b border-[var(--rule-soft)] last:border-b-0"
-                      >
-                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--ink-2)]">
-                          {row.finding}
-                        </td>
-                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--mid)]">
-                          {row.meaning}
-                        </td>
-                        <td className="py-[var(--space-3)] text-right [font-family:var(--font-mono)] text-[var(--signal-deep)] whitespace-nowrap">
-                          {row.severity}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
-                Illusztráció. A tényleges lista a felmérés után áll össze, oldalanként eltér.
-              </p>
+              <FindingsTable
+                rows={ACCESS_SAMPLE_ROWS}
+                note="Illusztráció. A tényleges lista a felmérés után áll össze, oldalanként eltér."
+              />
             </DevFrame>
           }
         />
@@ -934,48 +821,21 @@ export default function Arzenal() {
               nyomtatón át a munkatársak telefonjáig.
             </>,
             "Felméréssel kezdünk: megnézzük, mi van most, és írásban megkapod, mit találtunk és mit javasolunk. Utána te döntöd el, mit bízol ránk.",
+            <>
+              Részletesen:{" "}
+              <Link href={IT_SERVICE.path} className="text-[var(--ink)] underline">
+                irodai IT-üzemeltetés és rendszergazdai szolgáltatás
+              </Link>
+              .
+            </>,
           ]}
           features={IT_FEATURES}
           device={
             <DevFrame header="Amit egy IT-felmérés tipikusan talál" headerRight="Minta">
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-[480px] border-collapse [font-size:var(--text-sm)]">
-                  <thead>
-                    <tr className="border-b border-[var(--rule-soft)]">
-                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Amit találunk
-                      </th>
-                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Mit jelent
-                      </th>
-                      <th className="py-[var(--space-2)] text-right font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Súly
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {IT_SAMPLE_ROWS.map((row) => (
-                      <tr
-                        key={row.finding}
-                        className="border-b border-[var(--rule-soft)] last:border-b-0"
-                      >
-                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--ink-2)]">
-                          {row.finding}
-                        </td>
-                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--mid)]">
-                          {row.meaning}
-                        </td>
-                        <td className="py-[var(--space-3)] text-right [font-family:var(--font-mono)] text-[var(--signal-deep)] whitespace-nowrap">
-                          {row.severity}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
-                Illusztráció. A tényleges lista a felmérés után áll össze, irodánként eltér.
-              </p>
+              <FindingsTable
+                rows={IT_SAMPLE_ROWS}
+                note="Illusztráció. A tényleges lista a felmérés után áll össze, irodánként eltér."
+              />
             </DevFrame>
           }
         />

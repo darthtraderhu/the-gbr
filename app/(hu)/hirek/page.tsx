@@ -11,7 +11,7 @@ import HirekClient from "./HirekClient";
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: "Írások | THE GBR",
+  title: "Írások weboldalról, SEO-ról, AI-ról és üzemeltetésről | THE GBR",
   description:
     "B2B marketing, Next.js fejlesztés és AI-integráció — amit megcsinálunk, arról írunk is.",
   alternates: {
@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     languages: { hu: "/hirek", en: "/en/writing", "x-default": "/hirek" },
   },
   openGraph: {
-    title: "Írások | THE GBR",
+    title: "Írások weboldalról, SEO-ról, AI-ról és üzemeltetésről | THE GBR",
     description: "B2B marketing, Next.js fejlesztés és AI-integráció.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Írások | THE GBR",
+    title: "Írások weboldalról, SEO-ról, AI-ról és üzemeltetésről | THE GBR",
     description: "B2B marketing, Next.js fejlesztés és AI-integráció.",
   },
 };

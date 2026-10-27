@@ -29,7 +29,7 @@ try {
 // "sötét/neon terminál" márkahangot.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "THE GBR | Fejlesztés és üzemeltetés B2B cégeknek",
+  title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
   description:
     "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek.",
   alternates: {
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "THE GBR | Fejlesztés és üzemeltetés B2B cégeknek",
+    title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
     description:
       "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek.",
     url: SITE_URL,
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "THE GBR | Fejlesztés és üzemeltetés B2B cégeknek",
+    title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
     description:
       "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek.",
   },

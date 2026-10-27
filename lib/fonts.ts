@@ -9,21 +9,21 @@ import { Archivo, Source_Serif_4, IBM_Plex_Mono } from "next/font/google";
 
 // Display — címsorokhoz.
 export const fontDisplay = Archivo({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["500", "600", "700"],
   variable: "--font-archivo",
 });
 
 // Törzsszöveg.
 export const fontBody = Source_Serif_4({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "600"],
   variable: "--font-source-serif",
 });
 
 // Adat és címke — csak számokon/metaadaton, sosem folyószövegben (ld. AGENTS.md).
 export const fontMono = IBM_Plex_Mono({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "500"],
   variable: "--font-plex-mono",
 });

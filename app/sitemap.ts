@@ -16,6 +16,8 @@ const staticRoutes: Array<{
 }> = [
   { path: "", changeFrequency: "weekly", priority: 1 },
   { path: "/arzenal", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/arzenal/weboldal-fejlesztes", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/arzenal/it-uzemeltetes", changeFrequency: "monthly", priority: 0.8 },
   { path: "/architektura", changeFrequency: "monthly", priority: 0.8 },
   { path: "/szindikatus", changeFrequency: "monthly", priority: 0.6 },
   { path: "/seo", changeFrequency: "monthly", priority: 0.8 },
