@@ -259,7 +259,20 @@
         "Security headers, rate limiting, input validation",
         "Phased cutover for live systems"
       ],
-      "deviceHeader": "PROOF · WE BUILT THIS PAGE TOO",
+      "stackHeader": "Why Next.js and React",
+      "stackTag": "Public sources",
+      "stackIntro": "Next.js is Vercel's web framework; React is Meta's UI library that Next.js is built on. It is not a shop engine or a template, but a foundation we design around your client's catalogue and processes. Large international brands build on it too:",
+      "stackItems": [
+        { "name": "Nike", "tag": "Commerce", "body": "Listed on the official Next.js Showcase under Composable Commerce." },
+        { "name": "Sonos", "tag": "Commerce", "body": "Same page, same category." },
+        { "name": "OpenAI and Claude", "tag": "AI", "body": "Both OpenAI's and Anthropic's (Claude) sites are on the Showcase, in the AI category." },
+        { "name": "Netflix Jobs", "tag": "Web app", "body": "Netflix's careers site, listed under Web Apps." },
+        { "name": "Elkjøp", "tag": "Case study", "body": "Nordic electronics retailer that moved from Angular. Per Vercel: LCP improved 50%, INP 60%, release cycle went from 7 weeks to 1 day. These are Vercel's figures, not our measurements." },
+        { "name": "thegbr.eu", "tag": "Our own work", "body": "This site runs on Next.js 16 and React 19, built on the same principles." }
+      ],
+      "stackNote": "That these brands build on it is not a promise that your project improves by the same amount. It shows the stack handles heavy traffic and is maintained long term. When it is not worth it: if the catalogue and processes fit a template, a hosted platform is cheaper, and we will say so.",
+      "stackSourcesLabel": "Sources:",
+      "stackChecked": "checked 27 Oct 2026",
       "sampleHeader": "What one of our design proposals looks like",
       "sampleTag": "Anonymised excerpt",
       "sampleIntro": "Five pages from a 24-page brand and web design proposal we prepared for a handmade-goods online store after auditing their site: typography, a colour palette with measured contrast, and home and product page designs. Brand, product names and prices are redacted, because our clients' materials are not public. The pages are in Hungarian.",
