@@ -85,7 +85,6 @@ const TECH_STACK = [
   "Supabase",
   "WooCommerce",
   "Vercel",
-  "OpenAI",
 ];
 
 const PROJECTS = [

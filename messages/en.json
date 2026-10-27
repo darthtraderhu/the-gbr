@@ -185,7 +185,7 @@
     "stackEyebrow": "STACK",
     "stackHeadline": "What we work with",
     "stackIntro": "Not every project needs the same tools. These are what we use daily, and what we take responsibility for.",
-    "stackList": "Next.js · React · TypeScript · Supabase · PostgreSQL · WooCommerce · Vercel · OpenAI API",
+    "stackList": "Next.js · React · TypeScript · Supabase · PostgreSQL · WooCommerce · Vercel",
     "workEyebrow": "WORK",
     "workHeadline": "What we're building",
     "workIntro": "Client work and our own products. The latter isn't portfolio filler — it's here because we operate these ourselves, and that's the difference.",
@@ -332,7 +332,7 @@
       "p1": "AI isn't magic and it doesn't replace your support team. What it's good for: giving visitors an answer at midnight to the simple questions, and getting them to where a person can actually help.",
       "p2": "There's one running on this page — try it. And next to it, an <link>AI usage notice</link>, because the EU AI Act requires transparency and because it's the right thing to do.",
       "items": [
-        "OpenAI-based chat, tuned to your own content",
+        "Website chat, tuned to your own content",
         "Escalation to a human when the question is serious",
         "Compliance: AI notice, documented data flows",
         "Internal automation: document processing, summarisation"
