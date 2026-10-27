@@ -18,7 +18,7 @@ const HOME_DESCRIPTION =
   "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek. Válasz két munkanapon belül.";
 
 export const metadata: Metadata = {
-  title: "THE GBR | Fejlesztés és üzemeltetés B2B cégeknek",
+  title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
   description: HOME_DESCRIPTION,
   alternates: {
     canonical: "/",
@@ -29,12 +29,12 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "THE GBR | Fejlesztés és üzemeltetés B2B cégeknek",
+    title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
     description: HOME_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "THE GBR | Fejlesztés és üzemeltetés B2B cégeknek",
+    title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
     description: HOME_DESCRIPTION,
   },
 };

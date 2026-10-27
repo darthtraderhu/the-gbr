@@ -8,19 +8,19 @@ const DESCRIPTION =
   "Három tipikus felállás weboldal-fejlesztéstől a folyamatos üzemeltetésig, plusz a Pulzus havi figyelő szolgáltatás. Tervezd meg a keretet, és nézd meg, mit kapsz érte.";
 
 export const metadata: Metadata = {
-  title: "Csomagok és árazás | THE GBR",
+  title: "Csomagok és árazás: weboldal, webshop, üzemeltetés | THE GBR",
   description: DESCRIPTION,
   alternates: {
     canonical: "/architektura",
     languages: { hu: "/architektura", en: "/en/engagement", "x-default": "/architektura" },
   },
   openGraph: {
-    title: "Csomagok és árazás | THE GBR",
+    title: "Csomagok és árazás: weboldal, webshop, üzemeltetés | THE GBR",
     description: DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Csomagok és árazás | THE GBR",
+    title: "Csomagok és árazás: weboldal, webshop, üzemeltetés | THE GBR",
     description: DESCRIPTION,
   },
 };
