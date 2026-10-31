@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../globals.css";
 import { SITE_URL } from "@/lib/site";
 import { organizationSchema } from "@/lib/jsonld";
@@ -82,6 +83,8 @@ export default function EnglishRootLayout({
 
         <Analytics />
 
+        {/* Vercel Speed Insights — real user performance monitoring */}
+        <SpeedInsights />
 
         {/* Google Analytics csak hozzájárulás után tölt be (ld. CookieConsent) */}
 
