@@ -1,0 +1,51 @@
+{
+  "Nav": {
+    "services": "Services",
+    "engagement": "Engagement",
+    "seo": "SEO",
+    "about": "About",
+    "writing": "Writing",
+    "cta": "Start a conversation",
+    "mobileMenu": "Menu",
+    "mobileChat": "Chat",
+    "mobileCta": "Start",
+    "allAreas": "Nine areas",
+    "closeMenu": "Close menu",
+    "switchLabel": "Switch to Hungarian"
+  },
+  "Footer": {
+    "tagline": "Development and operations · EU-based",
+    "agencyColumn": "Agency",
+    "contactColumn": "Contact",
+    "legalColumn": "Legal",
+    "writeToUs": "Get started →",
+    "home": "Home",
+    "rightsReserved": "All rights reserved.",
+    "legalNote": "Our privacy notice and terms are published in Hungarian, as our company is registered in Hungary and operates under Hungarian and EU law. An English summary is available on request.",
+    "legalLine": "Registered in Hungary · EU VAT: HU28814706 · Operating under GDPR"
+  },
+  "CookieConsent": {
+    "title": "Cookies",
+    "body": "We'd like to use Google Analytics cookies to measure visits, but only with your consent. Cookies required for the site to work don't need consent.",
+    "policyLink": "Cookie notice (HU)",
+    "accept": "Accept",
+    "reject": "Decline",
+    "settings": "Cookie settings"
+  },
+  "LanguageSwitcher": {
+    "hu": "HU",
+    "en": "EN"
+  },
+
+  "Chat": {
+    "launcherLabel": "Got a question?",
+    "panelSubtitle": "Answers · doesn't quote",
+    "noticeLine": "AI replies · price and timeline from a person",
+    "initialMessage": "Hi! I'm here to help you find your way around. Please don't share personal data here — if you'd like a quote, the contact form is the right place.",
+    "inputPlaceholder": "Type a question…",
+    "send": "Send",
+    "close": "Close",
+    "you": "You",
+    "networkError": "The request failed. Try again, or email: gabor@thegbr.eu"
+  }
+}
