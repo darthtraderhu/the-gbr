@@ -106,7 +106,14 @@ export default function AtvilagitasEsAjanlas() {
         </DevFrame>
       }
       steps={STEPS}
-      relatedSlugs={["technikai-seo-audit", "kie-a-weboldalad", "sablon-weboldalak-halala"]}
+      relatedSlugs={[
+        "mielott-uj-weboldalt-rendelsz",
+        "ajanlat-kep-helyett-terv",
+        "oldalak-amikrol-nem-tudsz",
+        "technikai-seo-audit",
+        "kie-a-weboldalad",
+        "sablon-weboldalak-halala",
+      ]}
       faq={[...AUDIT_FAQ, SIZE_FAQ]}
     />
   );
