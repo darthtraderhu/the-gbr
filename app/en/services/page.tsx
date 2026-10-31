@@ -5,21 +5,16 @@ import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import ProposalSample from "@/app/components/ProposalSample";
-import StackProof, { type StackProofItem, type StackProofSource } from "@/app/components/StackProof";
+import StackProof from "@/app/components/StackProof";
+import { FactStrip, Okoszisztema } from "@/app/components/SalesBlocks";
+import { ECO_STAGES_EN } from "@/lib/okoszisztema";
+import { NEXTJS_CHECKED_EN, NEXTJS_ITEMS_EN, NEXTJS_SOURCES_EN } from "@/lib/nextjs-proof";
+import type { ServicePitch } from "@/lib/szolgaltatasok";
+import { PITCH_EN } from "@/lib/szolgaltatasok-en";
 import { ARZENAL_SECTIONS_EN } from "@/lib/site-links";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 
 // Ugyanazok az anonimizált oldalképek, mint a magyar szolgáltatásoldalon.
-// Next.js / React források — ugyanazok, mint a magyar /arzenal oldalon.
-const STACK_SOURCES: StackProofSource[] = [
-  { label: "nextjs.org/showcase", href: "https://nextjs.org/showcase" },
-  {
-    label: "Vercel: Elkjøp case study",
-    href: "https://vercel.com/customers/elkjops-digital-transformation-with-next-js-and-vercel",
-  },
-  { label: "react.dev", href: "https://react.dev/" },
-];
-
 const PROPOSAL_FILES = [
   "/minta/dizajnajanlas/01-tartalom.webp",
   "/minta/dizajnajanlas/02-tipografia.webp",
@@ -66,7 +61,7 @@ function ServiceBlock({
   id,
   n,
   label,
-  title,
+  pitch,
   paragraphs,
   features,
   device,
@@ -74,7 +69,7 @@ function ServiceBlock({
   id: string;
   n: string;
   label: string;
-  title: string;
+  pitch: ServicePitch;
   paragraphs: React.ReactNode[];
   features: string[];
   device: React.ReactNode;
@@ -91,13 +86,17 @@ function ServiceBlock({
           </div>
         </div>
         <div>
-          <h2 className="font-display font-extrabold [font-size:var(--text-svc-title)] tracking-[-0.038em] leading-[1.02] max-w-[20ch] mb-[var(--space-5)]">
-            {title}
+          <p className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.2em] uppercase text-[var(--signal-deep)] mb-[var(--space-4)]">
+            {pitch.kicker}
+          </p>
+          <h2 className="font-display font-black [font-size:var(--text-section)] tracking-[-0.045em] leading-[0.98] max-w-[16ch] mb-[var(--space-6)]">
+            {pitch.headline}
+            <span className="text-[var(--signal)]">.</span>
           </h2>
           {paragraphs.map((p, i) => (
             <p
               key={i}
-              className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[52ch] mt-[var(--space-4)] first:mt-0"
+              className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch] mt-[var(--space-4)] first:mt-0"
             >
               {p}
             </p>
@@ -105,18 +104,40 @@ function ServiceBlock({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-[var(--rule)]">
-        {features.map((feat, i) => (
+      <FactStrip facts={pitch.facts} />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 border-t border-[var(--rule)]">
+        {pitch.angle.slice(0, 2).map((row, i) => (
           <div
-            key={feat}
-            className={`px-6 py-[var(--space-4)] [font-size:var(--text-base)] text-[var(--ink-2)] border-b border-[var(--rule)] ${
-              i % 2 === 0 ? "sm:border-r" : ""
-            }`}
+            key={row.ours}
+            className={`px-6 py-[var(--space-6)] border-b md:border-b-0 border-[var(--rule)] ${i === 0 ? "md:border-r" : ""}`}
           >
-            {feat}
+            <p className="m-0 [font-size:var(--text-base)] text-[var(--mid)] line-through decoration-[var(--rule-strong)]">
+              {row.usual}
+            </p>
+            <p className="m-0 mt-[var(--space-2)] font-display font-bold [font-size:var(--text-xl)] leading-snug tracking-[-0.015em] text-[var(--ink)]">
+              <span className="text-[var(--signal)]" aria-hidden="true">&rarr; </span>
+              {row.ours}
+            </p>
           </div>
         ))}
       </div>
+
+      <ul className="m-0 p-0 list-none grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-[var(--rule)]">
+        {features.map((feat, i) => (
+          <li
+            key={feat}
+            className="flex gap-[var(--space-4)] items-baseline px-6 py-[var(--space-4)] border-b border-[var(--rule)] sm:[&:nth-child(2n+1)]:border-r lg:[&:nth-child(2n+1)]:border-r-0 lg:[&:not(:nth-child(3n))]:border-r"
+          >
+            <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] text-[var(--signal-deep)]">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span className="font-display font-semibold [font-size:var(--text-base)] leading-snug text-[var(--ink)]">
+              {feat}
+            </span>
+          </li>
+        ))}
+      </ul>
 
       {device}
     </section>
@@ -156,7 +177,7 @@ export default async function EnglishServices() {
           key={item.id}
           data={serviceSchema({
             name: item.name,
-            description: t(`${item.id === "pulse" ? "pulse" : item.id}.headline`),
+            description: PITCH_EN[item.id].headline,
             url: `${SITE_URL}/en/services#${item.id}`,
             inLanguage: "en",
           })}
@@ -196,6 +217,20 @@ export default async function EnglishServices() {
             </Link>
           ))}
         </div>
+        <div className="border-t border-[var(--rule)]">
+          <Okoszisztema
+            stages={ECO_STAGES_EN}
+            eyebrow="How it fits together"
+            title={
+              <>
+                Not a website. A sales ecosystem
+                <span className="text-[var(--signal)]">.</span>
+              </>
+            }
+            lead="Buyers don't decide in one click: they search, compare, ask, request a quote, and can drop off at any point. In most companies these steps run on separate channels with separate vendors, and nobody sees what became of an enquiry. We build them as one system, and your client sees it working."
+            note="Not every project needs all five stages. The assessment shows where the most is leaking."
+          />
+        </div>
       </Rail>
 
       <Seam />
@@ -206,7 +241,7 @@ export default async function EnglishServices() {
           id="web"
           n="01"
           label="Web and commerce"
-          title={t("web.headline")}
+          pitch={PITCH_EN.web}
           paragraphs={[t("web.p1"), t("web.p2")]}
           features={t.raw("web.items") as string[]}
           device={
@@ -227,11 +262,11 @@ export default async function EnglishServices() {
               <DevFrame header={t("web.stackHeader")} headerRight={t("web.stackTag")}>
                 <StackProof
                   intro={t("web.stackIntro")}
-                  items={t.raw("web.stackItems") as StackProofItem[]}
+                  items={NEXTJS_ITEMS_EN}
                   note={t("web.stackNote")}
                   sourcesLabel={t("web.stackSourcesLabel")}
-                  sources={STACK_SOURCES}
-                  checked={t("web.stackChecked")}
+                  sources={NEXTJS_SOURCES_EN}
+                  checked={NEXTJS_CHECKED_EN}
                 />
               </DevFrame>
             </>
@@ -245,7 +280,7 @@ export default async function EnglishServices() {
           n="02"
           id="ads"
           label="Performance marketing"
-          title={t("ads.headline")}
+          pitch={PITCH_EN.ads}
           paragraphs={[t("ads.p1"), t("ads.p2")]}
           features={t.raw("ads.items") as string[]}
           device={
@@ -279,7 +314,7 @@ export default async function EnglishServices() {
           id="software"
           n="03"
           label="Software and automation"
-          title={t("software.headline")}
+          pitch={PITCH_EN.software}
           paragraphs={[
             t("software.p1"),
             <span key="p2">{t.rich("software.p2", { b: B })}</span>,
@@ -315,7 +350,7 @@ export default async function EnglishServices() {
           n="04"
           label="AI integration"
           id="ai"
-          title={t("ai.headline")}
+          pitch={PITCH_EN.ai}
           paragraphs={[
             t("ai.p1"),
             <span key="p2">
@@ -358,7 +393,7 @@ export default async function EnglishServices() {
         <ServiceBlock
           n="05"
           label="Video and content"
-          title={t("video.headline")}
+          pitch={PITCH_EN.video}
           id="video"
           paragraphs={[t("video.p1")]}
           features={t.raw("video.items") as string[]}
@@ -388,7 +423,7 @@ export default async function EnglishServices() {
           id="ops"
           n="06"
           label="Web operations"
-          title={t("ops.headline")}
+          pitch={PITCH_EN.ops}
           paragraphs={[t("ops.p1"), t("ops.p2")]}
           features={t.raw("ops.items") as string[]}
           device={
@@ -417,7 +452,7 @@ export default async function EnglishServices() {
           id="access"
           n="07"
           label="Accessibility"
-          title={t("access.headline")}
+          pitch={PITCH_EN.access}
           paragraphs={[
             t("access.p1"),
             <span key="p2">{t.rich("access.p2", { b: B })}</span>,
@@ -475,7 +510,7 @@ export default async function EnglishServices() {
           id="pulse"
           n="08"
           label="Pulse"
-          title={t("pulse.headline")}
+          pitch={PITCH_EN.pulse}
           paragraphs={[
             t("pulse.p1"),
             <span key="p2">{t.rich("pulse.p2", { b: B })}</span>,
@@ -541,7 +576,7 @@ export default async function EnglishServices() {
           id="it"
           n="09"
           label="IT operations"
-          title={t("it.headline")}
+          pitch={PITCH_EN.it}
           paragraphs={[t("it.p1"), <span key="p2">{t.rich("it.p2", { b: B })}</span>, t("it.p3")]}
           features={t.raw("it.items") as string[]}
           device={

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ServicePage from "@/app/components/ServicePage";
-import { AI_FAQ, AI_FEATURES, AI_SERVICE, SIZE_FAQ } from "@/lib/szolgaltatasok";
+import { AI_FAQ, AI_FEATURES, AI_PITCH, AI_SERVICE, SIZE_FAQ } from "@/lib/szolgaltatasok";
 
 // A kapcsolódó cikkek listája miatt naponta frissül (ütemezett cikkek).
 export const revalidate = 86400;
@@ -42,17 +42,27 @@ export default function AiChatbot() {
       path={AI_SERVICE.path}
       schemaName={AI_SERVICE.name}
       schemaDescription={AI_SERVICE.description}
-      title="AI-chatbot a weboldaladra, ami a helyén van"
+      kicker={AI_PITCH.kicker}
+      title="AI-chatbot, ami éjjel is válaszol, és tudja, mikor kell ember"
       lead={[
-        "Az AI nem varázslat és nem is helyettesíti az ügyfélszolgálatot. Arra jó, hogy a látogató éjjel is választ kapjon az egyszerű kérdésekre, és eljusson oda, ahol valóban tudsz vele foglalkozni.",
         <>
-          Ezen az oldalon is fut egy — kipróbálhatod. Az adattovábbítás részleteit az{" "}
+          Az AI nem varázslat, és nem helyettesíti az ügyfélszolgálatot.{" "}
+          <strong className="text-[var(--ink)]">Egy jól betanított első vonal</strong>: a látogató
+          éjjel is választ kap az egyszerű kérdésére, a komoly érdeklődő pedig eljut oda, ahol
+          ember foglalkozik vele.
+        </>,
+        <>
+          Ezen az oldalon is fut egy, kipróbálhatod. Az adattovábbítás részleteit az{" "}
           <Link href="/ai-tajekoztato" className="text-[var(--ink)] underline">
             AI-használati tájékoztató
           </Link>{" "}
           írja le.
         </>,
       ]}
+      facts={AI_PITCH.facts}
+      angleTitle={AI_PITCH.angleTitle}
+      angle={AI_PITCH.angle}
+      ecosystemId="ai"
       features={AI_FEATURES}
       steps={STEPS}
       relatedSlugs={["ai-ertekesitesi-asszisztens", "llm-es-chatbotok-b2b", "ai-forradalom"]}

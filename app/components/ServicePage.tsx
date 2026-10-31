@@ -5,6 +5,16 @@ import { getSortedPostsData } from "@/lib/posts";
 import type { FaqItem } from "@/lib/szolgaltatasok";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
+import {
+  AngleTable,
+  FactStrip,
+  FeatureGrid,
+  Okoszisztema,
+  type AngleRow,
+  type Fact,
+  type Feature,
+} from "@/app/components/SalesBlocks";
+import { ECO_STAGES_HU, type ServiceId } from "@/lib/okoszisztema";
 
 // Egy szolgáltatás önálló aloldala (/arzenal/...). Az /arzenal az áttekintő,
 // ez a részletes oldal: saját title, H1, Service séma és GYIK, hogy a
@@ -17,11 +27,21 @@ export interface ServicePageProps {
   path: string;
   schemaName: string;
   schemaDescription: string;
+  // A H1 fölötti rövid, merész állítás.
+  kicker: string;
   title: string;
   lead: React.ReactNode[];
-  features: string[];
+  facts: Fact[];
+  // A szolgáltatás saját szöge: a szokásos megoldás és a mienk.
+  angleTitle: string;
+  angle: AngleRow[];
+  features: Feature[];
   steps: { title: string; body: string }[];
   device?: React.ReactNode;
+  // A szolgáltatás helye az értékesítési ökoszisztémában.
+  ecosystemId: ServiceId;
+  // Opcionális többlet blokk a kártyák után (pl. Next.js-márkák a webnél).
+  extra?: React.ReactNode;
   // A kapcsolódó cikkek slugjai — csak a már megjelent cikkek látszanak, az
   // ütemezett cikk a dátuma napján magától bekerül (ld. revalidate).
   relatedSlugs: string[];
@@ -35,11 +55,17 @@ export default function ServicePage({
   path,
   schemaName,
   schemaDescription,
+  kicker,
   title,
   lead,
+  facts,
+  angleTitle,
+  angle,
   features,
   steps,
   device,
+  ecosystemId,
+  extra,
   relatedSlugs,
   faq,
 }: ServicePageProps) {
@@ -72,7 +98,11 @@ export default function ServicePage({
             </Link>{" "}
             / {n}
           </p>
-          <h1 className="font-display font-black leading-[0.92] tracking-[-0.05em] [font-size:var(--text-svc-title)] max-w-[18ch]">
+          <p className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.22em] uppercase text-[var(--signal)] flex items-center gap-3 mb-[var(--space-5)]">
+            <span aria-hidden="true" className="w-1.5 h-1.5 bg-[var(--signal)] block motion-safe:animate-pulse" />
+            {kicker}
+          </p>
+          <h1 className="font-display font-black leading-[0.9] tracking-[-0.052em] [font-size:var(--text-claim)] max-w-[15ch]">
             {title}
             <span className="text-[var(--signal)]">.</span>
           </h1>
@@ -80,38 +110,70 @@ export default function ServicePage({
             {lead.map((p, i) => (
               <p
                 key={i}
-                className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch]"
+                className={`leading-relaxed text-[var(--ink-2)] max-w-[56ch] ${
+                  i === 0 ? "[font-size:var(--text-xl)] leading-snug" : "[font-size:var(--text-base)]"
+                }`}
               >
                 {p}
               </p>
             ))}
           </div>
+          <div className="flex flex-wrap items-center gap-3 mt-[var(--space-8)]">
+            <Button asChild>
+              <Link href="/init">Pitcheld el a projekted</Link>
+            </Button>
+            <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)]">
+              Válasz 2 munkanapon belül
+            </span>
+          </div>
         </section>
+        <FactStrip facts={facts} />
       </Rail>
 
       <Seam />
 
+      {/* ===== A SZÖGÜNK ===== */}
+      <Rail label="A szögünk">
+        <AngleTable
+          eyebrow="Ahol mások megállnak"
+          title={angleTitle}
+          usualLabel="A szokásos"
+          oursLabel="Nálunk"
+          rows={angle}
+        />
+      </Rail>
+
       {/* ===== AMIT KAPSZ ===== */}
       <Rail label="Amit kapsz">
         <section className="px-6 pt-[var(--space-12)] sm:pt-[var(--space-20)] pb-[var(--space-6)]">
-          <Eyebrow>Amit kapsz</Eyebrow>
+          <Eyebrow>Amit leszállítunk</Eyebrow>
           <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[18ch]">
-            Ez van benne
+            Ez kerül az asztalodra
           </h2>
         </section>
-        <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-[var(--rule)]">
-          {features.map((feat, i) => (
-            <div
-              key={feat}
-              className={`px-6 py-[var(--space-4)] [font-size:var(--text-base)] text-[var(--ink-2)] border-b border-[var(--rule)] ${
-                i % 2 === 0 ? "sm:border-r" : ""
-              }`}
-            >
-              {feat}
-            </div>
-          ))}
-        </div>
+        <FeatureGrid features={features} />
         {device}
+      </Rail>
+
+      {extra}
+
+      <Seam />
+
+      {/* ===== ÖKOSZISZTÉMA ===== */}
+      <Rail label="Ökoszisztéma" dark>
+        <Okoszisztema
+          stages={ECO_STAGES_HU}
+          active={ecosystemId}
+          eyebrow="Ahol ez a szolgáltatás ül"
+          title={
+            <>
+              Nem különálló munka. Egy értékesítési rendszer része
+              <span className="text-[var(--signal)]">.</span>
+            </>
+          }
+          lead="A vevőd nem egy kattintással dönt: keres, összehasonlít, kérdez, ajánlatot kér, és közben bármikor eltűnhet. Mi ezt az utat egyben nézzük. Nem kell mind az öt szakasz, de mindegyiknél tudjuk, mi jön előtte és utána."
+          youAreHere="itt vagy"
+        />
       </Rail>
 
       {/* ===== MENET ===== */}
@@ -119,7 +181,7 @@ export default function ServicePage({
         <section className="px-6 pt-[var(--space-12)] sm:pt-[var(--space-20)] pb-[var(--space-6)]">
           <Eyebrow>Hogyan zajlik</Eyebrow>
           <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[18ch]">
-            Lépésről lépésre
+            Így lesz belőle élő rendszer
           </h2>
         </section>
         <ol className="border-t border-[var(--rule)]">

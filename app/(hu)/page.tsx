@@ -8,6 +8,9 @@ import ServiceIndex from "@/app/components/ServiceIndex";
 import { ARZENAL_SECTIONS } from "@/lib/site-links";
 import IntroVideo from "@/app/components/IntroVideo";
 import HeroInstrument from "./HeroInstrument";
+import { Okoszisztema } from "@/app/components/SalesBlocks";
+import { ECO_STAGES_HU } from "@/lib/okoszisztema";
+import { NEXTJS_BRANDS, NEXTJS_CHECKED_HU } from "@/lib/nextjs-proof";
 
 // A cikk-ütemezés (lib/posts.ts) miatt a főoldal legutóbbi-cikkek blokkja is
 // naponta frissül — enélkül egy ütemezett cikk a dátuma napján sem jelenne
@@ -15,7 +18,7 @@ import HeroInstrument from "./HeroInstrument";
 export const revalidate = 86400;
 
 const HOME_DESCRIPTION =
-  "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek. Válasz két munkanapon belül.";
+  "Nem csak weboldal vagy webshop: értékesítési ökoszisztéma B2B cégeknek. Next.js alapon építjük, összekötjük a hirdetéssel, az automatizációval és az utánkövetéssel, és mi üzemeltetjük tovább. Válasz két munkanapon belül.";
 
 export const metadata: Metadata = {
   title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
@@ -38,27 +41,6 @@ export const metadata: Metadata = {
     description: HOME_DESCRIPTION,
   },
 };
-
-const DEVELOP_ITEMS = [
-  "Weboldal és webshop nulláról, vagy meglévő rendszer fölé",
-  "Telefonra telepíthető webalkalmazás (PWA)",
-  "Technikai SEO: sitemap, strukturált adat",
-  "Biztonság és teljesítmény alapból",
-  "Akadálymentesítés a WCAG szerint",
-  "Arculat, design rendszer, szövegezés",
-  "Egyedi szoftver és folyamat-automatizáció: belső rendszerek, összekötött alkalmazások",
-];
-
-const MANAGE_ITEMS = [
-  "Üzemeltetés, monitoring, hibariasztás",
-  "Folyamatos fejlesztés havi keretben",
-  "Tartalom, kampány, mérés",
-  "Automatizált tartalommotor",
-  "Havi állapotjelentés a weboldalról és a Google-megjelenésről (Pulzus)",
-  "Jogi modul a Pulzushoz: sütik és külső kódok havi figyelése, webjogász partnerrel",
-  "Irodai informatika partnerrel: rendszergazda, hálózat, Microsoft 365",
-  "Egy felelős kapcsolattartó",
-];
 
 // A weboldal-átvilágítás fejezetei — ugyanazok, mint a kiküldött riportoké.
 // Az AI-láthatóság szekció tényei — a /seo oldal AEO-felmérésével egyeznek
@@ -303,68 +285,31 @@ export default function Home() {
         </section>
       </Rail>
 
-      {/* ===== 04 / SZOLGÁLTATÁS — óriás számjegyek ===== */}
+      <Seam />
+
+      {/* ===== 04 / ÖKOSZISZTÉMA — nem weboldal, értékesítési rendszer ===== */}
+      <Rail label="04 / Ökoszisztéma" dark>
+        <Okoszisztema
+          stages={ECO_STAGES_HU}
+          eyebrow="Amit csinálunk"
+          title={
+            <>
+              Nem weboldalt adunk el. Értékesítési ökoszisztémát
+              <span className="text-[var(--signal)]">.</span>
+            </>
+          }
+          lead="Egy weboldal önmagában névjegy. Ami eladja a cégedet, az az út, amin egy idegenből vevő lesz: megtalál, meggyőződik, kérdez, ajánlatot kér, és közben nem vész el. Ezt az utat építjük meg és visszük tovább, egy felelős kapcsolattartóval."
+          note="Nem kell mind az öt szakasz. A felmérés megmutatja, hol szivárog most a legtöbb."
+        />
+      </Rail>
+
+      <Seam />
+
+      {/* ===== 04b / SZOLGÁLTATÁSOK — kilenc terület ===== */}
       <Rail label="04 / Szolgáltatás">
-        <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
-          <SectionHeader
-            eyebrow="Amit csinálunk"
-            title="Két dolog, nem tizenkettő"
-            lead="A „mindent tudunk” lista senkit nem győz meg. Két dologban vagyunk jók, és a kettő összetartozik."
-          />
-        </div>
-        <div className="border-t border-[var(--rule)]">
-          {[
-            {
-              n: "01",
-              lab: "Develop",
-              title: "Megépítjük",
-              desc: "Weboldalak és webshopok Next.js alapon, a mérnöki részletekkel együtt — nem csak úgy, hogy szép legyen a nyitóképernyő.",
-              items: DEVELOP_ITEMS,
-            },
-            {
-              n: "02",
-              lab: "Manage",
-              title: "És visszük tovább",
-              desc: "Itt dől el, hogy egy projekt siker lesz-e. Az átadás nem a vége — onnantól kezd el pénzt termelni.",
-              items: MANAGE_ITEMS,
-            },
-          ].map((row) => (
-            <div
-              key={row.n}
-              className="group grid grid-cols-1 lg:grid-cols-[minmax(140px,20%)_1fr_minmax(0,34%)] gap-[var(--space-6)] sm:gap-[var(--space-10)] px-6 py-[var(--space-8)] sm:py-[var(--space-12)] border-b border-[var(--rule)] items-start"
-            >
-              <div>
-                <div className="font-display font-black [font-size:var(--text-numeral-xl)] leading-[0.78] tracking-[-0.06em] text-[var(--rule)] transition-colors group-hover:text-[var(--signal)]">
-                  {row.n}
-                </div>
-                <div className="mt-[var(--space-3)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.22em] uppercase text-[var(--mid)]">
-                  {row.lab}
-                </div>
-              </div>
-              <div>
-                <h3 className="font-display font-bold [font-size:var(--text-3xl)] leading-[1.05] tracking-[-0.03em] mb-[var(--space-4)]">
-                  {row.title}
-                </h3>
-                <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[44ch]">
-                  {row.desc}
-                </p>
-              </div>
-              <ul className="m-0 p-0 list-none">
-                {row.items.map((item, i) => (
-                  <li
-                    key={item}
-                    className={`[font-size:var(--text-base)] text-[var(--ink-2)] py-[var(--space-3)] ${i === 0 ? "" : "border-t border-[var(--rule-soft)]"}`}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
         <ServiceIndex
-          eyebrow="Részletesen · kilenc terület"
-          lead="A két dolog kilenc területen áll össze. Mindegyikről bővebben a szolgáltatások oldalon."
+          eyebrow="Kilenc terület · mindegyik a saját szögéből"
+          lead="Mindegyik szolgáltatás egy szakaszt visz, és mindegyiknél ott kezdjük, ahol a piac szokásos megoldása megáll."
           items={ARZENAL_SECTIONS}
           basePath="/arzenal"
         />
@@ -450,23 +395,57 @@ export default function Home() {
         </section>
       </Rail>
 
-      {/* ===== 07 / STACK — tipográfiai fal ===== */}
+      {/* ===== 07 / STACK — Next.js, amire a világmárkák építenek ===== */}
       <Rail label="07 / Stack">
-        <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)]">
-          <Eyebrow>Műszaki alap · amivel dolgozunk</Eyebrow>
-          <p className="font-display font-extrabold [font-size:var(--text-wall)] leading-[1.02] tracking-[-0.045em] text-[var(--ink)] [overflow-wrap:anywhere]">
-            {TECH_STACK.map((tech, i) => (
-              <span key={tech}>
-                {i > 0 && <span className="text-[var(--signal)]"> · </span>}
-                {tech}
-              </span>
-            ))}
-          </p>
-          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch] mt-[var(--space-8)]">
-            Nem minden projektre ugyanaz kell. Ezekkel dolgozunk napi szinten, és ezekért felelünk
-            is.
-          </p>
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-20)] pb-[var(--space-8)]">
+          <Eyebrow>Műszaki alap · Next.js</Eyebrow>
+          <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[15ch] text-[var(--ink)]">
+            Amire a világmárkák építenek, arra építjük a te oldaladat is
+            <span className="text-[var(--signal)]">.</span>
+          </h2>
         </section>
+        <ul className="m-0 p-0 list-none grid grid-cols-2 lg:grid-cols-3 border-t border-l border-[var(--rule)]">
+          {NEXTJS_BRANDS.map((brand) => (
+            <li
+              key={brand}
+              className="px-6 py-[var(--space-8)] border-r border-b border-[var(--rule)] font-display font-black [font-size:var(--text-4xl)] tracking-[-0.045em] leading-none text-[var(--ink)] hover:text-[var(--signal-deep)] transition-colors"
+            >
+              {brand}
+            </li>
+          ))}
+        </ul>
+        <div className="px-6 py-[var(--space-8)] grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-[var(--space-8)] items-start">
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch]">
+            Ezek a márkák a Next.js hivatalos bemutatóoldalán szerepelnek. Ugyanez a keretrendszer
+            van a mi oldalaink alatt is: a sebesség, a keresőoptimalizálás és a biztonság a
+            szerkezet része, nem utólagos bővítmény. Nem ígéret arra, hogy a te oldalad ugyanannyit
+            javul, hanem bizonyíték arra, hogy a technológia bírja a nagy forgalmat.{" "}
+            <a
+              href="https://nextjs.org/showcase"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--ink)] underline"
+            >
+              Forrás: nextjs.org/showcase
+            </a>{" "}
+            <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)] whitespace-nowrap">
+              {NEXTJS_CHECKED_HU}
+            </span>
+          </p>
+          <div>
+            <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] mb-[var(--space-3)]">
+              Amivel napi szinten dolgozunk
+            </p>
+            <p className="font-display font-extrabold [font-size:var(--text-2xl)] leading-snug tracking-[-0.025em] text-[var(--ink)]">
+              {TECH_STACK.map((tech, i) => (
+                <span key={tech}>
+                  {i > 0 && <span className="text-[var(--signal)]"> · </span>}
+                  {tech}
+                </span>
+              ))}
+            </p>
+          </div>
+        </div>
       </Rail>
 
       {/* ===== 08 / MUNKÁK — jegyzék ===== */}
@@ -475,7 +454,7 @@ export default function Home() {
           <SectionHeader
             eyebrow="Munkák"
             title="Amin dolgozunk"
-            lead="Ügyfélmunka és saját termék. Az utóbbi nem portfólió-töltelék: azért van itt, mert ezeket magunk üzemeltetjük."
+            lead="Ügyfélmunka és saját termékek, élők és fejlesztés alattiak. A sajátjainknál nincs kire mutogatni, ha valami nem működik, és ez meglátszik azon, ahogy az ügyfeleknek építünk."
           />
         </div>
         <div className="border-t border-[var(--rule)]">

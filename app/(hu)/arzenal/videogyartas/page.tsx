@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ServicePage from "@/app/components/ServicePage";
-import { SIZE_FAQ, VIDEO_FAQ, VIDEO_FEATURES, VIDEO_SERVICE } from "@/lib/szolgaltatasok";
+import { SIZE_FAQ, VIDEO_FAQ, VIDEO_FEATURES, VIDEO_PITCH, VIDEO_SERVICE } from "@/lib/szolgaltatasok";
 
 // A kapcsolódó cikkek listája miatt naponta frissül (ütemezett cikkek).
 export const revalidate = 86400;
@@ -41,15 +41,21 @@ export default function Videogyartas() {
       path={VIDEO_SERVICE.path}
       schemaName={VIDEO_SERVICE.name}
       schemaDescription={VIDEO_SERVICE.description}
-      title="Céges videó és tartalom, a weboldallal egy arculatban"
+      kicker={VIDEO_PITCH.kicker}
+      title="Céges videó, ami ugyanazt mondja, mint a weboldalad"
       lead={[
         <>
-          Egy jó oldalra tartalom is kell. Reklámfilm, termékvideó, közösségi formátumok —{" "}
-          <strong className="text-[var(--ink)]">a mi irányításunk alatt</strong>, ugyanabban az
-          arculatban, mint a weboldal. Így nem lesz külön a „szép oldal” és a „valahonnan
-          összeszedett videó”. A gyártást videós partnerünk végzi.
+          A videó nem dísz, hanem érv: ott dolgozik, ahol a vevő mérlegel. Ezért{" "}
+          <strong className="text-[var(--ink)]">ugyanabban az arculatban készül, mint a weboldal</strong>
+          , és oda kerül, ahol a döntés születik: termékoldalra, nyitóképre, közösségi rövid
+          változatba.
         </>,
+        "A gyártást videós partnerünk végzi, a mi irányításunk alatt. A kapcsolattartó végig mi vagyunk, így nem kell két szállítót egyeztetned.",
       ]}
+      facts={VIDEO_PITCH.facts}
+      angleTitle={VIDEO_PITCH.angleTitle}
+      angle={VIDEO_PITCH.angle}
+      ecosystemId="video"
       features={VIDEO_FEATURES}
       steps={STEPS}
       relatedSlugs={["premium-video-konverzio", "tiktok-b2b-kampanyok"]}

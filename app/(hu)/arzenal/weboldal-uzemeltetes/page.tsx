@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ServicePage from "@/app/components/ServicePage";
-import { OPS_FAQ, OPS_FEATURES, OPS_SERVICE, SIZE_FAQ, WEB_FAQ } from "@/lib/szolgaltatasok";
+import { OPS_FAQ, OPS_FEATURES, OPS_PITCH, OPS_SERVICE, SIZE_FAQ, WEB_FAQ } from "@/lib/szolgaltatasok";
 
 // A kapcsolódó cikkek listája miatt naponta frissül (ütemezett cikkek).
 export const revalidate = 86400;
@@ -42,17 +42,18 @@ export default function WeboldalUzemeltetes() {
       path={OPS_SERVICE.path}
       schemaName={OPS_SERVICE.name}
       schemaDescription={OPS_SERVICE.description}
-      title="Weboldal-üzemeltetés és folyamatos fejlesztés"
+      kicker={OPS_PITCH.kicker}
+      title="Weboldal-üzemeltetés: az átadás nem a vége, hanem a rajt"
       lead={[
         <>
-          A legtöbb ügynökség itt hagyja abba. Pedig egy weboldal az élesítés után kezd el pénzt
-          termelni — és akkor kezd el elromlani is. Ha kéred,{" "}
-          <strong className="text-[var(--ink)]">visszük tovább</strong>: figyeljük, javítjuk,
+          A legtöbb ügynökség az átadásnál elköszön. Pedig egy weboldal az élesítés után kezd el
+          pénzt termelni, és akkor kezd el elromlani is.{" "}
+          <strong className="text-[var(--ink)]">Mi visszük tovább</strong>: figyeljük, javítjuk,
           fejlesztjük.
         </>,
         "Egy felelős emberrel dolgozol, aki ismeri a projekted. Nem ügyfélszolgálati sorszámot kapsz.",
         <>
-          Ezt nem csak ügyfeleknek mondjuk: a saját termékünket, a Gimbalt is mi üzemeltetjük — el
+          Ezt nem csak ügyfeleknek mondjuk: a saját termékünket, a Gimbalt is mi üzemeltetjük, és el
           is mondtuk,{" "}
           <Link href="/hirek/miert-epit-sajat-termeket" className="text-[var(--ink)] underline">
             mit tanultunk belőle
@@ -60,6 +61,10 @@ export default function WeboldalUzemeltetes() {
           .
         </>,
       ]}
+      facts={OPS_PITCH.facts}
+      angleTitle={OPS_PITCH.angleTitle}
+      angle={OPS_PITCH.angle}
+      ecosystemId="ops"
       features={OPS_FEATURES}
       steps={STEPS}
       relatedSlugs={[

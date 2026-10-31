@@ -4,7 +4,7 @@ import { DevFrame, LogLines } from "@/app/components/ServiceFrame";
 import {
   SIZE_FAQ,
   SOFTWARE_FAQ,
-  SOFTWARE_FEATURES,
+  SOFTWARE_FEATURES, SOFTWARE_PITCH,
   SOFTWARE_LOG,
   SOFTWARE_SERVICE,
 } from "@/lib/szolgaltatasok";
@@ -52,9 +52,10 @@ export default function Automatizacio() {
       path={SOFTWARE_SERVICE.path}
       schemaName={SOFTWARE_SERVICE.name}
       schemaDescription={SOFTWARE_SERVICE.description}
-      title="Folyamat-automatizálás és egyedi szoftverfejlesztés"
+      kicker={SOFTWARE_PITCH.kicker}
+      title="Folyamat-automatizálás: ami ma kézzel megy, holnap magától"
       lead={[
-        "A legtöbb cégnél van valaki, aki naponta átmásol valamit egyik helyről a másikra: a webshop rendeléseit a számlázóba, az űrlapról érkező megkereséseket egy táblázatba, a táblázatot a havi jelentésbe. Ez nem hiba, csak drága — és éppen akkor marad el, amikor a legnagyobb a hajtás.",
+        "A legtöbb cégnél van valaki, aki naponta átmásol valamit egyik helyről a másikra: a rendeléseket a számlázóba, a megkereséseket egy táblázatba, a táblázatot a havi jelentésbe. Ez nem hiba, csak drága, és éppen akkor marad el, amikor a legnagyobb a hajtás.",
         <>
           <strong className="text-[var(--ink)]">
             Ezeket a rendszereket összekötjük, hogy a munka magától fusson.
@@ -63,7 +64,12 @@ export default function Automatizacio() {
           egy folyamathoz nincs megfelelő szoftver, megépítjük: belső rendszert, ügyfélportált,
           adminfelületet.
         </>,
+        "Ez az értékesítési rendszer gerince is: a megkeresés nem egy postafiókban alszik el, hanem egy helyre fut be, felelőssel.",
       ]}
+      facts={SOFTWARE_PITCH.facts}
+      angleTitle={SOFTWARE_PITCH.angleTitle}
+      angle={SOFTWARE_PITCH.angle}
+      ecosystemId="software"
       features={SOFTWARE_FEATURES}
       device={
         <DevFrame header="Egy automatizáció naplója" headerRight="Minta">

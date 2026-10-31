@@ -4,37 +4,50 @@ import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import ProposalSample, { type ProposalPage } from "@/app/components/ProposalSample";
-import StackProof, { type StackProofItem, type StackProofSource } from "@/app/components/StackProof";
+import StackProof from "@/app/components/StackProof";
+import { FactStrip, Okoszisztema, type Feature } from "@/app/components/SalesBlocks";
+import { ECO_STAGES_HU } from "@/lib/okoszisztema";
+import { NEXTJS_CHECKED_HU, NEXTJS_ITEMS_HU, NEXTJS_SOURCES_HU } from "@/lib/nextjs-proof";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import { DevFrame, FindingsTable, LogLines, ReportRows } from "@/app/components/ServiceFrame";
 import {
+  type ServicePitch,
   ACCESS_FAQ,
   ACCESS_FEATURES,
+  ACCESS_PITCH,
   ACCESS_SAMPLE_ROWS,
   ACCESS_SERVICE,
   AD_SAMPLE_ROWS,
   ADS_FEATURES,
+  ADS_PITCH,
   ADS_SERVICE,
   AI_FEATURES,
+  AI_PITCH,
   AI_SERVICE,
   IT_FAQ,
   IT_FEATURES,
+  IT_PITCH,
   IT_SAMPLE_ROWS,
   IT_SERVICE,
   OPS_FEATURES,
+  OPS_PITCH,
   OPS_SERVICE,
   PULZUS_FAQ,
   PULZUS_FEATURES,
+  PULZUS_PITCH,
   PULZUS_SERVICE,
   SIZE_FAQ,
   SOFTWARE_FAQ,
   SOFTWARE_FEATURES,
+  SOFTWARE_PITCH,
   SOFTWARE_LOG,
   SOFTWARE_SERVICE,
   VIDEO_FEATURES,
+  VIDEO_PITCH,
   VIDEO_SERVICE,
   WEB_FAQ,
   WEB_FEATURES,
+  WEB_PITCH,
   WEB_SERVICE,
 } from "@/lib/szolgaltatasok";
 
@@ -102,50 +115,6 @@ const SERVICE_SCHEMA_ITEMS: { id: string; name: string; description: string; pat
 ];
 
 
-// Csak olyan márka, ami a forrásban név szerint szerepel. Ha a Showcase
-// változik, a listát és a megtekintés dátumát együtt frissítsd.
-const STACK_ITEMS: StackProofItem[] = [
-  {
-    name: "Nike",
-    tag: "Webáruház",
-    body: "A Next.js hivatalos bemutatóoldalán, a webáruházak (Composable Commerce) között.",
-  },
-  {
-    name: "Sonos",
-    tag: "Webáruház",
-    body: "Ugyanott, ugyanebben a kategóriában.",
-  },
-  {
-    name: "OpenAI és Claude",
-    tag: "AI",
-    body: "Az OpenAI és az Anthropic (Claude) oldala is a bemutatóoldalon szerepel, az AI kategóriában.",
-  },
-  {
-    name: "Netflix Jobs",
-    tag: "Webalkalmazás",
-    body: "A Netflix karrieroldala, a webalkalmazások között.",
-  },
-  {
-    name: "Elkjøp",
-    tag: "Esettanulmány",
-    body: "Északi elektronikai kiskereskedő, Angularról állt át. A Vercel szerint a betöltés (LCP) 50%-kal, a kattintásra adott válasz (INP) 60%-kal javult, a kiadási ciklus 7 hétről 1 napra rövidült. Ezek a Vercel számai, nem a mi mérésünk.",
-  },
-  {
-    name: "thegbr.eu",
-    tag: "Saját munkánk",
-    body: "Ez az oldal is Next.js 16-on és React 19-en fut, ugyanezekkel az elvekkel építettük.",
-  },
-];
-
-const STACK_SOURCES: StackProofSource[] = [
-  { label: "nextjs.org/showcase", href: "https://nextjs.org/showcase" },
-  {
-    label: "Vercel: Elkjøp-esettanulmány",
-    href: "https://vercel.com/customers/elkjops-digital-transformation-with-next-js-and-vercel",
-  },
-  { label: "react.dev", href: "https://react.dev/" },
-];
-
 const PROPOSAL_PAGES: ProposalPage[] = [
   {
     src: "/minta/dizajnajanlas/01-tartalom.webp",
@@ -174,22 +143,12 @@ const PROPOSAL_PAGES: ProposalPage[] = [
   },
 ];
 
-
-
-
-
-
-
-
-
-
-
-
-
+// Csak olyan lépés, amit ez az oldal ténylegesen csinál: az ütemezett cikk a
+// dátuma napján jelenik meg (revalidate), a sitemap és az llms.txt dinamikus.
 const OPS_LOG = [
-  { t: "06:00", msg: "Tartalomgenerálás elindítva" },
-  { t: "06:04", msg: "Cikk közzétéve a blogon" },
-  { t: "06:05", msg: "Sitemap frissítve, keresők értesítve" },
+  { t: "00:00", msg: "Ütemezett cikk dátuma elérkezett" },
+  { t: "00:00", msg: "Cikk megjelent a blogon és a főoldalon" },
+  { t: "00:00", msg: "Sitemap és llms.txt frissült az új cikkel" },
 ];
 
 const FAQ_ITEMS = [...WEB_FAQ, SIZE_FAQ, ...ACCESS_FAQ, ...PULZUS_FAQ, ...IT_FAQ, ...SOFTWARE_FAQ];
@@ -198,7 +157,7 @@ function ServiceBlock({
   id,
   n,
   label,
-  title,
+  pitch,
   paragraphs,
   features,
   device,
@@ -207,9 +166,10 @@ function ServiceBlock({
   id: string;
   n: string;
   label: string;
-  title: string;
+  // Rövid állítás, főcím, tényszalag és a „szokásos vs. nálunk” összevetés.
+  pitch: ServicePitch;
   paragraphs: React.ReactNode[];
-  features: string[];
+  features: Feature[];
   device: React.ReactNode;
   // A szolgáltatás saját aloldala és a link szövege.
   detail: { href: string; label: string };
@@ -226,38 +186,70 @@ function ServiceBlock({
           </div>
         </div>
         <div>
-          <h2 className="font-display font-extrabold [font-size:var(--text-svc-title)] tracking-[-0.038em] leading-[1.02] max-w-[20ch] mb-[var(--space-5)]">
-            {title}
-          </h2>
-          {paragraphs.map((p, i) => (
-            <p
-              key={i}
-              className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[52ch]"
-            >
-              {p}
-            </p>
-          ))}
-          <p className="mt-[var(--space-5)] [font-size:var(--text-base)] text-[var(--ink-2)]">
-            Részletesen:{" "}
-            <Link href={detail.href} className="text-[var(--ink)] underline">
-              {detail.label}
-            </Link>
+          <p className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.2em] uppercase text-[var(--signal-deep)] mb-[var(--space-4)]">
+            {pitch.kicker}
           </p>
+          <h2 className="font-display font-black [font-size:var(--text-section)] tracking-[-0.045em] leading-[0.98] max-w-[16ch] mb-[var(--space-6)]">
+            {pitch.headline}
+            <span className="text-[var(--signal)]">.</span>
+          </h2>
+          <div className="space-y-[var(--space-4)]">
+            {paragraphs.map((p, i) => (
+              <p
+                key={i}
+                className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch]"
+              >
+                {p}
+              </p>
+            ))}
+          </div>
+          <Link
+            href={detail.href}
+            className="group inline-flex items-center gap-3 mt-[var(--space-6)] [font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.16em] uppercase text-[var(--ink)] border-b-2 border-[var(--signal)] pb-1"
+          >
+            {detail.label}
+            <span aria-hidden="true" className="motion-safe:transition-transform motion-safe:group-hover:translate-x-1">
+              &rarr;
+            </span>
+          </Link>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-[var(--rule)]">
-        {features.map((feat, i) => (
+      <FactStrip facts={pitch.facts} />
+
+      {/* A szokásos megoldás és a mienk — a két legélesebb sor. */}
+      <div className="grid grid-cols-1 md:grid-cols-2 border-t border-[var(--rule)]">
+        {pitch.angle.slice(0, 2).map((row, i) => (
           <div
-            key={feat}
-            className={`px-6 py-[var(--space-4)] [font-size:var(--text-base)] text-[var(--ink-2)] border-b border-[var(--rule)] ${
-              i % 2 === 0 ? "sm:border-r" : ""
-            }`}
+            key={row.ours}
+            className={`px-6 py-[var(--space-6)] border-b md:border-b-0 border-[var(--rule)] ${i === 0 ? "md:border-r" : ""}`}
           >
-            {feat}
+            <p className="m-0 [font-size:var(--text-base)] text-[var(--mid)] line-through decoration-[var(--rule-strong)]">
+              {row.usual}
+            </p>
+            <p className="m-0 mt-[var(--space-2)] font-display font-bold [font-size:var(--text-xl)] leading-snug tracking-[-0.015em] text-[var(--ink)]">
+              <span className="text-[var(--signal)]" aria-hidden="true">&rarr; </span>
+              {row.ours}
+            </p>
           </div>
         ))}
       </div>
+
+      <ul className="m-0 p-0 list-none grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-[var(--rule)]">
+        {features.map((feat, i) => (
+          <li
+            key={feat.title}
+            className="flex gap-[var(--space-4)] items-baseline px-6 py-[var(--space-4)] border-b border-[var(--rule)] sm:[&:nth-child(2n+1)]:border-r lg:[&:nth-child(2n+1)]:border-r-0 lg:[&:not(:nth-child(3n))]:border-r"
+          >
+            <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] text-[var(--signal-deep)]">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span className="font-display font-semibold [font-size:var(--text-base)] leading-snug text-[var(--ink)]">
+              {feat.title}
+            </span>
+          </li>
+        ))}
+      </ul>
 
       {device}
     </section>
@@ -292,9 +284,16 @@ export default function Arzenal() {
             Szolgáltatások<span className="text-[var(--signal)]">.</span>
           </h1>
           <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-8)]">
-            Kilenc terület. A legtöbbet házon belül végezzük, a videót és az irodai informatikát
-            visszatérő partnerekkel, de a kapcsolattartó ilyenkor is mi vagyunk. Ha egy projekthez
-            nem mind a kilenc kell, nem is adjuk el mind a kilencet.
+            <strong className="text-[var(--ink)]">
+              Kilenc terület, egy értékesítési rendszer.
+            </strong>{" "}
+            Nem weboldalt, hirdetést vagy chatbotot adunk el külön-külön, hanem azt az utat, amin egy
+            idegenből vevő lesz. Mindegyik szolgáltatás ennek egy szakaszát viszi.
+          </p>
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-5)]">
+            A legtöbbet házon belül végezzük, a videót és az irodai informatikát visszatérő
+            partnerekkel, de a kapcsolattartó ilyenkor is mi vagyunk. Ha egy projekthez nem mind a
+            kilenc kell, nem is adjuk el mind a kilencet.
           </p>
           <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-5)]">
             Fejlesztési partnerként is dolgozunk — magyar és nyugat-európai ügynökségeknek
@@ -321,6 +320,20 @@ export default function Arzenal() {
             </Link>
           ))}
         </div>
+        <div className="border-t border-[var(--rule)]">
+          <Okoszisztema
+            stages={ECO_STAGES_HU}
+            eyebrow="Hogyan áll össze"
+            title={
+              <>
+                Nem weboldal. Értékesítési ökoszisztéma
+                <span className="text-[var(--signal)]">.</span>
+              </>
+            }
+            lead="A vevőd nem egy kattintással dönt: keres, összehasonlít, kérdez, ajánlatot kér, és közben bármikor eltűnhet. A legtöbb cégnél ezek a lépések külön csatornákon, külön szállítóknál futnak, és senki nem látja egyben, mi lett az érdeklődésből. Mi egy rendszerként építjük meg."
+            note="Nem kell mind az öt szakasz. A felmérés megmutatja, hol szivárog most a legtöbb."
+          />
+        </div>
       </Rail>
 
       <Seam />
@@ -331,16 +344,20 @@ export default function Arzenal() {
           id="web"
           n="01"
           label="Web és webshop"
-          title="Weboldal és webshop, ami mérhetően gyors"
+          pitch={WEB_PITCH}
           paragraphs={[
             <>
-              A sablonoldalak problémája nem az, hogy csúnyák — hanem hogy lassúak, és senki nem
-              tudja megmondani, miért.{" "}
-              <strong className="text-[var(--ink)]">Next.js alapon építünk</strong>, ahol a
-              betöltési sebesség, a keresőoptimalizálás és a biztonság nem utólagos javítás, hanem a
-              szerkezet része.
+              A legtöbb céges weboldal egy szép névjegy, ami csendben pénzt veszít: lassan tölt, a
+              megkeresés egy postafiókban landol, és senki nem tudja, hány ügyfelet hozott.{" "}
+              <strong className="text-[var(--ink)]">
+                Mi az értékesítésed első szakaszát építjük meg.
+              </strong>
             </>,
-            "Élő webshopnál nem kapcsolunk le semmit: fokozatosan cseréljük az oldalakat, a bolt közben forgalmaz.",
+            <>
+              <strong className="text-[var(--ink)]">Next.js alapon</strong>, amire a Nike, a Sonos
+              vagy a Netflix karrieroldala is épít. Élő webshopnál nem kapcsolunk le semmit: a bolt
+              közben forgalmaz.
+            </>,
           ]}
           detail={{ href: WEB_SERVICE.path, label: "weboldal- és webshopfejlesztés lépésről lépésre" }}
           features={WEB_FEATURES}
@@ -361,14 +378,14 @@ export default function Arzenal() {
                   openLabel="megnyitás teljes méretben"
                 />
               </DevFrame>
-              <DevFrame header="Miért Next.js és React" headerRight="Nyilvános források">
+              <DevFrame header="Miért Next.js · amire a világmárkák építenek" headerRight="Nyilvános források">
                 <StackProof
-                  intro="A Next.js a Vercel webes keretrendszere, a React a Meta felületépítő könyvtára, erre épül a Next.js. Nem webshop-motor és nem sablon, hanem alap, amire az oldalt a te kínálatodra és folyamataidra tervezzük. Nagy nemzetközi márkák is erre építenek:"
-                  items={STACK_ITEMS}
+                  intro="A Next.js a Vercel webes keretrendszere, a Meta React könyvtárára épül. Nem webshop-motor és nem sablon, hanem alap, amire az oldalt a te kínálatodra és folyamataidra tervezzük. Ugyanerre építenek ezek a márkák is (a Next.js hivatalos bemutatóoldala és a Vercel esettanulmányai szerint):"
+                  items={NEXTJS_ITEMS_HU}
                   note="Hogy ők erre építenek, az nem ígéret arra, hogy a te oldalad ugyanannyit javul. Azt mutatja, hogy a technológia bírja a nagy forgalmat, és hosszú távon karbantartott. Mikor nem éri meg: ha a kínálatod és a folyamataid jól beleférnek egy sablonba, a bérelt platform olcsóbb, és ezt meg is mondjuk."
                   sourcesLabel="Források:"
-                  sources={STACK_SOURCES}
-                  checked="megtekintve 2026. 10. 27."
+                  sources={NEXTJS_SOURCES_HU}
+                  checked={NEXTJS_CHECKED_HU}
                 />
               </DevFrame>
             </>
@@ -382,15 +399,15 @@ export default function Arzenal() {
           n="02"
           id="ads"
           label="Performance marketing"
-          title="Hirdetés, aminek a végén van egy szám"
+          pitch={ADS_PITCH}
           paragraphs={[
             <>
-              A legtöbb kampányjelentés arról szól, hány ember látta a hirdetést. Ez nem eredmény.
-              Mi végig követjük az utat a{" "}
+              A legtöbb kampányjelentés arról szól, hány ember látta a hirdetést. Ez nem eredmény,
+              ez költség. Mi végig követjük az utat a{" "}
               <strong className="text-[var(--ink)]">kattintástól a megkeresésig</strong>, és hetente
               megmutatjuk, mi hozott ügyfelet és mi nem.
             </>,
-            "Ha egy csatorna nem működik, azt megmondjuk — nem költjük tovább.",
+            "Ha egy csatorna nem működik, megmondjuk, és nem költjük tovább rá a pénzed.",
           ]}
           detail={{ href: ADS_SERVICE.path, label: "hirdetéskezelés, ahol a megkeresés számít" }}
           features={ADS_FEATURES}
@@ -411,7 +428,7 @@ export default function Arzenal() {
           id="software"
           n="03"
           label="Szoftver és automatizáció"
-          title="Ami ma kézzel megy, holnap magától"
+          pitch={SOFTWARE_PITCH}
           paragraphs={[
             "A legtöbb cégnél van valaki, aki naponta átmásol valamit egyik helyről a másikra: a webshop rendeléseit a számlázóba, az űrlapról érkező megkereséseket egy táblázatba, a táblázatot a havi jelentésbe. Ez nem hiba, csak drága — és éppen akkor marad el, amikor a legnagyobb a hajtás.",
             <>
@@ -443,9 +460,9 @@ export default function Arzenal() {
           n="04"
           label="AI és chatbot"
           id="ai"
-          title="AI, ami a helyén van"
+          pitch={AI_PITCH}
           paragraphs={[
-            "Az AI nem varázslat és nem is helyettesíti az ügyfélszolgálatot. Arra jó, hogy a látogató éjjel is választ kapjon az egyszerű kérdésekre, és eljusson oda, ahol valóban tudsz vele foglalkozni.",
+            "Az AI nem varázslat, és nem helyettesíti az ügyfélszolgálatot. Egy jól betanított első vonal: a látogató éjjel is választ kap az egyszerű kérdésére, a komoly érdeklődő pedig eljut oda, ahol ember foglalkozik vele.",
             <>
               Ezen az oldalon is fut egy — kipróbálhatod. Az adattovábbítás részleteit az{" "}
               <Link href="/ai-tajekoztato" className="text-[var(--ink)] underline">
@@ -490,21 +507,21 @@ export default function Arzenal() {
         <ServiceBlock
           n="05"
           label="Videó és tartalom"
-          title="A weboldal önmagában nem elég"
+          pitch={VIDEO_PITCH}
           id="video"
           paragraphs={[
             <>
-              Egy jó oldalra tartalom is kell. Reklámfilm, termékvideó, közösségi formátumok —{" "}
-              <strong className="text-[var(--ink)]">a mi irányításunk alatt</strong>, ugyanabban az
-              arculatban, mint a weboldal. Így nem lesz külön a „szép oldal” és a „valahonnan
-              összeszedett videó”. A gyártást videós partnerünk végzi.
+              A videó nem dísz, hanem érv: ott dolgozik, ahol a vevő mérlegel. Ezért{" "}
+              <strong className="text-[var(--ink)]">ugyanabban az arculatban készül, mint a weboldal</strong>
+              , és oda kerül, ahol a döntés születik. A gyártást videós partnerünk végzi, a mi
+              irányításunk alatt; a kapcsolattartó végig mi vagyunk.
             </>,
           ]}
           detail={{ href: VIDEO_SERVICE.path, label: "céges videó és tartalom" }}
           features={VIDEO_FEATURES}
           device={
             <div className="border-t border-[var(--rule)] grid grid-cols-1 sm:grid-cols-3">
-              {VIDEO_FEATURES.slice(0, 3).map((feat, i) => (
+              {VIDEO_FEATURES.slice(0, 3).map((f, i) => f.title).map((feat, i) => (
                 <div
                   key={feat}
                   className={`relative aspect-[4/3] sm:aspect-square border-b sm:border-b-0 border-[var(--rule)] ${
@@ -530,12 +547,12 @@ export default function Arzenal() {
           id="ops"
           n="06"
           label="Web-üzemeltetés"
-          title="Az átadás nem a vége"
+          pitch={OPS_PITCH}
           paragraphs={[
             <>
-              A legtöbb ügynökség itt hagyja abba. Pedig egy weboldal az élesítés után kezd el pénzt
-              termelni — és akkor kezd el elromlani is. Ha kéred,{" "}
-              <strong className="text-[var(--ink)]">visszük tovább</strong>: figyeljük, javítjuk,
+              A legtöbb ügynökség az átadásnál elköszön. Pedig egy weboldal az élesítés után kezd el
+              pénzt termelni, és akkor kezd el elromlani is.{" "}
+              <strong className="text-[var(--ink)]">Mi visszük tovább</strong>: figyeljük, javítjuk,
               fejlesztjük.
             </>,
             "Egy felelős emberrel dolgozol, aki ismeri a projekted. Nem ügyfélszolgálati sorszámot kapsz.",
@@ -564,7 +581,7 @@ export default function Arzenal() {
           id="access"
           n="07"
           label="Akadálymentesítés"
-          title="Van, aki nem tudja használni az oldaladat"
+          pitch={ACCESS_PITCH}
           paragraphs={[
             "Aki képernyőolvasót használ, aki csak billentyűzettel navigál, akinek gyengébb a látása vagy remeg a keze — ők ugyanúgy vásárolnának, csak sokszor nem tudnak. Nem azért, mert az oldal rossz, hanem mert senki nem gondolt rájuk a tervezésekor.",
             <>
@@ -610,7 +627,7 @@ export default function Arzenal() {
           id="pulzus"
           n="08"
           label="Pulzus"
-          title="Havonta egy levél arról, hogyan lát téged az internet"
+          pitch={PULZUS_PITCH}
           paragraphs={[
             "A legtöbb weboldal elkészül, aztán senki nem nézi meg többé. Ha lelassul, ha lejár egy tanúsítvány, ha elromlik a kapcsolati űrlap — az derül ki, amikor egy ügyfél szól. Vagy nem derül ki.",
             <>
@@ -715,7 +732,7 @@ export default function Arzenal() {
           id="it"
           n="09"
           label="IT-üzemeltetés"
-          title="Az irodai informatika, amire nem kell gondolnod"
+          pitch={IT_PITCH}
           paragraphs={[
             "Egy irodában ritkán az a gond, hogy nincs informatika. Inkább az, hogy senki nem tudja egészben: ki fér hozzá mihez, van-e mentés, és kit kell hívni, ha reggel nem indul a levelezés.",
             <>

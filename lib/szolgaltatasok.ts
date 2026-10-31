@@ -2,7 +2,21 @@
 // közös adatai — egy helyen, hogy az áttekintő és a részletes oldal ne
 // csúszhasson szét.
 
+import type { AngleRow, Fact, Feature } from "@/app/components/SalesBlocks";
+
 export type FaqItem = { question: string; answer: string };
+
+// Egy szolgáltatás értékesítési szöge: rövid állítás, főcím, tényszalag és a
+// „szokásos vs. nálunk” összevetés. Az /arzenal és az aloldal is ezt használja.
+// Csak olyat írj ide, amit leszállítunk és ellenőrizhető: százalék, garancia,
+// eredményígéret nem kerül bele.
+export type ServicePitch = {
+  kicker: string;
+  headline: string;
+  facts: Fact[];
+  angleTitle: string;
+  angle: AngleRow[];
+};
 
 export const WEB_SERVICE = {
   name: "Weboldal- és webshopfejlesztés",
@@ -18,26 +32,42 @@ export const IT_SERVICE = {
   path: "/arzenal/it-uzemeltetes",
 };
 
-export const WEB_FEATURES = [
-  "Egyedi dizájn és design rendszer",
-  "Technikai SEO: sitemap, strukturált adat, canonical",
-  "Telefonra telepíthető változat (PWA)",
-  "Meglévő rendszer fölé építés — WooCommerce, Shopify",
-  "Biztonsági fejlécek, rate limiting, input validáció",
+export const WEB_FEATURES: Feature[] = [
+  {
+    title: "Egyedi dizájn, design rendszerrel",
+    body: "A márkádra és a kínálatodra tervezve, nem sablonból. A design rendszer miatt a később hozzáadott oldalak is egységesek maradnak.",
+  },
+  {
+    title: "Technikai SEO, AI-keresőknek is olvashatóan",
+    body: "Sitemap, strukturált adat, canonical, tiszta szerkezet: a Google és az AI-keresők is értik, mit árulsz és kinek.",
+  },
+  {
+    title: "Megkeresés-útvonal, nem csak űrlap",
+    body: "Űrlap, visszahívás, ajánlatkérés oda, ahol a vevő döntést hoz. Ha kéred, egyenesen a CRM-edbe vagy a táblázatodba futtatjuk.",
+  },
+  {
+    title: "Telefonra telepíthető változat (PWA)",
+    body: "A visszatérő vevő a kezdőképernyőről nyitja meg az oldalt, mint egy alkalmazást.",
+  },
+  {
+    title: "Meglévő motor fölé építés",
+    body: "WooCommerce vagy Shopify marad, a felület újul. Nem kell kidobni, ami működik.",
+  },
+  {
+    title: "Biztonság a szerkezetben",
+    body: "Biztonsági fejlécek, kéréskorlátozás, bemenet-ellenőrzés. Nem utólag felrakott bővítmény.",
+  },
 ];
 
-export const IT_FEATURES = [
-  "Meglévő IT-rendszer felmérése, írásos összefoglalóval",
-  "Rendszergazdai feladatok irodában, home office-ban és mobil eszközökön",
-  "Távfelügyelet és távoli segítség: rákapcsolódunk, nem kell kiszállásra várni",
-  "Szerverkörnyezet kialakítása és üzemeltetése",
-  "Hálózat kiépítése: kábeles és wifi",
-  "Biztonságos távoli elérés, VPN",
-  "Nyomtatók kezelése és karbantartása",
-  "Levelezőrendszer kialakítása és üzemeltetése",
-  "Microsoft 365 és Teams: távmunka és távoktatás bevezetése, üzemeltetése",
-  "Céges mobilflotta: díjcsomagok és költségek átnézése",
-  "Meglévő szoftverek és eszközök üzemeltetése",
+export const IT_FEATURES: Feature[] = [
+  { title: "Felmérés írásban", body: "Mi van most, ki fér hozzá mihez, mi hiányzik. Írásos összefoglaló, sorrendbe tett javaslatokkal." },
+  { title: "Rendszergazda irodában, otthon, mobilon", body: "Ugyanaz a felelős ember, akár az irodában ül a kolléga, akár home office-ban, akár a telefonján dolgozik." },
+  { title: "Távfelügyelet és távoli segítség", body: "Rákapcsolódunk, nem kell kiszállásra várni egy elakadt levelezés miatt." },
+  { title: "Szerver és hálózat", body: "Szerverkörnyezet, kábeles és wifihálózat kiépítése és üzemeltetése." },
+  { title: "Biztonságos távoli elérés", body: "VPN, hogy otthonról is ugyanúgy és ugyanolyan biztonsággal lehessen dolgozni." },
+  { title: "Levelezés, Microsoft 365, Teams", body: "Kialakítás, üzemeltetés, távmunka és távoktatás bevezetése." },
+  { title: "Nyomtatók és eszközök", body: "Kezelés, karbantartás, a meglévő szoftverek és eszközök üzemeltetése." },
+  { title: "Mobilflotta átnézése", body: "Díjcsomagok és költségek: mit fizettek, és mit érdemes rajta változtatni." },
 ];
 
 export const IT_SAMPLE_ROWS = [
@@ -158,69 +188,65 @@ export const PULZUS_SERVICE = {
   path: "/arzenal/pulzus",
 };
 
-export const ADS_FEATURES = [
-  "Google és Meta kampányok, B2B fókusszal",
-  "Konverziómérés és attribúció — a megkeresésig követve",
-  "Heti jelentés, érthető nyelven",
-  "Landing page a kampányhoz, nem a főoldalra terelés",
+export const ADS_FEATURES: Feature[] = [
+  { title: "Google és Meta, B2B fókusszal", body: "Döntéshozókra és ajánlatkérőkre szabva, nem lájkvadászatra." },
+  { title: "Mérés a megkeresésig", body: "A kattintástól az űrlapig vagy a hívásig követjük, nem áll meg a hirdetési felületnél." },
+  { title: "Landing oldal kampányonként", body: "Egy üzenet, egy cselekvés. A fizetett forgalmat nem a főoldalra engedjük el." },
+  { title: "Heti jelentés, érthető nyelven", body: "Mi hozott megkeresést, mi nem, és mit állítunk le, indoklással." },
 ];
 
-export const AI_FEATURES = [
-  "Chat a weboldalon, saját tartalomra hangolva",
-  "Átirányítás emberhez, ha a kérdés komoly",
-  "Jogi megfelelés: AI-tájékoztató, adattovábbítás dokumentálva",
-  "Belső automatizációk: dokumentumfeldolgozás, összefoglalás",
+export const AI_FEATURES: Feature[] = [
+  { title: "A te tartalmadra hangolva", body: "Abból válaszol, amit kínálsz és amit leírtál, nem az internet általánosságaiból." },
+  { title: "Emberhez irányít, ha komoly a kérdés", body: "Árat, határidőt, ajánlatot ember mond. A chat tudja, hol a határa." },
+  { title: "Jogi rend az indulástól", body: "AI-tájékoztató, dokumentált adattovábbítás: tudod, milyen adat hova kerül." },
+  { title: "Belső automatizációk", body: "Dokumentumfeldolgozás, összefoglalás, besorolás: ahol a csapat ma kézzel olvas és másol." },
 ];
 
-export const VIDEO_FEATURES = [
-  "Cégbemutató és imázsvideó",
-  "Termékvideó webshophoz",
-  "Rövid formátumok közösségi médiára",
-  "Vágás, színkezelés, feliratozás",
+export const VIDEO_FEATURES: Feature[] = [
+  { title: "Cégbemutató és imázsvideó", body: "Ugyanazzal a hanggal és arculattal, mint a weboldal." },
+  { title: "Termékvideó webshophoz", body: "A termékoldalra, oda, ahol a vevő a kosárgomb előtt mérlegel." },
+  { title: "Rövid közösségi formátumok", body: "Álló és négyzetes változat ugyanabból az anyagból." },
+  { title: "Vágás, színkezelés, felirat", body: "Feliratozva, hogy hang nélkül, telefonon is érthető legyen." },
 ];
 
-export const OPS_FEATURES = [
-  "Monitoring és hibariasztás — előbb tudunk róla, mint te",
-  "Folyamatos fejlesztés havi óraszámban",
-  "Automatizált tartalommotor: a blog magától frissül",
-  "Jogi megfelelés karbantartása a változásokkal együtt",
-  "Heti vagy kétheti előrehaladási riport",
-  "Egy felelős kapcsolattartó",
+export const OPS_FEATURES: Feature[] = [
+  { title: "Monitoring és hibariasztás", body: "A hibáról mi tudunk előbb, nem egy ügyfeled szól." },
+  { title: "Fejlesztés havi óraszámban", body: "Nem kell minden apró javításra külön ajánlatot kérni." },
+  { title: "Ütemezett tartalom", body: "A cikk a megadott napon magától megjelenik, a sitemap vele frissül." },
+  { title: "Jogi megfelelés karbantartása", body: "Ha az oldal változik, a tájékoztatók sem maradnak le mögötte." },
+  { title: "Heti vagy kétheti riport", body: "Mi készült el, mi jön, mi akadt el. Írásban, nem telefonon elmesélve." },
+  { title: "Egy felelős kapcsolattartó", body: "Aki ismeri a projekted. Nem ügyfélszolgálati sorszám." },
 ];
 
-export const ACCESS_FEATURES = [
-  "Felmérés: mi akadályozza a használatot, és mennyire súlyos",
-  "Kontraszt, betűméret, kattintható felületek mérete",
-  "Billentyűzetes bejárhatóság, látható fókusz",
-  "Képernyőolvasóval való használhatóság: szemantikus szerkezet, képleírások",
-  "Űrlapok: érthető címkék, világos hibaüzenetek",
-  "Videók feliratozása",
-  "Írásos jelentés arról, mi változott",
+export const ACCESS_FEATURES: Feature[] = [
+  { title: "Felmérés súlyossággal", body: "Mi akadályozza a használatot, és mennyire: a lista sorrendje a javítás sorrendje." },
+  { title: "Kontraszt és méretek", body: "Betűméret, színkontraszt, kattintható felületek, hogy telefonon, remegő kézzel is eltalálható legyen." },
+  { title: "Billentyűzetes bejárhatóság", body: "Látható fókusz, logikus sorrend: egér nélkül is végig lehet menni a vásárláson." },
+  { title: "Képernyőolvasóval használható", body: "Szemantikus szerkezet, képleírások, értelmes linkszövegek." },
+  { title: "Érthető űrlapok", body: "Címkék, világos hibaüzenetek. Az ajánlatkérés ne bukjon el egy kimondatlan mezőn." },
+  { title: "Videók feliratozása", body: "Ami hangban elhangzik, szövegben is ott van." },
+  { title: "Írásos jelentés", body: "Mi volt, mit javítottunk, mi maradt. Ezt tudod megmutatni bárkinek, aki kérdezi." },
 ];
 
-export const PULZUS_FEATURES = [
-  "Elérhetőség figyelése — leállásnál értesítés",
-  "Betöltési sebesség: a változást jelezzük, nem a pontszámot",
-  "SSL-tanúsítvány lejárata — időben szólunk",
-  "Kapcsolati űrlap havi tesztelése",
-  "Indexeltség: látszik-e az oldal a keresőben",
-  "Google-profil: új értékelések, változó átlag",
-  "Értékelés-kérés a vásárlás után",
-  "Válaszjavaslat az értékelésekre — a küldés a tiéd",
-  "Jogi modul: sütik és külső kódok havi feltérképezése, változásjelzéssel",
-  "Fut-e mérő- vagy hirdetési kód a süti-hozzájárulás előtt",
-  "Jogi dokumentumok felülvizsgálata webjogász partnerrel",
-  "Havi levél magyarul, konkrét javaslatokkal",
+export const PULZUS_FEATURES: Feature[] = [
+  { title: "Elérhetőség", body: "Leállásnál értesítés, nem a hónap végén." },
+  { title: "Betöltési sebesség", body: "A változást jelezzük, nem egy pontszámot." },
+  { title: "SSL-tanúsítvány", body: "Időben szólunk, mielőtt a böngésző „nem biztonságos” jelzést tenne ki." },
+  { title: "Kapcsolati űrlap havi tesztje", body: "Kiderül, ha a megkeresések csendben elvesznek." },
+  { title: "Indexeltség", body: "Látszik-e az oldal a keresőben, és ha nem, miért." },
+  { title: "Google-profil és értékelések", body: "Új értékelések, változó átlag, semleges értékelés-kérés vásárlás után." },
+  { title: "Válaszjavaslat az értékelésekre", body: "Mi megírjuk, te küldöd. A nevedben soha nem posztolunk." },
+  { title: "Jogi modul", body: "Sütik és külső kódok havi feltérképezése, és jelzés, ha mérőkód fut hozzájárulás előtt. Eltérésnél webjogász partner értékel." },
+  { title: "Havi levél magyarul", body: "Mi változott, mit érdemes tenni. Konkrét javaslat, nem grafikonhalom." },
 ];
 
-export const SOFTWARE_FEATURES = [
-  "Folyamatfelmérés: mi megy ma kézzel, és mit érdemes automatizálni",
-  "Rendszerek összekötése: webshop, számlázó, CRM, e-mail, táblázat",
-  "Automatizáció kész eszközzel vagy saját kóddal, amelyik hosszabb távon olcsóbban fenntartható",
-  "Egyedi belső rendszer, ügyfélportál, adminfelület",
-  "Naplózás és hibariasztás: kiderül, ha valami nem futott le",
-  "Átadás dokumentációval, hogy ne csak mi értsük",
-  "Üzemeltetés és továbbfejlesztés, ha kéred",
+export const SOFTWARE_FEATURES: Feature[] = [
+  { title: "Folyamatfelmérés írásban", body: "Mi megy ma kézzel, mibe kerül, és mit érdemes automatizálni. Azt is leírjuk, mit nem." },
+  { title: "Rendszerek összekötése", body: "Webshop, számlázó, CRM, e-mail, táblázat: az adat egyszer kerül be, és mindenhová eljut." },
+  { title: "Kész eszköz vagy saját kód", body: "Amelyik hosszabb távon olcsóbban fenntartható. Nem a kedvenc eszközünkhöz igazítjuk a folyamatodat." },
+  { title: "Egyedi belső rendszer", body: "Ügyfélportál, adminfelület, belső nyilvántartás, ha nincs rá megfelelő kész szoftver." },
+  { title: "Napló és hibariasztás", body: "Kiderül, ha valami nem futott le, és a kimaradt tétel pótolható." },
+  { title: "Dokumentált átadás", body: "Hogy ne csak mi értsük, és ne legyél kiszolgáltatva senkinek, nekünk sem." },
 ];
 
 export const SOFTWARE_LOG = [
@@ -323,3 +349,266 @@ export const OPS_FAQ: FaqItem[] = [
       "Egy felelős emberrel, aki ismeri a projekted. Nem ügyfélszolgálati sorszámot kapsz.",
   },
 ];
+
+// ===== Értékesítési szögek szolgáltatásonként =====
+
+export const WEB_PITCH: ServicePitch = {
+  kicker: "Nem névjegy. Értékesítési felület.",
+  headline: "Weboldal és webshop, ami elad, nem csak létezik",
+  facts: [
+    { value: "Next.js", label: "ugyanaz az alap, amire a Nike és a Sonos webáruháza épül" },
+    { value: "Fix ár", label: "és határidő a felmérés végén, nem sáv" },
+    { value: "4–8 hét", label: "egy weboldal jellemző átfutása" },
+  ],
+  angleTitle: "Sablon helyett értékesítési felület",
+  angle: [
+    {
+      usual: "Sablon, amibe beleöntik a szöveget",
+      ours: "Oldal a kínálatodra és a vevőid kérdéseire: mit keres, mit hasonlít össze, hol akad el",
+    },
+    {
+      usual: "„Gyors lesz” — ígéretként",
+      ours: "Mérhetően gyors. Ez az oldal is élőben megméri magát a főoldalon",
+    },
+    {
+      usual: "Űrlap, ami egy postafiókban landol",
+      ours: "Megkeresés-útvonal, ami ha kéred, egyenesen a CRM-edbe fut",
+    },
+    {
+      usual: "Platformváltás, elveszett Google-helyezésekkel",
+      ours: "A régi URL-ek átirányítva, a régi oldal él, amíg az új bizonyítottan nem működik",
+    },
+    {
+      usual: "Átadás, aztán csend",
+      ours: "Üzemeltetés egy felelős emberrel, aki ismeri az oldalt",
+    },
+  ],
+};
+
+export const ADS_PITCH: ServicePitch = {
+  kicker: "Nem elérés. Megkeresés.",
+  headline: "Hirdetés, aminek a végén van egy szám",
+  facts: [
+    { value: "Hetente", label: "jelentés arról, mi hozott megkeresést" },
+    { value: "Végig", label: "követve a kattintástól a megkeresésig" },
+    { value: "Stop", label: "a csatornára, ami nem hoz megkeresést" },
+  ],
+  angleTitle: "Nem a megjelenést számoljuk, hanem a megkeresést",
+  angle: [
+    {
+      usual: "Jelentés elérésről és megjelenésről",
+      ours: "Jelentés arról, hány megkeresés lett a kattintásokból",
+    },
+    {
+      usual: "Minden kampány a főoldalra terel",
+      ours: "Kampányonként saját landing oldal, egy üzenettel, egy cselekvéssel",
+    },
+    {
+      usual: "A gyenge csatorna is fut, mert az is költés",
+      ours: "Ami nem hoz megkeresést, azt megmondjuk, és nem költjük tovább",
+    },
+    {
+      usual: "A mérés a hirdetési felületig tart",
+      ours: "A mérés a megkeresésig tart: látszik, melyik kattintásból lett érdeklődő",
+    },
+  ],
+};
+
+export const SOFTWARE_PITCH: ServicePitch = {
+  kicker: "A munka, ami magától megy",
+  headline: "Ami ma kézzel megy, holnap magától",
+  facts: [
+    { value: "Írásban", label: "melyik folyamatot érdemes automatizálni, és melyiket nem" },
+    { value: "Napló", label: "minden futásról, visszakereshetően" },
+    { value: "Riasztás", label: "ha valami nem futott le, nem csendes leállás" },
+  ],
+  angleTitle: "Nem új rendszert adunk el. Összekötjük, ami már megvan",
+  angle: [
+    {
+      usual: "Valaki naponta átmásolja a rendeléseket a számlázóba",
+      ours: "Rendelés, számla, visszaigazolás és raktártábla egy lépésben, kézi másolás nélkül",
+    },
+    {
+      usual: "Az automatizáció csendben leáll, hetekig senki nem veszi észre",
+      ours: "Minden futás naplózódik, hibánál riasztás megy, a kimaradt tétel pótolható",
+    },
+    {
+      usual: "„Cseréljétek le az egészet egy új rendszerre”",
+      ours: "Azt kötjük össze, ami megvan. Újat csak írásban indokolva javaslunk",
+    },
+    {
+      usual: "Csak a fejlesztő érti, hogyan működik",
+      ours: "Dokumentált átadás, hogy senkinek ne legyél kiszolgáltatva, nekünk sem",
+    },
+  ],
+};
+
+export const AI_PITCH: ServicePitch = {
+  kicker: "Éjjel is válaszol. Árat nem mond.",
+  headline: "Asszisztens, ami tudja, mikor kell ember",
+  facts: [
+    { value: "0–24", label: "válasz az egyszerű kérdésekre" },
+    { value: "Ember", label: "veszi át a komoly kérdést, árat és határidőt" },
+    { value: "Dokumentálva", label: "milyen adat hova kerül" },
+  ],
+  angleTitle: "Nem csodafegyver. Egy jól betanított első vonal",
+  angle: [
+    {
+      usual: "Általános chatbot, ami bármire magabiztosan rávágja a választ",
+      ours: "A te tartalmadra hangolt asszisztens, ami abból válaszol, amit kínálsz",
+    },
+    {
+      usual: "A chat árat ígér, amit aztán nem tudsz tartani",
+      ours: "A chat tájékoztat, nem ajánl. Árat és határidőt ember mond",
+    },
+    {
+      usual: "A komoly érdeklődő a chatablakban ragad",
+      ours: "A komoly kérdés emberhez kerül, nem vész el egy ablakban",
+    },
+    {
+      usual: "Adatkezelés? Majd kiderül",
+      ours: "AI-tájékoztató és dokumentált adattovábbítás az első naptól",
+    },
+  ],
+};
+
+export const VIDEO_PITCH: ServicePitch = {
+  kicker: "Egy arculat, mozgóképben is",
+  headline: "Videó, ami ugyanazt mondja, mint az oldalad",
+  facts: [
+    { value: "Egy", label: "kapcsolattartó, akkor is, ha a partnerünk forgat" },
+    { value: "Egy arculat", label: "weboldal és videó együtt tervezve" },
+    { value: "Felirattal", label: "hogy hang nélkül, telefonon is érthető legyen" },
+  ],
+  angleTitle: "Nem külön film. Az értékesítés része",
+  angle: [
+    {
+      usual: "A videó egy másik csapattól jön, más hangon, más színekkel",
+      ours: "Ugyanabban az arculatban készül, mint a weboldal",
+    },
+    {
+      usual: "Szép film, ami egy videómegosztón porosodik",
+      ours: "Formátum oda, ahol a vevő dönt: termékoldal, nyitókép, közösségi rövid változat",
+    },
+    {
+      usual: "Két szállító, két határidő, két egyeztetés",
+      ours: "Egy kapcsolattartó: mi irányítjuk a videós partnert",
+    },
+  ],
+};
+
+export const OPS_PITCH: ServicePitch = {
+  kicker: "Az élesítés a rajtvonal",
+  headline: "Az átadás nem a vége, hanem a rajt",
+  facts: [
+    { value: "Előbb", label: "tudunk a hibáról, mint az ügyfeled" },
+    { value: "Havi keret", label: "fejlesztési óraszámban" },
+    { value: "Egy ember", label: "aki ismeri a projekted" },
+  ],
+  angleTitle: "Ahol a legtöbb ügynökség elköszön, mi ott maradunk",
+  angle: [
+    {
+      usual: "Hibajegy, sorszám, várakozás",
+      ours: "Egy felelős ember, aki ismeri a projekted",
+    },
+    {
+      usual: "Egy ügyfeled szól, hogy nem megy az űrlap",
+      ours: "Monitoring és riasztás: a hibáról mi tudunk előbb",
+    },
+    {
+      usual: "Minden apró javításhoz új ajánlat",
+      ours: "Havi óraszám a folyamatos fejlesztésre",
+    },
+    {
+      usual: "Az oldal az élesítés napján befagy",
+      ours: "Az oldal tovább fejlődik, és írásban látod, mi készült el",
+    },
+  ],
+};
+
+export const ACCESS_PITCH: ServicePitch = {
+  kicker: "Vevő, akit eddig kizártál",
+  headline: "Van, aki nem tudja használni az oldaladat",
+  facts: [
+    { value: "WCAG", label: "szerinti technikai felmérés" },
+    { value: "A kódban", label: "javítjuk, nem egy ráhúzott widgettel" },
+    { value: "Írásban", label: "mit találtunk, és mi változott" },
+  ],
+  angleTitle: "Nem kötelező teher. Több vevő",
+  angle: [
+    {
+      usual: "Egy „akadálymentesítő” gomb a sarokban",
+      ours: "Javítás a forráskódban: kontraszt, fókusz, címkék, szerkezet",
+    },
+    {
+      usual: "„Megfelel a törvénynek” pecsét",
+      ours: "Technikai felmérés és javítás. A megfelelésről jogász nyilatkozik, nem mi",
+    },
+    {
+      usual: "Szóbeli „rendben van”",
+      ours: "Írásos jelentés arról, mi változott",
+    },
+    {
+      usual: "Akadálymentesség mint jogi kötelezettség",
+      ours: "Akadálymentesség mint vevő, aki eddig nem tudott nálad vásárolni",
+    },
+  ],
+};
+
+export const PULZUS_PITCH: ServicePitch = {
+  kicker: "Havonta egy levél, nem egy dashboard",
+  headline: "Havonta egy levél arról, hogyan lát téged az internet",
+  facts: [
+    { value: "Havonta", label: "egy levél magyarul, konkrét javaslattal" },
+    { value: "Előbb", label: "szólunk, mint ahogy egy ügyfeled észreveszi" },
+    { value: "Jogász", label: "partner értékeli a jogi modul eltéréseit" },
+  ],
+  angleTitle: "Nem pontszámot küldünk. Teendőt",
+  angle: [
+    {
+      usual: "Pontszámos riport, amit senki nem olvas el",
+      ours: "Levél arról, mi változott, és mit érdemes tenni",
+    },
+    {
+      usual: "Egy ügyfeled szól, hogy lejárt a tanúsítvány",
+      ours: "Időben szólunk, mielőtt a böngésző figyelmeztetne",
+    },
+    {
+      usual: "Automatikus válasz a nevedben az értékelésekre",
+      ours: "Válaszjavaslat, a küldés a tiéd",
+    },
+    {
+      usual: "A süti-tájékoztató az indulás napján befagy",
+      ours: "Havonta megnézzük, mit tölt az oldal; eltérésnél webjogász értékel",
+    },
+  ],
+};
+
+export const IT_PITCH: ServicePitch = {
+  kicker: "Az informatika, ami nem a te gondod",
+  headline: "Az irodai informatika, amire nem kell gondolnod",
+  facts: [
+    { value: "15 év", label: "partnerünk tapasztalata irodai rendszerek üzemeltetésében" },
+    { value: "Írásban", label: "mit találtunk, és mit javaslunk" },
+    { value: "Távolról", label: "rákapcsolódunk, nem kell kiszállásra várni" },
+  ],
+  angleTitle: "Nem „majd a kolléga megnézi”. Felelős rendszergazda",
+  angle: [
+    {
+      usual: "„A kolléga ért hozzá” — mellékesen, a saját munkája mellett",
+      ours: "Kijelölt rendszergazda-partner, felméréssel kezdve",
+    },
+    {
+      usual: "Van mentés. Valószínűleg",
+      ours: "A felmérés írásban megmondja, mi van, és mi hiányzik",
+    },
+    {
+      usual: "Kilépett munkatárs, még aktív fiókkal",
+      ours: "Fiókok és hozzáférések rendben tartva",
+    },
+    {
+      usual: "Napokat várni egy elakadt levelezés miatt",
+      ours: "Távfelügyelet: rákapcsolódunk, nem kell kiszállásra várni",
+    },
+  ],
+};
