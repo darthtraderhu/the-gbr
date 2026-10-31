@@ -101,6 +101,7 @@ export default function Navbar() {
                     isActive ? "text-[var(--signal)]" : "text-[var(--mid)] hover:text-[var(--ink)]"
                   }`}
                 >
+                  {link.highlight && <span aria-hidden="true" className="inline-block w-1.5 h-1.5 bg-[var(--signal)] mr-2 align-middle" />}
                   {link.label}
                 </Link>
               );
@@ -143,6 +144,11 @@ export default function Navbar() {
                           <span className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.1em] uppercase text-[var(--ink-2)] group-hover/item:text-[var(--signal)] transition-colors">
                             {s.name}
                           </span>
+                          {s.id === "audit" && (
+                            <span className="ml-auto [font-family:var(--font-mono)] text-[length:9px] tracking-[0.16em] uppercase px-[6px] py-[2px] bg-[var(--signal)] text-[#101400]">
+                              {isEn ? "New" : "Új"}
+                            </span>
+                          )}
                         </Link>
                       ))}
                     </div>
@@ -289,6 +295,11 @@ export default function Navbar() {
                     <span className="font-display font-bold text-[20px] tracking-[-0.02em]">
                       {item.label}
                     </span>
+                    {item.highlight && (
+                      <span className="[font-family:var(--font-mono)] text-[length:9px] tracking-[0.16em] uppercase px-[6px] py-[2px] bg-[var(--signal)] text-[#101400]">
+                        {isEn ? "New" : "Új"}
+                      </span>
+                    )}
                   </Link>
                   {isServices && (
                     <div className="pb-[10px]">

@@ -11,6 +11,16 @@ import HeroInstrument from "./HeroInstrument";
 import { Okoszisztema } from "@/app/components/SalesBlocks";
 import { ECO_STAGES_HU } from "@/lib/okoszisztema";
 import { NEXTJS_BRANDS, NEXTJS_CHECKED_HU } from "@/lib/nextjs-proof";
+import AuditSpotlight from "@/app/components/AuditSpotlight";
+import { AUDIT_CHAPTERS, AUDIT_PITCH, AUDIT_SERVICE } from "@/lib/szolgaltatasok";
+
+// Fejezetenként az első (legerősebb) valós találat a főoldali kiemeléshez.
+const AUDIT_SPOTLIGHT = AUDIT_CHAPTERS.map((c) => ({
+  n: c.n,
+  title: c.title,
+  finding: c.rows[0].finding,
+  cost: c.rows[0].cost,
+}));
 
 // A cikk-ütemezés (lib/posts.ts) miatt a főoldal legutóbbi-cikkek blokkja is
 // naponta frissül — enélkül egy ütemezett cikk a dátuma napján sem jelenne
@@ -42,7 +52,6 @@ export const metadata: Metadata = {
   },
 };
 
-// A weboldal-átvilágítás fejezetei — ugyanazok, mint a kiküldött riportoké.
 // Az AI-láthatóság szekció tényei — a /seo oldal AEO-felmérésével egyeznek
 // (AEO_CHECKS: 8 pont, AI_TEST_FACTS: felületek, ismétlés, átadás).
 const AEO_FACTS = [
@@ -50,14 +59,6 @@ const AEO_FACTS = [
   { value: "5", label: "AI-felület, ahol rákérdezünk" },
   { value: "3×", label: "legalább minden kérdés" },
   { value: "72 óra", label: "alatt kész az írásos eredmény" },
-];
-
-const AUDIT_CHAPTERS = [
-  "Első benyomás és sebesség, mobilon is",
-  "Mit lát a Google és a mesterséges intelligencia (SEO, AEO)",
-  "Használható-e mindenkinek (akadálymentesség)",
-  "Adatkezelés, sütik, hozzájárulás, cégadatok",
-  "Ami kívülről látszik: biztonsági beállítások, elavult elemek",
 ];
 
 const TECH_STACK = [
@@ -226,7 +227,7 @@ export default function Home() {
               <Link href="/init">Pitcheld el a projekted</Link>
             </Button>
             <Button asChild variant="ghost">
-              <Link href="#folyamat">Hogyan dolgozunk</Link>
+              <Link href="#atvilagitas">Mit találnánk nálad?</Link>
             </Button>
             <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)]">
               Válasz 2 munkanapon belül
@@ -239,8 +240,28 @@ export default function Home() {
 
       <Seam />
 
+      {/* ===== 02 / ÁTVILÁGÍTÁS — új szolgáltatás, a belépési pont ===== */}
+      <Rail label="02 / Átvilágítás">
+        <AuditSpotlight
+          kicker="Új szolgáltatás · Átvilágítás, dizájn- és rendszerajánlás"
+          headline={AUDIT_PITCH.headline}
+          lead="Kívülről nézzük meg az oldaladat, hozzáférés nélkül, úgy, ahogy egy idegen vevő látja. Írásban kapod meg, mi működik, mi nem, és mit javíts először. Ha kéred, utána jön a dizájn- és rendszerajánlás: kattintható látványterv a saját kínálatoddal, és a terv, hogyan lesz az oldalból értékesítési rendszer."
+          facts={AUDIT_PITCH.facts}
+          chapters={AUDIT_SPOTLIGHT}
+          findingsLabel="Valós találatok az eddigi átvilágításainkból · anonimizálva"
+          closer={{
+            title: "Nálad melyiket találnánk?",
+            body: "Eddig minden vizsgált oldalon akadt ezekből. Küldd el a címet, és megmutatjuk, nálad mi az.",
+          }}
+          primary={{ href: "/init", label: "Kérj átvilágítást" }}
+          secondary={{ href: AUDIT_SERVICE.path, label: "Mind a hét fejezet, több találattal" }}
+        />
+      </Rail>
+
+      <Seam />
+
       {/* ===== 02 / VIDEÓ — élig futó ===== */}
-      <Rail label="02 / Videó">
+      <Rail label="03 / Videó">
         <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-3.5 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
           <span>Egy perc arról, hogyan dolgozunk</span>
           <span>Cégbemutató · 1:04 · Hang nélkül</span>
@@ -262,7 +283,7 @@ export default function Home() {
       </Rail>
 
       {/* ===== 03 / A CÉG MÖGÖTT — óriás idézet ===== */}
-      <Rail label="03 / A cég mögött">
+      <Rail label="04 / A cég mögött">
         <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-24)] grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-[var(--space-10)] lg:gap-[var(--space-20)] items-start">
           <blockquote className="m-0 font-display font-bold [font-size:var(--text-quote)] leading-[1.06] tracking-[-0.038em]">
             A legjobb kampány sem segít,{" "}
@@ -295,7 +316,7 @@ export default function Home() {
       <Seam />
 
       {/* ===== 04 / ÖKOSZISZTÉMA — nem weboldal, értékesítési rendszer ===== */}
-      <Rail label="04 / Ökoszisztéma" dark>
+      <Rail label="05 / Ökoszisztéma" dark>
         <Okoszisztema
           stages={ECO_STAGES_HU}
           eyebrow="Amit csinálunk"
@@ -313,7 +334,7 @@ export default function Home() {
       <Seam />
 
       {/* ===== 04b / SZOLGÁLTATÁSOK — tíz terület ===== */}
-      <Rail label="04 / Szolgáltatás">
+      <Rail label="06 / Szolgáltatás">
         <ServiceIndex
           eyebrow="Tíz terület · mindegyik a saját szögéből"
           lead="Mindegyik szolgáltatás egy szakaszt visz, és mindegyiknél ott kezdjük, ahol a piac szokásos megoldása megáll."
@@ -322,56 +343,8 @@ export default function Home() {
         />
       </Rail>
 
-      {/* ===== 05 / ÁTVILÁGÍTÁS — belépési pont ===== */}
-      <Rail label="05 / Átvilágítás">
-        <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)] grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[var(--space-10)] lg:gap-[var(--space-16)] items-start border-t border-[var(--rule)]">
-          <div>
-            <Eyebrow>Weboldal-átvilágítás</Eyebrow>
-            <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[16ch] text-[var(--ink)]">
-              Mielőtt bármit ajánlanánk, megnézzük, mi van most
-            </h2>
-            <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-6)]">
-              A meglévő weboldaladat kívülről vizsgáljuk meg, hozzáférést nem kérünk. Az eredményt
-              írásos riportban kapod meg: mi működik, mi nem, és mit érdemes először javítani.
-            </p>
-            <div className="mt-[var(--space-8)]">
-              <Button asChild>
-                <Link href="/init">Kérj átvilágítást</Link>
-              </Button>
-              <Link
-                href="/arzenal/atvilagitas-es-ajanlas"
-                className="ml-[var(--space-5)] [font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.16em] uppercase text-[var(--ink)] border-b-2 border-[var(--signal)] pb-1"
-              >
-                Mit kapsz &rarr;
-              </Link>
-            </div>
-          </div>
-          <div>
-            <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] mb-[var(--space-4)]">
-              Amit megvizsgálunk
-            </p>
-            <ol className="m-0 p-0 list-none border-t border-[var(--rule)]">
-              {AUDIT_CHAPTERS.map((chapter, i) => (
-                <li
-                  key={chapter}
-                  className="grid grid-cols-[40px_1fr] gap-[var(--space-4)] py-[var(--space-4)] border-b border-[var(--rule)] items-baseline"
-                >
-                  <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--mid)]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="[font-size:var(--text-base)] text-[var(--ink-2)]">{chapter}</span>
-                </li>
-              ))}
-            </ol>
-            <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)] mt-[var(--space-4)]">
-              Riport PDF-ben · sorrendbe tett teendőlistával
-            </p>
-          </div>
-        </section>
-      </Rail>
-
       {/* ===== 06 / AI-LÁTHATÓSÁG — AEO ===== */}
-      <Rail label="06 / AI-láthatóság">
+      <Rail label="07 / AI-láthatóság">
         <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)] grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[var(--space-10)] lg:gap-[var(--space-16)] items-start border-t border-[var(--rule)]">
           <div>
             <Eyebrow>AI-láthatóság (AEO)</Eyebrow>
@@ -409,7 +382,7 @@ export default function Home() {
       </Rail>
 
       {/* ===== 07 / STACK — Next.js, amire a világmárkák építenek ===== */}
-      <Rail label="07 / Stack">
+      <Rail label="08 / Stack">
         <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-20)] pb-[var(--space-8)]">
           <Eyebrow>Műszaki alap · Next.js</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[15ch] text-[var(--ink)]">
@@ -462,7 +435,7 @@ export default function Home() {
       </Rail>
 
       {/* ===== 08 / MUNKÁK — jegyzék ===== */}
-      <Rail label="08 / Munkák">
+      <Rail label="09 / Munkák">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Munkák"
@@ -505,7 +478,7 @@ export default function Home() {
       <Seam />
 
       {/* ===== 09 / MIÉRT SZÁMÍT — sötét állítás ===== */}
-      <Rail label="09 / Miért számít" dark>
+      <Rail label="10 / Miért számít" dark>
         <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
           <Eyebrow>Miért számít</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[14ch] text-[var(--ink)]">
@@ -537,7 +510,7 @@ export default function Home() {
       <Seam />
 
       {/* ===== 10 / CSOMAGOK — összehasonlító táblázat ===== */}
-      <Rail label="10 / Csomagok" dark={false}>
+      <Rail label="11 / Csomagok" dark={false}>
         <section id="packages" className="px-6 py-[var(--space-16)] sm:py-[var(--space-24)]">
           <SectionHeader
             eyebrow="Együttműködés"
@@ -617,7 +590,7 @@ export default function Home() {
       </Rail>
 
       {/* ===== 11 / FOLYAMAT ===== */}
-      <Rail label="11 / Folyamat">
+      <Rail label="12 / Folyamat">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Folyamat"
@@ -649,7 +622,7 @@ export default function Home() {
       </Rail>
 
       {/* ===== 12 / ÍRÁSOK — kiemelt + lista ===== */}
-      <Rail label="12 / Írások">
+      <Rail label="13 / Írások">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Írások"
@@ -715,7 +688,7 @@ export default function Home() {
       <Seam />
 
       {/* ===== 13 / KAPCSOLAT — záró CTA ===== */}
-      <Rail label="13 / Kapcsolat" dark>
+      <Rail label="14 / Kapcsolat" dark>
         <section id="contact" className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
           <Eyebrow>Kapcsolat</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-final)] leading-[0.9] tracking-[-0.055em] max-w-[12ch] mb-[var(--space-6)] text-[var(--ink)]">

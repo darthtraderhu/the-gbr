@@ -24,8 +24,13 @@ import {
 // Megosztott navigációs adatok — a Navbar (asztali lenyíló + mobil Menü
 // overlay) és a Footer ugyanabból a forrásból dolgozik, hogy ne
 // csúszhasson szét a két hely.
-export const MAIN_NAV_ITEMS = [
+// A highlight: true menüpont lime ponttal kiemelve jelenik meg (az új
+// átvilágítás-szolgáltatás, ami a legtöbb ügyfélnél a belépési pont).
+export type NavItem = { label: string; href: string; highlight?: boolean };
+
+export const MAIN_NAV_ITEMS: NavItem[] = [
   { label: "Szolgáltatások", href: "/arzenal" },
+  { label: "Átvilágítás", href: AUDIT_SERVICE.path, highlight: true },
   { label: "Csomagok", href: "/architektura" },
   { label: "SEO", href: "/seo" },
   { label: "Rólunk", href: "/szindikatus" },
@@ -61,8 +66,9 @@ export const LEGAL_LINKS = [
 // thegbr-english-copy.md szerint. A jogi oldalaknak nincs angol
 // megfelelője: a LEGAL_LINKS (magyar URL-ek) közösek, csak a Footer/Navbar
 // EN ága elé kerül egy angol nyelvű megjegyzés (ld. Footer.tsx).
-export const MAIN_NAV_ITEMS_EN = [
+export const MAIN_NAV_ITEMS_EN: NavItem[] = [
   { label: "Services", href: "/en/services" },
+  { label: "Audit", href: "/en/services#audit", highlight: true },
   { label: "Engagement", href: "/en/engagement" },
   { label: "SEO", href: "/en/seo" },
   { label: "About", href: "/en/about" },

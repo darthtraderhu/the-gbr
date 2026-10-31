@@ -237,3 +237,50 @@ export const AUDIT_EN = {
     "Clickable prototype with the real catalogue",
   ],
 };
+
+// A főoldali átvilágítás-kiemelés angol fejezetei — a magyar AUDIT_CHAPTERS
+// első találatainak fordítása (valós, anonimizált találatok).
+export const AUDIT_SPOTLIGHT_EN = [
+  {
+    n: "01",
+    title: "How the site loses buyers without anyone noticing",
+    finding: "Three different opening hours: in the header, on the contact page and on the Google profile",
+    cost: "Whoever shows up or calls at the wrong time doesn't come back.",
+  },
+  {
+    n: "02",
+    title: "Slow, and the buyer feels it first",
+    finding: "8.2, 8.6 and 8.9 seconds on mobile before the main content appears",
+    cost: "Measured on three different companies' sites. Google calls 2.5 seconds good.",
+  },
+  {
+    n: "03",
+    title: "Why Google can't see it and AI doesn't quote it",
+    finding: "No structured data (JSON-LD) on the site at all",
+    cost: "Neither Google nor AI search can be sure who the company is, what it sells and where.",
+  },
+  {
+    n: "04",
+    title: "Why buyers can't find it",
+    finding: "Competitors bid on the company's own name on Google",
+    cost: "Anyone searching for it by name sees the other company's ad first.",
+  },
+  {
+    n: "05",
+    title: "The price that scares people off, or isn't there",
+    finding: "The same product at two different prices on two pages",
+    cost: "112 million forints in one place, 129 in the other. The buyer can't tell which is true.",
+  },
+  {
+    n: "06",
+    title: "A business card, not a sales surface",
+    finding: "The home page doesn't say who the company is or what it sells",
+    cost: "The first screen is a campaign image. A first-time visitor can't tell if they're in the right place.",
+  },
+  {
+    n: "07",
+    title: "What isn't right legally",
+    finding: "The privacy notice names \"Demo Ltd.\" as the data controller",
+    cost: "The template went live without being filled in.",
+  },
+];
