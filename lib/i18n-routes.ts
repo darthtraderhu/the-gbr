@@ -33,6 +33,8 @@ export const TRANSLATED_ARTICLES: Record<string, string> = {
   "kesz-eszkoz-vagy-sajat-szoftver": "off-the-shelf-or-custom-software",
   "oldalak-amikrol-nem-tudsz": "pages-you-dont-know-about",
   "ha-az-oldalad-ellentmond-onmaganak": "when-your-site-contradicts-itself",
+  "mielott-uj-weboldalt-rendelsz": "before-you-order-a-new-website",
+  "ajanlat-kep-helyett-terv": "a-plan-not-a-picture",
 };
 
 export const ARTICLE_HU_SLUG: Record<string, string> = Object.fromEntries(
