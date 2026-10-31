@@ -6,13 +6,33 @@ import JsonLd from "@/app/components/JsonLd";
 import ProposalSample, { type ProposalPage } from "@/app/components/ProposalSample";
 import StackProof, { type StackProofItem, type StackProofSource } from "@/app/components/StackProof";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
-import { DevFrame, FindingsTable } from "@/app/components/ServiceFrame";
+import { DevFrame, FindingsTable, LogLines, ReportRows } from "@/app/components/ServiceFrame";
 import {
+  ACCESS_FAQ,
+  ACCESS_FEATURES,
+  ACCESS_SAMPLE_ROWS,
+  ACCESS_SERVICE,
+  AD_SAMPLE_ROWS,
+  ADS_FEATURES,
+  ADS_SERVICE,
+  AI_FEATURES,
+  AI_SERVICE,
   IT_FAQ,
   IT_FEATURES,
   IT_SAMPLE_ROWS,
   IT_SERVICE,
+  OPS_FEATURES,
+  OPS_SERVICE,
+  PULZUS_FAQ,
+  PULZUS_FEATURES,
+  PULZUS_SERVICE,
   SIZE_FAQ,
+  SOFTWARE_FAQ,
+  SOFTWARE_FEATURES,
+  SOFTWARE_LOG,
+  SOFTWARE_SERVICE,
+  VIDEO_FEATURES,
+  VIDEO_SERVICE,
   WEB_FAQ,
   WEB_FEATURES,
   WEB_SERVICE,
@@ -53,63 +73,32 @@ const INDEX_ITEMS = [
 
 // Egész mondatos leírás szolgáltatásonként — a Service séma description
 // mezője, hogy az AI-keresők idézhető kontextust kapjanak (AEO), ne csak
-// kulcsszavakat. Ahol van saját aloldal (path), a Service séma URL-je oda
-// mutat, nem a horgonyra.
-const SERVICE_SCHEMA_ITEMS: { id: string; name: string; description: string; path?: string }[] = [
-  {
-    id: "web",
-    name: "Web és webshop",
-    description: WEB_SERVICE.description,
-    path: WEB_SERVICE.path,
-  },
-  {
-    id: "ads",
-    name: "Performance marketing",
-    description:
-      "Google és Meta hirdetéskezelés, ahol a kattintástól a megkeresésig követjük a konverziót, és heti jelentésben számolunk el.",
-  },
+// kulcsszavakat. A Service séma URL-je a szolgáltatás saját aloldala.
+const SERVICE_SCHEMA_ITEMS: { id: string; name: string; description: string; path: string }[] = [
+  { id: "web", name: "Web és webshop", description: WEB_SERVICE.description, path: WEB_SERVICE.path },
+  { id: "ads", name: ADS_SERVICE.name, description: ADS_SERVICE.description, path: ADS_SERVICE.path },
   {
     id: "software",
-    name: "Egyedi szoftver és automatizáció",
-    description:
-      "Üzleti folyamatok automatizálása és egyedi szoftverfejlesztés: a webshop, a számlázó, a CRM és a táblázatok összekötése kész automatizációs eszközzel vagy saját kóddal, belső rendszerek és ügyfélportálok fejlesztése, naplózással, hibariasztással és dokumentált átadással.",
+    name: SOFTWARE_SERVICE.name,
+    description: SOFTWARE_SERVICE.description,
+    path: SOFTWARE_SERVICE.path,
   },
-  {
-    id: "ai",
-    name: "AI és chatbot",
-    description:
-      "Chatbot a weboldalon, saját tartalomra hangolva, emberi átirányítással a komolyabb kérdéseknél.",
-  },
-  {
-    id: "video",
-    name: "Videó és tartalom",
-    description:
-      "Cégbemutató, termék- és közösségimédia-videók gyártása, a weboldal arculatával egységes kivitelben.",
-  },
-  {
-    id: "ops",
-    name: "Web-üzemeltetés és fejlesztés",
-    description:
-      "Folyamatos weboldal-üzemeltetés: monitoring, hibariasztás, havi fejlesztési óraszám és rendszeres jelentés.",
-  },
+  { id: "ai", name: AI_SERVICE.name, description: AI_SERVICE.description, path: AI_SERVICE.path },
+  { id: "video", name: VIDEO_SERVICE.name, description: VIDEO_SERVICE.description, path: VIDEO_SERVICE.path },
+  { id: "ops", name: OPS_SERVICE.name, description: OPS_SERVICE.description, path: OPS_SERVICE.path },
   {
     id: "access",
-    name: "Akadálymentesítés",
-    description:
-      "Weboldalak technikai akadálymentesítési felmérése és javítása — kontraszt, billentyűzetes bejárhatóság, képernyőolvasó-kompatibilitás és feliratozás.",
+    name: ACCESS_SERVICE.name,
+    description: ACCESS_SERVICE.description,
+    path: ACCESS_SERVICE.path,
   },
   {
     id: "pulzus",
-    name: "Pulzus",
-    description:
-      "Havi figyelő szolgáltatás élő weboldalakhoz: elérhetőség, sebesség, SSL-tanúsítvány és Google-profil figyelése, összefoglalva egy havi levélben. Jogi modullal: a sütik és külső kódok havi változását webjogász partner értékeli, és szükség esetén frissíti a jogi dokumentumokat.",
+    name: PULZUS_SERVICE.name,
+    description: PULZUS_SERVICE.description,
+    path: PULZUS_SERVICE.path,
   },
-  {
-    id: "it",
-    name: IT_SERVICE.name,
-    description: IT_SERVICE.description,
-    path: IT_SERVICE.path,
-  },
+  { id: "it", name: IT_SERVICE.name, description: IT_SERVICE.description, path: IT_SERVICE.path },
 ];
 
 
@@ -185,95 +174,17 @@ const PROPOSAL_PAGES: ProposalPage[] = [
   },
 ];
 
-const ADS_FEATURES = [
-  "Google és Meta kampányok, B2B fókusszal",
-  "Konverziómérés és attribúció — a megkeresésig követve",
-  "Heti jelentés, érthető nyelven",
-  "Landing page a kampányhoz, nem a főoldalra terelés",
-];
-
-const AI_FEATURES = [
-  "Chat a weboldalon, saját tartalomra hangolva",
-  "Átirányítás emberhez, ha a kérdés komoly",
-  "Jogi megfelelés: AI-tájékoztató, adattovábbítás dokumentálva",
-  "Belső automatizációk: dokumentumfeldolgozás, összefoglalás",
-];
-
-const VIDEO_FEATURES = [
-  "Cégbemutató és imázsvideó",
-  "Termékvideó webshophoz",
-  "Rövid formátumok közösségi médiára",
-  "Vágás, színkezelés, feliratozás",
-];
-
-const OPS_FEATURES = [
-  "Monitoring és hibariasztás — előbb tudunk róla, mint te",
-  "Folyamatos fejlesztés havi óraszámban",
-  "Automatizált tartalommotor: a blog magától frissül",
-  "Jogi megfelelés karbantartása a változásokkal együtt",
-  "Heti vagy kétheti előrehaladási riport",
-  "Egy felelős kapcsolattartó",
-];
-
-const ACCESS_FEATURES = [
-  "Felmérés: mi akadályozza a használatot, és mennyire súlyos",
-  "Kontraszt, betűméret, kattintható felületek mérete",
-  "Billentyűzetes bejárhatóság, látható fókusz",
-  "Képernyőolvasóval való használhatóság: szemantikus szerkezet, képleírások",
-  "Űrlapok: érthető címkék, világos hibaüzenetek",
-  "Videók feliratozása",
-  "Írásos jelentés arról, mi változott",
-];
-
-const PULZUS_FEATURES = [
-  "Elérhetőség figyelése — leállásnál értesítés",
-  "Betöltési sebesség: a változást jelezzük, nem a pontszámot",
-  "SSL-tanúsítvány lejárata — időben szólunk",
-  "Kapcsolati űrlap havi tesztelése",
-  "Indexeltség: látszik-e az oldal a keresőben",
-  "Google-profil: új értékelések, változó átlag",
-  "Értékelés-kérés a vásárlás után",
-  "Válaszjavaslat az értékelésekre — a küldés a tiéd",
-  "Jogi modul: sütik és külső kódok havi feltérképezése, változásjelzéssel",
-  "Fut-e mérő- vagy hirdetési kód a süti-hozzájárulás előtt",
-  "Jogi dokumentumok felülvizsgálata webjogász partnerrel",
-  "Havi levél magyarul, konkrét javaslatokkal",
-];
 
 
-const SOFTWARE_FEATURES = [
-  "Folyamatfelmérés: mi megy ma kézzel, és mit érdemes automatizálni",
-  "Rendszerek összekötése: webshop, számlázó, CRM, e-mail, táblázat",
-  "Automatizáció kész eszközzel vagy saját kóddal, amelyik hosszabb távon olcsóbban fenntartható",
-  "Egyedi belső rendszer, ügyfélportál, adminfelület",
-  "Naplózás és hibariasztás: kiderül, ha valami nem futott le",
-  "Átadás dokumentációval, hogy ne csak mi értsük",
-  "Üzemeltetés és továbbfejlesztés, ha kéred",
-];
-
-const SOFTWARE_LOG = [
-  { t: "08:12", msg: "Új rendelés érkezett a webshopba" },
-  { t: "08:12", msg: "Számla kiállítva a számlázóban" },
-  { t: "08:13", msg: "Visszaigazoló e-mail elküldve a vevőnek" },
-  { t: "08:13", msg: "Rendelés rögzítve a raktártáblázatban" },
-  { t: "09:40", msg: "A számlázó nem válaszolt — újrapróbálás 5 perc múlva, riasztás elküldve" },
-  { t: "09:45", msg: "Újrapróbálás sikeres, a tétel pótolva" },
-];
 
 
-const ACCESS_SAMPLE_ROWS = [
-  { finding: "Kontraszt 3,1:1 a gombokon", meaning: "Gyengénlátónak nehezen olvasható", severity: "Magas" },
-  { finding: "47 kép leírás nélkül", meaning: "Képernyőolvasó nem tudja felolvasni", severity: "Magas" },
-  { finding: "Fókusz nem látszik", meaning: "Billentyűzettel nem követhető, hol jár", severity: "Magas" },
-  { finding: "Űrlapmezők címke nélkül", meaning: "Nem derül ki, mit kell beírni", severity: "Közepes" },
-  { finding: "Kattintható felület 28 px", meaning: "Remegő kézzel, telefonon nehéz eltalálni", severity: "Közepes" },
-];
 
-const AD_SAMPLE_ROWS = [
-  { label: "Kattintás → megkeresés", value: "követve" },
-  { label: "Legjobb csatorna a héten", value: "megnevezve" },
-  { label: "Amit nem folytatunk", value: "indokolva" },
-];
+
+
+
+
+
+
 
 const OPS_LOG = [
   { t: "06:00", msg: "Tartalomgenerálás elindítva" },
@@ -281,36 +192,7 @@ const OPS_LOG = [
   { t: "06:05", msg: "Sitemap frissítve, keresők értesítve" },
 ];
 
-const FAQ_ITEMS = [
-  ...WEB_FAQ,
-  SIZE_FAQ,
-  {
-    question: "Az akadálymentesítési felmérés garantálja a jogi megfelelést?",
-    answer:
-      "Nem. A megfelelés jogi minősítés, arról ügyvéd nyilatkozik. Mi a technikai akadályokat mérjük fel, dokumentáljuk és szüntetjük meg — a jogi tanácsadást a saját jogászoddal intézed.",
-  },
-  {
-    question: "A Pulzus mit csinál, ha talál valami rosszat?",
-    answer:
-      "Nem javít automatikusan. A havi levélben megmondja, mi változott és mit érdemes tenni — a javítás külön megrendelés, vagy a Pulzus havi órakeretének terhére megy, ha azt választod.",
-  },
-  {
-    question: "A Pulzus jogi modulja garantálja a jogi megfelelést?",
-    answer:
-      "Nem. A megfelelésről jogász nyilatkozik, nem mi. Amit a modul ad: havonta dokumentáljuk, milyen sütiket és külső kódokat tölt ténylegesen az oldal, és ha ez eltér a jogi dokumentumoktól, webjogász partnerünk értékeli és szükség esetén frissíti őket. A jogi munka díját és terjedelmét a jogász határozza meg.",
-  },
-  ...IT_FAQ,
-  {
-    question: "Le kell cserélnünk a meglévő rendszereinket az automatizációhoz?",
-    answer:
-      "Általában nem. Azt kötjük össze, ami már megvan: a webshopot, a számlázót, a táblázatokat. Új szoftvert akkor javaslunk, ha a meglévő nem tudja, amire szükség van — és ezt a felmérésben írásban meg is indokoljuk.",
-  },
-  {
-    question: "Mi történik, ha egy automatizáció leáll?",
-    answer:
-      "Nem csendben áll le. Minden futás naplózódik, hiba esetén riasztás megy a felelősnek — nekünk, ha az üzemeltetést is ránk bízod, vagy a kijelölt munkatársatoknak. A kimaradt tételek a napló alapján pótolhatók.",
-  },
-];
+const FAQ_ITEMS = [...WEB_FAQ, SIZE_FAQ, ...ACCESS_FAQ, ...PULZUS_FAQ, ...IT_FAQ, ...SOFTWARE_FAQ];
 
 function ServiceBlock({
   id,
@@ -320,6 +202,7 @@ function ServiceBlock({
   paragraphs,
   features,
   device,
+  detail,
 }: {
   id: string;
   n: string;
@@ -328,6 +211,8 @@ function ServiceBlock({
   paragraphs: React.ReactNode[];
   features: string[];
   device: React.ReactNode;
+  // A szolgáltatás saját aloldala és a link szövege.
+  detail: { href: string; label: string };
 }) {
   return (
     <section id={id} className="border-b border-[var(--rule)]">
@@ -352,6 +237,12 @@ function ServiceBlock({
               {p}
             </p>
           ))}
+          <p className="mt-[var(--space-5)] [font-size:var(--text-base)] text-[var(--ink-2)]">
+            Részletesen:{" "}
+            <Link href={detail.href} className="text-[var(--ink)] underline">
+              {detail.label}
+            </Link>
+          </p>
         </div>
       </div>
 
@@ -389,7 +280,7 @@ export default function Arzenal() {
           data={serviceSchema({
             name: item.name,
             description: item.description,
-            url: `${SITE_URL}${item.path ?? `/arzenal#${item.id}`}`,
+            url: `${SITE_URL}${item.path}`,
           })}
         />
       ))}
@@ -450,14 +341,8 @@ export default function Arzenal() {
               szerkezet része.
             </>,
             "Élő webshopnál nem kapcsolunk le semmit: fokozatosan cseréljük az oldalakat, a bolt közben forgalmaz.",
-            <>
-              Részletesen:{" "}
-              <Link href={WEB_SERVICE.path} className="text-[var(--ink)] underline">
-                weboldal- és webshopfejlesztés lépésről lépésre
-              </Link>
-              .
-            </>,
           ]}
+          detail={{ href: WEB_SERVICE.path, label: "weboldal- és webshopfejlesztés lépésről lépésre" }}
           features={WEB_FEATURES}
           device={
             <>
@@ -507,24 +392,11 @@ export default function Arzenal() {
             </>,
             "Ha egy csatorna nem működik, azt megmondjuk — nem költjük tovább.",
           ]}
+          detail={{ href: ADS_SERVICE.path, label: "hirdetéskezelés, ahol a megkeresés számít" }}
           features={ADS_FEATURES}
           device={
             <DevFrame header="Így néz ki egy heti jelentés" headerRight="Minta">
-              <table className="w-full border-collapse [font-size:var(--text-sm)]">
-                <tbody>
-                  {AD_SAMPLE_ROWS.map((row) => (
-                    <tr
-                      key={row.label}
-                      className="border-b border-[var(--rule-soft)] last:border-b-0"
-                    >
-                      <td className="py-[var(--space-3)] text-[var(--mid)]">{row.label}</td>
-                      <td className="py-[var(--space-3)] text-[var(--signal-deep)] text-right [font-family:var(--font-mono)]">
-                        {row.value}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <ReportRows rows={AD_SAMPLE_ROWS} />
               <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
                 Szemléltetés — a valós számokat az első hónap végén te látod először.
               </p>
@@ -552,22 +424,11 @@ export default function Arzenal() {
             </>,
             "Felméréssel kezdünk: írásban megkapod, melyik folyamatot érdemes automatizálni, és melyiket nem. Minden automatizáció naplóz és hiba esetén riaszt, mert egy csendben leállt folyamat rosszabb, mint a kézi munka.",
           ]}
+          detail={{ href: SOFTWARE_SERVICE.path, label: "folyamat-automatizálás és egyedi szoftver" }}
           features={SOFTWARE_FEATURES}
           device={
             <DevFrame header="Egy automatizáció naplója" headerRight="Minta">
-              <div className="[font-family:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--ink-2)]">
-                {SOFTWARE_LOG.map((line, i) => (
-                  <div
-                    key={`${line.t}-${line.msg}`}
-                    className={`grid grid-cols-[74px_1fr] gap-[var(--space-4)] py-[var(--space-2)] ${
-                      i < SOFTWARE_LOG.length - 1 ? "border-b border-[var(--rule-soft)]" : ""
-                    }`}
-                  >
-                    <b className="text-[var(--signal-deep)] font-medium">{line.t}</b>
-                    <span>{line.msg}</span>
-                  </div>
-                ))}
-              </div>
+              <LogLines lines={SOFTWARE_LOG} />
               <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
                 Szemléltetés. A lépések a folyamattól függenek.
               </p>
@@ -593,6 +454,7 @@ export default function Arzenal() {
               írja le.
             </>,
           ]}
+          detail={{ href: AI_SERVICE.path, label: "AI-chatbot a weboldalon" }}
           features={AI_FEATURES}
           device={
             <DevFrame header="Amit a chat valóban tud" headerRight="Példa">
@@ -638,6 +500,7 @@ export default function Arzenal() {
               összeszedett videó”. A gyártást videós partnerünk végzi.
             </>,
           ]}
+          detail={{ href: VIDEO_SERVICE.path, label: "céges videó és tartalom" }}
           features={VIDEO_FEATURES}
           device={
             <div className="border-t border-[var(--rule)] grid grid-cols-1 sm:grid-cols-3">
@@ -685,22 +548,11 @@ export default function Arzenal() {
               .
             </>,
           ]}
+          detail={{ href: OPS_SERVICE.path, label: "weboldal-üzemeltetés és folyamatos fejlesztés" }}
           features={OPS_FEATURES}
           device={
             <DevFrame header="Egy nap a tartalommotorból" headerRight="Napló">
-              <div className="[font-family:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--ink-2)]">
-                {OPS_LOG.map((line, i) => (
-                  <div
-                    key={line.t}
-                    className={`grid grid-cols-[74px_1fr] gap-[var(--space-4)] py-[var(--space-2)] ${
-                      i < OPS_LOG.length - 1 ? "border-b border-[var(--rule-soft)]" : ""
-                    }`}
-                  >
-                    <b className="text-[var(--signal-deep)] font-medium">{line.t}</b>
-                    <span>{line.msg}</span>
-                  </div>
-                ))}
-              </div>
+              <LogLines lines={OPS_LOG} />
             </DevFrame>
           }
         />
@@ -739,6 +591,7 @@ export default function Arzenal() {
               .
             </>,
           ]}
+          detail={{ href: ACCESS_SERVICE.path, label: "weboldal-akadálymentesítés" }}
           features={ACCESS_FEATURES}
           device={
             <DevFrame header="Amit egy felmérés tipikusan talál" headerRight="Minta">
@@ -792,6 +645,7 @@ export default function Arzenal() {
               .
             </>,
           ]}
+          detail={{ href: PULZUS_SERVICE.path, label: "a Pulzus havi weboldal-figyelés" }}
           features={PULZUS_FEATURES}
           device={
             <DevFrame header="Így néz ki egy havi levél" headerRight="Minta">
@@ -871,14 +725,8 @@ export default function Arzenal() {
               ilyenkor is mi vagyunk.
             </>,
             "Felméréssel kezdünk: megnézzük, mi van most, és írásban megkapod, mit találtunk és mit javasolunk. Utána te döntöd el, mit bízol ránk.",
-            <>
-              Részletesen:{" "}
-              <Link href={IT_SERVICE.path} className="text-[var(--ink)] underline">
-                irodai IT-üzemeltetés és rendszergazdai szolgáltatás
-              </Link>
-              .
-            </>,
           ]}
+          detail={{ href: IT_SERVICE.path, label: "irodai IT-üzemeltetés és rendszergazdai szolgáltatás" }}
           features={IT_FEATURES}
           device={
             <DevFrame header="Amit egy IT-felmérés tipikusan talál" headerRight="Minta">
