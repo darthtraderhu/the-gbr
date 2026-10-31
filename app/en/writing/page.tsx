@@ -4,7 +4,7 @@ import { getSortedEnPostsData } from "@/lib/posts-en";
 import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
-import WritingClient from "./WritingClient";
+import ArticleIndex from "@/app/components/writing/ArticleIndex";
 
 // Ugyanaz a napi ISR, mint a magyar /hirek-nél — az ütemezett angol cikkek
 // (posts-en/) is a dátumuk napján jelenjenek meg, új deploy nélkül.
@@ -35,7 +35,7 @@ export default function EnglishWriting() {
           { name: "Writing", url: `${SITE_URL}/en/writing` },
         ])}
       />
-      <WritingClient posts={allPostsData} />
+      <ArticleIndex posts={allPostsData} locale="en" />
     </>
   );
 }

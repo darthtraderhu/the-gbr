@@ -6,6 +6,8 @@ import { blogPostingSchema, breadcrumbSchema, softwareApplicationSchema } from "
 import JsonLd from "@/app/components/JsonLd";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import ShareBar from "./ShareBar";
+import ArticleBody from "@/app/components/writing/ArticleBody";
+import { withHeadingAnchors } from "@/lib/article-toc";
 
 export async function generateMetadata({
   params,
@@ -60,6 +62,7 @@ export default async function EnglishArticlePage({
 
   const articleUrl = `${SITE_URL}/en/writing/${slug}`;
   const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`;
+  const article = withHeadingAnchors(postData.contentHtml);
   const showUpdated = postData.updated && postData.updated !== postData.date;
 
   return (
@@ -106,7 +109,7 @@ export default async function EnglishArticlePage({
             {postData.title}
           </h1>
           {postData.excerpt && (
-            <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[52ch] mt-[var(--space-6)]">
+            <p className="[font-size:var(--text-2xl)] leading-[1.45] text-[var(--ink)] max-w-[52ch] mt-[var(--space-6)]">
               {postData.excerpt}
             </p>
           )}
@@ -121,11 +124,13 @@ export default async function EnglishArticlePage({
 
       <Seam />
 
-      <Rail label="Content">
-        <section className="px-6 py-[clamp(44px,5.4vw,86px)]">
-          <article className="prose-gbr" dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-        </section>
-
+      <ArticleBody
+        html={article.html}
+        toc={article.toc}
+        readTime={postData.readTime}
+        backHref="/en/writing"
+        locale="en"
+      >
         <div className="flex flex-wrap justify-between items-center gap-[var(--space-4)] px-6 py-[clamp(28px,3.2vw,44px)] border-t border-[var(--rule)]">
           <ShareBar linkedInShareUrl={linkedInShareUrl} articleUrl={articleUrl} />
           {showUpdated && (
@@ -137,7 +142,7 @@ export default async function EnglishArticlePage({
             </span>
           )}
         </div>
-      </Rail>
+      </ArticleBody>
 
       <Seam />
 
@@ -174,7 +179,7 @@ export default async function EnglishArticlePage({
                 <span className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.18em] uppercase text-[var(--mid)]">
                   {post.category || "Writing"}
                 </span>
-                <h3 className="[font-size:var(--text-xl)] font-semibold leading-tight tracking-[-0.01em] max-w-[32ch] m-0">
+                <h3 className="font-display font-bold [font-size:var(--text-2xl)] leading-[1.15] tracking-[-0.025em] max-w-[34ch] m-0">
                   {post.title}
                 </h3>
                 <span className="hidden sm:block [font-family:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--rule-strong)]">
