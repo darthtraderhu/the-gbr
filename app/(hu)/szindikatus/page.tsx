@@ -73,6 +73,7 @@ const IN_HOUSE_ITEMS = [
 
 const PARTNER_ITEMS = [
   "Videógyártás és utómunka",
+  "Irodai IT-üzemeltetés és rendszergazdai munka",
   "Jogi háttér — adatvédelem, szerződések",
   "Könyvelés és számlázási integráció",
   "A projekthez szükséges speciális szakértelem",

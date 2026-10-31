@@ -6,7 +6,7 @@
     },
     "services": {
       "title": "Services — THE GBR",
-      "description": "Web and commerce, performance marketing, custom software and automation, AI integration, video, web operations, accessibility, monitoring and IT operations. Nine areas, in-house."
+      "description": "Web and commerce, performance marketing, custom software and automation, AI integration, video, web operations, accessibility, monitoring and IT operations. Nine areas, one accountable contact."
     },
     "engagement": {
       "title": "How we work — THE GBR",
@@ -103,7 +103,7 @@
       "Content, campaigns, measurement",
       "Monthly status report on the site and its search presence (Pulse)",
       "Legal module for Pulse: monthly map of cookies and third-party scripts, reviewed by a web lawyer",
-      "Office IT: system administration, networks, Microsoft 365",
+      "Office IT with a partner: system administration, networks, Microsoft 365",
       "One accountable contact, not a ticket queue"
     ],
     "serviceIndexEyebrow": "In detail · nine areas",
@@ -184,7 +184,7 @@
 
   "Services": {
     "headline": "Services.",
-    "intro1": "Nine areas we handle in-house. If a project doesn't need all nine, we don't sell you all nine.",
+    "intro1": "Nine areas. Most of it happens in-house; video and office IT we deliver with returning partners, and you still deal with us. If a project doesn't need all nine, we don't sell you all nine.",
     "intro2": "<b>We also work as a development partner</b> — for Hungarian and Western European agencies alike.",
     "indexNames": {
       "web": "Web and commerce",
@@ -297,7 +297,7 @@
     },
     "video": {
       "headline": "A website alone isn't enough",
-      "p1": "A good site needs content. Brand films, product video, short social formats — directed by us, in the same visual language as the site. So you don't end up with a polished page and video that came from somewhere else.",
+      "p1": "A good site needs content. Brand films, product video, short social formats — directed by us, in the same visual language as the site. So you don't end up with a polished page and video that came from somewhere else. Production is handled by our video partner.",
       "items": [
         "Company and brand film",
         "Product video for commerce",
@@ -390,7 +390,7 @@
     "it": {
       "headline": "Office IT you don't have to think about",
       "p1": "In most offices the problem isn't a lack of IT. It's that nobody has the whole picture: who can access what, whether there's a backup, and who to call when email won't start in the morning.",
-      "p2": "<b>We've run IT systems for 15 years</b> — for small and larger offices and remote teams, from the server through the printers to everyone's phone.",
+      "p2": "<b>We deliver this with our IT partner</b>, who has run IT systems for 15 years — for small and larger offices and remote teams, from the server through the printers to everyone's phone. You still deal with us.",
       "p3": "We start with an assessment: we look at what's there now, and you get a written summary of what we found and what we recommend. Then you decide what to hand over to us.",
       "items": [
         "Assessment of your existing IT, with a written summary",
@@ -817,6 +817,7 @@
     "partnersSub": "Vetted, returning partners",
     "partnersItems": [
       "Video production and post",
+      "Office IT and system administration",
       "Legal — data protection, contracts",
       "Accounting and invoicing integration",
       "Specialist skills a given project requires"

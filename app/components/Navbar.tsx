@@ -59,8 +59,12 @@ export default function Navbar() {
   if (pathname === "/init" || pathname === "/en/contact") return null;
 
   const navItems = isEn ? MAIN_NAV_ITEMS_EN : MAIN_NAV_ITEMS;
-  const sections = isEn ? ARZENAL_SECTIONS_EN : ARZENAL_SECTIONS;
   const servicesHref = isEn ? "/en/services" : "/arzenal";
+  // A magyar szolgáltatások saját aloldalra visznek, az angolok a
+  // /en/services horgonyára (ott nincs aloldal).
+  const sections = isEn
+    ? ARZENAL_SECTIONS_EN.map((s) => ({ ...s, href: `${servicesHref}#${s.id}` }))
+    : ARZENAL_SECTIONS;
   const homeHref = isEn ? "/en" : "/";
   const ctaHref = isEn ? "/en/contact" : "/init";
   const switcherHref = isEn ? getHungarianEquivalent(pathname ?? "/en") : getEnglishEquivalent(pathname ?? "/");
@@ -130,7 +134,7 @@ export default function Navbar() {
                       {sections.map((s) => (
                         <Link
                           key={s.id}
-                          href={`${servicesHref}#${s.id}`}
+                          href={s.href}
                           className="flex items-center gap-3 px-4 py-3 border-b border-[var(--rule)] last:border-b-0 hover:bg-[var(--panel)] transition-colors group/item"
                         >
                           <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] text-[var(--dim)] group-hover/item:text-[var(--signal)] transition-colors">
@@ -291,7 +295,7 @@ export default function Navbar() {
                       {sections.map((s) => (
                         <Link
                           key={s.id}
-                          href={`${servicesHref}#${s.id}`}
+                          href={s.href}
                           onClick={() => setIsMenuOpen(false)}
                           className="flex items-center gap-3 pl-[58px] pr-6 py-[10px]"
                         >

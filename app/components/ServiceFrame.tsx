@@ -64,3 +64,40 @@ export function FindingsTable({
     </>
   );
 }
+
+// Időbélyeges napló-sorok (automatizáció, tartalommotor).
+export function LogLines({ lines }: { lines: { t: string; msg: string }[] }) {
+  return (
+    <div className="[font-family:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--ink-2)]">
+      {lines.map((line, i) => (
+        <div
+          key={`${line.t}-${line.msg}`}
+          className={`grid grid-cols-[74px_1fr] gap-[var(--space-4)] py-[var(--space-2)] ${
+            i < lines.length - 1 ? "border-b border-[var(--rule-soft)]" : ""
+          }`}
+        >
+          <b className="text-[var(--signal-deep)] font-medium">{line.t}</b>
+          <span>{line.msg}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Címke–érték sorok (pl. a heti hirdetési jelentés mintája).
+export function ReportRows({ rows }: { rows: { label: string; value: string }[] }) {
+  return (
+    <table className="w-full border-collapse [font-size:var(--text-sm)]">
+      <tbody>
+        {rows.map((row) => (
+          <tr key={row.label} className="border-b border-[var(--rule-soft)] last:border-b-0">
+            <td className="py-[var(--space-3)] text-[var(--mid)]">{row.label}</td>
+            <td className="py-[var(--space-3)] text-[var(--signal-deep)] text-right [font-family:var(--font-mono)]">
+              {row.value}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}

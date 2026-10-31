@@ -56,7 +56,7 @@ const MANAGE_ITEMS = [
   "Automatizált tartalommotor",
   "Havi állapotjelentés a weboldalról és a Google-megjelenésről (Pulzus)",
   "Jogi modul a Pulzushoz: sütik és külső kódok havi figyelése, webjogász partnerrel",
-  "Irodai informatika: rendszergazda, hálózat, Microsoft 365",
+  "Irodai informatika partnerrel: rendszergazda, hálózat, Microsoft 365",
   "Egy felelős kapcsolattartó",
 ];
 
