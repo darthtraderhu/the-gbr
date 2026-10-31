@@ -25,6 +25,7 @@
   --rule-strong: #bfc5bc; /* kiemelt szegély (pl. körvonalas gomb) — erősebb, mint --rule */
   --signal: #93b300;
   --signal-deep: #88a800;
+  --on-signal: #14171a; /* szöveg lime felületen — mindkét témában sötét, hogy olvasható maradjon */
   --attention: #b8501c;
   --motif-opacity: 0.08; /* háttérmotívum fedése (BackgroundMotif) */
 
@@ -238,19 +239,20 @@ h2 {
   max-width: 66ch;
 }
 .prose-gbr p {
-  font-size: clamp(17px, 1.42vw, 20px);
-  line-height: 1.72;
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.7;
   color: var(--ink-2);
   margin: 0 0 26px;
 }
-.prose-gbr > p:first-of-type::first-letter {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 3.1em;
-  line-height: 0.82;
-  float: left;
-  margin: 6px 12px 0 0;
+/* Bevezető bekezdés: kezdőbetű (drop cap) helyett a teljes első bekezdés
+   nagyobb és sötétebb, lime szegéllyel — olvasható, nem díszítés. */
+.prose-article > p:first-of-type {
+  font-size: clamp(21px, 2vw, 26px);
+  line-height: 1.55;
   color: var(--ink);
+  padding-left: 22px;
+  border-left: 4px solid var(--signal);
+  margin-bottom: 40px;
 }
 .prose-gbr h2 {
   font-family: var(--font-display);
@@ -261,6 +263,31 @@ h2 {
   margin: 52px 0 18px;
   max-width: 24ch;
   color: var(--ink);
+}
+/* Cikk-szakaszcímek (.prose-article, a jogi oldalakon nem): nagyobb cím,
+   sorszám + vonal, hogy a cikk szerkezete ránézésre látsszon. */
+.prose-article {
+  counter-reset: szakasz;
+}
+.prose-article h2 {
+  counter-increment: szakasz;
+  font-size: clamp(26px, 3vw, 40px);
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  margin: 64px 0 20px;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule);
+  scroll-margin-top: 110px;
+}
+.prose-article h2::before {
+  content: counter(szakasz, decimal-leading-zero);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--signal-deep);
+  margin-bottom: 12px;
 }
 .prose-gbr h3 {
   font-family: var(--font-display);
@@ -290,7 +317,7 @@ h2 {
   counter-reset: li;
 }
 .prose-gbr li {
-  font-size: clamp(16.5px, 1.35vw, 19px);
+  font-size: clamp(17.5px, 1.45vw, 20px);
   line-height: 1.65;
   color: var(--ink-2);
   padding: 11px 0 11px 26px;

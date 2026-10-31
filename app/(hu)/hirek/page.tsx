@@ -3,7 +3,7 @@ import { getSortedPostsData } from "@/lib/posts";
 import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
-import HirekClient from "./HirekClient";
+import ArticleIndex from "@/app/components/writing/ArticleIndex";
 
 // A cikk-ütemezés (lib/posts.ts) miatt ez az oldal statikusan épül, de a
 // tartalma naponta lejár — így egy ütemezett cikk a megadott napon (a
@@ -40,7 +40,7 @@ export default function Hirek() {
           { name: "Írások", url: `${SITE_URL}/hirek` },
         ])}
       />
-      <HirekClient posts={allPostsData} />
+      <ArticleIndex posts={allPostsData} locale="hu" />
     </>
   );
 }
