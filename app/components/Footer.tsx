@@ -4,8 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { openCookieSettings } from "@/app/components/CookieConsent";
 import { MAIN_NAV_ITEMS, MAIN_NAV_ITEMS_EN, LEGAL_LINKS } from "@/lib/site-links";
-import huMessages from "@/messages/hu.json";
-import enMessages from "@/messages/en.json";
+// Csak a keret szövegei — a teljes messages/en.json az oldalak szövegét is
+// tartalmazza, és kliens-komponensből importálva minden látogatóhoz kimenne.
+import huMessages from "@/messages/shell/hu.json";
+import enMessages from "@/messages/shell/en.json";
 
 export default function Footer() {
   const pathname = usePathname();

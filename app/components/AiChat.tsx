@@ -3,8 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useChatOpenRequests } from "./chat-bus";
-import huMessages from "@/messages/hu.json";
-import enMessages from "@/messages/en.json";
+// Csak a keret szövegei — a teljes messages/en.json az oldalak szövegét is
+// tartalmazza, és kliens-komponensből importálva minden látogatóhoz kimenne.
+import huMessages from "@/messages/shell/hu.json";
+import enMessages from "@/messages/shell/en.json";
 
 type ChatMessage = { sender: "user" | "ai"; text: string };
 

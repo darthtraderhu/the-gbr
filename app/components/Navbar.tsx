@@ -13,8 +13,10 @@ import {
   LEGAL_LINKS,
 } from "@/lib/site-links";
 import { getEnglishEquivalent, getHungarianEquivalent } from "@/lib/i18n-routes";
-import huMessages from "@/messages/hu.json";
-import enMessages from "@/messages/en.json";
+// Csak a keret szövegei — a teljes messages/en.json az oldalak szövegét is
+// tartalmazza, és kliens-komponensből importálva minden látogatóhoz kimenne.
+import huMessages from "@/messages/shell/hu.json";
+import enMessages from "@/messages/shell/en.json";
 
 export default function Navbar() {
   const pathname = usePathname();

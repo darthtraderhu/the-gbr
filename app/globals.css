@@ -518,11 +518,21 @@ h2 {
   background-color: #fff;
   mask: url("/motif/nyul.webp") center / contain no-repeat;
   mix-blend-mode: difference;
-  opacity: var(--motif-opacity);
   right: -3vw;
   top: calc(var(--header-height) + 2vh);
   width: min(80vh, 62vw);
   aspect-ratio: 1100 / 1069;
+  /* Átlátszóan festődik ki, és csak akkor tűnik elő, amikor a maszkkép már
+     betöltött (az .is-ready osztályt a BackgroundMotif teszi rá). Így a
+     böngésző nem ezt a 8%-os fedésű dekorációt méri a legnagyobb tartalmi
+     elemnek (LCP), hanem a hős-szöveget — mobilon enélkül a rajz
+     várakoztatta a mért betöltést. Csökkentett mozgásnál a globális
+     prefers-reduced-motion szabály az áttűnést azonnalivá teszi. */
+  opacity: 0;
+  transition: opacity 600ms ease-out;
+}
+.background-motif.is-ready {
+  opacity: var(--motif-opacity);
 }
 /* Az /init (és /en/contact) oldalon nincs fejléc, és a varázsló a fókusz —
    ott a motívum kisebb, és a fejléc-magasság helyett a lap tetejéhez igazodik. */
@@ -536,6 +546,8 @@ h2 {
   .background-motif {
     right: -18vw;
     width: 82vw;
+  }
+  .background-motif.is-ready {
     opacity: calc(var(--motif-opacity) * 0.85);
   }
   .background-motif--compact {

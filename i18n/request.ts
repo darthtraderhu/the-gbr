@@ -7,7 +7,12 @@ import { getRequestConfig } from "next-intl/server";
 // amikor egy oldal a [locale] szegmensen kívül renderel.
 export default getRequestConfig(async ({ locale }) => {
   const resolvedLocale = locale ?? "hu";
-  const messages = (await import(`../messages/${resolvedLocale}.json`)).default;
+  // A keret szövegei (menü, lábléc, süti-sáv, chat) külön fájlban vannak, mert
+  // a kliens-komponensek közvetlenül importálják őket — így a böngésző csak
+  // ezt a pár száz bájtot kapja meg, nem az oldalak teljes angol szövegét.
+  const shell = (await import(`../messages/shell/${resolvedLocale}.json`)).default;
+  const pages = (await import(`../messages/${resolvedLocale}.json`)).default;
+  const messages = { ...shell, ...pages };
 
   return {
     locale: resolvedLocale,

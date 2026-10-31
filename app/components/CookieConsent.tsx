@@ -4,8 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSyncExternalStore } from "react";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import huMessages from "@/messages/hu.json";
-import enMessages from "@/messages/en.json";
+// Csak a keret szövegei — a teljes messages/en.json az oldalak szövegét is
+// tartalmazza, és kliens-komponensből importálva minden látogatóhoz kimenne.
+import huMessages from "@/messages/shell/hu.json";
+import enMessages from "@/messages/shell/en.json";
 
 const GA_ID = "G-HLK1LCQB5C";
 const CONSENT_COOKIE = "gbr-consent";
