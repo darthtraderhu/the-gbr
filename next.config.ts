@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV === "development";
 // Külső források, amiket az oldal ténylegesen használ:
 // - Google Analytics 4 (googletagmanager.com, google-analytics.com)
 // - Formspree (az /init párhuzamos fetch-hívása, amíg a saját pipeline át nem veszi)
-// A Vercel Analytics a saját domainről (/_vercel/insights) fut, külön engedély nem kell.
+// A Vercel Analytics és Speed Insights a saját domainről (/_vercel/insights, /_vercel/speed-insights) fut, külön engedély nem kell.
 const csp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com`,
