@@ -16,6 +16,10 @@ export type ServicePitch = {
   facts: Fact[];
   angleTitle: string;
   angle: AngleRow[];
+  // Az aloldal záró kérdése. Nem azt kérdezzük, mit szeretne (sokszor nem
+  // tudja), hanem egy szolgáltatáshoz illő, megválaszolható kérdést; a
+  // választ mi adjuk meg.
+  cta: { question: string; body: string; button?: string };
 };
 
 export const WEB_SERVICE = {
@@ -383,6 +387,10 @@ export const WEB_PITCH: ServicePitch = {
       ours: "Üzemeltetés egy felelős emberrel, aki ismeri az oldalt",
     },
   ],
+  cta: {
+    question: "Hol veszíti el most a vevőt az oldalad?",
+    body: "Nem kell kész terv, és azt sem kell tudnod, milyen oldal kell. Írd le, mit árulsz és kinek, küldd el a mostani oldal címét, a többit mi kérdezzük meg. Két munkanapon belül válaszolunk.",
+  },
 };
 
 export const ADS_PITCH: ServicePitch = {
@@ -412,6 +420,10 @@ export const ADS_PITCH: ServicePitch = {
       ours: "A mérés a megkeresésig tart: látszik, melyik kattintásból lett érdeklődő",
     },
   ],
+  cta: {
+    question: "Tudod, hány megkeresést hozott a múlt havi hirdetési kereted?",
+    body: "Ha nem, nem veled van a baj, hanem a méréssel. Írd le, hol hirdetsz most és mennyiért, és megmondjuk, mit kellene mérni ahhoz, hogy legyen egy szám a végén. Két munkanapon belül válaszolunk.",
+  },
 };
 
 export const SOFTWARE_PITCH: ServicePitch = {
@@ -441,6 +453,10 @@ export const SOFTWARE_PITCH: ServicePitch = {
       ours: "Dokumentált átadás, hogy senkinek ne legyél kiszolgáltatva, nekünk sem",
     },
   ],
+  cta: {
+    question: "Mit másol ma kézzel valaki a csapatodban?",
+    body: "Elég egy mondat: honnan hová, és milyen gyakran. Nem kell tudnod, melyik eszköz vagy kód kell hozzá, azt mi mondjuk meg, és azt is, ha nem éri meg automatizálni. Két munkanapon belül válaszolunk.",
+  },
 };
 
 export const AI_PITCH: ServicePitch = {
@@ -470,6 +486,10 @@ export const AI_PITCH: ServicePitch = {
       ours: "AI-tájékoztató és dokumentált adattovábbítás az első naptól",
     },
   ],
+  cta: {
+    question: "Melyik kérdésre válaszolsz el naponta ugyanúgy, újra és újra?",
+    body: "Abból indulunk ki, nem a technológiából. Írd le a három leggyakoribb kérdést, amit a vevőid feltesznek, és megmondjuk, melyikre válaszolhat jól egy asszisztens, és melyiknél kell ember. Két munkanapon belül válaszolunk.",
+  },
 };
 
 export const VIDEO_PITCH: ServicePitch = {
@@ -495,6 +515,10 @@ export const VIDEO_PITCH: ServicePitch = {
       ours: "Egy kapcsolattartó: mi irányítjuk a videós partnert",
     },
   ],
+  cta: {
+    question: "Mit kellene látnia a vevőnek, mielőtt felhív?",
+    body: "A terméket működés közben? A csapatot? A műhelyt? Írd le, mit kérdeznek tőled a legtöbbször telefonon, és megmondjuk, melyik formátum válaszol rá a legjobban. Két munkanapon belül válaszolunk.",
+  },
 };
 
 export const OPS_PITCH: ServicePitch = {
@@ -524,6 +548,10 @@ export const OPS_PITCH: ServicePitch = {
       ours: "Az oldal tovább fejlődik, és írásban látod, mi készült el",
     },
   ],
+  cta: {
+    question: "Ki szól neked, ha holnap reggel leáll az oldalad?",
+    body: "Ha a válasz az, hogy egy ügyfeled, akkor érdemes beszélnünk. Küldd el az oldal címét és azt, ki üzemelteti most, és megmondjuk, mit vinnénk tovább és hogyan. Két munkanapon belül válaszolunk.",
+  },
 };
 
 export const ACCESS_PITCH: ServicePitch = {
@@ -553,6 +581,10 @@ export const ACCESS_PITCH: ServicePitch = {
       ours: "Akadálymentesség mint vevő, aki eddig nem tudott nálad vásárolni",
     },
   ],
+  cta: {
+    question: "Végig tudnál menni a vásárláson egér nélkül?",
+    body: "Próbáld ki most: csak a Tab és az Enter billentyűvel. Ha elakadsz, a vevőid egy része is elakad. Küldd el az oldal címét, és megmondjuk, hol és mennyire súlyosan. Két munkanapon belül válaszolunk.",
+  },
 };
 
 export const PULZUS_PITCH: ServicePitch = {
@@ -582,6 +614,10 @@ export const PULZUS_PITCH: ServicePitch = {
       ours: "Havonta megnézzük, mit tölt az oldal; eltérésnél webjogász értékel",
     },
   ],
+  cta: {
+    question: "Mikor nézte meg utoljára valaki, működik-e a kapcsolati űrlapod?",
+    body: "Ha nem tudod, az a válasz. Küldd el az oldal címét, és megmondjuk, mit figyelne rajta a Pulzus, és mire szólna előbb, mint egy ügyfeled. Két munkanapon belül válaszolunk.",
+  },
 };
 
 export const IT_PITCH: ServicePitch = {
@@ -611,4 +647,103 @@ export const IT_PITCH: ServicePitch = {
       ours: "Távfelügyelet: rákapcsolódunk, nem kell kiszállásra várni",
     },
   ],
+  cta: {
+    question: "Ha holnap kilép valaki, tudod, mihez fért hozzá?",
+    body: "Ha nem vagy biztos benne, nem vagy egyedül, és pont ezzel kezdünk. Írd le, hányan dolgoztok, milyen gépeken és hol, és megmondjuk, mit nézne meg először a felmérés. Két munkanapon belül válaszolunk.",
+  },
 };
+
+// ===== 10 · Átvilágítás, dizájn- és rendszerajánlás =====
+// Amit érdeklődőknek készítünk: kívülről végzett átvilágítás, utána dizájn-
+// és rendszerajánlás működő látványtervvel. Ügyfélnevet nem írunk ki; mintát
+// csak anonimizálva mutatunk (ld. PROPOSAL_PAGES).
+
+export const AUDIT_SERVICE = {
+  name: "Átvilágítás, dizájn- és rendszerajánlás",
+  description:
+    "Weboldal- és webáruház-átvilágítás kívülről, hozzáférés nélkül, írásos riporttal és sorrendbe tett teendőlistával; utána dizájn- és rendszerajánlás: arculat, oldaltervek, az értékesítési ökoszisztéma terve és kattintható látványterv a saját kínálat adataival.",
+  path: "/arzenal/atvilagitas-es-ajanlas",
+};
+
+export const AUDIT_FEATURES: Feature[] = [
+  {
+    title: "Átvilágítás kívülről",
+    body: "Hozzáférést nem kérünk. Azt nézzük, amit a vevőd és a Google is lát: sebesség, mobil, keresők és AI, használhatóság, adatkezelés, biztonsági beállítások.",
+  },
+  {
+    title: "Erre lehet építeni",
+    body: "Nem csak a hibákat írjuk le. Megmondjuk, mi működik most is jól, mert azt nem kell kidobni.",
+  },
+  {
+    title: "Mit javítsunk először",
+    body: "Sorrendbe tett teendőlista: mi a sürgős, mi az, ami pénzt hoz, és mi várhat.",
+  },
+  {
+    title: "Dizájnajánlás",
+    body: "Betűk, színpaletta kontrasztméréssel, koncepció, főoldal- és belső oldaltervek, mobil nézet. Előtte és utána, egymás mellett.",
+  },
+  {
+    title: "Rendszerajánlás",
+    body: "Az értékesítési ökoszisztéma terve: honnan jön az érdeklődő, hová fut be a megkeresés, ki foglalkozik vele, és mit mérünk.",
+  },
+  {
+    title: "Kattintható látványterv",
+    body: "Nem csak kép: végig lehet kattintani, a saját kínálatod adataival. Döntés előtt látod, mit kapnál.",
+  },
+  {
+    title: "Hogyan tovább",
+    body: "Szakaszokra bontva, mi az első lépés, és mi az, ami a mostani rendszereden is megoldható.",
+  },
+];
+
+export const AUDIT_PITCH: ServicePitch = {
+  kicker: "Előbb megnézzük. Utána ajánlunk.",
+  headline: "Átvilágítás és ajánlás, amit döntés előtt kézbe veszel",
+  facts: [
+    { value: "Kívülről", label: "hozzáférést nem kérünk" },
+    { value: "Írásban", label: "riport és sorrendbe tett teendőlista" },
+    { value: "Kattintható", label: "látványterv a saját kínálatod adataival" },
+  ],
+  angleTitle: "Nem árajánlat egy képpel. Terv, amit végig lehet kattintani",
+  angle: [
+    {
+      usual: "Automatikusan generált pontszámlista, amit senki nem olvas végig",
+      ours: "Ember által írt riport az üzletedről, sorrendbe tett teendőkkel",
+    },
+    {
+      usual: "Ajánlat egy árral és egy sablon-képernyőképpel",
+      ours: "Dizájn- és rendszerajánlás: arculat, oldaltervek, és hogy hová fut be a megkeresés",
+    },
+    {
+      usual: "„Majd meglátod, ha kész lesz”",
+      ours: "Kattintható látványterv a saját kínálatod adataival, még a döntés előtt",
+    },
+    {
+      usual: "Mindig új weboldalt ajánlanak, mert azt árulnak",
+      ours: "Azt is leírjuk, mit nem érdemes cserélni, és mi marad a mostani motoron",
+    },
+  ],
+  cta: {
+    question: "Mit látna egy idegen az oldaladon az első tíz másodpercben?",
+    body: "Ezt nézzük meg elsőként. Küldd el az oldal címét és egy mondatban, mit árulsz és kinek: hozzáférés nem kell, és nem kell tudnod, mit kérj. Két munkanapon belül válaszolunk.",
+    button: "Kérj átvilágítást",
+  },
+};
+
+export const AUDIT_FAQ: FaqItem[] = [
+  {
+    question: "Kell hozzáférést adnom az oldalhoz vagy a webshophoz?",
+    answer:
+      "Az átvilágításhoz nem. Kívülről vizsgáljuk, azt, amit a vevőid, a Google és az AI-keresők is látnak.",
+  },
+  {
+    question: "Mit kapok kézbe?",
+    answer:
+      "Az átvilágításról írásos riportot PDF-ben, sorrendbe tett teendőlistával. Ha dizájn- és rendszerajánlást is kérsz, azt is PDF-ben, mellé egy kattintható látványtervet a saját kínálatod adataival.",
+  },
+  {
+    question: "Nyilvános lesz az anyag?",
+    answer:
+      "Nem. Az ügyfeleink anyagai nem nyilvánosak. Mintát csak anonimizálva mutatunk, a márkát, a termékneveket és az árakat kitakarva.",
+  },
+];

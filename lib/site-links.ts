@@ -8,6 +8,8 @@ import {
   SOFTWARE_SERVICE,
   VIDEO_SERVICE,
   WEB_SERVICE,
+  AUDIT_PITCH,
+  AUDIT_SERVICE,
   ACCESS_PITCH,
   ADS_PITCH,
   AI_PITCH,
@@ -30,7 +32,7 @@ export const MAIN_NAV_ITEMS = [
   { label: "Írások", href: "/hirek" },
 ];
 
-// Az /arzenal kilenc szolgáltatás-szekciójának azonosítója — az ott futó
+// Az /arzenal tíz szolgáltatás-szekciójának azonosítója — az ott futó
 // INDEX_ITEMS-szel egyezik (app/arzenal/page.tsx). A headline a szolgáltatás
 // értékesítési főcíme (lib/szolgaltatasok.ts *_PITCH); a főoldali szolgáltatás-index (ServiceIndex) ezt mutatja, és a
 // href-en át a szolgáltatás saját aloldalára visz.
@@ -44,6 +46,7 @@ export const ARZENAL_SECTIONS = [
   { id: "access", n: "07", name: "Akadálymentesítés", headline: ACCESS_PITCH.headline, href: ACCESS_SERVICE.path },
   { id: "pulzus", n: "08", name: "Pulzus", headline: PULZUS_PITCH.headline, href: PULZUS_SERVICE.path },
   { id: "it", n: "09", name: "IT-üzemeltetés", headline: IT_PITCH.headline, href: IT_SERVICE.path },
+  { id: "audit", n: "10", name: "Átvilágítás és ajánlás", headline: AUDIT_PITCH.headline, href: AUDIT_SERVICE.path },
 ];
 
 export const LEGAL_LINKS = [
@@ -76,4 +79,5 @@ export const ARZENAL_SECTIONS_EN = [
   { id: "access", n: "07", name: "Accessibility" },
   { id: "pulse", n: "08", name: "Pulse" },
   { id: "it", n: "09", name: "IT operations" },
+  { id: "audit", n: "10", name: "Audit and proposal" },
 ];

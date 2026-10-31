@@ -63,6 +63,7 @@ export default function Hirdeteskezeles() {
       angleTitle={ADS_PITCH.angleTitle}
       angle={ADS_PITCH.angle}
       ecosystemId="ads"
+      cta={ADS_PITCH.cta}
       features={ADS_FEATURES}
       device={
         <DevFrame header="Így néz ki egy heti jelentés" headerRight="Minta">

@@ -77,6 +77,7 @@ export default function WeboldalFejlesztes() {
       angleTitle={WEB_PITCH.angleTitle}
       angle={WEB_PITCH.angle}
       ecosystemId="web"
+      cta={WEB_PITCH.cta}
       features={WEB_FEATURES}
       device={
         <DevFrame header="Bizonyíték · ezt az oldalt is mi építettük">

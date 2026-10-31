@@ -65,6 +65,7 @@ export default function WeboldalUzemeltetes() {
       angleTitle={OPS_PITCH.angleTitle}
       angle={OPS_PITCH.angle}
       ecosystemId="ops"
+      cta={OPS_PITCH.cta}
       features={OPS_FEATURES}
       steps={STEPS}
       relatedSlugs={[

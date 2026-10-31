@@ -57,6 +57,7 @@ export default function ItUzemeltetes() {
       angleTitle={IT_PITCH.angleTitle}
       angle={IT_PITCH.angle}
       ecosystemId="it"
+      cta={IT_PITCH.cta}
       features={IT_FEATURES}
       device={
         <DevFrame header="Amit egy IT-felmérés tipikusan talál" headerRight="Minta">

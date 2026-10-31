@@ -1,6 +1,6 @@
 // Az értékesítési ökoszisztéma öt szakasza — a főoldal, az /arzenal és
 // minden szolgáltatás-aloldal ugyanebből rajzolja ki az ábrát, hogy látszódjon:
-// a kilenc szolgáltatás nem kilenc külön termék, hanem egy rendszer részei.
+// a szolgáltatások nem külön termékek, hanem egy rendszer részei.
 // A szolgáltatás-azonosítók a lib/site-links.ts ARZENAL_SECTIONS id-jaival
 // egyeznek (az EN oldalon a pulzus id-ja "pulse").
 

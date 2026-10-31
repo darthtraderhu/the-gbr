@@ -3,7 +3,8 @@ import Link from "next/link";
 import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
-import ProposalSample, { type ProposalPage } from "@/app/components/ProposalSample";
+import ProposalSample from "@/app/components/ProposalSample";
+import { PROPOSAL_INTRO, PROPOSAL_PAGES } from "@/lib/minta";
 import StackProof from "@/app/components/StackProof";
 import { FactStrip, Okoszisztema, type Feature } from "@/app/components/SalesBlocks";
 import { ECO_STAGES_HU } from "@/lib/okoszisztema";
@@ -12,6 +13,10 @@ import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import { DevFrame, FindingsTable, LogLines, ReportRows } from "@/app/components/ServiceFrame";
 import {
   type ServicePitch,
+  AUDIT_FAQ,
+  AUDIT_FEATURES,
+  AUDIT_PITCH,
+  AUDIT_SERVICE,
   ACCESS_FAQ,
   ACCESS_FEATURES,
   ACCESS_PITCH,
@@ -54,7 +59,7 @@ import {
 export const metadata: Metadata = {
   title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
   description:
-    "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, egy felelős kapcsolattartóval — B2B ügyfeleknek.",
+    "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus, irodai IT-üzemeltetés, átvilágítás és ajánlás. Tíz terület, egy értékesítési rendszer, egy felelős kapcsolattartóval — B2B ügyfeleknek.",
   alternates: {
     canonical: "/arzenal",
     languages: { hu: "/arzenal", en: "/en/services", "x-default": "/arzenal" },
@@ -62,13 +67,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, egy felelős kapcsolattartóval.",
+      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus, irodai IT-üzemeltetés, átvilágítás és ajánlás. Tíz terület, egy értékesítési rendszer, egy felelős kapcsolattartóval.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, egy felelős kapcsolattartóval.",
+      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus, irodai IT-üzemeltetés, átvilágítás és ajánlás. Tíz terület, egy értékesítési rendszer, egy felelős kapcsolattartóval.",
   },
 };
 
@@ -82,6 +87,7 @@ const INDEX_ITEMS = [
   { id: "access", n: "07", name: "Akadálymentesítés" },
   { id: "pulzus", n: "08", name: "Pulzus" },
   { id: "it", n: "09", name: "IT-üzemeltetés" },
+  { id: "audit", n: "10", name: "Átvilágítás és ajánlás" },
 ];
 
 // Egész mondatos leírás szolgáltatásonként — a Service séma description
@@ -112,36 +118,10 @@ const SERVICE_SCHEMA_ITEMS: { id: string; name: string; description: string; pat
     path: PULZUS_SERVICE.path,
   },
   { id: "it", name: IT_SERVICE.name, description: IT_SERVICE.description, path: IT_SERVICE.path },
+  { id: "audit", name: AUDIT_SERVICE.name, description: AUDIT_SERVICE.description, path: AUDIT_SERVICE.path },
 ];
 
 
-const PROPOSAL_PAGES: ProposalPage[] = [
-  {
-    src: "/minta/dizajnajanlas/01-tartalom.webp",
-    alt: "Dizájnajánlás tartalomjegyzéke tizenhat fejezettel",
-    caption: "Tartalom",
-  },
-  {
-    src: "/minta/dizajnajanlas/02-tipografia.webp",
-    alt: "Tipográfiai fejezet: betűpár és arculati lap a látványtervből",
-    caption: "Tipográfia",
-  },
-  {
-    src: "/minta/dizajnajanlas/03-szinpaletta.webp",
-    alt: "Színpaletta hat színnel és WCAG kontrasztarány-táblázattal",
-    caption: "Színpaletta",
-  },
-  {
-    src: "/minta/dizajnajanlas/04-fooldal.webp",
-    alt: "A főoldal látványterve és szakaszonkénti felépítése",
-    caption: "Főoldal",
-  },
-  {
-    src: "/minta/dizajnajanlas/05-termekoldal.webp",
-    alt: "A termékoldal látványterve lépésenkénti termékválasztóval",
-    caption: "Termékoldal",
-  },
-];
 
 // Csak olyan lépés, amit ez az oldal ténylegesen csinál: az ütemezett cikk a
 // dátuma napján jelenik meg (revalidate), a sitemap és az llms.txt dinamikus.
@@ -151,7 +131,7 @@ const OPS_LOG = [
   { t: "00:00", msg: "Sitemap és llms.txt frissült az új cikkel" },
 ];
 
-const FAQ_ITEMS = [...WEB_FAQ, SIZE_FAQ, ...ACCESS_FAQ, ...PULZUS_FAQ, ...IT_FAQ, ...SOFTWARE_FAQ];
+const FAQ_ITEMS = [...AUDIT_FAQ, ...WEB_FAQ, SIZE_FAQ, ...ACCESS_FAQ, ...PULZUS_FAQ, ...IT_FAQ, ...SOFTWARE_FAQ];
 
 function ServiceBlock({
   id,
@@ -285,7 +265,7 @@ export default function Arzenal() {
           </h1>
           <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-8)]">
             <strong className="text-[var(--ink)]">
-              Kilenc terület, egy értékesítési rendszer.
+              Tíz terület, egy értékesítési rendszer.
             </strong>{" "}
             Nem weboldalt, hirdetést vagy chatbotot adunk el külön-külön, hanem azt az utat, amin egy
             idegenből vevő lesz. Mindegyik szolgáltatás ennek egy szakaszát viszi.
@@ -293,7 +273,8 @@ export default function Arzenal() {
           <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-5)]">
             A legtöbbet házon belül végezzük, a videót és az irodai informatikát visszatérő
             partnerekkel, de a kapcsolattartó ilyenkor is mi vagyunk. Ha egy projekthez nem mind a
-            kilenc kell, nem is adjuk el mind a kilencet.
+            tíz kell, nem is adjuk el mind a tizet. Ha nem tudod, melyik kell, az átvilágítással
+            kezdünk.
           </p>
           <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-5)]">
             Fejlesztési partnerként is dolgozunk — magyar és nyugat-európai ügynökségeknek
@@ -363,21 +344,6 @@ export default function Arzenal() {
           features={WEB_FEATURES}
           device={
             <>
-              <DevFrame header="Így néz ki egy dizájnajánlásunk" headerRight="Anonimizált részlet">
-                <ProposalSample
-                  intro={
-                    <>
-                      Öt oldal egy 24 oldalas arculati és webdizájn-ajánlásból, amit egy kézműves
-                      webáruháznak készítettünk az oldaluk auditja után: tipográfia, színpaletta
-                      kontrasztméréssel, főoldal- és termékoldal-látványterv. A márkát, a
-                      termékneveket és az árakat kitakartuk, mert az ügyfeleink anyagai nem
-                      nyilvánosak.
-                    </>
-                  }
-                  pages={PROPOSAL_PAGES}
-                  openLabel="megnyitás teljes méretben"
-                />
-              </DevFrame>
               <DevFrame header="Miért Next.js · amire a világmárkák építenek" headerRight="Nyilvános források">
                 <StackProof
                   intro="A Next.js a Vercel webes keretrendszere, a Meta React könyvtárára épül. Nem webshop-motor és nem sablon, hanem alap, amire az oldalt a te kínálatodra és folyamataidra tervezzük. Ugyanerre építenek ezek a márkák is (a Next.js hivatalos bemutatóoldala és a Vercel esettanulmányai szerint):"
@@ -756,6 +722,32 @@ export default function Arzenal() {
         />
       </Rail>
 
+      {/* ===== 10 ÁTVILÁGÍTÁS ÉS AJÁNLÁS ===== */}
+      <Rail label="10 / Átvilágítás">
+        <ServiceBlock
+          id="audit"
+          n="10"
+          label="Átvilágítás és ajánlás"
+          pitch={AUDIT_PITCH}
+          paragraphs={[
+            "A legtöbb cég úgy kér ajánlatot weboldalra, hogy nem tudja, mit kérjen. Nem is kell tudnia: ez a mi dolgunk.",
+            <>
+              Kívülről átvilágítjuk az oldalt, hozzáférés nélkül, és írásban megkapod, mi működik, mi
+              nem, és mit javíts először. Utána, ha kéred,{" "}
+              <strong className="text-[var(--ink)]">dizájn- és rendszerajánlás</strong> jön az egész
+              értékesítési ökoszisztémára, kattintható látványtervvel a saját kínálatod adataival.
+            </>,
+          ]}
+          detail={{ href: AUDIT_SERVICE.path, label: "átvilágítás, dizájn- és rendszerajánlás" }}
+          features={AUDIT_FEATURES}
+          device={
+            <DevFrame header="Így néz ki egy dizájnajánlásunk" headerRight="Anonimizált részlet">
+              <ProposalSample intro={PROPOSAL_INTRO} pages={PROPOSAL_PAGES} openLabel="megnyitás teljes méretben" />
+            </DevFrame>
+          }
+        />
+      </Rail>
+
       {/* ===== GYIK ===== */}
       <Rail label="GYIK">
         <style
@@ -803,16 +795,17 @@ export default function Arzenal() {
       {/* ===== CTA ===== */}
       <Rail label="Kapcsolat" dark>
         <section className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
-          <Eyebrow>Beszéljünk róla</Eyebrow>
-          <h2 className="font-display font-extrabold [font-size:var(--text-final)] leading-[0.92] tracking-[-0.055em] max-w-[13ch] mb-[var(--space-6)] text-[var(--ink)]">
-            Mondd el, mit szeretnél elérni
+          <Eyebrow>Egy kérdés, mielőtt bármit ajánlanánk</Eyebrow>
+          <h2 className="font-display font-extrabold [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[16ch] mb-[var(--space-6)] text-[var(--ink)]">
+            Nem tudod, melyik kell a tízből? Ezt mondjuk meg mi
           </h2>
-          <p className="[font-size:var(--text-base)] text-[var(--ink-2)] max-w-[52ch] leading-relaxed mb-[var(--space-8)]">
-            Nem minden projektet vállalunk el — ezért kérdezünk előbb. Két munkanapon belül
-            válaszolunk. Ha nem illünk össze, azt is megmondjuk.
+          <p className="[font-size:var(--text-lg)] text-[var(--ink-2)] max-w-[56ch] leading-relaxed mb-[var(--space-8)]">
+            Nem kell kész terv. Küldd el az oldalad címét, és egy mondatban, mit árulsz és kinek.
+            Megmondjuk, hol szivárog most a legtöbb, és melyik szolgáltatással érdemes kezdeni. Két
+            munkanapon belül válaszolunk.
           </p>
           <Button asChild>
-            <Link href="/init">Pitcheld el a projekted &rarr;</Link>
+            <Link href="/init">Írd meg nekünk &rarr;</Link>
           </Button>
           <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)] mt-[var(--space-6)]">
             Vagy írj közvetlenül: gabor@thegbr.eu

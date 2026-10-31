@@ -70,6 +70,7 @@ export default function Automatizacio() {
       angleTitle={SOFTWARE_PITCH.angleTitle}
       angle={SOFTWARE_PITCH.angle}
       ecosystemId="software"
+      cta={SOFTWARE_PITCH.cta}
       features={SOFTWARE_FEATURES}
       device={
         <DevFrame header="Egy automatizáció naplója" headerRight="Minta">
