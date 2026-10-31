@@ -21,7 +21,7 @@ import {
 export const metadata: Metadata = {
   title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
   description:
-    "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, házon belül — B2B ügyfeleknek.",
+    "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, egy felelős kapcsolattartóval — B2B ügyfeleknek.",
   alternates: {
     canonical: "/arzenal",
     languages: { hu: "/arzenal", en: "/en/services", "x-default": "/arzenal" },
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, házon belül.",
+      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, egy felelős kapcsolattartóval.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, házon belül.",
+      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, egy felelős kapcsolattartóval.",
   },
 };
 
@@ -401,8 +401,9 @@ export default function Arzenal() {
             Szolgáltatások<span className="text-[var(--signal)]">.</span>
           </h1>
           <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-8)]">
-            Kilenc terület, amit házon belül végzünk. Ha egy projekthez nem mind a kilenc kell, nem
-            is adjuk el mind a kilencet.
+            Kilenc terület. A legtöbbet házon belül végezzük, a videót és az irodai informatikát
+            visszatérő partnerekkel, de a kapcsolattartó ilyenkor is mi vagyunk. Ha egy projekthez
+            nem mind a kilenc kell, nem is adjuk el mind a kilencet.
           </p>
           <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-5)]">
             Fejlesztési partnerként is dolgozunk — magyar és nyugat-európai ügynökségeknek
@@ -634,7 +635,7 @@ export default function Arzenal() {
               Egy jó oldalra tartalom is kell. Reklámfilm, termékvideó, közösségi formátumok —{" "}
               <strong className="text-[var(--ink)]">a mi irányításunk alatt</strong>, ugyanabban az
               arculatban, mint a weboldal. Így nem lesz külön a „szép oldal” és a „valahonnan
-              összeszedett videó”.
+              összeszedett videó”. A gyártást videós partnerünk végzi.
             </>,
           ]}
           features={VIDEO_FEATURES}
@@ -864,11 +865,10 @@ export default function Arzenal() {
           paragraphs={[
             "Egy irodában ritkán az a gond, hogy nincs informatika. Inkább az, hogy senki nem tudja egészben: ki fér hozzá mihez, van-e mentés, és kit kell hívni, ha reggel nem indul a levelezés.",
             <>
-              <strong className="text-[var(--ink)]">
-                15 éve üzemeltetünk informatikai rendszereket
-              </strong>{" "}
-              kis és nagyobb irodáknak, home office-ban dolgozó csapatoknak — a szervertől a
-              nyomtatón át a munkatársak telefonjáig.
+              <strong className="text-[var(--ink)]">IT-partnerünkkel végezzük</strong>, aki 15 éve
+              üzemeltet informatikai rendszereket kis és nagyobb irodáknak, home office-ban dolgozó
+              csapatoknak — a szervertől a nyomtatón át a munkatársak telefonjáig. A kapcsolattartó
+              ilyenkor is mi vagyunk.
             </>,
             "Felméréssel kezdünk: megnézzük, mi van most, és írásban megkapod, mit találtunk és mit javasolunk. Utána te döntöd el, mit bízol ránk.",
             <>

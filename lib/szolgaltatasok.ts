@@ -14,7 +14,7 @@ export const WEB_SERVICE = {
 export const IT_SERVICE = {
   name: "IT-üzemeltetés és rendszergazdai szolgáltatás",
   description:
-    "Irodai IT-üzemeltetés kis és nagyobb csapatoknak: rendszerfelmérés, rendszergazdai feladatok, távfelügyelet, szerver, hálózat, VPN, levelezés, Microsoft 365 és Teams, nyomtatók és mobilflotta kezelése, 15 év tapasztalattal.",
+    "Irodai IT-üzemeltetés kis és nagyobb csapatoknak: rendszerfelmérés, rendszergazdai feladatok, távfelügyelet, szerver, hálózat, VPN, levelezés, Microsoft 365 és Teams, nyomtatók és mobilflotta kezelése, IT-partnerünkkel, aki 15 éve üzemeltet irodai rendszereket.",
   path: "/arzenal/it-uzemeltetes",
 };
 

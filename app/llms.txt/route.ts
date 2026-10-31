@@ -19,7 +19,7 @@ export function GET() {
   const lines = [
     `# ${ORGANIZATION.alternateName}`,
     "",
-    `> ${ORGANIZATION.name} (márkanév: ${ORGANIZATION.alternateName}): weboldalak és webshopok fejlesztése és üzemeltetése Next.js alapokon, B2B cégeknek, Magyarországon. Kapcsolódó szolgáltatások: performance marketing, AI-integráció, videó, akadálymentesítés, weboldal-figyelés, irodai IT-üzemeltetés, valamint egyedi szoftverfejlesztés és üzleti folyamat-automatizáció.`,
+    `> ${ORGANIZATION.name} (márkanév: ${ORGANIZATION.alternateName}): weboldalak és webshopok fejlesztése és üzemeltetése Next.js alapokon, B2B cégeknek, Magyarországon. Kapcsolódó szolgáltatások: performance marketing, AI-integráció, videó, akadálymentesítés, weboldal-figyelés, irodai IT-üzemeltetés, valamint egyedi szoftverfejlesztés és üzleti folyamat-automatizáció. A videógyártást és az irodai IT-üzemeltetést visszatérő partnerekkel végezzük, egy kapcsolattartóval.`,
     "",
     `Székhely: ${address.postalCode} ${address.addressLocality}, ${address.streetAddress} · E-mail: ${ORGANIZATION.email} · Telefon: ${ORGANIZATION.telephone} · Adószám: ${ORGANIZATION.taxID}`,
     "",

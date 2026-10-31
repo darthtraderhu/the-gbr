@@ -13,7 +13,7 @@ export default async function Image() {
       topLabel="Szolgáltatások"
       titleLine1="Szolgáltatások"
       titleLine2="kilenc terület"
-      subtitle="Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, házon belül."
+      subtitle="Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus és irodai IT-üzemeltetés. Kilenc terület, egy felelős kapcsolattartóval."
     />,
     { ...size, fonts }
   );

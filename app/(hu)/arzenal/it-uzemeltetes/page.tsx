@@ -8,7 +8,7 @@ export const revalidate = 86400;
 
 const TITLE = "Irodai IT-üzemeltetés és rendszergazda cégeknek | THE GBR";
 const DESCRIPTION =
-  "Rendszergazdai szolgáltatás kis és nagyobb irodáknak: felmérés írásos összefoglalóval, távfelügyelet, szerver, hálózat, VPN, levelezés, Microsoft 365 és Teams. 15 év tapasztalat.";
+  "Rendszergazdai szolgáltatás kis és nagyobb irodáknak: felmérés írásos összefoglalóval, távfelügyelet, szerver, hálózat, VPN, levelezés, Microsoft 365 és Teams. IT-partnerünkkel, aki 15 éve üzemeltet irodai rendszereket.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -46,11 +46,10 @@ export default function ItUzemeltetes() {
       lead={[
         "Egy irodában ritkán az a gond, hogy nincs informatika. Inkább az, hogy senki nem tudja egészben: ki fér hozzá mihez, van-e mentés, és kit kell hívni, ha reggel nem indul a levelezés.",
         <>
-          <strong className="text-[var(--ink)]">
-            15 éve üzemeltetünk informatikai rendszereket
-          </strong>{" "}
-          kis és nagyobb irodáknak, home office-ban dolgozó csapatoknak — a szervertől a nyomtatón
-          át a munkatársak telefonjáig.
+          <strong className="text-[var(--ink)]">IT-partnerünkkel végezzük</strong>, aki 15 éve
+          üzemeltet informatikai rendszereket kis és nagyobb irodáknak, home office-ban dolgozó
+          csapatoknak — a szervertől a nyomtatón át a munkatársak telefonjáig. A kapcsolattartó
+          ilyenkor is mi vagyunk: neked nem kell két beszállítót egyeztetned.
         </>,
       ]}
       features={IT_FEATURES}
