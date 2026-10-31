@@ -16,9 +16,10 @@ export const EN_TO_HU: Record<string, string> = Object.fromEntries(
   Object.entries(HU_TO_EN).map(([hu, en]) => [en, hu])
 );
 
-// Csak ez a három cikk kapott angol fordítást (ld. a dokumentum "Writing"
-// szakaszának ajánlása) — a többi cikknek nincs angol párja, és nem is
-// jelenik meg az angol listában.
+// A lefordított cikkek magyar -> angol slug-párjai. Ami itt nem szerepel,
+// annak nincs angol párja, és nem is jelenik meg az angol listában. Új
+// angol cikknél (posts-en/, huSlug) ide is fel kell venni, különben a
+// magyar oldalról hiányzik a hreflang és a nyelvváltó célja.
 export const TRANSLATED_ARTICLES: Record<string, string> = {
   "pulzus-ot-masodperc": "five-seconds-nobody-knew",
   akadalymentesites: "what-makes-a-website-accessible",
@@ -28,6 +29,10 @@ export const TRANSLATED_ARTICLES: Record<string, string> = {
   "mit-lat-az-oldaladbol-a-chatgpt": "what-chatgpt-sees-on-your-site",
   "ki-fer-hozza-a-ceges-fiokokhoz": "who-can-still-log-in",
   "kie-a-weboldalad": "who-owns-your-website",
+  "egy-kerdes-nem-meres": "asking-chatgpt-once-is-not-a-test",
+  "kesz-eszkoz-vagy-sajat-szoftver": "off-the-shelf-or-custom-software",
+  "oldalak-amikrol-nem-tudsz": "pages-you-dont-know-about",
+  "ha-az-oldalad-ellentmond-onmaganak": "when-your-site-contradicts-itself",
 };
 
 export const ARTICLE_HU_SLUG: Record<string, string> = Object.fromEntries(
