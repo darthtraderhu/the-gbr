@@ -78,6 +78,13 @@ const PROJECTS = [
     meta: ["~400 termék", "Next.js"],
   },
   {
+    tag: "Saját termék · fejlesztés alatt",
+    client: false,
+    title: "Értékesítési rendszer",
+    desc: "Ipari és műszaki cégeknek, amelyek egyedi árajánlatból élnek. Arra a szakaszra építjük, ahol az üzlet csendben elcsúszhat: a beérkező megkeresés és az aláírt megrendelés között.",
+    meta: ["Fejlesztés alatt", "Ipari B2B"],
+  },
+  {
     tag: "Saját termék · élő",
     client: false,
     title: "Pénzügyi alkalmazás",

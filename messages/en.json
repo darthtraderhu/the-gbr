@@ -156,6 +156,12 @@
         "footer": "~400 products · Next.js"
       },
       {
+        "tag": "OWN PRODUCT · IN DEVELOPMENT",
+        "title": "Sales system",
+        "body": "For industrial and technical companies that live on custom quotes. We are building it for the stretch where deals can quietly slip away: between the incoming enquiry and the signed order.",
+        "footer": "In development · Industrial B2B"
+      },
+      {
         "tag": "OWN PRODUCT · LIVE",
         "title": "Financial application",
         "body": "Our own build, on our own infrastructure. Nobody else to blame when it breaks — which is exactly why we know what operating means.",
