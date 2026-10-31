@@ -668,11 +668,11 @@ export const AUDIT_SERVICE = {
 export const AUDIT_FEATURES: Feature[] = [
   {
     title: "Átvilágítás kívülről",
-    body: "Hozzáférést nem kérünk. Azt nézzük, amit a vevőd és a Google is lát: sebesség, mobil, keresők és AI, használhatóság, adatkezelés, biztonsági beállítások.",
+    body: "Hozzáférést nem kérünk. Azt nézzük, amit a vevőd, a Google és az AI is lát: sebesség, SEO és AEO, árak, használhatóság, adatkezelés, biztonsági beállítások.",
   },
   {
-    title: "Erre lehet építeni",
-    body: "Nem csak a hibákat írjuk le. Megmondjuk, mi működik most is jól, mert azt nem kell kidobni.",
+    title: "Névjegy vagy értékesítési felület",
+    body: "Megmondjuk, hol áll meg ma a vevő útja, és azt is, mi működik már most jól, mert azt nem kell kidobni.",
   },
   {
     title: "Mit javítsunk először",
@@ -697,8 +697,8 @@ export const AUDIT_FEATURES: Feature[] = [
 ];
 
 export const AUDIT_PITCH: ServicePitch = {
-  kicker: "Előbb megnézzük. Utána ajánlunk.",
-  headline: "Átvilágítás és ajánlás, amit döntés előtt kézbe veszel",
+  kicker: "Kívülről. Hozzáférés nélkül. Kíméletlenül.",
+  headline: "Megmutatjuk, hol veszít most ügyfelet az oldalad",
   facts: [
     { value: "Kívülről", label: "hozzáférést nem kérünk" },
     { value: "Írásban", label: "riport és sorrendbe tett teendőlista" },
@@ -745,5 +745,236 @@ export const AUDIT_FAQ: FaqItem[] = [
     question: "Nyilvános lesz az anyag?",
     answer:
       "Nem. Az ügyfeleink anyagai nem nyilvánosak. Mintát csak anonimizálva mutatunk, a márkát, a termékneveket és az árakat kitakarva.",
+  },
+];
+
+// Valós találatok az eddigi átvilágításainkból (2026. október), anonimizálva:
+// cégnév, márka, domain, iparágra utaló részlet nélkül. Csak olyat írj ide,
+// ami egy kiküldött riportban ténylegesen szerepelt. A jogi fejezetnél mi a
+// technikai eltérést mutatjuk meg, a minősítés jogászé.
+export type AuditFinding = { finding: string; cost: string };
+export type AuditChapter = { n: string; title: string; lead: string; rows: AuditFinding[] };
+
+export const AUDIT_CHAPTERS: AuditChapter[] = [
+  {
+    n: "01",
+    title: "Így veszítesz ügyfelet, és nem is tudsz róla",
+    lead: "Nem a forgalommal van baj. Azzal, ami a látogatóval az oldalon történik.",
+    rows: [
+      {
+        finding: "Három különböző nyitvatartás: a fejlécben, a kapcsolat oldalon és a Google-profilban",
+        cost: "Aki rossz időpontban indul el vagy telefonál, nem jön vissza.",
+      },
+      {
+        finding: "A webshop keresője a saját mintapéldájára sem ad találatot, és nem is jelzi",
+        cost: "A vevő azt hiszi, nincs ilyen termék. Pedig van.",
+      },
+      {
+        finding: "Ajánlatkérés négy mezővel, utána semmi: se visszaigazolás, se várható válaszidő",
+        cost: "A legmelegebb érdeklődő nem tudja, megkaptad-e. Közben másnak is ír.",
+      },
+      {
+        finding: "Egy versenytárs neve kétszer szerepelt a főoldal szövegében",
+        cost: "A szöveget onnan másolták. A vevő a versenytársat kezdi keresni.",
+      },
+    ],
+  },
+  {
+    n: "02",
+    title: "Lassú. És ezt a vevő érzi először",
+    lead: "Nem a te gépeden, nem az irodai wifin. Egy átlagos telefonon, útközben.",
+    rows: [
+      {
+        finding: "Mobilon 8,2, 8,6 és 8,9 másodperc, mire megjelenik a fő tartalom",
+        cost: "Három különböző cég oldalán mértük. A Google 2,5 másodperc alatt tartja jónak.",
+      },
+      {
+        finding: "A főoldal 4 MB, 123 kérés 25 különböző domainről",
+        cost: "Ebből 61 kérés egyetlen felugróablak-eszközé. A vevő a reklámra vár, nem a termékre.",
+      },
+      {
+        finding: "2011-es jQuery-verzió fut az oldalon",
+        cost: "Lassít, és régóta nem kap biztonsági javítást.",
+      },
+      {
+        finding: "Webes betűtípusok külső szerverről, a tartalom előtt",
+        cost: "Amíg a betű nem jön meg, a szöveg sem látszik. Ráadásul a látogató adata hozzájárulás nélkül megy külső szerverre.",
+      },
+      {
+        finding: "A nyitókép-slider PNG-képekből áll, a szöveg beléjük égetve",
+        cost: "A legnehezebb elem a legfontosabb helyen, és a benne lévő szöveget sem a Google, sem a vevő nem tudja kimásolni vagy megtalálni.",
+      },
+    ],
+  },
+  {
+    n: "03",
+    title: "Miért nem lát a Google, és miért nem idéz az AI",
+    lead: "SEO és AEO. Az oldal ott van, a Google és a ChatGPT mégsem érti, vagy nem hiszi el, hogy érdemes megmutatni.",
+    rows: [
+      {
+        finding: "Strukturált adat (JSON-LD) egyáltalán nincs az oldalon",
+        cost: "Sem a Google, sem az AI-keresők nem tudják biztosan, ki vagy, mit árulsz és hol.",
+      },
+      {
+        finding: "Ugyanarról a tényről két különböző szám az oldalon; két adószám, két telefonszám",
+        cost: "Az AI nem tudja, melyik igaz, ezért inkább egyiket sem idézi. Vagy a rosszat.",
+      },
+      {
+        finding: "A fontos tények képben vagy egy 73 oldalas PDF-ben",
+        cost: "Amit egy AI nem tud kiolvasni, arról nem is fog beszélni, ha rólad kérdezik.",
+      },
+      {
+        finding: "Minden aloldal canonical címkéje a főoldalra mutat",
+        cost: "A Google szemében egyetlen oldalad van. A termékoldalaid nem versenyeznek.",
+      },
+      {
+        finding: "A sitemapben 16 519 bejegyzés, ebből 863 egyedi",
+        cost: "A Google a kereteit ismétlődésekre költi, nem a valódi oldalaidra.",
+      },
+      {
+        finding: "63 oldalból egyiken sincs meta leírás; egy másik boltban 61 termékből 59-en",
+        cost: "A találati listában a Google maga vág ki egy véletlen mondatot helyetted.",
+      },
+      {
+        finding: "Szerencsejáték-bejegyzések négy nyelven, indexelhetően, idegen oldalakra linkelve",
+        cost: "Valaki más tett fel tartalmat a cég oldalára, és senki nem vette észre.",
+      },
+      {
+        finding: "Lorem ipsum és egy másik szakma sablonoldalai a sitemapben",
+        cost: "A Google ezeket is a cégedhez köti.",
+      },
+      {
+        finding: "A hírek és az akciók szövege képbe égetve",
+        cost: "A Google és az AI-keresők nem tudják elolvasni, tehát nincs is.",
+      },
+      {
+        finding: "Strukturált adat, ami a terméket használtként, 2019-ben lejárt árral jelöli",
+        cost: "A Google ezt hiszi el, nem azt, amit a vevő a képernyőn lát.",
+      },
+    ],
+  },
+  {
+    n: "04",
+    title: "Miért nem találnak a vásárlóid",
+    lead: "Rád keresnek, a kínálatodra keresnek, és máshol kötnek ki.",
+    rows: [
+      {
+        finding: "Versenytársak hirdetnek a cég saját nevére a Google-ben",
+        cost: "Aki név szerint keres, annak először a másik cég hirdetése jön.",
+      },
+      {
+        finding: "Az oldal címe egyetlen szó: a cégnév",
+        cost: "Nem derül ki, mit árulsz. Aki még nem ismer, nem kattint.",
+      },
+      {
+        finding: "A forgalmazott márkák csak a meta keywords mezőben szerepelnek",
+        cost: "Ezt a mezőt a Google 2009 óta nem használja. A márkára keresők nem találnak meg.",
+      },
+      {
+        finding: "Nincs leírva, hol dolgozol: a kiszállási terület annyi, hogy „Budapesten kívül”",
+        cost: "Aki a saját városával keres, nem talál meg.",
+      },
+      {
+        finding: "Megosztáskor a kép a kis logó",
+        cost: "A link a közösségi médiában üres dobozként jelenik meg. Senki nem kattint rá.",
+      },
+    ],
+  },
+  {
+    n: "05",
+    title: "Az ár, ami elriaszt, vagy ami nincs is ott",
+    lead: "A vevő az árral dönt. Ha nem találja, vagy nem hiszi el, máshol veszi meg.",
+    rows: [
+      {
+        finding: "Ugyanaz a termék két oldalon, két különböző áron",
+        cost: "Egyik helyen 112, a másikon 129 millió forint. A vevő nem tudja, melyik igaz.",
+      },
+      {
+        finding: "„Árak telefonon” — közben a cég közösségi oldalán ott az árlista",
+        cost: "Aki nem akar telefonálni, és a legtöbben nem akarnak, továbbmegy.",
+      },
+      {
+        finding: "Mobilon az ár nagyjából 1400 pixellel a termékkép alatt",
+        cost: "Három képernyőnyi görgetés az első kérdés válaszáig.",
+      },
+      {
+        finding: "Az akciós oldalon közel tízezer termék",
+        cost: "Ha minden akciós, semmi sem az. A vevő a kedvezményt sem hiszi el.",
+      },
+      {
+        finding: "Akció dátum nélkül, angol „Sale!” felirattal",
+        cost: "Nem derül ki, meddig érvényes, és hogy egyáltalán érvényes-e még.",
+      },
+    ],
+  },
+  {
+    n: "06",
+    title: "Névjegykártya, nem értékesítési felület",
+    lead: "Az oldal elmondja, hogy létezel. Azt nem, miért tőled vegyenek, és hogyan.",
+    rows: [
+      {
+        finding: "A főoldal nem mondja meg, ki a cég és mit árul",
+        cost: "Az első képernyő egy kampánykép. Aki most lát először, nem tudja, jó helyen jár-e.",
+      },
+      {
+        finding: "Több mint száz termékkártya a főoldalon, egymás alatt",
+        cost: "Nincs kiindulópont. A vevő nem választ, hanem bezárja.",
+      },
+      {
+        finding: "Az „Online jegy” menüpont ajánlatkártyákat mutat, kosarat nem",
+        cost: "Aki vásárolni jött, nem tud. Ez a legdrágább elveszett kattintás.",
+      },
+      {
+        finding: "Utalvány csak e-mailben, átutalással, postai kézbesítéssel",
+        cost: "Az ajándékot este, telefonról, azonnal vennék meg. Három lépés helyett tíz.",
+      },
+      {
+        finding: "Fizetés csak banki átutalással",
+        cost: "A vevő egy része itt megáll.",
+      },
+      {
+        finding: "A szakmai tudás megvan, csak nincs leírva: két 40 szavas blogbejegyzés",
+        cost: "Amire a vevők keresnek, arra a versenytárs válaszol.",
+      },
+    ],
+  },
+  {
+    n: "07",
+    title: "Mi nincs rendben jogilag",
+    lead: "Mi azt mutatjuk meg, hol tér el a dokumentum attól, amit az oldal ténylegesen csinál. Hogy ez jogsértés-e, azt jogász mondja meg.",
+    rows: [
+      {
+        finding: "Az adatkezelési tájékoztatóban adatkezelőként „Demo Kft.” szerepel",
+        cost: "A sablont kitöltés nélkül tették ki.",
+      },
+      {
+        finding: "Az adatvédelmi oldal szövege: „az adminfelületen szerkeszthető”",
+        cost: "Közben négy űrlap gyűjt nevet, telefonszámot, címet és fotót.",
+      },
+      {
+        finding: "Mérő- és hirdetési kódok futnak, mielőtt a látogató bármire rábólintana",
+        cost: "A sütisávon csak „Elfogadom” gomb van, vagy nincs is sütisáv.",
+      },
+      {
+        finding: "A tájékoztató olyan eszközöket ír le, amik nem futnak, és kihagyja, amik igen",
+        cost: "A dokumentum egy másik, régebbi oldalról szól.",
+      },
+      {
+        finding: "Három különböző eladó a jogi oldalakon: más név az impresszumban, más az ÁSZF-ben",
+        cost: "A vevő nem tudja, kivel köt szerződést.",
+      },
+      {
+        finding: "Nincs impresszum: se székhely, se adószám",
+        cost: "Egy céges vevő ezen a ponton bezárja az oldalt.",
+      },
+      {
+        finding: "Szinte minden termék akciós, az akció előtti legalacsonyabb ár feltüntetése nélkül",
+        cost: "Ezt érdemes jogásszal megnézetni, mielőtt egy hatóság teszi.",
+      },
+      {
+        finding: "Nyereményjáték-feltételek és hírlevél-feliratkozás egyetlen pipával",
+        cost: "A hozzájárulásokat külön kell kérni. Erről is jogász nyilatkozik.",
+      },
+    ],
   },
 ];

@@ -219,3 +219,62 @@ export function Okoszisztema({
     </div>
   );
 }
+
+// Az átvilágítás fejezetei: valós (anonimizált) találatok, mindegyik mellett
+// hogy mibe kerül. Fejezetenként váltakozó háttér, hogy ne folyjon egybe.
+export function FindingChapters({
+  chapters,
+  findingLabel,
+  costLabel,
+}: {
+  chapters: { n: string; title: string; lead: string; rows: { finding: string; cost: string }[] }[];
+  findingLabel: string;
+  costLabel: string;
+}) {
+  return (
+    <div>
+      {chapters.map((ch, ci) => (
+        <section
+          key={ch.n}
+          className={`border-t border-[var(--rule)] ${ci % 2 === 1 ? "bg-[var(--panel)]" : ""}`}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(160px,22%)_1fr] gap-[var(--space-6)] lg:gap-[var(--space-12)] px-6 pt-[var(--space-12)] sm:pt-[var(--space-16)] pb-[var(--space-8)]">
+            <div className="font-display font-black [font-size:var(--text-svc-num)] leading-[0.76] tracking-[-0.06em] text-[var(--signal)]">
+              {ch.n}
+            </div>
+            <div>
+              <h3 className="font-display font-black [font-size:var(--text-section)] leading-[0.98] tracking-[-0.045em] max-w-[18ch] text-[var(--ink)]">
+                {ch.title}
+              </h3>
+              <p className="mt-[var(--space-4)] [font-size:var(--text-lg)] leading-snug text-[var(--ink-2)] max-w-[52ch]">
+                {ch.lead}
+              </p>
+            </div>
+          </div>
+          <div className="hidden md:grid grid-cols-[1.2fr_1fr] gap-[var(--space-8)] px-6 py-3 border-t border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.22em] uppercase">
+            <span className="text-[var(--ink)]">{findingLabel}</span>
+            <span className="text-[var(--dim)]">{costLabel}</span>
+          </div>
+          <ul className="m-0 p-0 list-none border-t border-[var(--rule)]">
+            {ch.rows.map((row) => (
+              <li
+                key={row.finding}
+                className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-[var(--space-2)] md:gap-[var(--space-8)] items-baseline px-6 py-[var(--space-5)] border-b border-[var(--rule)]"
+              >
+                <p className="m-0 font-display font-bold [font-size:var(--text-xl)] leading-snug tracking-[-0.015em] text-[var(--ink)]">
+                  <span aria-hidden="true" className="text-[var(--mid)] mr-2">
+                    ×
+                  </span>
+                  {row.finding}
+                </p>
+                <p className="m-0 [font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)]">
+                  {row.cost}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+}

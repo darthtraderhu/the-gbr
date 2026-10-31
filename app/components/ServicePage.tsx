@@ -45,6 +45,8 @@ export interface ServicePageProps {
   cta: { question: string; body: string; button?: string };
   // Opcionális többlet blokk a kártyák után (pl. Next.js-márkák a webnél).
   extra?: React.ReactNode;
+  // Opcionális blokk közvetlenül a fejléc után (pl. az átvilágítás találatai).
+  afterHero?: React.ReactNode;
   // A kapcsolódó cikkek slugjai — csak a már megjelent cikkek látszanak, az
   // ütemezett cikk a dátuma napján magától bekerül (ld. revalidate).
   relatedSlugs: string[];
@@ -70,6 +72,7 @@ export default function ServicePage({
   ecosystemId,
   cta,
   extra,
+  afterHero,
   relatedSlugs,
   faq,
 }: ServicePageProps) {
@@ -135,6 +138,8 @@ export default function ServicePage({
       </Rail>
 
       <Seam />
+
+      {afterHero}
 
       {/* ===== A SZÖGÜNK ===== */}
       <Rail label="A szögünk">

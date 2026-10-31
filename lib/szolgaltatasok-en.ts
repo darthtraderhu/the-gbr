@@ -196,7 +196,7 @@ export const PITCH_EN: Record<string, ServicePitch> = {
   },
   audit: {
     kicker: "We look first. Then we propose.",
-    headline: "An audit and proposal you hold before you decide",
+    headline: "We show where the site is losing customers right now",
     facts: [
       { value: "Outside-in", label: "no access needed" },
       { value: "In writing", label: "a report with a prioritised to-do list" },
@@ -225,11 +225,11 @@ export const PITCH_EN: Record<string, ServicePitch> = {
 export const AUDIT_EN = {
   label: "Audit and proposal",
   paragraphs: [
-    "Most companies ask for a website quote without knowing what to ask for. They don't need to. We look at what's there now, write down what works and what doesn't, and show how it would look better.",
+    "The site is losing buyers right now: it loads slowly, Google doesn't understand it, AI doesn't quote it, the price isn't where people look, and the legal pages say things that aren't true. Every site we've audited so far had some of these.",
     "The audit is done from the outside, without access. Then, if wanted, comes the design and system proposal: not just a picture of a new site, but a plan for the whole sales ecosystem, with a clickable prototype built on the real catalogue. White-label for agencies if you prefer.",
   ],
   items: [
-    "Outside-in audit: speed, mobile, search and AI, usability, privacy, security headers",
+    "Outside-in audit: speed, SEO and AEO, pricing, usability, privacy, security headers",
     "What already works, so it doesn't get thrown away",
     "Prioritised to-do list",
     "Design proposal: type, palette with contrast checks, page designs, mobile",

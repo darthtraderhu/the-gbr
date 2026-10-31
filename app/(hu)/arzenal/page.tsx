@@ -730,7 +730,7 @@ export default function Arzenal() {
           label="Átvilágítás és ajánlás"
           pitch={AUDIT_PITCH}
           paragraphs={[
-            "A legtöbb cég úgy kér ajánlatot weboldalra, hogy nem tudja, mit kérjen. Nem is kell tudnia: ez a mi dolgunk.",
+            "Az oldalad most is veszít vevőket: lassan tölt, a Google nem érti, az AI nem idézi, az ár nem ott van, ahol keresik, és a jogi oldalakon olyan áll, ami nem igaz. Eddig minden átvilágított oldalon találtunk ezekből.",
             <>
               Kívülről átvilágítjuk az oldalt, hozzáférés nélkül, és írásban megkapod, mi működik, mi
               nem, és mit javíts először. Utána, ha kéred,{" "}
