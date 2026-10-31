@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ServicePage from "@/app/components/ServicePage";
-import { PULZUS_FAQ, PULZUS_FEATURES, PULZUS_SERVICE, SIZE_FAQ } from "@/lib/szolgaltatasok";
+import { PULZUS_FAQ, PULZUS_FEATURES, PULZUS_PITCH, PULZUS_SERVICE, SIZE_FAQ } from "@/lib/szolgaltatasok";
 
 // A kapcsolódó cikkek listája miatt naponta frissül (ütemezett cikkek).
 export const revalidate = 86400;
@@ -41,13 +41,14 @@ export default function Pulzus() {
       path={PULZUS_SERVICE.path}
       schemaName={PULZUS_SERVICE.name}
       schemaDescription={PULZUS_SERVICE.description}
+      kicker={PULZUS_PITCH.kicker}
       title="Pulzus: havonta egy levél arról, hogyan lát téged az internet"
       lead={[
-        "A legtöbb weboldal elkészül, aztán senki nem nézi meg többé. Ha lelassul, ha lejár egy tanúsítvány, ha elromlik a kapcsolati űrlap — az derül ki, amikor egy ügyfél szól. Vagy nem derül ki.",
+        "A legtöbb weboldal elkészül, aztán senki nem nézi meg többé. Ha lelassul, ha lejár egy tanúsítvány, ha elromlik a kapcsolati űrlap, az akkor derül ki, amikor egy ügyfél szól. Vagy soha.",
         <>
-          A Pulzus ezt figyeli helyette —{" "}
+          A Pulzus ezt figyeli helyetted:{" "}
           <strong className="text-[var(--ink)]">havonta megméri, és megmondja, mi változott</strong>
-          . Nem pontszámokat küldünk, hanem egy levelet arról, mi változott, és mit érdemes tenni.
+          . Nem pontszámot küldünk, hanem egy levelet arról, mi történt és mit érdemes tenni.
         </>,
         <>
           <strong className="text-[var(--ink)]">Jogi modul: mi mérünk, a jogász minősít.</strong>{" "}
@@ -55,6 +56,10 @@ export default function Pulzus() {
           értékeli. A megfelelésről ő nyilatkozik, nem mi.
         </>,
       ]}
+      facts={PULZUS_PITCH.facts}
+      angleTitle={PULZUS_PITCH.angleTitle}
+      angle={PULZUS_PITCH.angle}
+      ecosystemId="pulzus"
       features={PULZUS_FEATURES}
       steps={STEPS}
       relatedSlugs={["pulzus-ot-masodperc", "adatkezelesi-tajekoztato-ami-mast-ir"]}

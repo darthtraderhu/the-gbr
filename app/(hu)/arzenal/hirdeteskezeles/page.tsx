@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ServicePage from "@/app/components/ServicePage";
 import { DevFrame, ReportRows } from "@/app/components/ServiceFrame";
-import { ADS_FAQ, ADS_FEATURES, ADS_SERVICE, AD_SAMPLE_ROWS, SIZE_FAQ } from "@/lib/szolgaltatasok";
+import { ADS_FAQ, ADS_FEATURES, ADS_PITCH, ADS_SERVICE, AD_SAMPLE_ROWS, SIZE_FAQ } from "@/lib/szolgaltatasok";
 
 // A kapcsolódó cikkek listája miatt naponta frissül (ütemezett cikkek).
 export const revalidate = 86400;
@@ -46,16 +46,23 @@ export default function Hirdeteskezeles() {
       path={ADS_SERVICE.path}
       schemaName={ADS_SERVICE.name}
       schemaDescription={ADS_SERVICE.description}
-      title="Google- és Meta-hirdetéskezelés, ahol a megkeresés számít"
+      kicker={ADS_PITCH.kicker}
+      title="Google- és Meta-hirdetés, ahol a megkeresést számoljuk, nem a megjelenést"
       lead={[
         <>
-          A legtöbb kampányjelentés arról szól, hány ember látta a hirdetést. Ez nem eredmény. Mi
-          végig követjük az utat a{" "}
-          <strong className="text-[var(--ink)]">kattintástól a megkeresésig</strong>, és hetente
-          megmutatjuk, mi hozott ügyfelet és mi nem.
+          A legtöbb kampányjelentés arról szól, hány ember látta a hirdetést. Ez nem eredmény, ez
+          költség.{" "}
+          <strong className="text-[var(--ink)]">
+            Mi a kattintástól a megkeresésig követjük az utat
+          </strong>
+          , és hetente megmutatjuk, mi hozott ügyfelet és mi nem.
         </>,
-        "Ha egy csatorna nem működik, azt megmondjuk — nem költjük tovább.",
+        "Ha egy csatorna nem működik, megmondjuk, és nem költjük tovább rá a pénzed. A keret oda megy, ahonnan megkeresés jön.",
       ]}
+      facts={ADS_PITCH.facts}
+      angleTitle={ADS_PITCH.angleTitle}
+      angle={ADS_PITCH.angle}
+      ecosystemId="ads"
       features={ADS_FEATURES}
       device={
         <DevFrame header="Így néz ki egy heti jelentés" headerRight="Minta">

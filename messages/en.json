@@ -84,6 +84,15 @@
     "whatWeDoEyebrow": "WHAT WE DO",
     "whatWeDoHeadline": "Two things, not twelve",
     "whatWeDoIntro": "A list of everything convinces nobody. We're good at two things, and they belong together.",
+    "ecoEyebrow": "WHAT WE BUILD",
+    "ecoHeadline": "Not a website. A sales ecosystem",
+    "ecoLead": "A website on its own is a business card. What sells is the path a stranger takes to becoming a customer: finding you, being convinced, asking, requesting a quote, and not getting lost on the way. That's what we build for your clients and keep running, so they see it working, not just looking good.",
+    "ecoNote": "Not every project needs all five stages. The assessment shows where the most is leaking.",
+    "nextjsEyebrow": "FOUNDATION · NEXT.JS",
+    "nextjsHeadline": "What global brands build on, we build your clients' sites on",
+    "nextjsBody": "These brands are listed on the official Next.js showcase. The same framework sits under our builds: speed, search visibility and security are part of the structure, not a plugin added later. It's not a promise that your client's site will improve by the same amount; it's evidence that the technology handles heavy traffic.",
+    "nextjsSource": "Source: nextjs.org/showcase",
+    "nextjsDaily": "What we work with daily",
     "developTitle": "01 — DEVELOP · We build it",
     "developIntro": "Websites and stores on Next.js, with the engineering underneath — not just a nice-looking first screen.",
     "developItems": [
@@ -138,7 +147,7 @@
     "stackList": "Next.js · React · TypeScript · Supabase · PostgreSQL · WooCommerce · Vercel",
     "workEyebrow": "WORK",
     "workHeadline": "What we're building",
-    "workIntro": "Client work and our own products. The latter isn't portfolio filler — it's here because we operate these ourselves, and that's the difference.",
+    "workIntro": "Client work and our own products, live and in development. With our own there's nobody else to blame when something breaks, and it shows in how we build for clients.",
     "workCards": [
       {
         "tag": "CLIENT · IN PROGRESS",
@@ -184,7 +193,7 @@
 
   "Services": {
     "headline": "Services.",
-    "intro1": "Nine areas. Most of it happens in-house; video and office IT we deliver with returning partners, and you still deal with us. If a project doesn't need all nine, we don't sell you all nine.",
+    "intro1": "Nine areas, one sales system. We don't sell a website, ads or a chatbot in isolation, but the path a stranger takes to becoming a customer. Most of it happens in-house; video and office IT we deliver with returning partners, and you still deal with us. If a project doesn't need all nine, we don't sell you all nine.",
     "intro2": "<b>We also work as a development partner</b> — for Hungarian and Western European agencies alike.",
     "indexNames": {
       "web": "Web and commerce",
@@ -209,20 +218,11 @@
         "Security headers, rate limiting, input validation",
         "Phased cutover for live systems"
       ],
-      "stackHeader": "Why Next.js and React",
+      "stackHeader": "Why Next.js · what global brands build on",
       "stackTag": "Public sources",
-      "stackIntro": "Next.js is Vercel's web framework; React is Meta's UI library that Next.js is built on. It is not a shop engine or a template, but a foundation we design around your client's catalogue and processes. Large international brands build on it too:",
-      "stackItems": [
-        { "name": "Nike", "tag": "Commerce", "body": "Listed on the official Next.js Showcase under Composable Commerce." },
-        { "name": "Sonos", "tag": "Commerce", "body": "Same page, same category." },
-        { "name": "OpenAI and Claude", "tag": "AI", "body": "Both OpenAI's and Anthropic's (Claude) sites are on the Showcase, in the AI category." },
-        { "name": "Netflix Jobs", "tag": "Web app", "body": "Netflix's careers site, listed under Web Apps." },
-        { "name": "Elkjøp", "tag": "Case study", "body": "Nordic electronics retailer that moved from Angular. Per Vercel: LCP improved 50%, INP 60%, release cycle went from 7 weeks to 1 day. These are Vercel's figures, not our measurements." },
-        { "name": "thegbr.eu", "tag": "Our own work", "body": "This site runs on Next.js 16 and React 19, built on the same principles." }
-      ],
+      "stackIntro": "Next.js is Vercel's web framework; React is Meta's UI library that Next.js is built on. It is not a shop engine or a template, but a foundation we design around your client's catalogue and processes. The same foundation runs these brands (per the official Next.js showcase and Vercel's case studies):",
       "stackNote": "That these brands build on it is not a promise that your project improves by the same amount. It shows the stack handles heavy traffic and is maintained long term. When it is not worth it: if the catalogue and processes fit a template, a hosted platform is cheaper, and we will say so.",
       "stackSourcesLabel": "Sources:",
-      "stackChecked": "checked 27 Oct 2026",
       "sampleHeader": "What one of our design proposals looks like",
       "sampleTag": "Anonymised excerpt",
       "sampleIntro": "Five pages from a 24-page brand and web design proposal we prepared for a handmade-goods online store after auditing their site: typography, a colour palette with measured contrast, and home and product page designs. Brand, product names and prices are redacted, because our clients' materials are not public. The pages are in Hungarian.",

@@ -3,7 +3,7 @@ import ServicePage from "@/app/components/ServicePage";
 import { DevFrame, FindingsTable } from "@/app/components/ServiceFrame";
 import {
   ACCESS_FAQ,
-  ACCESS_FEATURES,
+  ACCESS_FEATURES, ACCESS_PITCH,
   ACCESS_SAMPLE_ROWS,
   ACCESS_SERVICE,
   SIZE_FAQ,
@@ -48,19 +48,29 @@ export default function Akadalymentesites() {
       path={ACCESS_SERVICE.path}
       schemaName={ACCESS_SERVICE.name}
       schemaDescription={ACCESS_SERVICE.description}
-      title="Weboldal-akadálymentesítés: felmérés és javítás"
+      kicker={ACCESS_PITCH.kicker}
+      title="Akadálymentesítés: van, aki most nem tudja használni az oldaladat"
       lead={[
-        "Aki képernyőolvasót használ, aki csak billentyűzettel navigál, akinek gyengébb a látása vagy remeg a keze — ők ugyanúgy vásárolnának, csak sokszor nem tudnak. Nem azért, mert az oldal rossz, hanem mert senki nem gondolt rájuk a tervezésekor.",
+        <>
+          Aki képernyőolvasót használ, csak billentyűzettel navigál, gyengébben lát vagy remeg a
+          keze, ugyanúgy vásárolna, csak sokszor nem tud.{" "}
+          <strong className="text-[var(--ink)]">Ők nem panaszt tesznek, hanem elmennek.</strong>{" "}
+          Nem azért, mert az oldal rossz, hanem mert senki nem gondolt rájuk a tervezésekor.
+        </>,
         <>
           Emellett az uniós akadálymentesítési szabályozás 2025 óta a fogyasztóknak szóló online
           szolgáltatásokra is kiterjed. Hogy ez pontosan kire és hogyan vonatkozik, azt jogász
-          mondja meg —{" "}
+          mondja meg;{" "}
           <strong className="text-[var(--ink)]">
-            mi a technikai oldalt tudjuk felmérni és rendbe tenni
+            mi a technikai oldalt mérjük fel és tesszük rendbe
           </strong>
           .
         </>,
       ]}
+      facts={ACCESS_PITCH.facts}
+      angleTitle={ACCESS_PITCH.angleTitle}
+      angle={ACCESS_PITCH.angle}
+      ecosystemId="access"
       features={ACCESS_FEATURES}
       device={
         <DevFrame header="Amit egy felmérés tipikusan talál" headerRight="Minta">

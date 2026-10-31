@@ -8,6 +8,15 @@ import {
   SOFTWARE_SERVICE,
   VIDEO_SERVICE,
   WEB_SERVICE,
+  ACCESS_PITCH,
+  ADS_PITCH,
+  AI_PITCH,
+  IT_PITCH,
+  OPS_PITCH,
+  PULZUS_PITCH,
+  SOFTWARE_PITCH,
+  VIDEO_PITCH,
+  WEB_PITCH,
 } from "./szolgaltatasok";
 
 // Megosztott navigációs adatok — a Navbar (asztali lenyíló + mobil Menü
@@ -22,19 +31,19 @@ export const MAIN_NAV_ITEMS = [
 ];
 
 // Az /arzenal kilenc szolgáltatás-szekciójának azonosítója — az ott futó
-// INDEX_ITEMS-szel egyezik (app/arzenal/page.tsx). A headline az ottani
-// szekciócím; a főoldali szolgáltatás-index (ServiceIndex) ezt mutatja, és a
+// INDEX_ITEMS-szel egyezik (app/arzenal/page.tsx). A headline a szolgáltatás
+// értékesítési főcíme (lib/szolgaltatasok.ts *_PITCH); a főoldali szolgáltatás-index (ServiceIndex) ezt mutatja, és a
 // href-en át a szolgáltatás saját aloldalára visz.
 export const ARZENAL_SECTIONS = [
-  { id: "web", n: "01", name: "Web és webshop", headline: "Weboldal és webshop, ami mérhetően gyors", href: WEB_SERVICE.path },
-  { id: "ads", n: "02", name: "Performance marketing", headline: "Hirdetés, aminek a végén van egy szám", href: ADS_SERVICE.path },
-  { id: "software", n: "03", name: "Egyedi szoftver és automatizáció", headline: "Ami ma kézzel megy, holnap magától", href: SOFTWARE_SERVICE.path },
-  { id: "ai", n: "04", name: "AI és chatbot", headline: "AI, ami a helyén van", href: AI_SERVICE.path },
-  { id: "video", n: "05", name: "Videó és tartalom", headline: "A weboldal önmagában nem elég", href: VIDEO_SERVICE.path },
-  { id: "ops", n: "06", name: "Web-üzemeltetés és fejlesztés", headline: "Az átadás nem a vége", href: OPS_SERVICE.path },
-  { id: "access", n: "07", name: "Akadálymentesítés", headline: "Van, aki nem tudja használni az oldaladat", href: ACCESS_SERVICE.path },
-  { id: "pulzus", n: "08", name: "Pulzus", headline: "Havonta egy levél arról, hogyan lát téged az internet", href: PULZUS_SERVICE.path },
-  { id: "it", n: "09", name: "IT-üzemeltetés", headline: "Az irodai informatika, amire nem kell gondolnod", href: IT_SERVICE.path },
+  { id: "web", n: "01", name: "Web és webshop", headline: WEB_PITCH.headline, href: WEB_SERVICE.path },
+  { id: "ads", n: "02", name: "Performance marketing", headline: ADS_PITCH.headline, href: ADS_SERVICE.path },
+  { id: "software", n: "03", name: "Egyedi szoftver és automatizáció", headline: SOFTWARE_PITCH.headline, href: SOFTWARE_SERVICE.path },
+  { id: "ai", n: "04", name: "AI és chatbot", headline: AI_PITCH.headline, href: AI_SERVICE.path },
+  { id: "video", n: "05", name: "Videó és tartalom", headline: VIDEO_PITCH.headline, href: VIDEO_SERVICE.path },
+  { id: "ops", n: "06", name: "Web-üzemeltetés és fejlesztés", headline: OPS_PITCH.headline, href: OPS_SERVICE.path },
+  { id: "access", n: "07", name: "Akadálymentesítés", headline: ACCESS_PITCH.headline, href: ACCESS_SERVICE.path },
+  { id: "pulzus", n: "08", name: "Pulzus", headline: PULZUS_PITCH.headline, href: PULZUS_SERVICE.path },
+  { id: "it", n: "09", name: "IT-üzemeltetés", headline: IT_PITCH.headline, href: IT_SERVICE.path },
 ];
 
 export const LEGAL_LINKS = [

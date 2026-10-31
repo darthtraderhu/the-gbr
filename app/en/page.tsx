@@ -8,6 +8,10 @@ import ServiceIndex from "@/app/components/ServiceIndex";
 import { ARZENAL_SECTIONS_EN } from "@/lib/site-links";
 import IntroVideo from "@/app/components/IntroVideo";
 import HeroInstrument from "./HeroInstrument";
+import { Okoszisztema } from "@/app/components/SalesBlocks";
+import { ECO_STAGES_EN } from "@/lib/okoszisztema";
+import { PITCH_EN } from "@/lib/szolgaltatasok-en";
+import { NEXTJS_BRANDS, NEXTJS_CHECKED_EN } from "@/lib/nextjs-proof";
 
 export const revalidate = 86400;
 
@@ -36,8 +40,6 @@ export default async function EnglishHome() {
   const t = await getTranslations({ locale: "en", namespace: "Home" });
 
   const fourPoints = t.raw("fourPoints") as { title: string; body: string }[];
-  const developItems = t.raw("developItems") as string[];
-  const manageItems = t.raw("manageItems") as string[];
   const workCards = t.raw("workCards") as {
     tag: string;
     title: string;
@@ -47,10 +49,9 @@ export default async function EnglishHome() {
   const whyRows = t.raw("whyRows") as { heading: string; body: string }[];
   const auditChapters = t.raw("auditChapters") as string[];
   const aeoFacts = t.raw("aeoFacts") as { value: string; label: string }[];
-  const tServices = await getTranslations({ locale: "en", namespace: "Services" });
   const serviceIndexItems = ARZENAL_SECTIONS_EN.map((item) => ({
     ...item,
-    headline: tServices(`${item.id}.headline`),
+    headline: PITCH_EN[item.id].headline,
   }));
 
   return (
@@ -162,49 +163,28 @@ export default async function EnglishHome() {
         </div>
       </Rail>
 
-      {/* ===== 04 / WHAT WE DO ===== */}
+      <Seam />
+
+      {/* ===== 04 / ECOSYSTEM ===== */}
+      <Rail label="04 / Ecosystem" dark>
+        <Okoszisztema
+          stages={ECO_STAGES_EN}
+          eyebrow={t("ecoEyebrow")}
+          title={
+            <>
+              {t("ecoHeadline")}
+              <span className="text-[var(--signal)]">.</span>
+            </>
+          }
+          lead={t("ecoLead")}
+          note={t("ecoNote")}
+        />
+      </Rail>
+
+      <Seam />
+
+      {/* ===== 04b / WHAT WE DO ===== */}
       <Rail label="04 / What we do">
-        <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
-          <SectionHeader eyebrow={t("whatWeDoEyebrow")} title={t("whatWeDoHeadline")} lead={t("whatWeDoIntro")} />
-        </div>
-        <div className="border-t border-[var(--rule)]">
-          {[
-            { n: "01", lab: "Develop", title: t("developTitle"), desc: t("developIntro"), items: developItems },
-            { n: "02", lab: "Manage", title: t("manageTitle"), desc: t("manageIntro"), items: manageItems },
-          ].map((row) => (
-            <div
-              key={row.n}
-              className="group grid grid-cols-1 lg:grid-cols-[minmax(140px,20%)_1fr_minmax(0,34%)] gap-[var(--space-6)] sm:gap-[var(--space-10)] px-6 py-[var(--space-8)] sm:py-[var(--space-12)] border-b border-[var(--rule)] items-start"
-            >
-              <div>
-                <div className="font-display font-black [font-size:var(--text-numeral-xl)] leading-[0.78] tracking-[-0.06em] text-[var(--rule)] transition-colors group-hover:text-[var(--signal)]">
-                  {row.n}
-                </div>
-                <div className="mt-[var(--space-3)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.22em] uppercase text-[var(--mid)]">
-                  {row.lab}
-                </div>
-              </div>
-              <div>
-                <h3 className="font-display font-bold [font-size:var(--text-3xl)] leading-[1.05] tracking-[-0.03em] mb-[var(--space-4)]">
-                  {row.title}
-                </h3>
-                <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[44ch]">
-                  {row.desc}
-                </p>
-              </div>
-              <ul className="m-0 p-0 list-none">
-                {row.items.map((item, i) => (
-                  <li
-                    key={item}
-                    className={`[font-size:var(--text-base)] text-[var(--ink-2)] py-[var(--space-3)] ${i === 0 ? "" : "border-t border-[var(--rule-soft)]"}`}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
         <ServiceIndex
           eyebrow={t("serviceIndexEyebrow")}
           lead={t("serviceIndexLead")}
@@ -289,17 +269,49 @@ export default async function EnglishHome() {
         </section>
       </Rail>
 
-      {/* ===== 07 / STACK ===== */}
+      {/* ===== 07 / STACK — Next.js ===== */}
       <Rail label="07 / Stack">
-        <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)]">
-          <Eyebrow>{t("stackHeadline")}</Eyebrow>
-          <p className="font-display font-extrabold [font-size:var(--text-wall)] leading-[1.02] tracking-[-0.045em] text-[var(--ink)] [overflow-wrap:anywhere]">
-            {t("stackList")}
-          </p>
-          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch] mt-[var(--space-8)]">
-            {t("stackIntro")}
-          </p>
+        <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-20)] pb-[var(--space-8)]">
+          <Eyebrow>{t("nextjsEyebrow")}</Eyebrow>
+          <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[16ch] text-[var(--ink)]">
+            {t("nextjsHeadline")}
+            <span className="text-[var(--signal)]">.</span>
+          </h2>
         </section>
+        <ul className="m-0 p-0 list-none grid grid-cols-2 lg:grid-cols-3 border-t border-l border-[var(--rule)]">
+          {NEXTJS_BRANDS.map((brand) => (
+            <li
+              key={brand}
+              className="px-6 py-[var(--space-8)] border-r border-b border-[var(--rule)] font-display font-black [font-size:var(--text-4xl)] tracking-[-0.045em] leading-none text-[var(--ink)] hover:text-[var(--signal-deep)] transition-colors"
+            >
+              {brand}
+            </li>
+          ))}
+        </ul>
+        <div className="px-6 py-[var(--space-8)] grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-[var(--space-8)] items-start">
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[56ch]">
+            {t("nextjsBody")}{" "}
+            <a
+              href="https://nextjs.org/showcase"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--ink)] underline"
+            >
+              {t("nextjsSource")}
+            </a>{" "}
+            <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)] whitespace-nowrap">
+              {NEXTJS_CHECKED_EN}
+            </span>
+          </p>
+          <div>
+            <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] mb-[var(--space-3)]">
+              {t("nextjsDaily")}
+            </p>
+            <p className="font-display font-extrabold [font-size:var(--text-2xl)] leading-snug tracking-[-0.025em] text-[var(--ink)]">
+              {t("stackList")}
+            </p>
+          </div>
+        </div>
       </Rail>
 
       {/* ===== 08 / WORK ===== */}
