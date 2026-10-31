@@ -71,6 +71,7 @@ export default function Akadalymentesites() {
       angleTitle={ACCESS_PITCH.angleTitle}
       angle={ACCESS_PITCH.angle}
       ecosystemId="access"
+      cta={ACCESS_PITCH.cta}
       features={ACCESS_FEATURES}
       device={
         <DevFrame header="Amit egy felmérés tipikusan talál" headerRight="Minta">

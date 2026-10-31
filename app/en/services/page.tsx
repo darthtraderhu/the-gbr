@@ -10,7 +10,7 @@ import { FactStrip, Okoszisztema } from "@/app/components/SalesBlocks";
 import { ECO_STAGES_EN } from "@/lib/okoszisztema";
 import { NEXTJS_CHECKED_EN, NEXTJS_ITEMS_EN, NEXTJS_SOURCES_EN } from "@/lib/nextjs-proof";
 import type { ServicePitch } from "@/lib/szolgaltatasok";
-import { PITCH_EN } from "@/lib/szolgaltatasok-en";
+import { AUDIT_EN, PITCH_EN } from "@/lib/szolgaltatasok-en";
 import { ARZENAL_SECTIONS_EN } from "@/lib/site-links";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
 
@@ -140,6 +140,23 @@ function ServiceBlock({
       </ul>
 
       {device}
+
+      <div className="px-6 py-[var(--space-6)] border-t border-[var(--rule)] flex flex-wrap items-baseline justify-between gap-[var(--space-4)]">
+        <div>
+          <p className="m-0 font-display font-bold [font-size:var(--text-2xl)] tracking-[-0.022em] leading-tight text-[var(--ink)] max-w-[32ch]">
+            {pitch.cta.question}
+          </p>
+          <p className="m-0 mt-[var(--space-2)] [font-size:var(--text-sm)] text-[var(--ink-2)] max-w-[60ch]">
+            {pitch.cta.body}
+          </p>
+        </div>
+        <Link
+          href="/en/contact"
+          className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.16em] uppercase text-[var(--ink)] border-b-2 border-[var(--signal)] pb-1"
+        >
+          Ask us &rarr;
+        </Link>
+      </div>
     </section>
   );
 }
@@ -246,19 +263,6 @@ export default async function EnglishServices() {
           features={t.raw("web.items") as string[]}
           device={
             <>
-              <DevFrame header={t("web.sampleHeader")} headerRight={t("web.sampleTag")}>
-                <ProposalSample
-                  intro={t("web.sampleIntro")}
-                  pages={(["contents", "typography", "palette", "home", "product"] as const).map(
-                    (key, i) => ({
-                      src: PROPOSAL_FILES[i],
-                      alt: t(`web.samplePages.${key}.alt`),
-                      caption: t(`web.samplePages.${key}.caption`),
-                    }),
-                  )}
-                  openLabel={t("web.sampleOpen")}
-                />
-              </DevFrame>
               <DevFrame header={t("web.stackHeader")} headerRight={t("web.stackTag")}>
                 <StackProof
                   intro={t("web.stackIntro")}
@@ -620,6 +624,33 @@ export default async function EnglishServices() {
                 {t("it.deviceBelow")}
               </p>
             </DevFrame>
+          }
+        />
+      </Rail>
+
+      {/* ===== 10 AUDIT AND PROPOSAL ===== */}
+      <Rail label="10 / Audit">
+        <ServiceBlock
+          id="audit"
+          n="10"
+          label={AUDIT_EN.label}
+          pitch={PITCH_EN.audit}
+          paragraphs={AUDIT_EN.paragraphs}
+          features={AUDIT_EN.items}
+          device={
+            <DevFrame header={t("web.sampleHeader")} headerRight={t("web.sampleTag")}>
+                <ProposalSample
+                  intro={t("web.sampleIntro")}
+                  pages={(["contents", "typography", "palette", "home", "product"] as const).map(
+                    (key, i) => ({
+                      src: PROPOSAL_FILES[i],
+                      alt: t(`web.samplePages.${key}.alt`),
+                      caption: t(`web.samplePages.${key}.caption`),
+                    }),
+                  )}
+                  openLabel={t("web.sampleOpen")}
+                />
+              </DevFrame>
           }
         />
       </Rail>

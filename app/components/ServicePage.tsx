@@ -38,10 +38,15 @@ export interface ServicePageProps {
   features: Feature[];
   steps: { title: string; body: string }[];
   device?: React.ReactNode;
-  // A szolgáltatás helye az értékesítési ökoszisztémában.
-  ecosystemId: ServiceId;
+  // A szolgáltatás helye az értékesítési ökoszisztémában. Ha nincs (pl. az
+  // átvilágítás, ami mind az öt szakaszt végignézi), egyik sincs kiemelve.
+  ecosystemId?: ServiceId;
+  // Szolgáltatáshoz illő záró kérdés — nem „mondd el, mit szeretnél”.
+  cta: { question: string; body: string; button?: string };
   // Opcionális többlet blokk a kártyák után (pl. Next.js-márkák a webnél).
   extra?: React.ReactNode;
+  // Opcionális blokk közvetlenül a fejléc után (pl. az átvilágítás találatai).
+  afterHero?: React.ReactNode;
   // A kapcsolódó cikkek slugjai — csak a már megjelent cikkek látszanak, az
   // ütemezett cikk a dátuma napján magától bekerül (ld. revalidate).
   relatedSlugs: string[];
@@ -65,7 +70,9 @@ export default function ServicePage({
   steps,
   device,
   ecosystemId,
+  cta,
   extra,
+  afterHero,
   relatedSlugs,
   faq,
 }: ServicePageProps) {
@@ -132,6 +139,8 @@ export default function ServicePage({
 
       <Seam />
 
+      {afterHero}
+
       {/* ===== A SZÖGÜNK ===== */}
       <Rail label="A szögünk">
         <AngleTable
@@ -164,12 +173,19 @@ export default function ServicePage({
         <Okoszisztema
           stages={ECO_STAGES_HU}
           active={ecosystemId}
-          eyebrow="Ahol ez a szolgáltatás ül"
+          eyebrow={ecosystemId ? "Ahol ez a szolgáltatás ül" : "Amit végignézünk"}
           title={
-            <>
-              Nem különálló munka. Egy értékesítési rendszer része
-              <span className="text-[var(--signal)]">.</span>
-            </>
+            ecosystemId ? (
+              <>
+                Nem különálló munka. Egy értékesítési rendszer része
+                <span className="text-[var(--signal)]">.</span>
+              </>
+            ) : (
+              <>
+                Mind az öt szakaszt megnézzük, mielőtt bármit ajánlanánk
+                <span className="text-[var(--signal)]">.</span>
+              </>
+            )
           }
           lead="A vevőd nem egy kattintással dönt: keres, összehasonlít, kérdez, ajánlatot kér, és közben bármikor eltűnhet. Mi ezt az utat egyben nézzük. Nem kell mind az öt szakasz, de mindegyiknél tudjuk, mi jön előtte és utána."
           youAreHere="itt vagy"
@@ -263,16 +279,15 @@ export default function ServicePage({
       {/* ===== CTA ===== */}
       <Rail label="Kapcsolat" dark>
         <section className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
-          <Eyebrow>Beszéljünk róla</Eyebrow>
-          <h2 className="font-display font-extrabold [font-size:var(--text-final)] leading-[0.92] tracking-[-0.055em] max-w-[13ch] mb-[var(--space-6)] text-[var(--ink)]">
-            Mondd el, mit szeretnél elérni
+          <Eyebrow>Egy kérdés, mielőtt bármit ajánlanánk</Eyebrow>
+          <h2 className="font-display font-extrabold [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[17ch] mb-[var(--space-6)] text-[var(--ink)]">
+            {cta.question}
           </h2>
-          <p className="[font-size:var(--text-base)] text-[var(--ink-2)] max-w-[52ch] leading-relaxed mb-[var(--space-8)]">
-            Nem minden projektet vállalunk el — ezért kérdezünk előbb. Két munkanapon belül
-            válaszolunk. Ha nem illünk össze, azt is megmondjuk.
+          <p className="[font-size:var(--text-lg)] text-[var(--ink-2)] max-w-[56ch] leading-relaxed mb-[var(--space-8)]">
+            {cta.body}
           </p>
           <Button asChild>
-            <Link href="/init">Pitcheld el a projekted &rarr;</Link>
+            <Link href="/init">{cta.button ?? "Írd meg nekünk"} &rarr;</Link>
           </Button>
           <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)] mt-[var(--space-6)]">
             Vagy írj közvetlenül: gabor@thegbr.eu

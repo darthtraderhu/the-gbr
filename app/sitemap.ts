@@ -25,6 +25,7 @@ const staticRoutes: Array<{
   { path: "/arzenal/weboldal-uzemeltetes", changeFrequency: "monthly", priority: 0.8 },
   { path: "/arzenal/akadalymentesites", changeFrequency: "monthly", priority: 0.8 },
   { path: "/arzenal/pulzus", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/arzenal/atvilagitas-es-ajanlas", changeFrequency: "monthly", priority: 0.8 },
   { path: "/architektura", changeFrequency: "monthly", priority: 0.8 },
   { path: "/szindikatus", changeFrequency: "monthly", priority: 0.6 },
   { path: "/seo", changeFrequency: "monthly", priority: 0.8 },

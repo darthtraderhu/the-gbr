@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Eyebrow } from "@/app/components/ui";
 
-// Főoldali szolgáltatás-index: mind a kilenc /arzenal (EN: /en/services)
+// Főoldali szolgáltatás-index: mind a tíz /arzenal (EN: /en/services)
 // szekció egy-egy linkként. Az elemek a lib/site-links.ts listáiból jönnek,
 // így egy új szolgáltatás a menüvel együtt itt is megjelenik.
 export interface ServiceIndexItem {

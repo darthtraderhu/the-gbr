@@ -24,6 +24,10 @@ export const PITCH_EN: Record<string, ServicePitch> = {
         ours: "An enquiry path that, if you want, runs straight into the CRM",
       },
     ],
+    cta: {
+      question: "Where is your client's site losing buyers right now?",
+      body: "Send us the URL and what they sell; we'll tell you where it leaks.",
+    },
   },
   ads: {
     kicker: "Not reach. Enquiries.",
@@ -38,6 +42,10 @@ export const PITCH_EN: Record<string, ServicePitch> = {
       { usual: "Reports on reach and impressions", ours: "Reports on how many enquiries the clicks turned into" },
       { usual: "Every campaign sent to the home page", ours: "A landing page per campaign, one message, one action" },
     ],
+    cta: {
+      question: "Do you know how many enquiries last month's ad budget brought in?",
+      body: "If not, it's the measurement, not you. Tell us where you advertise and we'll tell you what to track.",
+    },
   },
   software: {
     kicker: "Work that runs itself",
@@ -58,6 +66,10 @@ export const PITCH_EN: Record<string, ServicePitch> = {
         ours: "Every run logged, failures alerted, missed items recoverable",
       },
     ],
+    cta: {
+      question: "What does someone on the team copy by hand every day?",
+      body: "One sentence is enough: from where, to where, how often. We'll tell you whether it's worth automating.",
+    },
   },
   ai: {
     kicker: "Answers at night. Never quotes a price.",
@@ -75,6 +87,10 @@ export const PITCH_EN: Record<string, ServicePitch> = {
       },
       { usual: "The bot promises a price you can't keep", ours: "The chat informs, it doesn't quote. A person names price and deadline" },
     ],
+    cta: {
+      question: "Which question do you answer the same way every day?",
+      body: "Send us the three most common ones; we'll tell you which an assistant can handle and which need a person.",
+    },
   },
   video: {
     kicker: "One identity, in motion too",
@@ -95,6 +111,10 @@ export const PITCH_EN: Record<string, ServicePitch> = {
         ours: "Formats where buyers decide: product page, hero, short social cut",
       },
     ],
+    cta: {
+      question: "What should a buyer see before they pick up the phone?",
+      body: "Tell us what you get asked most often; we'll tell you which format answers it best.",
+    },
   },
   ops: {
     kicker: "Launch is the starting line",
@@ -109,6 +129,10 @@ export const PITCH_EN: Record<string, ServicePitch> = {
       { usual: "Ticket, number, waiting", ours: "One accountable person who knows the project" },
       { usual: "A customer reports the form is broken", ours: "Monitoring and alerting: we know first" },
     ],
+    cta: {
+      question: "Who tells you if the site goes down tomorrow morning?",
+      body: "If the answer is a customer, let's talk. Send us the URL and who runs it today.",
+    },
   },
   access: {
     kicker: "Buyers you've been shutting out",
@@ -126,6 +150,10 @@ export const PITCH_EN: Record<string, ServicePitch> = {
         ours: "Technical assessment and fixes. A lawyer, not us, speaks to compliance",
       },
     ],
+    cta: {
+      question: "Could you get through checkout without a mouse?",
+      body: "Try it now with Tab and Enter. If you get stuck, so do some of your buyers.",
+    },
   },
   pulse: {
     kicker: "One letter a month, not a dashboard",
@@ -140,6 +168,10 @@ export const PITCH_EN: Record<string, ServicePitch> = {
       { usual: "A scored report nobody reads", ours: "A letter on what changed and what's worth doing" },
       { usual: "Automatic replies to reviews in your name", ours: "A suggested reply; you press send" },
     ],
+    cta: {
+      question: "When did someone last check that the contact form works?",
+      body: "If you don't know, that's the answer. Send us the URL and we'll tell you what Pulse would watch.",
+    },
   },
   it: {
     kicker: "IT that isn't your problem",
@@ -157,5 +189,51 @@ export const PITCH_EN: Record<string, ServicePitch> = {
       },
       { usual: "A departed employee's account, still active", ours: "Accounts and access kept in order" },
     ],
+    cta: {
+      question: "If someone leaves tomorrow, do you know what they had access to?",
+      body: "If you're not sure, that's exactly where the assessment starts.",
+    },
   },
+  audit: {
+    kicker: "We look first. Then we propose.",
+    headline: "We show where the site is losing customers right now",
+    facts: [
+      { value: "Outside-in", label: "no access needed" },
+      { value: "In writing", label: "a report with a prioritised to-do list" },
+      { value: "Clickable", label: "prototype built on the real catalogue" },
+    ],
+    angleTitle: "Not a quote with a screenshot. A plan you can click through",
+    angle: [
+      {
+        usual: "An auto-generated score list nobody reads to the end",
+        ours: "A report written by a person about the business, with prioritised fixes",
+      },
+      {
+        usual: "\"You'll see it when it's done\"",
+        ours: "A clickable prototype with the real catalogue, before anyone decides",
+      },
+    ],
+    cta: {
+      question: "What would a stranger see on your client's site in the first ten seconds?",
+      body: "That's where we start. Send us the URL and one sentence on what they sell and to whom.",
+    },
+  },
+};
+
+// Az átvilágítás-blokk szövege az /en/services oldalon (a többi blokk szövege
+// a messages/en.json Services kulcsai alatt van).
+export const AUDIT_EN = {
+  label: "Audit and proposal",
+  paragraphs: [
+    "The site is losing buyers right now: it loads slowly, Google doesn't understand it, AI doesn't quote it, the price isn't where people look, and the legal pages say things that aren't true. Every site we've audited so far had some of these.",
+    "The audit is done from the outside, without access. Then, if wanted, comes the design and system proposal: not just a picture of a new site, but a plan for the whole sales ecosystem, with a clickable prototype built on the real catalogue. White-label for agencies if you prefer.",
+  ],
+  items: [
+    "Outside-in audit: speed, SEO and AEO, pricing, usability, privacy, security headers",
+    "What already works, so it doesn't get thrown away",
+    "Prioritised to-do list",
+    "Design proposal: type, palette with contrast checks, page designs, mobile",
+    "System proposal: where enquiries come from, where they land, what gets measured",
+    "Clickable prototype with the real catalogue",
+  ],
 };

@@ -56,6 +56,7 @@ export default function Videogyartas() {
       angleTitle={VIDEO_PITCH.angleTitle}
       angle={VIDEO_PITCH.angle}
       ecosystemId="video"
+      cta={VIDEO_PITCH.cta}
       features={VIDEO_FEATURES}
       steps={STEPS}
       relatedSlugs={["premium-video-konverzio", "tiktok-b2b-kampanyok"]}

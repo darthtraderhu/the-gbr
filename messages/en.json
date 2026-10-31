@@ -6,7 +6,7 @@
     },
     "services": {
       "title": "Services — THE GBR",
-      "description": "Web and commerce, performance marketing, custom software and automation, AI integration, video, web operations, accessibility, monitoring and IT operations. Nine areas, one accountable contact."
+      "description": "Web and commerce, performance marketing, custom software and automation, AI integration, video, web operations, accessibility, monitoring, IT operations, audit and proposal. Ten areas, one sales system, one accountable contact."
     },
     "engagement": {
       "title": "How we work — THE GBR",
@@ -115,8 +115,8 @@
       "Office IT with a partner: system administration, networks, Microsoft 365",
       "One accountable contact, not a ticket queue"
     ],
-    "serviceIndexEyebrow": "In detail · nine areas",
-    "serviceIndexLead": "The two things break down into nine areas. Each one is covered in detail on the services page.",
+    "serviceIndexEyebrow": "Ten areas · each from its own angle",
+    "serviceIndexLead": "Each service carries one stage, and each starts where the usual market answer stops.",
     "auditEyebrow": "Website audit",
     "auditHeadline": "Before we propose anything, we look at what's there",
     "auditIntro": "We review an existing website from the outside — no access needed. You get a written report: what works, what doesn't, and what to fix first.",
@@ -199,7 +199,7 @@
 
   "Services": {
     "headline": "Services.",
-    "intro1": "Nine areas, one sales system. We don't sell a website, ads or a chatbot in isolation, but the path a stranger takes to becoming a customer. Most of it happens in-house; video and office IT we deliver with returning partners, and you still deal with us. If a project doesn't need all nine, we don't sell you all nine.",
+    "intro1": "Ten areas, one sales system. We don't sell a website, ads or a chatbot in isolation, but the path a stranger takes to becoming a customer. Most of it happens in-house; video and office IT we deliver with returning partners, and you still deal with us. If a project doesn't need all ten, we don't sell you all ten.",
     "intro2": "<b>We also work as a development partner</b> — for Hungarian and Western European agencies alike.",
     "indexNames": {
       "web": "Web and commerce",
@@ -470,7 +470,7 @@
       {"question": "What happens if an automation stops?", "answer": "It doesn't stop silently. Every run is logged, and a failure sends an alert to whoever is responsible — us, if you hand over operations, or the person you designate. Missed items can be processed again from the log."}
     ],
     "faqHeading": "Questions we actually get asked",
-    "ctaHeadline": "Tell us what you're up against",
+    "ctaHeadline": "Not sure which one your client needs? That's our job",
     "ctaBody": "We don't take every project — which is why we ask first. Two business days, and we'll tell you if we're not the right fit.",
     "ctaButton": "Get started →"
   },

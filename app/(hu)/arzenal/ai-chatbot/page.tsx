@@ -63,6 +63,7 @@ export default function AiChatbot() {
       angleTitle={AI_PITCH.angleTitle}
       angle={AI_PITCH.angle}
       ecosystemId="ai"
+      cta={AI_PITCH.cta}
       features={AI_FEATURES}
       steps={STEPS}
       relatedSlugs={["ai-ertekesitesi-asszisztens", "llm-es-chatbotok-b2b", "ai-forradalom"]}

@@ -312,10 +312,10 @@ export default function Home() {
 
       <Seam />
 
-      {/* ===== 04b / SZOLGÁLTATÁSOK — kilenc terület ===== */}
+      {/* ===== 04b / SZOLGÁLTATÁSOK — tíz terület ===== */}
       <Rail label="04 / Szolgáltatás">
         <ServiceIndex
-          eyebrow="Kilenc terület · mindegyik a saját szögéből"
+          eyebrow="Tíz terület · mindegyik a saját szögéből"
           lead="Mindegyik szolgáltatás egy szakaszt visz, és mindegyiknél ott kezdjük, ahol a piac szokásos megoldása megáll."
           items={ARZENAL_SECTIONS}
           basePath="/arzenal"
@@ -338,6 +338,12 @@ export default function Home() {
               <Button asChild>
                 <Link href="/init">Kérj átvilágítást</Link>
               </Button>
+              <Link
+                href="/arzenal/atvilagitas-es-ajanlas"
+                className="ml-[var(--space-5)] [font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.16em] uppercase text-[var(--ink)] border-b-2 border-[var(--signal)] pb-1"
+              >
+                Mit kapsz &rarr;
+              </Link>
             </div>
           </div>
           <div>

@@ -60,6 +60,7 @@ export default function Pulzus() {
       angleTitle={PULZUS_PITCH.angleTitle}
       angle={PULZUS_PITCH.angle}
       ecosystemId="pulzus"
+      cta={PULZUS_PITCH.cta}
       features={PULZUS_FEATURES}
       steps={STEPS}
       relatedSlugs={["pulzus-ot-masodperc", "adatkezelesi-tajekoztato-ami-mast-ir"]}

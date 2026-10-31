@@ -35,7 +35,7 @@ export const ORGANIZATION = {
   vatID: "HU28814706",
 };
 
-// A hét /arzenal-szolgáltatás területe — az AEO-cél, hogy az AI-keresők
+// Az /arzenal szolgáltatási területei — az AEO-cél, hogy az AI-keresők
 // entitásként kössék a céghez ezeket a témákat (ld. app/arzenal/page.tsx
 // INDEX_ITEMS-szel egyező sorrend).
 export const KNOWS_ABOUT = [
@@ -49,6 +49,7 @@ export const KNOWS_ABOUT = [
   "Digitális akadálymentesítés",
   "Weboldal- és online megjelenés figyelése",
   "Irodai IT-üzemeltetés és rendszergazdai szolgáltatás",
+  "Weboldal-átvilágítás, dizájn- és rendszerajánlás",
   "Microsoft 365 és Teams bevezetése, üzemeltetése",
   "Hálózat, szerver és VPN kialakítása",
 ];
@@ -61,7 +62,7 @@ export function organizationSchema() {
   };
 }
 
-// Az /arzenal kilenc szolgáltatás-blokkjának Service sémája — provider mindig
+// Az /arzenal szolgáltatás-blokkjainak Service sémája — provider mindig
 // az Organization. A description egész mondat, nem kulcsszóhalmaz, hogy
 // az AI-keresők idézhető kontextust kapjanak (AEO).
 export function serviceSchema(params: {
