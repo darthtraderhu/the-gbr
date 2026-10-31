@@ -66,6 +66,7 @@ export default function WeboldalUzemeltetes() {
         "a-gbr-standard",
         "kie-a-weboldalad",
         "csendes-hiba",
+        "oldalak-amikrol-nem-tudsz",
         "miert-epit-sajat-termeket",
       ]}
       faq={[...OPS_FAQ, WEB_FAQ[4], SIZE_FAQ]}
