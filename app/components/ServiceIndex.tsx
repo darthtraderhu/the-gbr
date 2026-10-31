@@ -9,6 +9,8 @@ export interface ServiceIndexItem {
   n: string;
   name: string;
   headline: string;
+  // Ha van saját aloldal, oda visz; különben a basePath horgonyára.
+  href?: string;
 }
 
 export default function ServiceIndex({
@@ -32,7 +34,7 @@ export default function ServiceIndex({
         {items.map((item) => (
           <li key={item.id} className="border-r border-b border-[var(--rule)]">
             <Link
-              href={`${basePath}#${item.id}`}
+              href={item.href ?? `${basePath}#${item.id}`}
               className="group flex h-full flex-col gap-[var(--space-3)] p-[var(--space-5)] hover:bg-[var(--panel)] transition-colors"
             >
               <span className="flex items-center justify-between [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.18em] uppercase text-[var(--mid)]">
