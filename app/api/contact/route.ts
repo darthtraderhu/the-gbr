@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
 import { z } from "zod";
 import { saveLead } from "@/lib/leads";
+import { sendMail } from "@/lib/mail";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 import { LEAD_FROM_EMAIL, SITE_URL } from "@/lib/site";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const NOTIFICATION_TO = "gabor@thegbr.eu";
 
@@ -168,12 +166,12 @@ export async function POST(req: Request) {
   }
 
   // 6. E-mailek — csak a mentés UTÁN, és ha ez elhasal, a lead attól még megvan.
-  //    FONTOS: a Resend SDK a hibát NEM dobja, hanem { data, error } alakban
-  //    adja vissza — try/catch önmagában nem fogja el, expliciten kell nézni
-  //    az error mezőt minden egyes hívásnál.
+  //    A sendMail hibánál dob (és ellenőrzi, hogy a szerver átvette a
+  //    címzettet); az allSettled miatt az egyik levél hibája nem állítja meg
+  //    a másikat.
   try {
-    const [notificationResult, confirmationResult] = await Promise.all([
-      resend.emails.send({
+    const [notificationResult, confirmationResult] = await Promise.allSettled([
+      sendMail({
         from: LEAD_FROM_EMAIL,
         to: NOTIFICATION_TO,
         replyTo: email,
@@ -203,7 +201,7 @@ export async function POST(req: Request) {
           `Lead ID: ${savedLead.id}`,
         ].join("\n"),
       }),
-      resend.emails.send(
+      sendMail(
         lang === "en"
           ? {
               from: LEAD_FROM_EMAIL,
@@ -258,16 +256,16 @@ export async function POST(req: Request) {
       ),
     ]);
 
-    if (notificationResult.error) {
+    if (notificationResult.status === "rejected") {
       console.error("[LEAD-EMAIL-ERROR] Értesítő e-mail:", {
         leadId: savedLead.id,
-        error: notificationResult.error,
+        error: notificationResult.reason,
       });
     }
-    if (confirmationResult.error) {
+    if (confirmationResult.status === "rejected") {
       console.error("[LEAD-EMAIL-ERROR] Visszaigazoló e-mail:", {
         leadId: savedLead.id,
-        error: confirmationResult.error,
+        error: confirmationResult.reason,
       });
     }
   } catch (error) {
