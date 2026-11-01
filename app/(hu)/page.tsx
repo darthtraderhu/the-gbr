@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getSortedPostsData } from "@/lib/posts"; // <-- BEHÚZZUK A MOTORT!
-import { websiteSchema, professionalServiceSchema, videoObjectSchema } from "@/lib/jsonld";
+import { websiteSchema, professionalServiceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, SectionHeader, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import ServiceIndex from "@/app/components/ServiceIndex";
 import { ARZENAL_SECTIONS } from "@/lib/site-links";
-import IntroVideo from "@/app/components/IntroVideo";
 import HeroInstrument from "./HeroInstrument";
 import { Okoszisztema } from "@/app/components/SalesBlocks";
 import { ECO_STAGES_HU } from "@/lib/okoszisztema";
@@ -174,15 +173,6 @@ const PROCESS_STEPS = [
   },
 ];
 
-// A cégbemutató videó — forrása a video/ mappa Remotion-projektje. Ha a
-// videó szövege változik, ez a leirat is frissítendő.
-const INTRO_VIDEO = {
-  src: "/video/cegbemutato.mp4",
-  poster: "/video/cegbemutato-poster.jpg",
-  transcript:
-    "A legjobb kampány sem segít, ha a rendszer mögötte nem működik. Két dolgot csinálunk, nem tizenkettőt: megépítjük a weboldalt vagy webshopot Next.js alapon, és visszük tovább — üzemeltetés, monitoring, folyamatos fejlesztés. A folyamat négy szakasza: felmérés, ahol megnézzük, mi van most, és a végén tudod, mibe kerül és mennyi idő; terv és keret fix hatókörrel, fix árazással és írásos szerződéssel; építés szakaszokban, kéthetente látható eredménnyel; végül átadás és üzemeltetés dokumentációval, monitoringgal és riasztással. Minden szakasz végén van valami, amit meg tudsz nézni. Pitcheld el a projekted a thegbr.eu/init oldalon — válasz 2 munkanapon belül.",
-};
-
 export default function Home() {
   const allPostsData = getSortedPostsData();
   const [leadPost, ...restPosts] = allPostsData;
@@ -192,18 +182,6 @@ export default function Home() {
     <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd data={websiteSchema()} />
       <JsonLd data={professionalServiceSchema()} />
-      <JsonLd
-        data={videoObjectSchema({
-          name: "THE GBR cégbemutató: hogyan dolgozunk",
-          description:
-            "Egyperces bemutató arról, hogyan építünk és üzemeltetünk weboldalakat B2B cégeknek, és milyen szakaszokban halad egy projekt.",
-          contentPath: INTRO_VIDEO.src,
-          thumbnailPath: INTRO_VIDEO.poster,
-          uploadDate: "2026-10-23",
-          duration: "PT1M4S",
-          transcript: INTRO_VIDEO.transcript,
-        })}
-      />
 
       {/* ===== 01 / MŰSZER — a hero maga a bizonyíték ===== */}
       <Rail label="01 / Műszer" dark>
@@ -260,30 +238,12 @@ export default function Home() {
 
       <Seam />
 
-      {/* ===== 02 / VIDEÓ — élig futó ===== */}
-      <Rail label="03 / Videó">
-        <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-3.5 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
-          <span>Egy perc arról, hogyan dolgozunk</span>
-          <span>Cégbemutató · 1:04 · Hang nélkül</span>
-        </div>
-        <IntroVideo
-          src={INTRO_VIDEO.src}
-          poster={INTRO_VIDEO.poster}
-          label="THE GBR cégbemutató: hogyan dolgozunk"
-          playLabel="Lejátszás: THE GBR cégbemutató"
-        />
-        <details className="group px-6 py-3.5 border-b border-[var(--rule)]">
-          <summary className="cursor-pointer [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] hover:text-[var(--ink)]">
-            A videó szövege
-          </summary>
-          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[72ch] mt-[var(--space-4)] mb-[var(--space-2)]">
-            {INTRO_VIDEO.transcript}
-          </p>
-        </details>
-      </Rail>
+      {/* A cégbemutató videó 2026-11-01-én kikerült: a régi „két dolgot csinálunk”
+          pozicionálást mondta. A fájlok (public/video/) és az IntroVideo komponens
+          megvannak; visszahozni git-ből lehet, új videó és leirat esetén. */}
 
       {/* ===== 03 / A CÉG MÖGÖTT — óriás idézet ===== */}
-      <Rail label="04 / A cég mögött">
+      <Rail label="03 / A cég mögött">
         <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-24)] grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-[var(--space-10)] lg:gap-[var(--space-20)] items-start">
           <blockquote className="m-0 font-display font-bold [font-size:var(--text-quote)] leading-[1.06] tracking-[-0.038em]">
             A legjobb kampány sem segít,{" "}
@@ -316,7 +276,7 @@ export default function Home() {
       <Seam />
 
       {/* ===== 04 / ÖKOSZISZTÉMA — nem weboldal, értékesítési rendszer ===== */}
-      <Rail label="05 / Ökoszisztéma" dark>
+      <Rail label="04 / Ökoszisztéma" dark>
         <Okoszisztema
           stages={ECO_STAGES_HU}
           eyebrow="Amit csinálunk"
@@ -334,7 +294,7 @@ export default function Home() {
       <Seam />
 
       {/* ===== 04b / SZOLGÁLTATÁSOK — tíz terület ===== */}
-      <Rail label="06 / Szolgáltatás">
+      <Rail label="05 / Szolgáltatás">
         <ServiceIndex
           eyebrow="Tíz terület · mindegyik a saját szögéből"
           lead="Mindegyik szolgáltatás egy szakaszt visz, és mindegyiknél ott kezdjük, ahol a piac szokásos megoldása megáll."
@@ -344,7 +304,7 @@ export default function Home() {
       </Rail>
 
       {/* ===== 06 / AI-LÁTHATÓSÁG — AEO ===== */}
-      <Rail label="07 / AI-láthatóság">
+      <Rail label="06 / AI-láthatóság">
         <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)] grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[var(--space-10)] lg:gap-[var(--space-16)] items-start border-t border-[var(--rule)]">
           <div>
             <Eyebrow>AI-láthatóság (AEO)</Eyebrow>
@@ -382,7 +342,7 @@ export default function Home() {
       </Rail>
 
       {/* ===== 07 / STACK — Next.js, amire a világmárkák építenek ===== */}
-      <Rail label="08 / Stack">
+      <Rail label="07 / Stack">
         <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-20)] pb-[var(--space-8)]">
           <Eyebrow>Műszaki alap · Next.js</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[15ch] text-[var(--ink)]">
@@ -435,7 +395,7 @@ export default function Home() {
       </Rail>
 
       {/* ===== 08 / MUNKÁK — jegyzék ===== */}
-      <Rail label="09 / Munkák">
+      <Rail label="08 / Munkák">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Munkák"
@@ -478,7 +438,7 @@ export default function Home() {
       <Seam />
 
       {/* ===== 09 / MIÉRT SZÁMÍT — sötét állítás ===== */}
-      <Rail label="10 / Miért számít" dark>
+      <Rail label="09 / Miért számít" dark>
         <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
           <Eyebrow>Miért számít</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[14ch] text-[var(--ink)]">
@@ -510,7 +470,7 @@ export default function Home() {
       <Seam />
 
       {/* ===== 10 / CSOMAGOK — összehasonlító táblázat ===== */}
-      <Rail label="11 / Csomagok" dark={false}>
+      <Rail label="10 / Csomagok" dark={false}>
         <section id="packages" className="px-6 py-[var(--space-16)] sm:py-[var(--space-24)]">
           <SectionHeader
             eyebrow="Együttműködés"
@@ -590,7 +550,7 @@ export default function Home() {
       </Rail>
 
       {/* ===== 11 / FOLYAMAT ===== */}
-      <Rail label="12 / Folyamat">
+      <Rail label="11 / Folyamat">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Folyamat"
@@ -622,7 +582,7 @@ export default function Home() {
       </Rail>
 
       {/* ===== 12 / ÍRÁSOK — kiemelt + lista ===== */}
-      <Rail label="13 / Írások">
+      <Rail label="12 / Írások">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader
             eyebrow="Írások"
@@ -688,7 +648,7 @@ export default function Home() {
       <Seam />
 
       {/* ===== 13 / KAPCSOLAT — záró CTA ===== */}
-      <Rail label="14 / Kapcsolat" dark>
+      <Rail label="13 / Kapcsolat" dark>
         <section id="contact" className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
           <Eyebrow>Kapcsolat</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-final)] leading-[0.9] tracking-[-0.055em] max-w-[12ch] mb-[var(--space-6)] text-[var(--ink)]">

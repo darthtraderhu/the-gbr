@@ -40,6 +40,7 @@ export const TRANSLATED_ARTICLES: Record<string, string> = {
   "ajanlat-kep-helyett-terv": "a-plan-not-a-picture",
   "uj-weboldal-regi-helyezes": "new-website-without-losing-google",
   "hova-fut-be-a-megkereses": "where-does-an-enquiry-go",
+  "kapcsold-ki-a-javascriptet": "turn-off-javascript",
 };
 
 export const ARTICLE_HU_SLUG: Record<string, string> = Object.fromEntries(

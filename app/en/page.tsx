@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { websiteSchema, professionalServiceSchema, videoObjectSchema } from "@/lib/jsonld";
+import { websiteSchema, professionalServiceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, SectionHeader, Rail, Seam, Eyebrow } from "@/app/components/ui";
 import ServiceIndex from "@/app/components/ServiceIndex";
 import { ARZENAL_SECTIONS_EN } from "@/lib/site-links";
-import IntroVideo from "@/app/components/IntroVideo";
 import HeroInstrument from "./HeroInstrument";
 import { Okoszisztema } from "@/app/components/SalesBlocks";
 import { ECO_STAGES_EN } from "@/lib/okoszisztema";
@@ -30,13 +29,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-// Az angol cégbemutató videó — forrása a video/ mappa Remotion-projektje
-// (IntroEn kompozíció). A leirat a messages/en.json Home.videoTranscript kulcsa.
-const INTRO_VIDEO_EN = {
-  src: "/video/intro-en.mp4",
-  poster: "/video/intro-en-poster.jpg",
-};
-
 export default async function EnglishHome() {
   const t = await getTranslations({ locale: "en", namespace: "Home" });
 
@@ -58,18 +50,6 @@ export default async function EnglishHome() {
     <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd data={websiteSchema({ locale: "en" })} />
       <JsonLd data={professionalServiceSchema()} />
-      <JsonLd
-        data={videoObjectSchema({
-          name: t("videoTitle"),
-          description: t("videoDescription"),
-          contentPath: INTRO_VIDEO_EN.src,
-          thumbnailPath: INTRO_VIDEO_EN.poster,
-          uploadDate: "2026-10-23",
-          duration: "PT1M4S",
-          transcript: t("videoTranscript"),
-          inLanguage: "en",
-        })}
-      />
 
       {/* ===== 01 / INSTRUMENT ===== */}
       <Rail label="01 / Instrument" dark>
@@ -125,30 +105,11 @@ export default async function EnglishHome() {
 
       <Seam />
 
-      {/* ===== 02 / VIDEO ===== */}
-      <Rail label="03 / Video">
-        <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-3.5 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
-          <span>{t("videoEyebrow")}</span>
-          <span>{t("videoCaption")}</span>
-        </div>
-        <IntroVideo
-          src={INTRO_VIDEO_EN.src}
-          poster={INTRO_VIDEO_EN.poster}
-          label={t("videoTitle")}
-          playLabel={t("videoPlay")}
-        />
-        <details className="group px-6 py-3.5 border-b border-[var(--rule)]">
-          <summary className="cursor-pointer [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)] hover:text-[var(--ink)]">
-            {t("videoTranscriptLabel")}
-          </summary>
-          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[72ch] mt-[var(--space-4)] mb-[var(--space-2)]">
-            {t("videoTranscript")}
-          </p>
-        </details>
-      </Rail>
+      {/* Az angol cégbemutató videó 2026-11-01-én kikerült (régi „two things, not
+          twelve” pozicionálás). Fájlok és a messages/en.json kulcsai megvannak. */}
 
       {/* ===== 03 / FOR AGENCIES ===== */}
-      <Rail label="04 / For agencies">
+      <Rail label="03 / For agencies">
         <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
           <Eyebrow>{t("forAgenciesEyebrow")}</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[16ch] text-[var(--ink)]">
@@ -183,7 +144,7 @@ export default async function EnglishHome() {
       <Seam />
 
       {/* ===== 04 / ECOSYSTEM ===== */}
-      <Rail label="05 / Ecosystem" dark>
+      <Rail label="04 / Ecosystem" dark>
         <Okoszisztema
           stages={ECO_STAGES_EN}
           eyebrow={t("ecoEyebrow")}
@@ -201,7 +162,7 @@ export default async function EnglishHome() {
       <Seam />
 
       {/* ===== 04b / WHAT WE DO ===== */}
-      <Rail label="06 / What we do">
+      <Rail label="05 / What we do">
         <ServiceIndex
           eyebrow={t("serviceIndexEyebrow")}
           lead={t("serviceIndexLead")}
@@ -211,7 +172,7 @@ export default async function EnglishHome() {
       </Rail>
 
       {/* ===== 06 / AI VISIBILITY ===== */}
-      <Rail label="07 / AI visibility">
+      <Rail label="06 / AI visibility">
         <section className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)] grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[var(--space-10)] lg:gap-[var(--space-16)] items-start border-t border-[var(--rule)]">
           <div>
             <Eyebrow>{t("aeoEyebrow")}</Eyebrow>
@@ -246,7 +207,7 @@ export default async function EnglishHome() {
       </Rail>
 
       {/* ===== 07 / STACK — Next.js ===== */}
-      <Rail label="08 / Stack">
+      <Rail label="07 / Stack">
         <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-20)] pb-[var(--space-8)]">
           <Eyebrow>{t("nextjsEyebrow")}</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[16ch] text-[var(--ink)]">
@@ -291,7 +252,7 @@ export default async function EnglishHome() {
       </Rail>
 
       {/* ===== 08 / WORK ===== */}
-      <Rail label="09 / Work">
+      <Rail label="08 / Work">
         <div className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-6)] sm:pb-[var(--space-10)]">
           <SectionHeader eyebrow={t("workEyebrow")} title={t("workHeadline")} lead={t("workIntro")} />
         </div>
@@ -330,7 +291,7 @@ export default async function EnglishHome() {
       <Seam />
 
       {/* ===== 09 / WHY IT MATTERS ===== */}
-      <Rail label="10 / Why it matters" dark>
+      <Rail label="09 / Why it matters" dark>
         <section className="px-6 pt-[var(--space-16)] sm:pt-[var(--space-24)] pb-[var(--space-8)] sm:pb-[var(--space-10)]">
           <Eyebrow>{t("whyEyebrow")}</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[16ch] text-[var(--ink)]">
@@ -362,7 +323,7 @@ export default async function EnglishHome() {
       <Seam />
 
       {/* ===== 10 / CONTACT ===== */}
-      <Rail label="11 / Contact" dark>
+      <Rail label="10 / Contact" dark>
         <section className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
           <Eyebrow>Contact</Eyebrow>
           <h2 className="font-display font-black [font-size:var(--text-final)] leading-[0.9] tracking-[-0.055em] max-w-[15ch] mb-[var(--space-6)] text-[var(--ink)]">
