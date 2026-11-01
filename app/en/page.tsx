@@ -33,6 +33,7 @@ export default async function EnglishHome() {
   const t = await getTranslations({ locale: "en", namespace: "Home" });
 
   const fourPoints = t.raw("fourPoints") as { title: string; body: string }[];
+  const agencyTerms = t.raw("agencyTerms") as { title: string; body: string }[];
   const workCards = t.raw("workCards") as {
     tag: string;
     title: string;
@@ -138,6 +139,30 @@ export default async function EnglishHome() {
               </p>
             </div>
           ))}
+        </div>
+        {/* Az ügynökségi feltételek: mindegyiket a felhasználó hagyta jóvá
+            (2026-11-01). Új vállalást csak az ő jóváhagyásával írj ide. */}
+        <div className="border-t border-[var(--rule)]">
+          <div className="px-6 py-3 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--dim)]">
+            {t("agencyTermsLabel")}
+          </div>
+          <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {agencyTerms.map((term, i) => (
+              <div
+                key={term.title}
+                className={`px-6 py-[var(--space-6)] border-b border-[var(--rule)] ${
+                  i % 2 === 0 ? "sm:max-lg:border-r" : ""
+                } ${i % 3 !== 2 ? "lg:border-r" : ""}`}
+              >
+                <dt className="font-display font-bold [font-size:var(--text-lg)] mb-[var(--space-2)] text-[var(--ink)]">
+                  {term.title}
+                </dt>
+                <dd className="m-0 [font-size:var(--text-base)] text-[var(--ink-2)] leading-relaxed">
+                  {term.body}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </Rail>
 

@@ -33,7 +33,7 @@ export const FAQ_EN = {
   whiteLabel: {
     question: "Can you work white-label?",
     answer:
-      "Yes, and most of our agency work is. Your client relationship stays yours. If you'd rather name us, that's fine too.",
+      "Yes, and most of our agency work is. We sign your NDA, and we don't approach your client directly, during the project or for 12 months after. Your client relationship stays yours. If you'd rather name us, that's fine too.",
   },
   smallOffice: {
     question: "Does a small office need outside IT support?",
