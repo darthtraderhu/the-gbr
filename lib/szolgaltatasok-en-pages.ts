@@ -102,6 +102,8 @@ export type EnServicePage = {
   schemaName: string;
   schemaDescription: string;
   title: string;
+  // Az OG-kép két címsora (rövid, a 92 px-es betűhöz).
+  ogLines: [string, string];
   ecosystemId?: ServiceId;
   steps: { title: string; body: string }[];
   faq: FaqItem[];
@@ -123,6 +125,7 @@ export const EN_SERVICE_PAGES: EnServicePage[] = [
     schemaDescription:
       "Custom websites and online stores built on Next.js, with technical SEO, structured data and security built into the structure; phased cutover for live stores.",
     title: "Sites and stores that sell, not just exist",
+    ogLines: ["Web and", "commerce"],
     ecosystemId: "web",
     steps: [
       {
@@ -178,6 +181,7 @@ export const EN_SERVICE_PAGES: EnServicePage[] = [
     schemaDescription:
       "B2B Google and Meta campaigns with conversion tracking through to the enquiry, campaign-specific landing pages and weekly reporting.",
     title: "Google and Meta ads where we count enquiries, not impressions",
+    ogLines: ["Performance", "marketing"],
     ecosystemId: "ads",
     steps: [
       {
@@ -226,6 +230,7 @@ export const EN_SERVICE_PAGES: EnServicePage[] = [
     schemaDescription:
       "Process assessment, connecting existing systems, automation with off-the-shelf tools or custom code, custom internal systems and client portals, with logging and failure alerts.",
     title: "Process automation: what's done by hand today runs on its own tomorrow",
+    ogLines: ["Process", "automation"],
     ecosystemId: "software",
     steps: [
       {
@@ -262,6 +267,7 @@ export const EN_SERVICE_PAGES: EnServicePage[] = [
     schemaDescription:
       "Website chat tuned to the client's own content, escalation to a human, AI usage notice and documented data flows; internal document processing and summarisation.",
     title: "An AI chatbot that answers at night, and knows when a person is needed",
+    ogLines: ["AI chatbot", "with handoff"],
     ecosystemId: "ai",
     steps: [
       {
@@ -307,6 +313,7 @@ export const EN_SERVICE_PAGES: EnServicePage[] = [
     schemaDescription:
       "Company and brand film, product video, short social formats, editing, colour and subtitling, produced with a video partner under our direction.",
     title: "Company video that says the same thing as your website",
+    ogLines: ["Company", "video"],
     ecosystemId: "video",
     steps: [
       {
@@ -347,6 +354,7 @@ export const EN_SERVICE_PAGES: EnServicePage[] = [
     schemaDescription:
       "Monitoring and alerting, ongoing development against monthly hours, compliance maintenance, regular progress reporting and one accountable contact.",
     title: "Website operations: launch isn't the end, it's the start",
+    ogLines: ["Website", "operations"],
     ecosystemId: "ops",
     steps: [
       {
@@ -392,6 +400,7 @@ export const EN_SERVICE_PAGES: EnServicePage[] = [
     schemaDescription:
       "Technical accessibility assessment and remediation: contrast, text sizing, keyboard navigability, screen reader usability, forms and subtitling, with a written report.",
     title: "Accessibility: some people can't use your site right now",
+    ogLines: ["Website", "accessibility"],
     ecosystemId: "access",
     steps: [
       {
@@ -424,6 +433,7 @@ export const EN_SERVICE_PAGES: EnServicePage[] = [
     schemaDescription:
       "Monthly monitoring of uptime, load speed, SSL certificate, contact form, indexing and Google reviews, with a legal module mapping cookies and third-party scripts, reported in a monthly letter.",
     title: "Pulse: one email a month on how the internet sees you",
+    ogLines: ["Pulse", "monthly letter"],
     ecosystemId: "pulzus",
     steps: [
       {
@@ -456,6 +466,7 @@ export const EN_SERVICE_PAGES: EnServicePage[] = [
     schemaDescription:
       "Office IT assessment and system administration with remote monitoring and support: servers, network, VPN, printers, email, Microsoft 365 and Teams, company mobile fleet; delivered with an IT partner.",
     title: "Office IT you don't have to think about",
+    ogLines: ["Office IT", "operations"],
     ecosystemId: "it",
     steps: [
       {
@@ -488,6 +499,7 @@ export const EN_SERVICE_PAGES: EnServicePage[] = [
     schemaDescription:
       "Outside-in website and online store audit without access, with a written report and prioritised to-do list; then a design and system proposal: brand, page designs, the sales ecosystem plan and a clickable prototype on the real catalogue.",
     title: "Website audit: we show where the site is losing buyers right now",
+    ogLines: ["Website", "audit"],
     steps: [
       {
         title: "Send the site's address",

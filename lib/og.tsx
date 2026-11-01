@@ -1,3 +1,4 @@
+import { ImageResponse } from "next/og";
 // Megosztott OG-kép sablon és betűtöltő — a design/ látványtervek sötét
 // "műszer" nyelvén (ld. AGENTS.md — Arculat, 2026.08). A satori (a next/og
 // motorja) nem ismeri a CSS custom property-ket, ezért itt a token-
@@ -218,4 +219,20 @@ export function OgTemplate({
       </div>
     </div>
   );
+}
+
+// Egy oldal OG-képe a közös sablonnal. Minden oldal saját opengraph-image
+// fájlt kap, mert az oldal saját openGraph-exportja felülírja a szülő
+// szegmens képét (a Next sekély metadata-összefésülése miatt).
+// Kb. 290 karakter fér el öt sorban a lábléc-vonal fölött; ami hosszabb,
+// szóhatáron levágjuk, hogy ne csússzon rá.
+const OG_SUBTITLE_MAX = 290;
+
+export async function ogImage(props: Parameters<typeof OgTemplate>[0]) {
+  const fonts = await loadOgFonts();
+  const subtitle =
+    props.subtitle.length > OG_SUBTITLE_MAX
+      ? `${props.subtitle.slice(0, OG_SUBTITLE_MAX).replace(/\s+\S*$/, "")}…`
+      : props.subtitle;
+  return new ImageResponse(<OgTemplate {...props} subtitle={subtitle} />, { ...OG_SIZE, fonts });
 }
