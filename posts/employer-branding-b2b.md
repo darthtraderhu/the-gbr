@@ -31,4 +31,4 @@ A weboldal nem helyettesíti a jó munkahelyet. De ha a munkahely jó, az oldal 
 
 ---
 
-Ha úgy érzed, az oldalatok nem azt mutatja, amilyen a cég valójában, [írd le, mi hiányzik](/init). Részletek: [weboldal-fejlesztés](/arzenal#web).
+Ha úgy érzed, az oldalatok nem azt mutatja, amilyen a cég valójában, [írd le, mi hiányzik](/init). Részletek: [weboldal-fejlesztés](/arzenal/weboldal-fejlesztes).

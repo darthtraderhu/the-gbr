@@ -34,4 +34,4 @@ A TikTokot sokan még mindig táncos videókkal azonosítják. Közben a rövid 
 
 ---
 
-Ha kíváncsi vagy, nálad melyik felület lenne értelmes, [írd le, kiket szeretnél elérni](/init). Részletek: [videó és tartalom](/arzenal#video) és [hirdetéskezelés](/arzenal#ads).
+Ha kíváncsi vagy, nálad melyik felület lenne értelmes, [írd le, kiket szeretnél elérni](/init). Részletek: [videó és tartalom](/arzenal/videogyartas) és [hirdetéskezelés](/arzenal/hirdeteskezeles).

@@ -34,4 +34,4 @@ A megkeresés csak az első lépés. Ha két napig senki nem válaszol, a legjob
 
 ---
 
-Ha szeretnéd tudni, nálad hol akad el az út a hirdetéstől a megkeresésig, [írd le, hol tartasz](/init). Részletek: [hirdetéskezelés](/arzenal#ads).
+Ha szeretnéd tudni, nálad hol akad el az út a hirdetéstől a megkeresésig, [írd le, hol tartasz](/init). Részletek: [hirdetéskezelés](/arzenal/hirdeteskezeles).

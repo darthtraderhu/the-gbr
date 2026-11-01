@@ -34,4 +34,4 @@ A saját oldalunkon is van ilyen chat, ugyanezekkel a szabályokkal: eligazít, 
 
 ---
 
-Ha a te oldaladon is gondolkodsz egy ilyen asszisztensen, [írd le, mire használnád](/init). Megmondjuk, mire lenne jó, és mire nem. Részletek: [AI és chatbot](/arzenal#ai).
+Ha a te oldaladon is gondolkodsz egy ilyen asszisztensen, [írd le, mire használnád](/init). Megmondjuk, mire lenne jó, és mire nem. Részletek: [AI és chatbot](/arzenal/ai-chatbot).

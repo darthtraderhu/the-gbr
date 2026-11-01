@@ -89,4 +89,4 @@ Havonta feltérképezzük, milyen sütiket és külső kódokat tölt tényleges
 
 Ha kíváncsi vagy, mit tölt be ténylegesen a te oldalad, [írj egy sort](/init). Az első feltérképezésből kiderül, mennyire tér el attól, ami a tájékoztatóban áll.
 
-Bővebben a szolgáltatásról: [Pulzus](/arzenal#pulzus).
+Bővebben a szolgáltatásról: [Pulzus](/arzenal/pulzus).

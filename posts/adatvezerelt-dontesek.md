@@ -36,4 +36,4 @@ Ha viszont a két szám közel van egymáshoz, akkor a több hirdetés csak töb
 
 ---
 
-Ha nem tudod, ezek a számok nálad hogyan állnak, [írd le, hol tartasz](/init). Megnézzük, mi mérhető már most, és mi hiányzik. További részletek: [hirdetéskezelés](/arzenal#ads).
+Ha nem tudod, ezek a számok nálad hogyan állnak, [írd le, hol tartasz](/init). Megnézzük, mi mérhető már most, és mi hiányzik. További részletek: [hirdetéskezelés](/arzenal/hirdeteskezeles).

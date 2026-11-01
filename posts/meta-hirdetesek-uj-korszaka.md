@@ -34,4 +34,4 @@ Néhány éve a Facebook-hirdetés lényege a célzás volt: életkor, érdeklő
 
 ---
 
-Ha a kampányaid nem hozzák azt, amit vársz, [írd le, mit látsz](/init). Megnézzük a hirdetéstől a megkeresésig az egész utat. Részletek: [hirdetéskezelés](/arzenal#ads).
+Ha a kampányaid nem hozzák azt, amit vársz, [írd le, mit látsz](/init). Megnézzük a hirdetéstől a megkeresésig az egész utat. Részletek: [hirdetéskezelés](/arzenal/hirdeteskezeles).
