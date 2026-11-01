@@ -9,7 +9,6 @@ const isDev = process.env.NODE_ENV === "development";
 // renderelésre kényszerítene, ami a statikus oldalak sebességét rontaná.
 // Külső források, amiket az oldal ténylegesen használ:
 // - Google Analytics 4 (googletagmanager.com, google-analytics.com)
-// - Formspree (az /init párhuzamos fetch-hívása, amíg a saját pipeline át nem veszi)
 // A Vercel Analytics és Speed Insights a saját domainről (/_vercel/insights, /_vercel/speed-insights) fut, külön engedély nem kell.
 const csp = [
   "default-src 'self'",
@@ -17,7 +16,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' blob: data: https://www.google-analytics.com https://www.googletagmanager.com",
   "font-src 'self'",
-  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://formspree.io",
+  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",

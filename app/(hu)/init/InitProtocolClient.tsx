@@ -140,29 +140,6 @@ export default function InitProtocolClient() {
     const targetOption = TARGET_OPTIONS.find((t) => t.id === formData.target);
     const kategoria = targetOption?.label ?? formData.target;
 
-    // A Formspree egyelőre párhuzamosan fut tovább (átmeneti, nem blokkoló) —
-    // a UI-t kizárólag a saját /api/contact végpont válasza vezérli.
-    const formspreeForm = new FormData();
-    formspreeForm.append("Név", formData.name);
-    formspreeForm.append("Cég", formData.company);
-    formspreeForm.append("Telefon", formData.phone);
-    formspreeForm.append("Email", formData.email);
-    formspreeForm.append("Célpont (Rendszer)", kategoria);
-    formspreeForm.append("Projekt leírása", formData.description);
-    formspreeForm.append("Kiválasztott Büdzsé", formData.budget);
-    formspreeForm.append("Határidő", formData.deadline);
-    formspreeForm.append("Adatkezelés elfogadva", "IGEN");
-    formspreeForm.append("_replyto", formData.email);
-    formspreeForm.append("_subject", `THE GBR LEAD: ${formData.company} - ${formData.budget}`);
-
-    fetch("https://formspree.io/f/mykabnno", {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: formspreeForm,
-    }).catch((err) => {
-      console.warn("Formspree (párhuzamos, nem blokkoló) hiba:", err);
-    });
-
     try {
       const response = await fetch("/api/contact", {
         method: "POST",

@@ -3,8 +3,8 @@ title: "Adatkezelési tájékoztató | THE GBR"
 description: "Milyen személyes adatokat kezel a GBR Marketing Solutions Kft. a www.thegbr.eu használata és a szolgáltatások igénybevétele során, milyen jogalapon, meddig, és kinek továbbítjuk — GDPR szerinti tájékoztató."
 ---
 
-**Hatályos:** 2026. augusztus 16.
-**Verzió:** 1.0
+**Hatályos:** 2026. november 1.
+**Verzió:** 1.1
 **Weboldal:** www.thegbr.eu
 
 ---
@@ -126,13 +126,10 @@ Az adatkezelés során az alábbi szolgáltatókat vesszük igénybe. Ezek a szo
 | Adatfeldolgozó | Tevékenység | Székhely | Továbbított adatok |
 |---|---|---|---|
 | **Vercel Inc.** | Tárhely- és üzemeltetési szolgáltatás | Egyesült Államok | A weboldal működéséhez szükséges valamennyi adat, szerverlogok |
-| **Formspree, Inc.** | Kapcsolatfelvételi űrlap feldolgozása *(átmeneti megoldás)* | Egyesült Államok | Az űrlapon megadott adatok |
 | **Anthropic, PBC** | AI chat funkció működtetése | Egyesült Államok | A chatbe beírt üzenetek |
-| **Supabase, Inc.** | Adatbázis- és tárhelyszolgáltatás *(tervezett)* | EU-s régió (tervezett) | Megkeresések, dokumentumok |
+| **Supabase, Inc.** | Adatbázis- és tárhelyszolgáltatás (a beérkező megkeresések nyilvántartása) | EU-s régió (Frankfurt, Németország) | Megkeresések, dokumentumok |
 | **Google Ireland Limited** | Látogatottság-mérés (Google Analytics 4), kizárólag hozzájárulás esetén | Írország (EU) | Böngészési adatok, eszköz- és sütiazonosító |
 | Könyvelő | Könyvelési szolgáltatás | Magyarország | Számlázási adatok |
-
-*A „tervezett" jelöléssel ellátott szolgáltatók igénybevételekor ezt a tájékoztatót frissítjük.*
 
 ---
 
