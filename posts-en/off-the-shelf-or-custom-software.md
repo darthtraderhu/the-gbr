@@ -80,7 +80,7 @@ One automation that works, logs and alerts is worth more than five half-finished
 
 ## How we work
 
-Our [custom software and automation](/en/services#software) service starts with an assessment. We go through what's done by hand today, and **you get a written summary of which processes are worth automating and which aren't.**
+Our [custom software and automation](/en/services/automation) service starts with an assessment. We go through what's done by hand today, and **you get a written summary of which processes are worth automating and which aren't.**
 
 Where an off-the-shelf tool is enough, we use it. Where it isn't, we write code. We choose whichever is cheaper to maintain in the long run, and explain why.
 

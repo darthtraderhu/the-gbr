@@ -3,6 +3,7 @@ import { getSortedPostsData } from "@/lib/posts";
 import { getSortedEnPostsData } from "@/lib/posts-en";
 import { SITE_URL } from "@/lib/site";
 import { HU_TO_EN, EN_TO_HU, TRANSLATED_ARTICLES } from "@/lib/i18n-routes";
+import { EN_SERVICE_PAGES } from "@/lib/szolgaltatasok-en-pages";
 
 // A cikk-ütemezés (lib/posts.ts, lib/posts-en.ts) miatt a sitemap is naponta
 // frissül, hogy egy ütemezett cikk a dátuma napján magától bekerüljön, ne
@@ -48,6 +49,11 @@ const enRoutes: Array<{
 }> = [
   { path: "/en", changeFrequency: "weekly", priority: 1 },
   { path: "/en/services", changeFrequency: "monthly", priority: 0.8 },
+  ...EN_SERVICE_PAGES.map((page) => ({
+    path: `/en/services/${page.slug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  })),
   { path: "/en/engagement", changeFrequency: "monthly", priority: 0.8 },
   { path: "/en/about", changeFrequency: "monthly", priority: 0.6 },
   { path: "/en/seo", changeFrequency: "monthly", priority: 0.8 },

@@ -74,8 +74,8 @@ export const ECO_STAGES_EN: EcoStage[] = [
     body: "Buyers meet you first on Google, in an AI answer or in an ad.",
     links: [
       { id: "seo", label: "SEO and AEO", href: "/en/seo" },
-      { id: "ads", label: "Advertising", href: "/en/services#ads" },
-      { id: "video", label: "Video", href: "/en/services#video" },
+      { id: "ads", label: "Advertising", href: "/en/services/performance-marketing" },
+      { id: "video", label: "Video", href: "/en/services/video-production" },
     ],
   },
   {
@@ -83,30 +83,30 @@ export const ECO_STAGES_EN: EcoStage[] = [
     name: "Convinced",
     body: "The site loads fast, shows the offer clearly, and works for everyone.",
     links: [
-      { id: "web", label: "Web and commerce", href: "/en/services#web" },
-      { id: "access", label: "Accessibility", href: "/en/services#access" },
+      { id: "web", label: "Web and commerce", href: "/en/services/web-development" },
+      { id: "access", label: "Accessibility", href: "/en/services/accessibility" },
     ],
   },
   {
     n: "03",
     name: "Answered",
     body: "Simple questions get an answer at night too; serious ones go to a person.",
-    links: [{ id: "ai", label: "AI assistant", href: "/en/services#ai" }],
+    links: [{ id: "ai", label: "AI assistant", href: "/en/services/ai-chatbot" }],
   },
   {
     n: "04",
     name: "Not lost",
     body: "Every enquiry lands in one place with an owner, not asleep in an inbox.",
-    links: [{ id: "software", label: "Automation", href: "/en/services#software" }],
+    links: [{ id: "software", label: "Automation", href: "/en/services/automation" }],
   },
   {
     n: "05",
     name: "Running and measured",
     body: "We monitor, fix, and write down monthly what changed. The office IT runs too.",
     links: [
-      { id: "ops", label: "Operations", href: "/en/services#ops" },
-      { id: "pulzus", label: "Pulse", href: "/en/services#pulse" },
-      { id: "it", label: "Office IT", href: "/en/services#it" },
+      { id: "ops", label: "Operations", href: "/en/services/website-operations" },
+      { id: "pulzus", label: "Pulse", href: "/en/services/pulse" },
+      { id: "it", label: "Office IT", href: "/en/services/it-operations" },
     ],
   },
 ];

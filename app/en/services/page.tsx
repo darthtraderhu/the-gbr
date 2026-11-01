@@ -7,6 +7,9 @@ import JsonLd from "@/app/components/JsonLd";
 import ProposalSample from "@/app/components/ProposalSample";
 import StackProof from "@/app/components/StackProof";
 import { FactStrip, Okoszisztema } from "@/app/components/SalesBlocks";
+import { DevFrame, FindingsTable, LogLines, ReportRows } from "@/app/components/ServiceFrame";
+import PulseLetter, { type PulseLetterContent } from "@/app/components/PulseLetter";
+import { SERVICES_FAQ_EN, enServicePath } from "@/lib/szolgaltatasok-en-pages";
 import { ECO_STAGES_EN } from "@/lib/okoszisztema";
 import { NEXTJS_CHECKED_EN, NEXTJS_ITEMS_EN, NEXTJS_SOURCES_EN } from "@/lib/nextjs-proof";
 import type { ServicePitch } from "@/lib/szolgaltatasok";
@@ -37,26 +40,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-function DevFrame({
-  header,
-  headerRight,
-  children,
-}: {
-  header: string;
-  headerRight?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="border-t border-[var(--rule)] bg-[var(--panel)]">
-      <div className="flex flex-wrap justify-between gap-3 px-6 py-2.5 border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.2em] uppercase text-[var(--mid)]">
-        <span>{header}</span>
-        {headerRight && <span>{headerRight}</span>}
-      </div>
-      <div className="p-6">{children}</div>
-    </div>
-  );
-}
-
 function ServiceBlock({
   id,
   n,
@@ -66,7 +49,7 @@ function ServiceBlock({
   features,
   device,
 }: {
-  id: string;
+  id: (typeof ARZENAL_SECTIONS_EN)[number]["id"];
   n: string;
   label: string;
   pitch: ServicePitch;
@@ -150,22 +133,32 @@ function ServiceBlock({
             {pitch.cta.body}
           </p>
         </div>
-        <Link
-          href="/en/contact"
-          className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.16em] uppercase text-[var(--ink)] border-b-2 border-[var(--signal)] pb-1"
-        >
-          Ask us &rarr;
-        </Link>
+        <div className="flex flex-wrap gap-[var(--space-6)]">
+          <Link
+            href={enServicePath(id)}
+            className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.16em] uppercase text-[var(--ink)] border-b-2 border-[var(--signal)] pb-1"
+          >
+            In detail &rarr;
+          </Link>
+          <Link
+            href="/en/contact"
+            className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.16em] uppercase text-[var(--mid)] border-b-2 border-[var(--rule)] pb-1"
+          >
+            Ask us &rarr;
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
 
+const FINDINGS_HEADERS = { finding: "Finding", meaning: "Meaning", severity: "Severity" };
+
 const B = (chunks: React.ReactNode) => <strong className="text-[var(--ink)]">{chunks}</strong>;
 
 export default async function EnglishServices() {
   const t = await getTranslations({ locale: "en", namespace: "Services" });
-  const faq = t.raw("faq") as { question: string; answer: string }[];
+  const faq = SERVICES_FAQ_EN;
   const adsRows = t.raw("ads.sampleRows") as { label: string; value: string }[];
   const opsLog = t.raw("ops.logLines") as { t: string; msg: string }[];
   const findings = t.raw("access.findingsTable") as {
@@ -195,7 +188,7 @@ export default async function EnglishServices() {
           data={serviceSchema({
             name: item.name,
             description: PITCH_EN[item.id].headline,
-            url: `${SITE_URL}/en/services#${item.id}`,
+            url: `${SITE_URL}${item.href}`,
             inLanguage: "en",
           })}
         />
@@ -289,21 +282,7 @@ export default async function EnglishServices() {
           features={t.raw("ads.items") as string[]}
           device={
             <DevFrame header="What a weekly report looks like" headerRight="Sample">
-              <table className="w-full border-collapse [font-size:var(--text-sm)]">
-                <tbody>
-                  {adsRows.map((row) => (
-                    <tr
-                      key={row.label}
-                      className="border-b border-[var(--rule-soft)] last:border-b-0"
-                    >
-                      <td className="py-[var(--space-3)] text-[var(--mid)]">{row.label}</td>
-                      <td className="py-[var(--space-3)] text-[var(--signal-deep)] text-right [font-family:var(--font-mono)]">
-                        {row.value}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <ReportRows rows={adsRows} />
               <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
                 {t("ads.deviceBelow")}
               </p>
@@ -327,19 +306,7 @@ export default async function EnglishServices() {
           features={t.raw("software.items") as string[]}
           device={
             <DevFrame header={t("software.deviceHeader")} headerRight="Sample">
-              <div className="[font-family:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--ink-2)]">
-                {softwareLog.map((line, i) => (
-                  <div
-                    key={`${line.t}-${line.msg}`}
-                    className={`grid grid-cols-[74px_1fr] gap-[var(--space-4)] py-[var(--space-2)] ${
-                      i < softwareLog.length - 1 ? "border-b border-[var(--rule-soft)]" : ""
-                    }`}
-                  >
-                    <b className="text-[var(--signal-deep)] font-medium">{line.t}</b>
-                    <span>{line.msg}</span>
-                  </div>
-                ))}
-              </div>
+              <LogLines lines={softwareLog} />
               <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
                 {t("software.deviceBelow")}
               </p>
@@ -432,19 +399,7 @@ export default async function EnglishServices() {
           features={t.raw("ops.items") as string[]}
           device={
             <DevFrame header={t("ops.deviceHeader")} headerRight="Log">
-              <div className="[font-family:var(--font-mono)] text-[length:var(--text-sm)] text-[var(--ink-2)]">
-                {opsLog.map((line, i) => (
-                  <div
-                    key={line.t}
-                    className={`grid grid-cols-[74px_1fr] gap-[var(--space-4)] py-[var(--space-2)] ${
-                      i < opsLog.length - 1 ? "border-b border-[var(--rule-soft)]" : ""
-                    }`}
-                  >
-                    <b className="text-[var(--signal-deep)] font-medium">{line.t}</b>
-                    <span>{line.msg}</span>
-                  </div>
-                ))}
-              </div>
+              <LogLines lines={opsLog} />
             </DevFrame>
           }
         />
@@ -465,44 +420,7 @@ export default async function EnglishServices() {
           features={t.raw("access.items") as string[]}
           device={
             <DevFrame header={t("access.deviceHeader")} headerRight="Sample">
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-[480px] border-collapse [font-size:var(--text-sm)]">
-                  <thead>
-                    <tr className="border-b border-[var(--rule-soft)]">
-                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Finding
-                      </th>
-                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Meaning
-                      </th>
-                      <th className="py-[var(--space-2)] text-right font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Severity
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {findings.map((row) => (
-                      <tr
-                        key={row.finding}
-                        className="border-b border-[var(--rule-soft)] last:border-b-0"
-                      >
-                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--ink-2)]">
-                          {row.finding}
-                        </td>
-                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--mid)]">
-                          {row.meaning}
-                        </td>
-                        <td className="py-[var(--space-3)] text-right [font-family:var(--font-mono)] text-[var(--signal-deep)] whitespace-nowrap">
-                          {row.severity}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
-                {t("access.deviceBelow")}
-              </p>
+              <FindingsTable rows={findings} note={t("access.deviceBelow")} headers={FINDINGS_HEADERS} />
             </DevFrame>
           }
         />
@@ -525,50 +443,10 @@ export default async function EnglishServices() {
           features={t.raw("pulse.items") as string[]}
           device={
             <DevFrame header={t("pulse.deviceHeader")} headerRight="Sample">
-              <div className="[font-size:var(--text-sm)] text-[var(--ink-2)] space-y-[var(--space-4)]">
-                <p className="m-0 font-display font-bold [font-size:var(--text-lg)] text-[var(--ink)]">
-                  {t("pulse.letter.title")}
-                </p>
-                <div>
-                  <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
-                    {t("pulse.letter.siteLabel")}
-                  </p>
-                  <p className="m-0 leading-relaxed">{t("pulse.letter.siteLine1")}</p>
-                  <p className="m-0 leading-relaxed text-[var(--attention)]">
-                    {t("pulse.letter.siteLine2")}
-                  </p>
-                </div>
-                <div>
-                  <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
-                    {t("pulse.letter.googleLabel")}
-                  </p>
-                  <p className="m-0 leading-relaxed">{t("pulse.letter.googleLine")}</p>
-                </div>
-                <div>
-                  <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
-                    {t("pulse.letter.legalLabel")}
-                  </p>
-                  <p className="m-0 leading-relaxed">{t("pulse.letter.legalLine")}</p>
-                </div>
-                <div>
-                  <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
-                    {t("pulse.letter.watchLabel")}
-                  </p>
-                  <p className="m-0 leading-relaxed">{t("pulse.letter.watchLine")}</p>
-                </div>
-                <div>
-                  <p className="m-0 mb-[var(--space-1)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase text-[var(--mid)]">
-                    {t("pulse.letter.actionsLabel")}
-                  </p>
-                  <ol className="m-0 pl-[1.1em] space-y-[var(--space-1)]">
-                    <li>{t("pulse.letter.action1")}</li>
-                    <li>{t("pulse.letter.action2")}</li>
-                  </ol>
-                </div>
-              </div>
-              <p className="mt-[var(--space-4)] pt-[var(--space-4)] border-t border-[var(--rule-soft)] [font-size:var(--text-sm)] text-[var(--mid)]">
-                {t("pulse.deviceBelow")}
-              </p>
+              <PulseLetter
+                letter={t.raw("pulse.letter") as PulseLetterContent}
+                note={t("pulse.deviceBelow")}
+              />
             </DevFrame>
           }
         />
@@ -585,44 +463,7 @@ export default async function EnglishServices() {
           features={t.raw("it.items") as string[]}
           device={
             <DevFrame header={t("it.deviceHeader")} headerRight="Sample">
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-[480px] border-collapse [font-size:var(--text-sm)]">
-                  <thead>
-                    <tr className="border-b border-[var(--rule-soft)]">
-                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Finding
-                      </th>
-                      <th className="py-[var(--space-2)] pr-[var(--space-3)] text-left font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Meaning
-                      </th>
-                      <th className="py-[var(--space-2)] text-right font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]">
-                        Severity
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {itFindings.map((row) => (
-                      <tr
-                        key={row.finding}
-                        className="border-b border-[var(--rule-soft)] last:border-b-0"
-                      >
-                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--ink-2)]">
-                          {row.finding}
-                        </td>
-                        <td className="py-[var(--space-3)] pr-[var(--space-3)] text-[var(--mid)]">
-                          {row.meaning}
-                        </td>
-                        <td className="py-[var(--space-3)] text-right [font-family:var(--font-mono)] text-[var(--signal-deep)] whitespace-nowrap">
-                          {row.severity}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p className="mt-[var(--space-4)] [font-size:var(--text-sm)] text-[var(--mid)]">
-                {t("it.deviceBelow")}
-              </p>
+              <FindingsTable rows={itFindings} note={t("it.deviceBelow")} headers={FINDINGS_HEADERS} />
             </DevFrame>
           }
         />

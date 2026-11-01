@@ -62,7 +62,7 @@ If you find something on any of these, the first question is **who has access to
 
 Our [website audit](/en/contact) reviews the site from the outside; we don't need access. We go through the sitemap, the pages visible in search and the home page, and **you get a written report of what we found, where, and what to do about it.**
 
-When we build the site, every template page and sample text is removed before handover, and the sitemap only lists what you actually want to show. With [website operations](/en/services#ops), we keep monitoring and maintaining it afterwards, and the regular report shows you what happened to it.
+When we build the site, every template page and sample text is removed before handover, and the sitemap only lists what you actually want to show. With [website operations](/en/services/website-operations), we keep monitoring and maintaining it afterwards, and the regular report shows you what happened to it.
 
 ---
 

@@ -44,7 +44,7 @@ There's one more benefit: **the plan also shows what doesn't need replacing.** S
 
 ## How we work
 
-Our [design and system proposal](/en/services#audit) always follows an audit, so it builds on what actually isn't working today. You get the brand direction, the page designs including mobile, and the plan of the sales journey as a PDF: where leads come from, where the enquiry lands, who handles it, and what we measure.
+Our [design and system proposal](/en/services/audit-and-proposal) always follows an audit, so it builds on what actually isn't working today. You get the brand direction, the page designs including mobile, and the plan of the sales journey as a PDF: where leads come from, where the enquiry lands, who handles it, and what we measure.
 
 **Alongside it you get a clickable prototype with your own catalogue,** before you decide. At the end we break it into phases: what the first step is, and what can be done on your current system.
 

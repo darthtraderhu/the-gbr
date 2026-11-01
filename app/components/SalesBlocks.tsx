@@ -8,7 +8,8 @@ import { Eyebrow } from "@/app/components/ui";
 
 export type Fact = { value: string; label: string };
 export type AngleRow = { usual: string; ours: string };
-export type Feature = { title: string; body: string };
+// A body elhagyható: az angol oldalak listái egysorosak.
+export type Feature = { title: string; body?: string };
 
 // Hero alatti tényszalag: három rövid, ellenőrizhető állítás.
 export function FactStrip({ facts }: { facts: Fact[] }) {
@@ -109,9 +110,11 @@ export function FeatureGrid({ features }: { features: Feature[] }) {
           <h3 className="mt-[var(--space-3)] font-display font-bold [font-size:var(--text-xl)] tracking-[-0.02em] leading-tight text-[var(--ink)]">
             {feat.title}
           </h3>
-          <p className="mt-[var(--space-2)] [font-size:var(--text-sm)] leading-relaxed text-[var(--ink-2)]">
-            {feat.body}
-          </p>
+          {feat.body && (
+            <p className="mt-[var(--space-2)] [font-size:var(--text-sm)] leading-relaxed text-[var(--ink-2)]">
+              {feat.body}
+            </p>
+          )}
         </li>
       ))}
     </ul>
@@ -246,9 +249,11 @@ export function FindingChapters({
               <h3 className="font-display font-black [font-size:var(--text-section)] leading-[0.98] tracking-[-0.045em] max-w-[18ch] text-[var(--ink)]">
                 {ch.title}
               </h3>
-              <p className="mt-[var(--space-4)] [font-size:var(--text-lg)] leading-snug text-[var(--ink-2)] max-w-[52ch]">
-                {ch.lead}
-              </p>
+              {ch.lead && (
+                <p className="mt-[var(--space-4)] [font-size:var(--text-lg)] leading-snug text-[var(--ink-2)] max-w-[52ch]">
+                  {ch.lead}
+                </p>
+              )}
             </div>
           </div>
           <div className="hidden md:grid grid-cols-[1.2fr_1fr] gap-[var(--space-8)] px-6 py-3 border-t border-[var(--rule)] [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.22em] uppercase">

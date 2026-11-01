@@ -1,3 +1,4 @@
+import { enServicePath, type EnServiceId } from "./szolgaltatasok-en-pages";
 import {
   ACCESS_SERVICE,
   ADS_SERVICE,
@@ -68,14 +69,15 @@ export const LEGAL_LINKS = [
 // EN ága elé kerül egy angol nyelvű megjegyzés (ld. Footer.tsx).
 export const MAIN_NAV_ITEMS_EN: NavItem[] = [
   { label: "Services", href: "/en/services" },
-  { label: "Audit", href: "/en/services#audit", highlight: true },
+  { label: "Audit", href: "/en/services/audit-and-proposal", highlight: true },
   { label: "Engagement", href: "/en/engagement" },
   { label: "SEO", href: "/en/seo" },
   { label: "About", href: "/en/about" },
   { label: "Writing", href: "/en/writing" },
 ];
 
-export const ARZENAL_SECTIONS_EN = [
+// Minden szolgáltatásnak saját angol aloldala van (/en/services/<slug>).
+const EN_SECTIONS: { id: EnServiceId; n: string; name: string }[] = [
   { id: "web", n: "01", name: "Web and commerce" },
   { id: "ads", n: "02", name: "Performance marketing" },
   { id: "software", n: "03", name: "Custom software and automation" },
@@ -87,3 +89,5 @@ export const ARZENAL_SECTIONS_EN = [
   { id: "it", n: "09", name: "IT operations" },
   { id: "audit", n: "10", name: "Audit and proposal" },
 ];
+
+export const ARZENAL_SECTIONS_EN = EN_SECTIONS.map((s) => ({ ...s, href: enServicePath(s.id) }));

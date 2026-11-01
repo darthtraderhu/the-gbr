@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { huAlternates } from "@/lib/i18n-routes";
 import ServicePage from "@/app/components/ServicePage";
 import { DevFrame, ReportRows } from "@/app/components/ServiceFrame";
 import { ADS_FAQ, ADS_FEATURES, ADS_PITCH, ADS_SERVICE, AD_SAMPLE_ROWS, SIZE_FAQ } from "@/lib/szolgaltatasok";
@@ -13,7 +14,7 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: ADS_SERVICE.path },
+  alternates: huAlternates(ADS_SERVICE.path),
   openGraph: { title: TITLE, description: DESCRIPTION },
   twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };

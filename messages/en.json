@@ -435,34 +435,6 @@
         }
       ]
     },
-    "faq": [
-      {
-        "question": "Do you guarantee accessibility compliance?",
-        "answer": "No. Compliance is a legal determination and a lawyer makes it. What we guarantee: the technical barriers get assessed, documented and removed, and you get a written record of what changed."
-      },
-      {
-        "question": "Does Pulse fix problems automatically?",
-        "answer": "No. Pulse detects and reports. Fixing is either a separate instruction or comes out of a monthly retainer — because an automatic change to a live site without anyone looking at it is how outages happen."
-      },
-      {
-        "question": "Does the Pulse legal module guarantee compliance?",
-        "answer": "No. A lawyer determines compliance, not us. What the module gives you: a monthly record of which cookies and third-party scripts the site actually loads, and when that drifts from the legal documents, a web lawyer reviews and updates them as needed. The lawyer sets the scope and fee of the legal work."
-      },
-      {
-        "question": "How is the final price set?",
-        "answer": "After scoping. We discuss what you need, review the existing systems, then give a fixed price and date — not a range."
-      },
-      {
-        "question": "Can you work white-label?",
-        "answer": "Yes, and most of our agency work is. Your client relationship stays yours. If you'd rather name us, that's fine too."
-      },
-      {
-        "question": "Does a small office need outside IT support?",
-        "answer": "Often it's the small ones that need it most. Without an in-house IT person, someone usually handles it on the side, and that works until something breaks. We start with an assessment and tell you how much ongoing work your setup actually needs. If it's not much, we say so."
-      },
-      {"question": "Do we have to replace our existing systems to automate?", "answer": "Usually not. We connect what you already have: the webshop, the invoicing system, the spreadsheets. We only recommend new software when the existing one can't do what's needed — and the assessment explains why in writing."},
-      {"question": "What happens if an automation stops?", "answer": "It doesn't stop silently. Every run is logged, and a failure sends an alert to whoever is responsible — us, if you hand over operations, or the person you designate. Missed items can be processed again from the log."}
-    ],
     "faqHeading": "Questions we actually get asked",
     "ctaHeadline": "Not sure which one your client needs? That's our job",
     "ctaBody": "We don't take every project — which is why we ask first. Two business days, and we'll tell you if we're not the right fit.",

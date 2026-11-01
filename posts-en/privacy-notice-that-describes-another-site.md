@@ -90,4 +90,4 @@ That way the notice isn't a document written once. It follows the site. **We don
 
 If you'd like to know what your site actually loads, [get in touch](/en/contact). The first mapping shows how far it is from what your notice says.
 
-More on the service: [Pulse](/en/services#pulse).
+More on the service: [Pulse](/en/services/pulse).

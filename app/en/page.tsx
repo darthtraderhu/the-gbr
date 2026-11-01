@@ -119,7 +119,7 @@ export default async function EnglishHome() {
           findingsLabel={t("auditListLabel")}
           closer={{ title: t("auditCloserTitle"), body: t("auditCloserBody") }}
           primary={{ href: "/en/contact", label: t("auditCta") }}
-          secondary={{ href: "/en/services#audit", label: t("auditMore") }}
+          secondary={{ href: "/en/services/audit-and-proposal", label: t("auditMore") }}
         />
       </Rail>
 

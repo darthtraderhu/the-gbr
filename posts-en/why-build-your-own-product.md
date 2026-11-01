@@ -92,4 +92,4 @@ Gimbal is currently in **closed beta**, and we're looking for business owners to
 
 The beta is free, and if you join now, it stays free for you. In exchange we ask one thing: tell us honestly what's wrong with it.
 
-[Get in touch](/en/contact) and we'll send access. Or see [what we build and operate for others](/en/services#ops).
+[Get in touch](/en/contact) and we'll send access. Or see [what we build and operate for others](/en/services/website-operations).
