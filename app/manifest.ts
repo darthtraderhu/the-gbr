@@ -3,7 +3,8 @@ import type { MetadataRoute } from "next";
 // Webalkalmazás-manifest: a kezdőképernyőre mentett ikon és a böngésző
 // keretszíne. A színek az arculati tokenek (globals.css) értékei — a manifest
 // nem tud CSS-változót olvasni, ezért itt literálként szerepelnek.
-// Az ikonok forrása az app/icon.svg (a nyúl motívumból egyszerűsített jel).
+// Az ikonok forrása a saját graffiti-nyúl eredeti rajza (neonsárga fekete
+// alapon), az app/icon.svg ennek vektoros átrajzolása.
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "THE GBR",
