@@ -154,6 +154,7 @@ export async function POST(req: Request) {
       leiras,
       keret,
       hatarido,
+      lang,
       ip,
       createdAt: new Date().toISOString(),
     });
