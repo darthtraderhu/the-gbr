@@ -48,4 +48,4 @@ A saját oldalunk Next.js-en fut, új weboldalakat is erre építünk, de meglé
 
 ---
 
-Ha bizonytalan vagy, nálad melyik lenne a jó irány, [írd le, mire használod az oldalt](/init). Részletek: [web és webshop](/arzenal#web).
+Ha bizonytalan vagy, nálad melyik lenne a jó irány, [írd le, mire használod az oldalt](/init). Részletek: [web és webshop](/arzenal/weboldal-fejlesztes).

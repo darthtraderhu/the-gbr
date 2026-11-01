@@ -94,4 +94,4 @@ That matters, because most accessibility reports leave the client with nothing t
 
 If you're curious where you stand today, [request an assessment](/en/contact). You get the list either way, even if you don't continue with us.
 
-More on the service: [Accessibility](/en/services#access).
+More on the service: [Accessibility](/en/services/accessibility).

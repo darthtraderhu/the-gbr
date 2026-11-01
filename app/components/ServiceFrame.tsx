@@ -25,12 +25,16 @@ const TH_CLASS =
   "py-[var(--space-2)] font-normal [font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--mid)]";
 
 // Felmérési lelet-táblázat: mit találunk, mit jelent, mennyire súlyos.
+const HU_HEADERS = { finding: "Amit találunk", meaning: "Mit jelent", severity: "Súly" };
+
 export function FindingsTable({
   rows,
   note,
+  headers = HU_HEADERS,
 }: {
   rows: { finding: string; meaning: string; severity: string }[];
   note: string;
+  headers?: { finding: string; meaning: string; severity: string };
 }) {
   return (
     <>
@@ -38,9 +42,9 @@ export function FindingsTable({
         <table className="w-full min-w-[480px] border-collapse [font-size:var(--text-sm)]">
           <thead>
             <tr className="border-b border-[var(--rule-soft)]">
-              <th className={`${TH_CLASS} pr-[var(--space-3)] text-left`}>Amit találunk</th>
-              <th className={`${TH_CLASS} pr-[var(--space-3)] text-left`}>Mit jelent</th>
-              <th className={`${TH_CLASS} text-right`}>Súly</th>
+              <th className={`${TH_CLASS} pr-[var(--space-3)] text-left`}>{headers.finding}</th>
+              <th className={`${TH_CLASS} pr-[var(--space-3)] text-left`}>{headers.meaning}</th>
+              <th className={`${TH_CLASS} text-right`}>{headers.severity}</th>
             </tr>
           </thead>
           <tbody>

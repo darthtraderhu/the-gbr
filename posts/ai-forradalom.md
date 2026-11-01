@@ -32,4 +32,4 @@ Az AI-ról szóló hírek alapján könnyű azt hinni, hogy egy cégnek vagy min
 
 ---
 
-Ha szeretnéd megtudni, nálad melyik feladatnál lenne értelme, [írd le, mivel telik a legtöbb idő](/init). Részletek: [AI és chatbot](/arzenal#ai).
+Ha szeretnéd megtudni, nálad melyik feladatnál lenne értelme, [írd le, mivel telik a legtöbb idő](/init). Részletek: [AI és chatbot](/arzenal/ai-chatbot).

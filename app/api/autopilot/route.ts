@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
-import { timingSafeEqual } from "crypto";
+import { isCronAuthorized } from "@/lib/cron-auth";
 import { getPostMarkdown, getSortedPostsData } from "@/lib/posts";
 import { getTodayBudapest } from "@/lib/publish-schedule";
 import { SITE_URL } from "@/lib/site";
@@ -36,19 +36,6 @@ Szabályok:
 - Linket ne írj a szövegbe, azt a rendszer csatolja.
 - Csak a poszt szövegét add vissza, bevezető vagy magyarázat nélkül.
 `.trim();
-
-// Konstans idejű összehasonlítás: nem áll meg az első eltérő karakternél,
-// így az időzítésből nem következtethető ki a helyes CRON_SECRET.
-function isAuthorized(authHeader: string | null, cronSecret: string): boolean {
-  if (!authHeader) return false;
-
-  const expected = Buffer.from(`Bearer ${cronSecret}`);
-  const provided = Buffer.from(authHeader);
-
-  if (expected.length !== provided.length) return false;
-
-  return timingSafeEqual(expected, provided);
-}
 
 // Napok száma 1970-01-01 óta egy ÉÉÉÉ-HH-NN dátumra (UTC-ben számolva, hogy
 // az óraátállítás ne okozzon eltérést).
@@ -147,7 +134,7 @@ export async function GET(request: Request) {
     console.error("[AUTOPILOT] A CRON_SECRET környezeti változó nincs beállítva");
     return new NextResponse("Szerver-konfigurációs hiba", { status: 500 });
   }
-  if (!isAuthorized(request.headers.get("authorization"), cronSecret)) {
+  if (!isCronAuthorized(request.headers.get("authorization"), cronSecret)) {
     return new NextResponse("Hozzáférés megtagadva", { status: 401 });
   }
 

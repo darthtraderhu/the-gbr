@@ -38,4 +38,4 @@ Nem mindig kell nulláról kezdeni. Ha egy meglévő oldal alapjai rendben vanna
 
 ---
 
-Ha nem tudod eldönteni, nálad melyik lenne a jó irány, [írd le, mire kell az oldal](/init). Részletek: [web és webshop](/arzenal#web).
+Ha nem tudod eldönteni, nálad melyik lenne a jó irány, [írd le, mire kell az oldal](/init). Részletek: [web és webshop](/arzenal/weboldal-fejlesztes).

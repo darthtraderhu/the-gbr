@@ -79,7 +79,7 @@ Egy jól működő, naplózott, riasztással ellátott automatizáció többet �
 
 ## Hogyan dolgozunk mi
 
-Az [egyedi szoftver és automatizáció](/arzenal#software) szolgáltatásunk felméréssel kezdődik. Végigmegyünk azon, mi megy ma kézzel, és **írásban megkapod, melyik folyamatot érdemes automatizálni, és melyiket nem.**
+Az [egyedi szoftver és automatizáció](/arzenal/automatizacio) szolgáltatásunk felméréssel kezdődik. Végigmegyünk azon, mi megy ma kézzel, és **írásban megkapod, melyik folyamatot érdemes automatizálni, és melyiket nem.**
 
 Ahol elég egy kész eszköz, azt használjuk. Ahol nem, saját kódot írunk. A kettő közül azt választjuk, amelyik hosszabb távon olcsóbban fenntartható, és ezt indokoljuk is.
 

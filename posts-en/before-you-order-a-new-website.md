@@ -54,7 +54,7 @@ We don't ask for access to do an audit. That's not about convenience.
 
 ## How we work
 
-Our [audit](/en/services#audit) covers speed, SEO and AEO, pricing, usability, privacy and the security settings visible from outside. **You get a written PDF report with a prioritised to-do list:** what's urgent, what brings in money, and what can wait. We also write down what works well, and what isn't worth replacing.
+Our [audit](/en/services/audit-and-proposal) covers speed, SEO and AEO, pricing, usability, privacy and the security settings visible from outside. **You get a written PDF report with a prioritised to-do list:** what's urgent, what brings in money, and what can wait. We also write down what works well, and what isn't worth replacing.
 
 If you decide to go further after the report, we also prepare a design and system proposal: brand direction, page designs, a plan of the sales journey, and a clickable prototype built with your own catalogue.
 

@@ -30,4 +30,4 @@ A stockfotók könnyen elérhetők, olcsók, és mindenhol ugyanazok. Egy mosoly
 
 ---
 
-Ha szeretnéd megmutatni, milyen a céged valójában, [írd le, mit szeretnél bemutatni](/init). Részletek: [videó és tartalom](/arzenal#video).
+Ha szeretnéd megmutatni, milyen a céged valójában, [írd le, mit szeretnél bemutatni](/init). Részletek: [videó és tartalom](/arzenal/videogyartas).

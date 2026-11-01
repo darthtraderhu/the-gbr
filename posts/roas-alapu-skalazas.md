@@ -38,4 +38,4 @@ A mi hirdetéskezelésünknél a jelentés hetente megy, és a kattintástól a 
 
 ---
 
-Ha a jelenlegi jelentésedből nem derül ki, mi lett a pénzből, [írd le, mit látsz most](/init). Részletek: [hirdetéskezelés](/arzenal#ads).
+Ha a jelenlegi jelentésedből nem derül ki, mi lett a pénzből, [írd le, mit látsz most](/init). Részletek: [hirdetéskezelés](/arzenal/hirdeteskezeles).

@@ -45,7 +45,8 @@ export function GET() {
     "## English",
     "",
     `- [Home](${SITE_URL}/en)`,
-    `- [Services](${SITE_URL}/en/services): ${ARZENAL_SECTIONS_EN.map((s) => s.name).join(", ")}`,
+    `- [Services](${SITE_URL}/en/services)`,
+    ...ARZENAL_SECTIONS_EN.map((s) => `  - [${s.name}](${SITE_URL}${s.href})`),
     `- [SEO and AEO](${SITE_URL}/en/seo)`,
     `- [Contact](${SITE_URL}/en/contact)`,
     ...enPosts.map(

@@ -34,4 +34,4 @@ Nem mindig kell mindent egyszerre lecserélni. Gyakran jó megoldás, ha a megl�
 
 ---
 
-Ha bizonytalan vagy, hogy nálad megérné-e, [írd le, milyen rendszeren fut most a webshop](/init). Megmondjuk, melyik út lenne értelmes. Részletek: [web és webshop](/arzenal#web).
+Ha bizonytalan vagy, hogy nálad megérné-e, [írd le, milyen rendszeren fut most a webshop](/init). Megmondjuk, melyik út lenne értelmes. Részletek: [web és webshop](/arzenal/weboldal-fejlesztes).

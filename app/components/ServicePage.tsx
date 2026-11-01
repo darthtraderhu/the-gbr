@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema, faqPageSchema, serviceSchema } from "@/lib/jsonld";
 import { getSortedPostsData } from "@/lib/posts";
+import { getSortedEnPostsData } from "@/lib/posts-en";
 import type { FaqItem } from "@/lib/szolgaltatasok";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, Rail, Seam, Eyebrow } from "@/app/components/ui";
@@ -14,9 +15,90 @@ import {
   type Fact,
   type Feature,
 } from "@/app/components/SalesBlocks";
-import { ECO_STAGES_HU, type ServiceId } from "@/lib/okoszisztema";
+import { ECO_STAGES_EN, ECO_STAGES_HU, type ServiceId } from "@/lib/okoszisztema";
 
-// Egy szolgáltatás önálló aloldala (/arzenal/...). Az /arzenal az áttekintő,
+// A magyar (/arzenal/...) és az angol (/en/services/...) aloldal ugyanaz a
+// szerkezet, csak a keret szövegei és a linkek térnek el.
+const LABELS = {
+  hu: {
+    home: "Főoldal",
+    homeHref: "/",
+    services: "Szolgáltatások",
+    servicesHref: "/arzenal",
+    contactHref: "/init",
+    writingHref: "/hirek",
+    heroButton: "Pitcheld el a projekted",
+    reply: "Válasz 2 munkanapon belül",
+    angleRail: "A szögünk",
+    angleEyebrow: "Ahol mások megállnak",
+    usual: "A szokásos",
+    ours: "Nálunk",
+    deliverRail: "Amit kapsz",
+    deliverEyebrow: "Amit leszállítunk",
+    deliverTitle: "Ez kerül az asztalodra",
+    ecoRail: "Ökoszisztéma",
+    ecoEyebrowActive: "Ahol ez a szolgáltatás ül",
+    ecoEyebrowAll: "Amit végignézünk",
+    ecoTitleActive: "Nem különálló munka. Egy értékesítési rendszer része",
+    ecoTitleAll: "Mind az öt szakaszt megnézzük, mielőtt bármit ajánlanánk",
+    ecoLead:
+      "A vevőd nem egy kattintással dönt: keres, összehasonlít, kérdez, ajánlatot kér, és közben bármikor eltűnhet. Mi ezt az utat egyben nézzük. Nem kell mind az öt szakasz, de mindegyiknél tudjuk, mi jön előtte és utána.",
+    youAreHere: "itt vagy",
+    stepsRail: "Menet",
+    stepsEyebrow: "Hogyan zajlik",
+    stepsTitle: "Így lesz belőle élő rendszer",
+    relatedRail: "Írások",
+    relatedEyebrow: "Kapcsolódó írások",
+    relatedTitle: "Amit erről írtunk",
+    faqRail: "GYIK",
+    faqEyebrow: "Gyakori kérdések",
+    faqTitle: "Amit meg szoktak kérdezni",
+    ctaRail: "Kapcsolat",
+    ctaEyebrow: "Egy kérdés, mielőtt bármit ajánlanánk",
+    ctaButton: "Írd meg nekünk",
+    direct: "Vagy írj közvetlenül:",
+  },
+  en: {
+    home: "Home",
+    homeHref: "/en",
+    services: "Services",
+    servicesHref: "/en/services",
+    contactHref: "/en/contact",
+    writingHref: "/en/writing",
+    heroButton: "Start a conversation",
+    reply: "Reply within 2 business days",
+    angleRail: "Our angle",
+    angleEyebrow: "Where others stop",
+    usual: "The usual",
+    ours: "With us",
+    deliverRail: "What you get",
+    deliverEyebrow: "What we deliver",
+    deliverTitle: "What lands on your desk",
+    ecoRail: "Ecosystem",
+    ecoEyebrowActive: "Where this service sits",
+    ecoEyebrowAll: "What we look at",
+    ecoTitleActive: "Not a separate job. Part of one sales system",
+    ecoTitleAll: "We look at all five stages before recommending anything",
+    ecoLead:
+      "Buyers don't decide in one click: they search, compare, ask, request a quote, and can drop off at any point. We look at that path as a whole. Not every project needs all five stages, but at each one we know what comes before and after.",
+    youAreHere: "you are here",
+    stepsRail: "Process",
+    stepsEyebrow: "How it works",
+    stepsTitle: "How it becomes a live system",
+    relatedRail: "Writing",
+    relatedEyebrow: "Related writing",
+    relatedTitle: "What we've written about it",
+    faqRail: "FAQ",
+    faqEyebrow: "Frequently asked",
+    faqTitle: "What people actually ask",
+    ctaRail: "Contact",
+    ctaEyebrow: "One question before we recommend anything",
+    ctaButton: "Ask us",
+    direct: "Or write directly:",
+  },
+};
+
+// Egy szolgáltatás önálló aloldala (/arzenal/..., angolul /en/services/...). Az /arzenal az áttekintő,
 // ez a részletes oldal: saját title, H1, Service séma és GYIK, hogy a
 // szolgáltatásra külön is rangsorolható legyen.
 
@@ -51,6 +133,7 @@ export interface ServicePageProps {
   // ütemezett cikk a dátuma napján magától bekerül (ld. revalidate).
   relatedSlugs: string[];
   faq: FaqItem[];
+  locale?: "hu" | "en";
 }
 
 export default function ServicePage({
@@ -75,15 +158,19 @@ export default function ServicePage({
   afterHero,
   relatedSlugs,
   faq,
+  locale = "hu",
 }: ServicePageProps) {
-  const related = getSortedPostsData().filter((post) => relatedSlugs.includes(post.id));
+  const L = LABELS[locale];
+  const inLanguage = locale === "en" ? "en" : undefined;
+  const posts = locale === "en" ? getSortedEnPostsData() : getSortedPostsData();
+  const related = posts.filter((post) => relatedSlugs.includes(post.id));
 
   return (
     <main className="bg-[var(--ground)] text-[var(--ink)] font-body">
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Főoldal", url: SITE_URL },
-          { name: "Szolgáltatások", url: `${SITE_URL}/arzenal` },
+          { name: L.home, url: `${SITE_URL}${locale === "en" ? L.homeHref : ""}` },
+          { name: L.services, url: `${SITE_URL}${L.servicesHref}` },
           { name, url: `${SITE_URL}${path}` },
         ])}
       />
@@ -92,16 +179,17 @@ export default function ServicePage({
           name: schemaName,
           description: schemaDescription,
           url: `${SITE_URL}${path}`,
+          inLanguage,
         })}
       />
-      <JsonLd data={faqPageSchema(faq)} />
+      <JsonLd data={faqPageSchema(faq, inLanguage ? { inLanguage } : undefined)} />
 
       {/* ===== FEJLÉC ===== */}
       <Rail label={railLabel} dark>
         <section className="px-6 pt-[var(--space-8)] sm:pt-[var(--space-12)] pb-[var(--space-10)] sm:pb-[var(--space-16)]">
           <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.22em] uppercase text-[var(--dim)] mb-[var(--space-5)]">
-            <Link href="/arzenal" className="hover:text-[var(--signal)] transition-colors">
-              Szolgáltatások
+            <Link href={L.servicesHref} className="hover:text-[var(--signal)] transition-colors">
+              {L.services}
             </Link>{" "}
             / {n}
           </p>
@@ -127,10 +215,10 @@ export default function ServicePage({
           </div>
           <div className="flex flex-wrap items-center gap-3 mt-[var(--space-8)]">
             <Button asChild>
-              <Link href="/init">Pitcheld el a projekted</Link>
+              <Link href={L.contactHref}>{L.heroButton}</Link>
             </Button>
             <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)]">
-              Válasz 2 munkanapon belül
+              {L.reply}
             </span>
           </div>
         </section>
@@ -142,22 +230,22 @@ export default function ServicePage({
       {afterHero}
 
       {/* ===== A SZÖGÜNK ===== */}
-      <Rail label="A szögünk">
+      <Rail label={L.angleRail}>
         <AngleTable
-          eyebrow="Ahol mások megállnak"
+          eyebrow={L.angleEyebrow}
           title={angleTitle}
-          usualLabel="A szokásos"
-          oursLabel="Nálunk"
+          usualLabel={L.usual}
+          oursLabel={L.ours}
           rows={angle}
         />
       </Rail>
 
       {/* ===== AMIT KAPSZ ===== */}
-      <Rail label="Amit kapsz">
+      <Rail label={L.deliverRail}>
         <section className="px-6 pt-[var(--space-12)] sm:pt-[var(--space-20)] pb-[var(--space-6)]">
-          <Eyebrow>Amit leszállítunk</Eyebrow>
+          <Eyebrow>{L.deliverEyebrow}</Eyebrow>
           <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[18ch]">
-            Ez kerül az asztalodra
+            {L.deliverTitle}
           </h2>
         </section>
         <FeatureGrid features={features} />
@@ -169,35 +257,35 @@ export default function ServicePage({
       <Seam />
 
       {/* ===== ÖKOSZISZTÉMA ===== */}
-      <Rail label="Ökoszisztéma" dark>
+      <Rail label={L.ecoRail} dark>
         <Okoszisztema
-          stages={ECO_STAGES_HU}
+          stages={locale === "en" ? ECO_STAGES_EN : ECO_STAGES_HU}
           active={ecosystemId}
-          eyebrow={ecosystemId ? "Ahol ez a szolgáltatás ül" : "Amit végignézünk"}
+          eyebrow={ecosystemId ? L.ecoEyebrowActive : L.ecoEyebrowAll}
           title={
             ecosystemId ? (
               <>
-                Nem különálló munka. Egy értékesítési rendszer része
+                {L.ecoTitleActive}
                 <span className="text-[var(--signal)]">.</span>
               </>
             ) : (
               <>
-                Mind az öt szakaszt megnézzük, mielőtt bármit ajánlanánk
+                {L.ecoTitleAll}
                 <span className="text-[var(--signal)]">.</span>
               </>
             )
           }
-          lead="A vevőd nem egy kattintással dönt: keres, összehasonlít, kérdez, ajánlatot kér, és közben bármikor eltűnhet. Mi ezt az utat egyben nézzük. Nem kell mind az öt szakasz, de mindegyiknél tudjuk, mi jön előtte és utána."
-          youAreHere="itt vagy"
+          lead={L.ecoLead}
+          youAreHere={L.youAreHere}
         />
       </Rail>
 
       {/* ===== MENET ===== */}
-      <Rail label="Menet">
+      <Rail label={L.stepsRail}>
         <section className="px-6 pt-[var(--space-12)] sm:pt-[var(--space-20)] pb-[var(--space-6)]">
-          <Eyebrow>Hogyan zajlik</Eyebrow>
+          <Eyebrow>{L.stepsEyebrow}</Eyebrow>
           <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[18ch]">
-            Így lesz belőle élő rendszer
+            {L.stepsTitle}
           </h2>
         </section>
         <ol className="border-t border-[var(--rule)]">
@@ -224,18 +312,18 @@ export default function ServicePage({
 
       {/* ===== KAPCSOLÓDÓ ÍRÁSOK ===== */}
       {related.length > 0 && (
-        <Rail label="Írások">
+        <Rail label={L.relatedRail}>
           <section className="px-6 pt-[var(--space-12)] sm:pt-[var(--space-20)] pb-[var(--space-6)]">
-            <Eyebrow>Kapcsolódó írások</Eyebrow>
+            <Eyebrow>{L.relatedEyebrow}</Eyebrow>
             <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[18ch]">
-              Amit erről írtunk
+              {L.relatedTitle}
             </h2>
           </section>
           <div className="border-t border-[var(--rule)]">
             {related.map((post) => (
               <Link
                 key={post.id}
-                href={`/hirek/${post.id}`}
+                href={`${L.writingHref}/${post.id}`}
                 className="block px-6 py-[var(--space-5)] border-b border-[var(--rule)] group hover:bg-[var(--panel)] transition-colors"
               >
                 <span className="block font-display font-bold [font-size:var(--text-xl)] tracking-[-0.02em] leading-snug group-hover:text-[var(--signal-deep)] transition-colors">
@@ -253,11 +341,11 @@ export default function ServicePage({
       )}
 
       {/* ===== GYIK ===== */}
-      <Rail label="GYIK">
+      <Rail label={L.faqRail}>
         <section className="px-6 pt-[var(--space-12)] sm:pt-[var(--space-20)] pb-[var(--space-6)]">
-          <Eyebrow>Gyakori kérdések</Eyebrow>
+          <Eyebrow>{L.faqEyebrow}</Eyebrow>
           <h2 className="font-display font-extrabold [font-size:var(--text-section)] leading-[1.0] tracking-[-0.042em] max-w-[18ch]">
-            Amit meg szoktak kérdezni
+            {L.faqTitle}
           </h2>
         </section>
         <dl className="border-t border-[var(--rule)]">
@@ -277,9 +365,9 @@ export default function ServicePage({
       <Seam />
 
       {/* ===== CTA ===== */}
-      <Rail label="Kapcsolat" dark>
+      <Rail label={L.ctaRail} dark>
         <section className="px-6 py-[var(--space-20)] sm:py-[var(--space-32)]">
-          <Eyebrow>Egy kérdés, mielőtt bármit ajánlanánk</Eyebrow>
+          <Eyebrow>{L.ctaEyebrow}</Eyebrow>
           <h2 className="font-display font-extrabold [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[17ch] mb-[var(--space-6)] text-[var(--ink)]">
             {cta.question}
           </h2>
@@ -287,10 +375,10 @@ export default function ServicePage({
             {cta.body}
           </p>
           <Button asChild>
-            <Link href="/init">{cta.button ?? "Írd meg nekünk"} &rarr;</Link>
+            <Link href={L.contactHref}>{cta.button ?? L.ctaButton} &rarr;</Link>
           </Button>
           <p className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] text-[var(--dim)] mt-[var(--space-6)]">
-            Vagy írj közvetlenül: gabor@thegbr.eu
+            {L.direct} gabor@thegbr.eu
           </p>
         </section>
       </Rail>

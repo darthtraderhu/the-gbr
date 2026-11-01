@@ -35,4 +35,4 @@ A régi chatbotok három előre megírt gombot kínáltak, és ha a kérdés nem
 
 ---
 
-Ha szeretnéd tudni, nálad mekkora terhet venne le egy ilyen asszisztens, [írd le, milyen kérdések jönnek a legtöbbször](/init). Részletek: [AI és chatbot](/arzenal#ai).
+Ha szeretnéd tudni, nálad mekkora terhet venne le egy ilyen asszisztens, [írd le, milyen kérdések jönnek a legtöbbször](/init). Részletek: [AI és chatbot](/arzenal/ai-chatbot).

@@ -1,3 +1,5 @@
+import { EN_SERVICE_PAGES } from "./szolgaltatasok-en-pages";
+
 // Egyetlen forrás a magyar<->angol útvonal-párosításhoz — a nyelvváltó és a
 // hreflang-hivatkozások ebből dolgoznak. A magyar oldalak a gyökéren,
 // prefix nélkül futnak; az angol változatok saját, angol slug alatt
@@ -10,6 +12,7 @@ export const HU_TO_EN: Record<string, string> = {
   "/szindikatus": "/en/about",
   "/hirek": "/en/writing",
   "/init": "/en/contact",
+  ...Object.fromEntries(EN_SERVICE_PAGES.map((page) => [page.huPath, `/en/services/${page.slug}`])),
 };
 
 export const EN_TO_HU: Record<string, string> = Object.fromEntries(
@@ -66,4 +69,14 @@ export function getHungarianEquivalent(enPathname: string): string {
   }
 
   return "/";
+}
+
+// Egy magyar oldal metadata-alternates-e: canonical + hreflang, ha van
+// angol párja (HU_TO_EN).
+export function huAlternates(huPath: string) {
+  const en = HU_TO_EN[huPath];
+  return {
+    canonical: huPath,
+    ...(en ? { languages: { hu: huPath, en, "x-default": huPath } } : {}),
+  };
 }

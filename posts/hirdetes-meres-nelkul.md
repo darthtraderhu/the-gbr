@@ -82,4 +82,4 @@ A mérés bevezetésének van egy előfeltétele: **a mérőkód csak a látogat
 
 Ha futó vagy tervezett kampányod van, és nem vagy biztos benne, hogy a hirdetés mögötti oldal elbírja, [írj egy sort](/init). Megnézzük a teljes utat a hirdetéstől az ajánlatkérésig, és megmondjuk, hol szivárog.
 
-Bővebben: [Performance marketing](/arzenal#ads) és [Web-üzemeltetés](/arzenal#ops).
+Bővebben: [Performance marketing](/arzenal/hirdeteskezeles) és [Web-üzemeltetés](/arzenal/weboldal-uzemeltetes).

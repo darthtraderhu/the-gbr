@@ -63,7 +63,7 @@ export default function Navbar() {
   // A magyar szolgáltatások saját aloldalra visznek, az angolok a
   // /en/services horgonyára (ott nincs aloldal).
   const sections = isEn
-    ? ARZENAL_SECTIONS_EN.map((s) => ({ ...s, href: `${servicesHref}#${s.id}` }))
+    ? ARZENAL_SECTIONS_EN
     : ARZENAL_SECTIONS;
   const homeHref = isEn ? "/en" : "/";
   const ctaHref = isEn ? "/en/contact" : "/init";

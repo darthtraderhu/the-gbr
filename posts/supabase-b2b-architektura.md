@@ -34,4 +34,4 @@ Ez azt jelenti, hogy a fejlesztési idő nagy része arra mehet, ami a cégnek e
 
 ---
 
-Ha portált vagy belső rendszert terveztek, [írd le, mit kellene tudnia](/init). Megmondjuk, mire érdemes építeni. Részletek: [web és webshop](/arzenal#web).
+Ha portált vagy belső rendszert terveztek, [írd le, mit kellene tudnia](/init). Megmondjuk, mire érdemes építeni. Részletek: [egyedi szoftver és automatizáció](/arzenal/automatizacio).

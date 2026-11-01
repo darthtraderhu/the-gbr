@@ -99,4 +99,4 @@ And whether someone **can actually fix it.** If it turns out a plugin is calling
 
 If you're curious what's going on with your own site, [get in touch](/en/contact). We'll send the first measurement either way, even if it doesn't turn into a working relationship.
 
-More on the service: [Pulse](/en/services#pulse).
+More on the service: [Pulse](/en/services/pulse).
