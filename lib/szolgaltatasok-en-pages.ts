@@ -251,7 +251,7 @@ export const EN_SERVICE_PAGES: EnServicePage[] = [
       },
     ],
     faq: [FAQ_EN.replaceSystems, FAQ_EN.automationStops, FAQ_EN.price, FAQ_EN.size],
-    relatedSlugs: ["off-the-shelf-or-custom-software", "five-seconds-nobody-knew"],
+    relatedSlugs: ["where-does-an-enquiry-go", "off-the-shelf-or-custom-software", "five-seconds-nobody-knew"],
   },
   {
     id: "ai",

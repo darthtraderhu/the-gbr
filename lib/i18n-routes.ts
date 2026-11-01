@@ -39,6 +39,7 @@ export const TRANSLATED_ARTICLES: Record<string, string> = {
   "mielott-uj-weboldalt-rendelsz": "before-you-order-a-new-website",
   "ajanlat-kep-helyett-terv": "a-plan-not-a-picture",
   "uj-weboldal-regi-helyezes": "new-website-without-losing-google",
+  "hova-fut-be-a-megkereses": "where-does-an-enquiry-go",
 };
 
 export const ARTICLE_HU_SLUG: Record<string, string> = Object.fromEntries(

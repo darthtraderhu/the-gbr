@@ -153,7 +153,7 @@ export const ADS_SERVICE = {
 export const SOFTWARE_SERVICE = {
   name: "Egyedi szoftver és automatizáció",
   description:
-    "Üzleti folyamatok automatizálása és egyedi szoftverfejlesztés: a webshop, a számlázó, a CRM és a táblázatok összekötése kész automatizációs eszközzel vagy saját kóddal, belső rendszerek és ügyfélportálok fejlesztése, naplózással, hibariasztással és dokumentált átadással.",
+    "Üzleti folyamatok automatizálása és egyedi szoftverfejlesztés: a webshop, a számlázó, a CRM, az ügyviteli és raktárrendszer (ERP) és a táblázatok összekötése API-n vagy webhookkal, kész automatizációs eszközzel vagy saját kóddal, belső rendszerek és jogosultságkezelős ügyfélportálok fejlesztése, naplózással, hibariasztással és dokumentált átadással.",
   path: "/arzenal/automatizacio",
 };
 
