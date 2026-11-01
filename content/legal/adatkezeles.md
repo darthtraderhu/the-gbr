@@ -126,7 +126,6 @@ Az adatkezelés során az alábbi szolgáltatókat vesszük igénybe. Ezek a szo
 | Adatfeldolgozó | Tevékenység | Székhely | Továbbított adatok |
 |---|---|---|---|
 | **Vercel Inc.** | Tárhely- és üzemeltetési szolgáltatás | Egyesült Államok | A weboldal működéséhez szükséges valamennyi adat, szerverlogok |
-| **Formspree, Inc.** | Kapcsolatfelvételi űrlap feldolgozása *(átmeneti megoldás)* | Egyesült Államok | Az űrlapon megadott adatok |
 | **Anthropic, PBC** | AI chat funkció működtetése | Egyesült Államok | A chatbe beírt üzenetek |
 | **Supabase, Inc.** | Adatbázis- és tárhelyszolgáltatás (a beérkező megkeresések nyilvántartása) | EU-s régió (Frankfurt, Németország) | Megkeresések, dokumentumok |
 | **Google Ireland Limited** | Látogatottság-mérés (Google Analytics 4), kizárólag hozzájárulás esetén | Írország (EU) | Böngészési adatok, eszköz- és sütiazonosító |

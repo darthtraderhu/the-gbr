@@ -22,7 +22,7 @@ Ez nem stílus kérdése. Ha a `/seo` oldal dinamikus sitemapet és JSON-LD-t hi
 - Tailwind
 - Markdown tartalom gray-matter-rel (`lib/posts.ts`)
 - OpenAI API az AI chathez (`app/api/chat/route.ts`)
-- Kapcsolati űrlap: Formspree (átmeneti — saját pipeline-ra készül átállni)
+- Kapcsolati űrlap: saját `/api/contact` → levél Rackhost SMTP-n (`lib/mail.ts`) + a sales-rendszer Beérkezője (`lib/leads.ts`, `SALES_INGEST_TOKEN`)
 - Hosting: Vercel · Levelezés: Rackhost (MX ne kerüljön felülírásra!)
 
 ## Mappastruktúra
