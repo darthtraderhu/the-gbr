@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 // Megosztott OG-kép sablon és betűtöltő — a design/ látványtervek sötét
 // "műszer" nyelvén (ld. AGENTS.md — Arculat, 2026.08). A satori (a next/og
@@ -13,43 +15,35 @@ export const OG_COLOR = {
   signal: "#A8D400",
 } as const;
 
-// A next/font/google nem ad hozzáférést a nyers betűtípus-bájtokhoz (azok
-// build-időben, Next.js-belső cache-be kerülnek) — a satori viszont valódi
-// ArrayBuffer-t vár. Ezért ugyanazokat a Google Fonts családokat, amiket a
-// lib/fonts.ts next/font/google-lal tölt be a többi oldalon (Archivo,
-// Source Serif 4, IBM Plex Mono), itt közvetlenül a Google Fonts CDN-ről
-// töltjük le — vizuálisan ugyanaz a betű, csak a satori számára emészthető
-// formában.
-//
-// FONTOS: szándékosan NEM küldünk User-Agent fejlécet. A Google Fonts CSS2
-// API a kliens felismert képességei alapján dönt a formátumról — egy
-// "modern böngésző" UA (akár egy régi Chrome-verzióé is) woff2-t kap,
-// míg UA nélkül a teljes latin karakterkészletet lefedő alap @font-face
-// blokk .ttf-ként érkezik, amit a satori megbízhatóan tud olvasni.
-async function loadGoogleFont(family: string, weight: number): Promise<ArrayBuffer> {
-  const cssUrl = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@${weight}`;
-  const css = await fetch(cssUrl).then((res) => res.text());
-  const matches = [...css.matchAll(/src: url\(([^)]+)\) format\('(truetype|opentype|woff)'\)/g)];
-  const fontUrl = matches.at(-1)?.[1];
-  if (!fontUrl) {
-    throw new Error(`Nem található betűtípus-fájl az OG-képhez: ${family} ${weight}`);
+// A satori (a next/og motorja) woff2-t nem tud olvasni, ezért az OG-képekhez
+// a lib/fonts.ts betűinek TTF-változata az assets/fonts/og mappában van
+// (Archivo 900, Source Serif 4 400, IBM Plex Mono 500; SIL OFL). Korábban
+// build közben a Google Fonts CDN-ről töltöttük le, de sok OG-kép egyszerre
+// generálásakor ez időtúllépéssel elhasalt (ETIMEDOUT), és megbukott a
+// Vercel-build. Helyi fájlból nincs hálózati függés.
+type OgFont = {
+  name: string;
+  data: Buffer;
+  weight: 400 | 500 | 900;
+  style: "normal";
+};
+
+let fontsPromise: Promise<OgFont[]> | null = null;
+
+export function loadOgFonts(): Promise<OgFont[]> {
+  if (!fontsPromise) {
+    const dir = join(process.cwd(), "assets/fonts/og");
+    fontsPromise = Promise.all([
+      readFile(join(dir, "archivo-900.ttf")),
+      readFile(join(dir, "source-serif-4-400.ttf")),
+      readFile(join(dir, "ibm-plex-mono-500.ttf")),
+    ]).then(([archivo, sourceSerif, plexMono]) => [
+      { name: "Archivo", data: archivo, weight: 900, style: "normal" },
+      { name: "Source Serif 4", data: sourceSerif, weight: 400, style: "normal" },
+      { name: "IBM Plex Mono", data: plexMono, weight: 500, style: "normal" },
+    ]);
   }
-  const fontRes = await fetch(fontUrl);
-  return fontRes.arrayBuffer();
-}
-
-export async function loadOgFonts() {
-  const [archivo, sourceSerif, plexMono] = await Promise.all([
-    loadGoogleFont("Archivo", 900),
-    loadGoogleFont("Source Serif 4", 400),
-    loadGoogleFont("IBM Plex Mono", 500),
-  ]);
-
-  return [
-    { name: "Archivo", data: archivo, weight: 900 as const, style: "normal" as const },
-    { name: "Source Serif 4", data: sourceSerif, weight: 400 as const, style: "normal" as const },
-    { name: "IBM Plex Mono", data: plexMono, weight: 500 as const, style: "normal" as const },
-  ];
+  return fontsPromise;
 }
 
 export function OgTemplate({

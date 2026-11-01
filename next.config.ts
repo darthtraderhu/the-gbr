@@ -43,8 +43,10 @@ const nextConfig: NextConfig = {
   },
   // Az /api/autopilot futásidőben olvassa a posts/ mappát — a fájlkövetés
   // magától nem tudja, hogy a markdown kell a függvényhez.
+  // A dinamikus OG-képek futásidőben olvassák az assets/fonts/og betűit.
   outputFileTracingIncludes: {
     "/api/autopilot": ["./posts/**/*"],
+    "/**/opengraph-image*": ["./assets/fonts/og/**/*"],
   },
   // Az X-Powered-By: Next.js fejléc feleslegesen árulja el a stacket.
   poweredByHeader: false,
