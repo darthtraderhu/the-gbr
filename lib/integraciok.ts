@@ -26,9 +26,14 @@ export const INTEGRATION_SYSTEMS: IntegrationSystem[] = [
     flow: "A megkeresés az űrlapról egyenesen a felelőshöz fut, forrással együtt.",
   },
   {
-    title: "ERP, ügyvitel, raktár",
-    examples: ["ügyviteli szoftver", "raktárkezelő"],
-    flow: "Cikkszám, készlet, partneri ár: hivatalos API-n vagy rendszeres exporton keresztül.",
+    title: "Vállalatirányítási rendszer (ERP)",
+    examples: [
+      "SAP Business One",
+      "Microsoft Dynamics 365",
+      "Tharanis",
+      "ügyviteli és raktárszoftver",
+    ],
+    flow: "Cikkszám, készlet, partneri ár, rendelés: hivatalos API-n vagy rendszeres exporton keresztül, egy helyről.",
   },
   {
     title: "Táblázat és levelezés",
