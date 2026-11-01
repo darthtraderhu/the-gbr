@@ -38,6 +38,7 @@ export const TRANSLATED_ARTICLES: Record<string, string> = {
   "ha-az-oldalad-ellentmond-onmaganak": "when-your-site-contradicts-itself",
   "mielott-uj-weboldalt-rendelsz": "before-you-order-a-new-website",
   "ajanlat-kep-helyett-terv": "a-plan-not-a-picture",
+  "uj-weboldal-regi-helyezes": "new-website-without-losing-google",
 };
 
 export const ARTICLE_HU_SLUG: Record<string, string> = Object.fromEntries(
