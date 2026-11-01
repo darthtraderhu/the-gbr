@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { huAlternates } from "@/lib/i18n-routes";
 import ServicePage from "@/app/components/ServicePage";
+import IntegrationMap from "@/app/components/IntegrationMap";
 import { DevFrame, LogLines } from "@/app/components/ServiceFrame";
 import {
   SIZE_FAQ,
@@ -81,8 +82,10 @@ export default function Automatizacio() {
           </p>
         </DevFrame>
       }
+      extra={<IntegrationMap />}
       steps={STEPS}
       relatedSlugs={[
+        "hova-fut-be-a-megkereses",
         "uzleti-automatizaciok",
         "kesz-eszkoz-vagy-sajat-szoftver",
         "supabase-b2b-architektura",
