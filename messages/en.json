@@ -88,7 +88,7 @@
       { "title": "IP is yours", "body": "Once the full fee is paid, the code and all usage rights belong to you or your client. The contract says so from day one." },
       { "title": "GDPR data processing agreement", "body": "Where we handle personal data on your or your client's behalf, we sign a data processing agreement. We're an EU company operating under GDPR." },
       { "title": "Next.js App Router", "body": "App Router, React Server Components, TypeScript in strict mode. Pages are rendered on the server, so search engines and AI assistants can read the content." },
-      { "title": "SLA with operations", "body": "If we also run the site: a reply within 4 working hours, and work on an outage starts within 1 hour. Without an operations agreement, no SLA applies." }
+      { "title": "SLA with operations", "body": "If we also run the site: a reply within 4 working hours, and work on an outage starts within 1 hour. Business hours or round the clock: the operations agreement sets it. Without one, no SLA applies." }
     ],
     "ecoEyebrow": "WHAT WE BUILD",
     "ecoHeadline": "Not a website. A sales ecosystem",
@@ -576,7 +576,7 @@
       },
       {
         "question": "Do you offer an SLA?",
-        "answer": "With an operations agreement, yes: a reply within 4 working hours, and work on an outage starts within 1 hour. For project work without operations, no SLA applies; delivery dates are set in the contract."
+        "answer": "With an operations agreement, yes: a reply within 4 working hours, and work on an outage starts within 1 hour, in business hours or round the clock, as the agreement sets. For project work without operations, no SLA applies; delivery dates are set in the contract."
       },
       {
         "question": "Do you build with the Next.js App Router?",
