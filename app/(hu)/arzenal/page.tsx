@@ -131,7 +131,17 @@ const OPS_LOG = [
   { t: "00:00", msg: "Sitemap és llms.txt frissült az új cikkel" },
 ];
 
-const FAQ_ITEMS = [...AUDIT_FAQ, ...WEB_FAQ, SIZE_FAQ, ...ACCESS_FAQ, ...PULZUS_FAQ, ...IT_FAQ, ...SOFTWARE_FAQ];
+// Az áttekintő oldalon csak a legfontosabb kérdések: a teljes lista az
+// aloldalakon van, hogy ez az oldal ne nyúljon végtelenre.
+const FAQ_ITEMS = [
+  ...AUDIT_FAQ.slice(0, 3),
+  ...WEB_FAQ.slice(0, 5),
+  SIZE_FAQ,
+  ...ACCESS_FAQ.slice(0, 1),
+  ...PULZUS_FAQ.slice(0, 2),
+  ...IT_FAQ.slice(0, 1),
+  ...SOFTWARE_FAQ.slice(0, 2),
+];
 
 function ServiceBlock({
   id,

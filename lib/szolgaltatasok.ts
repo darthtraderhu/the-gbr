@@ -127,6 +127,16 @@ export const WEB_FAQ: FaqItem[] = [
     answer:
       "Ha üzemeltetést is kérsz, mi észleljük előbb, és javítjuk. Ha nem, akkor is felelünk a leszállított munkáért — a részleteket a szerződés rögzíti.",
   },
+  {
+    question: "Össze tudjátok kötni a weboldalt a CRM-mel vagy a számlázóval?",
+    answer:
+      "Igen. Az űrlapról érkező megkeresést egyenesen a CRM-be, a táblázatba vagy az értékesítési rendszerbe futtatjuk, a webshop rendelését a számlázóba. Feltétel, hogy a rendszernek legyen hivatalos kapcsolódási pontja, például API-ja vagy webhookja. Minden átadás naplózódik.",
+  },
+  {
+    question: "Kié lesz a weboldal, ha ti építitek?",
+    answer:
+      "Azt, hogy mi kié, az írásos szerződés rögzíti, a szellemi tulajdonnal együtt. Azt javasoljuk, hogy a domain, a tárhely, a mérés és a hirdetési fiókok a céged nevén legyenek, a fejlesztő pedig hozzáférést kapjon, ne tulajdont.",
+  },
 ];
 
 export const SIZE_FAQ: FaqItem = {
@@ -140,6 +150,16 @@ export const IT_FAQ: FaqItem[] = [
     question: "Kis irodának is érdemes külső rendszergazda?",
     answer:
       "Igen, gyakran éppen nekik. Ahol nincs saját informatikus, ott jellemzően valamelyik munkatárs viszi „mellékesen”, és ez addig működik, amíg nincs baj. Felméréssel kezdünk, és megmondjuk, mekkora rendszeres munkát kíván a tiétek. Ha keveset, azt is.",
+  },
+  {
+    question: "Mit tartalmaz az irodai IT-üzemeltetés?",
+    answer:
+      "Írásos felméréssel kezdünk: mi van most, ki fér hozzá mihez, mi hiányzik. Utána rendszergazdai feladatok, távfelügyelet és távoli segítség, szerver és hálózat, VPN, levelezés, Microsoft 365 és Teams, nyomtatók és eszközök, valamint a mobilflotta átnézése. IT-partnerünkkel végezzük, a kapcsolattartó mi vagyunk.",
+  },
+  {
+    question: "Az otthonról dolgozó kollégákat is támogatjátok?",
+    answer:
+      "Igen. Ugyanaz a felelős ember segít, akár az irodában, akár home office-ban, akár a telefonján dolgozik a kolléga. A biztonságos távoli elérést VPN adja, elakadásnál pedig távolról rákapcsolódunk.",
   },
 ];
 
@@ -282,6 +302,21 @@ export const ACCESS_FAQ: FaqItem[] = [
     answer:
       "Nem. A megfelelés jogi minősítés, arról ügyvéd nyilatkozik. Mi a technikai akadályokat mérjük fel, dokumentáljuk és szüntetjük meg — a jogi tanácsadást a saját jogászoddal intézed.",
   },
+  {
+    question: "Mit jelent, hogy egy weboldal akadálymentes?",
+    answer:
+      "Azt, hogy gyengénlátó, mozgásában korlátozott vagy halláskárosult ember is végig tudja csinálni rajta, amiért jött. A gyakorlatban: elég kontraszt és méret, billentyűzettel bejárható oldal látható fókusszal, képernyőolvasóval érthető szerkezet és képleírás, címkézett űrlapmezők és feliratozott videó.",
+  },
+  {
+    question: "Mit kapok a felmérés végén?",
+    answer:
+      "Írásos jelentést: mit találtunk, mennyire akadályozza a használatot, és ebben a sorrendben javítjuk. A javítás után azt is leírjuk, mi változott és mi maradt.",
+  },
+  {
+    question: "Egy akadálymentesítő gomb nem elég?",
+    answer:
+      "Nem. A sarokba tett widget a kódban lévő hibát nem javítja ki. Mi a forráskódban javítunk: kontrasztot, fókuszt, címkéket és szerkezetet.",
+  },
 ];
 
 export const PULZUS_FAQ: FaqItem[] = [
@@ -295,6 +330,11 @@ export const PULZUS_FAQ: FaqItem[] = [
     answer:
       "Nem. A megfelelésről jogász nyilatkozik, nem mi. Amit a modul ad: havonta dokumentáljuk, milyen sütiket és külső kódokat tölt ténylegesen az oldal, és ha ez eltér a jogi dokumentumoktól, webjogász partnerünk értékeli és szükség esetén frissíti őket. A jogi munka díját és terjedelmét a jogász határozza meg.",
   },
+  {
+    question: "Mit figyel a Pulzus?",
+    answer:
+      "Az élő weboldal elérhetőségét, betöltési sebességét és SSL-tanúsítványát, havonta teszteli a kapcsolati űrlapot, figyeli az indexeltséget, a Google-profilt és az értékeléseket. Leállásnál azonnal szól, a többit havi levélben foglalja össze, konkrét javaslattal.",
+  },
 ];
 
 export const SOFTWARE_FAQ: FaqItem[] = [
@@ -307,6 +347,21 @@ export const SOFTWARE_FAQ: FaqItem[] = [
     question: "Mi történik, ha egy automatizáció leáll?",
     answer:
       "Nem csendben áll le. Minden futás naplózódik, hiba esetén riasztás megy a felelősnek — nekünk, ha az üzemeltetést is ránk bízod, vagy a kijelölt munkatársatoknak. A kimaradt tételek a napló alapján pótolhatók.",
+  },
+  {
+    question: "Hogyan kerülnek a webshop rendelései maguktól a számlázóba?",
+    answer:
+      "A webshopot és a számlázót összekötjük a hivatalos API-jukon vagy webhookon keresztül. A rendelésből így magától készül a számla, nem kézzel átmásolva. Ha a számlázó éppen nem válaszol, a rendszer újrapróbálja, riasztást küld, és a kimaradt tétel pótolható.",
+  },
+  {
+    question: "Össze tudjátok kötni a vállalatirányítási (ERP) rendszerünkkel?",
+    answer:
+      "Ha az ERP-nek van hivatalos API-ja vagy rendszeres exportja, igen: cikkszám, készlet, partneri ár és rendelés egy helyről jön. Az ERP-t magát nem cseréljük le, és nem fejlesztjük át. Egyedi ERP vagy CRM fejlesztése külön projekt.",
+  },
+  {
+    question: "Kész automatizációs eszköz vagy saját kód?",
+    answer:
+      "Amelyik hosszabb távon olcsóbban fenntartható. A felmérésben leírjuk, melyiket javasoljuk és miért. Nem a kedvenc eszközünkhöz igazítjuk a folyamatodat.",
   },
 ];
 
@@ -323,6 +378,16 @@ export const ADS_FAQ: FaqItem[] = [
     question: "Mi történik, ha egy csatorna nem hoz megkeresést?",
     answer: "Megmondjuk, és nem költjük tovább rá a keretet.",
   },
+  {
+    question: "Mit mértek a hirdetéseknél?",
+    answer:
+      "A kattintástól a megkeresésig: az űrlapkitöltést vagy a hívást, nem csak azt, ami a hirdetési felületen látszik. Így kiderül, melyik kampány hoz ajánlatkérőt, és melyik csak forgalmat.",
+  },
+  {
+    question: "Hova visz a hirdetés?",
+    answer:
+      "Kampányonként külön landing oldalra, egy üzenettel és egy cselekvéssel. A fizetett forgalmat nem a főoldalra engedjük el.",
+  },
 ];
 
 export const AI_FAQ: FaqItem[] = [
@@ -336,6 +401,16 @@ export const AI_FAQ: FaqItem[] = [
     answer:
       "Ezen az oldalon az AI-használati tájékoztató írja le. Ha neked építünk chatet, mellé elkészül az AI-tájékoztató, és dokumentáljuk, milyen adat hova kerül.",
   },
+  {
+    question: "Miből válaszol a chatbot?",
+    answer:
+      "A te tartalmadból: abból, amit kínálsz és amit leírtál, nem az internet általánosságaiból. Ha a kérdés árra, határidőre vagy ajánlatra vonatkozik, emberhez irányít.",
+  },
+  {
+    question: "Mire jó az AI a chaten kívül?",
+    answer:
+      "Belső feladatokra, ahol a csapat ma kézzel olvas és másol: dokumentumok feldolgozására, összefoglalására, besorolására.",
+  },
 ];
 
 export const VIDEO_FAQ: FaqItem[] = [
@@ -344,6 +419,16 @@ export const VIDEO_FAQ: FaqItem[] = [
     answer:
       "Videós partnerünk, a mi irányításunk alatt. Ugyanabban az arculatban készül, mint a weboldal, és a kapcsolattartó ilyenkor is mi vagyunk.",
   },
+  {
+    question: "Milyen videókat készítetek?",
+    answer:
+      "Cégbemutató és imázsvideót, termékvideót a webshop termékoldalára, és rövid közösségi formátumokat álló és négyzetes változatban, ugyanabból az anyagból. Vágással, színkezeléssel és felirattal.",
+  },
+  {
+    question: "Miért kell felirat a videóra?",
+    answer:
+      "Mert a legtöbben hang nélkül, telefonon nézik. A felirattal így is érthető, és akadálymentes is: ami hangban elhangzik, szövegben is ott van.",
+  },
 ];
 
 export const OPS_FAQ: FaqItem[] = [
@@ -351,6 +436,16 @@ export const OPS_FAQ: FaqItem[] = [
     question: "Kivel tartom a kapcsolatot?",
     answer:
       "Egy felelős emberrel, aki ismeri a projekted. Nem ügyfélszolgálati sorszámot kapsz.",
+  },
+  {
+    question: "Mit tartalmaz a weboldal-üzemeltetés?",
+    answer:
+      "Monitoringot és hibariasztást, havi fejlesztési óraszámot, ütemezett tartalommegjelenést, a jogi tájékoztatók karbantartását, ha az oldal változik, és heti vagy kétheti írásos riportot arról, mi készült el, mi jön és mi akadt el.",
+  },
+  {
+    question: "Miben más az üzemeltetés, mint a Pulzus?",
+    answer:
+      "A Pulzus figyel és szól: havi levélben megmondja, mi változott és mit érdemes tenni, de nem javít. Az üzemeltetésben havi fejlesztési óraszám is van, tehát a javítást és a fejlesztést is mi végezzük.",
   },
 ];
 
@@ -745,6 +840,16 @@ export const AUDIT_FAQ: FaqItem[] = [
     question: "Nyilvános lesz az anyag?",
     answer:
       "Nem. Az ügyfeleink anyagai nem nyilvánosak. Mintát csak anonimizálva mutatunk, a márkát, a termékneveket és az árakat kitakarva.",
+  },
+  {
+    question: "Mit néz meg az átvilágítás?",
+    answer:
+      "Azt, hol veszít most ügyfelet az oldalad: mi történik a látogatóval, mennyire gyors, mit lát belőle a Google és az AI-keresők, megtalálják-e a vásárlók, amit keresnek, hogyan jelenik meg az ár, értékesítési felület-e vagy csak névjegy, és van-e technikai eltérés a jogi dokumentumoktól.",
+  },
+  {
+    question: "Biztosan új weboldalt fogtok ajánlani?",
+    answer:
+      "Nem. Azt is leírjuk, mit nem érdemes cserélni, és mi maradhat a mostani motoron.",
   },
 ];
 
