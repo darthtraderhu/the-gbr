@@ -129,7 +129,6 @@ Az adatkezelés során az alábbi szolgáltatókat vesszük igénybe. Ezek a szo
 | **Formspree, Inc.** | Kapcsolatfelvételi űrlap feldolgozása *(átmeneti megoldás)* | Egyesült Államok | Az űrlapon megadott adatok |
 | **Anthropic, PBC** | AI chat funkció működtetése | Egyesült Államok | A chatbe beírt üzenetek |
 | **Supabase, Inc.** | Adatbázis- és tárhelyszolgáltatás *(tervezett)* | EU-s régió (tervezett) | Megkeresések, dokumentumok |
-| **Resend, Inc.** | Tranzakciós e-mailek kiküldése *(tervezett)* | Egyesült Államok | Név, e-mail cím, az üzenet tartalma |
 | **Google Ireland Limited** | Látogatottság-mérés (Google Analytics 4), kizárólag hozzájárulás esetén | Írország (EU) | Böngészési adatok, eszköz- és sütiazonosító |
 | Könyvelő | Könyvelési szolgáltatás | Magyarország | Számlázási adatok |
 
