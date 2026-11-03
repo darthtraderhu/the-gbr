@@ -561,6 +561,26 @@ h2 {
 .background-motif.is-ready {
   opacity: var(--motif-opacity);
 }
+/* A lábléc szlogenje háttérelemként: a nyúllal azonos fedés, a lábléc alján
+   kifutva a képből, a hasábok mögött (Footer.tsx). */
+.footer-slogan {
+  position: absolute;
+  z-index: 0;
+  left: 0.2em;
+  right: 0.2em;
+  bottom: 0.05em;
+  margin: 0;
+  pointer-events: none;
+  user-select: none;
+  text-wrap: balance;
+  font-size: clamp(52px, 8.4vw, 140px);
+  color: var(--ink);
+  opacity: var(--motif-opacity);
+}
+.footer-slogan ~ * {
+  position: relative;
+  z-index: 1;
+}
 /* Az /init (és /en/contact) oldalon nincs fejléc, és a varázsló a fókusz —
    ott a motívum kisebb, és a fejléc-magasság helyett a lap tetejéhez igazodik. */
 .background-motif--compact {
