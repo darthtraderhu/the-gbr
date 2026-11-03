@@ -78,6 +78,13 @@ const PROJECTS = [
     meta: ["~400 termék", "Next.js"],
   },
   {
+    tag: "Ügyfél · folyamatban",
+    client: true,
+    title: "Kézműves táskamárka",
+    desc: "Kézzel horgolt táskák saját márkás webáruháza. Arculatot és webdizájnt tervezünk hozzá, a logótól a termékoldalig egy kézből, hogy a bolt ugyanolyan gondos legyen, mint a táskák.",
+    meta: ["Arculat", "Webdizájn"],
+  },
+  {
     tag: "Saját termék · fejlesztés alatt",
     client: false,
     title: "Értékesítési rendszer",
