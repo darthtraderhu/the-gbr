@@ -28,6 +28,14 @@ export default function Footer() {
       style={{ backgroundColor: "var(--ground)", color: "var(--ink)" }}
       className="border-t border-[var(--rule)]"
     >
+      {/* Szlogen: a lábléc tetején, így minden oldal ezzel zár. */}
+      <div className="border-b border-[var(--rule)] px-6 py-[var(--space-10)] sm:py-[var(--space-12)]">
+        <p className="font-display font-black leading-[0.95] tracking-[-0.05em] [font-size:clamp(30px,5.2vw,64px)] max-w-[18ch] text-[var(--ink)]">
+          {messages.Footer.slogan.replace(/[.!]$/, "")}
+          <span className="text-[var(--signal)]">{messages.Footer.slogan.slice(-1)}</span>
+        </p>
+      </div>
+
       <div className="px-6 py-[var(--space-16)] sm:py-[var(--space-20)] grid grid-cols-1 md:grid-cols-[1.2fr_1fr_1fr_1fr] gap-[var(--space-10)] sm:gap-[var(--space-12)]">
         <div>
           <div className="font-display font-extrabold text-[22px] tracking-[-0.045em] mb-[var(--space-3)]">

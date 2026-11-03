@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Button, Rail } from "@/app/components/ui";
+import enShell from "@/messages/shell/en.json";
 
 const TARGET_OPTIONS = [
   {
@@ -555,6 +556,9 @@ export default function ContactClient() {
                 <a href={`mailto:${CONTACT_EMAIL}`} className="text-[var(--signal)] underline">
                   {CONTACT_EMAIL}
                 </a>
+              </p>
+              <p className="font-display font-extrabold [font-size:var(--text-xl)] leading-tight tracking-[-0.03em] text-[var(--ink)] mt-[var(--space-6)]">
+                {enShell.Footer.slogan}
               </p>
 
               <div className="border border-[var(--rule)] bg-[var(--panel)] max-w-[520px] mt-[clamp(30px,3.6vw,50px)]">
