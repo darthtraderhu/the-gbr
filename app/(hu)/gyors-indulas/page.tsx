@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SITE_URL } from "@/lib/site";
 import { breadcrumbSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
+import KostoloJel from "@/app/components/KostoloJel";
 import { FactStrip } from "@/app/components/SalesBlocks";
 import { Button, Eyebrow, Rail, Seam } from "@/app/components/ui";
 import { GYORS_INDULAS_PATH, TERMEKEK, formatFt, termekPath } from "@/lib/gyors-indulas";
@@ -32,10 +33,7 @@ export default function GyorsIndulas() {
       {/* ===== FEJLÉC ===== */}
       <Rail label="Fix áron" dark>
         <section className="px-6 pt-[var(--space-8)] sm:pt-[var(--space-12)] pb-[var(--space-10)] sm:pb-[var(--space-16)]">
-          <p className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.22em] uppercase text-[var(--signal)] flex items-center gap-3 mb-[var(--space-5)]">
-            <span aria-hidden="true" className="w-1.5 h-1.5 bg-[var(--signal)] block" />
-            Fix áras első lépések
-          </p>
+          <KostoloJel className="mb-[var(--space-5)]" />
           <h1 className="font-display font-black leading-[0.9] tracking-[-0.052em] [font-size:var(--text-claim)] max-w-[15ch]">
             Kicsiben kezdünk, fix áron, határidővel
             <span className="text-[var(--signal)]">.</span>

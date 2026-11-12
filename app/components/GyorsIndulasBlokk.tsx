@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Button, Eyebrow } from "@/app/components/ui";
+import { Button } from "@/app/components/ui";
+import KostoloJel from "@/app/components/KostoloJel";
 import { GYORS_INDULAS_PATH, TERMEKEK, formatFt, termekPath } from "@/lib/gyors-indulas";
 
 // Főoldali blokk a fix áras első lépésekhez: mind a hat termék tömören,
@@ -9,7 +10,7 @@ export default function GyorsIndulasBlokk() {
     <section className="border-t border-[var(--rule)]">
       <div className="px-6 pt-[var(--space-12)] sm:pt-[var(--space-20)] pb-[var(--space-8)] grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-[var(--space-6)] lg:gap-[var(--space-16)] items-end">
         <div>
-          <Eyebrow>Fix áron · kérdezés nélkül</Eyebrow>
+          <KostoloJel className="mb-[var(--space-5)]" />
           <h2 className="font-display font-black [font-size:var(--text-claim)] leading-[0.94] tracking-[-0.05em] max-w-[16ch]">
             Kezdd kicsiben, pontos árral
             <span className="text-[var(--signal)]">.</span>
