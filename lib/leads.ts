@@ -7,10 +7,15 @@ export type Lead = {
   // nem szabadszöveg. A tartalmi leírást a `leiras` mező hordozza.
   kategoria: string;
   leiras: string;
-  keret: "1-3M" | "3-8M" | "8M+" | "nem-tudom";
+  // A /init keret-választása. A fix áras rendelésnél (/gyors-indulas) nincs.
+  keret?: "1-3M" | "3-8M" | "8M+" | "nem-tudom";
   hatarido?: string;
   // Melyik űrlapról jött: magyar /init vagy angol /en/contact.
   lang: "hu" | "en";
+  // Honnan jött, ha nem a /init vagy az /en/contact (pl. "thegbr.eu /gyors-indulas").
+  source?: string;
+  // Az űrlap saját mezői (pl. termék, ár, weboldal) — a Beérkezőben változatlanul megmaradnak.
+  extra?: Record<string, string>;
   ip: string;
   createdAt: string;
 };
@@ -45,10 +50,8 @@ async function sendToSales(lead: SavedLead): Promise<void> {
     return;
   }
 
-  const extra: Record<string, string> = {
-    keret: lead.keret,
-    nyelv: lead.lang,
-  };
+  const extra: Record<string, string> = { ...lead.extra, nyelv: lead.lang };
+  if (lead.keret) extra.keret = lead.keret;
   if (lead.hatarido) extra.hatarido = lead.hatarido;
 
   try {
@@ -60,7 +63,7 @@ async function sendToSales(lead: SavedLead): Promise<void> {
       },
       body: JSON.stringify({
         externalId: lead.id,
-        source: lead.lang === "en" ? "thegbr.eu /en/contact" : "thegbr.eu /init",
+        source: lead.source ?? (lead.lang === "en" ? "thegbr.eu /en/contact" : "thegbr.eu /init"),
         receivedAt: lead.createdAt,
         name: lead.nev,
         email: lead.email,

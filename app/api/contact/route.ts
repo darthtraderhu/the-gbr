@@ -3,7 +3,8 @@ import { z } from "zod";
 import { saveLead } from "@/lib/leads";
 import { sendMail } from "@/lib/mail";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
-import { LEAD_FROM_EMAIL, SITE_URL } from "@/lib/site";
+import { isAllowedOrigin } from "@/lib/request-guard";
+import { LEAD_FROM_EMAIL } from "@/lib/site";
 
 const NOTIFICATION_TO = "gabor@thegbr.eu";
 
@@ -51,13 +52,6 @@ const contactSchema = z.object({
   // /init hívásokkal, amik ezt a mezőt nem küldik).
   lang: z.enum(["hu", "en"]).optional().default("hu"),
 });
-
-function isAllowedOrigin(origin: string | null): boolean {
-  // Fejlesztés közben (localhost) ne akadjunk el az origin-ellenőrzésen.
-  if (process.env.NODE_ENV !== "production") return true;
-  if (!origin) return false;
-  return origin === SITE_URL || origin === "https://thegbr.eu";
-}
 
 function budgetLabel(keret: z.infer<typeof contactSchema>["keret"]): string {
   switch (keret) {
