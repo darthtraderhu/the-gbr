@@ -244,11 +244,6 @@ export default function Home() {
         />
       </Rail>
 
-      {/* ===== 02b / FIX ÁRON — kicsi, fix áras első lépések ===== */}
-      <Rail label="02b / Fix áron">
-        <GyorsIndulasBlokk />
-      </Rail>
-
       <Seam />
 
       {/* A cégbemutató videó 2026-11-01-én kikerült: a régi „két dolgot csinálunk”
@@ -656,6 +651,13 @@ export default function Home() {
             </div>
           </div>
         )}
+      </Rail>
+
+      <Seam />
+
+      {/* ===== 12b / FIX ÁRON — kicsi, fix áras első lépések, a záró CTA előtt ===== */}
+      <Rail label="12b / Fix áron">
+        <GyorsIndulasBlokk />
       </Rail>
 
       <Seam />
