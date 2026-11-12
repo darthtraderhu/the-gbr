@@ -11,6 +11,7 @@ import { Okoszisztema } from "@/app/components/SalesBlocks";
 import { ECO_STAGES_HU } from "@/lib/okoszisztema";
 import { NEXTJS_BRANDS, NEXTJS_CHECKED_HU } from "@/lib/nextjs-proof";
 import AuditSpotlight from "@/app/components/AuditSpotlight";
+import GyorsIndulasBlokk from "@/app/components/GyorsIndulasBlokk";
 import { AUDIT_CHAPTERS, AUDIT_PITCH, AUDIT_SERVICE } from "@/lib/szolgaltatasok";
 
 // Fejezetenként az első (legerősebb) valós találat a főoldali kiemeléshez.
@@ -241,6 +242,11 @@ export default function Home() {
           primary={{ href: "/init", label: "Kérj átvilágítást" }}
           secondary={{ href: AUDIT_SERVICE.path, label: "Mind a hét fejezet, több találattal" }}
         />
+      </Rail>
+
+      {/* ===== 02b / FIX ÁRON — kicsi, fix áras első lépések ===== */}
+      <Rail label="02b / Fix áron">
+        <GyorsIndulasBlokk />
       </Rail>
 
       <Seam />
