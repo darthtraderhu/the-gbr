@@ -3,6 +3,7 @@ import { getSortedEnPostsData } from "@/lib/posts-en";
 import { ORGANIZATION } from "@/lib/jsonld";
 import { ARZENAL_SECTIONS, ARZENAL_SECTIONS_EN } from "@/lib/site-links";
 import { SITE_URL } from "@/lib/site";
+import { GYORS_INDULAS_PATH, TERMEKEK, formatFt, termekPath } from "@/lib/gyors-indulas";
 
 // llms.txt (llmstxt.org): rövid, markdown nyelvű térkép az oldalról a nyelvi
 // modelleknek. Nem hivatalos szabvány, és nem garantálja, hogy egy AI-rendszer
@@ -35,6 +36,15 @@ export function GET() {
     "## Szolgáltatások",
     "",
     ...ARZENAL_SECTIONS.map((s) => `- [${s.name}](${SITE_URL}${s.href}): ${s.headline}`),
+    "",
+    "## Fix áras első lépések",
+    "",
+    `Kicsi, rögzített tartalmú munkák pontos nettó árral és határidővel (${SITE_URL}${GYORS_INDULAS_PATH}). Díjbekérővel, átutalással, előfizetés nélkül.`,
+    "",
+    ...TERMEKEK.map(
+      (t) =>
+        `- [${t.name}](${SITE_URL}${termekPath(t.id)}): ${formatFt(t.arNetto)} + ÁFA, ${t.munkanap} munkanap. ${t.summary}`,
+    ),
     "",
     "## Cikkek",
     "",

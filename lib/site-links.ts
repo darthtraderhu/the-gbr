@@ -32,6 +32,7 @@ export type NavItem = { label: string; href: string; highlight?: boolean };
 export const MAIN_NAV_ITEMS: NavItem[] = [
   { label: "Szolgáltatások", href: "/arzenal" },
   { label: "Átvilágítás", href: AUDIT_SERVICE.path, highlight: true },
+  { label: "Fix áron", href: "/gyors-indulas" },
   { label: "Csomagok", href: "/architektura" },
   { label: "SEO", href: "/seo" },
   { label: "Rólunk", href: "/szindikatus" },
