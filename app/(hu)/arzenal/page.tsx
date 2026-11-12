@@ -345,8 +345,8 @@ export default function Arzenal() {
               </strong>
             </>,
             <>
-              <strong className="text-[var(--ink)]">Next.js alapon</strong>, amire a Nike, a Sonos
-              vagy a Netflix karrieroldala is épít. Élő webshopnál nem kapcsolunk le semmit: a bolt
+              <strong className="text-[var(--ink)]">Next.js alapon</strong>, amire a Nike, az Under
+              Armour, a Hilton vagy a Sonos is épít. Élő webshopnál nem kapcsolunk le semmit: a bolt
               közben forgalmaz.
             </>,
           ]}

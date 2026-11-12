@@ -7,6 +7,8 @@ export type StackProofItem = {
   name: string;
   tag: string;
   body: string;
+  // Teljes sorszélesség (pl. hosszabb esettanulmány a lista végén).
+  wide?: boolean;
 };
 
 export type StackProofSource = {
@@ -38,7 +40,9 @@ export default function StackProof({
         {items.map((item) => (
           <li
             key={item.name}
-            className="p-[var(--space-5)] border-r border-b border-[var(--rule)] bg-[var(--ground)]"
+            className={`p-[var(--space-5)] border-r border-b border-[var(--rule)] bg-[var(--ground)]${
+              item.wide ? " sm:col-span-2 lg:col-span-3" : ""
+            }`}
           >
             <div className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.14em] uppercase text-[var(--signal-deep)]">
               {item.tag}

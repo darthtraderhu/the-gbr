@@ -69,7 +69,7 @@ export default function WeboldalFejlesztes() {
         </>,
         <>
           <strong className="text-[var(--ink)]">Next.js alapon dolgozunk</strong>, ugyanazon a
-          technológián, amire a Nike, a Sonos vagy a Netflix karrieroldala épít. Nem a divat miatt:
+          technológián, amire a Nike, a Hilton, a TED vagy a Netflix karrieroldala épít. Nem a divat miatt:
           itt a sebesség, a keresőoptimalizálás és a biztonság a szerkezet része, nem utólag
           ráragasztott bővítmény.
         </>,

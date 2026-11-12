@@ -362,7 +362,7 @@ export default function Home() {
           {NEXTJS_BRANDS.map((brand) => (
             <li
               key={brand}
-              className="px-6 py-[var(--space-8)] border-r border-b border-[var(--rule)] font-display font-black [font-size:var(--text-4xl)] tracking-[-0.045em] leading-none text-[var(--ink)] hover:text-[var(--signal-deep)] transition-colors"
+              className="px-4 sm:px-6 py-[var(--space-8)] border-r border-b border-[var(--rule)] font-display font-black [font-size:var(--text-2xl)] sm:[font-size:var(--text-4xl)] tracking-[-0.045em] leading-none text-[var(--ink)] hover:text-[var(--signal-deep)] transition-colors"
             >
               {brand}
             </li>
