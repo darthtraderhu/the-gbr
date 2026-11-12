@@ -84,7 +84,7 @@ export async function POST(req: Request) {
   const arSzoveg = `${formatFt(termek.arNetto)} + ÁFA`;
 
   const leiras = [
-    `Fix áras rendelés: ${termek.name} (${arSzoveg}, ${termek.munkanap} munkanap)`,
+    `Fix áras rendelés: ${termek.name} (${arSzoveg}, ${termek.hatarido})`,
     `Weboldal: ${weboldal}`,
     "",
     `${termek.noteLabel}`,
@@ -105,7 +105,7 @@ export async function POST(req: Request) {
       extra: {
         termek: termek.name,
         ar: arSzoveg,
-        hatarido: `${termek.munkanap} munkanap`,
+        hatarido: `${termek.hatarido} ${termek.hataridoKezdet}`,
         weboldal,
       },
       ip,
@@ -128,7 +128,7 @@ export async function POST(req: Request) {
       text: [
         "Új fix áras rendelés érkezett a weboldalon. Díjbekérő küldése 2 munkanapon belül.",
         "",
-        `Termék: ${termek.name} (${arSzoveg}, ${termek.munkanap} munkanap)`,
+        `Termék: ${termek.name} (${arSzoveg}, ${termek.hatarido})`,
         `Név: ${nev}`,
         `Cég: ${ceg}`,
         `E-mail: ${email}`,
@@ -154,7 +154,7 @@ export async function POST(req: Request) {
         "",
         `Termék: ${termek.name}`,
         `Ár: ${arSzoveg}`,
-        `Határidő: ${termek.munkanap} munkanap a díjbekérő kiegyenlítésétől`,
+        `Határidő: ${termek.hatarido} ${termek.hataridoKezdet}`,
         `Cég: ${ceg}`,
         `Weboldal: ${weboldal}`,
         "",

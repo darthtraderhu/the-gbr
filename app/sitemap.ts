@@ -4,6 +4,7 @@ import { getSortedEnPostsData } from "@/lib/posts-en";
 import { SITE_URL } from "@/lib/site";
 import { HU_TO_EN, EN_TO_HU, TRANSLATED_ARTICLES } from "@/lib/i18n-routes";
 import { EN_SERVICE_PAGES } from "@/lib/szolgaltatasok-en-pages";
+import { TERMEKEK, termekPath } from "@/lib/gyors-indulas";
 
 // A cikk-ütemezés (lib/posts.ts, lib/posts-en.ts) miatt a sitemap is naponta
 // frissül, hogy egy ütemezett cikk a dátuma napján magától bekerüljön, ne
@@ -28,8 +29,11 @@ const staticRoutes: Array<{
   { path: "/arzenal/pulzus", changeFrequency: "monthly", priority: 0.8 },
   { path: "/arzenal/atvilagitas-es-ajanlas", changeFrequency: "monthly", priority: 0.8 },
   { path: "/gyors-indulas", changeFrequency: "monthly", priority: 0.8 },
-  { path: "/gyors-indulas/megkereses-teszt", changeFrequency: "monthly", priority: 0.8 },
-  { path: "/gyors-indulas/gyorsatvilagitas", changeFrequency: "monthly", priority: 0.8 },
+  ...TERMEKEK.map((t) => ({
+    path: termekPath(t.id),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  })),
   { path: "/architektura", changeFrequency: "monthly", priority: 0.8 },
   { path: "/szindikatus", changeFrequency: "monthly", priority: 0.6 },
   { path: "/seo", changeFrequency: "monthly", priority: 0.8 },

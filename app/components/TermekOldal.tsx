@@ -193,8 +193,7 @@ export default function TermekOldal({ termek }: { termek: Termek }) {
             Rendeld meg most<span className="text-[var(--signal)]">.</span>
           </h2>
           <p className="[font-size:var(--text-lg)] text-[var(--ink-2)] max-w-[56ch] leading-relaxed mb-[var(--space-8)]">
-            Két munkanapon belül küldjük a díjbekérőt. A {termek.munkanap} munkanapos határidő a
-            kiegyenlítésekor indul. Cégeknek, nettó áron.
+            Két munkanapon belül küldjük a díjbekérőt. A határidő ({termek.hatarido}) {termek.hataridoKezdet} számít. Cégeknek, nettó áron.
           </p>
           <RendelesForm
             termek={termek.id}

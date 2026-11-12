@@ -9,7 +9,7 @@ import { GYORS_INDULAS_PATH, TERMEKEK, formatFt, termekPath } from "@/lib/gyors-
 
 const TITLE = "Fix áras első lépések: kicsi munka, pontos ár, határidő | THE GBR";
 const DESCRIPTION =
-  "Kicsi, rögzített tartalmú munkák cégeknek, pontos nettó árral és határidővel: megkeresés-teszt és gyorsátvilágítás. Díjbekérővel, előfizetés nélkül.";
+  "Kicsi, rögzített tartalmú munkák cégeknek, pontos nettó árral és határidővel: megkeresés-teszt, gyorsátvilágítás, alvó ajánlatok újraélesztése, javítócsomag, jogi-technikai gyorsellenőrzés, AI-láthatósági felmérés. Díjbekérővel, előfizetés nélkül.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -54,7 +54,7 @@ export default function GyorsIndulas() {
         <FactStrip
           facts={[
             { value: "Fix ár", label: "nettó, az oldalon kiírva" },
-            { value: "Határidő", label: "munkanapban, a díjbekérő kiegyenlítésétől" },
+            { value: "Határidő", label: "minden terméknél kiírva, munkanapban vagy órában" },
             { value: "Cégeknek", label: "díjbekérővel, átutalással, előfizetés nélkül" },
           ]}
         />
@@ -79,7 +79,7 @@ export default function GyorsIndulas() {
               />
               <div className="p-[var(--space-6)] sm:p-[var(--space-8)] flex flex-col h-full">
                 <span className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.14em] text-[var(--signal-deep)]">
-                  {t.n} · {t.munkanap} munkanap
+                  {t.n} · {t.hatarido}
                 </span>
                 <h3 className="mt-[var(--space-3)] font-display font-black [font-size:var(--text-3xl)] tracking-[-0.035em] leading-tight">
                   <Link href={termekPath(t.id)} className="after:absolute after:inset-0">
