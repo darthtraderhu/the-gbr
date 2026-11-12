@@ -6,7 +6,7 @@ import { formatFt, getTermek, termekPath } from "@/lib/gyors-indulas";
 const termek = getTermek("megkereses-teszt");
 
 const TITLE = termek
-  ? `${termek.name}: ${formatFt(termek.arNetto)} + ÁFA, ${termek.munkanap} munkanap | THE GBR`
+  ? `${termek.name}: ${formatFt(termek.arNetto)} + ÁFA, ${termek.hatarido} | THE GBR`
   : "THE GBR";
 const DESCRIPTION = termek?.summary ?? "";
 

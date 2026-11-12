@@ -43,7 +43,7 @@ export function GET() {
     "",
     ...TERMEKEK.map(
       (t) =>
-        `- [${t.name}](${SITE_URL}${termekPath(t.id)}): ${formatFt(t.arNetto)} + ÁFA, ${t.munkanap} munkanap. ${t.summary}`,
+        `- [${t.name}](${SITE_URL}${termekPath(t.id)}): ${formatFt(t.arNetto)} + ÁFA, ${t.hatarido}. ${t.summary}`,
     ),
     "",
     "## Cikkek",
