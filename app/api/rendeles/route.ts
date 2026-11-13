@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { saveLead } from "@/lib/leads";
+import { POSZT_KOD } from "@/lib/poszt-kovetes";
 import { sendMail } from "@/lib/mail";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 import { isAllowedOrigin } from "@/lib/request-guard";
@@ -35,6 +36,8 @@ const orderSchema = z.object({
   sajatCeg: z.literal(true),
   honeypot: z.string().optional().default(""),
   startedAt: z.number(),
+  // Közösségi posztunk követőkódja, ha onnan jött. Hibás érték nem buktatja a beküldést.
+  poszt: z.string().regex(POSZT_KOD).optional().catch(undefined),
 });
 
 export async function POST(req: Request) {
@@ -102,6 +105,7 @@ export async function POST(req: Request) {
       leiras,
       lang: "hu",
       source: `thegbr.eu /gyors-indulas/${termek.id}`,
+      poszt: parsed.data.poszt,
       extra: {
         termek: termek.name,
         ar: arSzoveg,

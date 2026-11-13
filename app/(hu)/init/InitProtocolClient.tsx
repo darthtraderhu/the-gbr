@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button, Rail } from "@/app/components/ui";
 import huShell from "@/messages/shell/hu.json";
+import { aktualisPosztKod } from "@/app/components/PosztKovetes";
 
 const TARGET_OPTIONS = [
   {
@@ -156,6 +157,7 @@ export default function InitProtocolClient() {
           hatarido: formData.deadline,
           honeypot: formData.website,
           startedAt: formStartedAt,
+          poszt: aktualisPosztKod(),
         }),
       });
 

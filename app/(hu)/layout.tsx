@@ -10,6 +10,7 @@ import { fontDisplay, fontBody, fontMono } from "@/lib/fonts";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import CookieConsent from "@/app/components/CookieConsent";
+import PosztKovetes from "@/app/components/PosztKovetes";
 import AiChat from "@/app/components/AiChat";
 import JsonLd from "@/app/components/JsonLd";
 import BackgroundMotif from "@/app/components/BackgroundMotif";
@@ -102,6 +103,7 @@ export default function RootLayout({
 
         {/* Google Analytics csak hozzájárulás után tölt be (ld. CookieConsent) */}
         <CookieConsent />
+        <PosztKovetes />
       </body>
 
     </html>

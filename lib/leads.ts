@@ -16,6 +16,8 @@ export type Lead = {
   source?: string;
   // Az űrlap saját mezői (pl. termék, ár, weboldal) — a Beérkezőben változatlanul megmaradnak.
   extra?: Record<string, string>;
+  // Ha közösségi posztunk linkjéről jött: a poszt követőkódja (lib/poszt-kovetes.ts).
+  poszt?: string;
   ip: string;
   createdAt: string;
 };
@@ -27,6 +29,11 @@ export type SavedLead = Lead & { id: string };
 const SALES_INGEST_URL =
   process.env.SALES_INGEST_URL || "https://sales.thegbr.eu/api/beerkezo";
 const SALES_TIMEOUT_MS = 8000;
+
+/** A sales-rendszer egy másik végpontja (ugyanazon a címen, mint a Beérkező). */
+export function salesUrl(path: string): string {
+  return new URL(path, SALES_INGEST_URL).toString();
+}
 
 /**
  * Lead-perzisztálás. Két helyre kerül:
@@ -51,6 +58,7 @@ async function sendToSales(lead: SavedLead): Promise<void> {
   }
 
   const extra: Record<string, string> = { ...lead.extra, nyelv: lead.lang };
+  if (lead.poszt) extra.poszt = lead.poszt;
   if (lead.keret) extra.keret = lead.keret;
   if (lead.hatarido) extra.hatarido = lead.hatarido;
 
