@@ -3,13 +3,13 @@ import Anthropic from "@anthropic-ai/sdk";
 import { isCronAuthorized } from "@/lib/cron-auth";
 import { getPostMarkdown, getSortedPostsData } from "@/lib/posts";
 import { getTodayBudapest } from "@/lib/publish-schedule";
+import { salesUrl } from "@/lib/leads";
 import { SITE_URL } from "@/lib/site";
 
 // A kulcsot az ANTHROPIC_API_KEY környezeti változóból olvassa.
 const anthropic = new Anthropic();
 
 const POST_MODEL = "claude-opus-5-5";
-const GRAPH_API = "https://graph.facebook.com/v21.0";
 
 // A cikkek közötti napokon ezeken a napokon egy korábbi cikket ajánlunk
 // (0 = vasárnap … 6 = szombat): kedd és csütörtök.
@@ -93,41 +93,45 @@ async function writePost(article: ReturnType<typeof getPostMarkdown>, isArchive:
   return text;
 }
 
-async function publishToFacebook(message: string, link: string): Promise<string> {
-  const pageId = process.env.FACEBOOK_PAGE_ID;
-  const accessToken = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
-  if (!pageId || !accessToken) {
-    throw new Error("Hiányzik a FACEBOOK_PAGE_ID vagy a FACEBOOK_PAGE_ACCESS_TOKEN környezeti változó");
-  }
-
-  // A link mezőből a Facebook a cikk OG-képével, címével és leírásával
-  // kártyát generál — külön képet nem kell feltölteni.
-  const response = await fetch(`${GRAPH_API}/${pageId}/feed`, {
+// A posztot nem tesszük ki innen: vázlatként a sales-rendszer Közzététel
+// oldalára kerül (gbr-sales /kozzetetel), ott hagyod jóvá, és onnan megy ki a
+// Facebookra, követőkóddal a linkben. Ugyanaz a vázlat kétszer nem kerül be
+// (externalId), így egy újrafuttatás nem dupláz.
+async function sendDraftToSales(p: {
+  externalId: string;
+  text: string;
+  link: string;
+  title: string;
+}): Promise<string> {
+  const token = process.env.SALES_INGEST_TOKEN;
+  if (!token) throw new Error("Hiányzik a SALES_INGEST_TOKEN környezeti változó");
+  const res = await fetch(salesUrl("/api/kozzetetel/vazlat"), {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message, link, access_token: accessToken }),
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      externalId: p.externalId,
+      source: "thegbr.eu posztoló",
+      channel: "FACEBOOK",
+      text: p.text,
+      linkUrl: p.link,
+      linkTitle: p.title,
+    }),
+    signal: AbortSignal.timeout(10_000),
   });
-  const data: { id?: string; error?: { message?: string } } = await response.json();
-  if (!response.ok || !data.id) {
-    throw new Error(`Meta API hiba: ${data.error?.message ?? response.status}`);
+  // Nem elég, hogy nem jött hiba: a sales-rendszer a rögzített vázlat azonosítóját adja vissza.
+  const body: unknown = await res.json().catch(() => null);
+  const id = body && typeof body === "object" && "id" in body ? body.id : undefined;
+  if (!res.ok || typeof id !== "string") {
+    throw new Error(`A vázlat nem került be a sales-rendszerbe (${res.status})`);
   }
-
-  // Nem elég, hogy nem jött hiba: visszaolvassuk, hogy a poszt tényleg létezik.
-  const check = await fetch(
-    `${GRAPH_API}/${data.id}?fields=id,permalink_url&access_token=${encodeURIComponent(accessToken)}`
-  );
-  const checkData: { id?: string; permalink_url?: string } = await check.json();
-  if (!check.ok || checkData.id !== data.id) {
-    throw new Error(`A poszt (${data.id}) létrehozása után nem olvasható vissza`);
-  }
-  return checkData.permalink_url ?? data.id;
+  return id;
 }
 
 // Naponta fut (vercel.json). Ha az ütemezés szerint ma élesedik egy cikk,
-// azt ajánlja; ha nem, az ARCHIVE_DAYS napjain egy korábbi cikket. A többi
-// napon nem posztol. Kézi teszt (CRON_SECRET-tel):
+// ahhoz ír vázlatot; ha nem, az ARCHIVE_DAYS napjain egy korábbi cikkhez. A
+// többi napon nincs vázlat. Kézi teszt (CRON_SECRET-tel):
 //   ?id=<cikk-slug>   egy adott, már megjelent cikkhez
-//   &dryRun=1         csak megírja a szöveget, nem posztol
+//   &dryRun=1         csak megírja a szöveget, nem küldi el
 export async function GET(request: Request) {
   const cronSecret = process.env.CRON_SECRET;
   if (!cronSecret) {
@@ -165,23 +169,30 @@ export async function GET(request: Request) {
   if (targets.length === 0) {
     return NextResponse.json({
       success: true,
-      posted: [],
+      drafts: [],
       note: requestedId
         ? `Nincs megjelent cikk ezzel az azonosítóval: ${requestedId}`
         : `Ma (${today}) nincs posztolnivaló`,
     });
   }
 
-  const results: Array<{ id: string; text: string; permalink?: string }> = [];
+  const results: Array<{ id: string; text: string; draftId?: string }> = [];
   try {
     for (const post of targets) {
       const text = await writePost(getPostMarkdown(post.id), isArchive);
       const link = `${SITE_URL}/hirek/${post.id}`;
-      const permalink = dryRun ? undefined : await publishToFacebook(text, link);
-      console.log("[AUTOPILOT]", dryRun ? "próbafuttatás" : "kiposztolva", isArchive ? "(archív)" : "(új)", post.id, permalink ?? "");
-      results.push({ id: post.id, text, permalink });
+      const draftId = dryRun
+        ? undefined
+        : await sendDraftToSales({
+            externalId: `autopilot:${post.id}:${today}`,
+            text,
+            link,
+            title: post.title,
+          });
+      console.log("[AUTOPILOT]", dryRun ? "próbafuttatás" : "vázlat elküldve", isArchive ? "(archív)" : "(új)", post.id, draftId ?? "");
+      results.push({ id: post.id, text, draftId });
     }
-    return NextResponse.json({ success: true, dryRun, posted: results });
+    return NextResponse.json({ success: true, dryRun, drafts: results });
   } catch (error) {
     if (error instanceof Anthropic.APIError) {
       console.error("[AUTOPILOT] Anthropic API hiba:", { status: error.status, message: error.message, requestID: error.requestID });
@@ -189,6 +200,6 @@ export async function GET(request: Request) {
       console.error("[AUTOPILOT] Hiba:", error);
     }
     const message = error instanceof Error ? error.message : String(error);
-    return NextResponse.json({ success: false, posted: results, error: message }, { status: 500 });
+    return NextResponse.json({ success: false, drafts: results, error: message }, { status: 500 });
   }
 }

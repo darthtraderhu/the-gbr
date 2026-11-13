@@ -83,6 +83,11 @@ function saveConsent(consent: "granted" | "denied") {
   notify();
 }
 
+/** Megadta-e a látogató a statisztikai hozzájárulást (pl. posztkövetés tárolásához). */
+export function hasAnalyticsConsent(): boolean {
+  return readConsent() === "granted";
+}
+
 export function openCookieSettings() {
   settingsOpen = true;
   notify();

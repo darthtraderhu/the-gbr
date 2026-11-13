@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button, Field } from "@/app/components/ui";
 import type { TermekId } from "@/lib/gyors-indulas";
+import { aktualisPosztKod } from "@/app/components/PosztKovetes";
 
 const CONTACT_EMAIL = "gabor@thegbr.eu";
 
@@ -68,6 +69,7 @@ export default function RendelesForm({ termek, termekNev, arSzoveg, noteLabel, n
           sajatCeg: true,
           honeypot: adat.website,
           startedAt,
+          poszt: aktualisPosztKod(),
         }),
       });
       const body: unknown = await res.json().catch(() => null);

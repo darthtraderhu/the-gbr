@@ -40,6 +40,10 @@ public/              statikus fájlok
 design/              arculati anyagok, mockupok (nem build-részei)
 ```
 
+## Posztoló (social pilot)
+
+Az `/api/autopilot` (napi cron) minden új cikkhez (és kedden/csütörtökön egy archívhoz) Claude-dal posztszöveget ír, és **vázlatként** elküldi a sales-rendszer Közzététel oldalára (`/api/kozzetetel/vazlat`). Innen semmi nem megy ki közvetlenül a Facebookra: a jóváhagyás, az ütemezés, a Facebook-token és a napló a gbr-sales-ben van. A poszt linkje követőkódot kap (`utm_content`); a `PosztKovetes` komponens jelzi a kattintást (`/api/kattintas`), az űrlapok a kódot `poszt` mezőként továbbadják, így a Beérkezőben látszik, melyik posztból jött a megkeresés. A kód a böngésző tárhelyére csak statisztikai hozzájárulás után kerül.
+
 ## Konvenciók
 
 - Egy komponens, egy hely. A Navbar és a Footer a `layout.tsx`-ből jön. Soha ne renderelj lokális `<header>`-t vagy `<footer>`-t oldalanként — ez korábban 5 oldalon duplikálva volt, felszámoltuk.
@@ -81,7 +85,6 @@ Montserrat, scanline/sweep/radar animációk és a transparenttextures.com hotli
 
 Részletes lista: `the-gbr-feladatlista.md`. A legfontosabbak:
 
-- `/api/autopilot` cron-guard: ha a `CRON_SECRET` hiányzik, a `Bearer undefined` átjut az ellenőrzésen. Kell egy explicit korai kilépés.
 - `/api/chat` nyitott: nincs rate limit, origin-ellenőrzés, méretkorlát → költség-DoS kockázat.
 - Nincs `app/sitemap.ts` és `app/robots.ts` — pedig a `/seo` oldal ezt hirdeti.
 - Nincs JSON-LD sehol — ugyanez.
