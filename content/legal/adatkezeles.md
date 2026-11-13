@@ -3,8 +3,8 @@ title: "Adatkezelési tájékoztató | THE GBR"
 description: "Milyen személyes adatokat kezel a GBR Marketing Solutions Kft. a www.thegbr.eu használata és a szolgáltatások igénybevétele során, milyen jogalapon, meddig, és kinek továbbítjuk — GDPR szerinti tájékoztató."
 ---
 
-**Hatályos:** 2026. november 1.
-**Verzió:** 1.1
+**Hatályos:** 2026. november 13.
+**Verzió:** 1.2
 **Weboldal:** www.thegbr.eu
 
 ---
@@ -51,8 +51,11 @@ Az adatkezelés az alábbi jogszabályok alapján történik:
 | **Jogalap** | GDPR 6. cikk (1) b) — a szerződés megkötését megelőzően az érintett kérésére történő lépések megtétele |
 | **Megőrzés** | Ha szerződéskötésre nem kerül sor: a megkereséstől számított **2 év**. Ha szerződés jön létre: az adatok a szerződéses kapcsolat adatkezelésébe kerülnek (ld. 3.4.) |
 | **Adatszolgáltatás** | Önkéntes, de a név és e-mail cím nélkül a megkeresést nem tudjuk megválaszolni |
+| **Adattovábbítás** | A megkeresés egyes adatai a napi munkatervünk összeállításához továbbításra kerülhetnek az **Anthropic, PBC** (Egyesült Államok) részére. Részletek alább, valamint az 5. és 6. pontban. |
 
 Az űrlap kitöltésekor automatikus visszaigazoló e-mailt küldünk, amely megerősíti a megkeresés beérkezését.
+
+**Napi munkaterv.** A megkereséseket és a belőlük induló ügyleteket belső értékesítési rendszerünkben tartjuk nyilván. Ez a rendszer minden munkanapra javaslatot készít a munkatársainknak arról, mivel foglalkozzanak, és ehhez válaszlevél- vagy hívásvázlatot ír. Ehhez a megkeresés és az ügylet egyes adatait (név, cégnév, a megkeresés tárgya és szövege, az ügylet állapota és a vele kapcsolatos korábbi lépések rövid összefoglalója) feldolgozás céljából továbbítjuk az Anthropic, PBC részére. E-mail címet és telefonszámot nem továbbítunk. A rendszer csak javaslatot tesz: rólad nem hoz döntést, profilt nem alkot, és semmit nem küld ki. Minden levelet és lépést munkatársunk néz át és indít el.
 
 ### 3.2. AI-alapú chat funkció
 
@@ -126,7 +129,7 @@ Az adatkezelés során az alábbi szolgáltatókat vesszük igénybe. Ezek a szo
 | Adatfeldolgozó | Tevékenység | Székhely | Továbbított adatok |
 |---|---|---|---|
 | **Vercel Inc.** | Tárhely- és üzemeltetési szolgáltatás | Egyesült Államok | A weboldal működéséhez szükséges valamennyi adat, szerverlogok |
-| **Anthropic, PBC** | AI chat funkció működtetése | Egyesült Államok | A chatbe beírt üzenetek |
+| **Anthropic, PBC** | AI chat funkció működtetése; a megkeresések kezeléséhez napi munkaterv és válaszvázlat készítése | Egyesült Államok | A chatbe beírt üzenetek; a megkeresés és az ügylet 3.1. pontban felsorolt adatai |
 | **Supabase, Inc.** | Adatbázis- és tárhelyszolgáltatás (a beérkező megkeresések nyilvántartása) | EU-s régió (Frankfurt, Németország) | Megkeresések, dokumentumok |
 | **Google Ireland Limited** | Látogatottság-mérés (Google Analytics 4), kizárólag hozzájárulás esetén | Írország (EU) | Böngészési adatok, eszköz- és sütiazonosító |
 | Könyvelő | Könyvelési szolgáltatás | Magyarország | Számlázási adatok |
