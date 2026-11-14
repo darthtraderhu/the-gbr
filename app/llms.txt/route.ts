@@ -20,7 +20,7 @@ export function GET() {
   const lines = [
     `# ${ORGANIZATION.alternateName}`,
     "",
-    `> ${ORGANIZATION.name} (márkanév: ${ORGANIZATION.alternateName}): értékesítési rendszer-partner műszaki, ipari és szolgáltató B2B cégeknek Magyarországon, akik egyedi ajánlatból élnek. Három pillér: átvilágítás (hol vész el a megkeresés és az ajánlat), a cégre szabott értékesítési rendszer (a megkereséstől a szerződésig és utána), valamint a felület: weboldal és webshop Next.js alapokon, ami a rendszerbe hozza a megkeresést. Kapcsolódó szolgáltatások: performance marketing, AI-integráció, videó, akadálymentesítés, weboldal-figyelés, irodai IT-üzemeltetés, valamint egyedi szoftverfejlesztés és üzleti folyamat-automatizáció. A videógyártást és az irodai IT-üzemeltetést visszatérő partnerekkel végezzük, egy kapcsolattartóval.`,
+    `> ${ORGANIZATION.name} (márkanév: ${ORGANIZATION.alternateName}): értékesítési rendszer-partner műszaki, ipari és szolgáltató B2B cégeknek Magyarországon, akik egyedi ajánlatból élnek. Három pillér: átvilágítás (hol vész el a megkeresés és az ajánlat), a cégre szabott értékesítési rendszer (a megkereséstől a szerződésig és utána), valamint a felület: weboldal és webshop Next.js alapokon, ami a rendszerbe hozza a megkeresést. Kapcsolódó szolgáltatások: performance marketing, AI-integráció, videó, akadálymentesítés, weboldal-figyelés, irodai IT-üzemeltetés, valamint egyedi szoftverfejlesztés és üzleti folyamat-automatizáció. Minden szolgáltatásnál egy kapcsolattartó.`,
     "",
     `Székhely: ${address.postalCode} ${address.addressLocality}, ${address.streetAddress} · E-mail: ${ORGANIZATION.email} · Telefon: ${ORGANIZATION.telephone} · Adószám: ${ORGANIZATION.taxID}`,
     "",

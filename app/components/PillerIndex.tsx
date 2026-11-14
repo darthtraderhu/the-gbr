@@ -3,12 +3,12 @@ import { Eyebrow } from "@/app/components/ui";
 import { PILLEREK, pillerSzekciok } from "@/lib/site-links";
 
 // Főoldali szolgáltatás-index a pozicionálás szerint: három pillér
-// (Átvilágítás → Rendszer → Felület) és a partnerrel végzett munka. A
+// (Átvilágítás → Rendszer → Felület) és a kiegészítő szolgáltatások. A
 // szolgáltatások a lib/site-links.ts listáiból jönnek, így a menüvel együtt
 // változnak.
 export default function PillerIndex({ eyebrow, lead }: { eyebrow: string; lead: string }) {
-  const fo = PILLEREK.filter((p) => p.id !== "partner");
-  const partner = PILLEREK.find((p) => p.id === "partner");
+  const fo = PILLEREK.filter((p) => p.id !== "kiegeszito");
+  const extra = PILLEREK.find((p) => p.id === "kiegeszito");
 
   return (
     <section className="px-6 pt-[var(--space-12)] sm:pt-[var(--space-16)] pb-[var(--space-12)] sm:pb-[var(--space-16)]">
@@ -59,13 +59,13 @@ export default function PillerIndex({ eyebrow, lead }: { eyebrow: string; lead: 
         ))}
       </ol>
 
-      {partner && (
+      {extra && (
         <div className="mt-[var(--space-6)] flex flex-col sm:flex-row sm:items-baseline gap-[var(--space-2)] sm:gap-[var(--space-6)]">
           <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.18em] uppercase text-[var(--mid)] shrink-0">
-            {partner.name}
+            {extra.name}
           </span>
           <p className="[font-size:var(--text-sm)] leading-relaxed text-[var(--ink-2)]">
-            {pillerSzekciok(partner).map((s, i) => (
+            {pillerSzekciok(extra).map((s, i) => (
               <span key={s.id}>
                 {i > 0 && ", "}
                 <Link href={s.href} className="underline decoration-[var(--rule-strong)] underline-offset-4 hover:decoration-[var(--signal)]">
@@ -73,7 +73,7 @@ export default function PillerIndex({ eyebrow, lead }: { eyebrow: string; lead: 
                 </Link>
               </span>
             ))}
-            . {partner.lead}
+            . {extra.lead}
           </p>
         </div>
       )}
