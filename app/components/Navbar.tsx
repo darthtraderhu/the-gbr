@@ -85,19 +85,19 @@ export default function Navbar() {
         <div className="flex items-center gap-5 px-6 py-[18px]">
           <Link
             href={homeHref}
-            className="font-display font-extrabold text-[20px] tracking-[-0.045em] hover:opacity-80 transition-opacity"
+            className="font-display font-extrabold text-[20px] tracking-[-0.045em] whitespace-nowrap shrink-0 hover:opacity-80 transition-opacity"
           >
             THE GBR<span className="text-[var(--signal)]">.</span>
           </Link>
 
-          <nav className="ml-auto hidden lg:flex items-center gap-6">
+          <nav className="ml-auto hidden lg:flex items-center gap-4 xl:gap-6">
             {navItems.map((link) => {
               const isActive = pathname === link.href;
               const isServices = link.href === servicesHref;
               const linkEl = (
                 <Link
                   href={link.href}
-                  className={`[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase transition-colors ${
+                  className={`[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] xl:tracking-[0.16em] uppercase whitespace-nowrap transition-colors ${
                     isActive ? "text-[var(--signal)]" : "text-[var(--mid)] hover:text-[var(--ink)]"
                   }`}
                 >
@@ -115,7 +115,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     aria-haspopup="true"
-                    className={`[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.16em] uppercase transition-colors ${
+                    className={`[font-family:var(--font-mono)] text-[length:var(--text-2xs)] tracking-[0.1em] xl:tracking-[0.16em] uppercase whitespace-nowrap transition-colors ${
                       isActive
                         ? "text-[var(--signal)]"
                         : "text-[var(--mid)] hover:text-[var(--ink)]"
@@ -166,7 +166,7 @@ export default function Navbar() {
             <ThemeToggle />
             <Link
               href={ctaHref}
-              className="font-display font-bold text-[12.5px] tracking-[-0.01em] px-[17px] py-[10px] bg-[var(--signal)] text-[#101400] border border-[var(--signal)] hover:bg-[var(--signal-deep)] hover:border-[var(--signal-deep)] transition-colors"
+              className="font-display font-bold text-[12.5px] tracking-[-0.01em] whitespace-nowrap px-[17px] py-[10px] bg-[var(--signal)] text-[#101400] border border-[var(--signal)] hover:bg-[var(--signal-deep)] hover:border-[var(--signal-deep)] transition-colors"
             >
               {t.cta}
             </Link>
