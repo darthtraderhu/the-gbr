@@ -59,6 +59,14 @@ const PELDAK = [
   { ag: "szolgáltató", cim: "Szerződésből emlékeztető", szoveg: "Lejáró szerződés előtt a megújítás magától kerül a napi tervbe." },
 ] as const;
 
+// Csak ami ma is működik (Projektek, ritmus és feladat, napló az ügyletnél).
+const UTANA = [
+  { cim: "Projekt a nyert ügyletből", szoveg: "A megnyert munka nem vész el: szakaszok, felelősök, határidők, értesítéssel." },
+  { cim: "Utánkövetés, ami nem felejt", szoveg: "Ritmus és feladat emlékeztet, kit kell keresni, és mikor." },
+  { cim: "Minden lépés visszanézhető", szoveg: "Levél, hívás, ajánlat, elküldött anyag: egy helyen az ügyletnél." },
+  { cim: "Közös munka a partnerrel", szoveg: "Külső partner bevonható, és csak azt látja, amit megosztasz." },
+] as const;
+
 const ELVEK = [
   { cim: "Ember hagy jóvá", szoveg: "Ügyfélnek semmi nem megy ki magától. A rendszer előkészít, te küldesz." },
   { cim: "Elkülönítve", szoveg: "A céged adatai más szervezettől szigorúan elválasztva, az EU-ban." },
@@ -423,6 +431,21 @@ export default function Rendszer() {
           <p className={`${s.note} mt-[var(--space-4)]`}>
             Ezek példák, nem kész termékek. Hogy nálad mi kell, azt az átvilágítás mondja meg.
           </p>
+
+          <div className="mt-[var(--space-20)]">
+            <Eyebrow>Az eladás után</Eyebrow>
+            <h2 className={`${H2} mb-[var(--space-10)]`}>
+              Az aláírásnál nem engedjük el az ügyfelet<Pont />
+            </h2>
+            <dl className={s.rules}>
+              {UTANA.map((e) => (
+                <div key={e.cim}>
+                  <dt>{e.cim}</dt>
+                  <dd>{e.szoveg}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
 
           <div className="mt-[var(--space-20)]">
             <Eyebrow>Amiben nem engedünk</Eyebrow>
