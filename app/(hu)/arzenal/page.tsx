@@ -57,23 +57,23 @@ import {
 } from "@/lib/szolgaltatasok";
 
 export const metadata: Metadata = {
-  title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
+  title: "Szolgáltatások: átvilágítás, értékesítési rendszer, weboldal | THE GBR",
   description:
-    "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus, irodai IT-üzemeltetés, átvilágítás és ajánlás. Tíz terület, egy értékesítési rendszer, egy felelős kapcsolattartóval — B2B ügyfeleknek.",
+    "Három pillér: átvilágítás és Pulzus; egyedi értékesítési rendszer, automatizáció és AI; weboldal, webshop, hirdetés, üzemeltetés és akadálymentesítés. Videó és irodai IT-üzemeltetés partnerrel. Egy rendszer, egy felelős kapcsolattartó, B2B cégeknek.",
   alternates: {
     canonical: "/arzenal",
     languages: { hu: "/arzenal", en: "/en/services", "x-default": "/arzenal" },
   },
   openGraph: {
-    title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
+    title: "Szolgáltatások: átvilágítás, értékesítési rendszer, weboldal | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus, irodai IT-üzemeltetés, átvilágítás és ajánlás. Tíz terület, egy értékesítési rendszer, egy felelős kapcsolattartóval.",
+      "Három pillér: átvilágítás és Pulzus; egyedi értékesítési rendszer, automatizáció és AI; weboldal, webshop, hirdetés, üzemeltetés és akadálymentesítés. Videó és irodai IT-üzemeltetés partnerrel. Egy rendszer, egy felelős kapcsolattartó, B2B cégeknek.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Weboldal, webshop, hirdetés és IT-üzemeltetés cégeknek | THE GBR",
+    title: "Szolgáltatások: átvilágítás, értékesítési rendszer, weboldal | THE GBR",
     description:
-      "Weboldal és webshop fejlesztés, performance marketing, egyedi szoftver és automatizáció, AI-integráció, videó, web-üzemeltetés, akadálymentesítés, Pulzus, irodai IT-üzemeltetés, átvilágítás és ajánlás. Tíz terület, egy értékesítési rendszer, egy felelős kapcsolattartóval.",
+      "Három pillér: átvilágítás és Pulzus; egyedi értékesítési rendszer, automatizáció és AI; weboldal, webshop, hirdetés, üzemeltetés és akadálymentesítés. Videó és irodai IT-üzemeltetés partnerrel. Egy rendszer, egy felelős kapcsolattartó, B2B cégeknek.",
   },
 };
 

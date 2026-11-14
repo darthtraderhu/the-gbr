@@ -4,14 +4,14 @@ import { getSortedPostsData } from "@/lib/posts"; // <-- BEHÚZZUK A MOTORT!
 import { websiteSchema, professionalServiceSchema } from "@/lib/jsonld";
 import JsonLd from "@/app/components/JsonLd";
 import { Button, SectionHeader, Rail, Seam, Eyebrow } from "@/app/components/ui";
-import ServiceIndex from "@/app/components/ServiceIndex";
-import { ARZENAL_SECTIONS } from "@/lib/site-links";
+import PillerIndex from "@/app/components/PillerIndex";
 import HeroInstrument from "./HeroInstrument";
 import { Okoszisztema } from "@/app/components/SalesBlocks";
 import { ECO_STAGES_HU } from "@/lib/okoszisztema";
 import { NEXTJS_BRANDS, NEXTJS_CHECKED_HU } from "@/lib/nextjs-proof";
 import AuditSpotlight from "@/app/components/AuditSpotlight";
 import GyorsIndulasBlokk from "@/app/components/GyorsIndulasBlokk";
+import { GYORS_INDULAS_PATH, TERMEKEK, formatFt } from "@/lib/gyors-indulas";
 import { AUDIT_CHAPTERS, AUDIT_PITCH, AUDIT_SERVICE } from "@/lib/szolgaltatasok";
 
 // Fejezetenként az első (legerősebb) valós találat a főoldali kiemeléshez.
@@ -27,11 +27,13 @@ const AUDIT_SPOTLIGHT = AUDIT_CHAPTERS.map((c) => ({
 // meg, amíg nincs új deploy.
 export const revalidate = 86400;
 
+const HOME_TITLE = "THE GBR | Értékesítési rendszer műszaki és ipari B2B cégeknek";
+
 const HOME_DESCRIPTION =
-  "Nem csak weboldal vagy webshop: értékesítési ökoszisztéma B2B cégeknek. Next.js alapon építjük, összekötjük a hirdetéssel, az automatizációval és az utánkövetéssel, és mi üzemeltetjük tovább. Válasz két munkanapon belül.";
+  "Értékesítési rendszer-partner azoknak a B2B cégeknek, akik egyedi ajánlatból élnek. Átvilágítjuk, hol vész el a megkeresés, megépítjük a cégedre szabott rendszert, és mellé a weboldalt, ami beviszi a megkeresést. Válasz két munkanapon belül.";
 
 export const metadata: Metadata = {
-  title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
+  title: HOME_TITLE,
   description: HOME_DESCRIPTION,
   alternates: {
     canonical: "/",
@@ -42,12 +44,12 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
+    title: HOME_TITLE,
     description: HOME_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
+    title: HOME_TITLE,
     description: HOME_DESCRIPTION,
   },
 };
@@ -86,11 +88,11 @@ const PROJECTS = [
     meta: ["Arculat", "Webdizájn"],
   },
   {
-    tag: "Saját termék · fejlesztés alatt",
+    tag: "Saját termék · élő",
     client: false,
     title: "Értékesítési rendszer",
-    desc: "Ipari és műszaki cégeknek, amelyek egyedi árajánlatból élnek. Arra a szakaszra építjük, ahol az üzlet csendben elcsúszhat: a beérkező megkeresés és az aláírt megrendelés között.",
-    meta: ["Fejlesztés alatt", "Ipari B2B"],
+    desc: "Ipari és műszaki cégeknek, amelyek egyedi árajánlatból élnek. Arra a szakaszra építjük, ahol az üzlet csendben elcsúszhat: a beérkező megkeresés és az aláírt megrendelés között. A saját értékesítésünk is ezen fut.",
+    meta: ["Élő, saját használatban", "Ipari B2B"],
   },
   {
     tag: "Saját termék · élő",
@@ -123,39 +125,42 @@ const TRUST_CLAIMS = [
   },
 ];
 
+// Az indulás három lépcsője a pozicionálás szerint (Átvilágítás → első
+// modul → rendszer-partner). Árlista a nagy munkákra nincs (lib/jsonld.ts);
+// a belépő ára a /gyors-indulas legolcsóbb termékéből jön.
 const PACKAGE_COLUMNS = [
   {
     tag: "Belépő",
-    name: "Weboldal és arculat",
-    price: "Egyedi ajánlat",
+    name: "Átvilágítás",
+    price: `Fix áron, nettó ${formatFt(Math.min(...TERMEKEK.map((t) => t.arNetto)))}-tól`,
     hot: false,
-    href: "/init?csomag=web-arculat",
+    href: GYORS_INDULAS_PATH,
   },
   {
-    tag: "A leggyakoribb",
-    name: "Webshop és skálázás",
-    price: "Teljes infrastruktúra",
+    tag: "Innen indulunk",
+    name: "Első modul",
+    price: "Egyedi ajánlat",
     hot: true,
-    href: "/init?csomag=webshop-skalazas",
+    href: "/init",
   },
   {
-    tag: "Teljes lefedettség",
-    name: "Fejlesztés és üzemeltetés",
+    tag: "Hosszú táv",
+    name: "Rendszer-partner",
     price: "Havi keret",
     hot: false,
-    href: "/init?csomag=fejlesztes-uzemeltetes",
+    href: "/init",
   },
 ];
 
 const PACKAGE_ROWS: { label: string; values: [boolean, boolean, boolean] }[] = [
-  { label: "Weboldal, dizájn", values: [true, true, true] },
-  { label: "Technikai SEO", values: [true, true, true] },
-  { label: "Webshop, PWA", values: [false, true, true] },
-  { label: "Fizetés, szállítás, számlázás", values: [false, true, true] },
-  { label: "Kampány és mérés", values: [false, true, true] },
-  { label: "Üzemeltetés, monitoring", values: [false, false, true] },
-  { label: "Videó és tartalom", values: [false, false, true] },
-  { label: "Egy felelős kapcsolattartó", values: [false, false, true] },
+  { label: "Írásos átvilágítás, mit javíts először", values: [true, true, true] },
+  { label: "Folyamatterv a megkereséstől a szerződésig", values: [false, true, true] },
+  { label: "Első modul élesben, a cégedre szabva", values: [false, true, true] },
+  { label: "Alapmérés az induláskor", values: [false, true, true] },
+  { label: "Weboldal, webshop bekötése a rendszerbe", values: [false, false, true] },
+  { label: "Utánkövetés és ügyfélgondozás", values: [false, false, true] },
+  { label: "Üzemeltetés és továbbfejlesztés", values: [false, false, true] },
+  { label: "Egy felelős kapcsolattartó", values: [true, true, true] },
 ];
 
 const PROCESS_STEPS = [
@@ -207,6 +212,12 @@ export default function Home() {
           <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-8)]">
             Megmutatjuk. Az alábbi számokat nem mi írtuk ide — a te böngésződ mérte, most, ahogy
             betöltötte ezt az oldalt.
+          </p>
+          <p className="[font-size:var(--text-lg)] leading-snug text-[var(--ink)] max-w-[52ch] mt-[var(--space-6)] pl-[var(--space-4)] border-l-2 border-[var(--signal)]">
+            <strong className="font-semibold">Értékesítési rendszert építünk</strong> műszaki és
+            ipari B2B cégeknek, akik egyedi ajánlatból élnek: a megkereséstől a szerződésig, és
+            utána is. A folyamatot két évtizede értékesítő ember tervezi, és ugyanő építi meg hozzá
+            a rendszert.
           </p>
           <div className="flex flex-wrap items-center gap-3 mt-[var(--space-8)]">
             <Button asChild>
@@ -308,11 +319,9 @@ export default function Home() {
 
       {/* ===== 04b / SZOLGÁLTATÁSOK — tíz terület ===== */}
       <Rail label="05 / Szolgáltatás">
-        <ServiceIndex
-          eyebrow="Tíz terület · mindegyik a saját szögéből"
-          lead="Mindegyik szolgáltatás egy szakaszt visz, és mindegyiknél ott kezdjük, ahol a piac szokásos megoldása megáll."
-          items={ARZENAL_SECTIONS}
-          basePath="/arzenal"
+        <PillerIndex
+          eyebrow="Három pillér · egy rendszer"
+          lead="A CRM-szoftver eszközt ad folyamat nélkül, a tanácsadó módszert eszköz nélkül, a webügynökség felületet. Mi a hármat egyben: előbb megnézzük, hol vész el az üzlet, aztán megépítjük a rendszert, és mellé a felületet, ami beviszi a megkeresést."
         />
       </Rail>
 
@@ -483,12 +492,12 @@ export default function Home() {
       <Seam />
 
       {/* ===== 10 / CSOMAGOK — összehasonlító táblázat ===== */}
-      <Rail label="10 / Csomagok" dark={false}>
+      <Rail label="10 / Indulás" dark={false}>
         <section id="packages" className="px-6 py-[var(--space-16)] sm:py-[var(--space-24)]">
           <SectionHeader
             eyebrow="Együttműködés"
-            title="Hogyan dolgozunk együtt"
-            lead="Minden projekt más, ezért fix árlista nincs. Három tipikus felállás — a tiéd valószínűleg valamelyikhez közel esik."
+            title="Kicsiben kezdünk"
+            lead="A nagy munkákra nincs fix árlista. Fix áras átvilágítással indulunk, utána egy modul élesben, és csak akkor megyünk tovább, ha láttad az első eredményt."
           />
 
           <div className="overflow-x-auto mt-[var(--space-8)]">
@@ -559,6 +568,12 @@ export default function Home() {
               </tfoot>
             </table>
           </div>
+          <p className="[font-size:var(--text-sm)] leading-relaxed text-[var(--mid)] mt-[var(--space-6)]">
+            Weboldalt vagy webshopot keresel, rendszer nélkül?{" "}
+            <Link href="/architektura" className="text-[var(--ink)] underline decoration-[var(--rule-strong)] underline-offset-4 hover:decoration-[var(--signal)]">
+              A weboldal- és webshopcsomagok itt vannak &rarr;
+            </Link>
+          </p>
         </section>
       </Rail>
 

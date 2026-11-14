@@ -31,9 +31,9 @@ try {
 // "sötét/neon terminál" márkahangot.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
+  title: "THE GBR | Értékesítési rendszer műszaki és ipari B2B cégeknek",
   description:
-    "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek.",
+    "Értékesítési rendszer-partner B2B cégeknek, akik egyedi ajánlatból élnek: átvilágítás, a cégre szabott rendszer, és mellé a weboldal, ami beviszi a megkeresést.",
   alternates: {
     canonical: "/",
     languages: {
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
+    title: "THE GBR | Értékesítési rendszer műszaki és ipari B2B cégeknek",
     description:
-      "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek.",
+      "Értékesítési rendszer-partner B2B cégeknek, akik egyedi ajánlatból élnek: átvilágítás, a cégre szabott rendszer, és mellé a weboldal, ami beviszi a megkeresést.",
     url: SITE_URL,
     siteName: "THE GBR",
     locale: "hu_HU",
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "THE GBR | Weboldal, webshop és IT-üzemeltetés B2B cégeknek",
+    title: "THE GBR | Értékesítési rendszer műszaki és ipari B2B cégeknek",
     description:
-      "Weboldalak és webshopok, amiket mi építünk és mi üzemeltetünk tovább — Next.js alapokon, kizárólag B2B cégeknek.",
+      "Értékesítési rendszer-partner B2B cégeknek, akik egyedi ajánlatból élnek: átvilágítás, a cégre szabott rendszer, és mellé a weboldal, ami beviszi a megkeresést.",
   },
   // A Search Console-hitelesítés még nincs beállítva. Ha a HTML meta-tages
   // módot használjuk, ide kerül a valós kód: verification: { google: "..." }.
