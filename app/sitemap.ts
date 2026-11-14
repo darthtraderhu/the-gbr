@@ -29,6 +29,7 @@ const staticRoutes: Array<{
   { path: "/arzenal/pulzus", changeFrequency: "monthly", priority: 0.8 },
   { path: "/arzenal/atvilagitas-es-ajanlas", changeFrequency: "monthly", priority: 0.8 },
   { path: "/gyors-indulas", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/rendszer", changeFrequency: "monthly", priority: 0.8 },
   ...TERMEKEK.map((t) => ({
     path: termekPath(t.id),
     changeFrequency: "monthly" as const,

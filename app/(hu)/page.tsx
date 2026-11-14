@@ -297,6 +297,11 @@ export default function Home() {
           lead="Egy weboldal önmagában névjegy. Ami eladja a cégedet, az az út, amin egy idegenből vevő lesz: megtalál, meggyőződik, kérdez, ajánlatot kér, és közben nem vész el. Ezt az utat építjük meg és visszük tovább, egy felelős kapcsolattartóval."
           note="Nem kell mind az öt szakasz. A felmérés megmutatja, hol szivárog most a legtöbb."
         />
+        <div className="px-6 pb-[var(--space-12)] sm:pb-[var(--space-16)]">
+          <Button asChild variant="ghost">
+            <Link href="/rendszer">Egy nap a rád szabott rendszerben &rarr;</Link>
+          </Button>
+        </div>
       </Rail>
 
       <Seam />
