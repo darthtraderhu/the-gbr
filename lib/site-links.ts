@@ -30,9 +30,9 @@ import {
 export type NavItem = { label: string; href: string; highlight?: boolean };
 
 export const MAIN_NAV_ITEMS: NavItem[] = [
-  { label: "Szolgáltatások", href: "/arzenal" },
-  { label: "Átvilágítás", href: AUDIT_SERVICE.path, highlight: true },
   { label: "Rendszer", href: "/rendszer" },
+  { label: "Átvilágítás", href: AUDIT_SERVICE.path, highlight: true },
+  { label: "Szolgáltatások", href: "/arzenal" },
   { label: "Fix áron", href: "/gyors-indulas" },
   { label: "Csomagok", href: "/architektura" },
   { label: "SEO", href: "/seo" },
@@ -55,7 +55,67 @@ export const ARZENAL_SECTIONS = [
   { id: "pulzus", n: "08", name: "Pulzus", headline: PULZUS_PITCH.headline, href: PULZUS_SERVICE.path },
   { id: "it", n: "09", name: "IT-üzemeltetés", headline: IT_PITCH.headline, href: IT_SERVICE.path },
   { id: "audit", n: "10", name: "Átvilágítás és ajánlás", headline: AUDIT_PITCH.headline, href: AUDIT_SERVICE.path },
+] as const;
+
+export type ArzenalSectionId = (typeof ARZENAL_SECTIONS)[number]["id"];
+
+// A pozicionálás három pillére (2026-11-14 döntés): a kirakatban nem tíz
+// egyenrangú szolgáltatás van, hanem Átvilágítás → Rendszer → Felület, és
+// ami partnerrel készül, az külön jelölve. A tíz szolgáltatás oldala marad,
+// csak a pillérek alá sorolva jelenik meg (főoldal, menü).
+export type Piller = {
+  id: "atvilagitas" | "rendszer" | "felulet" | "partner";
+  n: string;
+  name: string;
+  lead: string;
+  href: string;
+  linkLabel: string;
+  sections: ArzenalSectionId[];
+};
+
+export const PILLEREK: Piller[] = [
+  {
+    id: "atvilagitas",
+    n: "01",
+    name: "Átvilágítás",
+    lead: "Itt derül ki, hol vész el most a megkeresés és az ajánlat. Fix áron is kezdhető.",
+    href: AUDIT_SERVICE.path,
+    linkLabel: "Az átvilágításról",
+    sections: ["audit", "pulzus"],
+  },
+  {
+    id: "rendszer",
+    n: "02",
+    name: "Rendszer",
+    lead: "A cégedre szabott értékesítési rendszer: a megkereséstől a szerződésig, és utána is.",
+    href: "/rendszer",
+    linkLabel: "Egy nap a rendszerben",
+    sections: ["software", "ai"],
+  },
+  {
+    id: "felulet",
+    n: "03",
+    name: "Felület",
+    lead: "Weboldal, webshop és hirdetés, ami a rendszerbe hozza a megkeresést, nem csak névjegy.",
+    href: WEB_SERVICE.path,
+    linkLabel: "A weboldalról és webshopról",
+    sections: ["web", "ads", "ops", "access"],
+  },
+  {
+    id: "partner",
+    n: "+",
+    name: "Partnerrel",
+    lead: "Visszatérő partnereinkkel, a rendszer részeként, egy kapcsolattartóval.",
+    href: "/arzenal",
+    linkLabel: "Minden szolgáltatás",
+    sections: ["video", "it"],
+  },
 ];
+
+// A pillér szolgáltatásai a pillérben megadott sorrendben.
+export function pillerSzekciok(piller: Piller) {
+  return piller.sections.flatMap((id) => ARZENAL_SECTIONS.filter((s) => s.id === id));
+}
 
 export const LEGAL_LINKS = [
   { label: "Adatkezelés", href: "/adatkezeles" },

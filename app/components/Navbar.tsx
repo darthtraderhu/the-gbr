@@ -11,6 +11,8 @@ import {
   ARZENAL_SECTIONS,
   ARZENAL_SECTIONS_EN,
   LEGAL_LINKS,
+  PILLEREK,
+  pillerSzekciok,
 } from "@/lib/site-links";
 import { getEnglishEquivalent, getHungarianEquivalent } from "@/lib/i18n-routes";
 // Csak a keret szövegei — a teljes messages/en.json az oldalak szövegét is
@@ -65,6 +67,15 @@ export default function Navbar() {
   const sections = isEn
     ? ARZENAL_SECTIONS_EN
     : ARZENAL_SECTIONS;
+  // Magyarul a szolgáltatások a három pillér (és a partneres sor) alá
+  // sorolva jelennek meg; angolul marad a tíz elemes lista.
+  const groups: { key: string; label: string | null; items: { id: string; n: string; name: string; href: string }[] }[] = isEn
+    ? [{ key: "all", label: null, items: [...sections] }]
+    : PILLEREK.map((p) => ({
+        key: p.id,
+        label: p.n === "+" ? p.name : `${p.n} · ${p.name}`,
+        items: pillerSzekciok(p),
+      }));
   const homeHref = isEn ? "/en" : "/";
   const ctaHref = isEn ? "/en/contact" : "/init";
   const switcherHref = isEn ? getHungarianEquivalent(pathname ?? "/en") : getEnglishEquivalent(pathname ?? "/");
@@ -132,15 +143,24 @@ export default function Navbar() {
                       <div className="px-4 py-[10px] border-b border-[var(--rule)] [font-family:var(--font-mono)] text-[length:9.5px] tracking-[0.2em] uppercase text-[var(--dim)]">
                         {t.allAreas}
                       </div>
-                      {sections.map((s) => (
+                      {groups.map((g) => (
+                        <div key={g.key}>
+                          {g.label && (
+                            <div className="px-4 pt-[12px] pb-[6px] [font-family:var(--font-mono)] text-[length:9.5px] tracking-[0.2em] uppercase text-[var(--signal)]">
+                              {g.label}
+                            </div>
+                          )}
+                      {g.items.map((s) => (
                         <Link
                           key={s.id}
                           href={s.href}
-                          className="flex items-center gap-3 px-4 py-3 border-b border-[var(--rule)] last:border-b-0 hover:bg-[var(--panel)] transition-colors group/item"
+                          className={`flex items-center gap-3 px-4 ${isEn ? "py-3" : "py-[9px]"} border-b border-[var(--rule)] last:border-b-0 hover:bg-[var(--panel)] transition-colors group/item`}
                         >
+                          {isEn && (
                           <span className="[font-family:var(--font-mono)] text-[length:var(--text-2xs)] text-[var(--dim)] group-hover/item:text-[var(--signal)] transition-colors">
                             {s.n}
                           </span>
+                          )}
                           <span className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] tracking-[0.1em] uppercase text-[var(--ink-2)] group-hover/item:text-[var(--signal)] transition-colors">
                             {s.name}
                           </span>
@@ -150,6 +170,8 @@ export default function Navbar() {
                             </span>
                           )}
                         </Link>
+                      ))}
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -303,20 +325,31 @@ export default function Navbar() {
                   </Link>
                   {isServices && (
                     <div className="pb-[10px]">
-                      {sections.map((s) => (
-                        <Link
-                          key={s.id}
-                          href={s.href}
-                          onClick={() => setIsMenuOpen(false)}
-                          className="flex items-center gap-3 pl-[58px] pr-6 py-[10px]"
-                        >
-                          <span className="[font-family:var(--font-mono)] text-[length:9.5px] text-[var(--dim)]">
-                            {s.n}
-                          </span>
-                          <span className="[font-family:var(--font-mono)] text-[length:11.5px] tracking-[0.08em] uppercase text-[var(--ink-2)]">
-                            {s.name}
-                          </span>
-                        </Link>
+                      {groups.map((g) => (
+                        <div key={g.key}>
+                          {g.label && (
+                            <div className="pl-[58px] pr-6 pt-[10px] pb-[4px] [font-family:var(--font-mono)] text-[length:9.5px] tracking-[0.2em] uppercase text-[var(--signal)]">
+                              {g.label}
+                            </div>
+                          )}
+                          {g.items.map((s) => (
+                            <Link
+                              key={s.id}
+                              href={s.href}
+                              onClick={() => setIsMenuOpen(false)}
+                              className="flex items-center gap-3 pl-[58px] pr-6 py-[10px]"
+                            >
+                              {isEn && (
+                                <span className="[font-family:var(--font-mono)] text-[length:9.5px] text-[var(--dim)]">
+                                  {s.n}
+                                </span>
+                              )}
+                              <span className="[font-family:var(--font-mono)] text-[length:11.5px] tracking-[0.08em] uppercase text-[var(--ink-2)]">
+                                {s.name}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
                       ))}
                     </div>
                   )}
