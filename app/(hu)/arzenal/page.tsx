@@ -59,7 +59,7 @@ import {
 export const metadata: Metadata = {
   title: "Szolgáltatások: átvilágítás, értékesítési rendszer, weboldal | THE GBR",
   description:
-    "Három pillér: átvilágítás és Pulzus; egyedi értékesítési rendszer, automatizáció és AI; weboldal, webshop, hirdetés, üzemeltetés és akadálymentesítés. Videó és irodai IT-üzemeltetés partnerrel. Egy rendszer, egy felelős kapcsolattartó, B2B cégeknek.",
+    "Három pillér: átvilágítás és Pulzus; egyedi értékesítési rendszer, automatizáció és AI; weboldal, webshop, hirdetés, üzemeltetés és akadálymentesítés. Mellé videó és irodai IT-üzemeltetés. Egy rendszer, egy felelős kapcsolattartó, B2B cégeknek.",
   alternates: {
     canonical: "/arzenal",
     languages: { hu: "/arzenal", en: "/en/services", "x-default": "/arzenal" },
@@ -67,13 +67,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Szolgáltatások: átvilágítás, értékesítési rendszer, weboldal | THE GBR",
     description:
-      "Három pillér: átvilágítás és Pulzus; egyedi értékesítési rendszer, automatizáció és AI; weboldal, webshop, hirdetés, üzemeltetés és akadálymentesítés. Videó és irodai IT-üzemeltetés partnerrel. Egy rendszer, egy felelős kapcsolattartó, B2B cégeknek.",
+      "Három pillér: átvilágítás és Pulzus; egyedi értékesítési rendszer, automatizáció és AI; weboldal, webshop, hirdetés, üzemeltetés és akadálymentesítés. Mellé videó és irodai IT-üzemeltetés. Egy rendszer, egy felelős kapcsolattartó, B2B cégeknek.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Szolgáltatások: átvilágítás, értékesítési rendszer, weboldal | THE GBR",
     description:
-      "Három pillér: átvilágítás és Pulzus; egyedi értékesítési rendszer, automatizáció és AI; weboldal, webshop, hirdetés, üzemeltetés és akadálymentesítés. Videó és irodai IT-üzemeltetés partnerrel. Egy rendszer, egy felelős kapcsolattartó, B2B cégeknek.",
+      "Három pillér: átvilágítás és Pulzus; egyedi értékesítési rendszer, automatizáció és AI; weboldal, webshop, hirdetés, üzemeltetés és akadálymentesítés. Mellé videó és irodai IT-üzemeltetés. Egy rendszer, egy felelős kapcsolattartó, B2B cégeknek.",
   },
 };
 
@@ -281,8 +281,7 @@ export default function Arzenal() {
             idegenből vevő lesz. Mindegyik szolgáltatás ennek egy szakaszát viszi.
           </p>
           <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-5)]">
-            A legtöbbet házon belül végezzük, a videót és az irodai informatikát visszatérő
-            partnerekkel, de a kapcsolattartó ilyenkor is mi vagyunk. Ha egy projekthez nem mind a
+            Minden szolgáltatásnál egy kapcsolattartód van, mi. Ha egy projekthez nem mind a
             tíz kell, nem is adjuk el mind a tizet. Ha nem tudod, melyik kell, az átvilágítással
             kezdünk.
           </p>
@@ -494,8 +493,7 @@ export default function Arzenal() {
             <>
               A videó nem dísz, hanem érv: ott dolgozik, ahol a vevő mérlegel. Ezért{" "}
               <strong className="text-[var(--ink)]">ugyanabban az arculatban készül, mint a weboldal</strong>
-              , és oda kerül, ahol a döntés születik. A gyártást videós partnerünk végzi, a mi
-              irányításunk alatt; a kapcsolattartó végig mi vagyunk.
+              , és oda kerül, ahol a döntés születik. A kapcsolattartó végig mi vagyunk.
             </>,
           ]}
           detail={{ href: VIDEO_SERVICE.path, label: "céges videó és tartalom" }}
@@ -717,10 +715,9 @@ export default function Arzenal() {
           paragraphs={[
             "Egy irodában ritkán az a gond, hogy nincs informatika. Inkább az, hogy senki nem tudja egészben: ki fér hozzá mihez, van-e mentés, és kit kell hívni, ha reggel nem indul a levelezés.",
             <>
-              <strong className="text-[var(--ink)]">IT-partnerünkkel végezzük</strong>, aki 15 éve
-              üzemeltet informatikai rendszereket kis és nagyobb irodáknak, home office-ban dolgozó
-              csapatoknak — a szervertől a nyomtatón át a munkatársak telefonjáig. A kapcsolattartó
-              ilyenkor is mi vagyunk.
+              Kis és nagyobb irodáknak, home office-ban dolgozó csapatoknak{" "}
+              <strong className="text-[var(--ink)]">a szervertől a nyomtatón át a munkatársak telefonjáig</strong>
+              . A kapcsolattartó ilyenkor is mi vagyunk.
             </>,
             "Felméréssel kezdünk: megnézzük, mi van most, és írásban megkapod, mit találtunk és mit javasolunk. Utána te döntöd el, mit bízol ránk.",
           ]}

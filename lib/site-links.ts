@@ -61,10 +61,10 @@ export type ArzenalSectionId = (typeof ARZENAL_SECTIONS)[number]["id"];
 
 // A pozicionálás három pillére (2026-11-14 döntés): a kirakatban nem tíz
 // egyenrangú szolgáltatás van, hanem Átvilágítás → Rendszer → Felület, és
-// ami partnerrel készül, az külön jelölve. A tíz szolgáltatás oldala marad,
+// a kiegészítők (videó, irodai IT) külön sorban. A tíz szolgáltatás oldala marad,
 // csak a pillérek alá sorolva jelenik meg (főoldal, menü).
 export type Piller = {
-  id: "atvilagitas" | "rendszer" | "felulet" | "partner";
+  id: "atvilagitas" | "rendszer" | "felulet" | "kiegeszito";
   n: string;
   name: string;
   lead: string;
@@ -102,10 +102,10 @@ export const PILLEREK: Piller[] = [
     sections: ["web", "ads", "ops", "access"],
   },
   {
-    id: "partner",
+    id: "kiegeszito",
     n: "+",
-    name: "Partnerrel",
-    lead: "Visszatérő partnereinkkel, a rendszer részeként, egy kapcsolattartóval.",
+    name: "Ami még kellhet",
+    lead: "Ha a rendszer mellé ez is kell, ezt is intézzük, ugyanazzal a kapcsolattartóval.",
     href: "/arzenal",
     linkLabel: "Minden szolgáltatás",
     sections: ["video", "it"],

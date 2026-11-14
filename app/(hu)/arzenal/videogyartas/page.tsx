@@ -8,7 +8,7 @@ export const revalidate = 86400;
 
 const TITLE = "Céges videó, termékvideó és közösségi tartalom | THE GBR";
 const DESCRIPTION =
-  "Cégbemutató, termékvideó webshophoz és rövid formátumok közösségi médiára, a weboldal arculatával egységesen. A gyártást videós partnerünk végzi.";
+  "Cégbemutató, termékvideó webshophoz és rövid formátumok közösségi médiára, a weboldal arculatával egységesen.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -24,8 +24,8 @@ const STEPS = [
     body: "A videó ugyanabban az arculatban készül, mint az oldal, hogy egységes legyen a megjelenés.",
   },
   {
-    title: "Gyártás partnerrel, a mi irányításunk alatt",
-    body: "A forgatást és a vágást videós partnerünk végzi, a kapcsolattartó végig mi vagyunk.",
+    title: "Forgatás a mi irányításunk alatt",
+    body: "A forgatást és a vágást mi szervezzük és irányítjuk, a kapcsolattartó végig mi vagyunk.",
   },
   {
     title: "Utómunka és formátumok",
@@ -51,7 +51,7 @@ export default function Videogyartas() {
           , és oda kerül, ahol a döntés születik: termékoldalra, nyitóképre, közösségi rövid
           változatba.
         </>,
-        "A gyártást videós partnerünk végzi, a mi irányításunk alatt. A kapcsolattartó végig mi vagyunk, így nem kell két szállítót egyeztetned.",
+        "A gyártást mi irányítjuk, a kapcsolattartó végig mi vagyunk, így nem kell két szállítót egyeztetned.",
       ]}
       facts={VIDEO_PITCH.facts}
       angleTitle={VIDEO_PITCH.angleTitle}

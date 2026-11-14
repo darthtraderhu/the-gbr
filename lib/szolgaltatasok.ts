@@ -32,7 +32,7 @@ export const WEB_SERVICE = {
 export const IT_SERVICE = {
   name: "IT-üzemeltetés és rendszergazdai szolgáltatás",
   description:
-    "Irodai IT-üzemeltetés kis és nagyobb csapatoknak: rendszerfelmérés, rendszergazdai feladatok, távfelügyelet, szerver, hálózat, VPN, levelezés, Microsoft 365 és Teams, nyomtatók és mobilflotta kezelése, IT-partnerünkkel, aki 15 éve üzemeltet irodai rendszereket.",
+    "Irodai IT-üzemeltetés kis és nagyobb csapatoknak: rendszerfelmérés, rendszergazdai feladatok, távfelügyelet, szerver, hálózat, VPN, levelezés, Microsoft 365 és Teams, nyomtatók és mobilflotta kezelése, egy kapcsolattartóval.",
   path: "/arzenal/it-uzemeltetes",
 };
 
@@ -154,7 +154,7 @@ export const IT_FAQ: FaqItem[] = [
   {
     question: "Mit tartalmaz az irodai IT-üzemeltetés?",
     answer:
-      "Írásos felméréssel kezdünk: mi van most, ki fér hozzá mihez, mi hiányzik. Utána rendszergazdai feladatok, távfelügyelet és távoli segítség, szerver és hálózat, VPN, levelezés, Microsoft 365 és Teams, nyomtatók és eszközök, valamint a mobilflotta átnézése. IT-partnerünkkel végezzük, a kapcsolattartó mi vagyunk.",
+      "Írásos felméréssel kezdünk: mi van most, ki fér hozzá mihez, mi hiányzik. Utána rendszergazdai feladatok, távfelügyelet és távoli segítség, szerver és hálózat, VPN, levelezés, Microsoft 365 és Teams, nyomtatók és eszközök, valamint a mobilflotta átnézése. A kapcsolattartó végig mi vagyunk.",
   },
   {
     question: "Az otthonról dolgozó kollégákat is támogatjátok?",
@@ -417,7 +417,7 @@ export const VIDEO_FAQ: FaqItem[] = [
   {
     question: "Ki gyártja a videót?",
     answer:
-      "Videós partnerünk, a mi irányításunk alatt. Ugyanabban az arculatban készül, mint a weboldal, és a kapcsolattartó ilyenkor is mi vagyunk.",
+      "Mi szervezzük és irányítjuk. Ugyanabban az arculatban készül, mint a weboldal, és a kapcsolattartó ilyenkor is mi vagyunk.",
   },
   {
     question: "Milyen videókat készítetek?",
@@ -591,7 +591,7 @@ export const VIDEO_PITCH: ServicePitch = {
   kicker: "Egy arculat, mozgóképben is",
   headline: "Videó, ami ugyanazt mondja, mint az oldalad",
   facts: [
-    { value: "Egy", label: "kapcsolattartó, akkor is, ha a partnerünk forgat" },
+    { value: "Egy", label: "kapcsolattartó a forgatástól a feltöltésig" },
     { value: "Egy arculat", label: "weboldal és videó együtt tervezve" },
     { value: "Felirattal", label: "hogy hang nélkül, telefonon is érthető legyen" },
   ],
@@ -719,7 +719,7 @@ export const IT_PITCH: ServicePitch = {
   kicker: "Az informatika, ami nem a te gondod",
   headline: "Az irodai informatika, amire nem kell gondolnod",
   facts: [
-    { value: "15 év", label: "partnerünk tapasztalata irodai rendszerek üzemeltetésében" },
+    { value: "Egy", label: "kapcsolattartó minden informatikai ügyben" },
     { value: "Írásban", label: "mit találtunk, és mit javaslunk" },
     { value: "Távolról", label: "rákapcsolódunk, nem kell kiszállásra várni" },
   ],
