@@ -290,6 +290,11 @@ export default function Arzenal() {
             Fejlesztési partnerként is dolgozunk — magyar és nyugat-európai ügynökségeknek
             egyaránt.
           </p>
+          <p className="[font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[46ch] mt-[var(--space-5)]">
+            <Link href="/rendszer" className="underline decoration-[var(--signal)] underline-offset-4 hover:text-[var(--ink)]">
+              Nézd meg, hogyan néz ki egy rád szabott rendszer &rarr;
+            </Link>
+          </p>
         </section>
 
         <div className="border-t border-[var(--rule)]">
