@@ -29,7 +29,7 @@ export function GET() {
     `- [Főoldal](${SITE_URL}/): ki vagyunk és mit csinálunk`,
     `- [Szolgáltatások](${SITE_URL}/arzenal): a tíz szolgáltatási terület részletesen`,
     `- [Csomagok](${SITE_URL}/architektura): együttműködési csomagok`,
-    `- [Rád szabott rendszer](${SITE_URL}/rendszer): értékesítési és működési rendszer a cégre szabva, a megkereséstől a riportig`,
+    `- [Rád szabott rendszer](${SITE_URL}/rendszer): értékesítési és működési rendszer a cégre szabva, a megkereséstől a meglévő ügyfelek gondozásáig`,
     `- [SEO és AEO](${SITE_URL}/seo): keresőoptimalizálás és AI-láthatóság`,
     `- [Rólunk](${SITE_URL}/szindikatus)`,
     `- [Kapcsolat](${SITE_URL}/init): felmérés kérése`,

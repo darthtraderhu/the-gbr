@@ -14,7 +14,7 @@ import s from "./rendszer.module.css";
 const PATH = "/rendszer";
 const TITLE = "Rád szabott rendszer: értékesítés és működés egy helyen | THE GBR";
 const DESCRIPTION =
-  "Nem dobozos szoftver és nem még egy CRM: a cégedre szabott rendszer a megkereséstől az ajánlaton és a projekten át a heti riportig. A saját értékesítésünk is ezen fut.";
+  "Nem dobozos szoftver és nem még egy CRM: a cégedre szabott rendszer a megkereséstől az ajánlaton és a projekten át a meglévő ügyfelek gondozásáig. A saját értékesítésünk is ezen fut.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -46,6 +46,7 @@ const MODULOK = [
   { csoport: "Megszerez", nev: "Pipeline", leiras: "Ügyletek, utánkövetési ritmus, alvó ajánlatok." },
   { csoport: "Megszerez", nev: "Anyagtár", leiras: "Jóváhagyott, mindig friss bemutatók, linkként küldve." },
   { csoport: "Elvégez", nev: "Projektek", leiras: "A megnyert munka feladatokra bontva, felelőssel, határidővel." },
+  { csoport: "Megtart", nev: "Ügyfelek", leiras: "Ügyféllap, ránézés, szerződés és megújítás, következő ajánlat." },
   { csoport: "Lát", nev: "Napi terv", leiras: "Reggelente összerakott menetrend, indoklással." },
   { csoport: "Lát", nev: "Riport", leiras: "Heti tölcsér, trend, vezetői lap." },
   { csoport: "Mindenhol", nev: "Mobilon is", leiras: "Telepíthető a telefonra, alkalmazásbolt nélkül." },
@@ -59,12 +60,14 @@ const PELDAK = [
   { ag: "szolgáltató", cim: "Szerződésből emlékeztető", szoveg: "Lejáró szerződés előtt a megújítás magától kerül a napi tervbe." },
 ] as const;
 
-// Csak ami ma is működik (Projektek, ritmus és feladat, napló az ügyletnél).
+// Csak ami ma is működik: Projektek és az Ügyfelek modul (gbr-sales #39).
 const UTANA = [
-  { cim: "Projekt a nyert ügyletből", szoveg: "A megnyert munka nem vész el: szakaszok, felelősök, határidők, értesítéssel." },
-  { cim: "Utánkövetés, ami nem felejt", szoveg: "Ritmus és feladat emlékeztet, kit kell keresni, és mikor." },
-  { cim: "Minden lépés visszanézhető", szoveg: "Levél, hívás, ajánlat, elküldött anyag: egy helyen az ügyletnél." },
-  { cim: "Közös munka a partnerrel", szoveg: "Külső partner bevonható, és csak azt látja, amit megosztasz." },
+  { cim: "Ügyféllap", szoveg: "Mit vett, ki a gazdája, mikor beszéltetek utoljára, és ki kicsoda a kapcsolattartók közül." },
+  { cim: "Ránézés ritmusra", szoveg: "Ha egy ügyfelet régen kerestél, a napi tervben ott van. Ha aggódsz miatta, hamarabb visszajön." },
+  { cim: "Szerződés és megújítás", szoveg: "A felmondási határidő előtt magától jön az emlékeztető, nem a lejárat után." },
+  { cim: "Következő lépés", szoveg: "A vásárlás után javaslat a következő ajánlatra, amiből egy gombbal új ügylet lesz." },
+  { cim: "Ügyfélkérések", szoveg: "Amit az ügyfél kér, határidővel és felelőssel kerül be, nem egy levél aljára." },
+  { cim: "Ajánlás és áttekintő", szoveg: "Ajánláskérés a jó pillanatban, és negyedéves áttekintő minden ügyfélről." },
 ] as const;
 
 const ELVEK = [
@@ -113,7 +116,7 @@ export default function Rendszer() {
             </h1>
             <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[44ch] mt-[var(--space-8)]">
               Nem webshopot és nem még egy CRM-et adunk. Egy rendszert, ami úgy dolgozik, ahogy a
-              céged: a megkereséstől az ajánlaton és a projekten át a heti riportig. A saját
+              céged: a megkereséstől az ajánlaton és a projekten át a meglévő ügyfelek gondozásáig. A saját
               értékesítésünk is ezen fut.
             </p>
             <div className="mt-[var(--space-8)] flex flex-wrap gap-[var(--space-3)]">
@@ -141,6 +144,7 @@ export default function Rendszer() {
                 <div>Beérkező</div>
                 <div>Ügyletek</div>
                 <div>Projektek</div>
+                <div>Ügyfelek</div>
                 <div>Radar</div>
                 <div>Riport</div>
               </div>
@@ -337,6 +341,42 @@ export default function Rendszer() {
 
             <li className={s.step}>
               <div className={s.stepTime}>
+                14:30<small>Ügyfelek</small>
+              </div>
+              <div>
+                <h3>A meglévő ügyfél sem marad ki</h3>
+                <p>
+                  Ránézés ritmusra, közelgő megújítás, nyitott kérés: a napi terv a meglévő
+                  ügyfeleket is beosztja. Az ügyféllapon egyben látod, mit vett és mi a következő
+                  lépés.
+                </p>
+              </div>
+              <div className={s.mini}>
+                <div className={s.miniHead}>
+                  <span>Ügyféllap · Minta Kft.</span>
+                  <span className={`${s.pill} ${s.pillOk}`}>rendben</span>
+                </div>
+                <div className={s.miniBody}>
+                  {[
+                    { f: "Utolsó kapcsolat", h: "41 napja" },
+                    { f: "Felmondási határidő", h: "28 nap múlva" },
+                    { f: "Következő lépés", h: "karbantartás" },
+                  ].map((t) => (
+                    <div key={t.f} className={`${s.row} ${s.rowSimple}`}>
+                      <span className={s.rowTitle}>{t.f}</span>
+                      <span className={s.pill}>{t.h}</span>
+                    </div>
+                  ))}
+                  <div className={s.acts} aria-hidden="true">
+                    <span className={s.actPrimary}>Ránéztem</span>
+                    <span>Új ügylet ebből</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li className={s.step}>
+              <div className={s.stepTime}>
                 16:00<small>Riport</small>
               </div>
               <div>
@@ -391,7 +431,7 @@ export default function Rendszer() {
                 <p>{m.leiras}</p>
               </li>
             ))}
-            <li className={`${s.mod} ${s.modYou}`}>
+            <li className={`${s.mod} ${s.modYou} ${s.modWide}`}>
               <span className={s.modKind}>A tiéd</span>
               <h3>+ amit a céged kér</h3>
               <p>Ide kerül, ami nálad hiányzik.</p>
@@ -437,7 +477,7 @@ export default function Rendszer() {
             <h2 className={`${H2} mb-[var(--space-10)]`}>
               Az aláírásnál nem engedjük el az ügyfelet<Pont />
             </h2>
-            <dl className={s.rules}>
+            <dl className={`${s.rules} ${s.rules3}`}>
               {UTANA.map((e) => (
                 <div key={e.cim}>
                   <dt>{e.cim}</dt>

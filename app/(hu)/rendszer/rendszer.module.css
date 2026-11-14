@@ -389,6 +389,12 @@
   outline: 1px dashed var(--rule-strong);
   outline-offset: -1px;
 }
+.modWide {
+  grid-column: span 2;
+}
+.rules3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 .modYou h3 {
   color: var(--mid);
 }
@@ -470,6 +476,12 @@
   .path {
     grid-template-columns: 1fr;
   }
+  .rules3 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .modWide {
+    grid-column: auto;
+  }
   /* öt elem két oszlopban: az utolsó kitölti a sort */
   .chaos li:last-child {
     grid-column: 1 / -1;
@@ -484,7 +496,8 @@
   }
   .mods,
   .ex,
-  .rules {
+  .rules,
+  .rules3 {
     grid-template-columns: 1fr;
   }
   .kanban {
