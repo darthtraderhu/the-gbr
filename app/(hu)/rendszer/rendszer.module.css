@@ -392,9 +392,6 @@
 .modWide {
   grid-column: span 2;
 }
-.rules3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
 .modYou h3 {
   color: var(--mid);
 }
@@ -412,6 +409,10 @@
   background: var(--rule);
   border: 1px solid var(--rule);
   margin: 0;
+}
+/* a .rules után, hogy azonos specificitásnál ez nyerjen */
+.rules3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .rules > div {
   background: var(--panel);
