@@ -66,8 +66,8 @@ const UTANA = [
   { cim: "Ránézés ritmusra", szoveg: "Ha egy ügyfelet régen kerestél, a napi tervben ott van. Ha aggódsz miatta, hamarabb visszajön." },
   { cim: "Szerződés és megújítás", szoveg: "A felmondási határidő előtt magától jön az emlékeztető, nem a lejárat után." },
   { cim: "Következő lépés", szoveg: "A vásárlás után javaslat a következő ajánlatra, amiből egy gombbal új ügylet lesz." },
-  { cim: "Ügyfélkérések", szoveg: "Amit az ügyfél kér, határidővel és felelőssel kerül be, nem egy levél aljára." },
-  { cim: "Ajánlás és áttekintő", szoveg: "Ajánláskérés a jó pillanatban, és negyedéves áttekintő minden ügyfélről." },
+  { cim: "Ügyfélkérések", szoveg: "Amit az ügyfél kér, határidővel kerül be, nem egy levél aljára." },
+  { cim: "Ajánlás és áttekintő", szoveg: "Ajánláskérés a jó pillanatban, és negyedéves áttekintő a havidíjas ügyfeleknél." },
 ] as const;
 
 const ELVEK = [
