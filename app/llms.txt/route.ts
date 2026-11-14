@@ -28,7 +28,7 @@ export function GET() {
     "",
     `- [Főoldal](${SITE_URL}/): ki vagyunk és mit csinálunk`,
     `- [Szolgáltatások](${SITE_URL}/arzenal): a tíz szolgáltatás részletesen, három pillér alá sorolva`,
-    `- [Csomagok](${SITE_URL}/architektura): együttműködési csomagok`,
+    `- [Csomagok](${SITE_URL}/architektura): weboldal-, webshop- és üzemeltetési csomagok (a Felület pillér), plusz a Pulzus havi figyelő`,
     `- [Rád szabott rendszer](${SITE_URL}/rendszer): értékesítési és működési rendszer a cégre szabva, a megkereséstől a meglévő ügyfelek gondozásáig, minden oldalon edzővel, ami végigvezet a munkán`,
     `- [SEO és AEO](${SITE_URL}/seo): keresőoptimalizálás és AI-láthatóság`,
     `- [Rólunk](${SITE_URL}/szindikatus)`,
