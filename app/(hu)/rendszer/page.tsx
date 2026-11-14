@@ -14,7 +14,7 @@ import s from "./rendszer.module.css";
 const PATH = "/rendszer";
 const TITLE = "Rád szabott rendszer: értékesítés és működés egy helyen | THE GBR";
 const DESCRIPTION =
-  "Nem dobozos szoftver és nem még egy CRM: a cégedre szabott rendszer a megkereséstől az ajánlaton és a projekten át a meglévő ügyfelek gondozásáig. A saját értékesítésünk is ezen fut.";
+  "Nem dobozos szoftver és nem még egy CRM: a cégedre szabott rendszer a megkereséstől az ajánlaton és a projekten át a meglévő ügyfelek gondozásáig, és minden oldalon végigvezet a munkán. A saját értékesítésünk is ezen fut.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -49,9 +49,38 @@ const MODULOK = [
   { csoport: "Megtart", nev: "Ügyfelek", leiras: "Ügyféllap, ránézés, szerződés és megújítás, következő ajánlat." },
   { csoport: "Lát", nev: "Napi terv", leiras: "Reggelente összerakott menetrend, indoklással." },
   { csoport: "Lát", nev: "Riport", leiras: "Heti tölcsér, trend, vezetői lap." },
+  { csoport: "Mindenhol", nev: "Edző minden oldalon", leiras: "Elmondja, mi van előtted, mi a következő lépés, és hogyan csináld." },
   { csoport: "Mindenhol", nev: "Mobilon is", leiras: "Telepíthető a telefonra, alkalmazásbolt nélkül." },
   { csoport: "Csapat", nev: "Partnerek", leiras: "Külső partner csak azt látja, amit megosztasz vele." },
   { csoport: "Kedv", nev: "Két hívás között", leiras: "Saját kis játékok heti bajnoksággal. Mert emberek használják." },
+] as const;
+
+// Az oldalankénti edző (gbr-sales): mit mond egy-egy oldalon. Kitalált adatok.
+const EDZO_PELDAK = [
+  {
+    oldal: "Ügyletek",
+    fej: "az edző",
+    szoveg: "Három ajánlat 6 napja kint, válasz nélkül. A legnagyobbal kezdd, az van a legközelebb a pénzhez.",
+    gombok: ["Megnyitom", "Most nem"],
+  },
+  {
+    oldal: "Beérkező",
+    fej: "az edző",
+    szoveg: "Két új megkeresés vár. A tegnap estivel kezdd, arra még senki nem válaszolt.",
+    gombok: ["Odaviszem", "Mit tudok itt?"],
+  },
+  {
+    oldal: "Anyagtár",
+    fej: "hogyan működik?",
+    szoveg: "Itt vannak a jóváhagyott bemutatóid. Ügyfélnek innen linkként küldesz, mindig a friss változatot. Új anyag előbb jóváhagyásra megy.",
+    gombok: ["Hogyan működik?", "Összecsukom"],
+  },
+] as const;
+
+const VEGIGVEZET = [
+  { cim: "Mi van itt?", szoveg: "Minden oldal pár mondatban elmondja, mire való, és mit tudsz rajta megcsinálni. Nem kell hozzá betanító." },
+  { cim: "Mi a következő lépés?", szoveg: "Az edző a valós adatokból mutatja, mivel érdemes kezdeni az oldalon, és megmondja, miért. Mindenki csak azt látja, amihez joga van. Legfeljebb három javaslat, nem harminc." },
+  { cim: "Hogyan csináld?", szoveg: "Ahol több lépés van, például egy anyag jóváhagyásánál és küldésénél, végigvisz rajta. Az új kolléga munka közben tanul, nem oktatáson." },
 ] as const;
 
 const PELDAK = [
@@ -116,8 +145,9 @@ export default function Rendszer() {
             </h1>
             <p className="[font-size:var(--text-xl)] leading-snug text-[var(--ink-2)] max-w-[44ch] mt-[var(--space-8)]">
               Nem webshopot és nem még egy CRM-et adunk. Egy rendszert, ami úgy dolgozik, ahogy a
-              céged: a megkereséstől az ajánlaton és a projekten át a meglévő ügyfelek gondozásáig. A saját
-              értékesítésünk is ezen fut.
+              céged: a megkereséstől az ajánlaton és a projekten át a meglévő ügyfelek gondozásáig. Minden
+              oldala elmondja, mi a dolgod rajta, így a használat nem betanítással kezdődik, hanem munkával. A saját értékesítésünk is
+              ezen fut.
             </p>
             <div className="mt-[var(--space-8)] flex flex-wrap gap-[var(--space-3)]">
               <Button asChild>
@@ -405,6 +435,64 @@ export default function Rendszer() {
               </div>
             </li>
           </ol>
+        </section>
+      </Rail>
+
+      {/* ===== VÉGIGVEZET ===== */}
+      <Rail label="Végigvezet" className="border-t border-[var(--rule)]">
+        <section id="vegigvezet" className={`${s.wrap} scroll-mt-[var(--header-height)] py-[var(--space-16)] sm:py-[var(--space-20)]`}>
+          <div className={SH}>
+            <div>
+              <Eyebrow>Végigvezet a munkán</Eyebrow>
+              <h2 className={H2}>
+                Nem kézikönyvből tanulod. Minden oldal elmondja magát<Pont />
+              </h2>
+            </div>
+            <p className={LEAD}>
+              Sok céges rendszer nem azon bukik el, mit tud, hanem azon, hogy senki nem tudja, mire
+              jó és hol kell kattintani. Évekig tanulják, a felét soha nem használják. Nálunk minden
+              oldal tetején ott az edző: elmondja, mi van előtted, mi a következő lépés, és hogyan
+              csináld.
+            </p>
+          </div>
+          <div className={s.ex}>
+            {EDZO_PELDAK.map((p) => (
+              <div key={p.oldal} className={s.mini}>
+                <div className={s.miniHead}>
+                  <span>
+                    {p.oldal} · {p.fej}
+                  </span>
+                  <span>kitalált</span>
+                </div>
+                <div className={s.miniBody}>
+                  <div className={s.coach} style={{ marginTop: 0 }}>
+                    <span>{p.fej === "az edző" ? "Az edző" : "Hogyan működik?"}</span>
+                    {p.szoveg}
+                  </div>
+                  <div className={s.acts} aria-hidden="true">
+                    {p.gombok.map((g, i) => (
+                      <span key={g} className={i === 0 ? s.actPrimary : undefined}>
+                        {g}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-[var(--space-10)]">
+            <dl className={`${s.rules} ${s.rules3}`}>
+              {VEGIGVEZET.map((e) => (
+                <div key={e.cim}>
+                  <dt>{e.cim}</dt>
+                  <dd>{e.szoveg}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <p className={`${s.note} mt-[var(--space-4)]`}>
+            Az edző javasol, nem dönt helyetted. Ha épp nem kell, összecsukod, a javaslatot pedig egy gombbal aznapra félreteszed.
+          </p>
         </section>
       </Rail>
 
