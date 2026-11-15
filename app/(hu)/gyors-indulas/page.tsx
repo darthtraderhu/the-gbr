@@ -10,7 +10,7 @@ import { GYORS_INDULAS_PATH, TERMEKEK, formatFt, termekPath } from "@/lib/gyors-
 
 const TITLE = "Fix áras első lépések: kicsi munka, pontos ár, határidő | THE GBR";
 const DESCRIPTION =
-  "Kicsi, rögzített tartalmú munkák cégeknek, pontos nettó árral és határidővel: megkeresés-teszt, gyorsátvilágítás, alvó ajánlatok újraélesztése, javítócsomag, jogi-technikai gyorsellenőrzés, AI-láthatósági felmérés. Díjbekérővel, előfizetés nélkül.";
+  "Kicsi, rögzített tartalmú munkák cégeknek, pontos nettó árral és határidővel: megkeresés-teszt, gyorsátvilágítás, alvó ajánlatok újraélesztése, javítócsomag, jogi-technikai gyorsellenőrzés, AI-láthatósági felmérés, mérés beállítása. Díjbekérővel, előfizetés nélkül.";
 
 export const metadata: Metadata = {
   title: TITLE,

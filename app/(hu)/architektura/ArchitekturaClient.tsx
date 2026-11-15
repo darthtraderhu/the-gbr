@@ -98,6 +98,7 @@ const PACKAGES = [
       "Vállalati weboldal Next.js alapon",
       "Egyedi dizájn és design rendszer",
       "Kapcsolati űrlap, ami tényleg megérkezik, és beköthető az értékesítési rendszerbe",
+      "Mérés beállítva: minden megkeresés forrással érkezik, ha a látogató hozzájárult",
       "Technikai SEO: sitemap, strukturált adat, canonical",
       "Szövegezés, ha kell",
     ],
@@ -122,7 +123,7 @@ const PACKAGES = [
       "Fizetés, szállítás, számlázás integrálva",
       "Admin felület, amit a kollégák is használni tudnak",
       "Google és Meta kampányok, videós hirdetésekkel",
-      "Heti jelentés, érthető nyelven",
+      "Havi egyoldalas riport: honnan jött a megkeresés, mennyiből lett vevő, mit javítunk",
     ],
     notIncluded:
       "A folyamatos üzemeltetést, monitoringot és a jogi megfelelés karbantartását. Élesítés után a hibákat javítjuk, de nem figyeljük 0-24-ben.",
