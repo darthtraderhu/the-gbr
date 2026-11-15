@@ -3,7 +3,7 @@ title: "Cookie-tájékoztató | THE GBR"
 description: "Milyen sütiket használ a www.thegbr.eu, mire szolgálnak, mennyi ideig tárolódnak, és hogyan kezelheted vagy tilthatod le őket a weboldalon és a böngésződben."
 ---
 
-**Hatályos:** 2026. november 13.
+**Hatályos:** 2026. november 16.
 **Weboldal:** www.thegbr.eu
 
 ---
@@ -36,6 +36,7 @@ A weboldal használatának mérésére szolgálnak: hány látogató érkezik, m
 |---|---|---|
 | Google Analytics 4 (`_ga`, `_ga_<azonosító>`) — Google Ireland Limited | Látogatottság mérése | 2 év |
 | Posztkövetés (`gbr-poszt`, munkamenet-tárolás) — THE GBR | Ha egy közösségi posztunk linkjéről érkezel, megjegyzi a poszt véletlen kódját, hogy lássuk, melyik posztunk alapján kerestél meg. Személyt nem azonosít. | A böngészőlap bezárásáig |
+| Forráskövetés (`gbr-forras`, munkamenet-tárolás) — THE GBR | Megjegyzi, honnan érkeztél az oldalra (kampányjelölők, hirdetésről jöttél-e, a hivatkozó oldal domainje, az első megnyitott oldal), hogy ha megkeresel, lássuk, melyik csatornánk hozott. Részletek az [Adatkezelési tájékoztató](/adatkezeles) 3.1. pontjában. | A böngészőlap bezárásáig |
 
 A Google Analytics csak akkor töltődik be, ha a megjelenő süti-sávon az „Elfogadom” gombra kattintasz. Elutasítás esetén statisztikai süti nem kerül az eszközödre. A tárhelyszolgáltató (Vercel) saját látogatottság-mérése sütit nem használ, ezért ahhoz hozzájárulás nem szükséges.
 
