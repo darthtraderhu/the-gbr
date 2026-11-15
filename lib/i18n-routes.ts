@@ -41,6 +41,8 @@ export const TRANSLATED_ARTICLES: Record<string, string> = {
   "uj-weboldal-regi-helyezes": "new-website-without-losing-google",
   "hova-fut-be-a-megkereses": "where-does-an-enquiry-go",
   "kapcsold-ki-a-javascriptet": "turn-off-javascript",
+  "ki-all-a-weboldalad-mogott": "who-is-behind-your-website",
+  "a-ceg-valtozott-a-weboldal-nem": "your-company-changed-the-internet-didnt",
 };
 
 export const ARTICLE_HU_SLUG: Record<string, string> = Object.fromEntries(
