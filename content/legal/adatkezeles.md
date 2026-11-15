@@ -3,8 +3,8 @@ title: "Adatkezelési tájékoztató | THE GBR"
 description: "Milyen személyes adatokat kezel a GBR Marketing Solutions Kft. a www.thegbr.eu használata és a szolgáltatások igénybevétele során, milyen jogalapon, meddig, és kinek továbbítjuk — GDPR szerinti tájékoztató."
 ---
 
-**Hatályos:** 2026. november 15.
-**Verzió:** 1.3
+**Hatályos:** 2026. november 16.
+**Verzió:** 1.4
 **Weboldal:** www.thegbr.eu
 
 ---
@@ -47,13 +47,15 @@ Az adatkezelés az alábbi jogszabályok alapján történik:
 | | |
 |---|---|
 | **Cél** | A megkeresés megválaszolása, ajánlatadás, a szerződéskötés előkészítése |
-| **Kezelt adatok** | Név, cégnév, e-mail cím, telefonszám (opcionális), a projektre vonatkozó leírás, költségkeret, határidő, valamint a beküldés időpontja és a beküldés technikai adatai (IP-cím a visszaélés-megelőzés céljából) |
+| **Kezelt adatok** | Név, cégnév, e-mail cím, telefonszám (opcionális), a projektre vonatkozó leírás, költségkeret, határidő, valamint a beküldés időpontja és a beküldés technikai adatai (IP-cím a visszaélés-megelőzés céljából); ha a statisztikai sütikhez hozzájárultál: az, honnan érkeztél az oldalra (ld. „Honnan érkeztél” alább) |
 | **Jogalap** | GDPR 6. cikk (1) b) — a szerződés megkötését megelőzően az érintett kérésére történő lépések megtétele |
 | **Megőrzés** | Ha szerződéskötésre nem kerül sor: a megkereséstől számított **2 év**. Ha szerződés jön létre: az adatok a szerződéses kapcsolat adatkezelésébe kerülnek (ld. 3.4.) |
 | **Adatszolgáltatás** | Önkéntes, de a név és e-mail cím nélkül a megkeresést nem tudjuk megválaszolni |
 | **Adattovábbítás** | A megkeresés egyes adatai a napi munkatervünk összeállításához továbbításra kerülhetnek az **Anthropic, PBC** (Egyesült Államok) részére. Részletek alább, valamint az 5. és 6. pontban. |
 
 Az űrlap kitöltésekor automatikus visszaigazoló e-mailt küldünk, amely megerősíti a megkeresés beérkezését.
+
+**Honnan érkeztél.** Ha a süti-sávon hozzájárultál a statisztikai méréshez, a megkereséshez csatoljuk, honnan érkeztél a weboldalunkra: a link kampányjelölői (UTM-paraméterek), az, hogy hirdetésre kattintva jöttél-e (a hirdetési kattintásazonosító értékét nem tároljuk), annak az oldalnak a domainje, ahonnan átkattintottál, a weboldalunk első oldala, amelyet megnyitottál, és ha egy közösségi posztunk linkjéről jöttél, a poszt véletlen kódja. Ebből látjuk, melyik csatornánk hoz megkeresést; az értékesítési rendszerünkben csatornánként összesítjük. Erről nem hozunk rólad döntést, és profilt sem alkotunk. Jogalap: GDPR 6. cikk (1) a), a hozzájárulásod, amelyet a [süti-beállításokban](/cookie-tajekoztato) bármikor visszavonhatsz; a visszavonás az addigi adatkezelés jogszerűségét nem érinti. Hozzájárulás nélkül a megkeresésed forrás nélkül érkezik be. Megőrzés: a megkereséssel együtt (ld. fent).
 
 **Napi munkaterv.** A megkereséseket és a belőlük induló ügyleteket belső értékesítési rendszerünkben tartjuk nyilván. Ez a rendszer minden munkanapra javaslatot készít a munkatársainknak arról, mivel foglalkozzanak, és ehhez válaszlevél- vagy hívásvázlatot ír. Ehhez a megkeresés és az ügylet egyes adatait (név, cégnév, a megkeresés tárgya és szövege, az ügylet állapota és a vele kapcsolatos korábbi lépések rövid összefoglalója) feldolgozás céljából továbbítjuk az Anthropic, PBC részére. E-mail címet és telefonszámot nem továbbítunk. A rendszer csak javaslatot tesz: rólad nem hoz döntést, profilt nem alkot, és semmit nem küld ki. Minden levelet és lépést munkatársunk néz át és indít el.
 
