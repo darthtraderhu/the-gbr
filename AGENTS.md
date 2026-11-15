@@ -44,6 +44,8 @@ design/              arculati anyagok, mockupok (nem build-részei)
 
 Az `/api/autopilot` (napi cron) minden új cikkhez (és kedden/csütörtökön egy archívhoz) Claude-dal posztszöveget ír, és **vázlatként** elküldi a sales-rendszer Közzététel oldalára (`/api/kozzetetel/vazlat`). Innen semmi nem megy ki közvetlenül a Facebookra: a jóváhagyás, az ütemezés, a Facebook-token és a napló a gbr-sales-ben van. A poszt linkje követőkódot kap (`utm_content`); a `PosztKovetes` komponens jelzi a kattintást (`/api/kattintas`), az űrlapok a kódot `poszt` mezőként továbbadják, így a Beérkezőben látszik, melyik posztból jött a megkeresés. A kód a böngésző tárhelyére csak statisztikai hozzájárulás után kerül.
 
+Megkeresés forrása (`lib/forras.ts`): a `PosztKovetes` a látogatás első oldalán rögzíti az UTM-et, a hirdetési kattintásazonosító meglétét, a hivatkozó domaint és a nyitóoldalt; az űrlap csak statisztikai hozzájárulás mellett küldi (`forras`), a szerver Zoddal ellenőrzi és kategóriába sorolja (`extra.forras`: google-hirdetes, kereso, kozossegi … vagy ismeretlen). Ebből számol a sales-rendszer forrás szerinti riportja.
+
 ## Konvenciók
 
 - Egy komponens, egy hely. A Navbar és a Footer a `layout.tsx`-ből jön. Soha ne renderelj lokális `<header>`-t vagy `<footer>`-t oldalanként — ez korábban 5 oldalon duplikálva volt, felszámoltuk.
