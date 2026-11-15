@@ -1,3 +1,5 @@
+import { forrasExtra, type Forras } from "@/lib/forras";
+
 export type Lead = {
   nev: string;
   ceg?: string;
@@ -18,6 +20,8 @@ export type Lead = {
   extra?: Record<string, string>;
   // Ha közösségi posztunk linkjéről jött: a poszt követőkódja (lib/poszt-kovetes.ts).
   poszt?: string;
+  // Honnan jött a látogató (lib/forras.ts); hozzájárulás nélkül nincs.
+  forras?: Forras;
   ip: string;
   createdAt: string;
 };
@@ -59,6 +63,7 @@ async function sendToSales(lead: SavedLead): Promise<void> {
 
   const extra: Record<string, string> = { ...lead.extra, nyelv: lead.lang };
   if (lead.poszt) extra.poszt = lead.poszt;
+  Object.assign(extra, forrasExtra(lead.forras));
   if (lead.keret) extra.keret = lead.keret;
   if (lead.hatarido) extra.hatarido = lead.hatarido;
 

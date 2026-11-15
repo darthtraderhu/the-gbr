@@ -98,6 +98,7 @@ const PACKAGES = [
       "Vállalati weboldal Next.js alapon",
       "Egyedi dizájn és design rendszer",
       "Kapcsolati űrlap, ami tényleg megérkezik, és beköthető az értékesítési rendszerbe",
+      "Mérés beállítva: minden megkeresés forrással érkezik, ha a látogató hozzájárult",
       "Technikai SEO: sitemap, strukturált adat, canonical",
       "Szövegezés, ha kell",
     ],

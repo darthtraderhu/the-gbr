@@ -18,6 +18,7 @@ export const TERMEK_IDK = [
   "javitocsomag",
   "jogi-technikai-ellenorzes",
   "ai-lathatosag",
+  "meres-beallitasa",
 ] as const;
 export type TermekId = (typeof TERMEK_IDK)[number];
 
@@ -646,6 +647,107 @@ export const TERMEKEK: Termek[] = [
       text: "Hogy mit nézünk az AEO-felmérésnél, és mit csinálunk utána, a SEO és AEO oldalon írtuk le részletesen.",
       href: "/seo",
       label: "SEO és AEO",
+    },
+  },
+  {
+    id: "meres-beallitasa",
+    n: "07",
+    name: "Mérés beállítása",
+    arNetto: 140_000,
+    hatarido: "7 munkanap",
+    hataridoKezdet: "attól, hogy megkaptuk a hozzáférést és kiegyenlítetted a díjbekérőt",
+    kicker: "Fix ár · 7 munkanap",
+    title: "Minden megkeresésnél lásd, honnan jött",
+    summary:
+      "Beállítjuk a mérést a mostani oldaladon: a megkeresés konverzióként számít, és a levélben ott a forrása (hirdetés, kereső, közösségi oldal, ajánló), ha a látogató hozzájárult. Egy próbamegkereséssel ellenőrizzük.",
+    lead: [
+      "A legtöbb cég tudja, hány látogatója volt, de azt nem, melyik megkeresés honnan jött. Így azt sem lehet eldönteni, melyik hirdetés hoz vevőt, és melyikre megy el feleslegesen a pénz.",
+      "Beállítjuk a mérést úgy, hogy a megkeresés legyen a mérőszám, ne az oldalmegtekintés. A végén egy próbamegkeresést küldünk, és csak akkor adjuk át, ha forrással együtt megérkezett.",
+    ],
+    schemaDescription:
+      "Mérés beállítása meglévő weboldalra fix áron: Google Analytics 4 hozzájárulás után induló méréssel, az űrlapküldés, a telefon- és e-mail-kattintás konverzióként, a megkeresés forrása (UTM, hivatkozó oldal, nyitóoldal) a megkeresés levelében, Google Ads és Meta konverzió, ha van fiók, próbamegkereséssel ellenőrizve és egyoldalas leírással átadva. 7 munkanap.",
+    facts: [
+      { value: "3", label: "konverzió: űrlap, telefon- és e-mail-kattintás" },
+      { value: "1", label: "próbamegkeresés, ami forrással megérkezik" },
+      { value: "7 nap", label: "munkanap a hozzáféréstől és a kiegyenlítéstől" },
+    ],
+    features: [
+      {
+        title: "Mérés hozzájárulás után",
+        body: "Google Analytics 4 beállítása vagy rendbetétele úgy, hogy csak akkor mérjen, ha a látogató a sütikezelőben hozzájárult.",
+      },
+      {
+        title: "A megkeresés a mérőszám",
+        body: "Az űrlapküldés, a telefonszámra és az e-mail-címre kattintás konverzióként számít, nem csak az oldalmegtekintés.",
+      },
+      {
+        title: "Forrás a megkeresés mellett",
+        body: "A megkeresés levelében ott van, honnan jött a látogató: hirdetés, kereső, közösségi oldal vagy ajánló oldal, és melyik oldalon érkezett.",
+      },
+      {
+        title: "Hirdetési konverzió",
+        body: "Ha van Google Ads vagy Meta hirdetési fiókod, a megkeresést ott is konverzióként kötjük be, hogy a hirdetés a megkeresésre optimalizáljon.",
+      },
+      {
+        title: "Próbamegkeresés",
+        body: "Átadás előtt küldünk egy megkeresést, és ellenőrizzük, hogy konverzióként számít, és a forrása is megérkezett.",
+      },
+      {
+        title: "Egyoldalas leírás",
+        body: "Mit mérünk, hol látod, és mit jelent az, ha egy megkeresés forrása ismeretlen.",
+      },
+    ],
+    needs: [
+      "Hozzáférés a weboldalad adminjához, és ha van, a Google Analytics, Google Ads és Meta hirdetési fiókodhoz.",
+      "Működő sütikezelő az oldaladon. Ha nincs, a felméréskor szólunk, és megmondjuk, mi kell hozzá.",
+      "Hogy melyik postafiókba érkeznek ma a megkeresések.",
+    ],
+    steps: [
+      {
+        title: "Megrendeled",
+        body: "Kitöltöd az alábbi űrlapot. Két munkanapon belül visszaírunk: megnézzük az oldalad motorját, és ha a forrás átadását nem engedi, ezt a díjbekérő előtt megmondjuk.",
+      },
+      {
+        title: "Hozzáférést adsz",
+        body: "Az oldal adminjához és a mérő- és hirdetési fiókokhoz. A 7 munkanap innen indul.",
+      },
+      {
+        title: "Beállítjuk és ellenőrizzük",
+        body: "Mérés, konverziók, forrás a megkeresés mellett, majd egy próbamegkeresés.",
+      },
+      {
+        title: "Átadjuk",
+        body: "Az egyoldalas leírással és a próbamegkeresés eredményével.",
+      },
+    ],
+    faq: [
+      {
+        question: "Minden megkeresésnél látni fogom a forrást?",
+        answer:
+          "Nem mindegyiknél. Aki a sütikezelőben nem járul hozzá a méréshez, annak a forrását nem rögzítjük, és a böngészők védelme is elrejt valamennyit. Ezek a megkeresések is megérkeznek, csak ismeretlen forrással.",
+      },
+      {
+        question: "Milyen oldalon működik?",
+        answer:
+          "WordPressen, WooCommerce-en és Next.js-oldalon biztosan. Más motornál (pl. UNAS, Shoprenter, Wix) a rendelés után megnézzük, mit enged. Ha a forrást nem lehet átadni, a díjbekérő előtt megmondjuk.",
+      },
+      {
+        question: "Benne van a havi riport?",
+        answer:
+          "Nincs. Ez egyszeri beállítás. A havi riport, hogy honnan jött a megkeresés és mennyiből lett vevő, a havidíjas csomagjaink része.",
+      },
+      {
+        question: "Mennyibe kerül, és hogyan fizetek?",
+        answer:
+          "140 000 Ft + ÁFA, díjbekérő alapján, átutalással. Nem előfizetés, nincs további díj.",
+      },
+    ],
+    noteLabel: "Milyen motoron fut az oldalad, és hirdetsz-e most?",
+    noteHint: "Ha nem tudod, mi a motor, írd meg az oldal címét, megnézzük.",
+    next: {
+      text: "Ha azt is látni szeretnéd, mennyiből lett ajánlat és vevő, azt a havidíjas csomagjainkban, havi egyoldalas riportban adjuk.",
+      href: "/architektura",
+      label: "Csomagok",
     },
   },
 ];

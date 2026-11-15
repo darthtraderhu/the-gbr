@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { saveLead } from "@/lib/leads";
 import { POSZT_KOD } from "@/lib/poszt-kovetes";
+import { forrasSchema } from "@/lib/forras";
 import { sendMail } from "@/lib/mail";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 import { isAllowedOrigin } from "@/lib/request-guard";
@@ -38,6 +39,8 @@ const orderSchema = z.object({
   startedAt: z.number(),
   // Közösségi posztunk követőkódja, ha onnan jött. Hibás érték nem buktatja a beküldést.
   poszt: z.string().regex(POSZT_KOD).optional().catch(undefined),
+  // Honnan jött a látogató (csak hozzájárulás után küldi a kliens). Hibás érték nem buktatja a beküldést.
+  forras: forrasSchema,
 });
 
 export async function POST(req: Request) {
@@ -106,6 +109,7 @@ export async function POST(req: Request) {
       lang: "hu",
       source: `thegbr.eu /gyors-indulas/${termek.id}`,
       poszt: parsed.data.poszt,
+      forras: parsed.data.forras,
       extra: {
         termek: termek.name,
         ar: arSzoveg,

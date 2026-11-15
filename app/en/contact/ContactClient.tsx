@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button, Rail } from "@/app/components/ui";
 import enShell from "@/messages/shell/en.json";
-import { aktualisPosztKod } from "@/app/components/PosztKovetes";
+import { aktualisForras, aktualisPosztKod } from "@/app/components/PosztKovetes";
 
 const TARGET_OPTIONS = [
   {
@@ -158,6 +158,7 @@ export default function ContactClient() {
           startedAt: formStartedAt,
           lang: "en",
           poszt: aktualisPosztKod(),
+          forras: aktualisForras(),
         }),
       });
 

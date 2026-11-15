@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { saveLead } from "@/lib/leads";
 import { POSZT_KOD } from "@/lib/poszt-kovetes";
+import { forrasSchema } from "@/lib/forras";
 import { sendMail } from "@/lib/mail";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 import { isAllowedOrigin } from "@/lib/request-guard";
@@ -50,6 +51,8 @@ const contactSchema = z.object({
   startedAt: z.number(),
   // Közösségi posztunk követőkódja, ha onnan jött. Hibás érték nem buktatja a beküldést.
   poszt: z.string().regex(POSZT_KOD).optional().catch(undefined),
+  // Honnan jött a látogató (csak hozzájárulás után küldi a kliens). Hibás érték nem buktatja a beküldést.
+  forras: forrasSchema,
   // Melyik nyelvű űrlapból jött a beküldés — ez dönti el a visszaigazoló
   // e-mail nyelvét. Hiányában magyar (visszafelé kompatibilis a meglévő
   // /init hívásokkal, amik ezt a mezőt nem küldik).
@@ -123,7 +126,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const { nev, ceg, email, telefon, kategoria, leiras, keret, hatarido, honeypot, startedAt, lang, poszt } =
+  const { nev, ceg, email, telefon, kategoria, leiras, keret, hatarido, honeypot, startedAt, lang, poszt, forras } =
     parsed.data;
 
   // 4. Bot-szűrés: kitöltött honeypot VAGY túl gyors submit.
@@ -153,6 +156,7 @@ export async function POST(req: Request) {
       hatarido,
       lang,
       poszt,
+      forras,
       ip,
       createdAt: new Date().toISOString(),
     });
