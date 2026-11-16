@@ -94,6 +94,17 @@ export default function Footer() {
                 {messages.Footer.writeToUs}
               </Link>
             </li>
+            {/* Célzott ajánlat, csak a magyar oldalon (a DIMOP hazai pályázat). */}
+            {!isEn && (
+              <li>
+                <Link
+                  href="/dimop-nyerteseknek"
+                  className="[font-size:var(--text-sm)] text-[var(--mid)] hover:text-[var(--ink)] transition-colors"
+                >
+                  DIMOP-nyerteseknek
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
 
