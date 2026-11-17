@@ -14,6 +14,8 @@ import PosztKovetes from "@/app/components/PosztKovetes";
 import AiChat from "@/app/components/AiChat";
 import JsonLd from "@/app/components/JsonLd";
 import BackgroundMotif from "@/app/components/BackgroundMotif";
+import EstSav from "@/app/components/EstSav";
+import { EST, EST_PATH, estDatumSzoveg } from "@/lib/ai-est";
 
 // Villanásmentes témabeállítás — a tárolt választást már a hidratáció előtt
 // alkalmazza, mielőtt a böngésző a világos alapértelmezéssel kifestene
@@ -83,6 +85,17 @@ export default function RootLayout({
         {/* A Globális Menü — felül asztalon, alul mobilon */}
         {/* Halvány sas háttérmotívum — dekoráció, a tartalom mögött */}
         <BackgroundMotif />
+
+        {/* Az AI demo est sávja (lib/ai-est.ts) — a fejléc fölött, kikapcsolható */}
+        {EST.savAktiv && (
+          <EstSav
+            nev={EST.nev}
+            datum={estDatumSzoveg()}
+            datumIso={EST.datum}
+            hatarido={EST.ajandekHatarido}
+            href={EST_PATH}
+          />
+        )}
 
         <Navbar />
 

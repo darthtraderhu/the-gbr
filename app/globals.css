@@ -601,3 +601,18 @@ h2 {
     width: 64vw;
   }
 }
+
+/* AI demo est sávja (EstSav.tsx): a lime pont lassan lüktet, mint egy
+   „adásban” jelző. Mozgáskorlátozásnál áll. */
+@keyframes est-sav-pulzus {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--signal) 55%, transparent); }
+  60% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--signal) 0%, transparent); }
+}
+.est-sav-pont {
+  animation: est-sav-pulzus 2.4s ease-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .est-sav-pont {
+    animation: none;
+  }
+}
