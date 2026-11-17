@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/site";
 import { NEXTJS_BRANDS, NEXTJS_CHECKED_HU } from "@/lib/nextjs-proof";
-import { AJANDEK_ERTEK, EST, EST_AJANDEK_PATH, EST_PATH, estDatumSzoveg } from "@/lib/ai-est";
+import { AJANDEK_ERTEK, EST, EST_AJANDEK_PATH, EST_PATH, ajandekHataridoIg, estDatumSzoveg } from "@/lib/ai-est";
 import Prezentacio from "./Prezentacio";
 
 // Az AI demo est prezentációja (lib/ai-est.ts). Eseményoldal: nem kerül a
@@ -35,6 +35,7 @@ export default function AiEstOldal() {
         forrasDatum={FORRAS_DATUM}
         ajandekHref={EST_AJANDEK_PATH}
         ajandekErtek={AJANDEK_ERTEK}
+        ajandekIg={ajandekHataridoIg()}
       />
     </main>
   );

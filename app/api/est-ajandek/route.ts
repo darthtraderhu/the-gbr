@@ -7,7 +7,7 @@ import { sendMail } from "@/lib/mail";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 import { isAllowedOrigin } from "@/lib/request-guard";
 import { LEAD_FROM_EMAIL } from "@/lib/site";
-import { AJANDEK, AJANDEK_ERTEK, EST, EST_AJANDEK_PATH } from "@/lib/ai-est";
+import { AJANDEK, AJANDEK_ERTEK, EST, EST_AJANDEK_PATH, ajandekHataridoIg, ajandekKerheto } from "@/lib/ai-est";
 
 // Az AI demo est résztvevőinek ajándék-átvilágítása (QR-kódról,
 // /ai-est/ajandek). Ugyanúgy a sales-rendszer Beérkezőjébe fut, mint a /init,
@@ -45,6 +45,13 @@ export async function POST(req: Request) {
   if (!isAllowedOrigin(origin)) {
     console.warn("[EST-AJANDEK-REJECTED] Ismeretlen origin:", origin);
     return NextResponse.json({ success: false, error: "Érvénytelen kérés forrás." }, { status: 403 });
+  }
+
+  if (!ajandekKerheto()) {
+    return NextResponse.json(
+      { success: false, error: `Az ajándék ${ajandekHataridoIg()} volt kérhető.` },
+      { status: 410 }
+    );
   }
 
   const ip = getClientIp(req);
@@ -134,6 +141,8 @@ export async function POST(req: Request) {
         "Mit árul, kinek:",
         megjegyzes ?? "—",
         "",
+        "TEENDŐ: a riport elküldése után egy munkanapon belül hívás (ha nincs telefonszám, levél).",
+        "",
         `Beküldve: ${saved.createdAt}`,
         `IP: ${saved.ip}`,
         `Azonosító: ${saved.id}`,
@@ -154,6 +163,9 @@ export async function POST(req: Request) {
         "",
         "Két munkanapon belül visszaírunk, és megírjuk, mikor kapod meg a riportot.",
         "Kívülről vizsgálunk, hozzáférés nem kell. A riportban az oldalad tíz legfontosabb hibája lesz, fontossági sorrendben, javítással.",
+        telefon
+          ? "Miután megkaptad, Gábor egy munkanapon belül felhív, és végigmegy veled rajta."
+          : "Miután megkaptad, Gábor egy munkanapon belül jelentkezik, és végigmegy veled rajta.",
         "",
         "Ha időközben kérdésed van, írj közvetlenül: gabor@thegbr.eu",
         "",

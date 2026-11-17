@@ -87,7 +87,15 @@ export default function RootLayout({
         <BackgroundMotif />
 
         {/* Az AI demo est sávja (lib/ai-est.ts) — a fejléc fölött, kikapcsolható */}
-        {EST.savAktiv && <EstSav nev={EST.nev} datum={estDatumSzoveg()} href={EST_PATH} />}
+        {EST.savAktiv && (
+          <EstSav
+            nev={EST.nev}
+            datum={estDatumSzoveg()}
+            datumIso={EST.datum}
+            hatarido={EST.ajandekHatarido}
+            href={EST_PATH}
+          />
+        )}
 
         <Navbar />
 

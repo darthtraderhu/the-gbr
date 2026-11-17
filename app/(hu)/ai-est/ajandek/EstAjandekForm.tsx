@@ -94,7 +94,8 @@ export default function EstAjandekForm({ ajandekNev, ertek }: Props) {
         </p>
         <p className="mt-[var(--space-3)] [font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)]">
           {ajandekNev}, {ertek} értékben, neked díjmentesen. Két munkanapon belül visszaírunk, és
-          megírjuk, mikor kapod meg a riportot. A visszaigazolást elküldtük a megadott e-mail-címre;
+          megírjuk, mikor kapod meg a riportot. Miután megkaptad, Gábor egy munkanapon belül jelentkezik,
+          és végigmegy veled rajta. A visszaigazolást elküldtük a megadott e-mail-címre;
           ha pár percen belül nem érkezik meg, nézd meg a spam mappát is.
         </p>
         <dl className="mt-[var(--space-5)] [font-family:var(--font-mono)] text-[length:var(--text-xs)] text-[var(--mid)] border-t border-[var(--rule)] pt-[var(--space-4)] grid grid-cols-[auto_1fr] gap-x-[var(--space-4)] gap-y-[var(--space-2)]">
@@ -121,7 +122,7 @@ export default function EstAjandekForm({ ajandekNev, ertek }: Props) {
         <Field label="Neved" autoComplete="name" required value={adat.nev} onChange={set("nev")} />
         <Field label="Cégnév" autoComplete="organization" required value={adat.ceg} onChange={set("ceg")} />
         <Field label="E-mail-cím" type="email" autoComplete="email" required value={adat.email} onChange={set("email")} />
-        <Field label="Telefon (nem kötelező)" type="tel" autoComplete="tel" value={adat.telefon} onChange={set("telefon")} />
+        <Field label="Telefon (hogy Gábor fel tudjon hívni)" type="tel" autoComplete="tel" value={adat.telefon} onChange={set("telefon")} />
       </div>
       <Field
         label="A weboldal címe"

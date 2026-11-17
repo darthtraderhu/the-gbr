@@ -16,10 +16,39 @@ export const EST = {
   nev: "AI Demo Est",
   // Az est napja (ÉÉÉÉ-HH-NN). Amíg nincs megadva, a sáv dátum nélkül szól.
   datum: null as string | null,
-  // A felső sáv a magyar oldalakon. Az est után kikapcsolható; a két oldal
-  // ettől még elérhető marad (a QR-kód nem törik el).
+  // A felső sáv a magyar oldalakon. Kézzel is kikapcsolható; a két oldal
+  // ettől még elérhető marad (a QR-kód nem törik el). Az est napja után a
+  // sáv szövege „Lemaradtál…?”-ra vált, az ajándék határideje után pedig
+  // magától eltűnik (EstSav.tsx).
   savAktiv: true,
+  // Eddig a napig (bezárólag, budapesti idő szerint) kérhető az ajándék.
+  ajandekHatarido: "2026-12-15",
 };
+
+/** Mai nap ÉÉÉÉ-HH-NN alakban, budapesti idő szerint. */
+export function maBudapesten(most: Date = new Date()): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Budapest",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(most);
+}
+
+/** Kérhető-e még az ajándék (a határidő napja még igen). */
+export function ajandekKerheto(most: Date = new Date()): boolean {
+  return maBudapesten(most) <= EST.ajandekHatarido;
+}
+
+/** Az ajándék határideje magyarul, év nélkül, ragozva („december 15-ig”). */
+export function ajandekHataridoIg(): string {
+  const nap = new Intl.DateTimeFormat("hu-HU", {
+    month: "long",
+    day: "numeric",
+    timeZone: "Europe/Budapest",
+  }).format(new Date(`${EST.ajandekHatarido}T12:00:00Z`));
+  return `${nap.replace(/\.$/, "")}-ig`;
+}
 
 // Az ajándék: a /gyors-indulas gyorsátvilágítása, amelynek nyilvános ára van,
 // így az érték nem alátámasztatlan állítás. Név, ár és határidő onnan jön.

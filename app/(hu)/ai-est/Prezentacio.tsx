@@ -18,6 +18,7 @@ type Props = {
   forrasDatum: string;
   ajandekHref: string;
   ajandekErtek: string;
+  ajandekIg: string;
 };
 
 const FOOT = "THE GBR. · értékesítési rendszer, weboldal, webshop B2B cégeknek";
@@ -58,7 +59,7 @@ function Szamlalo({ cel, aktiv }: { cel: number; aktiv: boolean }) {
   return <>{ertek}</>;
 }
 
-export default function Prezentacio({ estNev, datum, brands, forrasDatum, ajandekHref, ajandekErtek }: Props) {
+export default function Prezentacio({ estNev, datum, brands, forrasDatum, ajandekHref, ajandekErtek, ajandekIg }: Props) {
   const deckRef = useRef<HTMLDivElement>(null);
   const [aktualis, setAktualis] = useState(0);
   const [lathato, setLathato] = useState<Set<number>>(() => new Set());
@@ -484,7 +485,7 @@ export default function Prezentacio({ estNev, datum, brands, forrasDatum, ajande
                   mit csinálsz most kézzel?
                 </p>
                 <p className={s.lede} {...i(2)}>
-                  Az est résztvevőinek ajándék: a {ajandekErtek} értékű gyorsátvilágítás a saját oldaladról.
+                  Az est résztvevőinek ajándék: a {ajandekErtek} értékű gyorsátvilágítás a saját oldaladról. {ajandekIg.charAt(0).toUpperCase() + ajandekIg.slice(1)} kérheted.
                 </p>
                 <div className={s.ctaRow} {...i(3)}>
                   <Link href={ajandekHref} className={s.btnDark}>
