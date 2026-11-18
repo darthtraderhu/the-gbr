@@ -15,7 +15,7 @@ export const EST = {
   // Az est neve, ahogy a sávon és a prezentáció borítóján megjelenik.
   nev: "AI Demo Est",
   // Az est napja (ÉÉÉÉ-HH-NN). Amíg nincs megadva, a sáv dátum nélkül szól.
-  datum: null as string | null,
+  datum: "2026-11-17" as string | null,
   // A felső sáv a magyar oldalakon. Kézzel is kikapcsolható; a két oldal
   // ettől még elérhető marad (a QR-kód nem törik el). Az est napja után a
   // sáv szövege „Lemaradtál…?”-ra vált, az ajándék határideje után pedig
