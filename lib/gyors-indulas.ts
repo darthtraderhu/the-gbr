@@ -47,7 +47,23 @@ export type Termek = {
   noteHint: string;
   // Ami a termék után jöhet; kapcsolódó szolgáltatásoldal.
   next: { text: string; href: string; label: string };
+  // Ha a díjat egy későbbi megbízásba beszámítjuk: a termékoldalon kiemelt
+  // blokk, a rendelés visszaigazolásában egy sor (api/rendeles).
+  beszamitas?: Beszamitas;
 };
+
+export type Beszamitas = {
+  // Mire számítjuk be (felsorolás a blokkban).
+  mire: string[];
+  // Hány napon belül megrendelt munkára, a riport átadásától.
+  napon: number;
+};
+
+/** A beszámítás egy mondatban (GYIK, visszaigazoló levél, kártya). */
+export function beszamitasMondat(t: Termek): string | null {
+  if (!t.beszamitas) return null;
+  return `Ha a riport átadásától számított ${t.beszamitas.napon} napon belül velünk folytatod (${t.beszamitas.mire.join(", ")}), a ${formatFt(t.arNetto)} nettó díjat teljes egészében levonjuk a megbízás díjából.`;
+}
 
 export function termekPath(id: TermekId): string {
   return `${GYORS_INDULAS_PATH}/${id}`;
@@ -227,7 +243,7 @@ export const TERMEKEK: Termek[] = [
       },
       {
         title: "Ha tovább lépnél",
-        body: "A riport alapján te döntöd el, hogy a saját fejlesztőddel javíttatod, vagy velünk. A teljes átvilágítás és a dizájn- és rendszerajánlás innen indulhat.",
+        body: "A riport alapján te döntöd el, hogy a saját fejlesztőddel javíttatod, vagy velünk. Ha velünk, a 49 000 Ft-ot beszámítjuk a megbízás díjába.",
       },
     ],
     faq: [
@@ -250,6 +266,11 @@ export const TERMEKEK: Termek[] = [
         answer:
           "49 000 Ft + ÁFA, díjbekérő alapján, átutalással. Nem előfizetés, nincs további díj. A határidő a díjbekérő kiegyenlítésekor indul.",
       },
+      {
+        question: "Mi lesz a 49 000 Ft-tal, ha utána veletek dolgozom?",
+        answer:
+          "Beszámítjuk. Ha a riport átadásától számított 90 napon belül velünk rendezed a jogi megfelelést, vagy velünk építed a weboldalt, webshopot vagy értékesítési rendszert, a gyorsátvilágítás teljes nettó díját levonjuk a megbízás díjából. Egy riport egyszer számítható be.",
+      },
     ],
     noteLabel: "Mit árulsz, és kinek?",
     noteHint: "Egy-két mondat elég. Ha van konkrét kérdésed az oldallal kapcsolatban, azt is írd ide.",
@@ -257,6 +278,10 @@ export const TERMEKEK: Termek[] = [
       text: "Ha a tíz hibánál mélyebbre mennél, a teljes átvilágítás minden területet végignéz, és dizájn- és rendszerajánlást is ad.",
       href: "/arzenal/atvilagitas-es-ajanlas",
       label: "Átvilágítás, dizájn- és rendszerajánlás",
+    },
+    beszamitas: {
+      mire: ["jogi megfelelés", "weboldal", "webshop", "értékesítési rendszer"],
+      napon: 90,
     },
   },
   {
