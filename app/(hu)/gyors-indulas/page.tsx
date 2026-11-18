@@ -87,6 +87,11 @@ export default function GyorsIndulas() {
                 <p className="mt-[var(--space-3)] [font-size:var(--text-base)] leading-relaxed text-[var(--ink-2)] max-w-[52ch] flex-1">
                   {t.summary}
                 </p>
+                {t.beszamitas && (
+                  <p className="mt-[var(--space-4)] [font-family:var(--font-mono)] text-[length:var(--text-xs)] text-[var(--ink)] border-l-2 border-[var(--signal)] pl-[var(--space-3)]">
+                    Ha velünk folytatod, a díját beszámítjuk.
+                  </p>
+                )}
                 <p className="mt-[var(--space-6)] flex items-baseline gap-[var(--space-3)]">
                   <span className="font-display font-black [font-size:var(--text-3xl)] tracking-[-0.04em] leading-none">
                     {formatFt(t.arNetto)}

@@ -7,7 +7,7 @@ import { sendMail } from "@/lib/mail";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 import { isAllowedOrigin } from "@/lib/request-guard";
 import { LEAD_FROM_EMAIL } from "@/lib/site";
-import { formatFt, getTermek, TERMEK_IDK } from "@/lib/gyors-indulas";
+import { beszamitasMondat, formatFt, getTermek, TERMEK_IDK } from "@/lib/gyors-indulas";
 
 // Fix áras termék rendelése (/gyors-indulas/<termék>). Ugyanúgy a
 // sales-rendszer Beérkezőjébe fut, mint a /init, csak a termék nevével, árával
@@ -88,6 +88,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: false, error: "Ismeretlen termék." }, { status: 400 });
   }
   const arSzoveg = `${formatFt(termek.arNetto)} + ÁFA`;
+  const beszamitas = beszamitasMondat(termek);
 
   const leiras = [
     `Fix áras rendelés: ${termek.name} (${arSzoveg}, ${termek.hatarido})`,
@@ -167,6 +168,7 @@ export async function POST(req: Request) {
         `Weboldal: ${weboldal}`,
         "",
         "Két munkanapon belül küldjük a díjbekérőt, és ha kell, egy-két pontosító kérdést.",
+        ...(beszamitas ? ["", beszamitas] : []),
         "",
         "Ha időközben kérdésed van, írj közvetlenül: gabor@thegbr.eu",
         "",

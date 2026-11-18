@@ -94,6 +94,47 @@ export default function TermekOldal({ termek }: { termek: Termek }) {
         <FactStrip facts={termek.facts} />
       </Rail>
 
+      {/* ===== BESZÁMÍTÁS ===== */}
+      {termek.beszamitas && (
+        <Rail label="Beszámítjuk">
+          <section className="px-6 pt-[var(--space-12)] sm:pt-[var(--space-16)] pb-[var(--space-4)]">
+            <div className="grid gap-[var(--space-8)] md:grid-cols-[minmax(0,1fr)_auto] items-center border border-[var(--rule)] border-l-4 border-l-[var(--signal)] bg-[var(--panel)] p-[var(--space-6)] sm:p-[var(--space-10)]">
+              <div>
+                <Eyebrow className="!mb-[var(--space-3)]">Ha velünk folytatod</Eyebrow>
+                <h2 className="font-display font-extrabold [font-size:var(--text-4xl)] leading-[1.02] tracking-[-0.04em] max-w-[18ch]">
+                  Az első lépést nem fizeted kétszer<span className="text-[var(--signal)]">.</span>
+                </h2>
+                <p className="mt-[var(--space-4)] [font-size:var(--text-lg)] leading-relaxed text-[var(--ink-2)] max-w-[58ch]">
+                  Ha a riport után velünk rendezed a jogi megfelelést, vagy velünk építed az új weboldalt,
+                  webshopot vagy értékesítési rendszert, a {formatFt(termek.arNetto)} nettó díjat teljes
+                  egészében levonjuk a megbízás díjából. Így az átvilágítás nem plusz költség, hanem a munka
+                  első, már kifizetett lépése.
+                </p>
+                <ul className="mt-[var(--space-5)] m-0 p-0 list-none flex flex-wrap gap-[var(--space-2)]">
+                  {termek.beszamitas.mire.map((m) => (
+                    <li
+                      key={m}
+                      className="[font-family:var(--font-mono)] text-[length:var(--text-xs)] border border-[var(--rule-strong)] rounded-full px-[var(--space-3)] py-[var(--space-1)] text-[var(--ink)]"
+                    >
+                      {m}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="md:text-right md:border-l md:border-[var(--rule)] md:pl-[var(--space-10)]">
+                <p className="font-display font-black [font-size:var(--text-gauge)] leading-none tracking-[-0.05em] whitespace-nowrap">
+                  −{formatFt(termek.arNetto)}
+                </p>
+                <p className="mt-[var(--space-3)] [font-family:var(--font-mono)] text-[length:var(--text-xs)] text-[var(--mid)] max-w-[30ch] md:ml-auto">
+                  a megbízás díjából, ha a riport átadásától számított {termek.beszamitas.napon} napon belül
+                  rendelsz. Egy riport egyszer számít be.
+                </p>
+              </div>
+            </div>
+          </section>
+        </Rail>
+      )}
+
       <Seam />
 
       {/* ===== AMIT KAPSZ ===== */}
@@ -194,6 +235,12 @@ export default function TermekOldal({ termek }: { termek: Termek }) {
           </h2>
           <p className="[font-size:var(--text-lg)] text-[var(--ink-2)] max-w-[56ch] leading-relaxed mb-[var(--space-8)]">
             Két munkanapon belül küldjük a díjbekérőt. A határidő ({termek.hatarido}) {termek.hataridoKezdet} számít. Cégeknek, nettó áron.
+            {termek.beszamitas && (
+              <>
+                {" "}
+                Ha {termek.beszamitas.napon} napon belül velünk folytatod, a díjat beszámítjuk.
+              </>
+            )}
           </p>
           <RendelesForm
             termek={termek.id}
