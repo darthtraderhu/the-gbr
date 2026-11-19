@@ -67,9 +67,21 @@ export function getSortedPostsData() {
   });
 }
 
+// Cikk-slug: csak kisbetű, szám és kötőjel. Minden más (pl. elgépelt vagy
+// régi URL, "../" kísérlet) a fájlrendszer előtt 404-et kap.
+const SLUG_PATTERN = /^[a-z0-9-]+$/;
+
 export async function getPostData(id: string) {
+  // Nem létező cikkre 404 kell, nem szerverhiba: a readFileSync kivétele
+  // korábban 500-at adott, amit a Google szerverhibaként könyvel el.
+  if (!SLUG_PATTERN.test(id)) notFound();
   const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  let fileContents: string;
+  try {
+    fileContents = fs.readFileSync(fullPath, "utf8");
+  } catch {
+    notFound();
+  }
 
   const matterResult = matter(fileContents);
 

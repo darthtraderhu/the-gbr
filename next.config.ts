@@ -50,6 +50,14 @@ const nextConfig: NextConfig = {
   },
   // Az X-Powered-By: Next.js fejléc feleslegesen árulja el a stacket.
   poweredByHeader: false,
+  // A szabály: URL nem változik. Ami mégis megszűnt, 301/308-cal az utódjára
+  // mutat, hogy a Google ne 404-ként tartsa nyilván.
+  async redirects() {
+    return [
+      // 2026 júniusában átnevezett cikk (nextjs-vs-wordpress -> ...2).
+      { source: "/hirek/nextjs-vs-wordpress", destination: "/hirek/nextjs-vs-wordpress2", permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
