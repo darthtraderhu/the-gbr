@@ -1,4 +1,5 @@
 import { SITE_URL } from "./site";
+import { ogImageUrl } from "./og-url";
 
 // A cég/márka egyetlen forrása a szervezeti JSON-LD-hez. Az impresszum.md és
 // adatkezeles.md dokumentumokkal egyező adatok — ha azok változnak, ez is
@@ -12,7 +13,9 @@ export const ORGANIZATION = {
   // vizuál (OG-kép) — a Google Rich Results ezt a két mezőt külön kéri,
   // ezért nem ugyanazt a fájlt adjuk mindkettőre.
   logo: `${SITE_URL}/logo-jel.png`,
-  image: `${SITE_URL}/opengraph-image.jpg`,
+  // A főoldal OG-képe (app/(hu)/opengraph-image.tsx). A korábbi
+  // /opengraph-image.jpg fájl nem létezett, 404-et adott.
+  image: ogImageUrl("/(hu)", "/"),
   email: "gabor@thegbr.eu",
   telephone: "+36705139838",
   address: {

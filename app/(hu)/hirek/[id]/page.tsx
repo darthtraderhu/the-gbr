@@ -10,6 +10,7 @@ import { TRANSLATED_ARTICLES } from "@/lib/i18n-routes";
 import ShareBar from "./ShareBar";
 import ArticleBody from "@/app/components/writing/ArticleBody";
 import { withHeadingAnchors } from "@/lib/article-toc";
+import { ogImageUrl } from "@/lib/og-url";
 
 // =========================================================================
 // DINAMIKUS SEO MOTOR: Ez olvassa be a Facebook/Google részére a cikk adatait
@@ -87,7 +88,7 @@ export default async function PosztOldal({ params }: { params: Promise<{ id: str
             datePublished: postData.date,
             dateModified: postData.updated ?? postData.date,
             url: articleUrl,
-            image: `${articleUrl}/opengraph-image`,
+            image: ogImageUrl("/(hu)/hirek/[id]", `/hirek/${id}`),
           }),
           breadcrumbSchema([
             { name: "Főoldal", url: SITE_URL },
